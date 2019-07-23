@@ -7,7 +7,10 @@
 
 
 
-
+This chapter will set the stage for the entire course.
+This chapter will introduce one of three main tasks: regression
+- what are the three tasks? regression, classification, and ?? density estimation? clustering?
+    - density estimation really is the basis of everything isn't it?
 
 
 
@@ -322,6 +325,8 @@ $$
 Y = f(X) + \epsilon
 $$
 
+- TODO: check this against old BVT chapter
+
 $$
 f(x) = \mathbb{E}[Y \mid X = x]
 $$
@@ -345,3 +350,8 @@ $$
 
 
 - TODO: hold `cp` constant, alter `minsplit`
+- TODO: in many ways, classification is just regression...
+- TODO: y_hat_i = f_hat(x_i)
+
+
+
