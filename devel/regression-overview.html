@@ -383,6 +383,7 @@ $(document).ready(function () {
 <div id="regression-overview" class="section level1">
 <h1>Overview</h1>
 <p><strong>Chapter Status:</strong> This chapter is currently undergoing massive rewrites. Some code is mostly for the use of current students. Plotting code is often not best practice for plotting, but is instead useful for understanding.</p>
+<p>This chapter will set the stage for the entire course. This chapter will introduce one of three main tasks: regression - what are the three tasks? regression, classification, and ?? density estimation? clustering? - density estimation really is the basis of everything isn’t it?</p>
 <ul>
 <li><strong>Supervised Learning</strong>
 <ul>
@@ -588,6 +589,9 @@ lines(x_grid$x, poly_fit_h_pred, col = &quot;darkgrey&quot;,  lwd = 2)</code></p
 <p><span class="math display">\[
 Y = f(X) + \epsilon
 \]</span></p>
+<ul>
+<li>TODO: check this against old BVT chapter</li>
+</ul>
 <p><span class="math display">\[
 f(x) = \mathbb{E}[Y \mid X = x]
 \]</span></p>
@@ -602,7 +606,43 @@ f(x) = \mathbb{E}[Y \mid X = x]
 \]</span></p>
 <ul>
 <li>TODO: hold <code>cp</code> constant, alter <code>minsplit</code></li>
+<li>TODO: in many ways, classification is just regression…</li>
+<li><p>TODO: y_hat_i = f_hat(x_i)</p></li>
+<li>linear</li>
+<li>quadratic</li>
+<li>sin</li>
+<li><p>two “groups” that a tree gets right</p></li>
 </ul>
+<p>vs</p>
+<ul>
+<li>SLR, quadtratic</li>
+<li>knn: low, high</li>
+<li>tree: stump, huge</li>
+</ul>
+<pre class="r"><code># simulate data
+
+## signal
+f = function(x) {
+  x ^ 3
+}
+
+## define data generating processs
+get_sim_data = function(f, sample_size = 50) {
+  x = runif(n = sample_size, min = -1, max = 1)
+  y = rnorm(n = sample_size, mean = f(x), sd = 0.15)
+  data.frame(x, y)
+}
+
+## simualte training data
+set.seed(42)
+sim_trn_data = get_sim_data(f = f)
+
+## simulate testing data
+set.seed(3)
+sim_tst_data = get_sim_data(f = f)
+
+## create grid for plotting
+x_grid = data.frame(x = seq(-1.5, 1.5, 0.001))</code></pre>
 </div>
 
 

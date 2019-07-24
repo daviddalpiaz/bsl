@@ -354,4 +354,71 @@ $$
 - TODO: y_hat_i = f_hat(x_i)
 
 
+- linear
+- quadratic
+- sin
+- two "groups" that a tree gets right
+
+vs
+
+- SLR, quadtratic, sin?, other var?
+- knn: low, medium, high
+- tree: stump, middle, huge
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+#
+x_min = -10
+x_max = 10
+
+
+## signal definition
+f = function(x) {
+  sin(x)
+}
+
+## define data generating processs
+gen_sim_data = function(f, sample_size = 100, x_min = -1, x_max = 1, sigma = 1) {
+  x = runif(n = sample_size, min = x_min, max = x_max)
+  y = rnorm(n = sample_size, mean = f(x), sd = sigma)
+  data.frame(x, y)
+}
+
+## simualte training data
+set.seed(42)
+sim_trn_data = gen_sim_data(f = f, sample_size = 100, x_min = x_min, x_max = x_max, sigma = 0.25)
+
+## simulate testing data
+set.seed(3)
+sim_tst_data = gen_sim_data(f = f, sample_size = 100, x_min = x_min, x_max = x_max, sigma = 0.25)
+
+## create grid for plotting
+x_grid = data.frame(x = seq(x_min - 0.5, x_max + 0.5, 0.001))
+
+```
+
+
+
+
+
+
+
+
+
+
 
