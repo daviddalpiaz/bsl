@@ -375,44 +375,39 @@ vs
 
 
 
-
-
-
-
-
+```{r}
+## define data generating processs
+gen_sim_data = function(f, sample_size = 100, x_min = -5, x_max = 5, sigma = 1) {
+  x = runif(n = sample_size, min = x_min, max = x_max)
+  y = rnorm(n = sample_size, mean = f(x), sd = sigma)
+  data.frame(x, y)
+}
+```
 
 ```{r}
-#
-x_min = -10
-x_max = 10
-
 
 ## signal definition
 f = function(x) {
   sin(x)
 }
 
-## define data generating processs
-gen_sim_data = function(f, sample_size = 100, x_min = -1, x_max = 1, sigma = 1) {
-  x = runif(n = sample_size, min = x_min, max = x_max)
-  y = rnorm(n = sample_size, mean = f(x), sd = sigma)
-  data.frame(x, y)
-}
-
-## simualte training data
+## simualte train and test data
 set.seed(42)
-sim_trn_data = gen_sim_data(f = f, sample_size = 100, x_min = x_min, x_max = x_max, sigma = 0.25)
-
-## simulate testing data
-set.seed(3)
-sim_tst_data = gen_sim_data(f = f, sample_size = 100, x_min = x_min, x_max = x_max, sigma = 0.25)
+sim_trn_data = gen_sim_data(f = f, sample_size = 100, sigma = 0.15)
+sim_tst_data = gen_sim_data(f = f, sample_size = 100, sigma = 0.15)
 
 ## create grid for plotting
-x_grid = data.frame(x = seq(x_min - 0.5, x_max + 0.5, 0.001))
-
+x_grid = data.frame(x = seq(-5, 5, 0.001))
 ```
 
 
+```{r}
+plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20, 
+     main = "KNN, k = 1", cex = 1.5)
+grid()
+curve(sin(x), add = TRUE)
+curve(predict(poly_fit_l, newdata = data.frame(x = x)), add = TRUE)
+```
 
 
 
