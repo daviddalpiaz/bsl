@@ -402,11 +402,11 @@ x_grid = data.frame(x = seq(-5, 5, 0.001))
 
 
 ```{r}
-plot(y ~ x, data = sim_trn_data, col = "dodgerblue", pch = 20, 
+plot(y ~ x, data = sim_trn_data, col = "darkgrey", pch = 20, 
      main = "KNN, k = 1", cex = 1.5)
 grid()
-curve(sin(x), add = TRUE)
-curve(predict(poly_fit_l, newdata = data.frame(x = x)), add = TRUE)
+curve(sin(x), add = TRUE, lwd = 2)
+curve(predict(tree_fit_m, newdata = data.frame(x = x)), add = TRUE, col = "dodgerblue", lwd = 2)
 ```
 
 
