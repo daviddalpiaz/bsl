@@ -1,0 +1,19 @@
+
+
+
+Welcome to Basics of Statistical Learning! A better title for this book would be "An Introduction Machine Learning from the Perspective of a Statistician who uses R," but that's a mouthful. The goal of this book is to....
+
+
+- Why R?
+
+
+- Why this book?
+
+
+- Why not (insert model here)?
+
+- Where's the deep learning?
+
+- Why so much simulated data?
+
+- Why so few "sections?" I hate clicking. I like scrolling.
