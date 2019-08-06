@@ -19,7 +19,6 @@ This chapter will introduce one of three main tasks: regression
 
 
 
-
 - **Supervised Learning**
     - **Regression** (Numeric Response)
         - What do we want? To make *predictions* on *unseen data*. (Predicting on data we already have is easy...) In other words, we want a *model* that **generalizes** well. That is, generalizes to unseen data.
