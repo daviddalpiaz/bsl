@@ -3,3 +3,6 @@
 .RData
 .Ruserdata
 .DS_Store
+devel/*.html
+devel/*_cache
+devel/*_files
