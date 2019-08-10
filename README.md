@@ -1,8 +1,8 @@
 # Basics of Statistical Learning
 
-# IDEA
+## IDEA
 
-# TODO
+## TODO
 
 - [ ] Add links in R4SL to note that this "book" exists
 - [ ] Add `bookdown` support
