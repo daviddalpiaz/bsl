@@ -15,7 +15,7 @@ Welcome to Basics of Statistical Learning! A better title for this book would be
 - Why this book?
     - A very good question, especially considering the huge number of machine learning books that already exist.
 - Why not (insert model here)?
-    - The idea behind this book is that after learnign this material, you won't need (insert model here) presented to you in great detail. Instead, you'll be able to find an implimentation of it in your langauage of choice, use it, adn evaluate if it is appropriate.
+    - The idea behind this book is that after learning this material, you won't need (insert model here) presented to you in great detail. Instead, you'll be able to find an implementation of it in your language of choice, use it, and evaluate if it is appropriate.
 - Where's the deep learning?
 - Why so much simulated data?
 - Why so few "sections?"
@@ -24,3 +24,4 @@ Welcome to Basics of Statistical Learning! A better title for this book would be
     - I don't have a great answer to this question. I'll probably transition the book to more and more `tidyverse` over time.
 - Why "statistical learning" instead of "machine learning"?
     - Heck, why not just "learning from data"? That's what were doing here.
+- Why a whole new book instead of R4SL?
