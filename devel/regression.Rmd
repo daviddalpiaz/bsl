@@ -19,7 +19,7 @@ knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
         - all of supervised is sort of just regression, but we will distinguish between regression (numeric outcome) and classification (categorical outcome)
 
 - TODO: Keywords
-    - Data Generating Process
+    - Data Generating Process (Move to previous chapter?)
     - Statistical Learning
     - Regression
     - Classification
