@@ -25,3 +25,5 @@ Welcome to Basics of Statistical Learning! A better title for this book would be
 - Why "statistical learning" instead of "machine learning"?
     - Heck, why not just "learning from data"? That's what were doing here.
 - Why a whole new book instead of R4SL?
+- FAQ: Why supervised last?
+- FAQ: Why regression first?

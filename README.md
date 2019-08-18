@@ -24,9 +24,14 @@
     - A classification example
     - A clustering example
 - Probability? (As an appendix?)
-- Estimation Theory
-- Regression
-- Classification
+- Estimation Theory, E[Y]
+- Regression, E[Y|X]
+- Classification, p(y|x)
+- Resampling
+- Modern Methods: Regularization and Ensembles
+- Practical Data Analysis
+- Unsupervised Learning
+- Appendix
 
 ## R References
 
@@ -34,10 +39,20 @@
 
 ## Misc
 
+- "3D" plots like in regression overview
+- EST, VAL, TRN, TST
+- goal: 1. do, 2. understand
+- main themes
+    1. write a song. (start with a four chord song) 
+    2. estimation. 
+    3. do / understand
 - Sort this into: books, classes, data, and misc
 - https://bookdown.org/yihui/bookdown/
 - http://seankross.com/2016/11/17/How-to-Start-a-Bookdown-Book.html
-- https://github.com/crsh/citr
+- intro datasets after pokemon: digits, powerlifting, chicago crime
+		- limits of digits: preprocesses
+		- limits of powerlifting: why would you predict deadlift?
+		- limits of crime: ?
 - https://twitter.com/juliasilge/status/1149616727136714756
 - Write a "cheat sheet"
 - https://gracious-allen-b2d17f.netlify.com/
@@ -54,4 +69,27 @@
 - https://www.kaggle.com/dansbecker/nba-shot-logs/activity
 - http://www.stat.cmu.edu/~larry/=sml/
 - https://people.eecs.berkeley.edu/~jrs/189/
+- add some of the practice problems to the end of each chapter?
+- ask tyler to create python notebooks for each chapter?
+- AI = function learning?
+- keep a list of packages and why we're using them (and repeat within chapters?)
+- 0-1 BVD?
+- use FNN for knn
+- ML != DS
+- () for functions?
+- [] for expectations?
+- practice in book?
+
+## Classes
+
+- STAT 432: Ruoqing
+- STAT 542: Feng, Ruoqing
+- CS 498: Forsyth, Etc
+
+## Books
+
 - https://www.textbook.ds100.org/about_this_book.html
+
+## Software
+
+- https://github.com/crsh/citr
