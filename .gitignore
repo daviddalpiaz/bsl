@@ -2,7 +2,7 @@
 .Rhistory
 .RData
 .Ruserdata
-.rds
+*.rds
 .DS_Store
 _book
 _bookdown_files
