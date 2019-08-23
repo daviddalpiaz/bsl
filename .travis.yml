@@ -12,3 +12,9 @@ script:
 after_success:
 - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash
   deployment/_deploy.sh
+
+# Containers have 2 CPUs by default. Speed up the build by using both.
+# c.f. https://docs.travis-ci.com/user/reference/overview/#virtualisation-environment-vs-operating-system
+env:
+  global:
+  - MAKEFLAGS="-j 2"
