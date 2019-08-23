@@ -12,12 +12,3 @@ pre {
 pre code {
   white-space: inherit;
 }
-
-a {
-  color: #006600;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
