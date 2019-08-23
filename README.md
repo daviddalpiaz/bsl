@@ -13,6 +13,7 @@
 - [ ] Write an R, RStudio, and R Markdown crash course
 - [ ] Setup a citation system
 - [ ] Steal form R4Sl
+- [ ] Find good KNN functions
 
 ## Chapters
 
