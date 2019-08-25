@@ -1,23 +1,31 @@
 # Contributing
 
-Pull requests are highly encouraged! If your contribution is not a structural change to the repository, please simply submit a pull request. For larger changes, please first file an issue.
+Pull requests are highly encouraged! If your contribution is not a structural 
+change to the repository, please simply submit a pull request. For larger 
+changes, please first file an issue.
 
-If you are not a GitHub user, and would like to contribute, say by way of a typo correction, feel free to email the maintainer.
+If you are not a GitHub user, and would like to contribute, say by way of a typo
+correction, feel free to email the maintainer.
 
-Whether or not your change is contributed via GitHub, the maintainer would like to credit you in the acknowledgments section of the text. Upon successfully contributing a change, you will be asked the following:
+Whether or not your change is contributed via GitHub, the maintainer would like
+to credit you in the acknowledgments section of the text. Upon successfully 
+contributing a change, you will be asked the following:
 
 1. Would you like to be listed in the acknowledgements?
 2. How would you like your name to appear in the acknowledgements?
-3. What contact information would you like listed in the acknowledgements? (GitHub? LinkedIn? Email?)
+3. What contact information would you like listed in the acknowledgements? 
+   (GitHub? LinkedIn? Email?)
 4. Are you a student in STAT 432? Current? Former? What semester?
 
-You are welcome to send this information along with any pull requests or typo corrections.
+You are welcome to send this information along with any pull requests or typo
+corrections.
 
 ***
 
 ## Code of Conduct
 
-Please note we have a code of conduct, please follow it in all your interactions with the project.
+Please note we have a code of conduct, please follow it in all your interactions
+with the project.
 
 ### Our Pledge
 
@@ -86,8 +94,11 @@ members of the project's leadership.
 
 ### Attribution
 
-This Code of Conduct is adapted from the [Contributor Covenant](https://www.contributor-covenant.org), version 1.4,
-available at https://www.contributor-covenant.org/version/1/4/code-of-conduct.html
+This Code of Conduct is adapted from the 
+[Contributor Covenant](https://www.contributor-covenant.org), version 1.4, 
+available at: 
 
-For answers to common questions about this code of conduct, see
-https://www.contributor-covenant.org/faq
+- https://www.contributor-covenant.org/version/1/4/code-of-conduct.html
+
+For answers to common questions about this code of conduct, see the 
+[Contributor Covenant FAQ](https://www.contributor-covenant.org/faq).
