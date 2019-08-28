@@ -19,6 +19,8 @@ description: ""
 knitr::opts_chunk$set(fig.align = "center")
 ```
 
+***
+
 # Introduction {-}
 
 ```{r, echo = FALSE}
@@ -27,6 +29,10 @@ knitr::include_graphics("images/wordmark.png")
 
 Welcome to Basics of Statistical Learning! 
 
+***
+
 ## License {-}
 
 ![This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).](images/cc.png)
+
+***
