@@ -1,12 +1,4 @@
----
-title: "Introduction"
-output:
-  html_document:
-    toc: true
-    df_print: paged
----
-
-***
+# Introduction
 
 ```{r, include = FALSE} 
 knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
@@ -276,9 +268,9 @@ map_dbl(reg_preds, calc_rmse, actual = pl_val$Deadlift)
 
 - TODO: **Never** supply `data = df` to `predict()`. You have been warned.
 
-```{r, echo = FALSE}
-knitr::include_graphics("img/sim-city.jpg", dpi = 200)
-```
+![](img/sim-city.jpg)
+
+- TODO: Use knitr::include_graphics()
 
 ```{r}
 calc_mae = function(actual, predicted) {
