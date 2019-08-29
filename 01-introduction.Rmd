@@ -1,0 +1,701 @@
+# Introduction
+
+```{r, include = FALSE} 
+knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
+```
+
+```{r, message = FALSE, warning = FALSE}
+library(readr)
+library(tibble)
+library(dplyr)
+library(purrr)
+library(ggplot2)
+library(ggridges)
+library(lubridate)
+library(randomForest)
+library(rpart)
+library(rpart.plot)
+library(cluster)
+library(caret)
+library(factoextra)
+library(rsample)
+library(janitor)
+library(rvest)
+library(dendextend)
+library(knitr)
+library(kableExtra)
+library(ggthemes)
+```
+
+```{r, echo = FALSE}
+theme_set(new = theme_light())
+```
+
+- TODO: Show package messaging? check conflicts!
+- TODO: Should this be split into three analyses with different packages?
+
+***
+
+## Regression: Powerlifting
+
+### Background
+
+- TODO: https://www.openpowerlifting.org/
+- TODO: https://en.wikipedia.org/wiki/Powerlifting
+
+### Data
+
+```{r, eval = FALSE, echo = FALSE}
+download.file(
+  url = "https://github.com/sstangl/openpowerlifting-static/raw/gh-pages/openpowerlifting-latest.zip",
+  destfile = "data/openpowerlifting-latest.zip")
+```
+
+```{r, eval = FALSE, echo = FALSE}
+unzip(zipfile = "data/openpowerlifting-latest.zip",
+      exdir = "data")
+```
+
+```{r, eval = FALSE, echo = FALSE}
+powerlifting = read_csv(
+  file = "data/openpowerlifting-2019-08-23/openpowerlifting-2019-08-23.csv",
+  col_types = cols(Tested = col_character(),
+                   Date   = col_datetime(format = "%Y-%m-%d"),
+                   Sex    = readr::col_factor()))
+```
+
+- TODO: Why readr::col_factor() and not just col_factor()?
+- TODO: Characters should be character and "categories" should be factors.
+
+```{r, eval = FALSE, echo = FALSE}
+pl = powerlifting %>% 
+  filter(Tested == "Yes", Division == "Open", MeetCountry == "USA", 
+         Event == "SBD", Equipment == "Raw") %>% 
+  filter(year(Date) > 2017) %>% 
+  filter(Best3DeadliftKg > 0, Best3SquatKg > 0, Best3BenchKg > 0) %>% 
+  select(Name, Sex, Bodyweight = BodyweightKg, Age, Squat = Best3SquatKg, 
+         Bench = Best3BenchKg, Deadlift = Best3DeadliftKg, Total = TotalKg) %>% 
+  na.omit()
+```
+
+- TODO: Is `na.omit()` actually a good idea?
+
+```{r, eval = FALSE, echo = FALSE}
+write_csv(x = pl, path = "data/pl.csv")
+```
+
+```{r, eval = FALSE, echo = FALSE}
+rm(pl)
+rm(powerlifting)
+```
+
+```{r}
+pl = read_csv("data/pl.csv", col_types = cols(Sex = readr::col_factor()))
+```
+
+```{r}
+pl
+```
+
+### EDA
+
+```{r}
+set.seed(1)
+
+# test-train split
+pl_tst_trn_split = initial_split(pl, prop = 0.80)
+pl_trn = training(pl_tst_trn_split)
+pl_tst = testing(pl_tst_trn_split)
+
+# estimation-validation split
+pl_est_val_split = initial_split(pl_trn, prop = 0.80)
+pl_est = training(pl_est_val_split)
+pl_val = testing(pl_est_val_split)
+```
+
+```{r, pl-clean}
+rm(pl)
+```
+
+- TODO: Train can be used however you want. (Including EDA.)
+- TODO: Test can only be used after all model decisions have been made!
+
+```{r, echo = FALSE}
+ggplot(pl_trn, aes(x = Bodyweight, y = Total, color = Sex)) +
+  geom_point() + 
+  scale_color_hc() + 
+  scale_fill_hc()
+```
+
+```{r, echo = FALSE}
+ggplot(pl_trn, aes(x = Bodyweight, y = Total, color = Sex)) +
+  geom_point() +
+  facet_wrap( ~ Sex) + 
+  scale_color_hc() + 
+  scale_fill_hc()
+```
+
+```{r, echo = FALSE}
+ggplot(pl_trn, aes(x = Sex, y = Deadlift, color = Sex)) +
+  geom_boxplot() + 
+  geom_jitter(position = position_jitter(0.1), alpha = 0.1) + 
+  scale_color_hc() + 
+  scale_fill_hc()
+```
+
+```{r, echo = FALSE}
+ggplot(pl_trn, aes(x = Bench, y = Deadlift, color = Sex)) +
+  geom_point() + 
+  scale_color_hc() + 
+  scale_fill_hc()
+```
+
+```{r, echo = FALSE}
+ggplot(pl_trn, aes(x = Squat, y = Deadlift, color = Sex)) +
+  geom_point() + 
+  scale_color_hc() + 
+  scale_fill_hc()
+```
+
+```{r}
+pl_trn_tidy = gather(pl_trn, key = "Lift", value = "Weight",
+                 Squat, Bench, Deadlift)
+```
+
+```{r}
+pl_trn_tidy$Lift = factor(pl_trn_tidy$Lift, levels = c("Squat", "Bench", "Deadlift"))
+```
+
+- TODO: https://www.tidyverse.org/
+- TODO: https://en.wikipedia.org/wiki/Tidy_data
+- TODO: http://vita.had.co.nz/papers/tidy-data.pdf
+
+```{r, echo = FALSE, fig.height = 4, fig.width = 8}
+ggplot(pl_trn_tidy, aes(x = Weight)) +
+  geom_histogram(bins = 30) +
+  facet_wrap( ~ Lift, scales = "free") + 
+  theme_light() + 
+  scale_color_hc() + 
+  scale_fill_hc()
+```
+
+```{r, echo = FALSE, fig.height = 4, fig.width = 8}
+ggplot(pl_trn_tidy, aes(x = Weight, fill = Sex, color = Sex)) +
+  geom_histogram(bins = 30) +
+  facet_wrap( ~ Lift, scales = "free") + 
+  scale_color_hc() + 
+  scale_fill_hc()
+```
+
+```{r, echo = FALSE, fig.height = 4, fig.width = 8}
+ggplot(pl_trn_tidy, aes(x = Weight, color = Sex, fill = Sex)) +
+  geom_histogram(bins = 30) +
+  facet_wrap( ~ Sex + Lift) + 
+  scale_color_hc() + 
+  scale_fill_hc()
+```
+
+### Modeling
+
+```{r}
+dl_mod_form = formula(Deadlift ~ Sex + Bodyweight + Age + Squat + Bench)
+
+set.seed(1)
+lm_mod  = lm(dl_mod_form, data = pl_est)
+knn_mod = caret::knnreg(dl_mod_form, data = pl_est)
+rf_mod  = randomForest(dl_mod_form, data = pl_est)
+rp_mod = rpart(dl_mod_form, data = pl_est)
+```
+
+- TODO: Note: we are not using `Name`. Why? We are not using `Total`. Why?
+- TODO: look what happens with `Total`! You'll see it with `lm()`, you'll be optimistic with `randomForest()`.
+- TODO: What variables are allowed? (With respect to real world problem.)
+- TODO: What variables lead to the best predictions?
+
+### Model Evaluation
+
+```{r, plot-reg-act-pred, echo = FALSE, fig.height = 8, fig.width = 8}
+par(mfrow = c(2, 2))
+
+# TODO: write plot function here!?
+
+plot(predict(lm_mod, pl_val), pl_val$Deadlift,
+     xlim = c(0, 400), ylim = c(0, 400), pch = 20, col = "darkgrey",
+     xlab = "Predicted", ylab = "Actual",
+     main = "Linear Model")
+abline(a = 0, b = 1, col = "green")
+grid()
+
+plot(predict(knn_mod, pl_val), pl_val$Deadlift,
+     xlim = c(0, 400), ylim = c(0, 400), pch = 20, col = "darkgrey",
+     xlab = "Predicted", ylab = "Actual",
+     main = "KNN Model")
+abline(a = 0, b = 1, col = "blue")
+grid()
+
+plot(predict(rp_mod, pl_val), pl_val$Deadlift,
+     xlim = c(0, 400), ylim = c(0, 400), pch = 20, col = "darkgrey",
+     xlab = "Predicted", ylab = "Actual",
+     main = "Tree Model")
+abline(a = 0, b = 1, col = "orange")
+grid()
+
+plot(predict(rf_mod, pl_val), pl_val$Deadlift,
+     xlim = c(0, 400), ylim = c(0, 400), pch = 20, col = "darkgrey",
+     xlab = "Predicted", ylab = "Actual",
+     main = "Random Forest Model")
+abline(a = 0, b = 1, col = "red")
+grid()
+```
+
+```{r}
+calc_rmse = function(actual, predicted) {
+  sqrt(mean((actual - predicted) ^ 2))
+}
+```
+
+```{r}
+c(calc_rmse(actual = pl_val$Deadlift, predicted = predict(lm_mod, pl_val)),
+  calc_rmse(actual = pl_val$Deadlift, predicted = predict(knn_mod, pl_val)),
+  calc_rmse(actual = pl_val$Deadlift, predicted = predict(rp_mod, pl_val)),
+  calc_rmse(actual = pl_val$Deadlift, predicted = predict(rf_mod, pl_val)))
+```
+
+```{r}
+reg_preds = map(list(lm_mod, knn_mod, rp_mod, rf_mod), predict, pl_val)
+map_dbl(reg_preds, calc_rmse, actual = pl_val$Deadlift)
+```
+
+- TODO: **Never** supply `data = df` to `predict()`. You have been warned.
+
+![](img/sim-city.jpg)
+
+- TODO: Use knitr::include_graphics()
+
+```{r}
+calc_mae = function(actual, predicted) {
+  mean(abs(actual - predicted))
+}
+```
+
+```{r}
+map_dbl(reg_preds, calc_mae,  actual = pl_val$Deadlift)
+```
+
+```{r, make-reg-results}
+reg_results = tibble(
+  Model = c("Linear", "KNN", "Tree", "Forest"),
+  RMSE = map_dbl(reg_preds, calc_rmse, actual = pl_val$Deadlift),
+  MAE = map_dbl(reg_preds, calc_mae,  actual = pl_val$Deadlift)) 
+```
+
+```{r, dispaly-reg-results, echo = FALSE}
+reg_results %>% 
+  kable %>% 
+  kable_styling(bootstrap_options = "striped", full_width = FALSE)
+```
+
+### Discussion
+
+```{r, echo = FALSE}
+rpart.plot(rp_mod)
+```
+
+```{r}
+lm_mod_final = lm(dl_mod_form, data = pl_trn)
+```
+
+```{r}
+calc_rmse(actual = pl_tst$Deadlift,
+          predicted = predict(lm_mod_final, pl_tst))
+```
+
+- TODO: Is this a good model?
+- TODO: Is this model useful?
+
+```{r}
+william_biscarri = tibble(
+  Name = "William Biscarri",
+  Age = 28,
+  Sex = "M",
+  Bodyweight = 83,
+  Squat = 130,
+  Bench = 90
+)
+```
+
+```{r}
+predict(lm_mod_final, william_biscarri)
+```
+
+***
+
+## Classification: Handwritten Digits
+
+### Background
+
+- TODO: https://en.wikipedia.org/wiki/MNIST_database
+- TODO: http://yann.lecun.com/exdb/mnist/
+
+### Data
+
+- TODO: How is this data pre-processed?
+- TODO: https://gist.github.com/daviddalpiaz/ae62ae5ccd0bada4b9acd6dbc9008706
+- TODO: https://github.com/itsrainingdata/mnistR
+- TODO: https://pjreddie.com/projects/mnist-in-csv/
+- TODO: http://varianceexplained.org/r/digit-eda/
+
+```{r, load-mnist-remote, warning = FALSE, message = FALSE, eval = FALSE, echo = FALSE}
+mnist_trn = read_csv(
+  file = "https://pjreddie.com/media/files/mnist_train.csv", 
+  col_names = FALSE)
+
+mnist_tst = read_csv(
+  file = "https://pjreddie.com/media/files/mnist_test.csv", 
+  col_names = FALSE)
+```
+
+```{r, eval = FALSE, echo = FALSE}
+write_csv(mnist_trn[1:1000, ], path = "data/mnist_train_subest.csv")
+write_csv(mnist_tst, path = "data/mnist_test.csv")
+```
+
+```{r, clean-mnist, echo = FALSE, eval = FALSE}
+rm(mnist_trn)
+rm(mnist_tst)
+```
+
+```{r, load-mnist-local, warning = FALSE, message = FALSE,}
+mnist_trn = read_csv(file = "data/mnist_train_subest.csv")
+mnist_tst = read_csv(file = "data/mnist_test.csv")
+```
+
+```{r, split-mnist}
+mnist_trn_y = as.factor(mnist_trn$X1)
+mnist_tst_y = as.factor(mnist_tst$X1)
+
+mnist_trn_x = mnist_trn[, -1]
+mnist_tst_x = mnist_tst[, -1]
+```
+
+```{r, clean-mnist-local, echo = FALSE}
+rm(mnist_trn)
+rm(mnist_tst)
+```
+
+- TODO: If we were going to tune a model, we would need a validation split as well. We're going to be lazy and just fit a single random forest.
+- TODO: This is an agreed upon split.
+
+### EDA
+
+```{r}
+pixel_positions = expand.grid(j = sprintf("%02.0f", 1:28), 
+                              i = sprintf("%02.0f", 1:28))
+pixel_names = paste("pixel", pixel_positions$i, pixel_positions$j, sep = "-")
+```
+
+```{r}
+colnames(mnist_trn_x) = pixel_names
+colnames(mnist_tst_x) = pixel_names
+```
+
+```{r}
+show_digit = function(arr784, col = gray(12:1 / 12), ...) {
+  image(matrix(as.matrix(arr784), nrow = 28)[, 28:1], 
+        col = col, xaxt = "n", yaxt = "n", ...)
+  grid(nx = 28, ny = 28)
+}
+```
+
+```{r, plot-digits, echo = FALSE, fig.height = 6, fig.width = 14}
+par(mfrow = c(2, 5))
+show_digit(mnist_trn_x[2, ],  main = "An Example Zero")
+show_digit(mnist_trn_x[4, ],  main = "An Example One")
+show_digit(mnist_trn_x[6, ],  main = "An Example Two")
+show_digit(mnist_trn_x[8, ],  main = "An Example Three")
+show_digit(mnist_trn_x[10, ], main = "An Example Four")
+show_digit(mnist_trn_x[1, ],  main = "An Example Five")
+show_digit(mnist_trn_x[14, ], main = "An Example Six")
+show_digit(mnist_trn_x[16, ], main = "An Example Seven")
+show_digit(mnist_trn_x[18, ], main = "An Example Eight")
+show_digit(mnist_trn_x[5, ],  main = "An Example Nine")
+```
+
+### Modeling
+
+```{r}
+set.seed(42)
+mnist_rf = randomForest(x = mnist_trn_x, y = mnist_trn_y, ntree = 100)
+```
+
+### Model Evaluation
+
+```{r}
+mnist_tst_pred = predict(mnist_rf, mnist_tst_x)
+mean(mnist_tst_pred == mnist_tst_y)
+```
+
+```{r}
+table(predicted = mnist_tst_pred, actual = mnist_tst_y)
+```
+
+### Discussion
+
+```{r, echo = FALSE}
+plot_mistake = function(actual, predicted) {
+  
+  obs_to_plot = which(mnist_tst_y == actual & mnist_tst_pred == predicted)[1:9]
+  show_digit(mnist_tst_x[obs_to_plot[1], ])
+  show_digit(mnist_tst_x[obs_to_plot[2], ])
+  show_digit(mnist_tst_x[obs_to_plot[3], ])
+  show_digit(mnist_tst_x[obs_to_plot[4], ])
+  show_digit(mnist_tst_x[obs_to_plot[5], ])
+  show_digit(mnist_tst_x[obs_to_plot[6], ])
+  show_digit(mnist_tst_x[obs_to_plot[7], ])
+  show_digit(mnist_tst_x[obs_to_plot[8], ])
+  show_digit(mnist_tst_x[obs_to_plot[9], ])
+}
+```
+
+```{r, fig.height = 12, fig.width = 12}
+par(mfrow = c(3, 3))
+plot_mistake(actual = 6, predicted = 4)
+```
+
+```{r}
+mnist_obs_to_check = 2
+predict(mnist_rf, mnist_tst_x[mnist_obs_to_check, ], type = "prob")[1, ]
+mnist_tst_y[mnist_obs_to_check]
+```
+
+```{r, fig.height = 4, fig.width = 4}
+show_digit(mnist_tst_x[mnist_obs_to_check, ])
+```
+
+***
+
+## Clustering: NBA Players
+
+### Background
+
+- https://www.youtube.com/watch?v=cuLprHh_BRg
+- https://www.youtube.com/watch?v=1FBwSO_1Mb8
+- https://www.basketball-reference.com/leagues/NBA_2019.html
+
+### Data
+
+- https://www.basketball-reference.com/leagues/NBA_2019_totals.html
+- https://www.basketball-reference.com/leagues/NBA_2019_per_minute.html
+- https://www.basketball-reference.com/leagues/NBA_2019_per_poss.html
+- https://www.basketball-reference.com/leagues/NBA_2019_advanced.html
+
+```{r, echo = FALSE}
+# TODO: this function should be more modular
+
+scrape_nba_season_player_stats = function(season = 2019) {
+
+  # totals source
+  totals_url = paste0("https://www.basketball-reference.com/leagues/NBA_",season,"_totals.html")
+
+  # scrape
+  stats_totals = read_html(totals_url) %>%
+    html_table() %>%
+    .[[1]] %>%
+    as_tibble(.name_repair = "minimal")
+
+  # clean
+  stats_totals_cleaned = stats_totals %>%
+    remove_empty("cols") %>%
+    clean_names() %>%
+    dplyr::filter(player != "Player") %>%
+    dplyr::filter(tm != "TOT") %>%
+    mutate_at(vars(-c(player, tm, pos)), as.numeric) %>%
+    mutate_if(is.numeric, ~ replace_na(., 0)) %>%
+    select(-rk)
+
+  # per minute source
+  per_min_url = paste0("https://www.basketball-reference.com/leagues/NBA_",season,"_per_minute.html")
+
+  # scrape
+  stats_per_min = read_html(per_min_url) %>%
+    html_table() %>%
+    .[[1]] %>%
+    as_tibble(.name_repair = "minimal")
+
+  # clean
+  stats_per_min_cleaned = stats_per_min %>%
+    remove_empty("cols") %>%
+    clean_names() %>%
+    dplyr::filter(player != "Player") %>%
+    dplyr::filter(tm != "TOT") %>%
+    mutate_at(vars(-c(player, tm, pos)), as.numeric) %>%
+    mutate_if(is.numeric, ~ replace_na(., 0)) %>%
+    rename_at(vars(-c(rk, player, pos, age, tm, g, gs, mp)), ~ paste0(., "_pm")) %>%
+    select(-rk)
+  
+  # per possession source
+  per_poss_url = paste0("https://www.basketball-reference.com/leagues/NBA_",season,"_per_poss.html")
+
+  # scrape
+  stats_per_poss = read_html(per_poss_url) %>%
+    html_table() %>%
+    .[[1]] %>%
+    as_tibble(.name_repair = "minimal")
+
+  # clean
+  stats_per_poss_cleaned = stats_per_poss %>%
+    remove_empty("cols") %>%
+    clean_names() %>%
+    dplyr::filter(player != "Player") %>%
+    dplyr::filter(tm != "TOT") %>%
+    mutate_at(vars(-c(player, tm, pos)), as.numeric) %>%
+    mutate_if(is.numeric, ~ replace_na(., 0)) %>%
+    rename_at(vars(-c(rk, player, pos, age, tm, g, gs, mp)), ~ paste0(., "_pp")) %>%
+    select(-rk)
+
+  # advanced source
+  adv_url = paste0("https://www.basketball-reference.com/leagues/NBA_",season,"_advanced.html")
+
+  # scrape
+  stats_adv = read_html(adv_url) %>%
+    html_table() %>%
+    .[[1]] %>%
+    as_tibble(.name_repair = "minimal")
+
+  # clean
+  stats_adv_cleaned = stats_adv %>%
+    remove_empty("cols") %>%
+    clean_names() %>%
+    dplyr::filter(player != "Player") %>%
+    dplyr::filter(tm != "TOT") %>%
+    mutate_at(vars(-c(player, tm, pos)), as.numeric) %>%
+    mutate_if(is.numeric, ~ replace_na(., 0)) %>%
+    select(-rk)
+
+  stats_totals_cleaned %>%
+    full_join(stats_per_min_cleaned) %>%
+    full_join(stats_per_poss_cleaned) %>% 
+    full_join(stats_adv_cleaned) %>%
+    mutate(player_team = stringr::str_c(player, " ", tm)) %>% 
+    select(player_team, everything(), -player) # probably a cleaner way to do this
+
+}
+```
+
+```{r, message = FALSE}
+nba = scrape_nba_season_player_stats()
+nba$pos = factor(nba$pos, levels = c("PG", "SG", "SF", "PF", "C"))
+```
+
+```{r, echo = FALSE}
+head(nba, n = 100)
+```
+
+### EDA
+
+```{r, echo = FALSE, message = FALSE}
+nba %>% 
+  ggplot(aes(x = mp, y = pos, fill = pos)) +
+  geom_density_ridges(scale = 4) + 
+  theme_ridges() +
+  scale_y_discrete(expand = c(0.01, 0)) +
+  scale_x_continuous(expand = c(0, 0)) + 
+  scale_color_hc() + 
+  scale_fill_hc()
+```
+
+```{r, echo = FALSE, message = FALSE}
+nba %>% 
+  filter(mp > 1000) %>% 
+  ggplot(aes(x = x3p_percent, y = pos, fill = pos)) +
+  geom_density_ridges(scale = 4) + 
+  theme_ridges() +
+  scale_y_discrete(expand = c(0.01, 0)) +
+  scale_x_continuous(expand = c(0, 0)) + 
+  scale_color_hc() + 
+  scale_fill_hc()
+```
+
+```{r, echo = FALSE, message = FALSE}
+nba %>% 
+  filter(mp > 1000, x3pa > 100) %>% 
+  ggplot(aes(x = x3p_percent, y = pos, fill = pos)) +
+  geom_density_ridges(scale = 4) + 
+  theme_ridges() +
+  scale_y_discrete(expand = c(0.01, 0)) +
+  scale_x_continuous(expand = c(0, 0)) + 
+  scale_color_hc() + 
+  scale_fill_hc()
+```
+
+```{r, echo = FALSE}
+ggplot(nba, aes(x = mp)) +
+  geom_histogram(bins = 50)
+```
+
+```{r}
+nba_for_clustering = nba %>% 
+  filter(mp > 2000) %>%
+  column_to_rownames("player_team") %>%
+  select(-pos, -tm)
+```
+
+### Modeling
+
+```{r}
+set.seed(42)
+
+# function to compute total within-cluster sum of square 
+wss = function(k, data) {
+  kmeans(x = data, centers = k, nstart = 10)$tot.withinss
+}
+
+# Compute and plot wss for k = 1 to k = 15
+k_values = 1:15
+
+# extract wss for 2-15 clusters
+wss_values = map_dbl(k_values, wss, data = nba_for_clustering)
+
+plot(k_values, wss_values,
+       type="b", pch = 19, frame = TRUE, 
+       xlab="Number of clusters K",
+       ylab="Total within-clusters sum of squares")
+grid()
+```
+
+- TODO: K-Means likes clusters of roughly equal size.
+- TODO: http://varianceexplained.org/r/kmeans-free-lunch/
+
+```{r}
+nba_hc = hclust(dist(nba_for_clustering))
+nba_hc_clust = cutree(nba_hc, k = 5)
+table(nba_hc_clust)
+```
+
+### Model Evaluation
+
+```{r, echo = FALSE}
+factoextra::fviz_nbclust(x = nba_for_clustering, kmeans, method = "wss")
+```
+
+```{r, echo = FALSE}
+factoextra::fviz_nbclust(x = nba_for_clustering, kmeans, method = "silhouette")
+```
+
+```{r, fig.height = 12, fig.width = 12, echo = FALSE}
+fviz_cluster(list(data = nba_for_clustering, cluster = nba_hc_clust))
+```
+
+### Discussion
+
+```{r fig.height = 36, fig.width = 36, echo = FALSE}
+par(mar = c(3, 1, 1, 70))
+as.dendrogram(nba_hc, hang = -1) %>% 
+  color_branches(k = 7, col = c(1, 3, 1, 3, 1, 3, 1)) %>% 
+  color_labels(k = 7, col = c(1, 3, 1, 3, 1, 3, 1)) %>% 
+  set("branches_lwd", 2) %>%
+  set("labels_cex", 2) %>% 
+  plot(horiz = TRUE)
+```
+
+***

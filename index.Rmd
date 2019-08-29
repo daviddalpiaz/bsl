@@ -21,13 +21,17 @@ knitr::opts_chunk$set(fig.align = "center")
 
 ***
 
-# Introduction {-}
+# Preface {-}
 
 ```{r, echo = FALSE}
 knitr::include_graphics("images/wordmark.png")
 ```
 
 Welcome to Basics of Statistical Learning! 
+
+- TODO: Warning about development.
+- TODO: Warning about PDF version.
+- TODO: Transfer acknowledgements.
 
 ***
 
