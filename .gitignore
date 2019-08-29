@@ -9,3 +9,4 @@ _bookdown_files
 devel/*.html
 devel/*_cache
 devel/*_files
+bsl.log
