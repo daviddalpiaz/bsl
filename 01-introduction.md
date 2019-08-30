@@ -204,9 +204,14 @@ map_dbl(reg_preds, calc_rmse, actual = pl_val$Deadlift)
 
 - TODO: **Never** supply `data = df` to `predict()`. You have been warned.
 
-![](img/sim-city.jpg)
 
-- TODO: Use knitr::include_graphics()
+```r
+knitr::include_graphics("img/sim-city.jpg")
+```
+
+
+
+\begin{center}\includegraphics[width=0.4\linewidth]{img/sim-city} \end{center}
 
 
 ```r
@@ -252,7 +257,7 @@ Forest & 19.23643 & 15.28626\\
 ### Discussion
 
 
-\begin{center}\includegraphics{01-introduction_files/figure-latex/unnamed-chunk-29-1} \end{center}
+\begin{center}\includegraphics{01-introduction_files/figure-latex/unnamed-chunk-30-1} \end{center}
 
 
 ```r
@@ -416,7 +421,7 @@ plot_mistake(actual = 6, predicted = 4)
 
 
 
-\begin{center}\includegraphics{01-introduction_files/figure-latex/unnamed-chunk-42-1} \end{center}
+\begin{center}\includegraphics{01-introduction_files/figure-latex/unnamed-chunk-43-1} \end{center}
 
 
 ```r
@@ -445,7 +450,7 @@ show_digit(mnist_tst_x[mnist_obs_to_check, ])
 
 
 
-\begin{center}\includegraphics{01-introduction_files/figure-latex/unnamed-chunk-44-1} \end{center}
+\begin{center}\includegraphics{01-introduction_files/figure-latex/unnamed-chunk-45-1} \end{center}
 
 ***
 
@@ -512,9 +517,6 @@ nba$pos = factor(nba$pos, levels = c("PG", "SG", "SF", "PF", "C"))
 ### EDA
 
 
-\begin{center}\includegraphics{01-introduction_files/figure-latex/unnamed-chunk-48-1} \end{center}
-
-
 \begin{center}\includegraphics{01-introduction_files/figure-latex/unnamed-chunk-49-1} \end{center}
 
 
@@ -522,6 +524,9 @@ nba$pos = factor(nba$pos, levels = c("PG", "SG", "SF", "PF", "C"))
 
 
 \begin{center}\includegraphics{01-introduction_files/figure-latex/unnamed-chunk-51-1} \end{center}
+
+
+\begin{center}\includegraphics{01-introduction_files/figure-latex/unnamed-chunk-52-1} \end{center}
 
 
 ```r
@@ -557,7 +562,7 @@ grid()
 
 
 
-\begin{center}\includegraphics{01-introduction_files/figure-latex/unnamed-chunk-53-1} \end{center}
+\begin{center}\includegraphics{01-introduction_files/figure-latex/unnamed-chunk-54-1} \end{center}
 
 - TODO: K-Means likes clusters of roughly equal size.
 - TODO: http://varianceexplained.org/r/kmeans-free-lunch/
@@ -578,17 +583,17 @@ table(nba_hc_clust)
 ### Model Evaluation
 
 
-\begin{center}\includegraphics{01-introduction_files/figure-latex/unnamed-chunk-55-1} \end{center}
-
-
 \begin{center}\includegraphics{01-introduction_files/figure-latex/unnamed-chunk-56-1} \end{center}
 
 
 \begin{center}\includegraphics{01-introduction_files/figure-latex/unnamed-chunk-57-1} \end{center}
 
+
+\begin{center}\includegraphics{01-introduction_files/figure-latex/unnamed-chunk-58-1} \end{center}
+
 ### Discussion
 
 
-\begin{center}\includegraphics{01-introduction_files/figure-latex/unnamed-chunk-58-1} \end{center}
+\begin{center}\includegraphics{01-introduction_files/figure-latex/unnamed-chunk-59-1} \end{center}
 
 ***

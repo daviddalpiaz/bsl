@@ -268,9 +268,9 @@ map_dbl(reg_preds, calc_rmse, actual = pl_val$Deadlift)
 
 - TODO: **Never** supply `data = df` to `predict()`. You have been warned.
 
-![](img/sim-city.jpg)
-
-- TODO: Use knitr::include_graphics()
+```{r, out.width = '40%'}
+knitr::include_graphics("img/sim-city.jpg")
+```
 
 ```{r}
 calc_mae = function(actual, predicted) {

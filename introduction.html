@@ -24,7 +24,7 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-08-29" />
+<meta name="date" content="2019-08-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="index.html"/>
-
+<link rel="next" href="computing.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -159,6 +159,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.3.5" data-path="introduction.html"><a href="introduction.html#model-evaluation-2"><i class="fa fa-check"></i><b>1.3.5</b> Model Evaluation</a></li>
 <li class="chapter" data-level="1.3.6" data-path="introduction.html"><a href="introduction.html#discussion-2"><i class="fa fa-check"></i><b>1.3.6</b> Discussion</a></li>
 </ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="computing.html"><a href="computing.html"><i class="fa fa-check"></i><b>2</b> Computing</a><ul>
+<li class="chapter" data-level="2.1" data-path="computing.html"><a href="computing.html#resources"><i class="fa fa-check"></i><b>2.1</b> Resources</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="computing.html"><a href="computing.html#r-resources"><i class="fa fa-check"></i><b>2.1.1</b> R Resources</a></li>
+<li class="chapter" data-level="2.1.2" data-path="computing.html"><a href="computing.html#rstudio"><i class="fa fa-check"></i><b>2.1.2</b> RStudio</a></li>
+<li class="chapter" data-level="2.1.3" data-path="computing.html"><a href="computing.html#r-markdown"><i class="fa fa-check"></i><b>2.1.3</b> R Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="computing.html"><a href="computing.html#bsl-idioms"><i class="fa fa-check"></i><b>2.2</b> BSL Idioms</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/daviddalpiaz/bsl" target="blank">&copy; 2019 David Dalpiaz</a></li>
@@ -308,19 +316,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>TODO: <strong>Never</strong> supply <code>data = df</code> to <code>predict()</code>. You have been warned.</li>
 </ul>
-<p><img src="img/sim-city.jpg" /></p>
-<ul>
-<li>TODO: Use knitr::include_graphics()</li>
-</ul>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">calc_mae =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2">  <span class="kw">mean</span>(<span class="kw">abs</span>(actual <span class="op">-</span><span class="st"> </span>predicted))</a>
-<a class="sourceLine" id="cb15-3" data-line-number="3">}</a></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">map_dbl</span>(reg_preds, calc_mae,  <span class="dt">actual =</span> pl_val<span class="op">$</span>Deadlift)</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="st">&quot;img/sim-city.jpg&quot;</span>)</a></code></pre></div>
+<p><img src="img/sim-city.jpg" width="40%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">calc_mae =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">  <span class="kw">mean</span>(<span class="kw">abs</span>(actual <span class="op">-</span><span class="st"> </span>predicted))</a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">map_dbl</span>(reg_preds, calc_mae,  <span class="dt">actual =</span> pl_val<span class="op">$</span>Deadlift)</a></code></pre></div>
 <pre><code>## [1] 14.38953 14.99748 17.14823 15.28626</code></pre>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">reg_results =<span class="st"> </span><span class="kw">tibble</span>(</a>
-<a class="sourceLine" id="cb18-2" data-line-number="2">  <span class="dt">Model =</span> <span class="kw">c</span>(<span class="st">&quot;Linear&quot;</span>, <span class="st">&quot;KNN&quot;</span>, <span class="st">&quot;Tree&quot;</span>, <span class="st">&quot;Forest&quot;</span>),</a>
-<a class="sourceLine" id="cb18-3" data-line-number="3">  <span class="dt">RMSE =</span> <span class="kw">map_dbl</span>(reg_preds, calc_rmse, <span class="dt">actual =</span> pl_val<span class="op">$</span>Deadlift),</a>
-<a class="sourceLine" id="cb18-4" data-line-number="4">  <span class="dt">MAE =</span> <span class="kw">map_dbl</span>(reg_preds, calc_mae,  <span class="dt">actual =</span> pl_val<span class="op">$</span>Deadlift)) </a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">reg_results =<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">  <span class="dt">Model =</span> <span class="kw">c</span>(<span class="st">&quot;Linear&quot;</span>, <span class="st">&quot;KNN&quot;</span>, <span class="st">&quot;Tree&quot;</span>, <span class="st">&quot;Forest&quot;</span>),</a>
+<a class="sourceLine" id="cb19-3" data-line-number="3">  <span class="dt">RMSE =</span> <span class="kw">map_dbl</span>(reg_preds, calc_rmse, <span class="dt">actual =</span> pl_val<span class="op">$</span>Deadlift),</a>
+<a class="sourceLine" id="cb19-4" data-line-number="4">  <span class="dt">MAE =</span> <span class="kw">map_dbl</span>(reg_preds, calc_mae,  <span class="dt">actual =</span> pl_val<span class="op">$</span>Deadlift)) </a></code></pre></div>
 <table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -385,24 +391,24 @@ Forest
 </div>
 <div id="discussion" class="section level3">
 <h3><span class="header-section-number">1.1.6</span> Discussion</h3>
-<p><img src="01-introduction_files/figure-html/unnamed-chunk-29-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">lm_mod_final =<span class="st"> </span><span class="kw">lm</span>(dl_mod_form, <span class="dt">data =</span> pl_trn)</a></code></pre></div>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">calc_rmse</span>(<span class="dt">actual =</span> pl_tst<span class="op">$</span>Deadlift,</a>
-<a class="sourceLine" id="cb20-2" data-line-number="2">          <span class="dt">predicted =</span> <span class="kw">predict</span>(lm_mod_final, pl_tst))</a></code></pre></div>
+<p><img src="01-introduction_files/figure-html/unnamed-chunk-30-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">lm_mod_final =<span class="st"> </span><span class="kw">lm</span>(dl_mod_form, <span class="dt">data =</span> pl_trn)</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">calc_rmse</span>(<span class="dt">actual =</span> pl_tst<span class="op">$</span>Deadlift,</a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">          <span class="dt">predicted =</span> <span class="kw">predict</span>(lm_mod_final, pl_tst))</a></code></pre></div>
 <pre><code>## [1] 22.29668</code></pre>
 <ul>
 <li>TODO: Is this a good model?</li>
 <li>TODO: Is this model useful?</li>
 </ul>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">william_biscarri =<span class="st"> </span><span class="kw">tibble</span>(</a>
-<a class="sourceLine" id="cb22-2" data-line-number="2">  <span class="dt">Name =</span> <span class="st">&quot;William Biscarri&quot;</span>,</a>
-<a class="sourceLine" id="cb22-3" data-line-number="3">  <span class="dt">Age =</span> <span class="dv">28</span>,</a>
-<a class="sourceLine" id="cb22-4" data-line-number="4">  <span class="dt">Sex =</span> <span class="st">&quot;M&quot;</span>,</a>
-<a class="sourceLine" id="cb22-5" data-line-number="5">  <span class="dt">Bodyweight =</span> <span class="dv">83</span>,</a>
-<a class="sourceLine" id="cb22-6" data-line-number="6">  <span class="dt">Squat =</span> <span class="dv">130</span>,</a>
-<a class="sourceLine" id="cb22-7" data-line-number="7">  <span class="dt">Bench =</span> <span class="dv">90</span></a>
-<a class="sourceLine" id="cb22-8" data-line-number="8">)</a></code></pre></div>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">predict</span>(lm_mod_final, william_biscarri)</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">william_biscarri =<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb23-2" data-line-number="2">  <span class="dt">Name =</span> <span class="st">&quot;William Biscarri&quot;</span>,</a>
+<a class="sourceLine" id="cb23-3" data-line-number="3">  <span class="dt">Age =</span> <span class="dv">28</span>,</a>
+<a class="sourceLine" id="cb23-4" data-line-number="4">  <span class="dt">Sex =</span> <span class="st">&quot;M&quot;</span>,</a>
+<a class="sourceLine" id="cb23-5" data-line-number="5">  <span class="dt">Bodyweight =</span> <span class="dv">83</span>,</a>
+<a class="sourceLine" id="cb23-6" data-line-number="6">  <span class="dt">Squat =</span> <span class="dv">130</span>,</a>
+<a class="sourceLine" id="cb23-7" data-line-number="7">  <span class="dt">Bench =</span> <span class="dv">90</span></a>
+<a class="sourceLine" id="cb23-8" data-line-number="8">)</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">predict</span>(lm_mod_final, william_biscarri)</a></code></pre></div>
 <pre><code>##       1 
 ## 175.495</code></pre>
 <hr />
@@ -426,13 +432,13 @@ Forest
 <li>TODO: <a href="https://pjreddie.com/projects/mnist-in-csv/" class="uri">https://pjreddie.com/projects/mnist-in-csv/</a></li>
 <li>TODO: <a href="http://varianceexplained.org/r/digit-eda/" class="uri">http://varianceexplained.org/r/digit-eda/</a></li>
 </ul>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">mnist_trn =<span class="st"> </span><span class="kw">read_csv</span>(<span class="dt">file =</span> <span class="st">&quot;data/mnist_train_subest.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb25-2" data-line-number="2">mnist_tst =<span class="st"> </span><span class="kw">read_csv</span>(<span class="dt">file =</span> <span class="st">&quot;data/mnist_test.csv&quot;</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">mnist_trn_y =<span class="st"> </span><span class="kw">as.factor</span>(mnist_trn<span class="op">$</span>X1)</a>
-<a class="sourceLine" id="cb26-2" data-line-number="2">mnist_tst_y =<span class="st"> </span><span class="kw">as.factor</span>(mnist_tst<span class="op">$</span>X1)</a>
-<a class="sourceLine" id="cb26-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb26-4" data-line-number="4">mnist_trn_x =<span class="st"> </span>mnist_trn[, <span class="dv">-1</span>]</a>
-<a class="sourceLine" id="cb26-5" data-line-number="5">mnist_tst_x =<span class="st"> </span>mnist_tst[, <span class="dv">-1</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">mnist_trn =<span class="st"> </span><span class="kw">read_csv</span>(<span class="dt">file =</span> <span class="st">&quot;data/mnist_train_subest.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb26-2" data-line-number="2">mnist_tst =<span class="st"> </span><span class="kw">read_csv</span>(<span class="dt">file =</span> <span class="st">&quot;data/mnist_test.csv&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">mnist_trn_y =<span class="st"> </span><span class="kw">as.factor</span>(mnist_trn<span class="op">$</span>X1)</a>
+<a class="sourceLine" id="cb27-2" data-line-number="2">mnist_tst_y =<span class="st"> </span><span class="kw">as.factor</span>(mnist_tst<span class="op">$</span>X1)</a>
+<a class="sourceLine" id="cb27-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb27-4" data-line-number="4">mnist_trn_x =<span class="st"> </span>mnist_trn[, <span class="dv">-1</span>]</a>
+<a class="sourceLine" id="cb27-5" data-line-number="5">mnist_tst_x =<span class="st"> </span>mnist_tst[, <span class="dv">-1</span>]</a></code></pre></div>
 <ul>
 <li>TODO: If we were going to tune a model, we would need a validation split as well. We’re going to be lazy and just fit a single random forest.</li>
 <li>TODO: This is an agreed upon split.</li>
@@ -440,29 +446,29 @@ Forest
 </div>
 <div id="eda-1" class="section level3">
 <h3><span class="header-section-number">1.2.3</span> EDA</h3>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">pixel_positions =<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">j =</span> <span class="kw">sprintf</span>(<span class="st">&quot;%02.0f&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">28</span>), </a>
-<a class="sourceLine" id="cb27-2" data-line-number="2">                              <span class="dt">i =</span> <span class="kw">sprintf</span>(<span class="st">&quot;%02.0f&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">28</span>))</a>
-<a class="sourceLine" id="cb27-3" data-line-number="3">pixel_names =<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;pixel&quot;</span>, pixel_positions<span class="op">$</span>i, pixel_positions<span class="op">$</span>j, <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw">colnames</span>(mnist_trn_x) =<span class="st"> </span>pixel_names</a>
-<a class="sourceLine" id="cb28-2" data-line-number="2"><span class="kw">colnames</span>(mnist_tst_x) =<span class="st"> </span>pixel_names</a></code></pre></div>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">show_digit =<span class="st"> </span><span class="cf">function</span>(arr784, <span class="dt">col =</span> <span class="kw">gray</span>(<span class="dv">12</span><span class="op">:</span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">12</span>), ...) {</a>
-<a class="sourceLine" id="cb29-2" data-line-number="2">  <span class="kw">image</span>(<span class="kw">matrix</span>(<span class="kw">as.matrix</span>(arr784), <span class="dt">nrow =</span> <span class="dv">28</span>)[, <span class="dv">28</span><span class="op">:</span><span class="dv">1</span>], </a>
-<a class="sourceLine" id="cb29-3" data-line-number="3">        <span class="dt">col =</span> col, <span class="dt">xaxt =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">yaxt =</span> <span class="st">&quot;n&quot;</span>, ...)</a>
-<a class="sourceLine" id="cb29-4" data-line-number="4">  <span class="kw">grid</span>(<span class="dt">nx =</span> <span class="dv">28</span>, <span class="dt">ny =</span> <span class="dv">28</span>)</a>
-<a class="sourceLine" id="cb29-5" data-line-number="5">}</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">pixel_positions =<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">j =</span> <span class="kw">sprintf</span>(<span class="st">&quot;%02.0f&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">28</span>), </a>
+<a class="sourceLine" id="cb28-2" data-line-number="2">                              <span class="dt">i =</span> <span class="kw">sprintf</span>(<span class="st">&quot;%02.0f&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">28</span>))</a>
+<a class="sourceLine" id="cb28-3" data-line-number="3">pixel_names =<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;pixel&quot;</span>, pixel_positions<span class="op">$</span>i, pixel_positions<span class="op">$</span>j, <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw">colnames</span>(mnist_trn_x) =<span class="st"> </span>pixel_names</a>
+<a class="sourceLine" id="cb29-2" data-line-number="2"><span class="kw">colnames</span>(mnist_tst_x) =<span class="st"> </span>pixel_names</a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">show_digit =<span class="st"> </span><span class="cf">function</span>(arr784, <span class="dt">col =</span> <span class="kw">gray</span>(<span class="dv">12</span><span class="op">:</span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">12</span>), ...) {</a>
+<a class="sourceLine" id="cb30-2" data-line-number="2">  <span class="kw">image</span>(<span class="kw">matrix</span>(<span class="kw">as.matrix</span>(arr784), <span class="dt">nrow =</span> <span class="dv">28</span>)[, <span class="dv">28</span><span class="op">:</span><span class="dv">1</span>], </a>
+<a class="sourceLine" id="cb30-3" data-line-number="3">        <span class="dt">col =</span> col, <span class="dt">xaxt =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">yaxt =</span> <span class="st">&quot;n&quot;</span>, ...)</a>
+<a class="sourceLine" id="cb30-4" data-line-number="4">  <span class="kw">grid</span>(<span class="dt">nx =</span> <span class="dv">28</span>, <span class="dt">ny =</span> <span class="dv">28</span>)</a>
+<a class="sourceLine" id="cb30-5" data-line-number="5">}</a></code></pre></div>
 <p><img src="01-introduction_files/figure-html/plot-digits-1.png" width="1344" style="display: block; margin: auto;" /></p>
 </div>
 <div id="modeling-1" class="section level3">
 <h3><span class="header-section-number">1.2.4</span> Modeling</h3>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb30-2" data-line-number="2">mnist_rf =<span class="st"> </span><span class="kw">randomForest</span>(<span class="dt">x =</span> mnist_trn_x, <span class="dt">y =</span> mnist_trn_y, <span class="dt">ntree =</span> <span class="dv">100</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb31-2" data-line-number="2">mnist_rf =<span class="st"> </span><span class="kw">randomForest</span>(<span class="dt">x =</span> mnist_trn_x, <span class="dt">y =</span> mnist_trn_y, <span class="dt">ntree =</span> <span class="dv">100</span>)</a></code></pre></div>
 </div>
 <div id="model-evaluation-1" class="section level3">
 <h3><span class="header-section-number">1.2.5</span> Model Evaluation</h3>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">mnist_tst_pred =<span class="st"> </span><span class="kw">predict</span>(mnist_rf, mnist_tst_x)</a>
-<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="kw">mean</span>(mnist_tst_pred <span class="op">==</span><span class="st"> </span>mnist_tst_y)</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">mnist_tst_pred =<span class="st"> </span><span class="kw">predict</span>(mnist_rf, mnist_tst_x)</a>
+<a class="sourceLine" id="cb32-2" data-line-number="2"><span class="kw">mean</span>(mnist_tst_pred <span class="op">==</span><span class="st"> </span>mnist_tst_y)</a></code></pre></div>
 <pre><code>## [1] 0.8839</code></pre>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw">table</span>(<span class="dt">predicted =</span> mnist_tst_pred, <span class="dt">actual =</span> mnist_tst_y)</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw">table</span>(<span class="dt">predicted =</span> mnist_tst_pred, <span class="dt">actual =</span> mnist_tst_y)</a></code></pre></div>
 <pre><code>##          actual
 ## predicted    0    1    2    3    4    5    6    7    8    9
 ##         0  959    0   14    6    1   15   22    1   10   10
@@ -478,18 +484,18 @@ Forest
 </div>
 <div id="discussion-1" class="section level3">
 <h3><span class="header-section-number">1.2.6</span> Discussion</h3>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb35-2" data-line-number="2"><span class="kw">plot_mistake</span>(<span class="dt">actual =</span> <span class="dv">6</span>, <span class="dt">predicted =</span> <span class="dv">4</span>)</a></code></pre></div>
-<p><img src="01-introduction_files/figure-html/unnamed-chunk-42-1.png" width="1152" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">mnist_obs_to_check =<span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb36-2" data-line-number="2"><span class="kw">predict</span>(mnist_rf, mnist_tst_x[mnist_obs_to_check, ], <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>)[<span class="dv">1</span>, ]</a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb36-2" data-line-number="2"><span class="kw">plot_mistake</span>(<span class="dt">actual =</span> <span class="dv">6</span>, <span class="dt">predicted =</span> <span class="dv">4</span>)</a></code></pre></div>
+<p><img src="01-introduction_files/figure-html/unnamed-chunk-43-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">mnist_obs_to_check =<span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb37-2" data-line-number="2"><span class="kw">predict</span>(mnist_rf, mnist_tst_x[mnist_obs_to_check, ], <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>)[<span class="dv">1</span>, ]</a></code></pre></div>
 <pre><code>##    0    1    2    3    4    5    6    7    8    9 
 ## 0.09 0.03 0.25 0.14 0.02 0.14 0.25 0.01 0.05 0.02</code></pre>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1">mnist_tst_y[mnist_obs_to_check]</a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">mnist_tst_y[mnist_obs_to_check]</a></code></pre></div>
 <pre><code>## [1] 2
 ## Levels: 0 1 2 3 4 5 6 7 8 9</code></pre>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw">show_digit</span>(mnist_tst_x[mnist_obs_to_check, ])</a></code></pre></div>
-<p><img src="01-introduction_files/figure-html/unnamed-chunk-44-1.png" width="384" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw">show_digit</span>(mnist_tst_x[mnist_obs_to_check, ])</a></code></pre></div>
+<p><img src="01-introduction_files/figure-html/unnamed-chunk-45-1.png" width="384" style="display: block; margin: auto;" /></p>
 <hr />
 </div>
 </div>
@@ -511,8 +517,8 @@ Forest
 <li><a href="https://www.basketball-reference.com/leagues/NBA_2019_per_poss.html" class="uri">https://www.basketball-reference.com/leagues/NBA_2019_per_poss.html</a></li>
 <li><a href="https://www.basketball-reference.com/leagues/NBA_2019_advanced.html" class="uri">https://www.basketball-reference.com/leagues/NBA_2019_advanced.html</a></li>
 </ul>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1">nba =<span class="st"> </span><span class="kw">scrape_nba_season_player_stats</span>()</a>
-<a class="sourceLine" id="cb41-2" data-line-number="2">nba<span class="op">$</span>pos =<span class="st"> </span><span class="kw">factor</span>(nba<span class="op">$</span>pos, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;PG&quot;</span>, <span class="st">&quot;SG&quot;</span>, <span class="st">&quot;SF&quot;</span>, <span class="st">&quot;PF&quot;</span>, <span class="st">&quot;C&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">nba =<span class="st"> </span><span class="kw">scrape_nba_season_player_stats</span>()</a>
+<a class="sourceLine" id="cb42-2" data-line-number="2">nba<span class="op">$</span>pos =<span class="st"> </span><span class="kw">factor</span>(nba<span class="op">$</span>pos, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;PG&quot;</span>, <span class="st">&quot;SG&quot;</span>, <span class="st">&quot;SF&quot;</span>, <span class="st">&quot;PF&quot;</span>, <span class="st">&quot;C&quot;</span>))</a></code></pre></div>
 <pre><code>## # A tibble: 100 x 93
 ##    player_team pos     age tm        g    gs    mp    fg   fga fg_percent
 ##    &lt;chr&gt;       &lt;fct&gt; &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
@@ -549,56 +555,56 @@ Forest
 </div>
 <div id="eda-2" class="section level3">
 <h3><span class="header-section-number">1.3.3</span> EDA</h3>
-<p><img src="01-introduction_files/figure-html/unnamed-chunk-48-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p><img src="01-introduction_files/figure-html/unnamed-chunk-49-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p><img src="01-introduction_files/figure-html/unnamed-chunk-50-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p><img src="01-introduction_files/figure-html/unnamed-chunk-51-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1">nba_for_clustering =<span class="st"> </span>nba <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb43-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(mp <span class="op">&gt;</span><span class="st"> </span><span class="dv">2000</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb43-3" data-line-number="3"><span class="st">  </span><span class="kw">column_to_rownames</span>(<span class="st">&quot;player_team&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb43-4" data-line-number="4"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>pos, <span class="op">-</span>tm)</a></code></pre></div>
+<p><img src="01-introduction_files/figure-html/unnamed-chunk-52-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">nba_for_clustering =<span class="st"> </span>nba <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb44-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(mp <span class="op">&gt;</span><span class="st"> </span><span class="dv">2000</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb44-3" data-line-number="3"><span class="st">  </span><span class="kw">column_to_rownames</span>(<span class="st">&quot;player_team&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb44-4" data-line-number="4"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>pos, <span class="op">-</span>tm)</a></code></pre></div>
 </div>
 <div id="modeling-2" class="section level3">
 <h3><span class="header-section-number">1.3.4</span> Modeling</h3>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb44-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb44-3" data-line-number="3"><span class="co"># function to compute total within-cluster sum of square </span></a>
-<a class="sourceLine" id="cb44-4" data-line-number="4">wss =<span class="st"> </span><span class="cf">function</span>(k, data) {</a>
-<a class="sourceLine" id="cb44-5" data-line-number="5">  <span class="kw">kmeans</span>(<span class="dt">x =</span> data, <span class="dt">centers =</span> k, <span class="dt">nstart =</span> <span class="dv">10</span>)<span class="op">$</span>tot.withinss</a>
-<a class="sourceLine" id="cb44-6" data-line-number="6">}</a>
-<a class="sourceLine" id="cb44-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb44-8" data-line-number="8"><span class="co"># Compute and plot wss for k = 1 to k = 15</span></a>
-<a class="sourceLine" id="cb44-9" data-line-number="9">k_values =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">15</span></a>
-<a class="sourceLine" id="cb44-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb44-11" data-line-number="11"><span class="co"># extract wss for 2-15 clusters</span></a>
-<a class="sourceLine" id="cb44-12" data-line-number="12">wss_values =<span class="st"> </span><span class="kw">map_dbl</span>(k_values, wss, <span class="dt">data =</span> nba_for_clustering)</a>
-<a class="sourceLine" id="cb44-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb44-14" data-line-number="14"><span class="kw">plot</span>(k_values, wss_values,</a>
-<a class="sourceLine" id="cb44-15" data-line-number="15">       <span class="dt">type=</span><span class="st">&quot;b&quot;</span>, <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">frame =</span> <span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb44-16" data-line-number="16">       <span class="dt">xlab=</span><span class="st">&quot;Number of clusters K&quot;</span>,</a>
-<a class="sourceLine" id="cb44-17" data-line-number="17">       <span class="dt">ylab=</span><span class="st">&quot;Total within-clusters sum of squares&quot;</span>)</a>
-<a class="sourceLine" id="cb44-18" data-line-number="18"><span class="kw">grid</span>()</a></code></pre></div>
-<p><img src="01-introduction_files/figure-html/unnamed-chunk-53-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb45-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb45-3" data-line-number="3"><span class="co"># function to compute total within-cluster sum of square </span></a>
+<a class="sourceLine" id="cb45-4" data-line-number="4">wss =<span class="st"> </span><span class="cf">function</span>(k, data) {</a>
+<a class="sourceLine" id="cb45-5" data-line-number="5">  <span class="kw">kmeans</span>(<span class="dt">x =</span> data, <span class="dt">centers =</span> k, <span class="dt">nstart =</span> <span class="dv">10</span>)<span class="op">$</span>tot.withinss</a>
+<a class="sourceLine" id="cb45-6" data-line-number="6">}</a>
+<a class="sourceLine" id="cb45-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb45-8" data-line-number="8"><span class="co"># Compute and plot wss for k = 1 to k = 15</span></a>
+<a class="sourceLine" id="cb45-9" data-line-number="9">k_values =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">15</span></a>
+<a class="sourceLine" id="cb45-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb45-11" data-line-number="11"><span class="co"># extract wss for 2-15 clusters</span></a>
+<a class="sourceLine" id="cb45-12" data-line-number="12">wss_values =<span class="st"> </span><span class="kw">map_dbl</span>(k_values, wss, <span class="dt">data =</span> nba_for_clustering)</a>
+<a class="sourceLine" id="cb45-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb45-14" data-line-number="14"><span class="kw">plot</span>(k_values, wss_values,</a>
+<a class="sourceLine" id="cb45-15" data-line-number="15">       <span class="dt">type=</span><span class="st">&quot;b&quot;</span>, <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">frame =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb45-16" data-line-number="16">       <span class="dt">xlab=</span><span class="st">&quot;Number of clusters K&quot;</span>,</a>
+<a class="sourceLine" id="cb45-17" data-line-number="17">       <span class="dt">ylab=</span><span class="st">&quot;Total within-clusters sum of squares&quot;</span>)</a>
+<a class="sourceLine" id="cb45-18" data-line-number="18"><span class="kw">grid</span>()</a></code></pre></div>
+<p><img src="01-introduction_files/figure-html/unnamed-chunk-54-1.png" width="672" style="display: block; margin: auto;" /></p>
 <ul>
 <li>TODO: K-Means likes clusters of roughly equal size.</li>
 <li>TODO: <a href="http://varianceexplained.org/r/kmeans-free-lunch/" class="uri">http://varianceexplained.org/r/kmeans-free-lunch/</a></li>
 </ul>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1">nba_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(nba_for_clustering))</a>
-<a class="sourceLine" id="cb45-2" data-line-number="2">nba_hc_clust =<span class="st"> </span><span class="kw">cutree</span>(nba_hc, <span class="dt">k =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb45-3" data-line-number="3"><span class="kw">table</span>(nba_hc_clust)</a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">nba_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(nba_for_clustering))</a>
+<a class="sourceLine" id="cb46-2" data-line-number="2">nba_hc_clust =<span class="st"> </span><span class="kw">cutree</span>(nba_hc, <span class="dt">k =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb46-3" data-line-number="3"><span class="kw">table</span>(nba_hc_clust)</a></code></pre></div>
 <pre><code>## nba_hc_clust
 ##  1  2  3  4  5 
 ## 38 13 28 11  1</code></pre>
 </div>
 <div id="model-evaluation-2" class="section level3">
 <h3><span class="header-section-number">1.3.5</span> Model Evaluation</h3>
-<p><img src="01-introduction_files/figure-html/unnamed-chunk-55-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p><img src="01-introduction_files/figure-html/unnamed-chunk-56-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p><img src="01-introduction_files/figure-html/unnamed-chunk-57-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="01-introduction_files/figure-html/unnamed-chunk-57-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="01-introduction_files/figure-html/unnamed-chunk-58-1.png" width="1152" style="display: block; margin: auto;" /></p>
 </div>
 <div id="discussion-2" class="section level3">
 <h3><span class="header-section-number">1.3.6</span> Discussion</h3>
-<p><img src="01-introduction_files/figure-html/unnamed-chunk-58-1.png" width="3456" style="display: block; margin: auto;" /></p>
+<p><img src="01-introduction_files/figure-html/unnamed-chunk-59-1.png" width="3456" style="display: block; margin: auto;" /></p>
 <hr />
 
 </div>
@@ -609,8 +615,8 @@ Forest
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="computing.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
