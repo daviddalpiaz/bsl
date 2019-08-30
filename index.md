@@ -29,6 +29,7 @@ Welcome to Basics of Statistical Learning!
 - TODO: Warning about development.
 - TODO: Warning about PDF version.
 - TODO: Transfer acknowledgements.
+- TODO: discuss https://daviddalpiaz.github.io/r4sl/
 
 ***
 
