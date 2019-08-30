@@ -243,4 +243,8 @@ View(summary(cars_mod))
 - TODO: style!
 - TODO: keyboard shortcut for keyboard shortcut
 
+## Common Issues
+
+- TODO: cannot find function called ""
+
 ***
