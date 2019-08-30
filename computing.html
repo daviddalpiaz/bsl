@@ -167,7 +167,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.3" data-path="computing.html"><a href="computing.html#r-markdown"><i class="fa fa-check"></i><b>2.1.3</b> R Markdown</a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="computing.html"><a href="computing.html#bsl-idioms"><i class="fa fa-check"></i><b>2.2</b> BSL Idioms</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="computing.html"><a href="computing.html#style"><i class="fa fa-check"></i><b>2.2.1</b> Style</a></li>
+<li class="chapter" data-level="2.2.1" data-path="computing.html"><a href="computing.html#reference-style"><i class="fa fa-check"></i><b>2.2.1</b> Reference Style</a></li>
+<li class="chapter" data-level="2.2.2" data-path="computing.html"><a href="computing.html#bsl-style-overrides"><i class="fa fa-check"></i><b>2.2.2</b> BSL Style Overrides</a></li>
+<li class="chapter" data-level="2.2.3" data-path="computing.html"><a href="computing.html#objects-and-functions"><i class="fa fa-check"></i><b>2.2.3</b> Objects and Functions</a></li>
+<li class="chapter" data-level="2.2.4" data-path="computing.html"><a href="computing.html#print-versus-return"><i class="fa fa-check"></i><b>2.2.4</b> Print versus Return</a></li>
+<li class="chapter" data-level="2.2.5" data-path="computing.html"><a href="computing.html#help"><i class="fa fa-check"></i><b>2.2.5</b> Help</a></li>
+<li class="chapter" data-level="2.2.6" data-path="computing.html"><a href="computing.html#keyboard-shortcuts"><i class="fa fa-check"></i><b>2.2.6</b> Keyboard Shortcuts</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -192,16 +197,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="computing" class="section level1">
 <h1><span class="header-section-number">Chapter 2</span> Computing</h1>
-<p>This is not a book about R.</p>
+<p>This is not a book about R. It is however, a book that uses R. Because of this, you will need to be familiar with R. The text will point out some thing about R along the way, but some previous study of R is necessary.</p>
+<p>The following (freely availible) readings are highly recommended:</p>
 <ul>
-<li><p>TODO: Set of readings to do. (R4DS, ADVR, ?)</p></li>
-<li><a href="https://daviddalpiaz.github.io/appliedstats/">Applied Statistics with R</a></li>
-<li><a href="https://r4ds.had.co.nz/">R for Data Science</a></li>
-<li><a href="https://adv-r.hadley.nz/">Advanced R</a></li>
-<li><p><a href="https://rstudio-education.github.io/hopr/">Hands-On Programming with R</a></p></li>
+<li><a href="https://rstudio-education.github.io/hopr/">Hands-On Programming with R</a> - <em>Garrett Grolemund</em>
+<ul>
+<li>If you have never used R or RStudio before, Part 1, Chapters 1 - 3, will be useful.</li>
+</ul></li>
+<li><a href="https://r4ds.had.co.nz/">R for Data Science</a> - <em>Garrett Grolemund, Hadley Wickham</em>
+<ul>
+<li>This book helps getting you up to speed working with data in R. While it is a lot of reading, Chapters 1 - 21 are highly recommended.</li>
+</ul></li>
+<li><a href="https://adv-r.hadley.nz/">Advanced R</a> - <em>Hadley Wickham</em>
+<ul>
+<li>Part I, Chapters 1 - 8, of this book will help create a mental model for working with R. These chapters are not an easy read, so they should be returned to often. (Chapter 2 could be safely skipped for our purposes, but is important if you will use R in the long term.)</li>
+</ul></li>
 </ul>
+<p>If you are a UIUC student who took the course STAT 420, the first six chapters of that book could serve as a nice refresher.</p>
+<ul>
+<li><a href="https://daviddalpiaz.github.io/appliedstats/">Applied Statistics with R</a> - <em>David Dalpiaz</em></li>
+</ul>
+<hr />
 <div id="resources" class="section level2">
 <h2><span class="header-section-number">2.1</span> Resources</h2>
+<p>The following resources are more specific or more advanced, but could still prove to be useful.</p>
 <div id="r" class="section level3">
 <h3><span class="header-section-number">2.1.1</span> R</h3>
 <ul>
@@ -209,41 +228,183 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="https://bookdown.org/rdpeng/rprogdatascience/">R Programming for Data Science</a></li>
 <li><a href="https://r-graphics.org/">R Graphics Cookbook</a></li>
 <li><a href="https://moderndive.com/index.html">Modern Dive</a></li>
-<li>? <a href="tidyverse.org/">The <code>tidyverse</code> Website</a>
+<li><a href="tidyverse.org/">The <code>tidyverse</code> Website</a>
 <ul>
-<li>? <a href="https://dplyr.tidyverse.org/"><code>dplyr</code> Website</a></li>
-<li>? <a href="https://readr.tidyverse.org/"><code>readr</code> Website</a></li>
-<li>? <a href="https://tibble.tidyverse.org/"><code>tibble</code> Website</a></li>
-<li>? <a href="https://forcats.tidyverse.org/"><code>forcats</code> Website</a></li>
+<li><a href="https://dplyr.tidyverse.org/"><code>dplyr</code> Website</a></li>
+<li><a href="https://readr.tidyverse.org/"><code>readr</code> Website</a></li>
+<li><a href="https://tibble.tidyverse.org/"><code>tibble</code> Website</a></li>
+<li><a href="https://forcats.tidyverse.org/"><code>forcats</code> Website</a></li>
 </ul></li>
 </ul>
 </div>
 <div id="rstudio" class="section level3">
 <h3><span class="header-section-number">2.1.2</span> RStudio</h3>
 <ul>
-<li><a href="https://resources.rstudio.com/rstudio-cheatsheets/rstudio-ide-cheat-sheet" class="uri">https://resources.rstudio.com/rstudio-cheatsheets/rstudio-ide-cheat-sheet</a></li>
-<li><a href="https://resources.rstudio.com/" class="uri">https://resources.rstudio.com/</a></li>
+<li><a href="https://resources.rstudio.com/rstudio-cheatsheets/rstudio-ide-cheat-sheet">RStudio IDE Cheatsheet</a></li>
+<li><a href="https://resources.rstudio.com/">RStudio Resources</a></li>
 </ul>
 </div>
 <div id="r-markdown" class="section level3">
 <h3><span class="header-section-number">2.1.3</span> R Markdown</h3>
 <ul>
-<li><a href="https://resources.rstudio.com/rstudio-cheatsheets/rmarkdown-2-0-cheat-sheet" class="uri">https://resources.rstudio.com/rstudio-cheatsheets/rmarkdown-2-0-cheat-sheet</a></li>
-<li><p><a href="https://bookdown.org/yihui/rmarkdown/" class="uri">https://bookdown.org/yihui/rmarkdown/</a></p></li>
-<li><a href="https://daringfireball.net/projects/markdown/basics" class="uri">https://daringfireball.net/projects/markdown/basics</a></li>
-<li><a href="https://guides.github.com/features/mastering-markdown/" class="uri">https://guides.github.com/features/mastering-markdown/</a></li>
-<li><p><a href="https://commonmark.org/" class="uri">https://commonmark.org/</a></p></li>
+<li><a href="https://resources.rstudio.com/rstudio-cheatsheets/rmarkdown-2-0-cheat-sheet">R Markdown Cheatsheet</a></li>
+<li><a href="https://bookdown.org/yihui/rmarkdown/">R Markdown: The Definitive Guide</a> - <em>Yihui Xie, J. J. Allaire, Garrett Grolemund</em></li>
+<li><a href="https://r4ds.had.co.nz/r-markdown.html">R4DS R Markdown Chapter</a></li>
 </ul>
+<div id="markdown" class="section level4">
+<h4><span class="header-section-number">2.1.3.1</span> Markdown</h4>
+<ul>
+<li><a href="https://daringfireball.net/projects/markdown/basics">Daring Fireball - Markdown: Basics</a></li>
+<li><a href="https://guides.github.com/features/mastering-markdown/">GitHub - Mastering Markdown</a></li>
+<li><a href="https://commonmark.org/">CommonMark</a></li>
+</ul>
+<hr />
+</div>
 </div>
 </div>
 <div id="bsl-idioms" class="section level2">
 <h2><span class="header-section-number">2.2</span> BSL Idioms</h2>
 <p>Things here supercede everythign above.</p>
-<div id="style" class="section level3">
-<h3><span class="header-section-number">2.2.1</span> Style</h3>
+<div id="reference-style" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Reference Style</h3>
 <ul>
-<li><a href="https://style.tidyverse.org/" class="uri">https://style.tidyverse.org/</a></li>
+<li><a href="https://style.tidyverse.org/"><code>tidyverse</code> Style Guide</a></li>
 </ul>
+</div>
+<div id="bsl-style-overrides" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> BSL Style Overrides</h3>
+<ul>
+<li>TODO: <code>=</code> instead of <code>&lt;-</code>
+<ul>
+<li><a href="http://thecoatlessprofessor.com/programming/an-opinionated-tale-of-why-you-should-replace---with-/" class="uri">http://thecoatlessprofessor.com/programming/an-opinionated-tale-of-why-you-should-replace---with-/</a></li>
+</ul></li>
+<li>TODO: never use <code>T</code> or <code>F</code>, only <code>TRUE</code> or <code>FALSE</code></li>
+</ul>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="ot">FALSE</span> <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span></a></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1">F     <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span></a></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1">F     =<span class="st">  </span><span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb52-2" data-line-number="2">F     <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span></a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<ul>
+<li>TODO: never ever ever use <code>attach()</code></li>
+<li>TODO: never ever ever use <code>&lt;&lt;-</code></li>
+<li>TODO: never ever ever use <code>setwd()</code> or set a working directory some other way</li>
+<li>TODO: a newline before and after any chunk</li>
+<li>TODO: use headers appropriately! (short names, good structure)</li>
+<li>TODO: never ever ever put spaces in filenames. use <code>-</code>. (others will use <code>_</code>.)</li>
+<li>TODO: load all needed packages at the beginning of an analysis in a single chunk (TODO: pros and cons of this approach)</li>
+<li>TODO: one plot per chunk! no other printed output</li>
+</ul>
+<p>Be consistent…</p>
+<ul>
+<li>with yourself!</li>
+<li>with your group!</li>
+<li>with your organization!</li>
+</ul>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">1337</span>);mu=<span class="dv">10</span>;sample_size=<span class="dv">50</span>;samples=<span class="dv">100000</span>;</a>
+<a class="sourceLine" id="cb54-2" data-line-number="2">x_bars=<span class="kw">rep</span>(<span class="dv">0</span>, samples)</a>
+<a class="sourceLine" id="cb54-3" data-line-number="3"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>samples)</a>
+<a class="sourceLine" id="cb54-4" data-line-number="4">{</a>
+<a class="sourceLine" id="cb54-5" data-line-number="5">x_bars[i]=<span class="kw">mean</span>(<span class="kw">rpois</span>(sample_size,<span class="dt">lambda =</span> mu))}</a>
+<a class="sourceLine" id="cb54-6" data-line-number="6">x_bar_hist=<span class="kw">hist</span>(x_bars,<span class="dt">breaks=</span><span class="dv">50</span>,<span class="dt">main=</span><span class="st">&quot;Histogram of Sample Means&quot;</span>,<span class="dt">xlab=</span><span class="st">&quot;Sample Means&quot;</span>,<span class="dt">col=</span><span class="st">&quot;darkorange&quot;</span>,<span class="dt">border =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a>
+<a class="sourceLine" id="cb54-7" data-line-number="7"><span class="kw">mean</span>(x_bars<span class="op">&gt;</span>mu<span class="dv">-2</span><span class="op">*</span><span class="kw">sqrt</span>(mu)<span class="op">/</span><span class="kw">sqrt</span>(sample_size)<span class="op">&amp;</span>x_bars<span class="op">&lt;</span>mu<span class="op">+</span><span class="dv">2</span><span class="op">*</span><span class="kw">sqrt</span>(mu)<span class="op">/</span><span class="kw">sqrt</span>(sample_size))</a></code></pre></div>
+</div>
+<div id="objects-and-functions" class="section level3">
+<h3><span class="header-section-number">2.2.3</span> Objects and Functions</h3>
+<blockquote>
+<p>To understand computations in R, two slogans are helpful:</p>
+<ul>
+<li>Everything that exists is an object.</li>
+<li>Everything tha thappens is a function call.</li>
+</ul>
+<p>— John Chambers</p>
+</blockquote>
+</div>
+<div id="print-versus-return" class="section level3">
+<h3><span class="header-section-number">2.2.4</span> Print versus Return</h3>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1">cars_mod =<span class="st"> </span><span class="kw">lm</span>(dist <span class="op">~</span><span class="st"> </span>speed, <span class="dt">data =</span> cars)</a></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1"><span class="kw">summary</span>(cars_mod)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = dist ~ speed, data = cars)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -29.069  -9.525  -2.272   9.215  43.201 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -17.5791     6.7584  -2.601   0.0123 *  
+## speed         3.9324     0.4155   9.464 1.49e-12 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 15.38 on 48 degrees of freedom
+## Multiple R-squared:  0.6511, Adjusted R-squared:  0.6438 
+## F-statistic: 89.57 on 1 and 48 DF,  p-value: 1.49e-12</code></pre>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1"><span class="kw">is.list</span>(<span class="kw">summary</span>(cars_mod))</a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="kw">names</span>(<span class="kw">summary</span>(cars_mod))</a></code></pre></div>
+<pre><code>##  [1] &quot;call&quot;          &quot;terms&quot;         &quot;residuals&quot;     &quot;coefficients&quot; 
+##  [5] &quot;aliased&quot;       &quot;sigma&quot;         &quot;df&quot;            &quot;r.squared&quot;    
+##  [9] &quot;adj.r.squared&quot; &quot;fstatistic&quot;    &quot;cov.unscaled&quot;</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="kw">str</span>(<span class="kw">summary</span>(cars_mod))</a></code></pre></div>
+<pre><code>## List of 11
+##  $ call         : language lm(formula = dist ~ speed, data = cars)
+##  $ terms        :Classes &#39;terms&#39;, &#39;formula&#39;  language dist ~ speed
+##   .. ..- attr(*, &quot;variables&quot;)= language list(dist, speed)
+##   .. ..- attr(*, &quot;factors&quot;)= int [1:2, 1] 0 1
+##   .. .. ..- attr(*, &quot;dimnames&quot;)=List of 2
+##   .. .. .. ..$ : chr [1:2] &quot;dist&quot; &quot;speed&quot;
+##   .. .. .. ..$ : chr &quot;speed&quot;
+##   .. ..- attr(*, &quot;term.labels&quot;)= chr &quot;speed&quot;
+##   .. ..- attr(*, &quot;order&quot;)= int 1
+##   .. ..- attr(*, &quot;intercept&quot;)= int 1
+##   .. ..- attr(*, &quot;response&quot;)= int 1
+##   .. ..- attr(*, &quot;.Environment&quot;)=&lt;environment: R_GlobalEnv&gt; 
+##   .. ..- attr(*, &quot;predvars&quot;)= language list(dist, speed)
+##   .. ..- attr(*, &quot;dataClasses&quot;)= Named chr [1:2] &quot;numeric&quot; &quot;numeric&quot;
+##   .. .. ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;dist&quot; &quot;speed&quot;
+##  $ residuals    : Named num [1:50] 3.85 11.85 -5.95 12.05 2.12 ...
+##   ..- attr(*, &quot;names&quot;)= chr [1:50] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; ...
+##  $ coefficients : num [1:2, 1:4] -17.579 3.932 6.758 0.416 -2.601 ...
+##   ..- attr(*, &quot;dimnames&quot;)=List of 2
+##   .. ..$ : chr [1:2] &quot;(Intercept)&quot; &quot;speed&quot;
+##   .. ..$ : chr [1:4] &quot;Estimate&quot; &quot;Std. Error&quot; &quot;t value&quot; &quot;Pr(&gt;|t|)&quot;
+##  $ aliased      : Named logi [1:2] FALSE FALSE
+##   ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;(Intercept)&quot; &quot;speed&quot;
+##  $ sigma        : num 15.4
+##  $ df           : int [1:3] 2 48 2
+##  $ r.squared    : num 0.651
+##  $ adj.r.squared: num 0.644
+##  $ fstatistic   : Named num [1:3] 89.6 1 48
+##   ..- attr(*, &quot;names&quot;)= chr [1:3] &quot;value&quot; &quot;numdf&quot; &quot;dendf&quot;
+##  $ cov.unscaled : num [1:2, 1:2] 0.19311 -0.01124 -0.01124 0.00073
+##   ..- attr(*, &quot;dimnames&quot;)=List of 2
+##   .. ..$ : chr [1:2] &quot;(Intercept)&quot; &quot;speed&quot;
+##   .. ..$ : chr [1:2] &quot;(Intercept)&quot; &quot;speed&quot;
+##  - attr(*, &quot;class&quot;)= chr &quot;summary.lm&quot;</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="co"># RStudio only</span></a>
+<a class="sourceLine" id="cb64-2" data-line-number="2"><span class="kw">View</span>(<span class="kw">summary</span>(cars_mod))</a></code></pre></div>
+</div>
+<div id="help" class="section level3">
+<h3><span class="header-section-number">2.2.5</span> Help</h3>
+<ul>
+<li>TODO: <code>?</code>, google, stack overflow, (office hours, course forums)</li>
+</ul>
+</div>
+<div id="keyboard-shortcuts" class="section level3">
+<h3><span class="header-section-number">2.2.6</span> Keyboard Shortcuts</h3>
+<ul>
+<li>TODO: copy-paste, switch program, switch tab, etc…</li>
+<li>TODO: TAB!!!</li>
+<li>TODO: new chunk!</li>
+<li>TODO: style!</li>
+<li>TODO: keyboard shortcut for keyboard shortcut</li>
+</ul>
+<hr />
 
 </div>
 </div>
