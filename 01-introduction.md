@@ -176,7 +176,7 @@ rp_mod = rpart(dl_mod_form, data = pl_est)
 
 ```r
 calc_rmse = function(actual, predicted) {
-  sqrt(mean((actual - predicted) ^ 2))
+  sqrt(mean( (actual - predicted) ^ 2) )
 }
 ```
 
@@ -554,9 +554,9 @@ k_values = 1:15
 wss_values = map_dbl(k_values, wss, data = nba_for_clustering)
 
 plot(k_values, wss_values,
-       type="b", pch = 19, frame = TRUE, 
-       xlab="Number of clusters K",
-       ylab="Total within-clusters sum of squares")
+       type = "b", pch = 19, frame = TRUE, 
+       xlab = "Number of clusters K",
+       ylab = "Total within-clusters sum of squares")
 grid()
 ```
 

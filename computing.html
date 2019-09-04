@@ -24,7 +24,7 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-08-30" />
+<meta name="date" content="2019-09-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="introduction.html"/>
-
+<link rel="next" href="estimation.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -175,6 +175,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2.6" data-path="computing.html"><a href="computing.html#keyboard-shortcuts"><i class="fa fa-check"></i><b>2.2.6</b> Keyboard Shortcuts</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="computing.html"><a href="computing.html#common-issues"><i class="fa fa-check"></i><b>2.3</b> Common Issues</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="estimation.html"><a href="estimation.html"><i class="fa fa-check"></i><b>3</b> Estimation</a><ul>
+<li class="chapter" data-level="3.1" data-path="estimation.html"><a href="estimation.html#probability"><i class="fa fa-check"></i><b>3.1</b> Probability</a></li>
+<li class="chapter" data-level="3.2" data-path="estimation.html"><a href="estimation.html#statistics"><i class="fa fa-check"></i><b>3.2</b> Statistics</a></li>
+<li class="chapter" data-level="3.3" data-path="estimation.html"><a href="estimation.html#estimators"><i class="fa fa-check"></i><b>3.3</b> Estimators</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="estimation.html"><a href="estimation.html#properties"><i class="fa fa-check"></i><b>3.3.1</b> Properties</a></li>
+<li class="chapter" data-level="3.3.2" data-path="estimation.html"><a href="estimation.html#methods"><i class="fa fa-check"></i><b>3.3.2</b> Methods</a></li>
+<li class="chapter" data-level="3.3.3" data-path="estimation.html"><a href="estimation.html#section"><i class="fa fa-check"></i><b>3.3.3</b> </a></li>
+</ul></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="probability-1.html"><a href="probability-1.html"><i class="fa fa-check"></i><b>A</b> Probability</a><ul>
+<li class="chapter" data-level="A.1" data-path="probability-1.html"><a href="probability-1.html#probability-models"><i class="fa fa-check"></i><b>A.1</b> Probability Models</a></li>
+<li class="chapter" data-level="A.2" data-path="probability-1.html"><a href="probability-1.html#probability-axioms"><i class="fa fa-check"></i><b>A.2</b> Probability Axioms</a></li>
+<li class="chapter" data-level="A.3" data-path="probability-1.html"><a href="probability-1.html#probability-rules"><i class="fa fa-check"></i><b>A.3</b> Probability Rules</a></li>
+<li class="chapter" data-level="A.4" data-path="probability-1.html"><a href="probability-1.html#random-variables"><i class="fa fa-check"></i><b>A.4</b> Random Variables</a><ul>
+<li class="chapter" data-level="A.4.1" data-path="probability-1.html"><a href="probability-1.html#distributions"><i class="fa fa-check"></i><b>A.4.1</b> Distributions</a></li>
+<li class="chapter" data-level="A.4.2" data-path="probability-1.html"><a href="probability-1.html#discrete-random-variables"><i class="fa fa-check"></i><b>A.4.2</b> Discrete Random Variables</a></li>
+<li class="chapter" data-level="A.4.3" data-path="probability-1.html"><a href="probability-1.html#continuous-random-variables"><i class="fa fa-check"></i><b>A.4.3</b> Continuous Random Variables</a></li>
+<li class="chapter" data-level="A.4.4" data-path="probability-1.html"><a href="probability-1.html#several-random-variables"><i class="fa fa-check"></i><b>A.4.4</b> Several Random Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="A.5" data-path="probability-1.html"><a href="probability-1.html#expectations"><i class="fa fa-check"></i><b>A.5</b> Expectations</a></li>
+<li class="chapter" data-level="A.6" data-path="probability-1.html"><a href="probability-1.html#likelihood"><i class="fa fa-check"></i><b>A.6</b> Likelihood</a></li>
+<li class="chapter" data-level="A.7" data-path="probability-1.html"><a href="probability-1.html#videos"><i class="fa fa-check"></i><b>A.7</b> Videos</a></li>
+<li class="chapter" data-level="A.8" data-path="probability-1.html"><a href="probability-1.html#references"><i class="fa fa-check"></i><b>A.8</b> References</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/daviddalpiaz/bsl" target="blank">&copy; 2019 David Dalpiaz</a></li>
@@ -421,8 +446,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="introduction.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="estimation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -467,6 +492,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

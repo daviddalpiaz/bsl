@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Basics of Statistical Learning</title>
-  <meta name="description" content="Basics of Statistical Learning" />
+  <title>Chapter 3 Estimation | Basics of Statistical Learning</title>
+  <meta name="description" content="Chapter 3 Estimation | Basics of Statistical Learning" />
   <meta name="generator" content="bookdown 0.13.2 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Basics of Statistical Learning" />
+  <meta property="og:title" content="Chapter 3 Estimation | Basics of Statistical Learning" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="http://daviddalpiaz.github.io/bsl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="daviddalpiaz/bsl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Basics of Statistical Learning" />
+  <meta name="twitter:title" content="Chapter 3 Estimation | Basics of Statistical Learning" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="introduction.html"/>
+<link rel="prev" href="computing.html"/>
+<link rel="next" href="probability-1.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -221,40 +221,116 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Basics of Statistical Learning</h1>
-<p class="author"><em><a href="https://daviddalpiaz.com/">David Dalpiaz</a></em></p>
-<p class="date"><em>2019-09-04</em></p>
-</div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p><img src="img/wordmark.png" style="display: block; margin: auto;" /></p>
-<p>Welcome to Basics of Statistical Learning!</p>
+<div id="estimation" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Estimation</h1>
 <ul>
-<li>TODO: Warning about development.</li>
-<li>TODO: Warning about PDF version.</li>
-<li>TODO: Transfer acknowledgements.</li>
-<li>TODO: discuss <a href="https://daviddalpiaz.github.io/r4sl/" class="uri">https://daviddalpiaz.github.io/r4sl/</a></li>
-<li>TODO: course vs book</li>
-<li>TODO: stat432.org</li>
-<li><p>TODO: <a href="https://yihui.name/en/2013/06/fix-typo-in-documentation/" class="uri">https://yihui.name/en/2013/06/fix-typo-in-documentation/</a></p></li>
-<li><p>TODO: <a href="http://varianceexplained.org/r/ds-ml-ai/" class="uri">http://varianceexplained.org/r/ds-ml-ai/</a></p></li>
+<li>TODO: Where we are going, estimating conditional means and distributions.</li>
+<li>TODO: estimation = learning. “learning from data.” what are we learning about? often parameters.</li>
+<li>TODO: <a href="https://stat400.org" class="uri">https://stat400.org</a></li>
+<li>TODO: <a href="https://stat420.org" class="uri">https://stat420.org</a></li>
 </ul>
-<hr />
-<div id="license" class="section level2 unnumbered">
-<h2>License</h2>
-<p><img src="img/cc.png" alt="CC NC SA" /> This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a></p>
-<hr />
+<div id="probability" class="section level2">
+<h2><span class="header-section-number">3.1</span> Probability</h2>
+<ul>
+<li>TODO: See Appendix A</li>
+<li>TODO: In R, <code>d*()</code>, <code>p*()</code>, <code>q*()</code>, <code>r*()</code></li>
+</ul>
+</div>
+<div id="statistics" class="section level2">
+<h2><span class="header-section-number">3.2</span> Statistics</h2>
+<ul>
+<li>TODO: parameters are a function of the population distribution</li>
+<li>TODO: statistics are a function of data.</li>
+<li>TODO: parameters:population::statistics::data</li>
+<li>TODO: statistic vs value of a statistic</li>
+</ul>
+</div>
+<div id="estimators" class="section level2">
+<h2><span class="header-section-number">3.3</span> Estimators</h2>
+<ul>
+<li>TODO: estimator vs estimate</li>
+<li>TODO: Why such a foucs on the mean, E[X]? Because E[(X - a)^2] is minimized by E[X]
+<ul>
+<li><a href="https://www.benkuhn.net/squared" class="uri">https://www.benkuhn.net/squared</a></li>
+<li><a href="https://news.ycombinator.com/item?id=9556459" class="uri">https://news.ycombinator.com/item?id=9556459</a></li>
+</ul></li>
+</ul>
+<div id="properties" class="section level3">
+<h3><span class="header-section-number">3.3.1</span> Properties</h3>
+<div id="bias" class="section level4">
+<h4><span class="header-section-number">3.3.1.1</span> Bias</h4>
+<p><span class="math display">\[
+\text{bias}\left[\hat{\theta}\right] \triangleq 
+\mathbb{E}\left[\hat{\theta}\right] - \theta
+\]</span></p>
+</div>
+<div id="variance" class="section level4">
+<h4><span class="header-section-number">3.3.1.2</span> Variance</h4>
+<p><span class="math display">\[
+\text{var}\left[\hat{\theta}\right] \triangleq 
+\mathbb{E}\left[ \left( \hat{\theta} -\mathbb{E}\left[\hat{\theta}\right] \right)^2 \right]
+\]</span></p>
+</div>
+<div id="mean-squared-error" class="section level4">
+<h4><span class="header-section-number">3.3.1.3</span> Mean Squared Error</h4>
+<p><span class="math display">\[
+\text{MSE}\left[\hat{\theta}\right] \triangleq  
+\mathbb{E}\left[\left(\hat{\theta} - \theta\right)^2\right] = 
+\text{var}\left[\hat{\theta}\right] + 
+\left(\text{Bias}\left[\hat{\theta}\right]\right)^2
+\]</span></p>
+</div>
+<div id="consistency" class="section level4">
+<h4><span class="header-section-number">3.3.1.4</span> Consistency</h4>
+<p>An estimator <span class="math inline">\(\hat{\theta}_n\)</span> is said to be a <strong>consistent estimator</strong> of <span class="math inline">\(\theta\)</span> if, for any positive <span class="math inline">\(\epsilon\)</span>,</p>
+<p><span class="math display">\[
+\lim_{n \rightarrow \infty} P\left( \left| \hat{\theta}_n - \theta \right| \leq  \epsilon\right) =1
+\]</span></p>
+<p>or, equivalently,</p>
+<p><span class="math display">\[
+\lim_{n \rightarrow \infty} P\left( \left| \hat{\theta}_n - \theta \right| &gt;  \epsilon\right) =0
+\]</span></p>
+<p>We say that <span class="math inline">\(\hat{\theta}_n\)</span> <strong>converges in probability</strong> to <span class="math inline">\(\theta\)</span> and we write <span class="math inline">\(\hat{\theta}_n \overset P \rightarrow \theta\)</span>.</p>
+</div>
+</div>
+<div id="methods" class="section level3">
+<h3><span class="header-section-number">3.3.2</span> Methods</h3>
+<ul>
+<li>TODO: MLE</li>
+</ul>
+<p>Given a random sample <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> from a population with parameter <span class="math inline">\(\theta\)</span> and density or mass <span class="math inline">\(f(x \mid \theta)\)</span>, we have:</p>
+<p>The Likelihood, <span class="math inline">\(L(\theta)\)</span>,</p>
+<p><span class="math display">\[
+L(\theta) = f(x_1, x_2, \ldots, x_n) = \prod_{i = 1}^{n} f(x_i \mid \theta)
+\]</span></p>
+<p>The <strong>Maximum Likelihood Estimator</strong>, <span class="math inline">\(\hat{\theta}\)</span></p>
+<p><span class="math display">\[
+\hat{\theta} =  \underset{\theta}{\text{argmax}} \ L(\theta) = \underset{\theta}{\text{argmax}} \ \log L(\theta)
+\]</span></p>
+<ul>
+<li>TODO: Invariance Principle</li>
+</ul>
+<p>If <span class="math inline">\(\hat{\theta}\)</span> is the MLE of <span class="math inline">\(\theta\)</span> and the function <span class="math inline">\(h(\theta)\)</span> is continuous, then <span class="math inline">\(h(\hat{\theta})\)</span> is the MLE of <span class="math inline">\(h(\theta)\)</span>.</p>
+<ul>
+<li>TODO: MOM</li>
+</ul>
+</div>
+<div id="section" class="section level3">
+<h3><span class="header-section-number">3.3.3</span> </h3>
 
 </div>
 </div>
+</div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="introduction.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="computing.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="probability-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -284,7 +360,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/daviddalpiaz/bsl/edit/master/index.Rmd",
+"link": "https://github.com/daviddalpiaz/bsl/edit/master/02-estimation.Rmd",
 "text": "Edit"
 },
 "history": {
