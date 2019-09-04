@@ -19,12 +19,7 @@
 - Unsupervised Learning
 - Appendix
     - Probability?
-    - R?
-
-## R References
-
-- [Efficient R Programming](https://csgillespie.github.io/efficientR/)
-- [The `caret` Package](https://topepo.github.io/caret/index.html)
+    - R? (Currently a "computing" chapter.)
 
 ## Miscellaneous Ideas and Notes
 
@@ -53,11 +48,12 @@
 - AI = function learning?
 - keep a list of packages and why we're using them (and repeat within chapters?)
 - 0-1 BVD?
-- use FNN for knn
+- use caret for knn
 - ML != DS
 - () for functions?
 - [] for expectations?
 - practice in book?
+- caret book?
 
 ## Courses
 
@@ -69,8 +65,9 @@
 
 ## Books
 
+- ISL
+- stat learn with sparsity
 - https://www.textbook.ds100.org/about_this_book.html
-- https://r-graphics.org/
 - https://christophm.github.io/interpretable-ml-book/
 - http://www.feat.engineering/index.html
 - http://uc-r.github.io
@@ -85,8 +82,6 @@
 - https://github.com/marcotcr/lime
 - http://uc-r.github.io/lime
 - https://github.com/Rdatatable/data.table/wiki
-- https://purrr.tidyverse.org/
-- https://commonmark.org/
 
 ## Data
 
@@ -103,6 +98,8 @@
 - https://www.tandfonline.com/doi/full/10.1080/10618600.2017.1384734
 - http://vita.had.co.nz/papers/tidy-data.pdf
 - http://varianceexplained.org/r/kmeans-free-lunch/
+- two cultures paper
+- random forest paper (the r one?)
 
 ## Book Building Resources
 
