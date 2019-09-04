@@ -90,4 +90,6 @@ If $\hat{\theta}$ is the MLE of $\theta$ and the function $h(\theta)$ is continu
 
 - TODO: MOM
 
-###
+- TODO: https://daviddalpiaz.github.io/stat3202-sp19/notes/fitting.html
+
+- TODO: ECDF
