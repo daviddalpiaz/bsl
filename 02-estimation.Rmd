@@ -2,8 +2,8 @@
 
 - TODO: Where we are going, estimating conditional means and distributions.
 - TODO: estimation = learning. "learning from data." what are we learning about? often parameters.
-- TODO: <https://stat400.org>
-- TODO: <https://stat420.org>
+- TODO: <http://stat400.org>
+- TODO: <http://stat420.org>
 
 ## Probability
 
@@ -92,4 +92,4 @@ If $\hat{\theta}$ is the MLE of $\theta$ and the function $h(\theta)$ is continu
 
 - TODO: https://daviddalpiaz.github.io/stat3202-sp19/notes/fitting.html
 
-- TODO: ECDF
+- TODO: ECDF: https://en.wikipedia.org/wiki/Empirical_distribution_function
