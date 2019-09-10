@@ -7,11 +7,11 @@ This is not a book about R. It is however, a book that uses R. Because of this, 
 The following (freely availible) readings are highly recommended:
 
 - [Hands-On Programming with R](https://rstudio-education.github.io/hopr/) - *Garrett Grolemund*
-    - If you have never used R or RStudio before, Part 1, Chapters 1 - 3, will be useful.
+  - If you have never used R or RStudio before, Part 1, Chapters 1 - 3, will be useful.
 - [R for Data Science](https://r4ds.had.co.nz/) - *Garrett Grolemund, Hadley Wickham*
-    - This book helps getting you up to speed working with data in R. While it is a lot of reading, Chapters 1 - 21 are highly recommended. 
+  - This book helps getting you up to speed working with data in R. While it is a lot of reading, Chapters 1 - 21 are highly recommended. 
 - [Advanced R](https://adv-r.hadley.nz/) - *Hadley Wickham*
-    - Part I, Chapters 1 - 8, of this book will help create a mental model for working with R. These chapters are not an easy read, so they should be returned to often. (Chapter 2 could be safely skipped for our purposes, but is important if you will use R in the long term.)
+  - Part I, Chapters 1 - 8, of this book will help create a mental model for working with R. These chapters are not an easy read, so they should be returned to often. (Chapter 2 could be safely skipped for our purposes, but is important if you will use R in the long term.)
 
 If you are a UIUC student who took the course STAT 420, the first six chapters of that book could serve as a nice refresher.
 
@@ -30,10 +30,10 @@ The following resources are more specific or more advanced, but could still prov
 - [R Graphics Cookbook](https://r-graphics.org/)
 - [Modern Dive](https://moderndive.com/index.html)
 - [The `tidyverse` Website](tidyverse.org/)
-    - [`dplyr` Website](https://dplyr.tidyverse.org/)
-    - [`readr` Website](https://readr.tidyverse.org/)
-    - [`tibble` Website](https://tibble.tidyverse.org/)
-    - [`forcats` Website](https://forcats.tidyverse.org/)
+  - [`dplyr` Website](https://dplyr.tidyverse.org/)
+  - [`readr` Website](https://readr.tidyverse.org/)
+  - [`tibble` Website](https://tibble.tidyverse.org/)
+  - [`forcats` Website](https://forcats.tidyverse.org/)
 
 ### RStudio
 
@@ -65,7 +65,7 @@ Things here supercede everythign above.
 ### BSL Style Overrides
 
 - TODO: `=` instead of `<-`
-    - http://thecoatlessprofessor.com/programming/an-opinionated-tale-of-why-you-should-replace---with-/
+  - http://thecoatlessprofessor.com/programming/an-opinionated-tale-of-why-you-should-replace---with-/
 - TODO: never use `T` or `F`, only `TRUE` or `FALSE`
 
 
@@ -128,6 +128,13 @@ mean(x_bars>mu-2*sqrt(mu)/sqrt(sample_size)&x_bars<mu+2*sqrt(mu)/sqrt(sample_siz
 > - Everything tha thappens is a function call. 
 >
 > — John Chambers
+
+- TODO: Functions + Objects
+  - these are the inputs and outputs of functions:
+    - functions
+    - vectors
+    - lists
+    - tibbles (dfs)
 
 ### Print versus Return
 
