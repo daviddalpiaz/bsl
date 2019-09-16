@@ -26,7 +26,7 @@ Although it ignores some practical and statistical considerations (which will be
 <!-- - TODO: pairs plot? -->
 <!-- - TODO: check document in development folder -->
 
-```{r}
+```{r, message = FALSE, warning = FALSE}
 library(tibble)
 library(caret)
 library(rpart)
