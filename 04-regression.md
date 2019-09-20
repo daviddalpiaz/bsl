@@ -229,6 +229,9 @@ k & Train RMSE & Test RMSE\\
 ### Decision Trees
 
 - TODO: `rpart::rpart()`
+- TODO: https://cran.r-project.org/web/packages/rpart/vignettes/longintro.pdf
+- TODO: http://www.milbo.org/doc/prp.pdf
+- TODO: maybe notes about pruning and CV
 
 #### Linear Data
 
