@@ -24,7 +24,7 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-09-20" />
+<meta name="date" content="2019-09-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -198,6 +201,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.7" data-path="regression.html"><a href="regression.html#overfitting"><i class="fa fa-check"></i><b>4.7</b> Overfitting</a></li>
 <li class="chapter" data-level="4.8" data-path="regression.html"><a href="regression.html#multiple-features"><i class="fa fa-check"></i><b>4.8</b> Multiple Features</a></li>
 <li class="chapter" data-level="4.9" data-path="regression.html"><a href="regression.html#example-analysis"><i class="fa fa-check"></i><b>4.9</b> Example Analysis</a></li>
+<li class="chapter" data-level="4.10" data-path="regression.html"><a href="regression.html#misc-todos"><i class="fa fa-check"></i><b>4.10</b> MISC TODOS</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>5</b> Bias–Variance Tradeoff</a><ul>
 <li class="chapter" data-level="5.1" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>5.1</b> Reducible and Irreducible Error</a></li>
@@ -801,6 +805,17 @@ Test RMSE
 <li><p>TODO: Diamonds analysis</p></li>
 <li><p>TODO: model.matrix()</p></li>
 </ul>
+</div>
+<div id="misc-todos" class="section level2">
+<h2><span class="header-section-number">4.10</span> MISC TODOS</h2>
+<ul>
+<li>lex fridman with ian: dataset (represent), model, optimize
+<ul>
+<li><a href="https://www.youtube.com/watch?v=Z6rxFNMGdn0" class="uri">https://www.youtube.com/watch?v=Z6rxFNMGdn0</a></li>
+</ul></li>
+<li>want to minimize E[(y - y_hat)^2]</li>
+<li>predict() creates estimate of E[Y|X] with supplied model</li>
+</ul>
 
 </div>
 </div>
@@ -815,11 +830,13 @@ Test RMSE
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({

@@ -410,5 +410,10 @@ calc_rmse = function(model, data, response) {
 
 - TODO: model.matrix()
 
+## MISC TODOS
 
+- lex fridman with ian: dataset (represent), model, optimize
+    - https://www.youtube.com/watch?v=Z6rxFNMGdn0
+- want to minimize E[(y - y_hat)^2]
+- predict() creates estimate of E[Y|X] with supplied model
 
