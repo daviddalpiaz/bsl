@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Basics of Statistical Learning</title>
-  <meta name="description" content="Basics of Statistical Learning" />
+  <title>Chapter 6 Classification | Basics of Statistical Learning</title>
+  <meta name="description" content="Chapter 6 Classification | Basics of Statistical Learning" />
   <meta name="generator" content="bookdown 0.13.2 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Basics of Statistical Learning" />
+  <meta property="og:title" content="Chapter 6 Classification | Basics of Statistical Learning" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="http://daviddalpiaz.github.io/bsl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="daviddalpiaz/bsl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Basics of Statistical Learning" />
+  <meta name="twitter:title" content="Chapter 6 Classification | Basics of Statistical Learning" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="introduction.html"/>
+<link rel="prev" href="biasvariance-tradeoff.html"/>
+<link rel="next" href="probability-1.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -256,40 +256,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Basics of Statistical Learning</h1>
-<p class="author"><em><a href="https://daviddalpiaz.com/">David Dalpiaz</a></em></p>
-<p class="date"><em>2019-09-23</em></p>
-</div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p><img src="img/wordmark.png" style="display: block; margin: auto;" /></p>
-<p>Welcome to Basics of Statistical Learning!</p>
+<div id="classification" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Classification</h1>
+<div id="bayes-classifier" class="section level2">
+<h2><span class="header-section-number">6.1</span> Bayes Classifier</h2>
 <ul>
-<li>TODO: Warning about development.</li>
-<li>TODO: Warning about PDF version.</li>
-<li>TODO: Transfer acknowledgements.</li>
-<li>TODO: discuss <a href="https://daviddalpiaz.github.io/r4sl/" class="uri">https://daviddalpiaz.github.io/r4sl/</a></li>
-<li>TODO: course vs book</li>
-<li>TODO: stat432.org</li>
-<li><p>TODO: <a href="https://yihui.name/en/2013/06/fix-typo-in-documentation/" class="uri">https://yihui.name/en/2013/06/fix-typo-in-documentation/</a></p></li>
-<li><p>TODO: <a href="http://varianceexplained.org/r/ds-ml-ai/" class="uri">http://varianceexplained.org/r/ds-ml-ai/</a></p></li>
+<li>TODO: Not the same as naïve Bayes classifier</li>
 </ul>
-<hr />
-<div id="license" class="section level2 unnumbered">
-<h2>License</h2>
-<p><img src="img/cc.png" alt="CC NC SA" /> This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a></p>
-<hr />
+<p><span class="math display">\[
+C^B(x) = \underset{k \in \{1, 2, \ldots K\}}{\text{argmax}} P\left[ Y = k \mid X = x \right]
+\]</span></p>
+<div id="bayes-error-rate" class="section level3">
+<h3><span class="header-section-number">6.1.1</span> Bayes Error Rate</h3>
+<p><span class="math display">\[
+1 - \mathbb{E}\left[ \underset{k}{\text{max}} \ P[Y = k \mid X] \right]
+\]</span></p>
+</div>
+</div>
+<div id="modeling-4" class="section level2">
+<h2><span class="header-section-number">6.2</span> Modeling</h2>
+<div id="linear-models-1" class="section level3">
+<h3><span class="header-section-number">6.2.1</span> Linear Models</h3>
+</div>
+<div id="k-nearest-neighbors-1" class="section level3">
+<h3><span class="header-section-number">6.2.2</span> k-Nearest Neighbors</h3>
+</div>
+<div id="decision-trees-1" class="section level3">
+<h3><span class="header-section-number">6.2.3</span> Decision Trees</h3>
 
 </div>
 </div>
+</div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="introduction.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="biasvariance-tradeoff.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="probability-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -321,7 +328,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/daviddalpiaz/bsl/edit/master/index.Rmd",
+"link": "https://github.com/daviddalpiaz/bsl/edit/master/06-classification.Rmd",
 "text": "Edit"
 },
 "history": {
