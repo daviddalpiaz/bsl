@@ -211,13 +211,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.5" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reproducibility"><i class="fa fa-check"></i><b>5.5</b> Reproducibility</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>6</b> Classification</a><ul>
-<li class="chapter" data-level="6.1" data-path="classification.html"><a href="classification.html#bayes-classifier"><i class="fa fa-check"></i><b>6.1</b> Bayes Classifier</a><ul>
-<li class="chapter" data-level="6.1.1" data-path="classification.html"><a href="classification.html#bayes-error-rate"><i class="fa fa-check"></i><b>6.1.1</b> Bayes Error Rate</a></li>
+<li class="chapter" data-level="6.1" data-path="classification.html"><a href="classification.html#slides"><i class="fa fa-check"></i><b>6.1</b> Slides</a></li>
+<li class="chapter" data-level="6.2" data-path="classification.html"><a href="classification.html#bayes-classifier"><i class="fa fa-check"></i><b>6.2</b> Bayes Classifier</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="classification.html"><a href="classification.html#bayes-error-rate"><i class="fa fa-check"></i><b>6.2.1</b> Bayes Error Rate</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="classification.html"><a href="classification.html#modeling-4"><i class="fa fa-check"></i><b>6.2</b> Modeling</a><ul>
-<li class="chapter" data-level="6.2.1" data-path="classification.html"><a href="classification.html#linear-models-1"><i class="fa fa-check"></i><b>6.2.1</b> Linear Models</a></li>
-<li class="chapter" data-level="6.2.2" data-path="classification.html"><a href="classification.html#k-nearest-neighbors-1"><i class="fa fa-check"></i><b>6.2.2</b> k-Nearest Neighbors</a></li>
-<li class="chapter" data-level="6.2.3" data-path="classification.html"><a href="classification.html#decision-trees-1"><i class="fa fa-check"></i><b>6.2.3</b> Decision Trees</a></li>
+<li class="chapter" data-level="6.3" data-path="classification.html"><a href="classification.html#modeling-4"><i class="fa fa-check"></i><b>6.3</b> Modeling</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="classification.html"><a href="classification.html#linear-models-1"><i class="fa fa-check"></i><b>6.3.1</b> Linear Models</a></li>
+<li class="chapter" data-level="6.3.2" data-path="classification.html"><a href="classification.html#k-nearest-neighbors-1"><i class="fa fa-check"></i><b>6.3.2</b> k-Nearest Neighbors</a></li>
+<li class="chapter" data-level="6.3.3" data-path="classification.html"><a href="classification.html#decision-trees-1"><i class="fa fa-check"></i><b>6.3.3</b> Decision Trees</a></li>
 </ul></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
@@ -258,31 +259,71 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="classification" class="section level1">
 <h1><span class="header-section-number">Chapter 6</span> Classification</h1>
+<div id="slides" class="section level2">
+<h2><span class="header-section-number">6.1</span> Slides</h2>
+<ul>
+<li><a href="https://fall-2019.stat432.org/slides/classification.pdf">Classification: Introduction</a></li>
+</ul>
+<hr />
+</div>
 <div id="bayes-classifier" class="section level2">
-<h2><span class="header-section-number">6.1</span> Bayes Classifier</h2>
+<h2><span class="header-section-number">6.2</span> Bayes Classifier</h2>
 <ul>
 <li>TODO: Not the same as naïve Bayes classifier</li>
 </ul>
 <p><span class="math display">\[
 C^B(x) = \underset{k \in \{1, 2, \ldots K\}}{\text{argmax}} P\left[ Y = k \mid X = x \right]
 \]</span></p>
+<hr />
 <div id="bayes-error-rate" class="section level3">
-<h3><span class="header-section-number">6.1.1</span> Bayes Error Rate</h3>
+<h3><span class="header-section-number">6.2.1</span> Bayes Error Rate</h3>
 <p><span class="math display">\[
 1 - \mathbb{E}\left[ \underset{k}{\text{max}} \ P[Y = k \mid X] \right]
 \]</span></p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" data-line-number="1"><span class="kw">library</span>(tibble)</a>
+<a class="sourceLine" id="cb106-2" data-line-number="2"><span class="kw">library</span>(caret)</a></code></pre></div>
+<pre><code>## Loading required package: lattice</code></pre>
+<pre><code>## Loading required package: ggplot2</code></pre>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" data-line-number="1"><span class="kw">library</span>(rpart)</a>
+<a class="sourceLine" id="cb109-2" data-line-number="2"><span class="kw">library</span>(nnet)</a></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" data-line-number="1">gen_data =<span class="st"> </span><span class="cf">function</span>(<span class="dt">n =</span> <span class="dv">100</span>) {</a>
+<a class="sourceLine" id="cb110-2" data-line-number="2">  x =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.4</span>, <span class="fl">0.6</span>), <span class="dt">size =</span> n, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb110-3" data-line-number="3">  y =<span class="st"> </span><span class="kw">ifelse</span>(<span class="dt">test =</span> {x <span class="op">==</span><span class="st"> </span><span class="dv">0</span>},</a>
+<a class="sourceLine" id="cb110-4" data-line-number="4">             <span class="dt">yes =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>), <span class="dt">size =</span> n, <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.25</span>, <span class="fl">0.50</span>, <span class="fl">0.25</span>), <span class="dt">replace =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb110-5" data-line-number="5">             <span class="dt">no =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>), <span class="dt">size =</span> n, <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">0.4</span>) <span class="op">/</span><span class="st"> </span><span class="fl">0.6</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb110-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb110-7" data-line-number="7">  <span class="kw">tibble</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> <span class="kw">factor</span>(y))</a>
+<a class="sourceLine" id="cb110-8" data-line-number="8">}</a>
+<a class="sourceLine" id="cb110-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb110-10" data-line-number="10">test_cases =<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb110-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb110-12" data-line-number="12"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb110-13" data-line-number="13">some_data =<span class="st"> </span><span class="kw">gen_data</span>()</a>
+<a class="sourceLine" id="cb110-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb110-15" data-line-number="15"><span class="kw">predict</span>(<span class="kw">knn3</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data), test_cases)</a></code></pre></div>
+<pre><code>##              A          B         C
+## [1,] 0.2608696 0.39130435 0.3478261
+## [2,] 0.1481481 0.07407407 0.7777778</code></pre>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" data-line-number="1"><span class="kw">predict</span>(<span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data), test_cases)</a></code></pre></div>
+<pre><code>##           A          B         C
+## 1 0.2608696 0.39130435 0.3478261
+## 2 0.1481481 0.07407407 0.7777778</code></pre>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" data-line-number="1"><span class="kw">predict</span>(<span class="kw">nnet</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data, <span class="dt">size =</span> <span class="dv">0</span>, <span class="dt">skip =</span> <span class="ot">TRUE</span>, <span class="dt">trace =</span> <span class="ot">FALSE</span>), test_cases)</a></code></pre></div>
+<pre><code>##           A          B         C
+## 1 0.2608693 0.39130387 0.3478268
+## 2 0.1481479 0.07407422 0.7777779</code></pre>
 </div>
 </div>
 <div id="modeling-4" class="section level2">
-<h2><span class="header-section-number">6.2</span> Modeling</h2>
+<h2><span class="header-section-number">6.3</span> Modeling</h2>
 <div id="linear-models-1" class="section level3">
-<h3><span class="header-section-number">6.2.1</span> Linear Models</h3>
+<h3><span class="header-section-number">6.3.1</span> Linear Models</h3>
 </div>
 <div id="k-nearest-neighbors-1" class="section level3">
-<h3><span class="header-section-number">6.2.2</span> k-Nearest Neighbors</h3>
+<h3><span class="header-section-number">6.3.2</span> k-Nearest Neighbors</h3>
 </div>
 <div id="decision-trees-1" class="section level3">
-<h3><span class="header-section-number">6.2.3</span> Decision Trees</h3>
+<h3><span class="header-section-number">6.3.3</span> Decision Trees</h3>
 
 </div>
 </div>
