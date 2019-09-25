@@ -1,6 +1,6 @@
 # Classification
 
-## 432 Materials
+## STAT 432 Materials
 
 - [**Slides** | Classification: Introduction](https://fall-2019.stat432.org/slides/classification.pdf)
 - [**Code** | Some Classification Code](https://fall-2019.stat432.org/misc/some-class-code-for-class.R)
