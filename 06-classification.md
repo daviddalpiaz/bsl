@@ -3,6 +3,7 @@
 ## Slides
 
 - [Classification: Introduction](https://fall-2019.stat432.org/slides/classification.pdf)
+- [Some Classification Code](https://fall-2019.stat432.org/misc/some-class-code-for-class.R)
 
 ***
 
@@ -85,9 +86,6 @@ predict(nnet(y ~ x, data = some_data, size = 0, skip = TRUE, trace = FALSE), tes
 ## 1 0.2608693 0.39130387 0.3478268
 ## 2 0.1481479 0.07407422 0.7777779
 ```
-
-
-
 
 ## Modeling
 
