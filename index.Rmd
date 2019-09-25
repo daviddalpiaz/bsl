@@ -31,13 +31,23 @@ Welcome to Basics of Statistical Learning!
 
 - TODO: Warning about development.
 - TODO: Warning about PDF version.
-- TODO: Transfer acknowledgements.
+
 - TODO: discuss https://daviddalpiaz.github.io/r4sl/
 - TODO: course vs book
 - TODO: stat432.org
 - TODO: https://yihui.name/en/2013/06/fix-typo-in-documentation/
 
 - TODO: http://varianceexplained.org/r/ds-ml-ai/
+
+***
+
+## Acknowledgements {-}
+
+The following is a (likely incomplete) list of helpful contributors.
+
+- [Jae-Ho Lee](https://www.linkedin.com/in/jae-ho-lee-32052710b/) - STAT 432, Fall 2019
+
+- TODO: Transfer acknowledgements from R4SL
 
 ***
 
