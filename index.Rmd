@@ -53,6 +53,8 @@ The following is a (likely incomplete) list of helpful contributors.
 
 ## License {-}
 
-![CC NC SA](img/cc.png) This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/)
+![CC NC SA](img/cc.png) 
+
+This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 ***
