@@ -4,6 +4,7 @@
 
 - [**Slides** | Classification: Introduction](https://fall-2019.stat432.org/slides/classification.pdf)
 - [**Code** | Some Classification Code](https://fall-2019.stat432.org/misc/some-class-code-for-class.R)
+- [**Slides** | Classification: Binary Classification](https://fall-2019.stat432.org/slides/binary-classification.pdf)
 - [**Code** | Some Binary Classification Code](https://fall-2019.stat432.org/misc/some-binary-class-code-for-class.R)
 
 ***
