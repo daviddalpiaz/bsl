@@ -481,6 +481,7 @@ show_digit(mnist_tst_x[mnist_obs_to_check, ])
 - https://www.youtube.com/watch?v=cuLprHh_BRg
 - https://www.youtube.com/watch?v=1FBwSO_1Mb8
 - https://www.basketball-reference.com/leagues/NBA_2019.html
+- inspiration here, and others: http://blog.schochastics.net/post/analyzing-nba-player-data-ii-clustering/
 
 ### Data
 
