@@ -332,7 +332,7 @@ k & Train RMSE & Test RMSE\\
 - TODO: Testing (Test) Data
 - TODO: Estimation Data
 - TODO: Validation Data
-
+    - https://en.wikipedia.org/wiki/Infinite_monkey_theorem
 
 $$
 \mathcal{D} = \{ (x_i, y_i) \in \mathbb{R}^p \times \mathbb{R}, \ i = 1, 2, \ldots n \}
@@ -380,10 +380,6 @@ calc_rmse = function(model, data, response) {
   sqrt(mean((actual - predicted) ^ 2))
 }
 ```
-
-
-
-
 
 ## Model Complexity
 
