@@ -405,26 +405,12 @@ $$
 
 - TODO: check this against old BVT chapter
 
-$$
-f(x) = \mathbb{E}[Y \mid X = x]
-$$
 
 
 
 
-$$
-\text{rmse}\left(\hat{f}, \mathcal{D}\right) = \sqrt{\frac{1}{n}\displaystyle\sum_{i = 1}^{n}\left(y_i - \hat{f}({\boldsymbol{x}}_i)\right)^2}
-$$
-
-$$
-\text{RMSE}_{\texttt{trn}} = \text{rmse}\left(\hat{f}, \mathcal{D}_{\texttt{trn}}\right) = \sqrt{\frac{1}{n_{\texttt{trn}}}\displaystyle\sum_{i \in {\texttt{trn}}}^{}\left(y_i - \hat{f}({\boldsymbol{x}}_i)\right)^2}
-$$
 
 
-
-$$
-\mathcal{D} = \mathcal{D}_{\texttt{trn}} \cup \mathcal{D}_{\texttt{tst}} = (x_i, y_i) \in \mathbb{R}^p \times \mathbb{R}, \ i = 1, 2, \ldots n
-$$
 
 
 - TODO: hold `cp` constant, alter `minsplit`
