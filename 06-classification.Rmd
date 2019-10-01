@@ -6,6 +6,7 @@
 - [**Code** | Some Classification Code](https://fall-2019.stat432.org/misc/some-class-code-for-class.R)
 - [**Slides** | Classification: Binary Classification](https://fall-2019.stat432.org/slides/binary-classification.pdf)
 - [**Code** | Some Binary Classification Code](https://fall-2019.stat432.org/misc/some-binary-class-code-for-class.R)
+- [**Slides** | Classification: Nonparametric Classification](https://fall-2019.stat432.org/slides/nonparametric-classification.pdf)
 
 ***
 
@@ -34,6 +35,7 @@ $$
 - TODO: https://web.expasy.org/pROC/
 - TODO: https://bmcbioinformatics.biomedcentral.com/track/pdf/10.1186/1471-2105-12-77
 - TODO: https://en.wikipedia.org/wiki/Receiver_operating_characteristic
+- TODO: https://papers.nips.cc/paper/2020-on-discriminative-vs-generative-classifiers-a-comparison-of-logistic-regression-and-naive-bayes.pdf
 
 ```{r}
 library(tibble)
