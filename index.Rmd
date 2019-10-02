@@ -27,7 +27,7 @@ knitr::opts_chunk$set(fig.align = "center")
 knitr::include_graphics("img/wordmark.png")
 ```
 
-Welcome to Basics of Statistical Learning! 
+Welcome to Basics of Statistical Learning!
 
 - TODO: Warning about development.
 - TODO: Warning about PDF version.
