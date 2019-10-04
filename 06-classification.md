@@ -8,6 +8,7 @@
 - [**Code** | Some Binary Classification Code](https://fall-2019.stat432.org/misc/some-binary-class-code-for-class.R)
 - [**Slides** | Classification: Nonparametric Classification](https://fall-2019.stat432.org/slides/nonparametric-classification.pdf)
 - [**Reading** | STAT 420: Logistic Regression](https://daviddalpiaz.github.io/appliedstats/logistic-regression.html)
+- [**Slides** | Classification: Logistic Regression](https://fall-2019.stat432.org/slides/logistic-regression.pdf)
 
 ***
 
@@ -105,6 +106,42 @@ predict(nnet(y ~ x, data = some_data, size = 0, skip = TRUE, trace = FALSE), tes
 ## Modeling
 
 ### Linear Models
+
+
+```r
+sim_2d_logistic = function(beta_0, beta_1, beta_2, n) {
+  
+  par(mfrow = c(1, 2))
+  
+  prob_plane = as_tibble(expand.grid(x1 = -220:220 / 100, 
+                                     x2 = -220:220 / 100))
+  prob_plane$p = with(prob_plane, 
+                      boot::inv.logit(beta_0 + beta_1 * x1 + beta_2 * x2))
+  
+  do_to_db = colorRampPalette(c('darkorange', "white", 'dodgerblue'))
+  
+  plot(x2 ~ x1, data = prob_plane, 
+       col = do_to_db(100)[as.numeric(cut(prob_plane$p, 
+                                          seq(0, 1, length.out = 101)))],
+       xlim = c(-2, 2), ylim = c(-2, 2), pch = 20)
+  abline(-beta_0 / beta_2, -beta_1 / beta_2, col = "black", lwd = 2)
+  
+  x1 = runif(n = n, -2, 2)
+  x2 = runif(n = n, -2, 2)
+  y = rbinom(n = n, size = 1, prob = boot::inv.logit(beta_0 + beta_1 * x1 + beta_2 * x2))
+  y = ifelse(y == 1, "dodgerblue", "orange")
+  asdf = tibble(x1, x2, y)
+  
+  plot(x2 ~ x1, data = asdf, col = y, xlim = c(-2, 2), ylim = c(-2, 2), pch = 20)
+  grid()
+  abline(-beta_0 / beta_2, -beta_1 / beta_2, col = "black", lwd = 2)
+  
+}
+
+sim_2d_logistic(beta_0 = 2 * 0.5, beta_1 = 2* 0.7, beta_2 = 2* 0.5, n = 100)
+```
+
+![](06-classification_files/figure-latex/unnamed-chunk-3-1.pdf)<!-- --> 
 
 ### k-Nearest Neighbors
 
