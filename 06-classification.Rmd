@@ -38,6 +38,10 @@ $$
 - TODO: https://bmcbioinformatics.biomedcentral.com/track/pdf/10.1186/1471-2105-12-77
 - TODO: https://en.wikipedia.org/wiki/Receiver_operating_characteristic
 - TODO: https://papers.nips.cc/paper/2020-on-discriminative-vs-generative-classifiers-a-comparison-of-logistic-regression-and-naive-bayes.pdf
+- https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.141.751&rep=rep1&type=pdf
+- https://www.cs.ubc.ca/~murphyk/Teaching/CS340-Fall06/lectures/naiveBayes.pdf
+- http://www.stat.cmu.edu/~ryantibs/statml/lectures/linearclassification.pdf
+- https://www.cs.cmu.edu/~tom/mlbook/NBayesLogReg.pdf
 
 ```{r}
 library(tibble)
