@@ -24,7 +24,7 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-10-04" />
+<meta name="date" content="2019-10-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="biasvariance-tradeoff.html"/>
-<link rel="next" href="supervised-learning.html"/>
+<link rel="next" href="resampling.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -222,7 +222,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.3.3" data-path="classification.html"><a href="classification.html#decision-trees-1"><i class="fa fa-check"></i><b>6.3.3</b> Decision Trees</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="supervised-learning.html"><a href="supervised-learning.html"><i class="fa fa-check"></i><b>7</b> Supervised Learning</a></li>
+<li class="chapter" data-level="7" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>7</b> Resampling</a></li>
+<li class="chapter" data-level="8" data-path="supervised-learning.html"><a href="supervised-learning.html"><i class="fa fa-check"></i><b>8</b> Supervised Learning</a></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="probability-1.html"><a href="probability-1.html"><i class="fa fa-check"></i><b>A</b> Probability</a><ul>
 <li class="chapter" data-level="A.1" data-path="probability-1.html"><a href="probability-1.html#probability-models"><i class="fa fa-check"></i><b>A.1</b> Probability Models</a></li>
@@ -299,6 +300,10 @@ C^B(x) = \underset{k \in \{1, 2, \ldots K\}}{\text{argmax}} P\left[ Y = k \mid X
 <li>TODO: <a href="https://bmcbioinformatics.biomedcentral.com/track/pdf/10.1186/1471-2105-12-77" class="uri">https://bmcbioinformatics.biomedcentral.com/track/pdf/10.1186/1471-2105-12-77</a></li>
 <li>TODO: <a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic" class="uri">https://en.wikipedia.org/wiki/Receiver_operating_characteristic</a></li>
 <li>TODO: <a href="https://papers.nips.cc/paper/2020-on-discriminative-vs-generative-classifiers-a-comparison-of-logistic-regression-and-naive-bayes.pdf" class="uri">https://papers.nips.cc/paper/2020-on-discriminative-vs-generative-classifiers-a-comparison-of-logistic-regression-and-naive-bayes.pdf</a></li>
+<li><a href="https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.141.751&amp;rep=rep1&amp;type=pdf" class="uri">https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.141.751&amp;rep=rep1&amp;type=pdf</a></li>
+<li><a href="https://www.cs.ubc.ca/~murphyk/Teaching/CS340-Fall06/lectures/naiveBayes.pdf" class="uri">https://www.cs.ubc.ca/~murphyk/Teaching/CS340-Fall06/lectures/naiveBayes.pdf</a></li>
+<li><a href="http://www.stat.cmu.edu/~ryantibs/statml/lectures/linearclassification.pdf" class="uri">http://www.stat.cmu.edu/~ryantibs/statml/lectures/linearclassification.pdf</a></li>
+<li><a href="https://www.cs.cmu.edu/~tom/mlbook/NBayesLogReg.pdf" class="uri">https://www.cs.cmu.edu/~tom/mlbook/NBayesLogReg.pdf</a></li>
 </ul>
 <div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" data-line-number="1"><span class="kw">library</span>(tibble)</a>
 <a class="sourceLine" id="cb106-2" data-line-number="2"><span class="kw">library</span>(caret)</a></code></pre></div>
@@ -385,7 +390,7 @@ C^B(x) = \underset{k \in \{1, 2, \ldots K\}}{\text{argmax}} P\left[ Y = k \mid X
         </div>
       </div>
 <a href="biasvariance-tradeoff.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="supervised-learning.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="resampling.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

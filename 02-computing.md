@@ -255,3 +255,6 @@ View(summary(cars_mod))
 - TODO: cannot find function called ""
 
 ***
+
+- TODO: https://stat545.com/
+- TODO: https://atrebas.github.io/post/2019-01-15-2018-learning/
