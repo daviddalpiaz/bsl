@@ -1,26 +1,5 @@
 # Basics of Statistical Learning
 
-## Chapters
-
-- Frontmatter
-- Introduction
-    - Data Types (Move to appendix?)
-    - What are the ML tasks?
-    - A regression example
-    - A classification example
-    - A clustering example
-- Probability? (As an appendix?)
-- Estimation Theory, E[Y]
-- Regression, E[Y|X]
-- Classification, p(y|x)
-- Resampling
-- Modern Methods: Regularization and Ensembles
-- Practical Data Analysis
-- Unsupervised Learning
-- Appendix
-    - Probability?
-    - R? (Currently a "computing" chapter.)
-
 ## Miscellaneous Ideas and Notes
 
 - "3D" plots like in regression overview
