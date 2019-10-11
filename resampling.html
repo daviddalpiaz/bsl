@@ -287,7 +287,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In this chapter we introduce <strong>cross-validation</strong>. We will highlight the need for cross-validation by comparing it to our previous approach, which was to use a single <strong>validation</strong> set inside of the training data.</p>
 <p>To illustrate the use of resampling techniques, we’ll consider a regression setup with a single feature <span class="math inline">\(x\)</span>, and a regression function <span class="math inline">\(f(x) = x^3\)</span>. Adding an additional noise parameter, and the distribution of the feature variable, we define the entire data generating process as</p>
 <p><span class="math display">\[
-X \sim \text{U(a = -1, b = 1)}\\
+X \sim \text{U}(a = -1, b = 1)\\
 Y \mid X = x \sim N(\mu = x^3, \sigma^2 = 0.25 ^ 2)
 \]</span></p>
 <p>We write an <code>R</code> function that generates datasets according to this process.</p>
