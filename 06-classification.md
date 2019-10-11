@@ -12,9 +12,26 @@
 
 ***
 
+
+
+
+```r
+library("dplyr")
+library("knitr")
+library("kableExtra")
+library("tibble")
+library("caret")
+library("rpart")
+library("nnet")
+```
+
 ## Bayes Classifier
 
 - TODO: Not the same as naïve Bayes classifier
+
+$$
+p_k(x) = P\left[ Y = k \mid X = x \right]
+$$
 
 $$
 C^B(x) = \underset{k \in \{1, 2, \ldots K\}}{\text{argmax}} P\left[ Y = k \mid X = x \right]
@@ -28,39 +45,78 @@ $$
 1 - \mathbb{E}\left[ \underset{k}{\text{max}} \ P[Y = k \mid X] \right]
 $$
 
-- TODO: https://topepo.github.io/caret/visualizations.html
-- TODO: https://en.wikipedia.org/wiki/Confusion_matrix
-- TODO: https://en.wikipedia.org/wiki/Matthews_correlation_coefficient
-- TODO: https://people.inf.elte.hu/kiss/11dwhdm/roc.pdf
-- TODO: https://www.cs.cmu.edu/~tom/mlbook/NBayesLogReg.pdf
-- TODO: http://www.oranlooney.com/post/viz-tsne/
-- TODO: https://web.expasy.org/pROC/
-- TODO: https://bmcbioinformatics.biomedcentral.com/track/pdf/10.1186/1471-2105-12-77
-- TODO: https://en.wikipedia.org/wiki/Receiver_operating_characteristic
-- TODO: https://papers.nips.cc/paper/2020-on-discriminative-vs-generative-classifiers-a-comparison-of-logistic-regression-and-naive-bayes.pdf
-- https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.141.751&rep=rep1&type=pdf
-- https://www.cs.ubc.ca/~murphyk/Teaching/CS340-Fall06/lectures/naiveBayes.pdf
-- http://www.stat.cmu.edu/~ryantibs/statml/lectures/linearclassification.pdf
-- https://www.cs.cmu.edu/~tom/mlbook/NBayesLogReg.pdf
+
+
+## Building a Classifier
+
+$$
+\hat{p}_k(x) = \hat{P}\left[ Y = k \mid X = x \right]
+$$
+
+$$
+\hat{C}(x) = \underset{k \in \{1, 2, \ldots K\}}{\text{argmax}} \hat{p}_k(x)
+$$
+
+- TODO: first estimation conditional distribution, then classify to label with highest probability
 
 
 ```r
-library(tibble)
-library(caret)
+set.seed(1)
+joint_probs = round(1:12 / sum(1:12), 2)
+joint_probs = sample(joint_probs)
+joint_dist = matrix(data  = joint_probs, nrow = 3, ncol = 4)
+colnames(joint_dist) = c("$X = 1$", "$X = 2$", "$X = 3$", "$X = 4$")
+rownames(joint_dist) = c("$Y = A$", "$Y = B$", "$Y = C$")
+joint_dist %>% kable() %>% kable_styling(full_width = FALSE)
 ```
 
-```
-## Loading required package: lattice
-```
+\begin{table}[H]
+\centering
+\begin{tabular}{l|r|r|r|r}
+\hline
+  & \$X = 1\$ & \$X = 2\$ & \$X = 3\$ & \$X = 4\$\\
+\hline
+\$Y = A\$ & 0.12 & 0.01 & 0.04 & 0.14\\
+\hline
+\$Y = B\$ & 0.05 & 0.03 & 0.10 & 0.15\\
+\hline
+\$Y = C\$ & 0.09 & 0.06 & 0.08 & 0.13\\
+\hline
+\end{tabular}
+\end{table}
 
-```
-## Loading required package: ggplot2
-```
 
 ```r
-library(rpart)
-library(nnet)
+# marginal distribution of Y
+t(colSums(joint_dist)) %>% kable() %>% kable_styling(full_width = FALSE)
 ```
+
+\begin{table}[H]
+\centering
+\begin{tabular}{r|r|r|r}
+\hline
+\$X = 1\$ & \$X = 2\$ & \$X = 3\$ & \$X = 4\$\\
+\hline
+0.26 & 0.1 & 0.22 & 0.42\\
+\hline
+\end{tabular}
+\end{table}
+
+```r
+# marginal distribution of X
+t(rowSums(joint_dist)) %>% kable() %>% kable_styling(full_width = FALSE)
+```
+
+\begin{table}[H]
+\centering
+\begin{tabular}{r|r|r}
+\hline
+\$Y = A\$ & \$Y = B\$ & \$Y = C\$\\
+\hline
+0.31 & 0.33 & 0.36\\
+\hline
+\end{tabular}
+\end{table}
 
 
 ```r
@@ -98,18 +154,58 @@ predict(rpart(y ~ x, data = some_data), test_cases)
 ```
 
 ```r
-predict(nnet(y ~ x, data = some_data, size = 0, skip = TRUE, trace = FALSE), test_cases)
+predict(multinom(y ~ x, data = some_data, trace = FALSE), test_cases, type = "prob")
 ```
 
 ```
 ##           A          B         C
-## 1 0.2608693 0.39130387 0.3478268
-## 2 0.1481479 0.07407422 0.7777779
+## 1 0.2608699 0.39130496 0.3478251
+## 2 0.1481478 0.07407414 0.7777781
 ```
 
 ## Modeling
 
 ### Linear Models
+
+- TODO: use `nnet::multinom
+
+### k-Nearest Neighbors
+
+- TODO: use `caret::knn3()`
+
+### Decision Trees
+
+- TODO: use `rpart::rpart()`
+
+
+
+
+
+
+
+
+
+
+
+## MISC TODO STUFF
+
+- TODO: https://topepo.github.io/caret/visualizations.html
+- TODO: https://en.wikipedia.org/wiki/Confusion_matrix
+- TODO: https://en.wikipedia.org/wiki/Matthews_correlation_coefficient
+- TODO: https://people.inf.elte.hu/kiss/11dwhdm/roc.pdf
+- TODO: https://www.cs.cmu.edu/~tom/mlbook/NBayesLogReg.pdf
+- TODO: http://www.oranlooney.com/post/viz-tsne/
+- TODO: https://web.expasy.org/pROC/
+- TODO: https://bmcbioinformatics.biomedcentral.com/track/pdf/10.1186/1471-2105-12-77
+- TODO: https://en.wikipedia.org/wiki/Receiver_operating_characteristic
+- TODO: https://papers.nips.cc/paper/2020-on-discriminative-vs-generative-classifiers-a-comparison-of-logistic-regression-and-naive-bayes.pdf
+- https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.141.751&rep=rep1&type=pdf
+- https://www.cs.ubc.ca/~murphyk/Teaching/CS340-Fall06/lectures/naiveBayes.pdf
+- http://www.stat.cmu.edu/~ryantibs/statml/lectures/linearclassification.pdf
+- https://www.cs.cmu.edu/~tom/mlbook/NBayesLogReg.pdf
+
+
+
 
 
 ```r
@@ -145,8 +241,6 @@ sim_2d_logistic = function(beta_0, beta_1, beta_2, n) {
 sim_2d_logistic(beta_0 = 2 * 0.5, beta_1 = 2* 0.7, beta_2 = 2* 0.5, n = 100)
 ```
 
-![](06-classification_files/figure-latex/unnamed-chunk-3-1.pdf)<!-- --> 
 
-### k-Nearest Neighbors
 
-### Decision Trees
+\begin{center}\includegraphics{06-classification_files/figure-latex/unnamed-chunk-6-1} \end{center}
