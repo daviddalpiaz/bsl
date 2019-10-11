@@ -23,7 +23,7 @@ In this chapter we introduce **cross-validation**. We will highlight the need fo
 To illustrate the use of resampling techniques, we'll consider a regression setup with a single feature $x$, and a regression function $f(x) = x^3$. Adding an additional noise parameter, and the distribution of the feature variable, we define the entire data generating process as
 
 $$
-X \sim \text{U(a = -1, b = 1)}\\
+X \sim \text{U}(a = -1, b = 1)\\
 Y \mid X = x \sim N(\mu = x^3, \sigma^2 = 0.25 ^ 2)
 $$
 
