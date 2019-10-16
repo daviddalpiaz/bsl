@@ -24,7 +24,7 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-10-11" />
+<meta name="date" content="2019-10-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -283,12 +283,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb117-2" data-line-number="2"><span class="kw">library</span>(<span class="st">&quot;rsample&quot;</span>)</a>
 <a class="sourceLine" id="cb117-3" data-line-number="3"><span class="kw">library</span>(<span class="st">&quot;tibble&quot;</span>)</a>
 <a class="sourceLine" id="cb117-4" data-line-number="4"><span class="kw">library</span>(<span class="st">&quot;knitr&quot;</span>)</a>
-<a class="sourceLine" id="cb117-5" data-line-number="5"><span class="kw">library</span>(<span class="st">&quot;kableExtra&quot;</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb117-5" data-line-number="5"><span class="kw">library</span>(<span class="st">&quot;kableExtra&quot;</span>)</a>
+<a class="sourceLine" id="cb117-6" data-line-number="6"><span class="kw">library</span>(<span class="st">&quot;purrr&quot;</span>)</a></code></pre></div>
 <p>In this chapter we introduce <strong>cross-validation</strong>. We will highlight the need for cross-validation by comparing it to our previous approach, which was to use a single <strong>validation</strong> set inside of the training data.</p>
-<p>To illustrate the use of resampling techniques, we’ll consider a regression setup with a single feature <span class="math inline">\(x\)</span>, and a regression function <span class="math inline">\(f(x) = x^3\)</span>. Adding an additional noise parameter, and the distribution of the feature variable, we define the entire data generating process as</p>
+<p>To illustrate the use of cross-validation, we’ll consider a regression setup with a single feature <span class="math inline">\(x\)</span>, and a regression function <span class="math inline">\(f(x) = x^3\)</span>. Adding an additional noise parameter, and the distribution of the feature variable, we define the entire data generating process as</p>
 <p><span class="math display">\[
-X \sim \text{U}(a = -1, b = 1)\\
-Y \mid X = x \sim N(\mu = x^3, \sigma^2 = 0.25 ^ 2)
+X \sim \text{Unif}\left(a = -1, b = 1\right) \\
+Y \mid X \sim \text{Normal}\left(\mu = x^3, \sigma^2 = 0.25 ^ 2\right)
 \]</span></p>
 <p>We write an <code>R</code> function that generates datasets according to this process.</p>
 <div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" data-line-number="1">gen_sim_data =<span class="st"> </span><span class="cf">function</span>(sample_size) {</a>
@@ -311,12 +312,141 @@ Y \mid X = x \sim N(\mu = x^3, \sigma^2 = 0.25 ^ 2)
 <div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" data-line-number="1">calc_rmse =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</a>
 <a class="sourceLine" id="cb121-2" data-line-number="2">  <span class="kw">sqrt</span>(<span class="kw">mean</span>((actual <span class="op">-</span><span class="st"> </span>predicted) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</a>
 <a class="sourceLine" id="cb121-3" data-line-number="3">}</a></code></pre></div>
-<p>Recall that we needed this validation set because the training error was far too optimistic for highly flexible models. This would lead us to always use the most flexible model.</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb122-1" data-line-number="1">fit =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dv">10</span>), <span class="dt">data =</span> sim_trn)</a>
-<a class="sourceLine" id="cb122-2" data-line-number="2"><span class="kw">calc_rmse</span>(<span class="dt">actual =</span> sim_est<span class="op">$</span>y, <span class="dt">predicted =</span> <span class="kw">predict</span>(fit, sim_est))</a></code></pre></div>
-<pre><code>## [1] 0.2287754</code></pre>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" data-line-number="1"><span class="kw">calc_rmse</span>(<span class="dt">actual =</span> sim_val<span class="op">$</span>y, <span class="dt">predicted =</span> <span class="kw">predict</span>(fit, sim_val))</a></code></pre></div>
-<pre><code>## [1] 0.2720983</code></pre>
+<p>Recall that we needed this validation set because the training error was far too optimistic for highly flexible models. This would lead us to always use the most flexible model. (That is, data that is used to fit a model should not be used to validate a model.)</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb122-1" data-line-number="1"><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb122-2" data-line-number="2">  <span class="st">&quot;Polynomial Degree&quot;</span> =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb122-3" data-line-number="3">  <span class="st">&quot;Train RMSE&quot;</span> =<span class="st"> </span><span class="kw">map_dbl</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="op">~</span><span class="st"> </span><span class="kw">calc_rmse</span>(<span class="dt">actual =</span> sim_est<span class="op">$</span>y, <span class="dt">predicted =</span> <span class="kw">predict</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, .x), <span class="dt">data =</span> sim_est), sim_est))),</a>
+<a class="sourceLine" id="cb122-4" data-line-number="4">  <span class="st">&quot;Validation RMSE&quot;</span> =<span class="st"> </span><span class="kw">map_dbl</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="op">~</span><span class="st"> </span><span class="kw">calc_rmse</span>(<span class="dt">actual =</span> sim_val<span class="op">$</span>y, <span class="dt">predicted =</span> <span class="kw">predict</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, .x), <span class="dt">data =</span> sim_est), sim_val)))</a>
+<a class="sourceLine" id="cb122-5" data-line-number="5">) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb122-6" data-line-number="6"><span class="st">  </span><span class="kw">kable</span>(<span class="dt">digits =</span> <span class="dv">4</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb122-7" data-line-number="7"><span class="st">  </span><span class="kw">kable_styling</span>(<span class="st">&quot;striped&quot;</span>, <span class="dt">full_width =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+Polynomial Degree
+</th>
+<th style="text-align:right;">
+Train RMSE
+</th>
+<th style="text-align:right;">
+Validation RMSE
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.2865
+</td>
+<td style="text-align:right;">
+0.3233
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.2861
+</td>
+<td style="text-align:right;">
+0.3220
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.2400
+</td>
+<td style="text-align:right;">
+0.2746
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0.2398
+</td>
+<td style="text-align:right;">
+0.2754
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0.2288
+</td>
+<td style="text-align:right;">
+0.2832
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+0.2288
+</td>
+<td style="text-align:right;">
+0.2833
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+0.2287
+</td>
+<td style="text-align:right;">
+0.2820
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+0.2286
+</td>
+<td style="text-align:right;">
+0.2805
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+0.2286
+</td>
+<td style="text-align:right;">
+0.2803
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+0.2267
+</td>
+<td style="text-align:right;">
+0.2886
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="validation-set-approach" class="section level2">
 <h2><span class="header-section-number">7.2</span> Validation-Set Approach</h2>
@@ -325,33 +455,33 @@ Y \mid X = x \sim N(\mu = x^3, \sigma^2 = 0.25 ^ 2)
 <li>TODO: here, we can consider k, the polynomial degree, as a tuning parameter</li>
 <li>TODO: perform simulation study to evaluate how well validation set approach works</li>
 </ul>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" data-line-number="1">num_sims =<span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb126-2" data-line-number="2">num_degrees =<span class="st"> </span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb126-3" data-line-number="3">val_rmse =<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">ncol =</span> num_degrees, <span class="dt">nrow =</span> num_sims)</a></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" data-line-number="1">num_sims =<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb123-2" data-line-number="2">num_degrees =<span class="st"> </span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb123-3" data-line-number="3">val_rmse =<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">ncol =</span> num_degrees, <span class="dt">nrow =</span> num_sims)</a></code></pre></div>
 <ul>
 <li>TODO: each simulation we will…</li>
 </ul>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb127-2" data-line-number="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>num_sims) {</a>
-<a class="sourceLine" id="cb127-3" data-line-number="3">  </a>
-<a class="sourceLine" id="cb127-4" data-line-number="4">  <span class="co"># simulate data</span></a>
-<a class="sourceLine" id="cb127-5" data-line-number="5">  sim_trn =<span class="st"> </span><span class="kw">gen_sim_data</span>(<span class="dt">sample_size =</span> <span class="dv">200</span>)</a>
-<a class="sourceLine" id="cb127-6" data-line-number="6">  </a>
-<a class="sourceLine" id="cb127-7" data-line-number="7">  <span class="co"># set aside validation set</span></a>
-<a class="sourceLine" id="cb127-8" data-line-number="8">  sim_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(sim_trn), <span class="dv">160</span>)</a>
-<a class="sourceLine" id="cb127-9" data-line-number="9">  sim_est =<span class="st"> </span>sim_trn[sim_idx, ]</a>
-<a class="sourceLine" id="cb127-10" data-line-number="10">  sim_val =<span class="st"> </span>sim_trn[<span class="op">-</span>sim_idx, ]</a>
-<a class="sourceLine" id="cb127-11" data-line-number="11">  </a>
-<a class="sourceLine" id="cb127-12" data-line-number="12">  <span class="co"># fit models and store RMSEs</span></a>
-<a class="sourceLine" id="cb127-13" data-line-number="13">  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>num_degrees) {</a>
-<a class="sourceLine" id="cb127-14" data-line-number="14">    </a>
-<a class="sourceLine" id="cb127-15" data-line-number="15">    <span class="co">#fit model</span></a>
-<a class="sourceLine" id="cb127-16" data-line-number="16">    fit =<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> j), <span class="dt">data =</span> sim_est)</a>
-<a class="sourceLine" id="cb127-17" data-line-number="17">    </a>
-<a class="sourceLine" id="cb127-18" data-line-number="18">    <span class="co"># calculate error</span></a>
-<a class="sourceLine" id="cb127-19" data-line-number="19">    val_rmse[i, j] =<span class="st"> </span><span class="kw">calc_rmse</span>(<span class="dt">actual =</span> sim_val<span class="op">$</span>y, <span class="dt">predicted =</span> <span class="kw">predict</span>(fit, sim_val))</a>
-<a class="sourceLine" id="cb127-20" data-line-number="20">  }</a>
-<a class="sourceLine" id="cb127-21" data-line-number="21">}</a></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb124-2" data-line-number="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>num_sims) {</a>
+<a class="sourceLine" id="cb124-3" data-line-number="3">  </a>
+<a class="sourceLine" id="cb124-4" data-line-number="4">  <span class="co"># simulate data</span></a>
+<a class="sourceLine" id="cb124-5" data-line-number="5">  sim_trn =<span class="st"> </span><span class="kw">gen_sim_data</span>(<span class="dt">sample_size =</span> <span class="dv">200</span>)</a>
+<a class="sourceLine" id="cb124-6" data-line-number="6">  </a>
+<a class="sourceLine" id="cb124-7" data-line-number="7">  <span class="co"># set aside validation set</span></a>
+<a class="sourceLine" id="cb124-8" data-line-number="8">  sim_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(sim_trn), <span class="dv">160</span>)</a>
+<a class="sourceLine" id="cb124-9" data-line-number="9">  sim_est =<span class="st"> </span>sim_trn[sim_idx, ]</a>
+<a class="sourceLine" id="cb124-10" data-line-number="10">  sim_val =<span class="st"> </span>sim_trn[<span class="op">-</span>sim_idx, ]</a>
+<a class="sourceLine" id="cb124-11" data-line-number="11">  </a>
+<a class="sourceLine" id="cb124-12" data-line-number="12">  <span class="co"># fit models and store RMSEs</span></a>
+<a class="sourceLine" id="cb124-13" data-line-number="13">  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>num_degrees) {</a>
+<a class="sourceLine" id="cb124-14" data-line-number="14">    </a>
+<a class="sourceLine" id="cb124-15" data-line-number="15">    <span class="co">#fit model</span></a>
+<a class="sourceLine" id="cb124-16" data-line-number="16">    fit =<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> j), <span class="dt">data =</span> sim_est)</a>
+<a class="sourceLine" id="cb124-17" data-line-number="17">    </a>
+<a class="sourceLine" id="cb124-18" data-line-number="18">    <span class="co"># calculate error</span></a>
+<a class="sourceLine" id="cb124-19" data-line-number="19">    val_rmse[i, j] =<span class="st"> </span><span class="kw">calc_rmse</span>(<span class="dt">actual =</span> sim_val<span class="op">$</span>y, <span class="dt">predicted =</span> <span class="kw">predict</span>(fit, sim_val))</a>
+<a class="sourceLine" id="cb124-20" data-line-number="20">  }</a>
+<a class="sourceLine" id="cb124-21" data-line-number="21">}</a></code></pre></div>
 <p><img src="07-resampling_files/figure-html/unnamed-chunk-9-1.png" width="960" style="display: block; margin: auto;" /></p>
 <ul>
 <li>TODO: issues are hard to “see” but have to do with variability</li>
@@ -360,7 +490,7 @@ Y \mid X = x \sim N(\mu = x^3, \sigma^2 = 0.25 ^ 2)
 </div>
 <div id="cross-validation" class="section level2">
 <h2><span class="header-section-number">7.3</span> Cross-Validation</h2>
-<p>Instead of using a single test-train split, we instead look to use <span class="math inline">\(K\)</span>-fold cross-validation.</p>
+<p>Instead of using a single estimation-validation split, we instead look to use <span class="math inline">\(K\)</span>-fold cross-validation.</p>
 <p><span class="math display">\[
 \text{RMSE-CV}_{K} = \sum_{k = 1}^{K} \frac{n_k}{n} \text{RMSE}_k
 \]</span></p>
@@ -381,39 +511,39 @@ Y \mid X = x \sim N(\mu = x^3, \sigma^2 = 0.25 ^ 2)
 <li>TODO: Can be used with any metric, MSE, RMSE, class-err, class-acc</li>
 </ul>
 <p>There are many ways to perform cross-validation in <code>R</code>, depending on the statistical learning method of interest. Some methods, for example <code>glm()</code> through <code>boot::cv.glm()</code> and <code>knn()</code> through <code>knn.cv()</code> have cross-validation capabilities built-in. We’ll use <code>glm()</code> for illustration. First we need to convince ourselves that <code>glm()</code> can be used to perform the same tasks as <code>lm()</code>.</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" data-line-number="1">glm_fit =<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dv">3</span>), <span class="dt">data =</span> sim_trn)</a>
-<a class="sourceLine" id="cb128-2" data-line-number="2"><span class="kw">coef</span>(glm_fit)</a></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb125-1" data-line-number="1">glm_fit =<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dv">3</span>), <span class="dt">data =</span> sim_trn)</a>
+<a class="sourceLine" id="cb125-2" data-line-number="2"><span class="kw">coef</span>(glm_fit)</a></code></pre></div>
 <pre><code>## (Intercept) poly(x, 3)1 poly(x, 3)2 poly(x, 3)3 
 ## -0.02516901  5.06661745 -0.09349681  2.64581436</code></pre>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" data-line-number="1">lm_fit  =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dv">3</span>), <span class="dt">data =</span> sim_trn)</a>
-<a class="sourceLine" id="cb130-2" data-line-number="2"><span class="kw">coef</span>(lm_fit)</a></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1">lm_fit  =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dv">3</span>), <span class="dt">data =</span> sim_trn)</a>
+<a class="sourceLine" id="cb127-2" data-line-number="2"><span class="kw">coef</span>(lm_fit)</a></code></pre></div>
 <pre><code>## (Intercept) poly(x, 3)1 poly(x, 3)2 poly(x, 3)3 
 ## -0.02516901  5.06661745 -0.09349681  2.64581436</code></pre>
 <p>By default, <code>cv.glm()</code> will report leave-one-out cross-validation (LOOCV).</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" data-line-number="1"><span class="kw">sqrt</span>(boot<span class="op">::</span><span class="kw">cv.glm</span>(sim_trn, glm_fit)<span class="op">$</span>delta)</a></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" data-line-number="1"><span class="kw">sqrt</span>(boot<span class="op">::</span><span class="kw">cv.glm</span>(sim_trn, glm_fit)<span class="op">$</span>delta)</a></code></pre></div>
 <pre><code>## [1] 0.2488233 0.2488099</code></pre>
 <p>We are actually given two values. The first is exactly the LOOCV-MSE. The second is a minor correction that we will not worry about. We take a square root to obtain LOOCV-RMSE.</p>
 <p>In practice, we often prefer 5 or 10-fold cross-validation for a number of reason, but often most importantly, for computational efficiency.</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" data-line-number="1"><span class="kw">sqrt</span>(boot<span class="op">::</span><span class="kw">cv.glm</span>(sim_trn, glm_fit, <span class="dt">K =</span> <span class="dv">5</span>)<span class="op">$</span>delta)</a></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" data-line-number="1"><span class="kw">sqrt</span>(boot<span class="op">::</span><span class="kw">cv.glm</span>(sim_trn, glm_fit, <span class="dt">K =</span> <span class="dv">5</span>)<span class="op">$</span>delta)</a></code></pre></div>
 <pre><code>## [1] 0.2470322 0.2466417</code></pre>
 <p>We repeat the above simulation study, this time performing 5-fold cross-validation. With a total sample size of <span class="math inline">\(n = 200\)</span> each validation set has 40 observations, as did the single validation set in the previous simulations.</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb136-1" data-line-number="1">cv_rmse =<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">ncol =</span> num_degrees, <span class="dt">nrow =</span> num_sims)</a></code></pre></div>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb137-2" data-line-number="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>num_sims) {</a>
-<a class="sourceLine" id="cb137-3" data-line-number="3">  </a>
-<a class="sourceLine" id="cb137-4" data-line-number="4">  <span class="co"># simulate data, use all data for training</span></a>
-<a class="sourceLine" id="cb137-5" data-line-number="5">  sim_trn =<span class="st"> </span><span class="kw">gen_sim_data</span>(<span class="dt">sample_size =</span> <span class="dv">200</span>)</a>
-<a class="sourceLine" id="cb137-6" data-line-number="6">  </a>
-<a class="sourceLine" id="cb137-7" data-line-number="7">  <span class="co"># fit models and store RMSE</span></a>
-<a class="sourceLine" id="cb137-8" data-line-number="8">  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>num_degrees) {</a>
-<a class="sourceLine" id="cb137-9" data-line-number="9">    </a>
-<a class="sourceLine" id="cb137-10" data-line-number="10">    <span class="co">#fit model</span></a>
-<a class="sourceLine" id="cb137-11" data-line-number="11">    fit =<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> j), <span class="dt">data =</span> sim_trn)</a>
-<a class="sourceLine" id="cb137-12" data-line-number="12">    </a>
-<a class="sourceLine" id="cb137-13" data-line-number="13">    <span class="co"># calculate error</span></a>
-<a class="sourceLine" id="cb137-14" data-line-number="14">    cv_rmse[i, j] =<span class="st"> </span><span class="kw">sqrt</span>(boot<span class="op">::</span><span class="kw">cv.glm</span>(sim_trn, fit, <span class="dt">K =</span> <span class="dv">5</span>)<span class="op">$</span>delta[<span class="dv">1</span>])</a>
-<a class="sourceLine" id="cb137-15" data-line-number="15">  }</a>
-<a class="sourceLine" id="cb137-16" data-line-number="16">}</a></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" data-line-number="1">cv_rmse =<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">ncol =</span> num_degrees, <span class="dt">nrow =</span> num_sims)</a></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb134-2" data-line-number="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>num_sims) {</a>
+<a class="sourceLine" id="cb134-3" data-line-number="3">  </a>
+<a class="sourceLine" id="cb134-4" data-line-number="4">  <span class="co"># simulate data, use all data for training</span></a>
+<a class="sourceLine" id="cb134-5" data-line-number="5">  sim_trn =<span class="st"> </span><span class="kw">gen_sim_data</span>(<span class="dt">sample_size =</span> <span class="dv">200</span>)</a>
+<a class="sourceLine" id="cb134-6" data-line-number="6">  </a>
+<a class="sourceLine" id="cb134-7" data-line-number="7">  <span class="co"># fit models and store RMSE</span></a>
+<a class="sourceLine" id="cb134-8" data-line-number="8">  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>num_degrees) {</a>
+<a class="sourceLine" id="cb134-9" data-line-number="9">    </a>
+<a class="sourceLine" id="cb134-10" data-line-number="10">    <span class="co">#fit model</span></a>
+<a class="sourceLine" id="cb134-11" data-line-number="11">    fit =<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> j), <span class="dt">data =</span> sim_trn)</a>
+<a class="sourceLine" id="cb134-12" data-line-number="12">    </a>
+<a class="sourceLine" id="cb134-13" data-line-number="13">    <span class="co"># calculate error</span></a>
+<a class="sourceLine" id="cb134-14" data-line-number="14">    cv_rmse[i, j] =<span class="st"> </span><span class="kw">sqrt</span>(boot<span class="op">::</span><span class="kw">cv.glm</span>(sim_trn, fit, <span class="dt">K =</span> <span class="dv">5</span>)<span class="op">$</span>delta[<span class="dv">1</span>])</a>
+<a class="sourceLine" id="cb134-15" data-line-number="15">  }</a>
+<a class="sourceLine" id="cb134-16" data-line-number="16">}</a></code></pre></div>
 <p><img src="07-resampling_files/figure-html/unnamed-chunk-15-1.png" width="960" style="display: block; margin: auto;" /></p>
 <table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
@@ -617,9 +747,9 @@ SD, CV
 <h2><span class="header-section-number">7.4</span> Test Data</h2>
 <p>The following example, inspired by The Elements of Statistical Learning, will illustrate the need for a dedicated test set which is <strong>never</strong> used in model training. We do this, if for no other reason, because it gives us a quick sanity check that we have cross-validated correctly. To be specific we will always test-train split the data, then perform cross-validation <strong>within the training data</strong>.</p>
 <p>Essentially, this example will also show how to <strong>not</strong> cross-validate properly. It will also show can example of cross-validated in a classification setting.</p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" data-line-number="1">calc_misclass =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</a>
-<a class="sourceLine" id="cb138-2" data-line-number="2">  <span class="kw">mean</span>(actual <span class="op">!=</span><span class="st"> </span>predicted)</a>
-<a class="sourceLine" id="cb138-3" data-line-number="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" data-line-number="1">calc_misclass =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</a>
+<a class="sourceLine" id="cb135-2" data-line-number="2">  <span class="kw">mean</span>(actual <span class="op">!=</span><span class="st"> </span>predicted)</a>
+<a class="sourceLine" id="cb135-3" data-line-number="3">}</a></code></pre></div>
 <p>Consider a binary response <span class="math inline">\(Y\)</span> with equal probability to take values <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>.</p>
 <p><span class="math display">\[
 Y \sim \text{bern}(p = 0.5)
@@ -629,13 +759,13 @@ Y \sim \text{bern}(p = 0.5)
 X_j \sim N(\mu = 0, \sigma^2 = 1)
 \]</span></p>
 <p>We simulate <span class="math inline">\(n = 100\)</span> observations from this data generating process. Notice that the way we’ve defined this process, none of the <span class="math inline">\(X_j\)</span> are related to <span class="math inline">\(Y\)</span>.</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb139-2" data-line-number="2">n =<span class="st"> </span><span class="dv">200</span></a>
-<a class="sourceLine" id="cb139-3" data-line-number="3">p =<span class="st"> </span><span class="dv">10000</span></a>
-<a class="sourceLine" id="cb139-4" data-line-number="4">x =<span class="st"> </span><span class="kw">replicate</span>(p, <span class="kw">rnorm</span>(n))</a>
-<a class="sourceLine" id="cb139-5" data-line-number="5">y =<span class="st"> </span><span class="kw">c</span>(<span class="kw">rbinom</span>(<span class="dt">n =</span> n, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>))</a>
-<a class="sourceLine" id="cb139-6" data-line-number="6">full_data =<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">data.frame</span>(y, x))</a>
-<a class="sourceLine" id="cb139-7" data-line-number="7">full_data</a></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb136-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb136-2" data-line-number="2">n =<span class="st"> </span><span class="dv">200</span></a>
+<a class="sourceLine" id="cb136-3" data-line-number="3">p =<span class="st"> </span><span class="dv">10000</span></a>
+<a class="sourceLine" id="cb136-4" data-line-number="4">x =<span class="st"> </span><span class="kw">replicate</span>(p, <span class="kw">rnorm</span>(n))</a>
+<a class="sourceLine" id="cb136-5" data-line-number="5">y =<span class="st"> </span><span class="kw">c</span>(<span class="kw">rbinom</span>(<span class="dt">n =</span> n, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>))</a>
+<a class="sourceLine" id="cb136-6" data-line-number="6">full_data =<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">data.frame</span>(y, x))</a>
+<a class="sourceLine" id="cb136-7" data-line-number="7">full_data</a></code></pre></div>
 <pre><code>## # A tibble: 200 x 10,001
 ##        y      X1     X2       X3     X4     X5     X6      X7      X8
 ##    &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
@@ -668,16 +798,16 @@ X_j \sim N(\mu = 0, \sigma^2 = 1)
 ## #   X101 &lt;dbl&gt;, X102 &lt;dbl&gt;, X103 &lt;dbl&gt;, X104 &lt;dbl&gt;, X105 &lt;dbl&gt;,
 ## #   X106 &lt;dbl&gt;, X107 &lt;dbl&gt;, X108 &lt;dbl&gt;, …</code></pre>
 <p>Before attempting to perform cross-validation, we test-train split the data, using half of the available data for each. (In practice, with this little data, it would be hard to justify a separate test dataset, but here we do so to illustrate another point.)</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" data-line-number="1">trn_idx  =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(full_data), <span class="kw">trunc</span>(<span class="kw">nrow</span>(full_data) <span class="op">*</span><span class="st"> </span><span class="fl">0.5</span>))</a>
-<a class="sourceLine" id="cb141-2" data-line-number="2">trn_data =<span class="st"> </span>full_data[trn_idx,   ]</a>
-<a class="sourceLine" id="cb141-3" data-line-number="3">tst_data =<span class="st"> </span>full_data[<span class="op">-</span>trn_idx, ]</a></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" data-line-number="1">trn_idx  =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(full_data), <span class="kw">trunc</span>(<span class="kw">nrow</span>(full_data) <span class="op">*</span><span class="st"> </span><span class="fl">0.5</span>))</a>
+<a class="sourceLine" id="cb138-2" data-line-number="2">trn_data =<span class="st"> </span>full_data[trn_idx,   ]</a>
+<a class="sourceLine" id="cb138-3" data-line-number="3">tst_data =<span class="st"> </span>full_data[<span class="op">-</span>trn_idx, ]</a></code></pre></div>
 <p>Now we would like to train a logistic regression model to predict <span class="math inline">\(Y\)</span> using the available predictor data. However, here we have <span class="math inline">\(p &gt; n\)</span>, which prevents us from fitting logistic regression. To overcome this issue, we will first attempt to find a subset of relevant predictors. To do so, we’ll simply find the predictors that are most correlated with the response.</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" data-line-number="1"><span class="co"># find correlation between y and each predictor variable</span></a>
-<a class="sourceLine" id="cb142-2" data-line-number="2">correlations =<span class="st"> </span><span class="kw">apply</span>(trn_data[, <span class="dv">-1</span>], <span class="dv">2</span>, cor, <span class="dt">y =</span> trn_data<span class="op">$</span>y)</a></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" data-line-number="1"><span class="co"># find correlation between y and each predictor variable</span></a>
+<a class="sourceLine" id="cb139-2" data-line-number="2">correlations =<span class="st"> </span><span class="kw">apply</span>(trn_data[, <span class="dv">-1</span>], <span class="dv">2</span>, cor, <span class="dt">y =</span> trn_data<span class="op">$</span>y)</a></code></pre></div>
 <p><img src="07-resampling_files/figure-html/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>While many of these correlations are small, many very close to zero, some are as large as 0.40. Since our training data has 50 observations, we’ll select the 25 predictors with the largest (absolute) correlations.</p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" data-line-number="1">selected =<span class="st"> </span><span class="kw">order</span>(<span class="kw">abs</span>(correlations), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">25</span>]</a>
-<a class="sourceLine" id="cb143-2" data-line-number="2">correlations[selected]</a></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb140-1" data-line-number="1">selected =<span class="st"> </span><span class="kw">order</span>(<span class="kw">abs</span>(correlations), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">25</span>]</a>
+<a class="sourceLine" id="cb140-2" data-line-number="2">correlations[selected]</a></code></pre></div>
 <pre><code>##      X4942       X867      X8617      X8044       X406      X4358 
 ##  0.4005771  0.3847397  0.3809371  0.3692479 -0.3571329  0.3553777 
 ##      X7725      X1986      X3784        X77      X7010      X9354 
@@ -689,21 +819,21 @@ X_j \sim N(\mu = 0, \sigma^2 = 1)
 ##      X1098 
 ## -0.3036153</code></pre>
 <p>We subset the training and test sets to contain only the response as well as these 25 predictors.</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" data-line-number="1">trn_screen =<span class="st"> </span>trn_data[<span class="kw">c</span>(<span class="dv">1</span>, selected)]</a>
-<a class="sourceLine" id="cb145-2" data-line-number="2">tst_screen =<span class="st"> </span>tst_data[<span class="kw">c</span>(<span class="dv">1</span>, selected)]</a></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" data-line-number="1">trn_screen =<span class="st"> </span>trn_data[<span class="kw">c</span>(<span class="dv">1</span>, selected)]</a>
+<a class="sourceLine" id="cb142-2" data-line-number="2">tst_screen =<span class="st"> </span>tst_data[<span class="kw">c</span>(<span class="dv">1</span>, selected)]</a></code></pre></div>
 <p>Then we finally fit an additive logistic regression using this subset of predictors. We perform 10-fold cross-validation to obtain an estimate of the classification error.</p>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" data-line-number="1">add_log_mod =<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> trn_screen, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</a>
-<a class="sourceLine" id="cb146-2" data-line-number="2">boot<span class="op">::</span><span class="kw">cv.glm</span>(trn_screen, add_log_mod, <span class="dt">K =</span> <span class="dv">10</span>)<span class="op">$</span>delta[<span class="dv">1</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" data-line-number="1">add_log_mod =<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> trn_screen, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</a>
+<a class="sourceLine" id="cb143-2" data-line-number="2">boot<span class="op">::</span><span class="kw">cv.glm</span>(trn_screen, add_log_mod, <span class="dt">K =</span> <span class="dv">10</span>)<span class="op">$</span>delta[<span class="dv">1</span>]</a></code></pre></div>
 <pre><code>## [1] 0.3742339</code></pre>
 <p>The 10-fold cross-validation is suggesting a classification error estimate of almost 30%.</p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" data-line-number="1">add_log_pred =<span class="st"> </span>(<span class="kw">predict</span>(add_log_mod, <span class="dt">newdata =</span> tst_screen, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>) <span class="op">*</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb148-2" data-line-number="2"><span class="kw">calc_misclass</span>(<span class="dt">predicted =</span> add_log_pred, <span class="dt">actual =</span> tst_screen<span class="op">$</span>y)</a></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" data-line-number="1">add_log_pred =<span class="st"> </span>(<span class="kw">predict</span>(add_log_mod, <span class="dt">newdata =</span> tst_screen, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>) <span class="op">*</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb145-2" data-line-number="2"><span class="kw">calc_misclass</span>(<span class="dt">predicted =</span> add_log_pred, <span class="dt">actual =</span> tst_screen<span class="op">$</span>y)</a></code></pre></div>
 <pre><code>## [1] 0.48</code></pre>
 <p>However, if we obtain an estimate of the error using the set, we see an error rate of about 50%. No better than guessing! But since <span class="math inline">\(Y\)</span> has no relationship with the predictors, this is actually what we would expect. This incorrect method we’ll call screen-then-validate.</p>
 <p>Now, we will correctly screen-while-validating. Essentially, instead of simply cross-validating the logistic regression, we also need to cross validate the screening process. That is, we won’t simply use the same variables for each fold, we get the “best” predictors for each fold.</p>
 <p>For methods that do not have a built-in ability to perform cross-validation, or for methods that have limited cross-validation capability, we will need to write our own code for cross-validation. (Spoiler: This is not completely true, but let’s pretend it is, so we can see how to perform cross-validation from scratch.)</p>
 <p>This essentially amounts to randomly splitting the data, then looping over the splits. The <code>createFolds()</code> function from the <code>caret()</code> package will make this much easier.</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" data-line-number="1">caret<span class="op">::</span><span class="kw">createFolds</span>(trn_data<span class="op">$</span>y, <span class="dt">k =</span> <span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb147-1" data-line-number="1">caret<span class="op">::</span><span class="kw">createFolds</span>(trn_data<span class="op">$</span>y, <span class="dt">k =</span> <span class="dv">10</span>)</a></code></pre></div>
 <pre><code>## $Fold01
 ##  [1] 17 23 27 44 45 76 85 87 93 97
 ## 
@@ -733,41 +863,41 @@ X_j \sim N(\mu = 0, \sigma^2 = 1)
 ## 
 ## $Fold10
 ##  [1]  1  5 22 24 30 63 70 72 81 86</code></pre>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" data-line-number="1"><span class="co"># use the caret package to obtain 10 &quot;folds&quot;</span></a>
-<a class="sourceLine" id="cb152-2" data-line-number="2">folds =<span class="st"> </span>caret<span class="op">::</span><span class="kw">createFolds</span>(trn_data<span class="op">$</span>y, <span class="dt">k =</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb152-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb152-4" data-line-number="4"><span class="co"># for each fold</span></a>
-<a class="sourceLine" id="cb152-5" data-line-number="5"><span class="co"># - pre-screen variables on the 9 training folds</span></a>
-<a class="sourceLine" id="cb152-6" data-line-number="6"><span class="co"># - fit model to these variables</span></a>
-<a class="sourceLine" id="cb152-7" data-line-number="7"><span class="co"># - get error on validation fold</span></a>
-<a class="sourceLine" id="cb152-8" data-line-number="8">fold_err =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">length</span>(folds))</a>
-<a class="sourceLine" id="cb152-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb152-10" data-line-number="10"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(folds)) {</a>
-<a class="sourceLine" id="cb152-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb152-12" data-line-number="12">  <span class="co"># split for fold i  </span></a>
-<a class="sourceLine" id="cb152-13" data-line-number="13">  est_fold =<span class="st"> </span>trn_data[<span class="op">-</span>folds[[i]], ]</a>
-<a class="sourceLine" id="cb152-14" data-line-number="14">  val_fold =<span class="st"> </span>trn_data[folds[[i]], ]</a>
-<a class="sourceLine" id="cb152-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb152-16" data-line-number="16">  <span class="co"># screening for fold i  </span></a>
-<a class="sourceLine" id="cb152-17" data-line-number="17">  correlations =<span class="st"> </span><span class="kw">apply</span>(est_fold[, <span class="dv">-1</span>], <span class="dv">2</span>, cor, <span class="dt">y =</span> est_fold[,<span class="dv">1</span>])</a>
-<a class="sourceLine" id="cb152-18" data-line-number="18">  selected =<span class="st"> </span><span class="kw">order</span>(<span class="kw">abs</span>(correlations), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">25</span>]</a>
-<a class="sourceLine" id="cb152-19" data-line-number="19">  est_fold_screen =<span class="st"> </span>est_fold[ , <span class="kw">c</span>(<span class="dv">1</span>, selected)]</a>
-<a class="sourceLine" id="cb152-20" data-line-number="20">  val_fold_screen =<span class="st"> </span>val_fold[ , <span class="kw">c</span>(<span class="dv">1</span>, selected)]</a>
-<a class="sourceLine" id="cb152-21" data-line-number="21"></a>
-<a class="sourceLine" id="cb152-22" data-line-number="22">  <span class="co"># error for fold i  </span></a>
-<a class="sourceLine" id="cb152-23" data-line-number="23">  add_log_mod =<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> est_fold_screen, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</a>
-<a class="sourceLine" id="cb152-24" data-line-number="24">  add_log_prob =<span class="st"> </span><span class="kw">predict</span>(add_log_mod, <span class="dt">newdata =</span> val_fold_screen, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</a>
-<a class="sourceLine" id="cb152-25" data-line-number="25">  add_log_pred =<span class="st"> </span><span class="kw">ifelse</span>(add_log_prob <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>, <span class="dt">yes =</span> <span class="dv">1</span>, <span class="dt">no =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb152-26" data-line-number="26">  fold_err[i] =<span class="st"> </span><span class="kw">mean</span>(add_log_pred <span class="op">!=</span><span class="st"> </span>val_fold_screen<span class="op">$</span>y)</a>
-<a class="sourceLine" id="cb152-27" data-line-number="27">  </a>
-<a class="sourceLine" id="cb152-28" data-line-number="28">}</a>
-<a class="sourceLine" id="cb152-29" data-line-number="29"></a>
-<a class="sourceLine" id="cb152-30" data-line-number="30"><span class="co"># report all 10 validation fold errors</span></a>
-<a class="sourceLine" id="cb152-31" data-line-number="31">fold_err</a></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" data-line-number="1"><span class="co"># use the caret package to obtain 10 &quot;folds&quot;</span></a>
+<a class="sourceLine" id="cb149-2" data-line-number="2">folds =<span class="st"> </span>caret<span class="op">::</span><span class="kw">createFolds</span>(trn_data<span class="op">$</span>y, <span class="dt">k =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb149-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb149-4" data-line-number="4"><span class="co"># for each fold</span></a>
+<a class="sourceLine" id="cb149-5" data-line-number="5"><span class="co"># - pre-screen variables on the 9 training folds</span></a>
+<a class="sourceLine" id="cb149-6" data-line-number="6"><span class="co"># - fit model to these variables</span></a>
+<a class="sourceLine" id="cb149-7" data-line-number="7"><span class="co"># - get error on validation fold</span></a>
+<a class="sourceLine" id="cb149-8" data-line-number="8">fold_err =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">length</span>(folds))</a>
+<a class="sourceLine" id="cb149-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb149-10" data-line-number="10"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(folds)) {</a>
+<a class="sourceLine" id="cb149-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb149-12" data-line-number="12">  <span class="co"># split for fold i  </span></a>
+<a class="sourceLine" id="cb149-13" data-line-number="13">  est_fold =<span class="st"> </span>trn_data[<span class="op">-</span>folds[[i]], ]</a>
+<a class="sourceLine" id="cb149-14" data-line-number="14">  val_fold =<span class="st"> </span>trn_data[folds[[i]], ]</a>
+<a class="sourceLine" id="cb149-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb149-16" data-line-number="16">  <span class="co"># screening for fold i  </span></a>
+<a class="sourceLine" id="cb149-17" data-line-number="17">  correlations =<span class="st"> </span><span class="kw">apply</span>(est_fold[, <span class="dv">-1</span>], <span class="dv">2</span>, cor, <span class="dt">y =</span> est_fold[,<span class="dv">1</span>])</a>
+<a class="sourceLine" id="cb149-18" data-line-number="18">  selected =<span class="st"> </span><span class="kw">order</span>(<span class="kw">abs</span>(correlations), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">25</span>]</a>
+<a class="sourceLine" id="cb149-19" data-line-number="19">  est_fold_screen =<span class="st"> </span>est_fold[ , <span class="kw">c</span>(<span class="dv">1</span>, selected)]</a>
+<a class="sourceLine" id="cb149-20" data-line-number="20">  val_fold_screen =<span class="st"> </span>val_fold[ , <span class="kw">c</span>(<span class="dv">1</span>, selected)]</a>
+<a class="sourceLine" id="cb149-21" data-line-number="21"></a>
+<a class="sourceLine" id="cb149-22" data-line-number="22">  <span class="co"># error for fold i  </span></a>
+<a class="sourceLine" id="cb149-23" data-line-number="23">  add_log_mod =<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> est_fold_screen, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</a>
+<a class="sourceLine" id="cb149-24" data-line-number="24">  add_log_prob =<span class="st"> </span><span class="kw">predict</span>(add_log_mod, <span class="dt">newdata =</span> val_fold_screen, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</a>
+<a class="sourceLine" id="cb149-25" data-line-number="25">  add_log_pred =<span class="st"> </span><span class="kw">ifelse</span>(add_log_prob <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>, <span class="dt">yes =</span> <span class="dv">1</span>, <span class="dt">no =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb149-26" data-line-number="26">  fold_err[i] =<span class="st"> </span><span class="kw">mean</span>(add_log_pred <span class="op">!=</span><span class="st"> </span>val_fold_screen<span class="op">$</span>y)</a>
+<a class="sourceLine" id="cb149-27" data-line-number="27">  </a>
+<a class="sourceLine" id="cb149-28" data-line-number="28">}</a>
+<a class="sourceLine" id="cb149-29" data-line-number="29"></a>
+<a class="sourceLine" id="cb149-30" data-line-number="30"><span class="co"># report all 10 validation fold errors</span></a>
+<a class="sourceLine" id="cb149-31" data-line-number="31">fold_err</a></code></pre></div>
 <pre><code>##  [1] 0.4 0.9 0.6 0.4 0.6 0.3 0.7 0.5 0.6 0.6</code></pre>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" data-line-number="1"><span class="co"># properly cross-validated error</span></a>
-<a class="sourceLine" id="cb154-2" data-line-number="2"><span class="co"># this roughly matches what we expect in the test set</span></a>
-<a class="sourceLine" id="cb154-3" data-line-number="3"><span class="kw">mean</span>(fold_err)</a></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" data-line-number="1"><span class="co"># properly cross-validated error</span></a>
+<a class="sourceLine" id="cb151-2" data-line-number="2"><span class="co"># this roughly matches what we expect in the test set</span></a>
+<a class="sourceLine" id="cb151-3" data-line-number="3"><span class="kw">mean</span>(fold_err)</a></code></pre></div>
 <pre><code>## [1] 0.56</code></pre>
 <ul>
 <li><p>TODO: note that, even cross-validated correctly, this isn’t a brilliant variable selection procedure. (it completely ignores interactions and correlations among the predictors. however, if it works, it works.) next chapters…</p></li>
@@ -781,6 +911,9 @@ X_j \sim N(\mu = 0, \sigma^2 = 1)
 <li>TODO: <a href="https://stats.stackexchange.com/questions/266225/step-by-step-explanation-of-k-fold-cross-validation-with-grid-search-to-optimise" class="uri">https://stats.stackexchange.com/questions/266225/step-by-step-explanation-of-k-fold-cross-validation-with-grid-search-to-optimise</a></li>
 <li>TODO: <a href="https://weina.me/nested-cross-validation/" class="uri">https://weina.me/nested-cross-validation/</a></li>
 </ul>
+<p><span class="math display">\[
+x, \boldsymbol{x}, X, \boldsymbol{X}, \mathbf{x}, \mathbf{X}, \mathbb{X}, \mathcal{X}, \mathfrak{x}, \mathfrak{X}, \mathrm{x}, \mathrm{X}
+\]</span></p>
 
 </div>
 </div>

@@ -15,15 +15,16 @@ library("rsample")
 library("tibble")
 library("knitr")
 library("kableExtra")
+library("purrr")
 ```
 
 In this chapter we introduce **cross-validation**. We will highlight the need for cross-validation by comparing it to our previous approach, which was to use a single **validation** set inside of the training data.
 
-To illustrate the use of resampling techniques, we'll consider a regression setup with a single feature $x$, and a regression function $f(x) = x^3$. Adding an additional noise parameter, and the distribution of the feature variable, we define the entire data generating process as
+To illustrate the use of cross-validation, we'll consider a regression setup with a single feature $x$, and a regression function $f(x) = x^3$. Adding an additional noise parameter, and the distribution of the feature variable, we define the entire data generating process as
 
 $$
-X \sim \text{U}(a = -1, b = 1)\\
-Y \mid X = x \sim N(\mu = x^3, \sigma^2 = 0.25 ^ 2)
+X \sim \text{Unif}\left(a = -1, b = 1\right) \\
+Y \mid X \sim \text{Normal}\left(\mu = x^3, \sigma^2 = 0.25 ^ 2\right)
 $$
 
 We write an `R` function that generates datasets according to this process.
@@ -69,25 +70,47 @@ calc_rmse = function(actual, predicted) {
 }
 ```
 
-Recall that we needed this validation set because the training error was far too optimistic for highly flexible models. This would lead us to always use the most flexible model.
+Recall that we needed this validation set because the training error was far too optimistic for highly flexible models. This would lead us to always use the most flexible model. (That is, data that is used to fit a model should not be used to validate a model.)
 
 
 ```r
-fit = lm(y ~ poly(x, 10), data = sim_trn)
-calc_rmse(actual = sim_est$y, predicted = predict(fit, sim_est))
+tibble(
+  "Polynomial Degree" = 1:10,
+  "Train RMSE" = map_dbl(1:10, ~ calc_rmse(actual = sim_est$y, predicted = predict(lm(y ~ poly(x, .x), data = sim_est), sim_est))),
+  "Validation RMSE" = map_dbl(1:10, ~ calc_rmse(actual = sim_val$y, predicted = predict(lm(y ~ poly(x, .x), data = sim_est), sim_val)))
+) %>% 
+  kable(digits = 4) %>% 
+  kable_styling("striped", full_width = FALSE)
 ```
 
-```
-## [1] 0.2287754
-```
-
-```r
-calc_rmse(actual = sim_val$y, predicted = predict(fit, sim_val))
-```
-
-```
-## [1] 0.2720983
-```
+\begin{table}[H]
+\centering
+\begin{tabular}{r|r|r}
+\hline
+Polynomial Degree & Train RMSE & Validation RMSE\\
+\hline
+1 & 0.2865 & 0.3233\\
+\hline
+2 & 0.2861 & 0.3220\\
+\hline
+3 & 0.2400 & 0.2746\\
+\hline
+4 & 0.2398 & 0.2754\\
+\hline
+5 & 0.2288 & 0.2832\\
+\hline
+6 & 0.2288 & 0.2833\\
+\hline
+7 & 0.2287 & 0.2820\\
+\hline
+8 & 0.2286 & 0.2805\\
+\hline
+9 & 0.2286 & 0.2803\\
+\hline
+10 & 0.2267 & 0.2886\\
+\hline
+\end{tabular}
+\end{table}
 
 ## Validation-Set Approach
 
@@ -137,7 +160,7 @@ for (i in 1:num_sims) {
 
 ## Cross-Validation
 
-Instead of using a single test-train split, we instead look to use $K$-fold cross-validation.
+Instead of using a single estimation-validation split, we instead look to use $K$-fold cross-validation.
 
 $$
 \text{RMSE-CV}_{K} = \sum_{k = 1}^{K} \frac{n_k}{n} \text{RMSE}_k
@@ -524,3 +547,12 @@ mean(fold_err)
 - TODO: https://github.com/topepo/caret/issues/70
 - TODO: https://stats.stackexchange.com/questions/266225/step-by-step-explanation-of-k-fold-cross-validation-with-grid-search-to-optimise
 - TODO: https://weina.me/nested-cross-validation/
+
+
+
+$$
+x, \boldsymbol{x}, X, \boldsymbol{X}, \mathbf{x}, \mathbf{X}, \mathbb{X}, \mathcal{X}, \mathfrak{x}, \mathfrak{X}, \mathrm{x}, \mathrm{X}
+$$
+
+
+
