@@ -35,7 +35,7 @@ Welcome to Basics of Statistical Learning! What a boring title! The title was ch
 
 ## Caveat Emptor
 
-**This "book" is under active development.** Literally ever element of the book is subject to change at any moment. This text, BSL, is the successor to [R4SL](https://daviddalpiaz.github.io/r4sl/), an unfinished work that began as a supplement to [Introduction to Statistical Learning](https://faculty.marshall.usc.edu/gareth-james/ISL/), but was never finished. (In some sense, this book is just a fresh start due to the author wanting to change the presentation of the material. The author is seriously worried that he will encounter the [second-system effect.](https://en.wikipedia.org/wiki/Second-system_effect))
+**This "book" is under active development.** Literally every element of the book is subject to change at any moment. This text, BSL, is the successor to [R4SL](https://daviddalpiaz.github.io/r4sl/), an unfinished work that began as a supplement to [Introduction to Statistical Learning](https://faculty.marshall.usc.edu/gareth-james/ISL/), but was never finished. (In some sense, this book is just a fresh start due to the author wanting to change the presentation of the material. The author is seriously worried that he will encounter the [second-system effect.](https://en.wikipedia.org/wiki/Second-system_effect))
 
 Because this book is written with a course in mind, that is actively being taught, sometimes out of convenience, the text will speak directly to the students of that course. Thus, be aware that any reference to a "course" are a reference to [STAT 432 @ UIUC](www.stat432.org).
 
@@ -60,15 +60,22 @@ This book is targeted at advanced undergraduate or first year MS students in Sta
 Note: This is somewhat speculative.
 
 - Main Narrative
-  1. Overview
-  2. Probability and Estimation
-  4. Regression (Supervised Learning)
-  5. Classification (Supervised Learning)
-  6. Resampling
-  7. Regularization
-  8. Ensemble Learning
-  9. Practical Issue in Machine Learning
-  10. Clustering (Unsupervised Learning)
+  1. Overview / Introduction (Three Tasks + Three Dataset)
+  2. Probability (A Quick Tour)
+  3. Statistics and Estimation (A Quick Tour)
+  4. Density Estimation
+  5. Introduction to Supervised Learning
+    - Data Splitting
+  6. Regression
+  7. Classification
+  8. Resampling
+  9. Recap and Overview of Supervised Learning
+  10. Regularization
+  11. Ensemble Learning
+  12. Practical Issue in Machine Learning
+  13. Clustering (Unsupervised Learning)
+    - Recap the unsupervised learning that was done throughout.
+    - Introduce clustering specifically.
 - Mathematical Details (Miscellaneous chapters further exploring mathematical details)
   - Bayes Theorem
   - Multivariate Normal
