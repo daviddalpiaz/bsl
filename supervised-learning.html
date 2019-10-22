@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 8 Supervised Learning | Basics of Statistical Learning</title>
-  <meta name="description" content="Chapter 8 Supervised Learning | Basics of Statistical Learning" />
+  <title>Chapter 13 Supervised Learning | Basics of Statistical Learning</title>
+  <meta name="description" content="Chapter 13 Supervised Learning | Basics of Statistical Learning" />
   <meta name="generator" content="bookdown 0.14.1 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 8 Supervised Learning | Basics of Statistical Learning" />
+  <meta property="og:title" content="Chapter 13 Supervised Learning | Basics of Statistical Learning" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="http://daviddalpiaz.github.io/bsl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="daviddalpiaz/bsl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 8 Supervised Learning | Basics of Statistical Learning" />
+  <meta name="twitter:title" content="Chapter 13 Supervised Learning | Basics of Statistical Learning" />
   
   
   
@@ -24,7 +24,7 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-10-18" />
+<meta name="date" content="2019-10-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="resampling.html"/>
-<link rel="next" href="probability-1.html"/>
+<link rel="next" href="regularization.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -135,122 +135,140 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i><b>0.1</b> Caveat Emptor</a></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i><b>0.2</b> Who?</a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#organization"><i class="fa fa-check"></i><b>0.3</b> Organization</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i>Caveat Emptor</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i>Who?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization"><i class="fa fa-check"></i>Organization</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i>License</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
-<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#regression-powerlifting"><i class="fa fa-check"></i><b>1.1</b> Regression: Powerlifting</a><ul>
-<li class="chapter" data-level="1.1.1" data-path="introduction.html"><a href="introduction.html#background"><i class="fa fa-check"></i><b>1.1.1</b> Background</a></li>
-<li class="chapter" data-level="1.1.2" data-path="introduction.html"><a href="introduction.html#data"><i class="fa fa-check"></i><b>1.1.2</b> Data</a></li>
-<li class="chapter" data-level="1.1.3" data-path="introduction.html"><a href="introduction.html#eda"><i class="fa fa-check"></i><b>1.1.3</b> EDA</a></li>
-<li class="chapter" data-level="1.1.4" data-path="introduction.html"><a href="introduction.html#modeling"><i class="fa fa-check"></i><b>1.1.4</b> Modeling</a></li>
-<li class="chapter" data-level="1.1.5" data-path="introduction.html"><a href="introduction.html#model-evaluation"><i class="fa fa-check"></i><b>1.1.5</b> Model Evaluation</a></li>
-<li class="chapter" data-level="1.1.6" data-path="introduction.html"><a href="introduction.html#discussion"><i class="fa fa-check"></i><b>1.1.6</b> Discussion</a></li>
+<li class="part"><span><b>I A Machine Learning Preview</b></span></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html"><i class="fa fa-check"></i><b>2</b> Regression: Powerlifting</a><ul>
+<li class="chapter" data-level="2.1" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html#background"><i class="fa fa-check"></i><b>2.1</b> Background</a></li>
+<li class="chapter" data-level="2.2" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html#data"><i class="fa fa-check"></i><b>2.2</b> Data</a></li>
+<li class="chapter" data-level="2.3" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html#eda"><i class="fa fa-check"></i><b>2.3</b> EDA</a></li>
+<li class="chapter" data-level="2.4" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html#modeling"><i class="fa fa-check"></i><b>2.4</b> Modeling</a></li>
+<li class="chapter" data-level="2.5" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html#model-evaluation"><i class="fa fa-check"></i><b>2.5</b> Model Evaluation</a></li>
+<li class="chapter" data-level="2.6" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html#discussion"><i class="fa fa-check"></i><b>2.6</b> Discussion</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#classification-handwritten-digits"><i class="fa fa-check"></i><b>1.2</b> Classification: Handwritten Digits</a><ul>
-<li class="chapter" data-level="1.2.1" data-path="introduction.html"><a href="introduction.html#background-1"><i class="fa fa-check"></i><b>1.2.1</b> Background</a></li>
-<li class="chapter" data-level="1.2.2" data-path="introduction.html"><a href="introduction.html#data-1"><i class="fa fa-check"></i><b>1.2.2</b> Data</a></li>
-<li class="chapter" data-level="1.2.3" data-path="introduction.html"><a href="introduction.html#eda-1"><i class="fa fa-check"></i><b>1.2.3</b> EDA</a></li>
-<li class="chapter" data-level="1.2.4" data-path="introduction.html"><a href="introduction.html#modeling-1"><i class="fa fa-check"></i><b>1.2.4</b> Modeling</a></li>
-<li class="chapter" data-level="1.2.5" data-path="introduction.html"><a href="introduction.html#model-evaluation-1"><i class="fa fa-check"></i><b>1.2.5</b> Model Evaluation</a></li>
-<li class="chapter" data-level="1.2.6" data-path="introduction.html"><a href="introduction.html#discussion-1"><i class="fa fa-check"></i><b>1.2.6</b> Discussion</a></li>
+<li class="chapter" data-level="3" data-path="classification-handwriting.html"><a href="classification-handwriting.html"><i class="fa fa-check"></i><b>3</b> Classification: Handwriting</a><ul>
+<li class="chapter" data-level="3.1" data-path="classification-handwriting.html"><a href="classification-handwriting.html#background-1"><i class="fa fa-check"></i><b>3.1</b> Background</a></li>
+<li class="chapter" data-level="3.2" data-path="classification-handwriting.html"><a href="classification-handwriting.html#data-1"><i class="fa fa-check"></i><b>3.2</b> Data</a></li>
+<li class="chapter" data-level="3.3" data-path="classification-handwriting.html"><a href="classification-handwriting.html#eda-1"><i class="fa fa-check"></i><b>3.3</b> EDA</a></li>
+<li class="chapter" data-level="3.4" data-path="classification-handwriting.html"><a href="classification-handwriting.html#modeling-1"><i class="fa fa-check"></i><b>3.4</b> Modeling</a></li>
+<li class="chapter" data-level="3.5" data-path="classification-handwriting.html"><a href="classification-handwriting.html#model-evaluation-1"><i class="fa fa-check"></i><b>3.5</b> Model Evaluation</a></li>
+<li class="chapter" data-level="3.6" data-path="classification-handwriting.html"><a href="classification-handwriting.html#discussion-1"><i class="fa fa-check"></i><b>3.6</b> Discussion</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#clustering-nba-players"><i class="fa fa-check"></i><b>1.3</b> Clustering: NBA Players</a><ul>
-<li class="chapter" data-level="1.3.1" data-path="introduction.html"><a href="introduction.html#background-2"><i class="fa fa-check"></i><b>1.3.1</b> Background</a></li>
-<li class="chapter" data-level="1.3.2" data-path="introduction.html"><a href="introduction.html#data-2"><i class="fa fa-check"></i><b>1.3.2</b> Data</a></li>
-<li class="chapter" data-level="1.3.3" data-path="introduction.html"><a href="introduction.html#eda-2"><i class="fa fa-check"></i><b>1.3.3</b> EDA</a></li>
-<li class="chapter" data-level="1.3.4" data-path="introduction.html"><a href="introduction.html#modeling-2"><i class="fa fa-check"></i><b>1.3.4</b> Modeling</a></li>
-<li class="chapter" data-level="1.3.5" data-path="introduction.html"><a href="introduction.html#model-evaluation-2"><i class="fa fa-check"></i><b>1.3.5</b> Model Evaluation</a></li>
-<li class="chapter" data-level="1.3.6" data-path="introduction.html"><a href="introduction.html#discussion-2"><i class="fa fa-check"></i><b>1.3.6</b> Discussion</a></li>
+<li class="chapter" data-level="4" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html"><i class="fa fa-check"></i><b>4</b> Clustering: Basketball Players</a><ul>
+<li class="chapter" data-level="4.1" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html#background-2"><i class="fa fa-check"></i><b>4.1</b> Background</a></li>
+<li class="chapter" data-level="4.2" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html#data-2"><i class="fa fa-check"></i><b>4.2</b> Data</a></li>
+<li class="chapter" data-level="4.3" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html#eda-2"><i class="fa fa-check"></i><b>4.3</b> EDA</a></li>
+<li class="chapter" data-level="4.4" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html#modeling-2"><i class="fa fa-check"></i><b>4.4</b> Modeling</a></li>
+<li class="chapter" data-level="4.5" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html#model-evaluation-2"><i class="fa fa-check"></i><b>4.5</b> Model Evaluation</a></li>
+<li class="chapter" data-level="4.6" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html#discussion-2"><i class="fa fa-check"></i><b>4.6</b> Discussion</a></li>
+</ul></li>
+<li class="part"><span><b>II Some Machine Learning Foundations</b></span></li>
+<li class="chapter" data-level="5" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>5</b> Introduction</a></li>
+<li class="chapter" data-level="6" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>6</b> Probability</a><ul>
+<li class="chapter" data-level="6.1" data-path="probability.html"><a href="probability.html#probability-models"><i class="fa fa-check"></i><b>6.1</b> Probability Models</a></li>
+<li class="chapter" data-level="6.2" data-path="probability.html"><a href="probability.html#probability-axioms"><i class="fa fa-check"></i><b>6.2</b> Probability Axioms</a></li>
+<li class="chapter" data-level="6.3" data-path="probability.html"><a href="probability.html#probability-rules"><i class="fa fa-check"></i><b>6.3</b> Probability Rules</a></li>
+<li class="chapter" data-level="6.4" data-path="probability.html"><a href="probability.html#random-variables"><i class="fa fa-check"></i><b>6.4</b> Random Variables</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="probability.html"><a href="probability.html#distributions"><i class="fa fa-check"></i><b>6.4.1</b> Distributions</a></li>
+<li class="chapter" data-level="6.4.2" data-path="probability.html"><a href="probability.html#discrete-random-variables"><i class="fa fa-check"></i><b>6.4.2</b> Discrete Random Variables</a></li>
+<li class="chapter" data-level="6.4.3" data-path="probability.html"><a href="probability.html#continuous-random-variables"><i class="fa fa-check"></i><b>6.4.3</b> Continuous Random Variables</a></li>
+<li class="chapter" data-level="6.4.4" data-path="probability.html"><a href="probability.html#several-random-variables"><i class="fa fa-check"></i><b>6.4.4</b> Several Random Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="probability.html"><a href="probability.html#expectations"><i class="fa fa-check"></i><b>6.5</b> Expectations</a></li>
+<li class="chapter" data-level="6.6" data-path="probability.html"><a href="probability.html#likelihood"><i class="fa fa-check"></i><b>6.6</b> Likelihood</a></li>
+<li class="chapter" data-level="6.7" data-path="probability.html"><a href="probability.html#videos"><i class="fa fa-check"></i><b>6.7</b> Videos</a></li>
+<li class="chapter" data-level="6.8" data-path="probability.html"><a href="probability.html#references"><i class="fa fa-check"></i><b>6.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="estimation.html"><a href="estimation.html"><i class="fa fa-check"></i><b>7</b> Estimation</a><ul>
+<li class="chapter" data-level="7.1" data-path="estimation.html"><a href="estimation.html#probability-1"><i class="fa fa-check"></i><b>7.1</b> Probability</a></li>
+<li class="chapter" data-level="7.2" data-path="estimation.html"><a href="estimation.html#statistics"><i class="fa fa-check"></i><b>7.2</b> Statistics</a></li>
+<li class="chapter" data-level="7.3" data-path="estimation.html"><a href="estimation.html#estimators"><i class="fa fa-check"></i><b>7.3</b> Estimators</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="estimation.html"><a href="estimation.html#properties"><i class="fa fa-check"></i><b>7.3.1</b> Properties</a></li>
+<li class="chapter" data-level="7.3.2" data-path="estimation.html"><a href="estimation.html#methods"><i class="fa fa-check"></i><b>7.3.2</b> Methods</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="computing.html"><a href="computing.html"><i class="fa fa-check"></i><b>2</b> Computing</a><ul>
-<li class="chapter" data-level="2.1" data-path="computing.html"><a href="computing.html#resources"><i class="fa fa-check"></i><b>2.1</b> Resources</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="computing.html"><a href="computing.html#r"><i class="fa fa-check"></i><b>2.1.1</b> R</a></li>
-<li class="chapter" data-level="2.1.2" data-path="computing.html"><a href="computing.html#rstudio"><i class="fa fa-check"></i><b>2.1.2</b> RStudio</a></li>
-<li class="chapter" data-level="2.1.3" data-path="computing.html"><a href="computing.html#r-markdown"><i class="fa fa-check"></i><b>2.1.3</b> R Markdown</a></li>
+<li class="part"><span><b>III A Tour of Machine Learning</b></span></li>
+<li class="chapter" data-level="8" data-path="introduction-2.html"><a href="introduction-2.html"><i class="fa fa-check"></i><b>8</b> Introduction</a></li>
+<li class="chapter" data-level="9" data-path="regression.html"><a href="regression.html"><i class="fa fa-check"></i><b>9</b> Regression</a><ul>
+<li class="chapter" data-level="9.1" data-path="regression.html"><a href="regression.html#setup"><i class="fa fa-check"></i><b>9.1</b> Setup</a></li>
+<li class="chapter" data-level="9.2" data-path="regression.html"><a href="regression.html#modeling-3"><i class="fa fa-check"></i><b>9.2</b> Modeling</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="regression.html"><a href="regression.html#linear-models"><i class="fa fa-check"></i><b>9.2.1</b> Linear Models</a></li>
+<li class="chapter" data-level="9.2.2" data-path="regression.html"><a href="regression.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>9.2.2</b> k-Nearest Neighbors</a></li>
+<li class="chapter" data-level="9.2.3" data-path="regression.html"><a href="regression.html#decision-trees"><i class="fa fa-check"></i><b>9.2.3</b> Decision Trees</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="computing.html"><a href="computing.html#bsl-idioms"><i class="fa fa-check"></i><b>2.2</b> BSL Idioms</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="computing.html"><a href="computing.html#reference-style"><i class="fa fa-check"></i><b>2.2.1</b> Reference Style</a></li>
-<li class="chapter" data-level="2.2.2" data-path="computing.html"><a href="computing.html#bsl-style-overrides"><i class="fa fa-check"></i><b>2.2.2</b> BSL Style Overrides</a></li>
-<li class="chapter" data-level="2.2.3" data-path="computing.html"><a href="computing.html#objects-and-functions"><i class="fa fa-check"></i><b>2.2.3</b> Objects and Functions</a></li>
-<li class="chapter" data-level="2.2.4" data-path="computing.html"><a href="computing.html#print-versus-return"><i class="fa fa-check"></i><b>2.2.4</b> Print versus Return</a></li>
-<li class="chapter" data-level="2.2.5" data-path="computing.html"><a href="computing.html#help"><i class="fa fa-check"></i><b>2.2.5</b> Help</a></li>
-<li class="chapter" data-level="2.2.6" data-path="computing.html"><a href="computing.html#keyboard-shortcuts"><i class="fa fa-check"></i><b>2.2.6</b> Keyboard Shortcuts</a></li>
+<li class="chapter" data-level="9.3" data-path="regression.html"><a href="regression.html#procedure"><i class="fa fa-check"></i><b>9.3</b> Procedure</a></li>
+<li class="chapter" data-level="9.4" data-path="regression.html"><a href="regression.html#data-splitting"><i class="fa fa-check"></i><b>9.4</b> Data Splitting</a></li>
+<li class="chapter" data-level="9.5" data-path="regression.html"><a href="regression.html#metrics"><i class="fa fa-check"></i><b>9.5</b> Metrics</a></li>
+<li class="chapter" data-level="9.6" data-path="regression.html"><a href="regression.html#model-complexity"><i class="fa fa-check"></i><b>9.6</b> Model Complexity</a></li>
+<li class="chapter" data-level="9.7" data-path="regression.html"><a href="regression.html#overfitting"><i class="fa fa-check"></i><b>9.7</b> Overfitting</a></li>
+<li class="chapter" data-level="9.8" data-path="regression.html"><a href="regression.html#multiple-features"><i class="fa fa-check"></i><b>9.8</b> Multiple Features</a></li>
+<li class="chapter" data-level="9.9" data-path="regression.html"><a href="regression.html#example-analysis"><i class="fa fa-check"></i><b>9.9</b> Example Analysis</a></li>
+<li class="chapter" data-level="9.10" data-path="regression.html"><a href="regression.html#misc-todos"><i class="fa fa-check"></i><b>9.10</b> MISC TODOS</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="computing.html"><a href="computing.html#common-issues"><i class="fa fa-check"></i><b>2.3</b> Common Issues</a></li>
+<li class="chapter" data-level="10" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>10</b> Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="10.1" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>10.1</b> Reducible and Irreducible Error</a></li>
+<li class="chapter" data-level="10.2" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>10.2</b> Bias-Variance Decomposition</a></li>
+<li class="chapter" data-level="10.3" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#simulation"><i class="fa fa-check"></i><b>10.3</b> Simulation</a></li>
+<li class="chapter" data-level="10.4" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>10.4</b> Estimating Expected Prediction Error</a></li>
+<li class="chapter" data-level="10.5" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reproducibility"><i class="fa fa-check"></i><b>10.5</b> Reproducibility</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="estimation.html"><a href="estimation.html"><i class="fa fa-check"></i><b>3</b> Estimation</a><ul>
-<li class="chapter" data-level="3.1" data-path="estimation.html"><a href="estimation.html#probability"><i class="fa fa-check"></i><b>3.1</b> Probability</a></li>
-<li class="chapter" data-level="3.2" data-path="estimation.html"><a href="estimation.html#statistics"><i class="fa fa-check"></i><b>3.2</b> Statistics</a></li>
-<li class="chapter" data-level="3.3" data-path="estimation.html"><a href="estimation.html#estimators"><i class="fa fa-check"></i><b>3.3</b> Estimators</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="estimation.html"><a href="estimation.html#properties"><i class="fa fa-check"></i><b>3.3.1</b> Properties</a></li>
-<li class="chapter" data-level="3.3.2" data-path="estimation.html"><a href="estimation.html#methods"><i class="fa fa-check"></i><b>3.3.2</b> Methods</a></li>
+<li class="chapter" data-level="11" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>11</b> Classification</a><ul>
+<li class="chapter" data-level="11.1" data-path="classification.html"><a href="classification.html#stat-432-materials"><i class="fa fa-check"></i><b>11.1</b> STAT 432 Materials</a></li>
+<li class="chapter" data-level="11.2" data-path="classification.html"><a href="classification.html#bayes-classifier"><i class="fa fa-check"></i><b>11.2</b> Bayes Classifier</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="classification.html"><a href="classification.html#bayes-error-rate"><i class="fa fa-check"></i><b>11.2.1</b> Bayes Error Rate</a></li>
 </ul></li>
+<li class="chapter" data-level="11.3" data-path="classification.html"><a href="classification.html#building-a-classifier"><i class="fa fa-check"></i><b>11.3</b> Building a Classifier</a></li>
+<li class="chapter" data-level="11.4" data-path="classification.html"><a href="classification.html#modeling-4"><i class="fa fa-check"></i><b>11.4</b> Modeling</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="classification.html"><a href="classification.html#linear-models-1"><i class="fa fa-check"></i><b>11.4.1</b> Linear Models</a></li>
+<li class="chapter" data-level="11.4.2" data-path="classification.html"><a href="classification.html#k-nearest-neighbors-1"><i class="fa fa-check"></i><b>11.4.2</b> k-Nearest Neighbors</a></li>
+<li class="chapter" data-level="11.4.3" data-path="classification.html"><a href="classification.html#decision-trees-1"><i class="fa fa-check"></i><b>11.4.3</b> Decision Trees</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="regression.html"><a href="regression.html"><i class="fa fa-check"></i><b>4</b> Regression</a><ul>
-<li class="chapter" data-level="4.1" data-path="regression.html"><a href="regression.html#setup"><i class="fa fa-check"></i><b>4.1</b> Setup</a></li>
-<li class="chapter" data-level="4.2" data-path="regression.html"><a href="regression.html#modeling-3"><i class="fa fa-check"></i><b>4.2</b> Modeling</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="regression.html"><a href="regression.html#linear-models"><i class="fa fa-check"></i><b>4.2.1</b> Linear Models</a></li>
-<li class="chapter" data-level="4.2.2" data-path="regression.html"><a href="regression.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>4.2.2</b> k-Nearest Neighbors</a></li>
-<li class="chapter" data-level="4.2.3" data-path="regression.html"><a href="regression.html#decision-trees"><i class="fa fa-check"></i><b>4.2.3</b> Decision Trees</a></li>
+<li class="chapter" data-level="11.5" data-path="classification.html"><a href="classification.html#misc-todo-stuff"><i class="fa fa-check"></i><b>11.5</b> MISC TODO STUFF</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="regression.html"><a href="regression.html#procedure"><i class="fa fa-check"></i><b>4.3</b> Procedure</a></li>
-<li class="chapter" data-level="4.4" data-path="regression.html"><a href="regression.html#data-splitting"><i class="fa fa-check"></i><b>4.4</b> Data Splitting</a></li>
-<li class="chapter" data-level="4.5" data-path="regression.html"><a href="regression.html#metrics"><i class="fa fa-check"></i><b>4.5</b> Metrics</a></li>
-<li class="chapter" data-level="4.6" data-path="regression.html"><a href="regression.html#model-complexity"><i class="fa fa-check"></i><b>4.6</b> Model Complexity</a></li>
-<li class="chapter" data-level="4.7" data-path="regression.html"><a href="regression.html#overfitting"><i class="fa fa-check"></i><b>4.7</b> Overfitting</a></li>
-<li class="chapter" data-level="4.8" data-path="regression.html"><a href="regression.html#multiple-features"><i class="fa fa-check"></i><b>4.8</b> Multiple Features</a></li>
-<li class="chapter" data-level="4.9" data-path="regression.html"><a href="regression.html#example-analysis"><i class="fa fa-check"></i><b>4.9</b> Example Analysis</a></li>
-<li class="chapter" data-level="4.10" data-path="regression.html"><a href="regression.html#misc-todos"><i class="fa fa-check"></i><b>4.10</b> MISC TODOS</a></li>
+<li class="chapter" data-level="12" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>12</b> Resampling</a><ul>
+<li class="chapter" data-level="12.1" data-path="resampling.html"><a href="resampling.html#stat-432-materials-1"><i class="fa fa-check"></i><b>12.1</b> STAT 432 Materials</a></li>
+<li class="chapter" data-level="12.2" data-path="resampling.html"><a href="resampling.html#validation-set-approach"><i class="fa fa-check"></i><b>12.2</b> Validation-Set Approach</a></li>
+<li class="chapter" data-level="12.3" data-path="resampling.html"><a href="resampling.html#cross-validation"><i class="fa fa-check"></i><b>12.3</b> Cross-Validation</a></li>
+<li class="chapter" data-level="12.4" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>12.4</b> Test Data</a></li>
+<li class="chapter" data-level="12.5" data-path="resampling.html"><a href="resampling.html#misc-todos-1"><i class="fa fa-check"></i><b>12.5</b> MISC TODOS</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>5</b> Bias–Variance Tradeoff</a><ul>
-<li class="chapter" data-level="5.1" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>5.1</b> Reducible and Irreducible Error</a></li>
-<li class="chapter" data-level="5.2" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>5.2</b> Bias-Variance Decomposition</a></li>
-<li class="chapter" data-level="5.3" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#simulation"><i class="fa fa-check"></i><b>5.3</b> Simulation</a></li>
-<li class="chapter" data-level="5.4" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>5.4</b> Estimating Expected Prediction Error</a></li>
-<li class="chapter" data-level="5.5" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reproducibility"><i class="fa fa-check"></i><b>5.5</b> Reproducibility</a></li>
+<li class="chapter" data-level="13" data-path="supervised-learning.html"><a href="supervised-learning.html"><i class="fa fa-check"></i><b>13</b> Supervised Learning</a></li>
+<li class="chapter" data-level="14" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>14</b> Regularization</a><ul>
+<li class="chapter" data-level="14.1" data-path="regularization.html"><a href="regularization.html#adding-bias-to-reduce-variance"><i class="fa fa-check"></i><b>14.1</b> adding bias to reduce variance</a></li>
+<li class="chapter" data-level="14.2" data-path="regularization.html"><a href="regularization.html#scaling-matters"><i class="fa fa-check"></i><b>14.2</b> scaling matters?</a></li>
+<li class="chapter" data-level="14.3" data-path="regularization.html"><a href="regularization.html#moving-to-two-dimensions"><i class="fa fa-check"></i><b>14.3</b> moving to two dimensions</a></li>
+<li class="chapter" data-level="14.4" data-path="regularization.html"><a href="regularization.html#boston-is-boring"><i class="fa fa-check"></i><b>14.4</b> boston is boring</a></li>
+<li class="chapter" data-level="14.5" data-path="regularization.html"><a href="regularization.html#some-more-simulation"><i class="fa fa-check"></i><b>14.5</b> some more simulation</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>6</b> Classification</a><ul>
-<li class="chapter" data-level="6.1" data-path="classification.html"><a href="classification.html#stat-432-materials"><i class="fa fa-check"></i><b>6.1</b> STAT 432 Materials</a></li>
-<li class="chapter" data-level="6.2" data-path="classification.html"><a href="classification.html#bayes-classifier"><i class="fa fa-check"></i><b>6.2</b> Bayes Classifier</a><ul>
-<li class="chapter" data-level="6.2.1" data-path="classification.html"><a href="classification.html#bayes-error-rate"><i class="fa fa-check"></i><b>6.2.1</b> Bayes Error Rate</a></li>
+<li class="part"><span><b>IV Mathematics</b></span></li>
+<li class="chapter" data-level="15" data-path="introduction-3.html"><a href="introduction-3.html"><i class="fa fa-check"></i><b>15</b> Introduction</a></li>
+<li class="part"><span><b>V Computing</b></span></li>
+<li class="chapter" data-level="16" data-path="introduction-4.html"><a href="introduction-4.html"><i class="fa fa-check"></i><b>16</b> Introduction</a></li>
+<li class="chapter" data-level="17" data-path="resources.html"><a href="resources.html"><i class="fa fa-check"></i><b>17</b> Resources</a><ul>
+<li class="chapter" data-level="17.1" data-path="resources.html"><a href="resources.html#resources-1"><i class="fa fa-check"></i><b>17.1</b> Resources</a><ul>
+<li class="chapter" data-level="17.1.1" data-path="resources.html"><a href="resources.html#r"><i class="fa fa-check"></i><b>17.1.1</b> R</a></li>
+<li class="chapter" data-level="17.1.2" data-path="resources.html"><a href="resources.html#rstudio"><i class="fa fa-check"></i><b>17.1.2</b> RStudio</a></li>
+<li class="chapter" data-level="17.1.3" data-path="resources.html"><a href="resources.html#r-markdown"><i class="fa fa-check"></i><b>17.1.3</b> R Markdown</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="classification.html"><a href="classification.html#building-a-classifier"><i class="fa fa-check"></i><b>6.3</b> Building a Classifier</a></li>
-<li class="chapter" data-level="6.4" data-path="classification.html"><a href="classification.html#modeling-4"><i class="fa fa-check"></i><b>6.4</b> Modeling</a><ul>
-<li class="chapter" data-level="6.4.1" data-path="classification.html"><a href="classification.html#linear-models-1"><i class="fa fa-check"></i><b>6.4.1</b> Linear Models</a></li>
-<li class="chapter" data-level="6.4.2" data-path="classification.html"><a href="classification.html#k-nearest-neighbors-1"><i class="fa fa-check"></i><b>6.4.2</b> k-Nearest Neighbors</a></li>
-<li class="chapter" data-level="6.4.3" data-path="classification.html"><a href="classification.html#decision-trees-1"><i class="fa fa-check"></i><b>6.4.3</b> Decision Trees</a></li>
+<li class="chapter" data-level="17.2" data-path="resources.html"><a href="resources.html#bsl-idioms"><i class="fa fa-check"></i><b>17.2</b> BSL Idioms</a><ul>
+<li class="chapter" data-level="17.2.1" data-path="resources.html"><a href="resources.html#reference-style"><i class="fa fa-check"></i><b>17.2.1</b> Reference Style</a></li>
+<li class="chapter" data-level="17.2.2" data-path="resources.html"><a href="resources.html#bsl-style-overrides"><i class="fa fa-check"></i><b>17.2.2</b> BSL Style Overrides</a></li>
+<li class="chapter" data-level="17.2.3" data-path="resources.html"><a href="resources.html#objects-and-functions"><i class="fa fa-check"></i><b>17.2.3</b> Objects and Functions</a></li>
+<li class="chapter" data-level="17.2.4" data-path="resources.html"><a href="resources.html#print-versus-return"><i class="fa fa-check"></i><b>17.2.4</b> Print versus Return</a></li>
+<li class="chapter" data-level="17.2.5" data-path="resources.html"><a href="resources.html#help"><i class="fa fa-check"></i><b>17.2.5</b> Help</a></li>
+<li class="chapter" data-level="17.2.6" data-path="resources.html"><a href="resources.html#keyboard-shortcuts"><i class="fa fa-check"></i><b>17.2.6</b> Keyboard Shortcuts</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="classification.html"><a href="classification.html#misc-todo-stuff"><i class="fa fa-check"></i><b>6.5</b> MISC TODO STUFF</a></li>
+<li class="chapter" data-level="17.3" data-path="resources.html"><a href="resources.html#common-issues"><i class="fa fa-check"></i><b>17.3</b> Common Issues</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>7</b> Resampling</a><ul>
-<li class="chapter" data-level="7.1" data-path="resampling.html"><a href="resampling.html#stat-432-materials-1"><i class="fa fa-check"></i><b>7.1</b> STAT 432 Materials</a></li>
-<li class="chapter" data-level="7.2" data-path="resampling.html"><a href="resampling.html#validation-set-approach"><i class="fa fa-check"></i><b>7.2</b> Validation-Set Approach</a></li>
-<li class="chapter" data-level="7.3" data-path="resampling.html"><a href="resampling.html#cross-validation"><i class="fa fa-check"></i><b>7.3</b> Cross-Validation</a></li>
-<li class="chapter" data-level="7.4" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>7.4</b> Test Data</a></li>
-<li class="chapter" data-level="7.5" data-path="resampling.html"><a href="resampling.html#misc-todos-1"><i class="fa fa-check"></i><b>7.5</b> MISC TODOS</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="supervised-learning.html"><a href="supervised-learning.html"><i class="fa fa-check"></i><b>8</b> Supervised Learning</a></li>
-<li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="probability-1.html"><a href="probability-1.html"><i class="fa fa-check"></i><b>A</b> Probability</a><ul>
-<li class="chapter" data-level="A.1" data-path="probability-1.html"><a href="probability-1.html#probability-models"><i class="fa fa-check"></i><b>A.1</b> Probability Models</a></li>
-<li class="chapter" data-level="A.2" data-path="probability-1.html"><a href="probability-1.html#probability-axioms"><i class="fa fa-check"></i><b>A.2</b> Probability Axioms</a></li>
-<li class="chapter" data-level="A.3" data-path="probability-1.html"><a href="probability-1.html#probability-rules"><i class="fa fa-check"></i><b>A.3</b> Probability Rules</a></li>
-<li class="chapter" data-level="A.4" data-path="probability-1.html"><a href="probability-1.html#random-variables"><i class="fa fa-check"></i><b>A.4</b> Random Variables</a><ul>
-<li class="chapter" data-level="A.4.1" data-path="probability-1.html"><a href="probability-1.html#distributions"><i class="fa fa-check"></i><b>A.4.1</b> Distributions</a></li>
-<li class="chapter" data-level="A.4.2" data-path="probability-1.html"><a href="probability-1.html#discrete-random-variables"><i class="fa fa-check"></i><b>A.4.2</b> Discrete Random Variables</a></li>
-<li class="chapter" data-level="A.4.3" data-path="probability-1.html"><a href="probability-1.html#continuous-random-variables"><i class="fa fa-check"></i><b>A.4.3</b> Continuous Random Variables</a></li>
-<li class="chapter" data-level="A.4.4" data-path="probability-1.html"><a href="probability-1.html#several-random-variables"><i class="fa fa-check"></i><b>A.4.4</b> Several Random Variables</a></li>
-</ul></li>
-<li class="chapter" data-level="A.5" data-path="probability-1.html"><a href="probability-1.html#expectations"><i class="fa fa-check"></i><b>A.5</b> Expectations</a></li>
-<li class="chapter" data-level="A.6" data-path="probability-1.html"><a href="probability-1.html#likelihood"><i class="fa fa-check"></i><b>A.6</b> Likelihood</a></li>
-<li class="chapter" data-level="A.7" data-path="probability-1.html"><a href="probability-1.html#videos"><i class="fa fa-check"></i><b>A.7</b> Videos</a></li>
-<li class="chapter" data-level="A.8" data-path="probability-1.html"><a href="probability-1.html#references"><i class="fa fa-check"></i><b>A.8</b> References</a></li>
-</ul></li>
+<li class="part"><span><b>VI Analysis</b></span></li>
+<li class="chapter" data-level="18" data-path="introduction-5.html"><a href="introduction-5.html"><i class="fa fa-check"></i><b>18</b> Introduction</a></li>
+<li class="part"><span><b>VII Appendix</b></span></li>
+<li class="chapter" data-level="19" data-path="introduction-6.html"><a href="introduction-6.html"><i class="fa fa-check"></i><b>19</b> Introduction</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/daviddalpiaz/bsl" target="blank">&copy; 2019 David Dalpiaz</a></li>
 
@@ -272,23 +290,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="supervised-learning" class="section level1">
-<h1><span class="header-section-number">Chapter 8</span> Supervised Learning</h1>
+<h1><span class="header-section-number">Chapter 13</span> Supervised Learning</h1>
 <ul>
 <li>TODO: write an overview / review of the previous two chapters</li>
 <li>TODO: do two analyses?</li>
+<li>TODO: use caret in this chapter</li>
 </ul>
 
 </div>
-
-
-
             </section>
 
           </div>
         </div>
       </div>
 <a href="resampling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="probability-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="regularization.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -320,7 +336,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/daviddalpiaz/bsl/edit/master/08-supervised.Rmd",
+"link": "https://github.com/daviddalpiaz/bsl/edit/master/03-06-supervised.Rmd",
 "text": "Edit"
 },
 "history": {

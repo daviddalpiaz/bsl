@@ -1,0 +1,17 @@
+# (PART) A Tour of Machine Learning {-}
+
+# Introduction
+
+```{r, include = FALSE} 
+knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
+```
+
+- TODO: Introduce data splitting:
+  - Test-Train Split (`_tst` and `_trn`)
+  - Estimation-Validation Split (`_est` and `_val`)
+    - Where are these "weird" terms coming from?
+    - Why not cross-validation yet?
+
+- TODO: http://varianceexplained.org/r/ds-ml-ai/s
+
+- TODO: This section is the heart of STAT 432.

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Clustering: Basketball Players | Basics of Statistical Learning</title>
+  <meta name="description" content="Chapter 4 Clustering: Basketball Players | Basics of Statistical Learning" />
+  <meta name="generator" content="bookdown 0.14.1 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Clustering: Basketball Players | Basics of Statistical Learning" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://daviddalpiaz.github.io/bsl/" />
+  
+  
+  <meta name="github-repo" content="daviddalpiaz/bsl" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Clustering: Basketball Players | Basics of Statistical Learning" />
+  
+  
+  
+
+<meta name="author" content="David Dalpiaz" />
+
+
+<meta name="date" content="2019-10-22" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="classification-handwriting.html"/>
+<link rel="next" href="introduction-1.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Basics of Statistical Learning</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i>Caveat Emptor</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i>Who?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization"><i class="fa fa-check"></i>Organization</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i>License</a></li>
+</ul></li>
+<li class="part"><span><b>I A Machine Learning Preview</b></span></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html"><i class="fa fa-check"></i><b>2</b> Regression: Powerlifting</a><ul>
+<li class="chapter" data-level="2.1" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html#background"><i class="fa fa-check"></i><b>2.1</b> Background</a></li>
+<li class="chapter" data-level="2.2" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html#data"><i class="fa fa-check"></i><b>2.2</b> Data</a></li>
+<li class="chapter" data-level="2.3" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html#eda"><i class="fa fa-check"></i><b>2.3</b> EDA</a></li>
+<li class="chapter" data-level="2.4" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html#modeling"><i class="fa fa-check"></i><b>2.4</b> Modeling</a></li>
+<li class="chapter" data-level="2.5" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html#model-evaluation"><i class="fa fa-check"></i><b>2.5</b> Model Evaluation</a></li>
+<li class="chapter" data-level="2.6" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html#discussion"><i class="fa fa-check"></i><b>2.6</b> Discussion</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="classification-handwriting.html"><a href="classification-handwriting.html"><i class="fa fa-check"></i><b>3</b> Classification: Handwriting</a><ul>
+<li class="chapter" data-level="3.1" data-path="classification-handwriting.html"><a href="classification-handwriting.html#background-1"><i class="fa fa-check"></i><b>3.1</b> Background</a></li>
+<li class="chapter" data-level="3.2" data-path="classification-handwriting.html"><a href="classification-handwriting.html#data-1"><i class="fa fa-check"></i><b>3.2</b> Data</a></li>
+<li class="chapter" data-level="3.3" data-path="classification-handwriting.html"><a href="classification-handwriting.html#eda-1"><i class="fa fa-check"></i><b>3.3</b> EDA</a></li>
+<li class="chapter" data-level="3.4" data-path="classification-handwriting.html"><a href="classification-handwriting.html#modeling-1"><i class="fa fa-check"></i><b>3.4</b> Modeling</a></li>
+<li class="chapter" data-level="3.5" data-path="classification-handwriting.html"><a href="classification-handwriting.html#model-evaluation-1"><i class="fa fa-check"></i><b>3.5</b> Model Evaluation</a></li>
+<li class="chapter" data-level="3.6" data-path="classification-handwriting.html"><a href="classification-handwriting.html#discussion-1"><i class="fa fa-check"></i><b>3.6</b> Discussion</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html"><i class="fa fa-check"></i><b>4</b> Clustering: Basketball Players</a><ul>
+<li class="chapter" data-level="4.1" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html#background-2"><i class="fa fa-check"></i><b>4.1</b> Background</a></li>
+<li class="chapter" data-level="4.2" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html#data-2"><i class="fa fa-check"></i><b>4.2</b> Data</a></li>
+<li class="chapter" data-level="4.3" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html#eda-2"><i class="fa fa-check"></i><b>4.3</b> EDA</a></li>
+<li class="chapter" data-level="4.4" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html#modeling-2"><i class="fa fa-check"></i><b>4.4</b> Modeling</a></li>
+<li class="chapter" data-level="4.5" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html#model-evaluation-2"><i class="fa fa-check"></i><b>4.5</b> Model Evaluation</a></li>
+<li class="chapter" data-level="4.6" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html#discussion-2"><i class="fa fa-check"></i><b>4.6</b> Discussion</a></li>
+</ul></li>
+<li class="part"><span><b>II Some Machine Learning Foundations</b></span></li>
+<li class="chapter" data-level="5" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>5</b> Introduction</a></li>
+<li class="chapter" data-level="6" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>6</b> Probability</a><ul>
+<li class="chapter" data-level="6.1" data-path="probability.html"><a href="probability.html#probability-models"><i class="fa fa-check"></i><b>6.1</b> Probability Models</a></li>
+<li class="chapter" data-level="6.2" data-path="probability.html"><a href="probability.html#probability-axioms"><i class="fa fa-check"></i><b>6.2</b> Probability Axioms</a></li>
+<li class="chapter" data-level="6.3" data-path="probability.html"><a href="probability.html#probability-rules"><i class="fa fa-check"></i><b>6.3</b> Probability Rules</a></li>
+<li class="chapter" data-level="6.4" data-path="probability.html"><a href="probability.html#random-variables"><i class="fa fa-check"></i><b>6.4</b> Random Variables</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="probability.html"><a href="probability.html#distributions"><i class="fa fa-check"></i><b>6.4.1</b> Distributions</a></li>
+<li class="chapter" data-level="6.4.2" data-path="probability.html"><a href="probability.html#discrete-random-variables"><i class="fa fa-check"></i><b>6.4.2</b> Discrete Random Variables</a></li>
+<li class="chapter" data-level="6.4.3" data-path="probability.html"><a href="probability.html#continuous-random-variables"><i class="fa fa-check"></i><b>6.4.3</b> Continuous Random Variables</a></li>
+<li class="chapter" data-level="6.4.4" data-path="probability.html"><a href="probability.html#several-random-variables"><i class="fa fa-check"></i><b>6.4.4</b> Several Random Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="probability.html"><a href="probability.html#expectations"><i class="fa fa-check"></i><b>6.5</b> Expectations</a></li>
+<li class="chapter" data-level="6.6" data-path="probability.html"><a href="probability.html#likelihood"><i class="fa fa-check"></i><b>6.6</b> Likelihood</a></li>
+<li class="chapter" data-level="6.7" data-path="probability.html"><a href="probability.html#videos"><i class="fa fa-check"></i><b>6.7</b> Videos</a></li>
+<li class="chapter" data-level="6.8" data-path="probability.html"><a href="probability.html#references"><i class="fa fa-check"></i><b>6.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="estimation.html"><a href="estimation.html"><i class="fa fa-check"></i><b>7</b> Estimation</a><ul>
+<li class="chapter" data-level="7.1" data-path="estimation.html"><a href="estimation.html#probability-1"><i class="fa fa-check"></i><b>7.1</b> Probability</a></li>
+<li class="chapter" data-level="7.2" data-path="estimation.html"><a href="estimation.html#statistics"><i class="fa fa-check"></i><b>7.2</b> Statistics</a></li>
+<li class="chapter" data-level="7.3" data-path="estimation.html"><a href="estimation.html#estimators"><i class="fa fa-check"></i><b>7.3</b> Estimators</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="estimation.html"><a href="estimation.html#properties"><i class="fa fa-check"></i><b>7.3.1</b> Properties</a></li>
+<li class="chapter" data-level="7.3.2" data-path="estimation.html"><a href="estimation.html#methods"><i class="fa fa-check"></i><b>7.3.2</b> Methods</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III A Tour of Machine Learning</b></span></li>
+<li class="chapter" data-level="8" data-path="introduction-2.html"><a href="introduction-2.html"><i class="fa fa-check"></i><b>8</b> Introduction</a></li>
+<li class="chapter" data-level="9" data-path="regression.html"><a href="regression.html"><i class="fa fa-check"></i><b>9</b> Regression</a><ul>
+<li class="chapter" data-level="9.1" data-path="regression.html"><a href="regression.html#setup"><i class="fa fa-check"></i><b>9.1</b> Setup</a></li>
+<li class="chapter" data-level="9.2" data-path="regression.html"><a href="regression.html#modeling-3"><i class="fa fa-check"></i><b>9.2</b> Modeling</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="regression.html"><a href="regression.html#linear-models"><i class="fa fa-check"></i><b>9.2.1</b> Linear Models</a></li>
+<li class="chapter" data-level="9.2.2" data-path="regression.html"><a href="regression.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>9.2.2</b> k-Nearest Neighbors</a></li>
+<li class="chapter" data-level="9.2.3" data-path="regression.html"><a href="regression.html#decision-trees"><i class="fa fa-check"></i><b>9.2.3</b> Decision Trees</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="regression.html"><a href="regression.html#procedure"><i class="fa fa-check"></i><b>9.3</b> Procedure</a></li>
+<li class="chapter" data-level="9.4" data-path="regression.html"><a href="regression.html#data-splitting"><i class="fa fa-check"></i><b>9.4</b> Data Splitting</a></li>
+<li class="chapter" data-level="9.5" data-path="regression.html"><a href="regression.html#metrics"><i class="fa fa-check"></i><b>9.5</b> Metrics</a></li>
+<li class="chapter" data-level="9.6" data-path="regression.html"><a href="regression.html#model-complexity"><i class="fa fa-check"></i><b>9.6</b> Model Complexity</a></li>
+<li class="chapter" data-level="9.7" data-path="regression.html"><a href="regression.html#overfitting"><i class="fa fa-check"></i><b>9.7</b> Overfitting</a></li>
+<li class="chapter" data-level="9.8" data-path="regression.html"><a href="regression.html#multiple-features"><i class="fa fa-check"></i><b>9.8</b> Multiple Features</a></li>
+<li class="chapter" data-level="9.9" data-path="regression.html"><a href="regression.html#example-analysis"><i class="fa fa-check"></i><b>9.9</b> Example Analysis</a></li>
+<li class="chapter" data-level="9.10" data-path="regression.html"><a href="regression.html#misc-todos"><i class="fa fa-check"></i><b>9.10</b> MISC TODOS</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>10</b> Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="10.1" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>10.1</b> Reducible and Irreducible Error</a></li>
+<li class="chapter" data-level="10.2" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>10.2</b> Bias-Variance Decomposition</a></li>
+<li class="chapter" data-level="10.3" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#simulation"><i class="fa fa-check"></i><b>10.3</b> Simulation</a></li>
+<li class="chapter" data-level="10.4" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>10.4</b> Estimating Expected Prediction Error</a></li>
+<li class="chapter" data-level="10.5" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reproducibility"><i class="fa fa-check"></i><b>10.5</b> Reproducibility</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>11</b> Classification</a><ul>
+<li class="chapter" data-level="11.1" data-path="classification.html"><a href="classification.html#stat-432-materials"><i class="fa fa-check"></i><b>11.1</b> STAT 432 Materials</a></li>
+<li class="chapter" data-level="11.2" data-path="classification.html"><a href="classification.html#bayes-classifier"><i class="fa fa-check"></i><b>11.2</b> Bayes Classifier</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="classification.html"><a href="classification.html#bayes-error-rate"><i class="fa fa-check"></i><b>11.2.1</b> Bayes Error Rate</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="classification.html"><a href="classification.html#building-a-classifier"><i class="fa fa-check"></i><b>11.3</b> Building a Classifier</a></li>
+<li class="chapter" data-level="11.4" data-path="classification.html"><a href="classification.html#modeling-4"><i class="fa fa-check"></i><b>11.4</b> Modeling</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="classification.html"><a href="classification.html#linear-models-1"><i class="fa fa-check"></i><b>11.4.1</b> Linear Models</a></li>
+<li class="chapter" data-level="11.4.2" data-path="classification.html"><a href="classification.html#k-nearest-neighbors-1"><i class="fa fa-check"></i><b>11.4.2</b> k-Nearest Neighbors</a></li>
+<li class="chapter" data-level="11.4.3" data-path="classification.html"><a href="classification.html#decision-trees-1"><i class="fa fa-check"></i><b>11.4.3</b> Decision Trees</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="classification.html"><a href="classification.html#misc-todo-stuff"><i class="fa fa-check"></i><b>11.5</b> MISC TODO STUFF</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>12</b> Resampling</a><ul>
+<li class="chapter" data-level="12.1" data-path="resampling.html"><a href="resampling.html#stat-432-materials-1"><i class="fa fa-check"></i><b>12.1</b> STAT 432 Materials</a></li>
+<li class="chapter" data-level="12.2" data-path="resampling.html"><a href="resampling.html#validation-set-approach"><i class="fa fa-check"></i><b>12.2</b> Validation-Set Approach</a></li>
+<li class="chapter" data-level="12.3" data-path="resampling.html"><a href="resampling.html#cross-validation"><i class="fa fa-check"></i><b>12.3</b> Cross-Validation</a></li>
+<li class="chapter" data-level="12.4" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>12.4</b> Test Data</a></li>
+<li class="chapter" data-level="12.5" data-path="resampling.html"><a href="resampling.html#misc-todos-1"><i class="fa fa-check"></i><b>12.5</b> MISC TODOS</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="supervised-learning.html"><a href="supervised-learning.html"><i class="fa fa-check"></i><b>13</b> Supervised Learning</a></li>
+<li class="chapter" data-level="14" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>14</b> Regularization</a><ul>
+<li class="chapter" data-level="14.1" data-path="regularization.html"><a href="regularization.html#adding-bias-to-reduce-variance"><i class="fa fa-check"></i><b>14.1</b> adding bias to reduce variance</a></li>
+<li class="chapter" data-level="14.2" data-path="regularization.html"><a href="regularization.html#scaling-matters"><i class="fa fa-check"></i><b>14.2</b> scaling matters?</a></li>
+<li class="chapter" data-level="14.3" data-path="regularization.html"><a href="regularization.html#moving-to-two-dimensions"><i class="fa fa-check"></i><b>14.3</b> moving to two dimensions</a></li>
+<li class="chapter" data-level="14.4" data-path="regularization.html"><a href="regularization.html#boston-is-boring"><i class="fa fa-check"></i><b>14.4</b> boston is boring</a></li>
+<li class="chapter" data-level="14.5" data-path="regularization.html"><a href="regularization.html#some-more-simulation"><i class="fa fa-check"></i><b>14.5</b> some more simulation</a></li>
+</ul></li>
+<li class="part"><span><b>IV Mathematics</b></span></li>
+<li class="chapter" data-level="15" data-path="introduction-3.html"><a href="introduction-3.html"><i class="fa fa-check"></i><b>15</b> Introduction</a></li>
+<li class="part"><span><b>V Computing</b></span></li>
+<li class="chapter" data-level="16" data-path="introduction-4.html"><a href="introduction-4.html"><i class="fa fa-check"></i><b>16</b> Introduction</a></li>
+<li class="chapter" data-level="17" data-path="resources.html"><a href="resources.html"><i class="fa fa-check"></i><b>17</b> Resources</a><ul>
+<li class="chapter" data-level="17.1" data-path="resources.html"><a href="resources.html#resources-1"><i class="fa fa-check"></i><b>17.1</b> Resources</a><ul>
+<li class="chapter" data-level="17.1.1" data-path="resources.html"><a href="resources.html#r"><i class="fa fa-check"></i><b>17.1.1</b> R</a></li>
+<li class="chapter" data-level="17.1.2" data-path="resources.html"><a href="resources.html#rstudio"><i class="fa fa-check"></i><b>17.1.2</b> RStudio</a></li>
+<li class="chapter" data-level="17.1.3" data-path="resources.html"><a href="resources.html#r-markdown"><i class="fa fa-check"></i><b>17.1.3</b> R Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="17.2" data-path="resources.html"><a href="resources.html#bsl-idioms"><i class="fa fa-check"></i><b>17.2</b> BSL Idioms</a><ul>
+<li class="chapter" data-level="17.2.1" data-path="resources.html"><a href="resources.html#reference-style"><i class="fa fa-check"></i><b>17.2.1</b> Reference Style</a></li>
+<li class="chapter" data-level="17.2.2" data-path="resources.html"><a href="resources.html#bsl-style-overrides"><i class="fa fa-check"></i><b>17.2.2</b> BSL Style Overrides</a></li>
+<li class="chapter" data-level="17.2.3" data-path="resources.html"><a href="resources.html#objects-and-functions"><i class="fa fa-check"></i><b>17.2.3</b> Objects and Functions</a></li>
+<li class="chapter" data-level="17.2.4" data-path="resources.html"><a href="resources.html#print-versus-return"><i class="fa fa-check"></i><b>17.2.4</b> Print versus Return</a></li>
+<li class="chapter" data-level="17.2.5" data-path="resources.html"><a href="resources.html#help"><i class="fa fa-check"></i><b>17.2.5</b> Help</a></li>
+<li class="chapter" data-level="17.2.6" data-path="resources.html"><a href="resources.html#keyboard-shortcuts"><i class="fa fa-check"></i><b>17.2.6</b> Keyboard Shortcuts</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="resources.html"><a href="resources.html#common-issues"><i class="fa fa-check"></i><b>17.3</b> Common Issues</a></li>
+</ul></li>
+<li class="part"><span><b>VI Analysis</b></span></li>
+<li class="chapter" data-level="18" data-path="introduction-5.html"><a href="introduction-5.html"><i class="fa fa-check"></i><b>18</b> Introduction</a></li>
+<li class="part"><span><b>VII Appendix</b></span></li>
+<li class="chapter" data-level="19" data-path="introduction-6.html"><a href="introduction-6.html"><i class="fa fa-check"></i><b>19</b> Introduction</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/daviddalpiaz/bsl" target="blank">&copy; 2019 David Dalpiaz</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Basics of Statistical Learning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="clustering-basketball-players" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Clustering: Basketball Players</h1>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw">library</span>(readr)</a>
+<a class="sourceLine" id="cb43-2" data-line-number="2"><span class="kw">library</span>(tibble)</a>
+<a class="sourceLine" id="cb43-3" data-line-number="3"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb43-4" data-line-number="4"><span class="kw">library</span>(purrr)</a>
+<a class="sourceLine" id="cb43-5" data-line-number="5"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb43-6" data-line-number="6"><span class="kw">library</span>(ggridges)</a>
+<a class="sourceLine" id="cb43-7" data-line-number="7"><span class="kw">library</span>(lubridate)</a>
+<a class="sourceLine" id="cb43-8" data-line-number="8"><span class="kw">library</span>(randomForest)</a>
+<a class="sourceLine" id="cb43-9" data-line-number="9"><span class="kw">library</span>(rpart)</a>
+<a class="sourceLine" id="cb43-10" data-line-number="10"><span class="kw">library</span>(rpart.plot)</a>
+<a class="sourceLine" id="cb43-11" data-line-number="11"><span class="kw">library</span>(cluster)</a>
+<a class="sourceLine" id="cb43-12" data-line-number="12"><span class="kw">library</span>(caret)</a>
+<a class="sourceLine" id="cb43-13" data-line-number="13"><span class="kw">library</span>(factoextra)</a>
+<a class="sourceLine" id="cb43-14" data-line-number="14"><span class="kw">library</span>(rsample)</a>
+<a class="sourceLine" id="cb43-15" data-line-number="15"><span class="kw">library</span>(janitor)</a>
+<a class="sourceLine" id="cb43-16" data-line-number="16"><span class="kw">library</span>(rvest)</a>
+<a class="sourceLine" id="cb43-17" data-line-number="17"><span class="kw">library</span>(dendextend)</a>
+<a class="sourceLine" id="cb43-18" data-line-number="18"><span class="kw">library</span>(knitr)</a>
+<a class="sourceLine" id="cb43-19" data-line-number="19"><span class="kw">library</span>(kableExtra)</a>
+<a class="sourceLine" id="cb43-20" data-line-number="20"><span class="kw">library</span>(ggthemes)</a></code></pre></div>
+<ul>
+<li>TODO: Show package messaging? check conflicts!</li>
+<li>TODO: Should this be split into three analyses with different packages?</li>
+</ul>
+<div id="background-2" class="section level2">
+<h2><span class="header-section-number">4.1</span> Background</h2>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=cuLprHh_BRg" class="uri">https://www.youtube.com/watch?v=cuLprHh_BRg</a></li>
+<li><a href="https://www.youtube.com/watch?v=1FBwSO_1Mb8" class="uri">https://www.youtube.com/watch?v=1FBwSO_1Mb8</a></li>
+<li><a href="https://www.basketball-reference.com/leagues/NBA_2019.html" class="uri">https://www.basketball-reference.com/leagues/NBA_2019.html</a></li>
+<li>inspiration here, and others: <a href="http://blog.schochastics.net/post/analyzing-nba-player-data-ii-clustering/" class="uri">http://blog.schochastics.net/post/analyzing-nba-player-data-ii-clustering/</a></li>
+</ul>
+</div>
+<div id="data-2" class="section level2">
+<h2><span class="header-section-number">4.2</span> Data</h2>
+<ul>
+<li><a href="https://www.basketball-reference.com/leagues/NBA_2019_totals.html" class="uri">https://www.basketball-reference.com/leagues/NBA_2019_totals.html</a></li>
+<li><a href="https://www.basketball-reference.com/leagues/NBA_2019_per_minute.html" class="uri">https://www.basketball-reference.com/leagues/NBA_2019_per_minute.html</a></li>
+<li><a href="https://www.basketball-reference.com/leagues/NBA_2019_per_poss.html" class="uri">https://www.basketball-reference.com/leagues/NBA_2019_per_poss.html</a></li>
+<li><a href="https://www.basketball-reference.com/leagues/NBA_2019_advanced.html" class="uri">https://www.basketball-reference.com/leagues/NBA_2019_advanced.html</a></li>
+</ul>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">nba =<span class="st"> </span><span class="kw">scrape_nba_season_player_stats</span>()</a>
+<a class="sourceLine" id="cb44-2" data-line-number="2">nba<span class="op">$</span>pos =<span class="st"> </span><span class="kw">factor</span>(nba<span class="op">$</span>pos, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;PG&quot;</span>, <span class="st">&quot;SG&quot;</span>, <span class="st">&quot;SF&quot;</span>, <span class="st">&quot;PF&quot;</span>, <span class="st">&quot;C&quot;</span>))</a></code></pre></div>
+<pre><code>## # A tibble: 100 x 93
+##    player_team pos     age tm        g    gs    mp    fg   fga fg_percent
+##    &lt;chr&gt;       &lt;fct&gt; &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+##  1 Álex Abrin… SG       25 OKC      31     2   588    56   157      0.357
+##  2 Quincy Acy… PF       28 PHO      10     0   123     4    18      0.222
+##  3 Jaylen Ada… PG       22 ATL      34     1   428    38   110      0.345
+##  4 Steven Ada… C        25 OKC      80    80  2669   481   809      0.595
+##  5 Bam Adebay… C        21 MIA      82    28  1913   280   486      0.576
+##  6 Deng Adel … SF       21 CLE      19     3   194    11    36      0.306
+##  7 DeVaughn A… SG       25 DEN       7     0    22     3    10      0.3  
+##  8 LaMarcus A… C        33 SAS      81    81  2687   684  1319      0.519
+##  9 Rawle Alki… SG       21 CHI      10     1   120    13    39      0.333
+## 10 Grayson Al… SG       23 UTA      38     2   416    67   178      0.376
+## # … with 90 more rows, and 83 more variables: x3p &lt;dbl&gt;, x3pa &lt;dbl&gt;,
+## #   x3p_percent &lt;dbl&gt;, x2p &lt;dbl&gt;, x2pa &lt;dbl&gt;, x2p_percent &lt;dbl&gt;,
+## #   e_fg_percent &lt;dbl&gt;, ft &lt;dbl&gt;, fta &lt;dbl&gt;, ft_percent &lt;dbl&gt;, orb &lt;dbl&gt;,
+## #   drb &lt;dbl&gt;, trb &lt;dbl&gt;, ast &lt;dbl&gt;, stl &lt;dbl&gt;, blk &lt;dbl&gt;, tov &lt;dbl&gt;,
+## #   pf &lt;dbl&gt;, pts &lt;dbl&gt;, fg_pm &lt;dbl&gt;, fga_pm &lt;dbl&gt;, fg_percent_pm &lt;dbl&gt;,
+## #   x3p_pm &lt;dbl&gt;, x3pa_pm &lt;dbl&gt;, x3p_percent_pm &lt;dbl&gt;, x2p_pm &lt;dbl&gt;,
+## #   x2pa_pm &lt;dbl&gt;, x2p_percent_pm &lt;dbl&gt;, ft_pm &lt;dbl&gt;, fta_pm &lt;dbl&gt;,
+## #   ft_percent_pm &lt;dbl&gt;, orb_pm &lt;dbl&gt;, drb_pm &lt;dbl&gt;, trb_pm &lt;dbl&gt;,
+## #   ast_pm &lt;dbl&gt;, stl_pm &lt;dbl&gt;, blk_pm &lt;dbl&gt;, tov_pm &lt;dbl&gt;, pf_pm &lt;dbl&gt;,
+## #   pts_pm &lt;dbl&gt;, fg_pp &lt;dbl&gt;, fga_pp &lt;dbl&gt;, fg_percent_pp &lt;dbl&gt;,
+## #   x3p_pp &lt;dbl&gt;, x3pa_pp &lt;dbl&gt;, x3p_percent_pp &lt;dbl&gt;, x2p_pp &lt;dbl&gt;,
+## #   x2pa_pp &lt;dbl&gt;, x2p_percent_pp &lt;dbl&gt;, ft_pp &lt;dbl&gt;, fta_pp &lt;dbl&gt;,
+## #   ft_percent_pp &lt;dbl&gt;, orb_pp &lt;dbl&gt;, drb_pp &lt;dbl&gt;, trb_pp &lt;dbl&gt;,
+## #   ast_pp &lt;dbl&gt;, stl_pp &lt;dbl&gt;, blk_pp &lt;dbl&gt;, tov_pp &lt;dbl&gt;, pf_pp &lt;dbl&gt;,
+## #   pts_pp &lt;dbl&gt;, o_rtg_pp &lt;dbl&gt;, d_rtg_pp &lt;dbl&gt;, per &lt;dbl&gt;,
+## #   ts_percent &lt;dbl&gt;, x3p_ar &lt;dbl&gt;, f_tr &lt;dbl&gt;, orb_percent &lt;dbl&gt;,
+## #   drb_percent &lt;dbl&gt;, trb_percent &lt;dbl&gt;, ast_percent &lt;dbl&gt;,
+## #   stl_percent &lt;dbl&gt;, blk_percent &lt;dbl&gt;, tov_percent &lt;dbl&gt;,
+## #   usg_percent &lt;dbl&gt;, ows &lt;dbl&gt;, dws &lt;dbl&gt;, ws &lt;dbl&gt;, ws_48 &lt;dbl&gt;,
+## #   obpm &lt;dbl&gt;, dbpm &lt;dbl&gt;, bpm &lt;dbl&gt;, vorp &lt;dbl&gt;</code></pre>
+</div>
+<div id="eda-2" class="section level2">
+<h2><span class="header-section-number">4.3</span> EDA</h2>
+<p><img src="01-04-clustering_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="01-04-clustering_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="01-04-clustering_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="01-04-clustering_files/figure-html/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">nba_for_clustering =<span class="st"> </span>nba <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb46-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(mp <span class="op">&gt;</span><span class="st"> </span><span class="dv">2000</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb46-3" data-line-number="3"><span class="st">  </span><span class="kw">column_to_rownames</span>(<span class="st">&quot;player_team&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb46-4" data-line-number="4"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>pos, <span class="op">-</span>tm)</a></code></pre></div>
+</div>
+<div id="modeling-2" class="section level2">
+<h2><span class="header-section-number">4.4</span> Modeling</h2>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb47-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb47-3" data-line-number="3"><span class="co"># function to compute total within-cluster sum of square </span></a>
+<a class="sourceLine" id="cb47-4" data-line-number="4">wss =<span class="st"> </span><span class="cf">function</span>(k, data) {</a>
+<a class="sourceLine" id="cb47-5" data-line-number="5">  <span class="kw">kmeans</span>(<span class="dt">x =</span> data, <span class="dt">centers =</span> k, <span class="dt">nstart =</span> <span class="dv">10</span>)<span class="op">$</span>tot.withinss</a>
+<a class="sourceLine" id="cb47-6" data-line-number="6">}</a>
+<a class="sourceLine" id="cb47-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb47-8" data-line-number="8"><span class="co"># Compute and plot wss for k = 1 to k = 15</span></a>
+<a class="sourceLine" id="cb47-9" data-line-number="9">k_values =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">15</span></a>
+<a class="sourceLine" id="cb47-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb47-11" data-line-number="11"><span class="co"># extract wss for 2-15 clusters</span></a>
+<a class="sourceLine" id="cb47-12" data-line-number="12">wss_values =<span class="st"> </span><span class="kw">map_dbl</span>(k_values, wss, <span class="dt">data =</span> nba_for_clustering)</a>
+<a class="sourceLine" id="cb47-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb47-14" data-line-number="14"><span class="kw">plot</span>(k_values, wss_values,</a>
+<a class="sourceLine" id="cb47-15" data-line-number="15">       <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>, <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">frame =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb47-16" data-line-number="16">       <span class="dt">xlab =</span> <span class="st">&quot;Number of clusters K&quot;</span>,</a>
+<a class="sourceLine" id="cb47-17" data-line-number="17">       <span class="dt">ylab =</span> <span class="st">&quot;Total within-clusters sum of squares&quot;</span>)</a>
+<a class="sourceLine" id="cb47-18" data-line-number="18"><span class="kw">grid</span>()</a></code></pre></div>
+<p><img src="01-04-clustering_files/figure-html/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<ul>
+<li>TODO: K-Means likes clusters of roughly equal size.</li>
+<li>TODO: <a href="http://varianceexplained.org/r/kmeans-free-lunch/" class="uri">http://varianceexplained.org/r/kmeans-free-lunch/</a></li>
+</ul>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1">nba_hc =<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(nba_for_clustering))</a>
+<a class="sourceLine" id="cb48-2" data-line-number="2">nba_hc_clust =<span class="st"> </span><span class="kw">cutree</span>(nba_hc, <span class="dt">k =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb48-3" data-line-number="3"><span class="kw">table</span>(nba_hc_clust)</a></code></pre></div>
+<pre><code>## nba_hc_clust
+##  1  2  3  4  5 
+## 38 13 28 11  1</code></pre>
+</div>
+<div id="model-evaluation-2" class="section level2">
+<h2><span class="header-section-number">4.5</span> Model Evaluation</h2>
+<p><img src="01-04-clustering_files/figure-html/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="01-04-clustering_files/figure-html/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="01-04-clustering_files/figure-html/unnamed-chunk-16-1.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="discussion-2" class="section level2">
+<h2><span class="header-section-number">4.6</span> Discussion</h2>
+<p><img src="01-04-clustering_files/figure-html/unnamed-chunk-17-1.png" width="3456" style="display: block; margin: auto;" /></p>
+
+</div>
+</div>
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="classification-handwriting.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="introduction-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/daviddalpiaz/bsl/edit/master/01-04-clustering.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["bsl.pdf"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

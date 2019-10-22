@@ -1,0 +1,169 @@
+# Resources
+
+```{r, include = FALSE} 
+knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
+```
+
+This is not a book about R. It is however, a book that uses R. Because of this, you will need to be familiar with R. The text will point out some thing about R along the way, but some previous study of R is necessary.
+
+The following (freely available) readings are highly recommended:
+
+- [Hands-On Programming with R](https://rstudio-education.github.io/hopr/) - *Garrett Grolemund*
+  - If you have never used R or RStudio before, Part 1, Chapters 1 - 3, will be useful.
+- [R for Data Science](https://r4ds.had.co.nz/) - *Garrett Grolemund, Hadley Wickham*
+  - This book helps getting you up to speed working with data in R. While it is a lot of reading, Chapters 1 - 21 are highly recommended. 
+- [Advanced R](https://adv-r.hadley.nz/) - *Hadley Wickham*
+  - Part I, Chapters 1 - 8, of this book will help create a mental model for working with R. These chapters are not an easy read, so they should be returned to often. (Chapter 2 could be safely skipped for our purposes, but is important if you will use R in the long term.)
+
+If you are a UIUC student who took the course STAT 420, the first six chapters of that book could serve as a nice refresher.
+
+- [Applied Statistics with R](https://daviddalpiaz.github.io/appliedstats/) - *David Dalpiaz*
+
+***
+
+## Resources
+
+The following resources are more specific or more advanced, but could still prove to be useful.
+
+### R
+
+- [Efficient R programming](https://csgillespie.github.io/efficientR/)
+- [R Programming for Data Science](https://bookdown.org/rdpeng/rprogdatascience/)
+- [R Graphics Cookbook](https://r-graphics.org/)
+- [Modern Dive](https://moderndive.com/index.html)
+- [The `tidyverse` Website](tidyverse.org/)
+  - [`dplyr` Website](https://dplyr.tidyverse.org/)
+  - [`readr` Website](https://readr.tidyverse.org/)
+  - [`tibble` Website](https://tibble.tidyverse.org/)
+  - [`forcats` Website](https://forcats.tidyverse.org/)
+
+### RStudio
+
+- [RStudio IDE Cheatsheet](https://resources.rstudio.com/rstudio-cheatsheets/rstudio-ide-cheat-sheet)
+- [RStudio Resources](https://resources.rstudio.com/)
+
+### R Markdown
+
+- [R Markdown Cheatsheet](https://resources.rstudio.com/rstudio-cheatsheets/rmarkdown-2-0-cheat-sheet)
+- [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/) - *Yihui Xie, J. J. Allaire, Garrett Grolemund*
+- [R4DS R Markdown Chapter](https://r4ds.had.co.nz/r-markdown.html)
+
+#### Markdown
+
+- [Daring Fireball - Markdown: Basics](https://daringfireball.net/projects/markdown/basics)
+- [GitHub - Mastering Markdown](https://guides.github.com/features/mastering-markdown/)
+- [CommonMark](https://commonmark.org/)
+
+***
+
+## BSL Idioms
+
+Things here supersede everything above.
+
+### Reference Style
+
+- [`tidyverse` Style Guide](https://style.tidyverse.org/)
+
+### BSL Style Overrides
+
+- TODO: `=` instead of `<-`
+  - http://thecoatlessprofessor.com/programming/an-opinionated-tale-of-why-you-should-replace---with-/
+- TODO: never use `T` or `F`, only `TRUE` or `FALSE`
+
+```{r}
+FALSE == TRUE
+F     == TRUE
+F     =  TRUE
+F     == TRUE
+```
+
+- TODO: never ever ever use `attach()`
+- TODO: never ever ever use `<<-`
+- TODO: never ever ever use `setwd()` or set a working directory some other way
+- TODO: a newline before and after any chunk
+- TODO: use headers appropriately! (short names, good structure)
+- TODO: never ever ever put spaces in filenames. use `-`. (others will use `_`.)
+- TODO: load all needed packages at the beginning of an analysis in a single chunk (TODO: pros and cons of this approach)
+- TODO: one plot per chunk! no other printed output
+
+Be consistent...
+
+- with yourself!
+- with your group!
+- with your organization!
+
+```{r, eval = FALSE}
+set.seed(1337);mu=10;sample_size=50;samples=100000;
+x_bars=rep(0, samples)
+for(i in 1:samples)
+{
+x_bars[i]=mean(rpois(sample_size,lambda = mu))}
+x_bar_hist=hist(x_bars,breaks=50,main="Histogram of Sample Means",xlab="Sample Means",col="darkorange",border = "dodgerblue")
+mean(x_bars>mu-2*sqrt(mu)/sqrt(sample_size)&x_bars<mu+2*sqrt(mu)/sqrt(sample_size))
+```
+
+### Objects and Functions
+
+> To understand computations in R, two slogans are helpful:
+> 
+> - Everything that exists is an object. 
+> - Everything that happens is a function call. 
+>
+> — John Chambers
+
+- TODO: Functions + Objects
+  - these are the inputs and outputs of functions:
+    - functions
+    - vectors
+    - lists
+    - tibbles (dfs)
+
+### Print versus Return
+
+```{r}
+cars_mod = lm(dist ~ speed, data = cars)
+```
+
+```{r}
+summary(cars_mod)
+```
+
+```{r}
+is.list(summary(cars_mod))
+```
+
+```{r}
+names(summary(cars_mod))
+```
+
+```{r}
+str(summary(cars_mod))
+```
+
+```{r, eval = FALSE}
+# RStudio only
+View(summary(cars_mod))
+```
+
+### Help
+
+- TODO: `?`, google, stack overflow, (office hours, course forums)
+
+### Keyboard Shortcuts
+
+- TODO: copy-paste, switch program, switch tab, etc...
+- TODO: TAB!!!
+- TODO: new chunk!
+- TODO: style!
+- TODO: keyboard shortcut for keyboard shortcut
+
+## Common Issues
+
+- TODO: cannot find function called ""
+
+***
+
+- TODO: https://stat545.com/
+- TODO: https://atrebas.github.io/post/2019-01-15-2018-learning/
+- TODO: https://www.burns-stat.com/pages/Tutor/R_inferno.pdf
+

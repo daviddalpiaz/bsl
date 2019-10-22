@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 17 Resources | Basics of Statistical Learning</title>
+  <meta name="description" content="Chapter 17 Resources | Basics of Statistical Learning" />
+  <meta name="generator" content="bookdown 0.14.1 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 17 Resources | Basics of Statistical Learning" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://daviddalpiaz.github.io/bsl/" />
+  
+  
+  <meta name="github-repo" content="daviddalpiaz/bsl" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 17 Resources | Basics of Statistical Learning" />
+  
+  
+  
+
+<meta name="author" content="David Dalpiaz" />
+
+
+<meta name="date" content="2019-10-22" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction-4.html"/>
+<link rel="next" href="introduction-5.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Basics of Statistical Learning</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i>Caveat Emptor</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i>Who?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization"><i class="fa fa-check"></i>Organization</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i>License</a></li>
+</ul></li>
+<li class="part"><span><b>I A Machine Learning Preview</b></span></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html"><i class="fa fa-check"></i><b>2</b> Regression: Powerlifting</a><ul>
+<li class="chapter" data-level="2.1" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html#background"><i class="fa fa-check"></i><b>2.1</b> Background</a></li>
+<li class="chapter" data-level="2.2" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html#data"><i class="fa fa-check"></i><b>2.2</b> Data</a></li>
+<li class="chapter" data-level="2.3" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html#eda"><i class="fa fa-check"></i><b>2.3</b> EDA</a></li>
+<li class="chapter" data-level="2.4" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html#modeling"><i class="fa fa-check"></i><b>2.4</b> Modeling</a></li>
+<li class="chapter" data-level="2.5" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html#model-evaluation"><i class="fa fa-check"></i><b>2.5</b> Model Evaluation</a></li>
+<li class="chapter" data-level="2.6" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html#discussion"><i class="fa fa-check"></i><b>2.6</b> Discussion</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="classification-handwriting.html"><a href="classification-handwriting.html"><i class="fa fa-check"></i><b>3</b> Classification: Handwriting</a><ul>
+<li class="chapter" data-level="3.1" data-path="classification-handwriting.html"><a href="classification-handwriting.html#background-1"><i class="fa fa-check"></i><b>3.1</b> Background</a></li>
+<li class="chapter" data-level="3.2" data-path="classification-handwriting.html"><a href="classification-handwriting.html#data-1"><i class="fa fa-check"></i><b>3.2</b> Data</a></li>
+<li class="chapter" data-level="3.3" data-path="classification-handwriting.html"><a href="classification-handwriting.html#eda-1"><i class="fa fa-check"></i><b>3.3</b> EDA</a></li>
+<li class="chapter" data-level="3.4" data-path="classification-handwriting.html"><a href="classification-handwriting.html#modeling-1"><i class="fa fa-check"></i><b>3.4</b> Modeling</a></li>
+<li class="chapter" data-level="3.5" data-path="classification-handwriting.html"><a href="classification-handwriting.html#model-evaluation-1"><i class="fa fa-check"></i><b>3.5</b> Model Evaluation</a></li>
+<li class="chapter" data-level="3.6" data-path="classification-handwriting.html"><a href="classification-handwriting.html#discussion-1"><i class="fa fa-check"></i><b>3.6</b> Discussion</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html"><i class="fa fa-check"></i><b>4</b> Clustering: Basketball Players</a><ul>
+<li class="chapter" data-level="4.1" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html#background-2"><i class="fa fa-check"></i><b>4.1</b> Background</a></li>
+<li class="chapter" data-level="4.2" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html#data-2"><i class="fa fa-check"></i><b>4.2</b> Data</a></li>
+<li class="chapter" data-level="4.3" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html#eda-2"><i class="fa fa-check"></i><b>4.3</b> EDA</a></li>
+<li class="chapter" data-level="4.4" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html#modeling-2"><i class="fa fa-check"></i><b>4.4</b> Modeling</a></li>
+<li class="chapter" data-level="4.5" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html#model-evaluation-2"><i class="fa fa-check"></i><b>4.5</b> Model Evaluation</a></li>
+<li class="chapter" data-level="4.6" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html#discussion-2"><i class="fa fa-check"></i><b>4.6</b> Discussion</a></li>
+</ul></li>
+<li class="part"><span><b>II Some Machine Learning Foundations</b></span></li>
+<li class="chapter" data-level="5" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>5</b> Introduction</a></li>
+<li class="chapter" data-level="6" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>6</b> Probability</a><ul>
+<li class="chapter" data-level="6.1" data-path="probability.html"><a href="probability.html#probability-models"><i class="fa fa-check"></i><b>6.1</b> Probability Models</a></li>
+<li class="chapter" data-level="6.2" data-path="probability.html"><a href="probability.html#probability-axioms"><i class="fa fa-check"></i><b>6.2</b> Probability Axioms</a></li>
+<li class="chapter" data-level="6.3" data-path="probability.html"><a href="probability.html#probability-rules"><i class="fa fa-check"></i><b>6.3</b> Probability Rules</a></li>
+<li class="chapter" data-level="6.4" data-path="probability.html"><a href="probability.html#random-variables"><i class="fa fa-check"></i><b>6.4</b> Random Variables</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="probability.html"><a href="probability.html#distributions"><i class="fa fa-check"></i><b>6.4.1</b> Distributions</a></li>
+<li class="chapter" data-level="6.4.2" data-path="probability.html"><a href="probability.html#discrete-random-variables"><i class="fa fa-check"></i><b>6.4.2</b> Discrete Random Variables</a></li>
+<li class="chapter" data-level="6.4.3" data-path="probability.html"><a href="probability.html#continuous-random-variables"><i class="fa fa-check"></i><b>6.4.3</b> Continuous Random Variables</a></li>
+<li class="chapter" data-level="6.4.4" data-path="probability.html"><a href="probability.html#several-random-variables"><i class="fa fa-check"></i><b>6.4.4</b> Several Random Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="probability.html"><a href="probability.html#expectations"><i class="fa fa-check"></i><b>6.5</b> Expectations</a></li>
+<li class="chapter" data-level="6.6" data-path="probability.html"><a href="probability.html#likelihood"><i class="fa fa-check"></i><b>6.6</b> Likelihood</a></li>
+<li class="chapter" data-level="6.7" data-path="probability.html"><a href="probability.html#videos"><i class="fa fa-check"></i><b>6.7</b> Videos</a></li>
+<li class="chapter" data-level="6.8" data-path="probability.html"><a href="probability.html#references"><i class="fa fa-check"></i><b>6.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="estimation.html"><a href="estimation.html"><i class="fa fa-check"></i><b>7</b> Estimation</a><ul>
+<li class="chapter" data-level="7.1" data-path="estimation.html"><a href="estimation.html#probability-1"><i class="fa fa-check"></i><b>7.1</b> Probability</a></li>
+<li class="chapter" data-level="7.2" data-path="estimation.html"><a href="estimation.html#statistics"><i class="fa fa-check"></i><b>7.2</b> Statistics</a></li>
+<li class="chapter" data-level="7.3" data-path="estimation.html"><a href="estimation.html#estimators"><i class="fa fa-check"></i><b>7.3</b> Estimators</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="estimation.html"><a href="estimation.html#properties"><i class="fa fa-check"></i><b>7.3.1</b> Properties</a></li>
+<li class="chapter" data-level="7.3.2" data-path="estimation.html"><a href="estimation.html#methods"><i class="fa fa-check"></i><b>7.3.2</b> Methods</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III A Tour of Machine Learning</b></span></li>
+<li class="chapter" data-level="8" data-path="introduction-2.html"><a href="introduction-2.html"><i class="fa fa-check"></i><b>8</b> Introduction</a></li>
+<li class="chapter" data-level="9" data-path="regression.html"><a href="regression.html"><i class="fa fa-check"></i><b>9</b> Regression</a><ul>
+<li class="chapter" data-level="9.1" data-path="regression.html"><a href="regression.html#setup"><i class="fa fa-check"></i><b>9.1</b> Setup</a></li>
+<li class="chapter" data-level="9.2" data-path="regression.html"><a href="regression.html#modeling-3"><i class="fa fa-check"></i><b>9.2</b> Modeling</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="regression.html"><a href="regression.html#linear-models"><i class="fa fa-check"></i><b>9.2.1</b> Linear Models</a></li>
+<li class="chapter" data-level="9.2.2" data-path="regression.html"><a href="regression.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>9.2.2</b> k-Nearest Neighbors</a></li>
+<li class="chapter" data-level="9.2.3" data-path="regression.html"><a href="regression.html#decision-trees"><i class="fa fa-check"></i><b>9.2.3</b> Decision Trees</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="regression.html"><a href="regression.html#procedure"><i class="fa fa-check"></i><b>9.3</b> Procedure</a></li>
+<li class="chapter" data-level="9.4" data-path="regression.html"><a href="regression.html#data-splitting"><i class="fa fa-check"></i><b>9.4</b> Data Splitting</a></li>
+<li class="chapter" data-level="9.5" data-path="regression.html"><a href="regression.html#metrics"><i class="fa fa-check"></i><b>9.5</b> Metrics</a></li>
+<li class="chapter" data-level="9.6" data-path="regression.html"><a href="regression.html#model-complexity"><i class="fa fa-check"></i><b>9.6</b> Model Complexity</a></li>
+<li class="chapter" data-level="9.7" data-path="regression.html"><a href="regression.html#overfitting"><i class="fa fa-check"></i><b>9.7</b> Overfitting</a></li>
+<li class="chapter" data-level="9.8" data-path="regression.html"><a href="regression.html#multiple-features"><i class="fa fa-check"></i><b>9.8</b> Multiple Features</a></li>
+<li class="chapter" data-level="9.9" data-path="regression.html"><a href="regression.html#example-analysis"><i class="fa fa-check"></i><b>9.9</b> Example Analysis</a></li>
+<li class="chapter" data-level="9.10" data-path="regression.html"><a href="regression.html#misc-todos"><i class="fa fa-check"></i><b>9.10</b> MISC TODOS</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>10</b> Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="10.1" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>10.1</b> Reducible and Irreducible Error</a></li>
+<li class="chapter" data-level="10.2" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>10.2</b> Bias-Variance Decomposition</a></li>
+<li class="chapter" data-level="10.3" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#simulation"><i class="fa fa-check"></i><b>10.3</b> Simulation</a></li>
+<li class="chapter" data-level="10.4" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>10.4</b> Estimating Expected Prediction Error</a></li>
+<li class="chapter" data-level="10.5" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reproducibility"><i class="fa fa-check"></i><b>10.5</b> Reproducibility</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>11</b> Classification</a><ul>
+<li class="chapter" data-level="11.1" data-path="classification.html"><a href="classification.html#stat-432-materials"><i class="fa fa-check"></i><b>11.1</b> STAT 432 Materials</a></li>
+<li class="chapter" data-level="11.2" data-path="classification.html"><a href="classification.html#bayes-classifier"><i class="fa fa-check"></i><b>11.2</b> Bayes Classifier</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="classification.html"><a href="classification.html#bayes-error-rate"><i class="fa fa-check"></i><b>11.2.1</b> Bayes Error Rate</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="classification.html"><a href="classification.html#building-a-classifier"><i class="fa fa-check"></i><b>11.3</b> Building a Classifier</a></li>
+<li class="chapter" data-level="11.4" data-path="classification.html"><a href="classification.html#modeling-4"><i class="fa fa-check"></i><b>11.4</b> Modeling</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="classification.html"><a href="classification.html#linear-models-1"><i class="fa fa-check"></i><b>11.4.1</b> Linear Models</a></li>
+<li class="chapter" data-level="11.4.2" data-path="classification.html"><a href="classification.html#k-nearest-neighbors-1"><i class="fa fa-check"></i><b>11.4.2</b> k-Nearest Neighbors</a></li>
+<li class="chapter" data-level="11.4.3" data-path="classification.html"><a href="classification.html#decision-trees-1"><i class="fa fa-check"></i><b>11.4.3</b> Decision Trees</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="classification.html"><a href="classification.html#misc-todo-stuff"><i class="fa fa-check"></i><b>11.5</b> MISC TODO STUFF</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>12</b> Resampling</a><ul>
+<li class="chapter" data-level="12.1" data-path="resampling.html"><a href="resampling.html#stat-432-materials-1"><i class="fa fa-check"></i><b>12.1</b> STAT 432 Materials</a></li>
+<li class="chapter" data-level="12.2" data-path="resampling.html"><a href="resampling.html#validation-set-approach"><i class="fa fa-check"></i><b>12.2</b> Validation-Set Approach</a></li>
+<li class="chapter" data-level="12.3" data-path="resampling.html"><a href="resampling.html#cross-validation"><i class="fa fa-check"></i><b>12.3</b> Cross-Validation</a></li>
+<li class="chapter" data-level="12.4" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>12.4</b> Test Data</a></li>
+<li class="chapter" data-level="12.5" data-path="resampling.html"><a href="resampling.html#misc-todos-1"><i class="fa fa-check"></i><b>12.5</b> MISC TODOS</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="supervised-learning.html"><a href="supervised-learning.html"><i class="fa fa-check"></i><b>13</b> Supervised Learning</a></li>
+<li class="chapter" data-level="14" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>14</b> Regularization</a><ul>
+<li class="chapter" data-level="14.1" data-path="regularization.html"><a href="regularization.html#adding-bias-to-reduce-variance"><i class="fa fa-check"></i><b>14.1</b> adding bias to reduce variance</a></li>
+<li class="chapter" data-level="14.2" data-path="regularization.html"><a href="regularization.html#scaling-matters"><i class="fa fa-check"></i><b>14.2</b> scaling matters?</a></li>
+<li class="chapter" data-level="14.3" data-path="regularization.html"><a href="regularization.html#moving-to-two-dimensions"><i class="fa fa-check"></i><b>14.3</b> moving to two dimensions</a></li>
+<li class="chapter" data-level="14.4" data-path="regularization.html"><a href="regularization.html#boston-is-boring"><i class="fa fa-check"></i><b>14.4</b> boston is boring</a></li>
+<li class="chapter" data-level="14.5" data-path="regularization.html"><a href="regularization.html#some-more-simulation"><i class="fa fa-check"></i><b>14.5</b> some more simulation</a></li>
+</ul></li>
+<li class="part"><span><b>IV Mathematics</b></span></li>
+<li class="chapter" data-level="15" data-path="introduction-3.html"><a href="introduction-3.html"><i class="fa fa-check"></i><b>15</b> Introduction</a></li>
+<li class="part"><span><b>V Computing</b></span></li>
+<li class="chapter" data-level="16" data-path="introduction-4.html"><a href="introduction-4.html"><i class="fa fa-check"></i><b>16</b> Introduction</a></li>
+<li class="chapter" data-level="17" data-path="resources.html"><a href="resources.html"><i class="fa fa-check"></i><b>17</b> Resources</a><ul>
+<li class="chapter" data-level="17.1" data-path="resources.html"><a href="resources.html#resources-1"><i class="fa fa-check"></i><b>17.1</b> Resources</a><ul>
+<li class="chapter" data-level="17.1.1" data-path="resources.html"><a href="resources.html#r"><i class="fa fa-check"></i><b>17.1.1</b> R</a></li>
+<li class="chapter" data-level="17.1.2" data-path="resources.html"><a href="resources.html#rstudio"><i class="fa fa-check"></i><b>17.1.2</b> RStudio</a></li>
+<li class="chapter" data-level="17.1.3" data-path="resources.html"><a href="resources.html#r-markdown"><i class="fa fa-check"></i><b>17.1.3</b> R Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="17.2" data-path="resources.html"><a href="resources.html#bsl-idioms"><i class="fa fa-check"></i><b>17.2</b> BSL Idioms</a><ul>
+<li class="chapter" data-level="17.2.1" data-path="resources.html"><a href="resources.html#reference-style"><i class="fa fa-check"></i><b>17.2.1</b> Reference Style</a></li>
+<li class="chapter" data-level="17.2.2" data-path="resources.html"><a href="resources.html#bsl-style-overrides"><i class="fa fa-check"></i><b>17.2.2</b> BSL Style Overrides</a></li>
+<li class="chapter" data-level="17.2.3" data-path="resources.html"><a href="resources.html#objects-and-functions"><i class="fa fa-check"></i><b>17.2.3</b> Objects and Functions</a></li>
+<li class="chapter" data-level="17.2.4" data-path="resources.html"><a href="resources.html#print-versus-return"><i class="fa fa-check"></i><b>17.2.4</b> Print versus Return</a></li>
+<li class="chapter" data-level="17.2.5" data-path="resources.html"><a href="resources.html#help"><i class="fa fa-check"></i><b>17.2.5</b> Help</a></li>
+<li class="chapter" data-level="17.2.6" data-path="resources.html"><a href="resources.html#keyboard-shortcuts"><i class="fa fa-check"></i><b>17.2.6</b> Keyboard Shortcuts</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="resources.html"><a href="resources.html#common-issues"><i class="fa fa-check"></i><b>17.3</b> Common Issues</a></li>
+</ul></li>
+<li class="part"><span><b>VI Analysis</b></span></li>
+<li class="chapter" data-level="18" data-path="introduction-5.html"><a href="introduction-5.html"><i class="fa fa-check"></i><b>18</b> Introduction</a></li>
+<li class="part"><span><b>VII Appendix</b></span></li>
+<li class="chapter" data-level="19" data-path="introduction-6.html"><a href="introduction-6.html"><i class="fa fa-check"></i><b>19</b> Introduction</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/daviddalpiaz/bsl" target="blank">&copy; 2019 David Dalpiaz</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Basics of Statistical Learning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="resources" class="section level1">
+<h1><span class="header-section-number">Chapter 17</span> Resources</h1>
+<p>This is not a book about R. It is however, a book that uses R. Because of this, you will need to be familiar with R. The text will point out some thing about R along the way, but some previous study of R is necessary.</p>
+<p>The following (freely available) readings are highly recommended:</p>
+<ul>
+<li><a href="https://rstudio-education.github.io/hopr/">Hands-On Programming with R</a> - <em>Garrett Grolemund</em>
+<ul>
+<li>If you have never used R or RStudio before, Part 1, Chapters 1 - 3, will be useful.</li>
+</ul></li>
+<li><a href="https://r4ds.had.co.nz/">R for Data Science</a> - <em>Garrett Grolemund, Hadley Wickham</em>
+<ul>
+<li>This book helps getting you up to speed working with data in R. While it is a lot of reading, Chapters 1 - 21 are highly recommended.</li>
+</ul></li>
+<li><a href="https://adv-r.hadley.nz/">Advanced R</a> - <em>Hadley Wickham</em>
+<ul>
+<li>Part I, Chapters 1 - 8, of this book will help create a mental model for working with R. These chapters are not an easy read, so they should be returned to often. (Chapter 2 could be safely skipped for our purposes, but is important if you will use R in the long term.)</li>
+</ul></li>
+</ul>
+<p>If you are a UIUC student who took the course STAT 420, the first six chapters of that book could serve as a nice refresher.</p>
+<ul>
+<li><a href="https://daviddalpiaz.github.io/appliedstats/">Applied Statistics with R</a> - <em>David Dalpiaz</em></li>
+</ul>
+<hr />
+<div id="resources-1" class="section level2">
+<h2><span class="header-section-number">17.1</span> Resources</h2>
+<p>The following resources are more specific or more advanced, but could still prove to be useful.</p>
+<div id="r" class="section level3">
+<h3><span class="header-section-number">17.1.1</span> R</h3>
+<ul>
+<li><a href="https://csgillespie.github.io/efficientR/">Efficient R programming</a></li>
+<li><a href="https://bookdown.org/rdpeng/rprogdatascience/">R Programming for Data Science</a></li>
+<li><a href="https://r-graphics.org/">R Graphics Cookbook</a></li>
+<li><a href="https://moderndive.com/index.html">Modern Dive</a></li>
+<li><a href="tidyverse.org/">The <code>tidyverse</code> Website</a>
+<ul>
+<li><a href="https://dplyr.tidyverse.org/"><code>dplyr</code> Website</a></li>
+<li><a href="https://readr.tidyverse.org/"><code>readr</code> Website</a></li>
+<li><a href="https://tibble.tidyverse.org/"><code>tibble</code> Website</a></li>
+<li><a href="https://forcats.tidyverse.org/"><code>forcats</code> Website</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="rstudio" class="section level3">
+<h3><span class="header-section-number">17.1.2</span> RStudio</h3>
+<ul>
+<li><a href="https://resources.rstudio.com/rstudio-cheatsheets/rstudio-ide-cheat-sheet">RStudio IDE Cheatsheet</a></li>
+<li><a href="https://resources.rstudio.com/">RStudio Resources</a></li>
+</ul>
+</div>
+<div id="r-markdown" class="section level3">
+<h3><span class="header-section-number">17.1.3</span> R Markdown</h3>
+<ul>
+<li><a href="https://resources.rstudio.com/rstudio-cheatsheets/rmarkdown-2-0-cheat-sheet">R Markdown Cheatsheet</a></li>
+<li><a href="https://bookdown.org/yihui/rmarkdown/">R Markdown: The Definitive Guide</a> - <em>Yihui Xie, J. J. Allaire, Garrett Grolemund</em></li>
+<li><a href="https://r4ds.had.co.nz/r-markdown.html">R4DS R Markdown Chapter</a></li>
+</ul>
+<div id="markdown" class="section level4">
+<h4><span class="header-section-number">17.1.3.1</span> Markdown</h4>
+<ul>
+<li><a href="https://daringfireball.net/projects/markdown/basics">Daring Fireball - Markdown: Basics</a></li>
+<li><a href="https://guides.github.com/features/mastering-markdown/">GitHub - Mastering Markdown</a></li>
+<li><a href="https://commonmark.org/">CommonMark</a></li>
+</ul>
+<hr />
+</div>
+</div>
+</div>
+<div id="bsl-idioms" class="section level2">
+<h2><span class="header-section-number">17.2</span> BSL Idioms</h2>
+<p>Things here supersede everything above.</p>
+<div id="reference-style" class="section level3">
+<h3><span class="header-section-number">17.2.1</span> Reference Style</h3>
+<ul>
+<li><a href="https://style.tidyverse.org/"><code>tidyverse</code> Style Guide</a></li>
+</ul>
+</div>
+<div id="bsl-style-overrides" class="section level3">
+<h3><span class="header-section-number">17.2.2</span> BSL Style Overrides</h3>
+<ul>
+<li>TODO: <code>=</code> instead of <code>&lt;-</code>
+<ul>
+<li><a href="http://thecoatlessprofessor.com/programming/an-opinionated-tale-of-why-you-should-replace---with-/" class="uri">http://thecoatlessprofessor.com/programming/an-opinionated-tale-of-why-you-should-replace---with-/</a></li>
+</ul></li>
+<li>TODO: never use <code>T</code> or <code>F</code>, only <code>TRUE</code> or <code>FALSE</code></li>
+</ul>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" data-line-number="1"><span class="ot">FALSE</span> <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span></a></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" data-line-number="1">F     <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span></a></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" data-line-number="1">F     =<span class="st">  </span><span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb193-2" data-line-number="2">F     <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span></a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<ul>
+<li>TODO: never ever ever use <code>attach()</code></li>
+<li>TODO: never ever ever use <code>&lt;&lt;-</code></li>
+<li>TODO: never ever ever use <code>setwd()</code> or set a working directory some other way</li>
+<li>TODO: a newline before and after any chunk</li>
+<li>TODO: use headers appropriately! (short names, good structure)</li>
+<li>TODO: never ever ever put spaces in filenames. use <code>-</code>. (others will use <code>_</code>.)</li>
+<li>TODO: load all needed packages at the beginning of an analysis in a single chunk (TODO: pros and cons of this approach)</li>
+<li>TODO: one plot per chunk! no other printed output</li>
+</ul>
+<p>Be consistent…</p>
+<ul>
+<li>with yourself!</li>
+<li>with your group!</li>
+<li>with your organization!</li>
+</ul>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">1337</span>);mu=<span class="dv">10</span>;sample_size=<span class="dv">50</span>;samples=<span class="dv">100000</span>;</a>
+<a class="sourceLine" id="cb195-2" data-line-number="2">x_bars=<span class="kw">rep</span>(<span class="dv">0</span>, samples)</a>
+<a class="sourceLine" id="cb195-3" data-line-number="3"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>samples)</a>
+<a class="sourceLine" id="cb195-4" data-line-number="4">{</a>
+<a class="sourceLine" id="cb195-5" data-line-number="5">x_bars[i]=<span class="kw">mean</span>(<span class="kw">rpois</span>(sample_size,<span class="dt">lambda =</span> mu))}</a>
+<a class="sourceLine" id="cb195-6" data-line-number="6">x_bar_hist=<span class="kw">hist</span>(x_bars,<span class="dt">breaks=</span><span class="dv">50</span>,<span class="dt">main=</span><span class="st">&quot;Histogram of Sample Means&quot;</span>,<span class="dt">xlab=</span><span class="st">&quot;Sample Means&quot;</span>,<span class="dt">col=</span><span class="st">&quot;darkorange&quot;</span>,<span class="dt">border =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a>
+<a class="sourceLine" id="cb195-7" data-line-number="7"><span class="kw">mean</span>(x_bars<span class="op">&gt;</span>mu<span class="dv">-2</span><span class="op">*</span><span class="kw">sqrt</span>(mu)<span class="op">/</span><span class="kw">sqrt</span>(sample_size)<span class="op">&amp;</span>x_bars<span class="op">&lt;</span>mu<span class="op">+</span><span class="dv">2</span><span class="op">*</span><span class="kw">sqrt</span>(mu)<span class="op">/</span><span class="kw">sqrt</span>(sample_size))</a></code></pre></div>
+</div>
+<div id="objects-and-functions" class="section level3">
+<h3><span class="header-section-number">17.2.3</span> Objects and Functions</h3>
+<blockquote>
+<p>To understand computations in R, two slogans are helpful:</p>
+<ul>
+<li>Everything that exists is an object.</li>
+<li>Everything that happens is a function call.</li>
+</ul>
+<p>— John Chambers</p>
+</blockquote>
+<ul>
+<li>TODO: Functions + Objects
+<ul>
+<li>these are the inputs and outputs of functions:
+<ul>
+<li>functions</li>
+<li>vectors</li>
+<li>lists</li>
+<li>tibbles (dfs)</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="print-versus-return" class="section level3">
+<h3><span class="header-section-number">17.2.4</span> Print versus Return</h3>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" data-line-number="1">cars_mod =<span class="st"> </span><span class="kw">lm</span>(dist <span class="op">~</span><span class="st"> </span>speed, <span class="dt">data =</span> cars)</a></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" data-line-number="1"><span class="kw">summary</span>(cars_mod)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = dist ~ speed, data = cars)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -29.069  -9.525  -2.272   9.215  43.201 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -17.5791     6.7584  -2.601   0.0123 *  
+## speed         3.9324     0.4155   9.464 1.49e-12 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 15.38 on 48 degrees of freedom
+## Multiple R-squared:  0.6511, Adjusted R-squared:  0.6438 
+## F-statistic: 89.57 on 1 and 48 DF,  p-value: 1.49e-12</code></pre>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" data-line-number="1"><span class="kw">is.list</span>(<span class="kw">summary</span>(cars_mod))</a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" data-line-number="1"><span class="kw">names</span>(<span class="kw">summary</span>(cars_mod))</a></code></pre></div>
+<pre><code>##  [1] &quot;call&quot;          &quot;terms&quot;         &quot;residuals&quot;     &quot;coefficients&quot; 
+##  [5] &quot;aliased&quot;       &quot;sigma&quot;         &quot;df&quot;            &quot;r.squared&quot;    
+##  [9] &quot;adj.r.squared&quot; &quot;fstatistic&quot;    &quot;cov.unscaled&quot;</code></pre>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" data-line-number="1"><span class="kw">str</span>(<span class="kw">summary</span>(cars_mod))</a></code></pre></div>
+<pre><code>## List of 11
+##  $ call         : language lm(formula = dist ~ speed, data = cars)
+##  $ terms        :Classes &#39;terms&#39;, &#39;formula&#39;  language dist ~ speed
+##   .. ..- attr(*, &quot;variables&quot;)= language list(dist, speed)
+##   .. ..- attr(*, &quot;factors&quot;)= int [1:2, 1] 0 1
+##   .. .. ..- attr(*, &quot;dimnames&quot;)=List of 2
+##   .. .. .. ..$ : chr [1:2] &quot;dist&quot; &quot;speed&quot;
+##   .. .. .. ..$ : chr &quot;speed&quot;
+##   .. ..- attr(*, &quot;term.labels&quot;)= chr &quot;speed&quot;
+##   .. ..- attr(*, &quot;order&quot;)= int 1
+##   .. ..- attr(*, &quot;intercept&quot;)= int 1
+##   .. ..- attr(*, &quot;response&quot;)= int 1
+##   .. ..- attr(*, &quot;.Environment&quot;)=&lt;environment: R_GlobalEnv&gt; 
+##   .. ..- attr(*, &quot;predvars&quot;)= language list(dist, speed)
+##   .. ..- attr(*, &quot;dataClasses&quot;)= Named chr [1:2] &quot;numeric&quot; &quot;numeric&quot;
+##   .. .. ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;dist&quot; &quot;speed&quot;
+##  $ residuals    : Named num [1:50] 3.85 11.85 -5.95 12.05 2.12 ...
+##   ..- attr(*, &quot;names&quot;)= chr [1:50] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; ...
+##  $ coefficients : num [1:2, 1:4] -17.579 3.932 6.758 0.416 -2.601 ...
+##   ..- attr(*, &quot;dimnames&quot;)=List of 2
+##   .. ..$ : chr [1:2] &quot;(Intercept)&quot; &quot;speed&quot;
+##   .. ..$ : chr [1:4] &quot;Estimate&quot; &quot;Std. Error&quot; &quot;t value&quot; &quot;Pr(&gt;|t|)&quot;
+##  $ aliased      : Named logi [1:2] FALSE FALSE
+##   ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;(Intercept)&quot; &quot;speed&quot;
+##  $ sigma        : num 15.4
+##  $ df           : int [1:3] 2 48 2
+##  $ r.squared    : num 0.651
+##  $ adj.r.squared: num 0.644
+##  $ fstatistic   : Named num [1:3] 89.6 1 48
+##   ..- attr(*, &quot;names&quot;)= chr [1:3] &quot;value&quot; &quot;numdf&quot; &quot;dendf&quot;
+##  $ cov.unscaled : num [1:2, 1:2] 0.19311 -0.01124 -0.01124 0.00073
+##   ..- attr(*, &quot;dimnames&quot;)=List of 2
+##   .. ..$ : chr [1:2] &quot;(Intercept)&quot; &quot;speed&quot;
+##   .. ..$ : chr [1:2] &quot;(Intercept)&quot; &quot;speed&quot;
+##  - attr(*, &quot;class&quot;)= chr &quot;summary.lm&quot;</code></pre>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" data-line-number="1"><span class="co"># RStudio only</span></a>
+<a class="sourceLine" id="cb205-2" data-line-number="2"><span class="kw">View</span>(<span class="kw">summary</span>(cars_mod))</a></code></pre></div>
+</div>
+<div id="help" class="section level3">
+<h3><span class="header-section-number">17.2.5</span> Help</h3>
+<ul>
+<li>TODO: <code>?</code>, google, stack overflow, (office hours, course forums)</li>
+</ul>
+</div>
+<div id="keyboard-shortcuts" class="section level3">
+<h3><span class="header-section-number">17.2.6</span> Keyboard Shortcuts</h3>
+<ul>
+<li>TODO: copy-paste, switch program, switch tab, etc…</li>
+<li>TODO: TAB!!!</li>
+<li>TODO: new chunk!</li>
+<li>TODO: style!</li>
+<li>TODO: keyboard shortcut for keyboard shortcut</li>
+</ul>
+</div>
+</div>
+<div id="common-issues" class="section level2">
+<h2><span class="header-section-number">17.3</span> Common Issues</h2>
+<ul>
+<li>TODO: cannot find function called &quot;&quot;</li>
+</ul>
+<hr />
+<ul>
+<li>TODO: <a href="https://stat545.com/" class="uri">https://stat545.com/</a></li>
+<li>TODO: <a href="https://atrebas.github.io/post/2019-01-15-2018-learning/" class="uri">https://atrebas.github.io/post/2019-01-15-2018-learning/</a></li>
+<li>TODO: <a href="https://www.burns-stat.com/pages/Tutor/R_inferno.pdf" class="uri">https://www.burns-stat.com/pages/Tutor/R_inferno.pdf</a></li>
+</ul>
+
+</div>
+</div>
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction-4.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="introduction-5.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/daviddalpiaz/bsl/edit/master/05-02-resources.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["bsl.pdf"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

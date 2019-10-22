@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Regression | Basics of Statistical Learning</title>
-  <meta name="description" content="Chapter 4 Regression | Basics of Statistical Learning" />
+  <title>Chapter 9 Regression | Basics of Statistical Learning</title>
+  <meta name="description" content="Chapter 9 Regression | Basics of Statistical Learning" />
   <meta name="generator" content="bookdown 0.14.1 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Regression | Basics of Statistical Learning" />
+  <meta property="og:title" content="Chapter 9 Regression | Basics of Statistical Learning" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="http://daviddalpiaz.github.io/bsl/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="daviddalpiaz/bsl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Regression | Basics of Statistical Learning" />
+  <meta name="twitter:title" content="Chapter 9 Regression | Basics of Statistical Learning" />
   
   
   
@@ -24,14 +24,14 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-10-18" />
+<meta name="date" content="2019-10-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="estimation.html"/>
+<link rel="prev" href="introduction-2.html"/>
 <link rel="next" href="biasvariance-tradeoff.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -135,122 +135,140 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i><b>0.1</b> Caveat Emptor</a></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i><b>0.2</b> Who?</a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#organization"><i class="fa fa-check"></i><b>0.3</b> Organization</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i>Caveat Emptor</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i>Who?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization"><i class="fa fa-check"></i>Organization</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i>License</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
-<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#regression-powerlifting"><i class="fa fa-check"></i><b>1.1</b> Regression: Powerlifting</a><ul>
-<li class="chapter" data-level="1.1.1" data-path="introduction.html"><a href="introduction.html#background"><i class="fa fa-check"></i><b>1.1.1</b> Background</a></li>
-<li class="chapter" data-level="1.1.2" data-path="introduction.html"><a href="introduction.html#data"><i class="fa fa-check"></i><b>1.1.2</b> Data</a></li>
-<li class="chapter" data-level="1.1.3" data-path="introduction.html"><a href="introduction.html#eda"><i class="fa fa-check"></i><b>1.1.3</b> EDA</a></li>
-<li class="chapter" data-level="1.1.4" data-path="introduction.html"><a href="introduction.html#modeling"><i class="fa fa-check"></i><b>1.1.4</b> Modeling</a></li>
-<li class="chapter" data-level="1.1.5" data-path="introduction.html"><a href="introduction.html#model-evaluation"><i class="fa fa-check"></i><b>1.1.5</b> Model Evaluation</a></li>
-<li class="chapter" data-level="1.1.6" data-path="introduction.html"><a href="introduction.html#discussion"><i class="fa fa-check"></i><b>1.1.6</b> Discussion</a></li>
+<li class="part"><span><b>I A Machine Learning Preview</b></span></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html"><i class="fa fa-check"></i><b>2</b> Regression: Powerlifting</a><ul>
+<li class="chapter" data-level="2.1" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html#background"><i class="fa fa-check"></i><b>2.1</b> Background</a></li>
+<li class="chapter" data-level="2.2" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html#data"><i class="fa fa-check"></i><b>2.2</b> Data</a></li>
+<li class="chapter" data-level="2.3" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html#eda"><i class="fa fa-check"></i><b>2.3</b> EDA</a></li>
+<li class="chapter" data-level="2.4" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html#modeling"><i class="fa fa-check"></i><b>2.4</b> Modeling</a></li>
+<li class="chapter" data-level="2.5" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html#model-evaluation"><i class="fa fa-check"></i><b>2.5</b> Model Evaluation</a></li>
+<li class="chapter" data-level="2.6" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html#discussion"><i class="fa fa-check"></i><b>2.6</b> Discussion</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#classification-handwritten-digits"><i class="fa fa-check"></i><b>1.2</b> Classification: Handwritten Digits</a><ul>
-<li class="chapter" data-level="1.2.1" data-path="introduction.html"><a href="introduction.html#background-1"><i class="fa fa-check"></i><b>1.2.1</b> Background</a></li>
-<li class="chapter" data-level="1.2.2" data-path="introduction.html"><a href="introduction.html#data-1"><i class="fa fa-check"></i><b>1.2.2</b> Data</a></li>
-<li class="chapter" data-level="1.2.3" data-path="introduction.html"><a href="introduction.html#eda-1"><i class="fa fa-check"></i><b>1.2.3</b> EDA</a></li>
-<li class="chapter" data-level="1.2.4" data-path="introduction.html"><a href="introduction.html#modeling-1"><i class="fa fa-check"></i><b>1.2.4</b> Modeling</a></li>
-<li class="chapter" data-level="1.2.5" data-path="introduction.html"><a href="introduction.html#model-evaluation-1"><i class="fa fa-check"></i><b>1.2.5</b> Model Evaluation</a></li>
-<li class="chapter" data-level="1.2.6" data-path="introduction.html"><a href="introduction.html#discussion-1"><i class="fa fa-check"></i><b>1.2.6</b> Discussion</a></li>
+<li class="chapter" data-level="3" data-path="classification-handwriting.html"><a href="classification-handwriting.html"><i class="fa fa-check"></i><b>3</b> Classification: Handwriting</a><ul>
+<li class="chapter" data-level="3.1" data-path="classification-handwriting.html"><a href="classification-handwriting.html#background-1"><i class="fa fa-check"></i><b>3.1</b> Background</a></li>
+<li class="chapter" data-level="3.2" data-path="classification-handwriting.html"><a href="classification-handwriting.html#data-1"><i class="fa fa-check"></i><b>3.2</b> Data</a></li>
+<li class="chapter" data-level="3.3" data-path="classification-handwriting.html"><a href="classification-handwriting.html#eda-1"><i class="fa fa-check"></i><b>3.3</b> EDA</a></li>
+<li class="chapter" data-level="3.4" data-path="classification-handwriting.html"><a href="classification-handwriting.html#modeling-1"><i class="fa fa-check"></i><b>3.4</b> Modeling</a></li>
+<li class="chapter" data-level="3.5" data-path="classification-handwriting.html"><a href="classification-handwriting.html#model-evaluation-1"><i class="fa fa-check"></i><b>3.5</b> Model Evaluation</a></li>
+<li class="chapter" data-level="3.6" data-path="classification-handwriting.html"><a href="classification-handwriting.html#discussion-1"><i class="fa fa-check"></i><b>3.6</b> Discussion</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#clustering-nba-players"><i class="fa fa-check"></i><b>1.3</b> Clustering: NBA Players</a><ul>
-<li class="chapter" data-level="1.3.1" data-path="introduction.html"><a href="introduction.html#background-2"><i class="fa fa-check"></i><b>1.3.1</b> Background</a></li>
-<li class="chapter" data-level="1.3.2" data-path="introduction.html"><a href="introduction.html#data-2"><i class="fa fa-check"></i><b>1.3.2</b> Data</a></li>
-<li class="chapter" data-level="1.3.3" data-path="introduction.html"><a href="introduction.html#eda-2"><i class="fa fa-check"></i><b>1.3.3</b> EDA</a></li>
-<li class="chapter" data-level="1.3.4" data-path="introduction.html"><a href="introduction.html#modeling-2"><i class="fa fa-check"></i><b>1.3.4</b> Modeling</a></li>
-<li class="chapter" data-level="1.3.5" data-path="introduction.html"><a href="introduction.html#model-evaluation-2"><i class="fa fa-check"></i><b>1.3.5</b> Model Evaluation</a></li>
-<li class="chapter" data-level="1.3.6" data-path="introduction.html"><a href="introduction.html#discussion-2"><i class="fa fa-check"></i><b>1.3.6</b> Discussion</a></li>
+<li class="chapter" data-level="4" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html"><i class="fa fa-check"></i><b>4</b> Clustering: Basketball Players</a><ul>
+<li class="chapter" data-level="4.1" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html#background-2"><i class="fa fa-check"></i><b>4.1</b> Background</a></li>
+<li class="chapter" data-level="4.2" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html#data-2"><i class="fa fa-check"></i><b>4.2</b> Data</a></li>
+<li class="chapter" data-level="4.3" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html#eda-2"><i class="fa fa-check"></i><b>4.3</b> EDA</a></li>
+<li class="chapter" data-level="4.4" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html#modeling-2"><i class="fa fa-check"></i><b>4.4</b> Modeling</a></li>
+<li class="chapter" data-level="4.5" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html#model-evaluation-2"><i class="fa fa-check"></i><b>4.5</b> Model Evaluation</a></li>
+<li class="chapter" data-level="4.6" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html#discussion-2"><i class="fa fa-check"></i><b>4.6</b> Discussion</a></li>
+</ul></li>
+<li class="part"><span><b>II Some Machine Learning Foundations</b></span></li>
+<li class="chapter" data-level="5" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>5</b> Introduction</a></li>
+<li class="chapter" data-level="6" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>6</b> Probability</a><ul>
+<li class="chapter" data-level="6.1" data-path="probability.html"><a href="probability.html#probability-models"><i class="fa fa-check"></i><b>6.1</b> Probability Models</a></li>
+<li class="chapter" data-level="6.2" data-path="probability.html"><a href="probability.html#probability-axioms"><i class="fa fa-check"></i><b>6.2</b> Probability Axioms</a></li>
+<li class="chapter" data-level="6.3" data-path="probability.html"><a href="probability.html#probability-rules"><i class="fa fa-check"></i><b>6.3</b> Probability Rules</a></li>
+<li class="chapter" data-level="6.4" data-path="probability.html"><a href="probability.html#random-variables"><i class="fa fa-check"></i><b>6.4</b> Random Variables</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="probability.html"><a href="probability.html#distributions"><i class="fa fa-check"></i><b>6.4.1</b> Distributions</a></li>
+<li class="chapter" data-level="6.4.2" data-path="probability.html"><a href="probability.html#discrete-random-variables"><i class="fa fa-check"></i><b>6.4.2</b> Discrete Random Variables</a></li>
+<li class="chapter" data-level="6.4.3" data-path="probability.html"><a href="probability.html#continuous-random-variables"><i class="fa fa-check"></i><b>6.4.3</b> Continuous Random Variables</a></li>
+<li class="chapter" data-level="6.4.4" data-path="probability.html"><a href="probability.html#several-random-variables"><i class="fa fa-check"></i><b>6.4.4</b> Several Random Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="probability.html"><a href="probability.html#expectations"><i class="fa fa-check"></i><b>6.5</b> Expectations</a></li>
+<li class="chapter" data-level="6.6" data-path="probability.html"><a href="probability.html#likelihood"><i class="fa fa-check"></i><b>6.6</b> Likelihood</a></li>
+<li class="chapter" data-level="6.7" data-path="probability.html"><a href="probability.html#videos"><i class="fa fa-check"></i><b>6.7</b> Videos</a></li>
+<li class="chapter" data-level="6.8" data-path="probability.html"><a href="probability.html#references"><i class="fa fa-check"></i><b>6.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="estimation.html"><a href="estimation.html"><i class="fa fa-check"></i><b>7</b> Estimation</a><ul>
+<li class="chapter" data-level="7.1" data-path="estimation.html"><a href="estimation.html#probability-1"><i class="fa fa-check"></i><b>7.1</b> Probability</a></li>
+<li class="chapter" data-level="7.2" data-path="estimation.html"><a href="estimation.html#statistics"><i class="fa fa-check"></i><b>7.2</b> Statistics</a></li>
+<li class="chapter" data-level="7.3" data-path="estimation.html"><a href="estimation.html#estimators"><i class="fa fa-check"></i><b>7.3</b> Estimators</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="estimation.html"><a href="estimation.html#properties"><i class="fa fa-check"></i><b>7.3.1</b> Properties</a></li>
+<li class="chapter" data-level="7.3.2" data-path="estimation.html"><a href="estimation.html#methods"><i class="fa fa-check"></i><b>7.3.2</b> Methods</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="computing.html"><a href="computing.html"><i class="fa fa-check"></i><b>2</b> Computing</a><ul>
-<li class="chapter" data-level="2.1" data-path="computing.html"><a href="computing.html#resources"><i class="fa fa-check"></i><b>2.1</b> Resources</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="computing.html"><a href="computing.html#r"><i class="fa fa-check"></i><b>2.1.1</b> R</a></li>
-<li class="chapter" data-level="2.1.2" data-path="computing.html"><a href="computing.html#rstudio"><i class="fa fa-check"></i><b>2.1.2</b> RStudio</a></li>
-<li class="chapter" data-level="2.1.3" data-path="computing.html"><a href="computing.html#r-markdown"><i class="fa fa-check"></i><b>2.1.3</b> R Markdown</a></li>
+<li class="part"><span><b>III A Tour of Machine Learning</b></span></li>
+<li class="chapter" data-level="8" data-path="introduction-2.html"><a href="introduction-2.html"><i class="fa fa-check"></i><b>8</b> Introduction</a></li>
+<li class="chapter" data-level="9" data-path="regression.html"><a href="regression.html"><i class="fa fa-check"></i><b>9</b> Regression</a><ul>
+<li class="chapter" data-level="9.1" data-path="regression.html"><a href="regression.html#setup"><i class="fa fa-check"></i><b>9.1</b> Setup</a></li>
+<li class="chapter" data-level="9.2" data-path="regression.html"><a href="regression.html#modeling-3"><i class="fa fa-check"></i><b>9.2</b> Modeling</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="regression.html"><a href="regression.html#linear-models"><i class="fa fa-check"></i><b>9.2.1</b> Linear Models</a></li>
+<li class="chapter" data-level="9.2.2" data-path="regression.html"><a href="regression.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>9.2.2</b> k-Nearest Neighbors</a></li>
+<li class="chapter" data-level="9.2.3" data-path="regression.html"><a href="regression.html#decision-trees"><i class="fa fa-check"></i><b>9.2.3</b> Decision Trees</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="computing.html"><a href="computing.html#bsl-idioms"><i class="fa fa-check"></i><b>2.2</b> BSL Idioms</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="computing.html"><a href="computing.html#reference-style"><i class="fa fa-check"></i><b>2.2.1</b> Reference Style</a></li>
-<li class="chapter" data-level="2.2.2" data-path="computing.html"><a href="computing.html#bsl-style-overrides"><i class="fa fa-check"></i><b>2.2.2</b> BSL Style Overrides</a></li>
-<li class="chapter" data-level="2.2.3" data-path="computing.html"><a href="computing.html#objects-and-functions"><i class="fa fa-check"></i><b>2.2.3</b> Objects and Functions</a></li>
-<li class="chapter" data-level="2.2.4" data-path="computing.html"><a href="computing.html#print-versus-return"><i class="fa fa-check"></i><b>2.2.4</b> Print versus Return</a></li>
-<li class="chapter" data-level="2.2.5" data-path="computing.html"><a href="computing.html#help"><i class="fa fa-check"></i><b>2.2.5</b> Help</a></li>
-<li class="chapter" data-level="2.2.6" data-path="computing.html"><a href="computing.html#keyboard-shortcuts"><i class="fa fa-check"></i><b>2.2.6</b> Keyboard Shortcuts</a></li>
+<li class="chapter" data-level="9.3" data-path="regression.html"><a href="regression.html#procedure"><i class="fa fa-check"></i><b>9.3</b> Procedure</a></li>
+<li class="chapter" data-level="9.4" data-path="regression.html"><a href="regression.html#data-splitting"><i class="fa fa-check"></i><b>9.4</b> Data Splitting</a></li>
+<li class="chapter" data-level="9.5" data-path="regression.html"><a href="regression.html#metrics"><i class="fa fa-check"></i><b>9.5</b> Metrics</a></li>
+<li class="chapter" data-level="9.6" data-path="regression.html"><a href="regression.html#model-complexity"><i class="fa fa-check"></i><b>9.6</b> Model Complexity</a></li>
+<li class="chapter" data-level="9.7" data-path="regression.html"><a href="regression.html#overfitting"><i class="fa fa-check"></i><b>9.7</b> Overfitting</a></li>
+<li class="chapter" data-level="9.8" data-path="regression.html"><a href="regression.html#multiple-features"><i class="fa fa-check"></i><b>9.8</b> Multiple Features</a></li>
+<li class="chapter" data-level="9.9" data-path="regression.html"><a href="regression.html#example-analysis"><i class="fa fa-check"></i><b>9.9</b> Example Analysis</a></li>
+<li class="chapter" data-level="9.10" data-path="regression.html"><a href="regression.html#misc-todos"><i class="fa fa-check"></i><b>9.10</b> MISC TODOS</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="computing.html"><a href="computing.html#common-issues"><i class="fa fa-check"></i><b>2.3</b> Common Issues</a></li>
+<li class="chapter" data-level="10" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>10</b> Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="10.1" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>10.1</b> Reducible and Irreducible Error</a></li>
+<li class="chapter" data-level="10.2" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>10.2</b> Bias-Variance Decomposition</a></li>
+<li class="chapter" data-level="10.3" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#simulation"><i class="fa fa-check"></i><b>10.3</b> Simulation</a></li>
+<li class="chapter" data-level="10.4" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>10.4</b> Estimating Expected Prediction Error</a></li>
+<li class="chapter" data-level="10.5" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reproducibility"><i class="fa fa-check"></i><b>10.5</b> Reproducibility</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="estimation.html"><a href="estimation.html"><i class="fa fa-check"></i><b>3</b> Estimation</a><ul>
-<li class="chapter" data-level="3.1" data-path="estimation.html"><a href="estimation.html#probability"><i class="fa fa-check"></i><b>3.1</b> Probability</a></li>
-<li class="chapter" data-level="3.2" data-path="estimation.html"><a href="estimation.html#statistics"><i class="fa fa-check"></i><b>3.2</b> Statistics</a></li>
-<li class="chapter" data-level="3.3" data-path="estimation.html"><a href="estimation.html#estimators"><i class="fa fa-check"></i><b>3.3</b> Estimators</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="estimation.html"><a href="estimation.html#properties"><i class="fa fa-check"></i><b>3.3.1</b> Properties</a></li>
-<li class="chapter" data-level="3.3.2" data-path="estimation.html"><a href="estimation.html#methods"><i class="fa fa-check"></i><b>3.3.2</b> Methods</a></li>
+<li class="chapter" data-level="11" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>11</b> Classification</a><ul>
+<li class="chapter" data-level="11.1" data-path="classification.html"><a href="classification.html#stat-432-materials"><i class="fa fa-check"></i><b>11.1</b> STAT 432 Materials</a></li>
+<li class="chapter" data-level="11.2" data-path="classification.html"><a href="classification.html#bayes-classifier"><i class="fa fa-check"></i><b>11.2</b> Bayes Classifier</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="classification.html"><a href="classification.html#bayes-error-rate"><i class="fa fa-check"></i><b>11.2.1</b> Bayes Error Rate</a></li>
 </ul></li>
+<li class="chapter" data-level="11.3" data-path="classification.html"><a href="classification.html#building-a-classifier"><i class="fa fa-check"></i><b>11.3</b> Building a Classifier</a></li>
+<li class="chapter" data-level="11.4" data-path="classification.html"><a href="classification.html#modeling-4"><i class="fa fa-check"></i><b>11.4</b> Modeling</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="classification.html"><a href="classification.html#linear-models-1"><i class="fa fa-check"></i><b>11.4.1</b> Linear Models</a></li>
+<li class="chapter" data-level="11.4.2" data-path="classification.html"><a href="classification.html#k-nearest-neighbors-1"><i class="fa fa-check"></i><b>11.4.2</b> k-Nearest Neighbors</a></li>
+<li class="chapter" data-level="11.4.3" data-path="classification.html"><a href="classification.html#decision-trees-1"><i class="fa fa-check"></i><b>11.4.3</b> Decision Trees</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="regression.html"><a href="regression.html"><i class="fa fa-check"></i><b>4</b> Regression</a><ul>
-<li class="chapter" data-level="4.1" data-path="regression.html"><a href="regression.html#setup"><i class="fa fa-check"></i><b>4.1</b> Setup</a></li>
-<li class="chapter" data-level="4.2" data-path="regression.html"><a href="regression.html#modeling-3"><i class="fa fa-check"></i><b>4.2</b> Modeling</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="regression.html"><a href="regression.html#linear-models"><i class="fa fa-check"></i><b>4.2.1</b> Linear Models</a></li>
-<li class="chapter" data-level="4.2.2" data-path="regression.html"><a href="regression.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>4.2.2</b> k-Nearest Neighbors</a></li>
-<li class="chapter" data-level="4.2.3" data-path="regression.html"><a href="regression.html#decision-trees"><i class="fa fa-check"></i><b>4.2.3</b> Decision Trees</a></li>
+<li class="chapter" data-level="11.5" data-path="classification.html"><a href="classification.html#misc-todo-stuff"><i class="fa fa-check"></i><b>11.5</b> MISC TODO STUFF</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="regression.html"><a href="regression.html#procedure"><i class="fa fa-check"></i><b>4.3</b> Procedure</a></li>
-<li class="chapter" data-level="4.4" data-path="regression.html"><a href="regression.html#data-splitting"><i class="fa fa-check"></i><b>4.4</b> Data Splitting</a></li>
-<li class="chapter" data-level="4.5" data-path="regression.html"><a href="regression.html#metrics"><i class="fa fa-check"></i><b>4.5</b> Metrics</a></li>
-<li class="chapter" data-level="4.6" data-path="regression.html"><a href="regression.html#model-complexity"><i class="fa fa-check"></i><b>4.6</b> Model Complexity</a></li>
-<li class="chapter" data-level="4.7" data-path="regression.html"><a href="regression.html#overfitting"><i class="fa fa-check"></i><b>4.7</b> Overfitting</a></li>
-<li class="chapter" data-level="4.8" data-path="regression.html"><a href="regression.html#multiple-features"><i class="fa fa-check"></i><b>4.8</b> Multiple Features</a></li>
-<li class="chapter" data-level="4.9" data-path="regression.html"><a href="regression.html#example-analysis"><i class="fa fa-check"></i><b>4.9</b> Example Analysis</a></li>
-<li class="chapter" data-level="4.10" data-path="regression.html"><a href="regression.html#misc-todos"><i class="fa fa-check"></i><b>4.10</b> MISC TODOS</a></li>
+<li class="chapter" data-level="12" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>12</b> Resampling</a><ul>
+<li class="chapter" data-level="12.1" data-path="resampling.html"><a href="resampling.html#stat-432-materials-1"><i class="fa fa-check"></i><b>12.1</b> STAT 432 Materials</a></li>
+<li class="chapter" data-level="12.2" data-path="resampling.html"><a href="resampling.html#validation-set-approach"><i class="fa fa-check"></i><b>12.2</b> Validation-Set Approach</a></li>
+<li class="chapter" data-level="12.3" data-path="resampling.html"><a href="resampling.html#cross-validation"><i class="fa fa-check"></i><b>12.3</b> Cross-Validation</a></li>
+<li class="chapter" data-level="12.4" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>12.4</b> Test Data</a></li>
+<li class="chapter" data-level="12.5" data-path="resampling.html"><a href="resampling.html#misc-todos-1"><i class="fa fa-check"></i><b>12.5</b> MISC TODOS</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>5</b> Bias–Variance Tradeoff</a><ul>
-<li class="chapter" data-level="5.1" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>5.1</b> Reducible and Irreducible Error</a></li>
-<li class="chapter" data-level="5.2" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>5.2</b> Bias-Variance Decomposition</a></li>
-<li class="chapter" data-level="5.3" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#simulation"><i class="fa fa-check"></i><b>5.3</b> Simulation</a></li>
-<li class="chapter" data-level="5.4" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>5.4</b> Estimating Expected Prediction Error</a></li>
-<li class="chapter" data-level="5.5" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reproducibility"><i class="fa fa-check"></i><b>5.5</b> Reproducibility</a></li>
+<li class="chapter" data-level="13" data-path="supervised-learning.html"><a href="supervised-learning.html"><i class="fa fa-check"></i><b>13</b> Supervised Learning</a></li>
+<li class="chapter" data-level="14" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>14</b> Regularization</a><ul>
+<li class="chapter" data-level="14.1" data-path="regularization.html"><a href="regularization.html#adding-bias-to-reduce-variance"><i class="fa fa-check"></i><b>14.1</b> adding bias to reduce variance</a></li>
+<li class="chapter" data-level="14.2" data-path="regularization.html"><a href="regularization.html#scaling-matters"><i class="fa fa-check"></i><b>14.2</b> scaling matters?</a></li>
+<li class="chapter" data-level="14.3" data-path="regularization.html"><a href="regularization.html#moving-to-two-dimensions"><i class="fa fa-check"></i><b>14.3</b> moving to two dimensions</a></li>
+<li class="chapter" data-level="14.4" data-path="regularization.html"><a href="regularization.html#boston-is-boring"><i class="fa fa-check"></i><b>14.4</b> boston is boring</a></li>
+<li class="chapter" data-level="14.5" data-path="regularization.html"><a href="regularization.html#some-more-simulation"><i class="fa fa-check"></i><b>14.5</b> some more simulation</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>6</b> Classification</a><ul>
-<li class="chapter" data-level="6.1" data-path="classification.html"><a href="classification.html#stat-432-materials"><i class="fa fa-check"></i><b>6.1</b> STAT 432 Materials</a></li>
-<li class="chapter" data-level="6.2" data-path="classification.html"><a href="classification.html#bayes-classifier"><i class="fa fa-check"></i><b>6.2</b> Bayes Classifier</a><ul>
-<li class="chapter" data-level="6.2.1" data-path="classification.html"><a href="classification.html#bayes-error-rate"><i class="fa fa-check"></i><b>6.2.1</b> Bayes Error Rate</a></li>
+<li class="part"><span><b>IV Mathematics</b></span></li>
+<li class="chapter" data-level="15" data-path="introduction-3.html"><a href="introduction-3.html"><i class="fa fa-check"></i><b>15</b> Introduction</a></li>
+<li class="part"><span><b>V Computing</b></span></li>
+<li class="chapter" data-level="16" data-path="introduction-4.html"><a href="introduction-4.html"><i class="fa fa-check"></i><b>16</b> Introduction</a></li>
+<li class="chapter" data-level="17" data-path="resources.html"><a href="resources.html"><i class="fa fa-check"></i><b>17</b> Resources</a><ul>
+<li class="chapter" data-level="17.1" data-path="resources.html"><a href="resources.html#resources-1"><i class="fa fa-check"></i><b>17.1</b> Resources</a><ul>
+<li class="chapter" data-level="17.1.1" data-path="resources.html"><a href="resources.html#r"><i class="fa fa-check"></i><b>17.1.1</b> R</a></li>
+<li class="chapter" data-level="17.1.2" data-path="resources.html"><a href="resources.html#rstudio"><i class="fa fa-check"></i><b>17.1.2</b> RStudio</a></li>
+<li class="chapter" data-level="17.1.3" data-path="resources.html"><a href="resources.html#r-markdown"><i class="fa fa-check"></i><b>17.1.3</b> R Markdown</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="classification.html"><a href="classification.html#building-a-classifier"><i class="fa fa-check"></i><b>6.3</b> Building a Classifier</a></li>
-<li class="chapter" data-level="6.4" data-path="classification.html"><a href="classification.html#modeling-4"><i class="fa fa-check"></i><b>6.4</b> Modeling</a><ul>
-<li class="chapter" data-level="6.4.1" data-path="classification.html"><a href="classification.html#linear-models-1"><i class="fa fa-check"></i><b>6.4.1</b> Linear Models</a></li>
-<li class="chapter" data-level="6.4.2" data-path="classification.html"><a href="classification.html#k-nearest-neighbors-1"><i class="fa fa-check"></i><b>6.4.2</b> k-Nearest Neighbors</a></li>
-<li class="chapter" data-level="6.4.3" data-path="classification.html"><a href="classification.html#decision-trees-1"><i class="fa fa-check"></i><b>6.4.3</b> Decision Trees</a></li>
+<li class="chapter" data-level="17.2" data-path="resources.html"><a href="resources.html#bsl-idioms"><i class="fa fa-check"></i><b>17.2</b> BSL Idioms</a><ul>
+<li class="chapter" data-level="17.2.1" data-path="resources.html"><a href="resources.html#reference-style"><i class="fa fa-check"></i><b>17.2.1</b> Reference Style</a></li>
+<li class="chapter" data-level="17.2.2" data-path="resources.html"><a href="resources.html#bsl-style-overrides"><i class="fa fa-check"></i><b>17.2.2</b> BSL Style Overrides</a></li>
+<li class="chapter" data-level="17.2.3" data-path="resources.html"><a href="resources.html#objects-and-functions"><i class="fa fa-check"></i><b>17.2.3</b> Objects and Functions</a></li>
+<li class="chapter" data-level="17.2.4" data-path="resources.html"><a href="resources.html#print-versus-return"><i class="fa fa-check"></i><b>17.2.4</b> Print versus Return</a></li>
+<li class="chapter" data-level="17.2.5" data-path="resources.html"><a href="resources.html#help"><i class="fa fa-check"></i><b>17.2.5</b> Help</a></li>
+<li class="chapter" data-level="17.2.6" data-path="resources.html"><a href="resources.html#keyboard-shortcuts"><i class="fa fa-check"></i><b>17.2.6</b> Keyboard Shortcuts</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="classification.html"><a href="classification.html#misc-todo-stuff"><i class="fa fa-check"></i><b>6.5</b> MISC TODO STUFF</a></li>
+<li class="chapter" data-level="17.3" data-path="resources.html"><a href="resources.html#common-issues"><i class="fa fa-check"></i><b>17.3</b> Common Issues</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>7</b> Resampling</a><ul>
-<li class="chapter" data-level="7.1" data-path="resampling.html"><a href="resampling.html#stat-432-materials-1"><i class="fa fa-check"></i><b>7.1</b> STAT 432 Materials</a></li>
-<li class="chapter" data-level="7.2" data-path="resampling.html"><a href="resampling.html#validation-set-approach"><i class="fa fa-check"></i><b>7.2</b> Validation-Set Approach</a></li>
-<li class="chapter" data-level="7.3" data-path="resampling.html"><a href="resampling.html#cross-validation"><i class="fa fa-check"></i><b>7.3</b> Cross-Validation</a></li>
-<li class="chapter" data-level="7.4" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>7.4</b> Test Data</a></li>
-<li class="chapter" data-level="7.5" data-path="resampling.html"><a href="resampling.html#misc-todos-1"><i class="fa fa-check"></i><b>7.5</b> MISC TODOS</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="supervised-learning.html"><a href="supervised-learning.html"><i class="fa fa-check"></i><b>8</b> Supervised Learning</a></li>
-<li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="probability-1.html"><a href="probability-1.html"><i class="fa fa-check"></i><b>A</b> Probability</a><ul>
-<li class="chapter" data-level="A.1" data-path="probability-1.html"><a href="probability-1.html#probability-models"><i class="fa fa-check"></i><b>A.1</b> Probability Models</a></li>
-<li class="chapter" data-level="A.2" data-path="probability-1.html"><a href="probability-1.html#probability-axioms"><i class="fa fa-check"></i><b>A.2</b> Probability Axioms</a></li>
-<li class="chapter" data-level="A.3" data-path="probability-1.html"><a href="probability-1.html#probability-rules"><i class="fa fa-check"></i><b>A.3</b> Probability Rules</a></li>
-<li class="chapter" data-level="A.4" data-path="probability-1.html"><a href="probability-1.html#random-variables"><i class="fa fa-check"></i><b>A.4</b> Random Variables</a><ul>
-<li class="chapter" data-level="A.4.1" data-path="probability-1.html"><a href="probability-1.html#distributions"><i class="fa fa-check"></i><b>A.4.1</b> Distributions</a></li>
-<li class="chapter" data-level="A.4.2" data-path="probability-1.html"><a href="probability-1.html#discrete-random-variables"><i class="fa fa-check"></i><b>A.4.2</b> Discrete Random Variables</a></li>
-<li class="chapter" data-level="A.4.3" data-path="probability-1.html"><a href="probability-1.html#continuous-random-variables"><i class="fa fa-check"></i><b>A.4.3</b> Continuous Random Variables</a></li>
-<li class="chapter" data-level="A.4.4" data-path="probability-1.html"><a href="probability-1.html#several-random-variables"><i class="fa fa-check"></i><b>A.4.4</b> Several Random Variables</a></li>
-</ul></li>
-<li class="chapter" data-level="A.5" data-path="probability-1.html"><a href="probability-1.html#expectations"><i class="fa fa-check"></i><b>A.5</b> Expectations</a></li>
-<li class="chapter" data-level="A.6" data-path="probability-1.html"><a href="probability-1.html#likelihood"><i class="fa fa-check"></i><b>A.6</b> Likelihood</a></li>
-<li class="chapter" data-level="A.7" data-path="probability-1.html"><a href="probability-1.html#videos"><i class="fa fa-check"></i><b>A.7</b> Videos</a></li>
-<li class="chapter" data-level="A.8" data-path="probability-1.html"><a href="probability-1.html#references"><i class="fa fa-check"></i><b>A.8</b> References</a></li>
-</ul></li>
+<li class="part"><span><b>VI Analysis</b></span></li>
+<li class="chapter" data-level="18" data-path="introduction-5.html"><a href="introduction-5.html"><i class="fa fa-check"></i><b>18</b> Introduction</a></li>
+<li class="part"><span><b>VII Appendix</b></span></li>
+<li class="chapter" data-level="19" data-path="introduction-6.html"><a href="introduction-6.html"><i class="fa fa-check"></i><b>19</b> Introduction</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/daviddalpiaz/bsl" target="blank">&copy; 2019 David Dalpiaz</a></li>
 
@@ -272,7 +290,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="regression" class="section level1">
-<h1><span class="header-section-number">Chapter 4</span> Regression</h1>
+<h1><span class="header-section-number">Chapter 9</span> Regression</h1>
 <p><strong>BLUF</strong>:
 Use <strong>regression</strong>, which is one of the two <strong>supervised learning</strong> tasks (the other being <strong>classification</strong>) to make predictions of new observations of <strong>numeric <em>response</em> variables.</strong>
 Start by randomly splitting the data (which includes both the response and the <strong>features</strong>) into a <strong>test set</strong> and a <strong>training set</strong>.
@@ -295,14 +313,14 @@ Although it ignores some practical and statistical considerations (which will be
 <!-- - TODO: pairs plot? -->
 <!-- - TODO: check document in development folder --></li>
 </ul>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1"><span class="kw">library</span>(tibble)</a>
-<a class="sourceLine" id="cb65-2" data-line-number="2"><span class="kw">library</span>(caret)</a>
-<a class="sourceLine" id="cb65-3" data-line-number="3"><span class="kw">library</span>(rpart)</a>
-<a class="sourceLine" id="cb65-4" data-line-number="4"><span class="kw">library</span>(knitr)</a>
-<a class="sourceLine" id="cb65-5" data-line-number="5"><span class="kw">library</span>(kableExtra)</a>
-<a class="sourceLine" id="cb65-6" data-line-number="6"><span class="kw">library</span>(dplyr)</a></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="kw">library</span>(tibble)</a>
+<a class="sourceLine" id="cb50-2" data-line-number="2"><span class="kw">library</span>(caret)</a>
+<a class="sourceLine" id="cb50-3" data-line-number="3"><span class="kw">library</span>(rpart)</a>
+<a class="sourceLine" id="cb50-4" data-line-number="4"><span class="kw">library</span>(knitr)</a>
+<a class="sourceLine" id="cb50-5" data-line-number="5"><span class="kw">library</span>(kableExtra)</a>
+<a class="sourceLine" id="cb50-6" data-line-number="6"><span class="kw">library</span>(dplyr)</a></code></pre></div>
 <div id="setup" class="section level2">
-<h2><span class="header-section-number">4.1</span> Setup</h2>
+<h2><span class="header-section-number">9.1</span> Setup</h2>
 <p><span class="math display">\[
 Y = f(X) + \epsilon
 \]</span></p>
@@ -330,32 +348,32 @@ f(x) = \mathbb{E}[Y \mid X = x]
 <ul>
 <li>TODO: want to learn these “things” which are regression functions</li>
 </ul>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1">line_reg_fun =<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb66-2" data-line-number="2">  x</a>
-<a class="sourceLine" id="cb66-3" data-line-number="3">}</a></code></pre></div>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1">quad_reg_fun =<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb67-2" data-line-number="2">  x <span class="op">^</span><span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb67-3" data-line-number="3">}</a></code></pre></div>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1">sine_reg_fun =<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb68-2" data-line-number="2">  <span class="kw">sin</span>(x)</a>
-<a class="sourceLine" id="cb68-3" data-line-number="3">}</a></code></pre></div>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1">gen_sim_data =<span class="st"> </span><span class="cf">function</span>(f, <span class="dt">sample_size =</span> <span class="dv">50</span>, <span class="dt">sd =</span> <span class="dv">1</span>) {</a>
-<a class="sourceLine" id="cb69-2" data-line-number="2">  x =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size, <span class="dt">min =</span> <span class="dv">-5</span>, <span class="dt">max =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb69-3" data-line-number="3">  y =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">mean =</span> <span class="kw">f</span>(x), <span class="dt">sd =</span> sd)</a>
-<a class="sourceLine" id="cb69-4" data-line-number="4">  tibble<span class="op">::</span><span class="kw">tibble</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)</a>
-<a class="sourceLine" id="cb69-5" data-line-number="5">}</a></code></pre></div>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb70-2" data-line-number="2">line_data =<span class="st"> </span><span class="kw">gen_sim_data</span>(<span class="dt">f =</span> line_reg_fun, <span class="dt">sample_size =</span> <span class="dv">50</span>, <span class="dt">sd =</span> <span class="fl">1.0</span>)</a>
-<a class="sourceLine" id="cb70-3" data-line-number="3">quad_data =<span class="st"> </span><span class="kw">gen_sim_data</span>(<span class="dt">f =</span> quad_reg_fun, <span class="dt">sample_size =</span> <span class="dv">50</span>, <span class="dt">sd =</span> <span class="fl">2.0</span>)</a>
-<a class="sourceLine" id="cb70-4" data-line-number="4">sine_data =<span class="st"> </span><span class="kw">gen_sim_data</span>(<span class="dt">f =</span> sine_reg_fun, <span class="dt">sample_size =</span> <span class="dv">50</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb71-2" data-line-number="2">line_data_unseen =<span class="st"> </span><span class="kw">gen_sim_data</span>(<span class="dt">f =</span> line_reg_fun, <span class="dt">sample_size =</span> <span class="dv">100000</span>, <span class="dt">sd =</span> <span class="fl">1.0</span>)</a>
-<a class="sourceLine" id="cb71-3" data-line-number="3">quad_data_unseen =<span class="st"> </span><span class="kw">gen_sim_data</span>(<span class="dt">f =</span> quad_reg_fun, <span class="dt">sample_size =</span> <span class="dv">100000</span>, <span class="dt">sd =</span> <span class="fl">2.0</span>)</a>
-<a class="sourceLine" id="cb71-4" data-line-number="4">sine_data_unseen =<span class="st"> </span><span class="kw">gen_sim_data</span>(<span class="dt">f =</span> sine_reg_fun, <span class="dt">sample_size =</span> <span class="dv">100000</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>)</a></code></pre></div>
-<p><img src="04-regression_files/figure-html/unnamed-chunk-10-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">line_reg_fun =<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb51-2" data-line-number="2">  x</a>
+<a class="sourceLine" id="cb51-3" data-line-number="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1">quad_reg_fun =<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb52-2" data-line-number="2">  x <span class="op">^</span><span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb52-3" data-line-number="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1">sine_reg_fun =<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb53-2" data-line-number="2">  <span class="kw">sin</span>(x)</a>
+<a class="sourceLine" id="cb53-3" data-line-number="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1">gen_sim_data =<span class="st"> </span><span class="cf">function</span>(f, <span class="dt">sample_size =</span> <span class="dv">50</span>, <span class="dt">sd =</span> <span class="dv">1</span>) {</a>
+<a class="sourceLine" id="cb54-2" data-line-number="2">  x =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size, <span class="dt">min =</span> <span class="dv">-5</span>, <span class="dt">max =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb54-3" data-line-number="3">  y =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">mean =</span> <span class="kw">f</span>(x), <span class="dt">sd =</span> sd)</a>
+<a class="sourceLine" id="cb54-4" data-line-number="4">  tibble<span class="op">::</span><span class="kw">tibble</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)</a>
+<a class="sourceLine" id="cb54-5" data-line-number="5">}</a></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb55-2" data-line-number="2">line_data =<span class="st"> </span><span class="kw">gen_sim_data</span>(<span class="dt">f =</span> line_reg_fun, <span class="dt">sample_size =</span> <span class="dv">50</span>, <span class="dt">sd =</span> <span class="fl">1.0</span>)</a>
+<a class="sourceLine" id="cb55-3" data-line-number="3">quad_data =<span class="st"> </span><span class="kw">gen_sim_data</span>(<span class="dt">f =</span> quad_reg_fun, <span class="dt">sample_size =</span> <span class="dv">50</span>, <span class="dt">sd =</span> <span class="fl">2.0</span>)</a>
+<a class="sourceLine" id="cb55-4" data-line-number="4">sine_data =<span class="st"> </span><span class="kw">gen_sim_data</span>(<span class="dt">f =</span> sine_reg_fun, <span class="dt">sample_size =</span> <span class="dv">50</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb56-2" data-line-number="2">line_data_unseen =<span class="st"> </span><span class="kw">gen_sim_data</span>(<span class="dt">f =</span> line_reg_fun, <span class="dt">sample_size =</span> <span class="dv">100000</span>, <span class="dt">sd =</span> <span class="fl">1.0</span>)</a>
+<a class="sourceLine" id="cb56-3" data-line-number="3">quad_data_unseen =<span class="st"> </span><span class="kw">gen_sim_data</span>(<span class="dt">f =</span> quad_reg_fun, <span class="dt">sample_size =</span> <span class="dv">100000</span>, <span class="dt">sd =</span> <span class="fl">2.0</span>)</a>
+<a class="sourceLine" id="cb56-4" data-line-number="4">sine_data_unseen =<span class="st"> </span><span class="kw">gen_sim_data</span>(<span class="dt">f =</span> sine_reg_fun, <span class="dt">sample_size =</span> <span class="dv">100000</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>)</a></code></pre></div>
+<p><img src="03-02-regression_files/figure-html/unnamed-chunk-10-1.png" width="1152" style="display: block; margin: auto;" /></p>
 </div>
 <div id="modeling-3" class="section level2">
-<h2><span class="header-section-number">4.2</span> Modeling</h2>
+<h2><span class="header-section-number">9.2</span> Modeling</h2>
 <ul>
 <li>TODO: for now, only use formula syntax
 <ul>
@@ -364,29 +382,29 @@ f(x) = \mathbb{E}[Y \mid X = x]
 </ul></li>
 </ul>
 <div id="linear-models" class="section level3">
-<h3><span class="header-section-number">4.2.1</span> Linear Models</h3>
+<h3><span class="header-section-number">9.2.1</span> Linear Models</h3>
 <ul>
 <li>TODO: assume form of mean relationship. linear combination</li>
 <li>TODO: how to go from y = b0 + b1x1 + … + eps to <code>lm(y ~ stuff)</code></li>
 <li>TODO: least squares, least squares is least squares (difference in assumptions)</li>
 </ul>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1">lm_line_int =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,                    <span class="dt">data =</span> line_data)</a>
-<a class="sourceLine" id="cb72-2" data-line-number="2">lm_line_slr =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">1</span>),  <span class="dt">data =</span> line_data)</a>
-<a class="sourceLine" id="cb72-3" data-line-number="3">lm_line_ply =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">20</span>), <span class="dt">data =</span> line_data)</a></code></pre></div>
-<p><img src="04-regression_files/figure-html/unnamed-chunk-13-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1">lm_line_int =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,                    <span class="dt">data =</span> line_data)</a>
+<a class="sourceLine" id="cb57-2" data-line-number="2">lm_line_slr =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">1</span>),  <span class="dt">data =</span> line_data)</a>
+<a class="sourceLine" id="cb57-3" data-line-number="3">lm_line_ply =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">20</span>), <span class="dt">data =</span> line_data)</a></code></pre></div>
+<p><img src="03-02-regression_files/figure-html/unnamed-chunk-13-1.png" width="1152" style="display: block; margin: auto;" /></p>
 </div>
 <div id="k-nearest-neighbors" class="section level3">
-<h3><span class="header-section-number">4.2.2</span> k-Nearest Neighbors</h3>
+<h3><span class="header-section-number">9.2.2</span> k-Nearest Neighbors</h3>
 <ul>
 <li>TODO: <code>caret::knnreg()</code></li>
 <li>TODO: for now, don’t worry about scaling, factors, etc.</li>
 </ul>
 <div id="linear-data" class="section level4">
-<h4><span class="header-section-number">4.2.2.1</span> Linear Data</h4>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" data-line-number="1">knn_line_<span class="dv">25</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> line_data, <span class="dt">k =</span> <span class="dv">25</span>)</a>
-<a class="sourceLine" id="cb73-2" data-line-number="2">knn_line_<span class="dv">05</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> line_data, <span class="dt">k =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb73-3" data-line-number="3">knn_line_<span class="dv">01</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> line_data, <span class="dt">k =</span> <span class="dv">1</span>)</a></code></pre></div>
-<p><img src="04-regression_files/figure-html/unnamed-chunk-15-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<h4><span class="header-section-number">9.2.2.1</span> Linear Data</h4>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1">knn_line_<span class="dv">25</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> line_data, <span class="dt">k =</span> <span class="dv">25</span>)</a>
+<a class="sourceLine" id="cb58-2" data-line-number="2">knn_line_<span class="dv">05</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> line_data, <span class="dt">k =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb58-3" data-line-number="3">knn_line_<span class="dv">01</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> line_data, <span class="dt">k =</span> <span class="dv">1</span>)</a></code></pre></div>
+<p><img src="03-02-regression_files/figure-html/unnamed-chunk-15-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -439,11 +457,11 @@ Test RMSE
 </table>
 </div>
 <div id="quadratic-data" class="section level4">
-<h4><span class="header-section-number">4.2.2.2</span> Quadratic Data</h4>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1">knn_quad_<span class="dv">25</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> quad_data, <span class="dt">k =</span> <span class="dv">25</span>)</a>
-<a class="sourceLine" id="cb74-2" data-line-number="2">knn_quad_<span class="dv">05</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> quad_data, <span class="dt">k =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb74-3" data-line-number="3">knn_quad_<span class="dv">01</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> quad_data, <span class="dt">k =</span> <span class="dv">1</span>)</a></code></pre></div>
-<p><img src="04-regression_files/figure-html/unnamed-chunk-18-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<h4><span class="header-section-number">9.2.2.2</span> Quadratic Data</h4>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1">knn_quad_<span class="dv">25</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> quad_data, <span class="dt">k =</span> <span class="dv">25</span>)</a>
+<a class="sourceLine" id="cb59-2" data-line-number="2">knn_quad_<span class="dv">05</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> quad_data, <span class="dt">k =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb59-3" data-line-number="3">knn_quad_<span class="dv">01</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> quad_data, <span class="dt">k =</span> <span class="dv">1</span>)</a></code></pre></div>
+<p><img src="03-02-regression_files/figure-html/unnamed-chunk-18-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -496,11 +514,11 @@ Test RMSE
 </table>
 </div>
 <div id="sinusoidal-data" class="section level4">
-<h4><span class="header-section-number">4.2.2.3</span> Sinusoidal Data</h4>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" data-line-number="1">knn_sine_<span class="dv">25</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sine_data, <span class="dt">k =</span> <span class="dv">25</span>)</a>
-<a class="sourceLine" id="cb75-2" data-line-number="2">knn_sine_<span class="dv">05</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sine_data, <span class="dt">k =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb75-3" data-line-number="3">knn_sine_<span class="dv">01</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sine_data, <span class="dt">k =</span> <span class="dv">1</span>)</a></code></pre></div>
-<p><img src="04-regression_files/figure-html/unnamed-chunk-21-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<h4><span class="header-section-number">9.2.2.3</span> Sinusoidal Data</h4>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1">knn_sine_<span class="dv">25</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sine_data, <span class="dt">k =</span> <span class="dv">25</span>)</a>
+<a class="sourceLine" id="cb60-2" data-line-number="2">knn_sine_<span class="dv">05</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sine_data, <span class="dt">k =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb60-3" data-line-number="3">knn_sine_<span class="dv">01</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sine_data, <span class="dt">k =</span> <span class="dv">1</span>)</a></code></pre></div>
+<p><img src="03-02-regression_files/figure-html/unnamed-chunk-21-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -554,7 +572,7 @@ Test RMSE
 </div>
 </div>
 <div id="decision-trees" class="section level3">
-<h3><span class="header-section-number">4.2.3</span> Decision Trees</h3>
+<h3><span class="header-section-number">9.2.3</span> Decision Trees</h3>
 <ul>
 <li>TODO: <code>rpart::rpart()</code></li>
 <li>TODO: <a href="https://cran.r-project.org/web/packages/rpart/vignettes/longintro.pdf" class="uri">https://cran.r-project.org/web/packages/rpart/vignettes/longintro.pdf</a></li>
@@ -562,11 +580,11 @@ Test RMSE
 <li>TODO: maybe notes about pruning and CV</li>
 </ul>
 <div id="linear-data-1" class="section level4">
-<h4><span class="header-section-number">4.2.3.1</span> Linear Data</h4>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1">tree_line_<span class="dv">010</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> line_data, <span class="dt">cp =</span> <span class="fl">0.10</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb76-2" data-line-number="2">tree_line_<span class="dv">001</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> line_data, <span class="dt">cp =</span> <span class="fl">0.01</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb76-3" data-line-number="3">tree_line_<span class="dv">000</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> line_data, <span class="dt">cp =</span> <span class="fl">0.00</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a></code></pre></div>
-<p><img src="04-regression_files/figure-html/unnamed-chunk-24-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<h4><span class="header-section-number">9.2.3.1</span> Linear Data</h4>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1">tree_line_<span class="dv">010</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> line_data, <span class="dt">cp =</span> <span class="fl">0.10</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb61-2" data-line-number="2">tree_line_<span class="dv">001</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> line_data, <span class="dt">cp =</span> <span class="fl">0.01</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb61-3" data-line-number="3">tree_line_<span class="dv">000</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> line_data, <span class="dt">cp =</span> <span class="fl">0.00</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="03-02-regression_files/figure-html/unnamed-chunk-24-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -619,11 +637,11 @@ Test RMSE
 </table>
 </div>
 <div id="quadratic-data-1" class="section level4">
-<h4><span class="header-section-number">4.2.3.2</span> Quadratic Data</h4>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1">tree_quad_<span class="dv">010</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> quad_data, <span class="dt">cp =</span> <span class="fl">0.10</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb77-2" data-line-number="2">tree_quad_<span class="dv">001</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> quad_data, <span class="dt">cp =</span> <span class="fl">0.01</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb77-3" data-line-number="3">tree_quad_<span class="dv">000</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> quad_data, <span class="dt">cp =</span> <span class="fl">0.00</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a></code></pre></div>
-<p><img src="04-regression_files/figure-html/unnamed-chunk-27-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<h4><span class="header-section-number">9.2.3.2</span> Quadratic Data</h4>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1">tree_quad_<span class="dv">010</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> quad_data, <span class="dt">cp =</span> <span class="fl">0.10</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb62-2" data-line-number="2">tree_quad_<span class="dv">001</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> quad_data, <span class="dt">cp =</span> <span class="fl">0.01</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb62-3" data-line-number="3">tree_quad_<span class="dv">000</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> quad_data, <span class="dt">cp =</span> <span class="fl">0.00</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="03-02-regression_files/figure-html/unnamed-chunk-27-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -676,11 +694,11 @@ Test RMSE
 </table>
 </div>
 <div id="sinusoidal-data-1" class="section level4">
-<h4><span class="header-section-number">4.2.3.3</span> Sinusoidal Data</h4>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1">tree_sine_<span class="dv">010</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sine_data, <span class="dt">cp =</span> <span class="fl">0.10</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb78-2" data-line-number="2">tree_sine_<span class="dv">001</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sine_data, <span class="dt">cp =</span> <span class="fl">0.01</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb78-3" data-line-number="3">tree_sine_<span class="dv">000</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sine_data, <span class="dt">cp =</span> <span class="fl">0.00</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a></code></pre></div>
-<p><img src="04-regression_files/figure-html/unnamed-chunk-30-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<h4><span class="header-section-number">9.2.3.3</span> Sinusoidal Data</h4>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1">tree_sine_<span class="dv">010</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sine_data, <span class="dt">cp =</span> <span class="fl">0.10</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb63-2" data-line-number="2">tree_sine_<span class="dv">001</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sine_data, <span class="dt">cp =</span> <span class="fl">0.01</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb63-3" data-line-number="3">tree_sine_<span class="dv">000</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sine_data, <span class="dt">cp =</span> <span class="fl">0.00</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="03-02-regression_files/figure-html/unnamed-chunk-30-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -735,7 +753,7 @@ Test RMSE
 </div>
 </div>
 <div id="procedure" class="section level2">
-<h2><span class="header-section-number">4.3</span> Procedure</h2>
+<h2><span class="header-section-number">9.3</span> Procedure</h2>
 <ul>
 <li>TODO: Look at data</li>
 <li>TODO: Pick candiate models</li>
@@ -748,7 +766,7 @@ Test RMSE
 </ul>
 </div>
 <div id="data-splitting" class="section level2">
-<h2><span class="header-section-number">4.4</span> Data Splitting</h2>
+<h2><span class="header-section-number">9.4</span> Data Splitting</h2>
 <ul>
 <li>TODO: want to generalize to unseen data</li>
 <li><p>TODO: for now, all variables should either be numeric, or factor</p></li>
@@ -771,7 +789,7 @@ Test RMSE
 \]</span></p>
 </div>
 <div id="metrics" class="section level2">
-<h2><span class="header-section-number">4.5</span> Metrics</h2>
+<h2><span class="header-section-number">9.5</span> Metrics</h2>
 <ul>
 <li>TODO: RMSE</li>
 </ul>
@@ -795,14 +813,14 @@ Test RMSE
 <li>but probably don’t use</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1">calc_rmse =<span class="st"> </span><span class="cf">function</span>(model, data, response) {</a>
-<a class="sourceLine" id="cb79-2" data-line-number="2">  actual =<span class="st"> </span>data[[response]]</a>
-<a class="sourceLine" id="cb79-3" data-line-number="3">  predicted =<span class="st"> </span><span class="kw">predict</span>(model, data)</a>
-<a class="sourceLine" id="cb79-4" data-line-number="4">  <span class="kw">sqrt</span>(<span class="kw">mean</span>((actual <span class="op">-</span><span class="st"> </span>predicted) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb79-5" data-line-number="5">}</a></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1">calc_rmse =<span class="st"> </span><span class="cf">function</span>(model, data, response) {</a>
+<a class="sourceLine" id="cb64-2" data-line-number="2">  actual =<span class="st"> </span>data[[response]]</a>
+<a class="sourceLine" id="cb64-3" data-line-number="3">  predicted =<span class="st"> </span><span class="kw">predict</span>(model, data)</a>
+<a class="sourceLine" id="cb64-4" data-line-number="4">  <span class="kw">sqrt</span>(<span class="kw">mean</span>((actual <span class="op">-</span><span class="st"> </span>predicted) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb64-5" data-line-number="5">}</a></code></pre></div>
 </div>
 <div id="model-complexity" class="section level2">
-<h2><span class="header-section-number">4.6</span> Model Complexity</h2>
+<h2><span class="header-section-number">9.6</span> Model Complexity</h2>
 <ul>
 <li>TODO: what determines the complexity of the above models?
 <ul>
@@ -813,7 +831,7 @@ Test RMSE
 </ul>
 </div>
 <div id="overfitting" class="section level2">
-<h2><span class="header-section-number">4.7</span> Overfitting</h2>
+<h2><span class="header-section-number">9.7</span> Overfitting</h2>
 <ul>
 <li>TODO: too complex</li>
 <li>TODO: usual picture with training and validation error</li>
@@ -821,21 +839,21 @@ Test RMSE
 </ul>
 </div>
 <div id="multiple-features" class="section level2">
-<h2><span class="header-section-number">4.8</span> Multiple Features</h2>
+<h2><span class="header-section-number">9.8</span> Multiple Features</h2>
 <ul>
 <li>TODO: more features = more complex</li>
 <li>TODO: how do the three models add additional features?</li>
 </ul>
 </div>
 <div id="example-analysis" class="section level2">
-<h2><span class="header-section-number">4.9</span> Example Analysis</h2>
+<h2><span class="header-section-number">9.9</span> Example Analysis</h2>
 <ul>
 <li><p>TODO: Diamonds analysis</p></li>
 <li><p>TODO: model.matrix()</p></li>
 </ul>
 </div>
 <div id="misc-todos" class="section level2">
-<h2><span class="header-section-number">4.10</span> MISC TODOS</h2>
+<h2><span class="header-section-number">9.10</span> MISC TODOS</h2>
 <ul>
 <li>lex fridman with ian: dataset (represent), model, optimize
 <ul>
@@ -852,7 +870,7 @@ Test RMSE
           </div>
         </div>
       </div>
-<a href="estimation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="introduction-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="biasvariance-tradeoff.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
@@ -885,7 +903,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/daviddalpiaz/bsl/edit/master/04-regression.Rmd",
+"link": "https://github.com/daviddalpiaz/bsl/edit/master/03-02-regression.Rmd",
 "text": "Edit"
 },
 "history": {
