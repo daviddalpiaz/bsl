@@ -1,0 +1,214 @@
+# Regularization
+
+```{r resampling_opts, include = FALSE}
+knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
+```
+
+```{r, message=FALSE, warning=FALSE}
+library(glmnet)
+```
+
+
+## adding bias to reduce variance
+
+```{r}
+# this is a bad function name
+dgp = function(sample_size = 25) {
+  x = runif(n = sample_size)
+  y = 0 + 5 * x + rnorm(n = sample_size)
+  data.frame(x, y)
+}
+```
+
+```{r}
+# maybe write a function for each
+beta_ls = replicate(n = 1000, coef(lm(y ~ 0 + x, data = dgp()))["x"])
+beta_05 = replicate(n = 1000, min(coef(lm(y ~ 0 + x, data = dgp()))["x"], 5))
+beta_04 = replicate(n = 1000, min(coef(lm(y ~ 0 + x, data = dgp()))["x"], 4))
+```
+
+```{r}
+# add MSE, add names, make tibble
+c(mean(beta_ls) - 5, sd(beta_ls))
+c(mean(beta_05) - 5, sd(beta_05))
+c(mean(beta_04) - 5, sd(beta_04))
+```
+
+## scaling matters?
+
+```{r}
+dgp = function(sample_size = 25) {
+  x = runif(n = sample_size)
+  y = -2 + 5 * x + rnorm(n = sample_size)
+  data.frame(x, y)
+}
+```
+
+
+```{r}
+asdf = dgp()
+predict(lm(y ~ x, data = asdf))
+
+asdf$x = scale(asdf$x)
+predict(lm(y ~ x, data = asdf))
+```
+
+## moving to two dimensions
+
+```{r}
+gen_linear_data = function() {
+  x1 = rnorm(100)
+  x2 = rnorm(100)
+  y = 0 + -5 * x1 + 5 * x2 + rnorm(100)
+  data.frame(x1, x2, y)
+}
+```
+
+```{r}
+data = gen_linear_data()
+beta = expand.grid(beta_1 = seq(-10, 10, 0.1),
+                   beta_2 = seq(-10, 10, 0.1))
+beta_error = rep(0, dim(beta)[1])
+for (i in 1:dim(beta)[1]){
+  beta_error[i] = with(data, sum((y - (beta$beta_1[i] * x1 + beta$beta_2[i] * x2)) ^ 2 ))
+}
+```
+
+```{r}
+# TODO: make this into a function
+# TODO: add ridge constraint
+contour(x = seq(-10, 10, 0.1), 
+        y = seq(-10, 10, 0.1), 
+        z = matrix(beta_error, 
+                   nrow = length(seq(-10, 10, 0.1)),
+                   ncol = length(seq(-10, 10, 0.1))),
+        nlevels = 50,
+        col = "darkgrey"
+)
+
+abline(h = 0)
+abline(v = 0)
+a = 4
+segments(0, a, a, 0, col = "dodgerblue", lwd = 2)
+segments(0, -a, a, 0, col = "dodgerblue", lwd = 2)
+segments(-a, 0, 0, a, col = "dodgerblue", lwd = 2)
+segments(-a, 0, 0, -a, col = "dodgerblue", lwd = 2)
+points(beta[which.min(beta_error), ], col = "darkorange", pch = 20, cex = 2)
+```
+
+
+
+
+## boston is boring
+
+```{r}
+bstn = MASS::Boston
+
+bstn$chas = factor(bstn$chas)
+bstn$rad = factor(bstn$rad)
+
+levels(bstn$chas)
+levels(bstn$rad)
+```
+
+```{r}
+lm(medv ~ ., data = bstn)
+```
+
+```{r}
+model.matrix(lm(medv ~ ., data = bstn))
+```
+
+```{r}
+bstn_x = model.matrix(lm(medv ~ ., data = bstn))
+bstn_y = bstn$medv
+```
+
+```{r}
+coef(lm.fit(x = bstn_x, y = bstn_y))
+```
+
+```{r}
+bstn_x = model.matrix(lm(medv ~ ., data = bstn))[, -1]
+bstn_y = bstn$medv
+```
+
+```{r}
+par(mfrow = c(1, 2))
+plot(glmnet(x = bstn_x, y = bstn_y, alpha = 0), xvar = "lambda")
+grid()
+plot(glmnet(x = bstn_x, y = bstn_y, alpha = 1), xvar = "lambda")
+grid()
+```
+
+```{r}
+par(mfrow = c(1, 2))
+plot(cv.glmnet(x = bstn_x, y = bstn_y, alpha = 0))
+plot(cv.glmnet(x = bstn_x, y = bstn_y, alpha = 1))
+```
+
+```{r}
+bstn_ridge = cv.glmnet(x = bstn_x, y = bstn_y, alpha = 0)
+bstn_lasso = cv.glmnet(x = bstn_x, y = bstn_y, alpha = 1)
+```
+
+
+```{r}
+library(broom)
+```
+
+```{r}
+tidy(bstn_lasso)
+glance(bstn_lasso)
+```
+
+
+```{r}
+predict(bstn_lasso, newx = bstn_x[1:10,], type = "link")
+```
+
+```{r}
+predict(bstn_lasso, newx = bstn_x[1:10,], type = "response")
+```
+
+```{r}
+predict(bstn_lasso, type = "coefficients", s=c("lambda.1se","lambda.min"))
+```
+
+```{r}
+predict(bstn_lasso, type = "nonzero")
+```
+
+
+## some more simulation
+
+```{r}
+diag(100)
+```
+
+
+```{r}
+p = 100
+A = matrix(runif(p ^ 2) * 2 - 1, ncol = p)
+Sigma = t(A) %*% A
+sample_size = 500
+X = MASS::mvrnorm(n = sample_size, mu = rep(0, p), Sigma = Sigma)
+beta = ifelse(sample(c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1), size = p, replace = TRUE), runif(n = p, -1, 1), 0) * 2
+y = X %*% beta + rnorm(n = sample_size, sd = 4)
+fit = glmnet::cv.glmnet(x = X, y = y, alpha = 1)
+sqrt(min(fit$cvm))
+```
+
+```{r}
+plot(fit, xlim = c(-6, 1), ylim = c(10, 30))
+```
+
+
+```{r}
+# type.measure = "class"
+```
+
+
+
+Least Absolute Shrinkage and Selection Operator
+

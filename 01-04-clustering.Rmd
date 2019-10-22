@@ -1,0 +1,267 @@
+# Clustering: Basketball Players
+
+```{r, include = FALSE} 
+knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
+```
+
+```{r, message = FALSE, warning = FALSE}
+library(readr)
+library(tibble)
+library(dplyr)
+library(purrr)
+library(ggplot2)
+library(ggridges)
+library(lubridate)
+library(randomForest)
+library(rpart)
+library(rpart.plot)
+library(cluster)
+library(caret)
+library(factoextra)
+library(rsample)
+library(janitor)
+library(rvest)
+library(dendextend)
+library(knitr)
+library(kableExtra)
+library(ggthemes)
+```
+
+```{r, echo = FALSE}
+theme_set(new = theme_light())
+```
+
+- TODO: Show package messaging? check conflicts!
+- TODO: Should this be split into three analyses with different packages?
+
+## Background
+
+- https://www.youtube.com/watch?v=cuLprHh_BRg
+- https://www.youtube.com/watch?v=1FBwSO_1Mb8
+- https://www.basketball-reference.com/leagues/NBA_2019.html
+- inspiration here, and others: http://blog.schochastics.net/post/analyzing-nba-player-data-ii-clustering/
+
+## Data
+
+- https://www.basketball-reference.com/leagues/NBA_2019_totals.html
+- https://www.basketball-reference.com/leagues/NBA_2019_per_minute.html
+- https://www.basketball-reference.com/leagues/NBA_2019_per_poss.html
+- https://www.basketball-reference.com/leagues/NBA_2019_advanced.html
+
+```{r, echo = FALSE}
+# TODO: this function should be more modular
+
+scrape_nba_season_player_stats = function(season = 2019) {
+
+  # totals source
+  totals_url = paste0("https://www.basketball-reference.com/leagues/NBA_", 
+                      season, 
+                      "_totals.html")
+
+  # scrape
+  stats_totals = read_html(totals_url) %>%
+    html_table() %>%
+    .[[1]] %>%
+    as_tibble(.name_repair = "minimal")
+
+  # clean
+  stats_totals_cleaned = stats_totals %>%
+    remove_empty("cols") %>%
+    clean_names() %>%
+    dplyr::filter(player != "Player") %>%
+    dplyr::filter(tm != "TOT") %>%
+    mutate_at(vars(-c(player, tm, pos)), as.numeric) %>%
+    mutate_if(is.numeric, ~ replace_na(., 0)) %>%
+    select(-rk)
+
+  # per minute source
+  per_min_url = paste0("https://www.basketball-reference.com/leagues/NBA_",
+                       season,
+                       "_per_minute.html")
+
+  # scrape
+  stats_per_min = read_html(per_min_url) %>%
+    html_table() %>%
+    .[[1]] %>%
+    as_tibble(.name_repair = "minimal")
+
+  # clean
+  stats_per_min_cleaned = stats_per_min %>%
+    remove_empty("cols") %>%
+    clean_names() %>%
+    dplyr::filter(player != "Player") %>%
+    dplyr::filter(tm != "TOT") %>%
+    mutate_at(vars(-c(player, tm, pos)), as.numeric) %>%
+    mutate_if(is.numeric, ~ replace_na(., 0)) %>%
+    rename_at(vars(-c(rk, player, pos, age, tm, g, gs, mp)), ~ paste0(., "_pm")) %>%
+    select(-rk)
+  
+  # per possession source
+  per_poss_url = paste0("https://www.basketball-reference.com/leagues/NBA_",
+                        season,
+                        "_per_poss.html")
+
+  # scrape
+  stats_per_poss = read_html(per_poss_url) %>%
+    html_table() %>%
+    .[[1]] %>%
+    as_tibble(.name_repair = "minimal")
+
+  # clean
+  stats_per_poss_cleaned = stats_per_poss %>%
+    remove_empty("cols") %>%
+    clean_names() %>%
+    dplyr::filter(player != "Player") %>%
+    dplyr::filter(tm != "TOT") %>%
+    mutate_at(vars(-c(player, tm, pos)), as.numeric) %>%
+    mutate_if(is.numeric, ~ replace_na(., 0)) %>%
+    rename_at(vars(-c(rk, player, pos, age, tm, g, gs, mp)), ~ paste0(., "_pp")) %>%
+    select(-rk)
+
+  # advanced source
+  adv_url = paste0("https://www.basketball-reference.com/leagues/NBA_",
+                   season,
+                   "_advanced.html")
+
+  # scrape
+  stats_adv = read_html(adv_url) %>%
+    html_table() %>%
+    .[[1]] %>%
+    as_tibble(.name_repair = "minimal")
+
+  # clean
+  stats_adv_cleaned = stats_adv %>%
+    remove_empty("cols") %>%
+    clean_names() %>%
+    dplyr::filter(player != "Player") %>%
+    dplyr::filter(tm != "TOT") %>%
+    mutate_at(vars(-c(player, tm, pos)), as.numeric) %>%
+    mutate_if(is.numeric, ~ replace_na(., 0)) %>%
+    select(-rk)
+
+  stats_totals_cleaned %>%
+    full_join(stats_per_min_cleaned) %>%
+    full_join(stats_per_poss_cleaned) %>% 
+    full_join(stats_adv_cleaned) %>%
+    mutate(player_team = stringr::str_c(player, " ", tm)) %>% 
+    select(player_team, everything(), -player) # probably a cleaner way to do this
+
+}
+```
+
+```{r, message = FALSE}
+nba = scrape_nba_season_player_stats()
+nba$pos = factor(nba$pos, levels = c("PG", "SG", "SF", "PF", "C"))
+```
+
+```{r, echo = FALSE}
+head(nba, n = 100)
+```
+
+## EDA
+
+```{r, echo = FALSE, message = FALSE}
+nba %>% 
+  ggplot(aes(x = mp, y = pos, fill = pos)) +
+  geom_density_ridges(scale = 4) + 
+  theme_ridges() +
+  scale_y_discrete(expand = c(0.01, 0)) +
+  scale_x_continuous(expand = c(0, 0)) + 
+  scale_color_hc() + 
+  scale_fill_hc()
+```
+
+```{r, echo = FALSE, message = FALSE}
+nba %>% 
+  filter(mp > 1000) %>% 
+  ggplot(aes(x = x3p_percent, y = pos, fill = pos)) +
+  geom_density_ridges(scale = 4) + 
+  theme_ridges() +
+  scale_y_discrete(expand = c(0.01, 0)) +
+  scale_x_continuous(expand = c(0, 0)) + 
+  scale_color_hc() + 
+  scale_fill_hc()
+```
+
+```{r, echo = FALSE, message = FALSE}
+nba %>% 
+  filter(mp > 1000, x3pa > 100) %>% 
+  ggplot(aes(x = x3p_percent, y = pos, fill = pos)) +
+  geom_density_ridges(scale = 4) + 
+  theme_ridges() +
+  scale_y_discrete(expand = c(0.01, 0)) +
+  scale_x_continuous(expand = c(0, 0)) + 
+  scale_color_hc() + 
+  scale_fill_hc()
+```
+
+```{r, echo = FALSE}
+ggplot(nba, aes(x = mp)) +
+  geom_histogram(bins = 50)
+```
+
+```{r}
+nba_for_clustering = nba %>% 
+  filter(mp > 2000) %>%
+  column_to_rownames("player_team") %>%
+  select(-pos, -tm)
+```
+
+## Modeling
+
+```{r}
+set.seed(42)
+
+# function to compute total within-cluster sum of square 
+wss = function(k, data) {
+  kmeans(x = data, centers = k, nstart = 10)$tot.withinss
+}
+
+# Compute and plot wss for k = 1 to k = 15
+k_values = 1:15
+
+# extract wss for 2-15 clusters
+wss_values = map_dbl(k_values, wss, data = nba_for_clustering)
+
+plot(k_values, wss_values,
+       type = "b", pch = 19, frame = TRUE, 
+       xlab = "Number of clusters K",
+       ylab = "Total within-clusters sum of squares")
+grid()
+```
+
+- TODO: K-Means likes clusters of roughly equal size.
+- TODO: http://varianceexplained.org/r/kmeans-free-lunch/
+
+```{r}
+nba_hc = hclust(dist(nba_for_clustering))
+nba_hc_clust = cutree(nba_hc, k = 5)
+table(nba_hc_clust)
+```
+
+## Model Evaluation
+
+```{r, echo = FALSE}
+factoextra::fviz_nbclust(x = nba_for_clustering, kmeans, method = "wss")
+```
+
+```{r, echo = FALSE}
+factoextra::fviz_nbclust(x = nba_for_clustering, kmeans, method = "silhouette")
+```
+
+```{r, fig.height = 12, fig.width = 12, echo = FALSE}
+fviz_cluster(list(data = nba_for_clustering, cluster = nba_hc_clust))
+```
+
+## Discussion
+
+```{r fig.height = 36, fig.width = 36, echo = FALSE}
+par(mar = c(3, 1, 1, 70))
+as.dendrogram(nba_hc, hang = -1) %>%
+  color_branches(k = 7, col = c(1, 3, 1, 3, 1, 3, 1)) %>%
+  color_labels(k = 7, col = c(1, 3, 1, 3, 1, 3, 1)) %>%
+  set("branches_lwd", 2) %>%
+  set("labels_cex", 2) %>% 
+  plot(horiz = TRUE)
+
+```

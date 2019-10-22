@@ -1,0 +1,175 @@
+# Classification: Handwriting
+
+```{r, include = FALSE} 
+knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
+```
+
+```{r, message = FALSE, warning = FALSE}
+library(readr)
+library(tibble)
+library(dplyr)
+library(purrr)
+library(ggplot2)
+library(ggridges)
+library(lubridate)
+library(randomForest)
+library(rpart)
+library(rpart.plot)
+library(cluster)
+library(caret)
+library(factoextra)
+library(rsample)
+library(janitor)
+library(rvest)
+library(dendextend)
+library(knitr)
+library(kableExtra)
+library(ggthemes)
+```
+
+```{r, echo = FALSE}
+theme_set(new = theme_light())
+```
+
+- TODO: Show package messaging? check conflicts!
+- TODO: Should this be split into three analyses with different packages?
+
+## Background
+
+- TODO: https://en.wikipedia.org/wiki/MNIST_database
+- TODO: http://yann.lecun.com/exdb/mnist/
+
+## Data
+
+- TODO: How is this data pre-processed?
+- TODO: https://gist.github.com/daviddalpiaz/ae62ae5ccd0bada4b9acd6dbc9008706
+- TODO: https://github.com/itsrainingdata/mnistR
+- TODO: https://pjreddie.com/projects/mnist-in-csv/
+- TODO: http://varianceexplained.org/r/digit-eda/
+
+```{r, load-mnist-remote, warning = FALSE, message = FALSE, eval = FALSE, echo = FALSE}
+mnist_trn = read_csv(
+  file = "https://pjreddie.com/media/files/mnist_train.csv", 
+  col_names = FALSE)
+
+mnist_tst = read_csv(
+  file = "https://pjreddie.com/media/files/mnist_test.csv", 
+  col_names = FALSE)
+```
+
+```{r, eval = FALSE, echo = FALSE}
+write_csv(mnist_trn[1:1000, ], path = "data/mnist_train_subest.csv")
+write_csv(mnist_tst, path = "data/mnist_test.csv")
+```
+
+```{r, clean-mnist, echo = FALSE, eval = FALSE}
+rm(mnist_trn)
+rm(mnist_tst)
+```
+
+```{r, load-mnist-local, warning = FALSE, message = FALSE,}
+mnist_trn = read_csv(file = "data/mnist_train_subest.csv")
+mnist_tst = read_csv(file = "data/mnist_test.csv")
+```
+
+```{r, split-mnist}
+mnist_trn_y = as.factor(mnist_trn$X1)
+mnist_tst_y = as.factor(mnist_tst$X1)
+
+mnist_trn_x = mnist_trn[, -1]
+mnist_tst_x = mnist_tst[, -1]
+```
+
+```{r, clean-mnist-local, echo = FALSE}
+rm(mnist_trn)
+rm(mnist_tst)
+```
+
+- TODO: If we were going to tune a model, we would need a validation split as well. We're going to be lazy and just fit a single random forest.
+- TODO: This is an agreed upon split.
+
+## EDA
+
+```{r}
+pixel_positions = expand.grid(j = sprintf("%02.0f", 1:28), 
+                              i = sprintf("%02.0f", 1:28))
+pixel_names = paste("pixel", pixel_positions$i, pixel_positions$j, sep = "-")
+```
+
+```{r}
+colnames(mnist_trn_x) = pixel_names
+colnames(mnist_tst_x) = pixel_names
+```
+
+```{r}
+show_digit = function(arr784, col = gray(12:1 / 12), ...) {
+  image(matrix(as.matrix(arr784), nrow = 28)[, 28:1], 
+        col = col, xaxt = "n", yaxt = "n", ...)
+  grid(nx = 28, ny = 28)
+}
+```
+
+```{r, plot-digits, echo = FALSE, fig.height = 6, fig.width = 14}
+par(mfrow = c(2, 5))
+show_digit(mnist_trn_x[2, ],  main = "An Example Zero")
+show_digit(mnist_trn_x[4, ],  main = "An Example One")
+show_digit(mnist_trn_x[6, ],  main = "An Example Two")
+show_digit(mnist_trn_x[8, ],  main = "An Example Three")
+show_digit(mnist_trn_x[10, ], main = "An Example Four")
+show_digit(mnist_trn_x[1, ],  main = "An Example Five")
+show_digit(mnist_trn_x[14, ], main = "An Example Six")
+show_digit(mnist_trn_x[16, ], main = "An Example Seven")
+show_digit(mnist_trn_x[18, ], main = "An Example Eight")
+show_digit(mnist_trn_x[5, ],  main = "An Example Nine")
+```
+
+## Modeling
+
+```{r}
+set.seed(42)
+mnist_rf = randomForest(x = mnist_trn_x, y = mnist_trn_y, ntree = 100)
+```
+
+## Model Evaluation
+
+```{r}
+mnist_tst_pred = predict(mnist_rf, mnist_tst_x)
+mean(mnist_tst_pred == mnist_tst_y)
+```
+
+```{r}
+table(predicted = mnist_tst_pred, actual = mnist_tst_y)
+```
+
+## Discussion
+
+```{r, echo = FALSE}
+plot_mistake = function(actual, predicted) {
+  
+  obs_to_plot = which(mnist_tst_y == actual & mnist_tst_pred == predicted)[1:9]
+  show_digit(mnist_tst_x[obs_to_plot[1], ])
+  show_digit(mnist_tst_x[obs_to_plot[2], ])
+  show_digit(mnist_tst_x[obs_to_plot[3], ])
+  show_digit(mnist_tst_x[obs_to_plot[4], ])
+  show_digit(mnist_tst_x[obs_to_plot[5], ])
+  show_digit(mnist_tst_x[obs_to_plot[6], ])
+  show_digit(mnist_tst_x[obs_to_plot[7], ])
+  show_digit(mnist_tst_x[obs_to_plot[8], ])
+  show_digit(mnist_tst_x[obs_to_plot[9], ])
+}
+```
+
+```{r, fig.height = 12, fig.width = 12}
+par(mfrow = c(3, 3))
+plot_mistake(actual = 6, predicted = 4)
+```
+
+```{r}
+mnist_obs_to_check = 2
+predict(mnist_rf, mnist_tst_x[mnist_obs_to_check, ], type = "prob")[1, ]
+mnist_tst_y[mnist_obs_to_check]
+```
+
+```{r, fig.height = 4, fig.width = 4}
+show_digit(mnist_tst_x[mnist_obs_to_check, ])
+```

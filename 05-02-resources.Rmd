@@ -1,4 +1,4 @@
-# Computing
+# Resources
 
 ```{r, include = FALSE} 
 knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
@@ -165,3 +165,5 @@ View(summary(cars_mod))
 
 - TODO: https://stat545.com/
 - TODO: https://atrebas.github.io/post/2019-01-15-2018-learning/
+- TODO: https://www.burns-stat.com/pages/Tutor/R_inferno.pdf
+

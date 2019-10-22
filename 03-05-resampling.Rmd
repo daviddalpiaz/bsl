@@ -392,7 +392,10 @@ mean(fold_err)
 - TODO: https://github.com/topepo/caret/issues/70
 - TODO: https://stats.stackexchange.com/questions/266225/step-by-step-explanation-of-k-fold-cross-validation-with-grid-search-to-optimise
 - TODO: https://weina.me/nested-cross-validation/
-
+- rsample::nested_cv
+- http://appliedpredictivemodeling.com/blog/2014/11/27/08ks7leh0zof45zpf5vqe56d1sahb0
+- http://appliedpredictivemodeling.com/blog/2014/11/27/vpuig01pqbklmi72b8lcl3ij5hj2qm
+- http://appliedpredictivemodeling.com/blog/2017/9/2/njdc83d01pzysvvlgik02t5qnaljnd
 
 
 $$

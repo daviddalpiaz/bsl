@@ -1,0 +1,325 @@
+# Regression: Powerlifting
+
+```{r, include = FALSE} 
+knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
+```
+
+```{r, message = FALSE, warning = FALSE}
+library(readr)
+library(tibble)
+library(dplyr)
+library(purrr)
+library(ggplot2)
+library(ggridges)
+library(lubridate)
+library(randomForest)
+library(rpart)
+library(rpart.plot)
+library(cluster)
+library(caret)
+library(factoextra)
+library(rsample)
+library(janitor)
+library(rvest)
+library(dendextend)
+library(knitr)
+library(kableExtra)
+library(ggthemes)
+```
+
+```{r, echo = FALSE}
+theme_set(new = theme_light())
+```
+
+- TODO: Show package messaging? check conflicts!
+- TODO: Should this be split into three analyses with different packages?
+
+## Background
+
+- TODO: https://www.openpowerlifting.org/
+- TODO: https://en.wikipedia.org/wiki/Powerlifting
+
+## Data
+
+```{r, eval = FALSE, echo = FALSE}
+download.file(
+  url = "https://github.com/sstangl/openpowerlifting-static/raw/gh-pages/openpowerlifting-latest.zip",
+  destfile = "data/openpowerlifting-latest.zip")
+```
+
+```{r, eval = FALSE, echo = FALSE}
+unzip(zipfile = "data/openpowerlifting-latest.zip",
+      exdir = "data")
+```
+
+```{r, eval = FALSE, echo = FALSE}
+powerlifting = read_csv(
+  file = "data/openpowerlifting-2019-08-23/openpowerlifting-2019-08-23.csv",
+  col_types = cols(Tested = col_character(),
+                   Date   = col_datetime(format = "%Y-%m-%d"),
+                   Sex    = readr::col_factor()))
+```
+
+- TODO: Why readr::col_factor() and not just col_factor()?
+- TODO: Characters should be character and "categories" should be factors.
+
+```{r, eval = FALSE, echo = FALSE}
+pl = powerlifting %>% 
+  filter(Tested == "Yes", Division == "Open", MeetCountry == "USA", 
+         Event == "SBD", Equipment == "Raw") %>% 
+  filter(year(Date) > 2017) %>% 
+  filter(Best3DeadliftKg > 0, Best3SquatKg > 0, Best3BenchKg > 0) %>% 
+  select(Name, Sex, Bodyweight = BodyweightKg, Age, Squat = Best3SquatKg, 
+         Bench = Best3BenchKg, Deadlift = Best3DeadliftKg, Total = TotalKg) %>% 
+  na.omit()
+```
+
+- TODO: Is `na.omit()` actually a good idea?
+
+```{r, eval = FALSE, echo = FALSE}
+write_csv(x = pl, path = "data/pl.csv")
+```
+
+```{r, eval = FALSE, echo = FALSE}
+rm(pl)
+rm(powerlifting)
+```
+
+```{r}
+pl = read_csv("data/pl.csv", col_types = cols(Sex = readr::col_factor()))
+```
+
+```{r}
+pl
+```
+
+## EDA
+
+```{r}
+set.seed(1)
+
+# test-train split
+pl_tst_trn_split = initial_split(pl, prop = 0.80)
+pl_trn = training(pl_tst_trn_split)
+pl_tst = testing(pl_tst_trn_split)
+
+# estimation-validation split
+pl_est_val_split = initial_split(pl_trn, prop = 0.80)
+pl_est = training(pl_est_val_split)
+pl_val = testing(pl_est_val_split)
+```
+
+```{r, pl-clean}
+rm(pl)
+```
+
+- TODO: Train can be used however you want. (Including EDA.)
+- TODO: Test can only be used after all model decisions have been made!
+
+```{r, echo = FALSE}
+ggplot(pl_trn, aes(x = Bodyweight, y = Total, color = Sex)) +
+  geom_point() + 
+  scale_color_hc() + 
+  scale_fill_hc()
+```
+
+```{r, echo = FALSE}
+ggplot(pl_trn, aes(x = Bodyweight, y = Total, color = Sex)) +
+  geom_point() +
+  facet_wrap( ~ Sex) + 
+  scale_color_hc() + 
+  scale_fill_hc()
+```
+
+```{r, echo = FALSE}
+ggplot(pl_trn, aes(x = Sex, y = Deadlift, color = Sex)) +
+  geom_boxplot() + 
+  geom_jitter(position = position_jitter(0.1), alpha = 0.1) + 
+  scale_color_hc() + 
+  scale_fill_hc()
+```
+
+```{r, echo = FALSE}
+ggplot(pl_trn, aes(x = Bench, y = Deadlift, color = Sex)) +
+  geom_point() + 
+  scale_color_hc() + 
+  scale_fill_hc()
+```
+
+```{r, echo = FALSE}
+ggplot(pl_trn, aes(x = Squat, y = Deadlift, color = Sex)) +
+  geom_point() + 
+  scale_color_hc() + 
+  scale_fill_hc()
+```
+
+```{r}
+pl_trn_tidy = gather(pl_trn, key = "Lift", value = "Weight",
+                 Squat, Bench, Deadlift)
+```
+
+```{r}
+pl_trn_tidy$Lift = factor(pl_trn_tidy$Lift, levels = c("Squat", "Bench", "Deadlift"))
+```
+
+- TODO: https://www.tidyverse.org/
+- TODO: https://en.wikipedia.org/wiki/Tidy_data
+- TODO: http://vita.had.co.nz/papers/tidy-data.pdf
+
+```{r, echo = FALSE, fig.height = 4, fig.width = 8}
+ggplot(pl_trn_tidy, aes(x = Weight)) +
+  geom_histogram(bins = 30) +
+  facet_wrap( ~ Lift, scales = "free") + 
+  theme_light() + 
+  scale_color_hc() + 
+  scale_fill_hc()
+```
+
+```{r, echo = FALSE, fig.height = 4, fig.width = 8}
+ggplot(pl_trn_tidy, aes(x = Weight, fill = Sex, color = Sex)) +
+  geom_histogram(bins = 30) +
+  facet_wrap( ~ Lift, scales = "free") + 
+  scale_color_hc() + 
+  scale_fill_hc()
+```
+
+```{r, echo = FALSE, fig.height = 4, fig.width = 8}
+ggplot(pl_trn_tidy, aes(x = Weight, color = Sex, fill = Sex)) +
+  geom_histogram(bins = 30) +
+  facet_wrap( ~ Sex + Lift) + 
+  scale_color_hc() + 
+  scale_fill_hc()
+```
+
+## Modeling
+
+```{r}
+dl_mod_form = formula(Deadlift ~ Sex + Bodyweight + Age + Squat + Bench)
+
+set.seed(1)
+lm_mod  = lm(dl_mod_form, data = pl_est)
+knn_mod = caret::knnreg(dl_mod_form, data = pl_est)
+rf_mod  = randomForest(dl_mod_form, data = pl_est)
+rp_mod = rpart(dl_mod_form, data = pl_est)
+```
+
+- TODO: Note: we are not using `Name`. Why? We are not using `Total`. Why?
+- TODO: look what happens with `Total`! You'll see it with `lm()`, you'll be optimistic with `randomForest()`.
+- TODO: What variables are allowed? (With respect to real world problem.)
+- TODO: What variables lead to the best predictions?
+
+## Model Evaluation
+
+```{r, plot-reg-act-pred, echo = FALSE, fig.height = 8, fig.width = 8}
+par(mfrow = c(2, 2))
+
+# TODO: write plot function here!?
+
+plot(predict(lm_mod, pl_val), pl_val$Deadlift,
+     xlim = c(0, 400), ylim = c(0, 400), pch = 20, col = "darkgrey",
+     xlab = "Predicted", ylab = "Actual",
+     main = "Linear Model")
+abline(a = 0, b = 1, col = "green")
+grid()
+
+plot(predict(knn_mod, pl_val), pl_val$Deadlift,
+     xlim = c(0, 400), ylim = c(0, 400), pch = 20, col = "darkgrey",
+     xlab = "Predicted", ylab = "Actual",
+     main = "KNN Model")
+abline(a = 0, b = 1, col = "blue")
+grid()
+
+plot(predict(rp_mod, pl_val), pl_val$Deadlift,
+     xlim = c(0, 400), ylim = c(0, 400), pch = 20, col = "darkgrey",
+     xlab = "Predicted", ylab = "Actual",
+     main = "Tree Model")
+abline(a = 0, b = 1, col = "orange")
+grid()
+
+plot(predict(rf_mod, pl_val), pl_val$Deadlift,
+     xlim = c(0, 400), ylim = c(0, 400), pch = 20, col = "darkgrey",
+     xlab = "Predicted", ylab = "Actual",
+     main = "Random Forest Model")
+abline(a = 0, b = 1, col = "red")
+grid()
+```
+
+```{r}
+calc_rmse = function(actual, predicted) {
+  sqrt(mean( (actual - predicted) ^ 2) )
+}
+```
+
+```{r}
+c(calc_rmse(actual = pl_val$Deadlift, predicted = predict(lm_mod, pl_val)),
+  calc_rmse(actual = pl_val$Deadlift, predicted = predict(knn_mod, pl_val)),
+  calc_rmse(actual = pl_val$Deadlift, predicted = predict(rp_mod, pl_val)),
+  calc_rmse(actual = pl_val$Deadlift, predicted = predict(rf_mod, pl_val)))
+```
+
+```{r}
+reg_preds = map(list(lm_mod, knn_mod, rp_mod, rf_mod), predict, pl_val)
+map_dbl(reg_preds, calc_rmse, actual = pl_val$Deadlift)
+```
+
+- TODO: **Never** supply `data = df` to `predict()`. You have been warned.
+
+```{r, out.width = '40%'}
+knitr::include_graphics("img/sim-city.jpg")
+```
+
+```{r}
+calc_mae = function(actual, predicted) {
+  mean(abs(actual - predicted))
+}
+```
+
+```{r}
+map_dbl(reg_preds, calc_mae,  actual = pl_val$Deadlift)
+```
+
+```{r, make-reg-results}
+reg_results = tibble(
+  Model = c("Linear", "KNN", "Tree", "Forest"),
+  RMSE = map_dbl(reg_preds, calc_rmse, actual = pl_val$Deadlift),
+  MAE = map_dbl(reg_preds, calc_mae,  actual = pl_val$Deadlift)) 
+```
+
+```{r, dispaly-reg-results, echo = FALSE}
+reg_results %>% 
+  kable %>% 
+  kable_styling(bootstrap_options = "striped", full_width = FALSE)
+```
+
+## Discussion
+
+```{r, echo = FALSE}
+rpart.plot(rp_mod)
+```
+
+```{r}
+lm_mod_final = lm(dl_mod_form, data = pl_trn)
+```
+
+```{r}
+calc_rmse(actual = pl_tst$Deadlift,
+          predicted = predict(lm_mod_final, pl_tst))
+```
+
+- TODO: Is this a good model?
+- TODO: Is this model useful?
+
+```{r}
+william_biscarri = tibble(
+  Name = "William Biscarri",
+  Age = 28,
+  Sex = "M",
+  Bodyweight = 83,
+  Squat = 130,
+  Bench = 90
+)
+```
+
+```{r}
+predict(lm_mod_final, william_biscarri)
+```
