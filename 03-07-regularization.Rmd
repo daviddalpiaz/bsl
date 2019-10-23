@@ -5,7 +5,7 @@ knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
 ```
 
 ```{r, message=FALSE, warning=FALSE}
-library(glmnet)
+library("glmnet")
 ```
 
 

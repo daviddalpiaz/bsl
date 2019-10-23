@@ -42,7 +42,7 @@ $$
 ### Bayes Error Rate
 
 $$
-1 - \mathbb{E}\left[ \underset{k}{\text{max}} \ P[Y = k \mid X] \right]
+1 - \mathbb{E}_X\left[ \underset{k}{\text{max}} \ P[Y = k \mid X = x] \right]
 $$
 
 
@@ -67,12 +67,15 @@ joint_probs = sample(joint_probs)
 joint_dist = matrix(data  = joint_probs, nrow = 3, ncol = 4)
 colnames(joint_dist) = c("$X = 1$", "$X = 2$", "$X = 3$", "$X = 4$")
 rownames(joint_dist) = c("$Y = A$", "$Y = B$", "$Y = C$")
-joint_dist %>% kable() %>% kable_styling("bordered", full_width = FALSE)
+joint_dist %>% 
+  kable() %>% 
+  kable_styling("striped", full_width = FALSE) %>% 
+  column_spec(column = 1, bold = TRUE, background = "white", border_right = TRUE)
 ```
 
 \begin{table}[H]
 \centering
-\begin{tabular}{l|r|r|r|r}
+\begin{tabular}{>{\bfseries\columncolor{white}}l||r|r|r|r}
 \hline
   & \$X = 1\$ & \$X = 2\$ & \$X = 3\$ & \$X = 4\$\\
 \hline
@@ -167,7 +170,8 @@ predict(multinom(y ~ x, data = some_data, trace = FALSE), test_cases, type = "pr
 
 ### Linear Models
 
-- TODO: use `nnet::multinom
+- TODO: use `nnet::multinom`
+    - in place of `glm()`? always?
 
 ### k-Nearest Neighbors
 
