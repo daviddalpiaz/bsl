@@ -1,5 +1,13 @@
 # Ensembles
 
+***
+
+## STAT 432 Materials
+
+- [**Slides** | Ensemble Methods](https://fall-2019.stat432.org/slides/ensembles.pdf)
+
+***
+
 ```{r resampling_opts, include = FALSE}
 knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
 ```

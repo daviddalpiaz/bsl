@@ -1,5 +1,7 @@
 # Classification
 
+***
+
 ## STAT 432 Materials
 
 - [**Slides** | Classification: Introduction](https://fall-2019.stat432.org/slides/classification.pdf)
