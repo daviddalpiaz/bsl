@@ -23,7 +23,7 @@ library("purrr")
 ## Bagging
 
 ```{r}
-sin_dgp = function(sample_size = 200) {
+sin_dgp = function(sample_size = 150) {
   x = runif(n = sample_size, min = -10, max = 10)
   y = 2 * sin(x) + rnorm(n = sample_size)
   tibble(x = x, y = y)
@@ -68,16 +68,12 @@ rpart.plot(fit_3)
 ```
 
 ```{r}
-new_obs = tibble(x = 0, y = (2 * sin(0)))
-```
-
-```{r}
 bag_pred = function(x) {
   apply(t(map_df(boot_reps, predict, data.frame(x = x))), 2, mean)
 }
 
 set.seed(42)
-boot_idx = caret::createResample(y = some_data$y, times = 500)
+boot_idx = caret::createResample(y = some_data$y, times = 100)
 boot_reps = map(boot_idx, ~ rpart(y ~ x, data = some_data[.x, ], cp = 0))
 bag_pred(x = c(-1, 0 , 1))
 ```
@@ -89,43 +85,47 @@ some_data = sin_dgp()
 plot(some_data, pch = 20, col = "darkgrey")
 grid()
 curve(2 * sin(x), add = TRUE, col = "dodgerblue", lwd = 2)
-boot_idx = caret::createResample(y = some_data$y, times = 500)
+boot_idx = caret::createResample(y = some_data$y, times = 100)
 boot_reps = map(boot_idx, ~ rpart(y ~ x, data = some_data[.x, ], cp = 0))
-curve(bag_pred(x = x), add = TRUE, lwd = 2, n = 250)
+curve(bag_pred(x = x), add = TRUE, lwd = 2)
 
 some_data = sin_dgp()
 plot(some_data, pch = 20, col = "darkgrey")
 grid()
 curve(2 * sin(x), add = TRUE, col = "dodgerblue", lwd = 2)
-boot_idx = caret::createResample(y = some_data$y, times = 500)
+boot_idx = caret::createResample(y = some_data$y, times = 100)
 boot_reps = map(boot_idx, ~ rpart(y ~ x, data = some_data[.x, ], cp = 0))
-curve(bag_pred(x = x), add = TRUE, lwd = 2, n = 250)
+curve(bag_pred(x = x), add = TRUE, lwd = 2)
 
 some_data = sin_dgp()
 plot(some_data, pch = 20, col = "darkgrey")
 grid()
 curve(2 * sin(x), add = TRUE, col = "dodgerblue", lwd = 2)
-boot_idx = caret::createResample(y = some_data$y, times = 500)
+boot_idx = caret::createResample(y = some_data$y, times = 100)
 boot_reps = map(boot_idx, ~ rpart(y ~ x, data = some_data[.x, ], cp = 0))
-curve(bag_pred(x = x), add = TRUE, lwd = 2, n = 250)
+curve(bag_pred(x = x), add = TRUE, lwd = 2)
 ```
 
 ### Simultation Study
 
 ```{r}
+new_obs = tibble(x = 0, y = (2 * sin(0)))
+```
+
+```{r, bag-sim-study}
 sim_bagging_vs_single = function() {
   some_data = sin_dgp()
   
   single = predict(rpart(y ~ x, data = some_data, cp = 0), new_obs)
   
-  boot_idx = caret::createResample(y = some_data$y, times = 500)
+  boot_idx = caret::createResample(y = some_data$y, times = 100)
   boot_reps = map(boot_idx, ~ rpart(y ~ x, data = some_data[.x, ], cp = 0))
   bagged = mean(map_dbl(boot_reps, predict, new_obs))
   c(single = single, bagged = bagged)
 }
 
 set.seed(42)
-sim_results = replicate(n = 1000, sim_bagging_vs_single())
+sim_results = replicate(n = 250, sim_bagging_vs_single())
 apply(sim_results, 1, mean)
 apply(sim_results, 1, var)
 ```
