@@ -247,6 +247,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="15" data-path="ensembles.html"><a href="ensembles.html"><i class="fa fa-check"></i><b>15</b> Ensembles</a><ul>
 <li class="chapter" data-level="15.1" data-path="ensembles.html"><a href="ensembles.html#stat-432-materials-2"><i class="fa fa-check"></i><b>15.1</b> STAT 432 Materials</a></li>
+<li class="chapter" data-level="15.2" data-path="ensembles.html"><a href="ensembles.html#bagging"><i class="fa fa-check"></i><b>15.2</b> Bagging</a><ul>
+<li class="chapter" data-level="15.2.1" data-path="ensembles.html"><a href="ensembles.html#simultation-study"><i class="fa fa-check"></i><b>15.2.1</b> Simultation Study</a></li>
+</ul></li>
 </ul></li>
 <li class="part"><span><b>IV Mathematics</b></span></li>
 <li class="chapter" data-level="16" data-path="introduction-3.html"><a href="introduction-3.html"><i class="fa fa-check"></i><b>16</b> Introduction</a></li>
@@ -306,7 +309,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb189-3" data-line-number="3"><span class="kw">library</span>(<span class="st">&quot;rpart.plot&quot;</span>)</a>
 <a class="sourceLine" id="cb189-4" data-line-number="4"><span class="kw">library</span>(<span class="st">&quot;caret&quot;</span>)</a>
 <a class="sourceLine" id="cb189-5" data-line-number="5"><span class="kw">library</span>(<span class="st">&quot;purrr&quot;</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" data-line-number="1">sin_dgp =<span class="st"> </span><span class="cf">function</span>(<span class="dt">sample_size =</span> <span class="dv">200</span>) {</a>
+</div>
+<div id="bagging" class="section level2">
+<h2><span class="header-section-number">15.2</span> Bagging</h2>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" data-line-number="1">sin_dgp =<span class="st"> </span><span class="cf">function</span>(<span class="dt">sample_size =</span> <span class="dv">150</span>) {</a>
 <a class="sourceLine" id="cb190-2" data-line-number="2">  x =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size, <span class="dt">min =</span> <span class="dv">-10</span>, <span class="dt">max =</span> <span class="dv">10</span>)</a>
 <a class="sourceLine" id="cb190-3" data-line-number="3">  y =<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x) <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size)</a>
 <a class="sourceLine" id="cb190-4" data-line-number="4">  <span class="kw">tibble</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)</a>
@@ -318,22 +324,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb192-4" data-line-number="4"><span class="kw">plot</span>(some_data, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
 <a class="sourceLine" id="cb192-5" data-line-number="5"><span class="kw">grid</span>()</a>
 <a class="sourceLine" id="cb192-6" data-line-number="6"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb192-7" data-line-number="7">fit_<span class="dv">1</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data)</a>
-<a class="sourceLine" id="cb192-8" data-line-number="8"><span class="kw">curve</span>(<span class="kw">predict</span>(fit_<span class="dv">1</span>, <span class="kw">tibble</span>(<span class="dt">x =</span> x)), <span class="dt">add =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb192-7" data-line-number="7">fit_<span class="dv">1</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data, <span class="dt">cp =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb192-8" data-line-number="8"><span class="kw">curve</span>(<span class="kw">predict</span>(fit_<span class="dv">1</span>, <span class="kw">tibble</span>(<span class="dt">x =</span> x)), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb192-9" data-line-number="9">      </a>
 <a class="sourceLine" id="cb192-10" data-line-number="10">some_data =<span class="st"> </span><span class="kw">sin_dgp</span>()</a>
 <a class="sourceLine" id="cb192-11" data-line-number="11"><span class="kw">plot</span>(some_data, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
 <a class="sourceLine" id="cb192-12" data-line-number="12"><span class="kw">grid</span>()</a>
 <a class="sourceLine" id="cb192-13" data-line-number="13"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb192-14" data-line-number="14">fit_<span class="dv">2</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data)</a>
-<a class="sourceLine" id="cb192-15" data-line-number="15"><span class="kw">curve</span>(<span class="kw">predict</span>(fit_<span class="dv">2</span>, <span class="kw">tibble</span>(<span class="dt">x =</span> x)), <span class="dt">add =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb192-14" data-line-number="14">fit_<span class="dv">2</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data, <span class="dt">cp =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb192-15" data-line-number="15"><span class="kw">curve</span>(<span class="kw">predict</span>(fit_<span class="dv">2</span>, <span class="kw">tibble</span>(<span class="dt">x =</span> x)), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb192-16" data-line-number="16"></a>
 <a class="sourceLine" id="cb192-17" data-line-number="17">some_data =<span class="st"> </span><span class="kw">sin_dgp</span>()</a>
 <a class="sourceLine" id="cb192-18" data-line-number="18"><span class="kw">plot</span>(some_data, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
 <a class="sourceLine" id="cb192-19" data-line-number="19"><span class="kw">grid</span>()</a>
 <a class="sourceLine" id="cb192-20" data-line-number="20"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb192-21" data-line-number="21">fit_<span class="dv">3</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data)</a>
-<a class="sourceLine" id="cb192-22" data-line-number="22"><span class="kw">curve</span>(<span class="kw">predict</span>(fit_<span class="dv">3</span>, <span class="kw">tibble</span>(<span class="dt">x =</span> x)), <span class="dt">add =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb192-21" data-line-number="21">fit_<span class="dv">3</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data, <span class="dt">cp =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb192-22" data-line-number="22"><span class="kw">curve</span>(<span class="kw">predict</span>(fit_<span class="dv">3</span>, <span class="kw">tibble</span>(<span class="dt">x =</span> x)), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a></code></pre></div>
 <p><img src="03-08-ensembles_files/figure-html/unnamed-chunk-4-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</a>
 <a class="sourceLine" id="cb193-2" data-line-number="2"></a>
@@ -341,26 +347,65 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb193-4" data-line-number="4"><span class="kw">rpart.plot</span>(fit_<span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb193-5" data-line-number="5"><span class="kw">rpart.plot</span>(fit_<span class="dv">3</span>)</a></code></pre></div>
 <p><img src="03-08-ensembles_files/figure-html/unnamed-chunk-5-1.png" width="1152" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" data-line-number="1">new_obs =<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">y =</span> (<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(<span class="dv">0</span>)))</a></code></pre></div>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" data-line-number="1">sim_bagging_vs_single =<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb195-2" data-line-number="2">  some_data =<span class="st"> </span><span class="kw">sin_dgp</span>()</a>
-<a class="sourceLine" id="cb195-3" data-line-number="3">  </a>
-<a class="sourceLine" id="cb195-4" data-line-number="4">  single =<span class="st"> </span><span class="kw">predict</span>(<span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data), new_obs)</a>
-<a class="sourceLine" id="cb195-5" data-line-number="5">  </a>
-<a class="sourceLine" id="cb195-6" data-line-number="6">  boot_idx =<span class="st"> </span>caret<span class="op">::</span><span class="kw">createResample</span>(<span class="dt">y =</span> some_data<span class="op">$</span>y, <span class="dt">times =</span> <span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb195-7" data-line-number="7">  boot_reps =<span class="st"> </span><span class="kw">map</span>(boot_idx, <span class="op">~</span><span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data[.x, ]))</a>
-<a class="sourceLine" id="cb195-8" data-line-number="8">  bagged =<span class="st"> </span><span class="kw">mean</span>(<span class="kw">map_dbl</span>(boot_reps, predict, new_obs))</a>
-<a class="sourceLine" id="cb195-9" data-line-number="9">  <span class="kw">c</span>(<span class="dt">single =</span> single, <span class="dt">bagged =</span> bagged)</a>
-<a class="sourceLine" id="cb195-10" data-line-number="10">}</a>
-<a class="sourceLine" id="cb195-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb195-12" data-line-number="12">sim_results =<span class="st"> </span><span class="kw">replicate</span>(<span class="dt">n =</span> <span class="dv">250</span>, <span class="kw">sim_bagging_vs_single</span>())</a>
-<a class="sourceLine" id="cb195-13" data-line-number="13"><span class="kw">apply</span>(sim_results, <span class="dv">1</span>, mean)</a></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" data-line-number="1">bag_pred =<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb194-2" data-line-number="2">  <span class="kw">apply</span>(<span class="kw">t</span>(<span class="kw">map_df</span>(boot_reps, predict, <span class="kw">data.frame</span>(<span class="dt">x =</span> x))), <span class="dv">2</span>, mean)</a>
+<a class="sourceLine" id="cb194-3" data-line-number="3">}</a>
+<a class="sourceLine" id="cb194-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb194-5" data-line-number="5"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb194-6" data-line-number="6">boot_idx =<span class="st"> </span>caret<span class="op">::</span><span class="kw">createResample</span>(<span class="dt">y =</span> some_data<span class="op">$</span>y, <span class="dt">times =</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb194-7" data-line-number="7">boot_reps =<span class="st"> </span><span class="kw">map</span>(boot_idx, <span class="op">~</span><span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data[.x, ], <span class="dt">cp =</span> <span class="dv">0</span>))</a>
+<a class="sourceLine" id="cb194-8" data-line-number="8"><span class="kw">bag_pred</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span> , <span class="dv">1</span>))</a></code></pre></div>
+<pre><code>## [1] -1.87295394  0.06556445  1.18010317</code></pre>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb196-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb196-3" data-line-number="3">some_data =<span class="st"> </span><span class="kw">sin_dgp</span>()</a>
+<a class="sourceLine" id="cb196-4" data-line-number="4"><span class="kw">plot</span>(some_data, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
+<a class="sourceLine" id="cb196-5" data-line-number="5"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb196-6" data-line-number="6"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb196-7" data-line-number="7">boot_idx =<span class="st"> </span>caret<span class="op">::</span><span class="kw">createResample</span>(<span class="dt">y =</span> some_data<span class="op">$</span>y, <span class="dt">times =</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb196-8" data-line-number="8">boot_reps =<span class="st"> </span><span class="kw">map</span>(boot_idx, <span class="op">~</span><span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data[.x, ], <span class="dt">cp =</span> <span class="dv">0</span>))</a>
+<a class="sourceLine" id="cb196-9" data-line-number="9"><span class="kw">curve</span>(<span class="kw">bag_pred</span>(<span class="dt">x =</span> x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb196-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb196-11" data-line-number="11">some_data =<span class="st"> </span><span class="kw">sin_dgp</span>()</a>
+<a class="sourceLine" id="cb196-12" data-line-number="12"><span class="kw">plot</span>(some_data, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
+<a class="sourceLine" id="cb196-13" data-line-number="13"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb196-14" data-line-number="14"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb196-15" data-line-number="15">boot_idx =<span class="st"> </span>caret<span class="op">::</span><span class="kw">createResample</span>(<span class="dt">y =</span> some_data<span class="op">$</span>y, <span class="dt">times =</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb196-16" data-line-number="16">boot_reps =<span class="st"> </span><span class="kw">map</span>(boot_idx, <span class="op">~</span><span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data[.x, ], <span class="dt">cp =</span> <span class="dv">0</span>))</a>
+<a class="sourceLine" id="cb196-17" data-line-number="17"><span class="kw">curve</span>(<span class="kw">bag_pred</span>(<span class="dt">x =</span> x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb196-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb196-19" data-line-number="19">some_data =<span class="st"> </span><span class="kw">sin_dgp</span>()</a>
+<a class="sourceLine" id="cb196-20" data-line-number="20"><span class="kw">plot</span>(some_data, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
+<a class="sourceLine" id="cb196-21" data-line-number="21"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb196-22" data-line-number="22"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb196-23" data-line-number="23">boot_idx =<span class="st"> </span>caret<span class="op">::</span><span class="kw">createResample</span>(<span class="dt">y =</span> some_data<span class="op">$</span>y, <span class="dt">times =</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb196-24" data-line-number="24">boot_reps =<span class="st"> </span><span class="kw">map</span>(boot_idx, <span class="op">~</span><span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data[.x, ], <span class="dt">cp =</span> <span class="dv">0</span>))</a>
+<a class="sourceLine" id="cb196-25" data-line-number="25"><span class="kw">curve</span>(<span class="kw">bag_pred</span>(<span class="dt">x =</span> x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="03-08-ensembles_files/figure-html/unnamed-chunk-7-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<div id="simultation-study" class="section level3">
+<h3><span class="header-section-number">15.2.1</span> Simultation Study</h3>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" data-line-number="1">new_obs =<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">y =</span> (<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(<span class="dv">0</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" data-line-number="1">sim_bagging_vs_single =<span class="st"> </span><span class="cf">function</span>() {</a>
+<a class="sourceLine" id="cb198-2" data-line-number="2">  some_data =<span class="st"> </span><span class="kw">sin_dgp</span>()</a>
+<a class="sourceLine" id="cb198-3" data-line-number="3">  </a>
+<a class="sourceLine" id="cb198-4" data-line-number="4">  single =<span class="st"> </span><span class="kw">predict</span>(<span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data, <span class="dt">cp =</span> <span class="dv">0</span>), new_obs)</a>
+<a class="sourceLine" id="cb198-5" data-line-number="5">  </a>
+<a class="sourceLine" id="cb198-6" data-line-number="6">  boot_idx =<span class="st"> </span>caret<span class="op">::</span><span class="kw">createResample</span>(<span class="dt">y =</span> some_data<span class="op">$</span>y, <span class="dt">times =</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb198-7" data-line-number="7">  boot_reps =<span class="st"> </span><span class="kw">map</span>(boot_idx, <span class="op">~</span><span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data[.x, ], <span class="dt">cp =</span> <span class="dv">0</span>))</a>
+<a class="sourceLine" id="cb198-8" data-line-number="8">  bagged =<span class="st"> </span><span class="kw">mean</span>(<span class="kw">map_dbl</span>(boot_reps, predict, new_obs))</a>
+<a class="sourceLine" id="cb198-9" data-line-number="9">  <span class="kw">c</span>(<span class="dt">single =</span> single, <span class="dt">bagged =</span> bagged)</a>
+<a class="sourceLine" id="cb198-10" data-line-number="10">}</a>
+<a class="sourceLine" id="cb198-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb198-12" data-line-number="12"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb198-13" data-line-number="13">sim_results =<span class="st"> </span><span class="kw">replicate</span>(<span class="dt">n =</span> <span class="dv">250</span>, <span class="kw">sim_bagging_vs_single</span>())</a>
+<a class="sourceLine" id="cb198-14" data-line-number="14"><span class="kw">apply</span>(sim_results, <span class="dv">1</span>, mean)</a></code></pre></div>
 <pre><code>##    single.1      bagged 
-## -0.04073238  0.01506561</code></pre>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" data-line-number="1"><span class="kw">apply</span>(sim_results, <span class="dv">1</span>, var)</a></code></pre></div>
+## -0.02487810  0.03302126</code></pre>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" data-line-number="1"><span class="kw">apply</span>(sim_results, <span class="dv">1</span>, var)</a></code></pre></div>
 <pre><code>##  single.1    bagged 
-## 0.7451381 0.2670599</code></pre>
+## 1.0147130 0.3356579</code></pre>
 
+</div>
 </div>
 </div>
 
