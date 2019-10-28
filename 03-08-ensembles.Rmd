@@ -21,6 +21,8 @@ library("purrr")
 library("randomForest")
 library("gbm")
 library("xgboost")
+library("knitr")
+library("kableExtra")
 ```
 
 ## Bagging
@@ -156,8 +158,8 @@ tibble(
   "OOB Predictions" = head(predict(fit), n = 10),
   "Full Forest Predictions" = head(predict(fit, two_class_data), n = 10)
 ) %>% 
-  knitr::kable() %>% 
-  kableExtra::kable_styling("striped", full_width = FALSE)
+  kable() %>% 
+  kable_styling("striped", full_width = FALSE)
 ```
 
 ```{r}
