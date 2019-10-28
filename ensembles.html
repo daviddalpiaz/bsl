@@ -250,6 +250,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15.2" data-path="ensembles.html"><a href="ensembles.html#bagging"><i class="fa fa-check"></i><b>15.2</b> Bagging</a><ul>
 <li class="chapter" data-level="15.2.1" data-path="ensembles.html"><a href="ensembles.html#simultation-study"><i class="fa fa-check"></i><b>15.2.1</b> Simultation Study</a></li>
 </ul></li>
+<li class="chapter" data-level="15.3" data-path="ensembles.html"><a href="ensembles.html#random-forest"><i class="fa fa-check"></i><b>15.3</b> Random Forest</a></li>
+<li class="chapter" data-level="15.4" data-path="ensembles.html"><a href="ensembles.html#boosting"><i class="fa fa-check"></i><b>15.4</b> Boosting</a></li>
 </ul></li>
 <li class="part"><span><b>IV Mathematics</b></span></li>
 <li class="chapter" data-level="16" data-path="introduction-3.html"><a href="introduction-3.html"><i class="fa fa-check"></i><b>16</b> Introduction</a></li>
@@ -312,7 +314,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb189-2" data-line-number="2"><span class="kw">library</span>(<span class="st">&quot;rpart&quot;</span>)</a>
 <a class="sourceLine" id="cb189-3" data-line-number="3"><span class="kw">library</span>(<span class="st">&quot;rpart.plot&quot;</span>)</a>
 <a class="sourceLine" id="cb189-4" data-line-number="4"><span class="kw">library</span>(<span class="st">&quot;caret&quot;</span>)</a>
-<a class="sourceLine" id="cb189-5" data-line-number="5"><span class="kw">library</span>(<span class="st">&quot;purrr&quot;</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb189-5" data-line-number="5"><span class="kw">library</span>(<span class="st">&quot;purrr&quot;</span>)</a>
+<a class="sourceLine" id="cb189-6" data-line-number="6"><span class="kw">library</span>(<span class="st">&quot;randomForest&quot;</span>)</a>
+<a class="sourceLine" id="cb189-7" data-line-number="7"><span class="kw">library</span>(<span class="st">&quot;gbm&quot;</span>)</a>
+<a class="sourceLine" id="cb189-8" data-line-number="8"><span class="kw">library</span>(<span class="st">&quot;xgboost&quot;</span>)</a>
+<a class="sourceLine" id="cb189-9" data-line-number="9"><span class="kw">library</span>(<span class="st">&quot;knitr&quot;</span>)</a>
+<a class="sourceLine" id="cb189-10" data-line-number="10"><span class="kw">library</span>(<span class="st">&quot;kableExtra&quot;</span>)</a></code></pre></div>
 </div>
 <div id="bagging" class="section level2">
 <h2><span class="header-section-number">15.2</span> Bagging</h2>
@@ -327,23 +334,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb192-3" data-line-number="3">some_data =<span class="st"> </span><span class="kw">sin_dgp</span>()</a>
 <a class="sourceLine" id="cb192-4" data-line-number="4"><span class="kw">plot</span>(some_data, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
 <a class="sourceLine" id="cb192-5" data-line-number="5"><span class="kw">grid</span>()</a>
-<a class="sourceLine" id="cb192-6" data-line-number="6"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb192-6" data-line-number="6"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb192-7" data-line-number="7">fit_<span class="dv">1</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data, <span class="dt">cp =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb192-8" data-line-number="8"><span class="kw">curve</span>(<span class="kw">predict</span>(fit_<span class="dv">1</span>, <span class="kw">tibble</span>(<span class="dt">x =</span> x)), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb192-8" data-line-number="8"><span class="kw">curve</span>(<span class="kw">predict</span>(fit_<span class="dv">1</span>, <span class="kw">tibble</span>(<span class="dt">x =</span> x)), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a>
 <a class="sourceLine" id="cb192-9" data-line-number="9">      </a>
 <a class="sourceLine" id="cb192-10" data-line-number="10">some_data =<span class="st"> </span><span class="kw">sin_dgp</span>()</a>
 <a class="sourceLine" id="cb192-11" data-line-number="11"><span class="kw">plot</span>(some_data, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
 <a class="sourceLine" id="cb192-12" data-line-number="12"><span class="kw">grid</span>()</a>
-<a class="sourceLine" id="cb192-13" data-line-number="13"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb192-13" data-line-number="13"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb192-14" data-line-number="14">fit_<span class="dv">2</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data, <span class="dt">cp =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb192-15" data-line-number="15"><span class="kw">curve</span>(<span class="kw">predict</span>(fit_<span class="dv">2</span>, <span class="kw">tibble</span>(<span class="dt">x =</span> x)), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb192-15" data-line-number="15"><span class="kw">curve</span>(<span class="kw">predict</span>(fit_<span class="dv">2</span>, <span class="kw">tibble</span>(<span class="dt">x =</span> x)), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a>
 <a class="sourceLine" id="cb192-16" data-line-number="16"></a>
 <a class="sourceLine" id="cb192-17" data-line-number="17">some_data =<span class="st"> </span><span class="kw">sin_dgp</span>()</a>
 <a class="sourceLine" id="cb192-18" data-line-number="18"><span class="kw">plot</span>(some_data, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
 <a class="sourceLine" id="cb192-19" data-line-number="19"><span class="kw">grid</span>()</a>
-<a class="sourceLine" id="cb192-20" data-line-number="20"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb192-20" data-line-number="20"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb192-21" data-line-number="21">fit_<span class="dv">3</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data, <span class="dt">cp =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb192-22" data-line-number="22"><span class="kw">curve</span>(<span class="kw">predict</span>(fit_<span class="dv">3</span>, <span class="kw">tibble</span>(<span class="dt">x =</span> x)), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb192-22" data-line-number="22"><span class="kw">curve</span>(<span class="kw">predict</span>(fit_<span class="dv">3</span>, <span class="kw">tibble</span>(<span class="dt">x =</span> x)), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a></code></pre></div>
 <p><img src="03-08-ensembles_files/figure-html/unnamed-chunk-4-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</a>
 <a class="sourceLine" id="cb193-2" data-line-number="2"></a>
@@ -365,26 +372,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb196-3" data-line-number="3">some_data =<span class="st"> </span><span class="kw">sin_dgp</span>()</a>
 <a class="sourceLine" id="cb196-4" data-line-number="4"><span class="kw">plot</span>(some_data, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
 <a class="sourceLine" id="cb196-5" data-line-number="5"><span class="kw">grid</span>()</a>
-<a class="sourceLine" id="cb196-6" data-line-number="6"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb196-6" data-line-number="6"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb196-7" data-line-number="7">boot_idx =<span class="st"> </span>caret<span class="op">::</span><span class="kw">createResample</span>(<span class="dt">y =</span> some_data<span class="op">$</span>y, <span class="dt">times =</span> <span class="dv">100</span>)</a>
 <a class="sourceLine" id="cb196-8" data-line-number="8">boot_reps =<span class="st"> </span><span class="kw">map</span>(boot_idx, <span class="op">~</span><span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data[.x, ], <span class="dt">cp =</span> <span class="dv">0</span>))</a>
-<a class="sourceLine" id="cb196-9" data-line-number="9"><span class="kw">curve</span>(<span class="kw">bag_pred</span>(<span class="dt">x =</span> x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb196-9" data-line-number="9"><span class="kw">curve</span>(<span class="kw">bag_pred</span>(<span class="dt">x =</span> x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a>
 <a class="sourceLine" id="cb196-10" data-line-number="10"></a>
 <a class="sourceLine" id="cb196-11" data-line-number="11">some_data =<span class="st"> </span><span class="kw">sin_dgp</span>()</a>
 <a class="sourceLine" id="cb196-12" data-line-number="12"><span class="kw">plot</span>(some_data, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
 <a class="sourceLine" id="cb196-13" data-line-number="13"><span class="kw">grid</span>()</a>
-<a class="sourceLine" id="cb196-14" data-line-number="14"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb196-14" data-line-number="14"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb196-15" data-line-number="15">boot_idx =<span class="st"> </span>caret<span class="op">::</span><span class="kw">createResample</span>(<span class="dt">y =</span> some_data<span class="op">$</span>y, <span class="dt">times =</span> <span class="dv">100</span>)</a>
 <a class="sourceLine" id="cb196-16" data-line-number="16">boot_reps =<span class="st"> </span><span class="kw">map</span>(boot_idx, <span class="op">~</span><span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data[.x, ], <span class="dt">cp =</span> <span class="dv">0</span>))</a>
-<a class="sourceLine" id="cb196-17" data-line-number="17"><span class="kw">curve</span>(<span class="kw">bag_pred</span>(<span class="dt">x =</span> x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb196-17" data-line-number="17"><span class="kw">curve</span>(<span class="kw">bag_pred</span>(<span class="dt">x =</span> x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a>
 <a class="sourceLine" id="cb196-18" data-line-number="18"></a>
 <a class="sourceLine" id="cb196-19" data-line-number="19">some_data =<span class="st"> </span><span class="kw">sin_dgp</span>()</a>
 <a class="sourceLine" id="cb196-20" data-line-number="20"><span class="kw">plot</span>(some_data, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
 <a class="sourceLine" id="cb196-21" data-line-number="21"><span class="kw">grid</span>()</a>
-<a class="sourceLine" id="cb196-22" data-line-number="22"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb196-22" data-line-number="22"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb196-23" data-line-number="23">boot_idx =<span class="st"> </span>caret<span class="op">::</span><span class="kw">createResample</span>(<span class="dt">y =</span> some_data<span class="op">$</span>y, <span class="dt">times =</span> <span class="dv">100</span>)</a>
 <a class="sourceLine" id="cb196-24" data-line-number="24">boot_reps =<span class="st"> </span><span class="kw">map</span>(boot_idx, <span class="op">~</span><span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data[.x, ], <span class="dt">cp =</span> <span class="dv">0</span>))</a>
-<a class="sourceLine" id="cb196-25" data-line-number="25"><span class="kw">curve</span>(<span class="kw">bag_pred</span>(<span class="dt">x =</span> x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb196-25" data-line-number="25"><span class="kw">curve</span>(<span class="kw">bag_pred</span>(<span class="dt">x =</span> x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a></code></pre></div>
 <p><img src="03-08-ensembles_files/figure-html/unnamed-chunk-7-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <div id="simultation-study" class="section level3">
 <h3><span class="header-section-number">15.2.1</span> Simultation Study</h3>
@@ -408,8 +415,618 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" data-line-number="1"><span class="kw">apply</span>(sim_results, <span class="dv">1</span>, var)</a></code></pre></div>
 <pre><code>##  single.1    bagged 
 ## 1.0147130 0.3356579</code></pre>
-
 </div>
+</div>
+<div id="random-forest" class="section level2">
+<h2><span class="header-section-number">15.3</span> Random Forest</h2>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb202-2" data-line-number="2">two_class_data =<span class="st"> </span><span class="kw">as_tibble</span>(caret<span class="op">::</span><span class="kw">twoClassSim</span>(<span class="dt">n =</span> <span class="dv">1250</span>, <span class="dt">noiseVars =</span> <span class="dv">20</span>))</a>
+<a class="sourceLine" id="cb202-3" data-line-number="3">two_class_data</a></code></pre></div>
+<pre><code>## # A tibble: 1,250 x 36
+##    TwoFactor1 TwoFactor2 Linear01 Linear02 Linear03 Linear04 Linear05
+##         &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+##  1      2.68       0.843  0.617      0.761   0.0712   -0.368    0.294
+##  2     -0.496     -0.955 -0.00454   -0.172   0.970    -1.28    -0.404
+##  3     -0.577      1.51  -0.0913    -0.265   0.310    -1.98    -2.18 
+##  4      1.06       0.567  0.400     -0.424  -0.140    -1.24     0.198
+##  5      1.21      -0.171  0.589      0.689  -0.326    -0.541    1.92 
+##  6     -0.161     -0.112 -0.0169     1.05   -0.119    -0.219   -0.928
+##  7      1.20       2.68   0.419     -2.19    0.894    -1.30    -0.329
+##  8      0.812     -1.06   0.801     -0.503   0.211     1.45     0.952
+##  9      2.74       2.44   0.680      0.880  -0.489    -0.197    1.64 
+## 10     -0.357      0.196  1.31       1.55   -0.220     0.891   -0.764
+## # … with 1,240 more rows, and 29 more variables: Linear06 &lt;dbl&gt;,
+## #   Linear07 &lt;dbl&gt;, Linear08 &lt;dbl&gt;, Linear09 &lt;dbl&gt;, Linear10 &lt;dbl&gt;,
+## #   Nonlinear1 &lt;dbl&gt;, Nonlinear2 &lt;dbl&gt;, Nonlinear3 &lt;dbl&gt;, Noise01 &lt;dbl&gt;,
+## #   Noise02 &lt;dbl&gt;, Noise03 &lt;dbl&gt;, Noise04 &lt;dbl&gt;, Noise05 &lt;dbl&gt;,
+## #   Noise06 &lt;dbl&gt;, Noise07 &lt;dbl&gt;, Noise08 &lt;dbl&gt;, Noise09 &lt;dbl&gt;,
+## #   Noise10 &lt;dbl&gt;, Noise11 &lt;dbl&gt;, Noise12 &lt;dbl&gt;, Noise13 &lt;dbl&gt;,
+## #   Noise14 &lt;dbl&gt;, Noise15 &lt;dbl&gt;, Noise16 &lt;dbl&gt;, Noise17 &lt;dbl&gt;,
+## #   Noise18 &lt;dbl&gt;, Noise19 &lt;dbl&gt;, Noise20 &lt;dbl&gt;, Class &lt;fct&gt;</code></pre>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" data-line-number="1">fit =<span class="st"> </span><span class="kw">randomForest</span>(Class <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> two_class_data)</a>
+<a class="sourceLine" id="cb204-2" data-line-number="2">fit</a></code></pre></div>
+<pre><code>## 
+## Call:
+##  randomForest(formula = Class ~ ., data = two_class_data) 
+##                Type of random forest: classification
+##                      Number of trees: 500
+## No. of variables tried at each split: 5
+## 
+##         OOB estimate of  error rate: 18.24%
+## Confusion matrix:
+##        Class1 Class2 class.error
+## Class1    562     96   0.1458967
+## Class2    132    460   0.2229730</code></pre>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" data-line-number="1"><span class="kw">all.equal</span>(<span class="kw">predict</span>(fit), <span class="kw">predict</span>(fit, two_class_data))</a></code></pre></div>
+<pre><code>## [1] &quot;228 string mismatches&quot;</code></pre>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" data-line-number="1"><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb208-2" data-line-number="2">  <span class="st">&quot;Training Observation&quot;</span> =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb208-3" data-line-number="3">  <span class="st">&quot;OOB Predictions&quot;</span> =<span class="st"> </span><span class="kw">head</span>(<span class="kw">predict</span>(fit), <span class="dt">n =</span> <span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb208-4" data-line-number="4">  <span class="st">&quot;Full Forest Predictions&quot;</span> =<span class="st"> </span><span class="kw">head</span>(<span class="kw">predict</span>(fit, two_class_data), <span class="dt">n =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb208-5" data-line-number="5">) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb208-6" data-line-number="6"><span class="st">  </span><span class="kw">kable</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb208-7" data-line-number="7"><span class="st">  </span><span class="kw">kable_styling</span>(<span class="st">&quot;striped&quot;</span>, <span class="dt">full_width =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+Training Observation
+</th>
+<th style="text-align:left;">
+OOB Predictions
+</th>
+<th style="text-align:left;">
+Full Forest Predictions
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Class1
+</td>
+<td style="text-align:left;">
+Class1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+Class1
+</td>
+<td style="text-align:left;">
+Class1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+Class2
+</td>
+<td style="text-align:left;">
+Class2
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+Class1
+</td>
+<td style="text-align:left;">
+Class1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+Class2
+</td>
+<td style="text-align:left;">
+Class1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+Class1
+</td>
+<td style="text-align:left;">
+Class1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+Class2
+</td>
+<td style="text-align:left;">
+Class2
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+Class1
+</td>
+<td style="text-align:left;">
+Class1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:left;">
+Class2
+</td>
+<td style="text-align:left;">
+Class2
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:left;">
+Class1
+</td>
+<td style="text-align:left;">
+Class1
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" data-line-number="1"><span class="kw">predict</span>(fit, two_class_data, <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>)[<span class="dv">2</span>, ]</a></code></pre></div>
+<pre><code>## Class1 Class2 
+##  0.822  0.178</code></pre>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" data-line-number="1"><span class="kw">predict</span>(fit, two_class_data, <span class="dt">predict.all =</span> <span class="ot">TRUE</span>)<span class="op">$</span>individual[<span class="dv">2</span>, ]</a></code></pre></div>
+<pre><code>##   [1] &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+##   [8] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot;
+##  [15] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot;
+##  [22] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+##  [29] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot;
+##  [36] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot;
+##  [43] &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+##  [50] &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+##  [57] &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+##  [64] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+##  [71] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+##  [78] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+##  [85] &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+##  [92] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+##  [99] &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [106] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot;
+## [113] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [120] &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [127] &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot;
+## [134] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class1&quot;
+## [141] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot;
+## [148] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [155] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [162] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [169] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot;
+## [176] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [183] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [190] &quot;Class2&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [197] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [204] &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [211] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [218] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class2&quot;
+## [225] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [232] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot;
+## [239] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [246] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [253] &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot;
+## [260] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [267] &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot;
+## [274] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [281] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [288] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [295] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot;
+## [302] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [309] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot;
+## [316] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [323] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class1&quot;
+## [330] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [337] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [344] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [351] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [358] &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot;
+## [365] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [372] &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class2&quot;
+## [379] &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot;
+## [386] &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class2&quot;
+## [393] &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [400] &quot;Class2&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class2&quot;
+## [407] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot;
+## [414] &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [421] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [428] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot;
+## [435] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [442] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [449] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class1&quot;
+## [456] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [463] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [470] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot;
+## [477] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [484] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [491] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [498] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;</code></pre>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" data-line-number="1"><span class="kw">table</span>(<span class="kw">predict</span>(fit, two_class_data, <span class="dt">predict.all =</span> <span class="ot">TRUE</span>)<span class="op">$</span>individual[<span class="dv">2</span>, ])</a></code></pre></div>
+<pre><code>## 
+## Class1 Class2 
+##    411     89</code></pre>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" data-line-number="1"><span class="kw">table</span>(<span class="kw">predict</span>(fit, two_class_data, <span class="dt">predict.all =</span> <span class="ot">TRUE</span>)<span class="op">$</span>individual[<span class="dv">2</span>, ]) <span class="op">/</span><span class="st"> </span><span class="dv">500</span></a></code></pre></div>
+<pre><code>## 
+## Class1 Class2 
+##  0.822  0.178</code></pre>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" data-line-number="1"><span class="kw">mean</span>(fit<span class="op">$</span>oob.times <span class="op">/</span><span class="st"> </span><span class="dv">500</span>)</a></code></pre></div>
+<pre><code>## [1] 0.368216</code></pre>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" data-line-number="1"><span class="kw">exp</span>(<span class="op">-</span><span class="dv">1</span>)</a></code></pre></div>
+<pre><code>## [1] 0.3678794</code></pre>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" data-line-number="1">fit<span class="op">$</span>importance</a></code></pre></div>
+<pre><code>##            MeanDecreaseGini
+## TwoFactor1        70.393099
+## TwoFactor2        69.608199
+## Linear01          11.352368
+## Linear02          38.903234
+## Linear03          34.207241
+## Linear04          25.245839
+## Linear05          24.898924
+## Linear06          25.374816
+## Linear07          17.307651
+## Linear08          17.704504
+## Linear09          13.516845
+## Linear10          12.400794
+## Nonlinear1        14.781874
+## Nonlinear2         9.795264
+## Nonlinear3        13.552729
+## Noise01           10.566502
+## Noise02           10.898295
+## Noise03           11.989430
+## Noise04           11.418045
+## Noise05           10.899319
+## Noise06           10.821215
+## Noise07           11.185296
+## Noise08           10.604101
+## Noise09           11.301260
+## Noise10           11.191305
+## Noise11           11.084711
+## Noise12           11.121672
+## Noise13           11.678859
+## Noise14           10.835472
+## Noise15           11.372321
+## Noise16           10.558511
+## Noise17           10.862320
+## Noise18           12.148751
+## Noise19           11.807009
+## Noise20           11.396611</code></pre>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" data-line-number="1"><span class="kw">varImpPlot</span>(fit)</a></code></pre></div>
+<p><img src="03-08-ensembles_files/figure-html/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb224-1" data-line-number="1">fit_caret_rf =<span class="st"> </span><span class="kw">train</span>(Class <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> two_class_data,</a>
+<a class="sourceLine" id="cb224-2" data-line-number="2">                     <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;oob&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb225-1" data-line-number="1">fit_caret_rf</a></code></pre></div>
+<pre><code>## Random Forest 
+## 
+## 1250 samples
+##   35 predictor
+##    2 classes: &#39;Class1&#39;, &#39;Class2&#39; 
+## 
+## No pre-processing
+## Resampling results across tuning parameters:
+## 
+##   mtry  Accuracy  Kappa    
+##    2    0.8168    0.6309813
+##   18    0.8304    0.6592744
+##   35    0.8288    0.6564099
+## 
+## Accuracy was used to select the optimal model using the largest value.
+## The final value used for the model was mtry = 18.</code></pre>
+</div>
+<div id="boosting" class="section level2">
+<h2><span class="header-section-number">15.4</span> Boosting</h2>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb227-1" data-line-number="1">sin_dgp =<span class="st"> </span><span class="cf">function</span>(<span class="dt">sample_size =</span> <span class="dv">150</span>) {</a>
+<a class="sourceLine" id="cb227-2" data-line-number="2">  x =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size, <span class="dt">min =</span> <span class="dv">-10</span>, <span class="dt">max =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb227-3" data-line-number="3">  y =<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x) <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size)</a>
+<a class="sourceLine" id="cb227-4" data-line-number="4">  <span class="kw">tibble</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)</a>
+<a class="sourceLine" id="cb227-5" data-line-number="5">}</a></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb228-2" data-line-number="2">sim_data =<span class="st"> </span><span class="kw">sin_dgp</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb229-1" data-line-number="1"><span class="kw">plot</span>(sim_data, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>), <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
+<a class="sourceLine" id="cb229-2" data-line-number="2"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb229-3" data-line-number="3"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="03-08-ensembles_files/figure-html/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" data-line-number="1">sim_data_for_boosting =<span class="st"> </span>sim_data</a></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb231-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb231-2" data-line-number="2">splits =<span class="st"> </span><span class="dv">99</span></a>
+<a class="sourceLine" id="cb231-3" data-line-number="3"><span class="cf">while</span>(splits <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb231-4" data-line-number="4">  <span class="kw">plot</span>(sim_data_for_boosting, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>), <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
+<a class="sourceLine" id="cb231-5" data-line-number="5">  <span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb231-6" data-line-number="6">  fit =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_data_for_boosting, <span class="dt">maxdepth =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb231-7" data-line-number="7">  <span class="kw">curve</span>(<span class="kw">predict</span>(fit, <span class="kw">data.frame</span>(<span class="dt">x =</span> x)), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a>
+<a class="sourceLine" id="cb231-8" data-line-number="8">  sim_data_for_boosting<span class="op">$</span>y =<span class="st"> </span>sim_data_for_boosting<span class="op">$</span>y <span class="op">-</span><span class="st"> </span><span class="fl">0.4</span> <span class="op">*</span><span class="st"> </span><span class="kw">predict</span>(fit)</a>
+<a class="sourceLine" id="cb231-9" data-line-number="9">  splits =<span class="st"> </span><span class="kw">nrow</span>(fit<span class="op">$</span>frame) <span class="op">-</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb231-10" data-line-number="10">}</a></code></pre></div>
+<p><img src="03-08-ensembles_files/figure-html/unnamed-chunk-26-1.png" width="1152" style="display: block; margin: auto;" /><img src="03-08-ensembles_files/figure-html/unnamed-chunk-26-2.png" width="1152" style="display: block; margin: auto;" /><img src="03-08-ensembles_files/figure-html/unnamed-chunk-26-3.png" width="1152" style="display: block; margin: auto;" /><img src="03-08-ensembles_files/figure-html/unnamed-chunk-26-4.png" width="1152" style="display: block; margin: auto;" /><img src="03-08-ensembles_files/figure-html/unnamed-chunk-26-5.png" width="1152" style="display: block; margin: auto;" /><img src="03-08-ensembles_files/figure-html/unnamed-chunk-26-6.png" width="1152" style="display: block; margin: auto;" /><img src="03-08-ensembles_files/figure-html/unnamed-chunk-26-7.png" width="1152" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb232-1" data-line-number="1">sim_data_for_boosting =<span class="st"> </span>sim_data</a>
+<a class="sourceLine" id="cb232-2" data-line-number="2">tree_list =<span class="st"> </span><span class="kw">list</span>()</a>
+<a class="sourceLine" id="cb232-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb232-4" data-line-number="4"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>) {</a>
+<a class="sourceLine" id="cb232-5" data-line-number="5">  fit =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_data_for_boosting, <span class="dt">maxdepth =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb232-6" data-line-number="6">  tree_list[[i]] =<span class="st"> </span>fit</a>
+<a class="sourceLine" id="cb232-7" data-line-number="7">  sim_data_for_boosting<span class="op">$</span>y =<span class="st"> </span>sim_data_for_boosting<span class="op">$</span>y <span class="op">-</span><span class="st"> </span><span class="fl">0.1</span> <span class="op">*</span><span class="st"> </span><span class="kw">predict</span>(fit)</a>
+<a class="sourceLine" id="cb232-8" data-line-number="8">}</a>
+<a class="sourceLine" id="cb232-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb232-10" data-line-number="10"><span class="kw">names</span>(tree_list) =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb232-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb232-12" data-line-number="12">boost_pred =<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb232-13" data-line-number="13">  <span class="kw">apply</span>(<span class="kw">t</span>(<span class="kw">map_df</span>(tree_list, predict, <span class="kw">data.frame</span>(<span class="dt">x =</span> x))), <span class="dv">2</span>, <span class="cf">function</span>(x) {<span class="fl">0.1</span> <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>(x)})</a>
+<a class="sourceLine" id="cb232-14" data-line-number="14">}</a>
+<a class="sourceLine" id="cb232-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb232-16" data-line-number="16"><span class="kw">plot</span>(sim_data, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>), <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
+<a class="sourceLine" id="cb232-17" data-line-number="17"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb232-18" data-line-number="18"><span class="kw">curve</span>(<span class="kw">boost_pred</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a>
+<a class="sourceLine" id="cb232-19" data-line-number="19"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="03-08-ensembles_files/figure-html/unnamed-chunk-27-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb233-1" data-line-number="1">fit_caret_gbm =<span class="st"> </span><span class="kw">train</span>(Class <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> two_class_data,</a>
+<a class="sourceLine" id="cb233-2" data-line-number="2">                      <span class="dt">method =</span> <span class="st">&quot;xgbTree&quot;</span>,</a>
+<a class="sourceLine" id="cb233-3" data-line-number="3">                      <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb234-1" data-line-number="1">fit_caret_gbm</a></code></pre></div>
+<pre><code>## eXtreme Gradient Boosting 
+## 
+## 1250 samples
+##   35 predictor
+##    2 classes: &#39;Class1&#39;, &#39;Class2&#39; 
+## 
+## No pre-processing
+## Resampling: Cross-Validated (5 fold) 
+## Summary of sample sizes: 1000, 1001, 999, 1000, 1000 
+## Resampling results across tuning parameters:
+## 
+##   eta  max_depth  colsample_bytree  subsample  nrounds  Accuracy 
+##   0.3  1          0.6               0.50        50      0.8216115
+##   0.3  1          0.6               0.50       100      0.8440341
+##   0.3  1          0.6               0.50       150      0.8400372
+##   0.3  1          0.6               0.75        50      0.8216212
+##   0.3  1          0.6               0.75       100      0.8512149
+##   0.3  1          0.6               0.75       150      0.8496213
+##   0.3  1          0.6               1.00        50      0.8272020
+##   0.3  1          0.6               1.00       100      0.8448309
+##   0.3  1          0.6               1.00       150      0.8496117
+##   0.3  1          0.8               0.50        50      0.8376084
+##   0.3  1          0.8               0.50       100      0.8488245
+##   0.3  1          0.8               0.50       150      0.8456084
+##   0.3  1          0.8               0.75        50      0.8368180
+##   0.3  1          0.8               0.75       100      0.8504182
+##   0.3  1          0.8               0.75       150      0.8600406
+##   0.3  1          0.8               1.00        50      0.8264276
+##   0.3  1          0.8               1.00       100      0.8480246
+##   0.3  1          0.8               1.00       150      0.8528214
+##   0.3  2          0.6               0.50        50      0.8512245
+##   0.3  2          0.6               0.50       100      0.8472181
+##   0.3  2          0.6               0.50       150      0.8456053
+##   0.3  2          0.6               0.75        50      0.8432214
+##   0.3  2          0.6               0.75       100      0.8608086
+##   0.3  2          0.6               0.75       150      0.8544150
+##   0.3  2          0.6               1.00        50      0.8432277
+##   0.3  2          0.6               1.00       100      0.8472180
+##   0.3  2          0.6               1.00       150      0.8448341
+##   0.3  2          0.8               0.50        50      0.8399926
+##   0.3  2          0.8               0.50       100      0.8512246
+##   0.3  2          0.8               0.50       150      0.8512342
+##   0.3  2          0.8               0.75        50      0.8375796
+##   0.3  2          0.8               0.75       100      0.8464117
+##   0.3  2          0.8               0.75       150      0.8568214
+##   0.3  2          0.8               1.00        50      0.8512374
+##   0.3  2          0.8               1.00       100      0.8568278
+##   0.3  2          0.8               1.00       150      0.8560182
+##   0.3  3          0.6               0.50        50      0.8424085
+##   0.3  3          0.6               0.50       100      0.8352244
+##   0.3  3          0.6               0.50       150      0.8392084
+##   0.3  3          0.6               0.75        50      0.8432054
+##   0.3  3          0.6               0.75       100      0.8440021
+##   0.3  3          0.6               0.75       150      0.8424021
+##   0.3  3          0.6               1.00        50      0.8392085
+##   0.3  3          0.6               1.00       100      0.8496213
+##   0.3  3          0.6               1.00       150      0.8464149
+##   0.3  3          0.8               0.50        50      0.8416373
+##   0.3  3          0.8               0.50       100      0.8360244
+##   0.3  3          0.8               0.50       150      0.8368019
+##   0.3  3          0.8               0.75        50      0.8496118
+##   0.3  3          0.8               0.75       100      0.8560247
+##   0.3  3          0.8               0.75       150      0.8520150
+##   0.3  3          0.8               1.00        50      0.8408181
+##   0.3  3          0.8               1.00       100      0.8440054
+##   0.3  3          0.8               1.00       150      0.8456054
+##   0.4  1          0.6               0.50        50      0.8304181
+##   0.4  1          0.6               0.50       100      0.8384116
+##   0.4  1          0.6               0.50       150      0.8472085
+##   0.4  1          0.6               0.75        50      0.8432213
+##   0.4  1          0.6               0.75       100      0.8496181
+##   0.4  1          0.6               0.75       150      0.8616054
+##   0.4  1          0.6               1.00        50      0.8384309
+##   0.4  1          0.6               1.00       100      0.8464342
+##   0.4  1          0.6               1.00       150      0.8544246
+##   0.4  1          0.8               0.50        50      0.8256404
+##   0.4  1          0.8               0.50       100      0.8376213
+##   0.4  1          0.8               0.50       150      0.8520150
+##   0.4  1          0.8               0.75        50      0.8400148
+##   0.4  1          0.8               0.75       100      0.8600214
+##   0.4  1          0.8               0.75       150      0.8544213
+##   0.4  1          0.8               1.00        50      0.8336373
+##   0.4  1          0.8               1.00       100      0.8432246
+##   0.4  1          0.8               1.00       150      0.8520246
+##   0.4  2          0.6               0.50        50      0.8344213
+##   0.4  2          0.6               0.50       100      0.8376085
+##   0.4  2          0.6               0.50       150      0.8336245
+##   0.4  2          0.6               0.75        50      0.8424308
+##   0.4  2          0.6               0.75       100      0.8424245
+##   0.4  2          0.6               0.75       150      0.8472277
+##   0.4  2          0.6               1.00        50      0.8488213
+##   0.4  2          0.6               1.00       100      0.8504277
+##   0.4  2          0.6               1.00       150      0.8480117
+##   0.4  2          0.8               0.50        50      0.8535958
+##   0.4  2          0.8               0.50       100      0.8399925
+##   0.4  2          0.8               0.50       150      0.8319956
+##   0.4  2          0.8               0.75        50      0.8512246
+##   0.4  2          0.8               0.75       100      0.8440310
+##   0.4  2          0.8               0.75       150      0.8456246
+##   0.4  2          0.8               1.00        50      0.8400149
+##   0.4  2          0.8               1.00       100      0.8528150
+##   0.4  2          0.8               1.00       150      0.8488214
+##   0.4  3          0.6               0.50        50      0.8344020
+##   0.4  3          0.6               0.50       100      0.8336308
+##   0.4  3          0.6               0.50       150      0.8216115
+##   0.4  3          0.6               0.75        50      0.8319988
+##   0.4  3          0.6               0.75       100      0.8320180
+##   0.4  3          0.6               0.75       150      0.8256115
+##   0.4  3          0.6               1.00        50      0.8448053
+##   0.4  3          0.6               1.00       100      0.8496053
+##   0.4  3          0.6               1.00       150      0.8504117
+##   0.4  3          0.8               0.50        50      0.8408596
+##   0.4  3          0.8               0.50       100      0.8480533
+##   0.4  3          0.8               0.50       150      0.8504341
+##   0.4  3          0.8               0.75        50      0.8416021
+##   0.4  3          0.8               0.75       100      0.8568054
+##   0.4  3          0.8               0.75       150      0.8480213
+##   0.4  3          0.8               1.00        50      0.8423988
+##   0.4  3          0.8               1.00       100      0.8504085
+##   0.4  3          0.8               1.00       150      0.8472085
+##   Kappa    
+##   0.6414749
+##   0.6865206
+##   0.6786892
+##   0.6409912
+##   0.7010616
+##   0.6976634
+##   0.6520287
+##   0.6879805
+##   0.6978221
+##   0.6734819
+##   0.6961073
+##   0.6897355
+##   0.6718179
+##   0.6992234
+##   0.7188406
+##   0.6505342
+##   0.6944758
+##   0.7041572
+##   0.7011962
+##   0.6931712
+##   0.6896884
+##   0.6850208
+##   0.7204842
+##   0.7076156
+##   0.6848511
+##   0.6931451
+##   0.6882066
+##   0.6780840
+##   0.7011207
+##   0.7011798
+##   0.6737815
+##   0.6915892
+##   0.7122765
+##   0.7010443
+##   0.7124447
+##   0.7109870
+##   0.6834186
+##   0.6690434
+##   0.6772174
+##   0.6852938
+##   0.6869397
+##   0.6834257
+##   0.6775491
+##   0.6982164
+##   0.6917889
+##   0.6820106
+##   0.6706852
+##   0.6722480
+##   0.6982359
+##   0.7112039
+##   0.7030828
+##   0.6804525
+##   0.6869473
+##   0.6902489
+##   0.6588838
+##   0.6753484
+##   0.6928970
+##   0.6845712
+##   0.6977998
+##   0.7218161
+##   0.6747629
+##   0.6916485
+##   0.7075619
+##   0.6493075
+##   0.6737085
+##   0.7027045
+##   0.6783493
+##   0.7188709
+##   0.7074875
+##   0.6651914
+##   0.6848631
+##   0.7025076
+##   0.6671783
+##   0.6734749
+##   0.6657955
+##   0.6834192
+##   0.6837333
+##   0.6931566
+##   0.6966864
+##   0.6998624
+##   0.6949629
+##   0.7065727
+##   0.6791651
+##   0.6633081
+##   0.7014535
+##   0.6868763
+##   0.6902718
+##   0.6789107
+##   0.7045840
+##   0.6964023
+##   0.6675237
+##   0.6661531
+##   0.6422744
+##   0.6628870
+##   0.6628081
+##   0.6498437
+##   0.6886234
+##   0.6983848
+##   0.6999526
+##   0.6801776
+##   0.6948665
+##   0.6996543
+##   0.6821385
+##   0.7125795
+##   0.6950743
+##   0.6837597
+##   0.6999404
+##   0.6935261
+## 
+## Tuning parameter &#39;gamma&#39; was held constant at a value of 0
+## 
+## Tuning parameter &#39;min_child_weight&#39; was held constant at a value of 1
+## Accuracy was used to select the optimal model using the largest value.
+## The final values used for the model were nrounds = 150, max_depth = 1,
+##  eta = 0.4, gamma = 0, colsample_bytree = 0.6, min_child_weight = 1
+##  and subsample = 0.75.</code></pre>
+
 </div>
 </div>
 

@@ -18,6 +18,11 @@ library("rpart")
 library("rpart.plot")
 library("caret")
 library("purrr")
+library("randomForest")
+library("gbm")
+library("xgboost")
+library("knitr")
+library("kableExtra")
 ```
 
 ## Bagging
@@ -40,23 +45,23 @@ par(mfrow = c(1, 3))
 some_data = sin_dgp()
 plot(some_data, pch = 20, col = "darkgrey")
 grid()
-curve(2 * sin(x), add = TRUE, col = "dodgerblue", lwd = 2)
+curve(2 * sin(x), add = TRUE, col = "black", lwd = 2)
 fit_1 = rpart(y ~ x, data = some_data, cp = 0)
-curve(predict(fit_1, tibble(x = x)), add = TRUE, lwd = 2)
+curve(predict(fit_1, tibble(x = x)), add = TRUE, lwd = 2, col = "dodgerblue")
       
 some_data = sin_dgp()
 plot(some_data, pch = 20, col = "darkgrey")
 grid()
-curve(2 * sin(x), add = TRUE, col = "dodgerblue", lwd = 2)
+curve(2 * sin(x), add = TRUE, col = "black", lwd = 2)
 fit_2 = rpart(y ~ x, data = some_data, cp = 0)
-curve(predict(fit_2, tibble(x = x)), add = TRUE, lwd = 2)
+curve(predict(fit_2, tibble(x = x)), add = TRUE, lwd = 2, col = "dodgerblue")
 
 some_data = sin_dgp()
 plot(some_data, pch = 20, col = "darkgrey")
 grid()
-curve(2 * sin(x), add = TRUE, col = "dodgerblue", lwd = 2)
+curve(2 * sin(x), add = TRUE, col = "black", lwd = 2)
 fit_3 = rpart(y ~ x, data = some_data, cp = 0)
-curve(predict(fit_3, tibble(x = x)), add = TRUE, lwd = 2)
+curve(predict(fit_3, tibble(x = x)), add = TRUE, lwd = 2, col = "dodgerblue")
 ```
 
 ```{r, fig.height = 4, fig.width = 12}
@@ -84,26 +89,26 @@ par(mfrow = c(1, 3))
 some_data = sin_dgp()
 plot(some_data, pch = 20, col = "darkgrey")
 grid()
-curve(2 * sin(x), add = TRUE, col = "dodgerblue", lwd = 2)
+curve(2 * sin(x), add = TRUE, col = "black", lwd = 2)
 boot_idx = caret::createResample(y = some_data$y, times = 100)
 boot_reps = map(boot_idx, ~ rpart(y ~ x, data = some_data[.x, ], cp = 0))
-curve(bag_pred(x = x), add = TRUE, lwd = 2)
+curve(bag_pred(x = x), add = TRUE, lwd = 2, col = "dodgerblue")
 
 some_data = sin_dgp()
 plot(some_data, pch = 20, col = "darkgrey")
 grid()
-curve(2 * sin(x), add = TRUE, col = "dodgerblue", lwd = 2)
+curve(2 * sin(x), add = TRUE, col = "black", lwd = 2)
 boot_idx = caret::createResample(y = some_data$y, times = 100)
 boot_reps = map(boot_idx, ~ rpart(y ~ x, data = some_data[.x, ], cp = 0))
-curve(bag_pred(x = x), add = TRUE, lwd = 2)
+curve(bag_pred(x = x), add = TRUE, lwd = 2, col = "dodgerblue")
 
 some_data = sin_dgp()
 plot(some_data, pch = 20, col = "darkgrey")
 grid()
-curve(2 * sin(x), add = TRUE, col = "dodgerblue", lwd = 2)
+curve(2 * sin(x), add = TRUE, col = "black", lwd = 2)
 boot_idx = caret::createResample(y = some_data$y, times = 100)
 boot_reps = map(boot_idx, ~ rpart(y ~ x, data = some_data[.x, ], cp = 0))
-curve(bag_pred(x = x), add = TRUE, lwd = 2)
+curve(bag_pred(x = x), add = TRUE, lwd = 2, col = "dodgerblue")
 ```
 
 ### Simultation Study
@@ -128,4 +133,140 @@ set.seed(42)
 sim_results = replicate(n = 250, sim_bagging_vs_single())
 apply(sim_results, 1, mean)
 apply(sim_results, 1, var)
+```
+
+## Random Forest
+
+```{r}
+set.seed(42)
+two_class_data = as_tibble(caret::twoClassSim(n = 1250, noiseVars = 20))
+two_class_data
+```
+
+```{r}
+fit = randomForest(Class ~ ., data = two_class_data)
+fit
+```
+
+```{r}
+all.equal(predict(fit), predict(fit, two_class_data))
+```
+
+```{r}
+tibble(
+  "Training Observation" = 1:10,
+  "OOB Predictions" = head(predict(fit), n = 10),
+  "Full Forest Predictions" = head(predict(fit, two_class_data), n = 10)
+) %>% 
+  kable() %>% 
+  kable_styling("striped", full_width = FALSE)
+```
+
+```{r}
+predict(fit, two_class_data, type = "prob")[2, ]
+```
+
+```{r}
+predict(fit, two_class_data, predict.all = TRUE)$individual[2, ]
+```
+
+```{r}
+table(predict(fit, two_class_data, predict.all = TRUE)$individual[2, ])
+```
+
+```{r}
+table(predict(fit, two_class_data, predict.all = TRUE)$individual[2, ]) / 500
+```
+
+```{r}
+mean(fit$oob.times / 500)
+exp(-1)
+```
+
+```{r}
+fit$importance
+```
+
+```{r}
+varImpPlot(fit)
+```
+
+```{r}
+fit_caret_rf = train(Class ~ ., data = two_class_data,
+                     trControl = trainControl(method = "oob"))
+```
+
+```{r}
+fit_caret_rf
+```
+
+## Boosting
+
+```{r}
+sin_dgp = function(sample_size = 150) {
+  x = runif(n = sample_size, min = -10, max = 10)
+  y = 2 * sin(x) + rnorm(n = sample_size)
+  tibble(x = x, y = y)
+}
+```
+
+
+```{r}
+set.seed(42)
+sim_data = sin_dgp()
+```
+
+```{r}
+plot(sim_data, ylim = c(-6, 6), pch = 20, col = "darkgrey")
+grid()
+curve(2 * sin(x), col = "black", add = TRUE, lwd = 2)
+```
+
+```{r}
+sim_data_for_boosting = sim_data
+```
+
+```{r, fig.height = 4, fig.width = 12}
+par(mfrow = c(1, 3))
+splits = 99
+while(splits > 0) {
+  plot(sim_data_for_boosting, ylim = c(-6, 6), pch = 20, col = "darkgrey")
+  grid()
+  fit = rpart(y ~ x, data = sim_data_for_boosting, maxdepth = 2)
+  curve(predict(fit, data.frame(x = x)), add = TRUE, lwd = 2, col = "dodgerblue")
+  sim_data_for_boosting$y = sim_data_for_boosting$y - 0.4 * predict(fit)
+  splits = nrow(fit$frame) - 1
+}
+```
+
+```{r}
+sim_data_for_boosting = sim_data
+tree_list = list()
+
+for (i in 1:100) {
+  fit = rpart(y ~ x, data = sim_data_for_boosting, maxdepth = 2)
+  tree_list[[i]] = fit
+  sim_data_for_boosting$y = sim_data_for_boosting$y - 0.1 * predict(fit)
+}
+
+names(tree_list) = 1:100
+
+boost_pred = function(x) {
+  apply(t(map_df(tree_list, predict, data.frame(x = x))), 2, function(x) {0.1 * sum(x)})
+}
+
+plot(sim_data, ylim = c(-6, 6), pch = 20, col = "darkgrey")
+grid()
+curve(boost_pred(x), add = TRUE, lwd = 2, col = "dodgerblue")
+curve(2 * sin(x), add = TRUE, col = "black", lwd = 2)
+```
+
+```{r}
+fit_caret_gbm = train(Class ~ ., data = two_class_data,
+                      method = "xgbTree",
+                      trControl = trainControl(method = "cv", number = 5))
+```
+
+```{r}
+fit_caret_gbm
 ```
