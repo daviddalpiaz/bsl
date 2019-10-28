@@ -99,6 +99,7 @@ Note: This is somewhat speculative.
 1. Introduction
 2. Getting up to speed with R (Currently "Computing" in the main narrative.)
 3. `purrr::map()`
+4. Simulation? Bootstrap?
 
 06 - Analysis (Examples of using the material with "real world" datasets)
 
