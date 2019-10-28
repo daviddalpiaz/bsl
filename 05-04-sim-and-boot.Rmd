@@ -4,7 +4,7 @@
 
 ## STAT 432 Materials
 
-- [**Slides** | Bootstrap](https://fall-2019.stat432.org/slides/bootstap.pdf)
+- [**Slides** | Bootstrap](https://fall-2019.stat432.org/slides/bootstrap.pdf)
 
 ***
 
