@@ -275,7 +275,8 @@ fit_caret_gbm
 ```{r}
 fit_caret_xgb = train(Class ~ ., data = two_class_data,
                       method = "xgbTree",
-                      trControl = trainControl(method = "cv", number = 5))
+                      trControl = trainControl(method = "cv", number = 5),
+                      tuneLength = 2)
 ```
 
 ```{r}
