@@ -771,13 +771,13 @@ Class1
 <a class="sourceLine" id="cb232-4" data-line-number="4"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>) {</a>
 <a class="sourceLine" id="cb232-5" data-line-number="5">  fit =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_data_for_boosting, <span class="dt">maxdepth =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb232-6" data-line-number="6">  tree_list[[i]] =<span class="st"> </span>fit</a>
-<a class="sourceLine" id="cb232-7" data-line-number="7">  sim_data_for_boosting<span class="op">$</span>y =<span class="st"> </span>sim_data_for_boosting<span class="op">$</span>y <span class="op">-</span><span class="st"> </span><span class="fl">0.1</span> <span class="op">*</span><span class="st"> </span><span class="kw">predict</span>(fit)</a>
+<a class="sourceLine" id="cb232-7" data-line-number="7">  sim_data_for_boosting<span class="op">$</span>y =<span class="st"> </span>sim_data_for_boosting<span class="op">$</span>y <span class="op">-</span><span class="st"> </span><span class="fl">0.4</span> <span class="op">*</span><span class="st"> </span><span class="kw">predict</span>(fit)</a>
 <a class="sourceLine" id="cb232-8" data-line-number="8">}</a>
 <a class="sourceLine" id="cb232-9" data-line-number="9"></a>
 <a class="sourceLine" id="cb232-10" data-line-number="10"><span class="kw">names</span>(tree_list) =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">100</span></a>
 <a class="sourceLine" id="cb232-11" data-line-number="11"></a>
 <a class="sourceLine" id="cb232-12" data-line-number="12">boost_pred =<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb232-13" data-line-number="13">  <span class="kw">apply</span>(<span class="kw">t</span>(<span class="kw">map_df</span>(tree_list, predict, <span class="kw">data.frame</span>(<span class="dt">x =</span> x))), <span class="dv">2</span>, <span class="cf">function</span>(x) {<span class="fl">0.1</span> <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>(x)})</a>
+<a class="sourceLine" id="cb232-13" data-line-number="13">  <span class="kw">apply</span>(<span class="kw">t</span>(<span class="kw">map_df</span>(tree_list, predict, <span class="kw">data.frame</span>(<span class="dt">x =</span> x))), <span class="dv">2</span>, <span class="cf">function</span>(x) {<span class="fl">0.4</span> <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>(x)})</a>
 <a class="sourceLine" id="cb232-14" data-line-number="14">}</a>
 <a class="sourceLine" id="cb232-15" data-line-number="15"></a>
 <a class="sourceLine" id="cb232-16" data-line-number="16"><span class="kw">plot</span>(sim_data, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>), <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>

@@ -570,13 +570,13 @@ tree_list = list()
 for (i in 1:100) {
   fit = rpart(y ~ x, data = sim_data_for_boosting, maxdepth = 2)
   tree_list[[i]] = fit
-  sim_data_for_boosting$y = sim_data_for_boosting$y - 0.1 * predict(fit)
+  sim_data_for_boosting$y = sim_data_for_boosting$y - 0.4 * predict(fit)
 }
 
 names(tree_list) = 1:100
 
 boost_pred = function(x) {
-  apply(t(map_df(tree_list, predict, data.frame(x = x))), 2, function(x) {0.1 * sum(x)})
+  apply(t(map_df(tree_list, predict, data.frame(x = x))), 2, function(x) {0.4 * sum(x)})
 }
 
 plot(sim_data, ylim = c(-6, 6), pch = 20, col = "darkgrey")
