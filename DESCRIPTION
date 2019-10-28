@@ -37,6 +37,7 @@ Imports:
   leaps,
   lubridate,
   MASS,
+  microbenchmark,
   mlbench,
   nnet, 
   plotrix,
