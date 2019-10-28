@@ -263,10 +263,21 @@ curve(2 * sin(x), add = TRUE, col = "black", lwd = 2)
 
 ```{r}
 fit_caret_gbm = train(Class ~ ., data = two_class_data,
+                      method = "gbm",
+                      trControl = trainControl(method = "cv", number = 5),
+                      verbose = FALSE)
+```
+
+```{r}
+fit_caret_gbm
+```
+
+```{r}
+fit_caret_xgb = train(Class ~ ., data = two_class_data,
                       method = "xgbTree",
                       trControl = trainControl(method = "cv", number = 5))
 ```
 
 ```{r}
-fit_caret_gbm
+fit_caret_xgb
 ```
