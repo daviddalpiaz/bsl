@@ -1,7 +1,7 @@
 --- 
 title: "Basics of Statistical Learning"
 author: "[David Dalpiaz](https://daviddalpiaz.com/)"
-date: "2019-10-25"
+date: "2019-10-28"
 github-repo: daviddalpiaz/bsl
 url: 'http\://daviddalpiaz.github.io/bsl/'
 knit: "bookdown::render_book"
@@ -96,6 +96,7 @@ Note: This is somewhat speculative.
 1. Introduction
 2. Getting up to speed with R (Currently "Computing" in the main narrative.)
 3. `purrr::map()`
+4. Simulation? Bootstrap?
 
 06 - Analysis (Examples of using the material with "real world" datasets)
 
