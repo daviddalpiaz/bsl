@@ -54,7 +54,7 @@ ylim = c(0, 0.5)
 xlim = c(0, 20)
 ```
 
-```{r}
+```{r, fig.height = 4, fig.width = 12}
 # resampling from the true distribution
 par(mfrow = c(1, 3))
 
@@ -142,7 +142,7 @@ grid()
 sample(x = data, replace = TRUE)
 ```
 
-```{r}
+```{r, fig.height = 4, fig.width = 12}
 # bootstrap resample from original data
 par(mfrow = c(1, 3))
 
