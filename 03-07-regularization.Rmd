@@ -1,5 +1,14 @@
 # Regularization
 
+***
+
+## STAT 432 Materials
+
+- [**Slides** | Ensemble Methods](https://fall-2019.stat432.org/slides/ensembles.pdf)
+- ISL Readings: Sections 6.1 - 6.4
+
+***
+
 ```{r resampling_opts, include = FALSE}
 knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
 ```
@@ -7,7 +16,6 @@ knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
 ```{r, message=FALSE, warning=FALSE}
 library("glmnet")
 ```
-
 
 ## adding bias to reduce variance
 
