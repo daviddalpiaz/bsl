@@ -5,6 +5,7 @@
 ## STAT 432 Materials
 
 - [**Slides** | Ensemble Methods](https://fall-2019.stat432.org/slides/ensembles.pdf)
+- ISL Readings: Sections 8.1 - 8.2
 
 ***
 

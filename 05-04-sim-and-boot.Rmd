@@ -5,7 +5,6 @@
 ## STAT 432 Materials
 
 - [**Slides** | Bootstrap](https://fall-2019.stat432.org/slides/bootstrap.pdf)
-- ISL Readings: Sections 8.1 - 8.2 
 
 ***
 
