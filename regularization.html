@@ -239,14 +239,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="13" data-path="supervised-learning.html"><a href="supervised-learning.html"><i class="fa fa-check"></i><b>13</b> Supervised Learning</a></li>
 <li class="chapter" data-level="14" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>14</b> Regularization</a><ul>
-<li class="chapter" data-level="14.1" data-path="regularization.html"><a href="regularization.html#adding-bias-to-reduce-variance"><i class="fa fa-check"></i><b>14.1</b> adding bias to reduce variance</a></li>
-<li class="chapter" data-level="14.2" data-path="regularization.html"><a href="regularization.html#scaling-matters"><i class="fa fa-check"></i><b>14.2</b> scaling matters?</a></li>
-<li class="chapter" data-level="14.3" data-path="regularization.html"><a href="regularization.html#moving-to-two-dimensions"><i class="fa fa-check"></i><b>14.3</b> moving to two dimensions</a></li>
-<li class="chapter" data-level="14.4" data-path="regularization.html"><a href="regularization.html#boston-is-boring"><i class="fa fa-check"></i><b>14.4</b> boston is boring</a></li>
-<li class="chapter" data-level="14.5" data-path="regularization.html"><a href="regularization.html#some-more-simulation"><i class="fa fa-check"></i><b>14.5</b> some more simulation</a></li>
+<li class="chapter" data-level="14.1" data-path="regularization.html"><a href="regularization.html#stat-432-materials-2"><i class="fa fa-check"></i><b>14.1</b> STAT 432 Materials</a></li>
+<li class="chapter" data-level="14.2" data-path="regularization.html"><a href="regularization.html#adding-bias-to-reduce-variance"><i class="fa fa-check"></i><b>14.2</b> adding bias to reduce variance</a></li>
+<li class="chapter" data-level="14.3" data-path="regularization.html"><a href="regularization.html#scaling-matters"><i class="fa fa-check"></i><b>14.3</b> scaling matters?</a></li>
+<li class="chapter" data-level="14.4" data-path="regularization.html"><a href="regularization.html#moving-to-two-dimensions"><i class="fa fa-check"></i><b>14.4</b> moving to two dimensions</a></li>
+<li class="chapter" data-level="14.5" data-path="regularization.html"><a href="regularization.html#boston-is-boring"><i class="fa fa-check"></i><b>14.5</b> boston is boring</a></li>
+<li class="chapter" data-level="14.6" data-path="regularization.html"><a href="regularization.html#some-more-simulation"><i class="fa fa-check"></i><b>14.6</b> some more simulation</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="ensembles.html"><a href="ensembles.html"><i class="fa fa-check"></i><b>15</b> Ensembles</a><ul>
-<li class="chapter" data-level="15.1" data-path="ensembles.html"><a href="ensembles.html#stat-432-materials-2"><i class="fa fa-check"></i><b>15.1</b> STAT 432 Materials</a></li>
+<li class="chapter" data-level="15.1" data-path="ensembles.html"><a href="ensembles.html#stat-432-materials-3"><i class="fa fa-check"></i><b>15.1</b> STAT 432 Materials</a></li>
 <li class="chapter" data-level="15.2" data-path="ensembles.html"><a href="ensembles.html#bagging"><i class="fa fa-check"></i><b>15.2</b> Bagging</a><ul>
 <li class="chapter" data-level="15.2.1" data-path="ensembles.html"><a href="ensembles.html#simultation-study"><i class="fa fa-check"></i><b>15.2.1</b> Simultation Study</a></li>
 </ul></li>
@@ -274,7 +275,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18.3" data-path="resources.html"><a href="resources.html#common-issues"><i class="fa fa-check"></i><b>18.3</b> Common Issues</a></li>
 </ul></li>
 <li class="chapter" data-level="19" data-path="simulation-and-bootstrap.html"><a href="simulation-and-bootstrap.html"><i class="fa fa-check"></i><b>19</b> Simulation and Bootstrap</a><ul>
-<li class="chapter" data-level="19.1" data-path="simulation-and-bootstrap.html"><a href="simulation-and-bootstrap.html#stat-432-materials-3"><i class="fa fa-check"></i><b>19.1</b> STAT 432 Materials</a></li>
+<li class="chapter" data-level="19.1" data-path="simulation-and-bootstrap.html"><a href="simulation-and-bootstrap.html#stat-432-materials-4"><i class="fa fa-check"></i><b>19.1</b> STAT 432 Materials</a></li>
 <li class="chapter" data-level="19.2" data-path="simulation-and-bootstrap.html"><a href="simulation-and-bootstrap.html#misc-notes"><i class="fa fa-check"></i><b>19.2</b> Misc Notes</a></li>
 </ul></li>
 <li class="part"><span><b>VI Analysis</b></span></li>
@@ -303,9 +304,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="regularization" class="section level1">
 <h1><span class="header-section-number">Chapter 14</span> Regularization</h1>
+<hr />
+<div id="stat-432-materials-2" class="section level2">
+<h2><span class="header-section-number">14.1</span> STAT 432 Materials</h2>
+<ul>
+<li>ISL Readings: Sections 6.1 - 6.4</li>
+</ul>
+<hr />
 <div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" data-line-number="1"><span class="kw">library</span>(<span class="st">&quot;glmnet&quot;</span>)</a></code></pre></div>
+</div>
 <div id="adding-bias-to-reduce-variance" class="section level2">
-<h2><span class="header-section-number">14.1</span> adding bias to reduce variance</h2>
+<h2><span class="header-section-number">14.2</span> adding bias to reduce variance</h2>
 <div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" data-line-number="1"><span class="co"># this is a bad function name</span></a>
 <a class="sourceLine" id="cb139-2" data-line-number="2">dgp =<span class="st"> </span><span class="cf">function</span>(<span class="dt">sample_size =</span> <span class="dv">25</span>) {</a>
 <a class="sourceLine" id="cb139-3" data-line-number="3">  x =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size)</a>
@@ -325,7 +334,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] -1.0000283827  0.0008975389</code></pre>
 </div>
 <div id="scaling-matters" class="section level2">
-<h2><span class="header-section-number">14.2</span> scaling matters?</h2>
+<h2><span class="header-section-number">14.3</span> scaling matters?</h2>
 <div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb147-1" data-line-number="1">dgp =<span class="st"> </span><span class="cf">function</span>(<span class="dt">sample_size =</span> <span class="dv">25</span>) {</a>
 <a class="sourceLine" id="cb147-2" data-line-number="2">  x =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size)</a>
 <a class="sourceLine" id="cb147-3" data-line-number="3">  y =<span class="st"> </span><span class="dv">-2</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size)</a>
@@ -357,7 +366,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## -0.843904758 -0.304753005 -1.055747512  1.700604544 -0.749181170</code></pre>
 </div>
 <div id="moving-to-two-dimensions" class="section level2">
-<h2><span class="header-section-number">14.3</span> moving to two dimensions</h2>
+<h2><span class="header-section-number">14.4</span> moving to two dimensions</h2>
 <div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" data-line-number="1">gen_linear_data =<span class="st"> </span><span class="cf">function</span>() {</a>
 <a class="sourceLine" id="cb152-2" data-line-number="2">  x1 =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</a>
 <a class="sourceLine" id="cb152-3" data-line-number="3">  x2 =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</a>
@@ -393,7 +402,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="03-07-regularization_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="boston-is-boring" class="section level2">
-<h2><span class="header-section-number">14.4</span> boston is boring</h2>
+<h2><span class="header-section-number">14.5</span> boston is boring</h2>
 <div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" data-line-number="1">bstn =<span class="st"> </span>MASS<span class="op">::</span>Boston</a>
 <a class="sourceLine" id="cb155-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb155-3" data-line-number="3">bstn<span class="op">$</span>chas =<span class="st"> </span><span class="kw">factor</span>(bstn<span class="op">$</span>chas)</a>
@@ -1552,7 +1561,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10 20</code></pre>
 </div>
 <div id="some-more-simulation" class="section level2">
-<h2><span class="header-section-number">14.5</span> some more simulation</h2>
+<h2><span class="header-section-number">14.6</span> some more simulation</h2>
 <div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" data-line-number="1"><span class="kw">diag</span>(<span class="dv">100</span>)</a></code></pre></div>
 <pre><code>##        [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12]
 ##   [1,]    1    0    0    0    0    0    0    0    0     0     0     0

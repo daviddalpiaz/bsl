@@ -1,12 +1,19 @@
 # Regularization
 
+***
+
+## STAT 432 Materials
+
+- ISL Readings: Sections 6.1 - 6.4
+
+***
+
 
 
 
 ```r
 library("glmnet")
 ```
-
 
 ## adding bias to reduce variance
 
