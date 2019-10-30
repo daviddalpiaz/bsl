@@ -24,7 +24,7 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-10-29" />
+<meta name="date" content="2019-10-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -777,7 +777,7 @@ SD, CV
 <div id="test-data" class="section level2">
 <h2><span class="header-section-number">12.4</span> Test Data</h2>
 <p>The following example, inspired by The Elements of Statistical Learning, will illustrate the need for a dedicated test set which is <strong>never</strong> used in model training. We do this, if for no other reason, because it gives us a quick sanity check that we have cross-validated correctly. To be specific we will always test-train split the data, then perform cross-validation <strong>within the training data</strong>.</p>
-<p>Essentially, this example will also show how to <strong>not</strong> cross-validate properly. It will also show can example of cross-validated in a classification setting.</p>
+<p>Essentially, this example will also show how to <strong>not</strong> cross-validate properly. It will also show an example of cross-validation in a classification setting.</p>
 <div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb120-1" data-line-number="1">calc_misclass =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</a>
 <a class="sourceLine" id="cb120-2" data-line-number="2">  <span class="kw">mean</span>(actual <span class="op">!=</span><span class="st"> </span>predicted)</a>
 <a class="sourceLine" id="cb120-3" data-line-number="3">}</a></code></pre></div>
