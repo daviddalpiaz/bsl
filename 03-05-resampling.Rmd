@@ -248,7 +248,7 @@ grid()
 
 The following example, inspired by The Elements of Statistical Learning, will illustrate the need for a dedicated test set which is **never** used in model training. We do this, if for no other reason, because it gives us a quick sanity check that we have cross-validated correctly. To be specific we will always test-train split the data, then perform cross-validation **within the training data**. 
 
-Essentially, this example will also show how to **not** cross-validate properly. It will also show can example of cross-validated in a classification setting.
+Essentially, this example will also show how to **not** cross-validate properly. It will also show an example of cross-validation in a classification setting.
 
 ```{r}
 calc_misclass = function(actual, predicted) {
