@@ -1,0 +1,60 @@
+# Data Manipulation
+
+***
+
+```{r data_manipulation_opts, include = FALSE}
+knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
+```
+
+```{r, message = FALSE, warning = FALSE}
+library("tidyverse")
+```
+
+***
+
+## `dplyr`
+
+- [The `tidyverse` Website](https://www.tidyverse.org/packages/)
+- [`dplyr` Website](https://dplyr.tidyverse.org/)
+- [`dplyr` Cheat Sheet](https://github.com/rstudio/cheatsheets/blob/master/data-transformation.pdf)
+- [R4DS: Data Transformation](https://r4ds.had.co.nz/transform.html)
+- [R4DS: Pipes](https://r4ds.had.co.nz/pipes.html)
+
+## `data.table`
+
+- [`data.table` Wiki](https://github.com/Rdatatable/data.table/wiki)
+- [`data.table` Website](https://rdatatable.gitlab.io/data.table/)
+- [`data.table` Cheat Sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/master/datatable.pdf)
+
+
+## Data Splitting with `dplyr::anti_join`
+
+```{r}
+set.seed(42)
+# simulate an estimation and validation dataset
+sim_est = as_tibble(caret::twoClassSim(n = 100))
+sim_val = as_tibble(caret::twoClassSim(n = 100))
+```
+
+```{r}
+# merge the rows of the estimation and validation datasets 
+# to create a training dataset
+sim_trn = sim_est %>% bind_rows(sim_val)
+```
+
+```{r, message = FALSE, warning = FALSE}
+# re-split the data to get better proportions, 80-20 split
+sim_est = sim_trn %>% sample_frac(0.8)
+sim_val = sim_trn %>% anti_join(sim_est)
+```
+
+```{r}
+# split datasets together are not the training dataset (check for order)
+identical(bind_rows(sim_est, sim_val), sim_trn)
+# bind_rows(sim_est, sim_val)[1, ] == sim_trn[1, ]
+```
+
+```{r}
+# split datasets together contain the same observations as the training dataset
+setequal(bind_rows(sim_est, sim_val), sim_trn)
+```
