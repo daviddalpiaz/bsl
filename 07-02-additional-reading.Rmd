@@ -14,7 +14,17 @@
   - Mehryar Mohri, Afshin Rostamizadeh, and Ameet Talwalkar
 - [The `caret` Package](https://topepo.github.io/caret/index.html)
   - Max Kuhn
-  
+- [Feature Engineering and Selection: A Practical Approach for Predictive Models](http://www.feat.engineering/)
+  - Max Kuhn and Kjell Johnson
+- [Applied Predictive Modeling](http://appliedpredictivemodeling.com/)
+  - Max Kuhn and Kjell Johnson
+- [Machine Learning: A Probabilistic Perspective](https://www.cs.ubc.ca/~murphyk/MLbook/)
+  - Kevin Murphy
+- [Probability for Statistics and Machine Learning](https://www.springer.com/gp/book/9781441996336)
+  - Anirban DasGupta
+- [From Linear Models to Machine Learning](http://heather.cs.ucdavis.edu/draftregclass.pdf)
+  - Norman Matloff
+
 ## Papers
 
 - [Do we Need Hundreds of Classifiers to Solve Real WorldClassification Problems?](http://jmlr.csail.mit.edu/papers/volume15/delgado14a/delgado14a.pdf)
@@ -23,3 +33,8 @@
 ## Blog Posts
 
 - [Peekaboo: Don't cite the No Free Lunch Theorem](https://peekaboo-vision.blogspot.com/2019/07/dont-cite-no-free-lunch-theorem.html)
+
+## Miscellaneous 
+
+- [Machine Learning verus Statistics, A Glossar](https://statweb.stanford.edu/~tibs/stat315a/glossary.pdf)
+  - Rob Tibshirani
