@@ -2384,5 +2384,6 @@ plot(fit, xlim = c(-6, 1), ylim = c(10, 30))
 
 
 
-Least Absolute Shrinkage and Selection Operator
-
+- TODO: Least Absolute Shrinkage and Selection Operator
+- TODO: https://statisticaloddsandends.wordpress.com/2018/11/15/a-deep-dive-into-glmnet-standardize/
+- TODO: https://www.jaredlander.com/2018/02/using-coefplot-with-glmnet/
