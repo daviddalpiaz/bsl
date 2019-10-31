@@ -29,6 +29,10 @@
 
 - [Do we Need Hundreds of Classifiers to Solve Real WorldClassification Problems?](http://jmlr.csail.mit.edu/papers/volume15/delgado14a/delgado14a.pdf)
   - Manuel Fernandez-Delgado, Eva Cernadas, Senen Barro, Dinani Amorim
+- [Statistical Modeling: The Two Cultures](https://projecteuclid.org/euclid.ss/1009213726)
+  - Leo Breiman
+- [50 Years of Data Science](https://www.tandfonline.com/doi/full/10.1080/10618600.2017.1384734)
+  - David Donoho
 
 ## Blog Posts
 
