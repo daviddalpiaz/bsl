@@ -1,0 +1,125 @@
+# Practical Issues
+
+***
+
+## STAT 432 Materials
+
+- Suggested Reading: [The `caret` Package: Model Training and Tuning](https://topepo.github.io/caret/model-training-and-tuning.html)
+
+***
+
+```{r resampling_opts, include = FALSE}
+knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
+```
+
+```{r}
+# load packages
+library("tidyverse")
+library("caret")
+library("rpart")
+```
+
+```{r}
+# generate date with x1 and x2 on very different scales
+gen_reg_data = function(sample_size = 250, beta_1 = 1, beta_2 = 1) {
+  x_1 = runif(n = sample_size, min = 0, max = 1)
+  x_2 = runif(n = sample_size, min = 0, max = 1000)
+  y = beta_1 * x_1 + beta_2 * x_2 + rnorm(n = sample_size)
+  tibble(x_1 = x_1, x_2 = x_2, y = y)
+}
+```
+
+```{r}
+# generate train and test sets
+set.seed(42)
+trn = gen_reg_data(beta_1 = 10, beta_2 = 0.001)
+tst = gen_reg_data(beta_1 = 10, beta_2 = 0.001)
+```
+
+```{r}
+trn %>% 
+  mutate(x1_scaled = scale(x_1),
+         x2_scaled = scale(x_2))
+```
+
+```{r}
+# create scaled datasets
+scale_trn = preProcess(trn[, 1:2])
+trn_scaled = predict(scale_trn, trn)
+tst_scaled = predict(scale_trn, tst)
+```
+
+```{r}
+trn_scaled
+```
+
+```{r}
+# linear models -> scaling doesn't matter
+# knn -> scaling does matter!
+# tress -> scaling doesn't matter
+```
+
+```{r}
+lm_u = lm(y ~ ., data = trn)
+lm_s = lm(y ~ ., data = trn_scaled)
+```
+
+```{r}
+coef(lm_u)
+coef(lm_s)
+```
+
+```{r}
+head(cbind(predict(lm_u, tst),
+           predict(lm_s, tst_scaled)))
+```
+
+```{r}
+all(predict(lm_u, tst) == predict(lm_s, tst_scaled))
+identical(predict(lm_u, tst), predict(lm_s, tst_scaled))
+all.equal(predict(lm_u, tst), predict(lm_s, tst_scaled))
+```
+
+```{r}
+knn_u = knnreg(y ~ ., data = trn)
+knn_s = knnreg(y ~ ., data = trn_scaled)
+```
+
+```{r}
+all.equal(predict(knn_u, tst), predict(knn_s, tst_scaled))
+```
+
+```{r}
+tree_u = rpart(y ~ ., data = trn)
+tree_s = rpart(y ~ ., data = trn_scaled)
+```
+
+```{r}
+identical(predict(tree_u, tst), predict(tree_s, tst_scaled)) #!
+all.equal(predict(tree_u, tst), predict(tree_s, tst_scaled))
+```
+
+```{r}
+set.seed(42)
+fit_caret_unscaled = train(
+  y ~ .,
+  data = trn,
+  method = "knn",
+  trControl = trainControl(method = "cv", number = 5)
+)
+fit_caret_unscaled
+```
+
+```{r}
+set.seed(42)
+fit_caret_scaled = train(
+  y ~ ., data = trn,
+  method = "knn",
+  preProcess = c("center", "scale"),
+  trControl = trainControl(method = "cv", number = 5))
+fit_caret_scaled
+```
+
+```{r}
+predict(fit, tst)
+```
