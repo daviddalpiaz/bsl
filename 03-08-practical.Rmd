@@ -121,5 +121,5 @@ fit_caret_scaled
 ```
 
 ```{r}
-predict(fit, tst)
+predict(fit_caret_scaled, tst)
 ```
