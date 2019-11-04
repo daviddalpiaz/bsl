@@ -353,8 +353,11 @@ fit_caret_scaled
 
 ```r
 gen_cat_data = function(sample_size = 250) {
+
+  # generate categorical x data
   x = sample(LETTERS[1:10], size = sample_size, replace = TRUE)
   
+  # generate y data, different means for different categories
   y = case_when(
     x == "A" ~ rnorm(n = sample_size, mean = 1),
     x == "B" ~ rnorm(n = sample_size, mean = 1),
@@ -367,10 +370,17 @@ gen_cat_data = function(sample_size = 250) {
     x == "I" ~ rnorm(n = sample_size, mean = 13),
     x == "J" ~ rnorm(n = sample_size, mean = 13),
   )
-  
-  
+
+  # return tibble
   tibble(x = x, y = y)
 }
+```
+
+
+```r
+x_levels = data.frame(
+  x = LETTERS[1:10]
+)
 ```
 
 
@@ -419,26 +429,30 @@ rpart.plot(rpart(y ~ x, data = cat_trn))
 
 
 
-\begin{center}\includegraphics{03-08-practical_files/figure-latex/unnamed-chunk-25-1} \end{center}
+\begin{center}\includegraphics{03-08-practical_files/figure-latex/unnamed-chunk-26-1} \end{center}
 
 
 ```r
 knn_cat_mod = knnreg(y ~ x, data = cat_trn, use.all = TRUE)
-head(predict(knn_cat_mod, cat_trn))
+predict(knn_cat_mod, x_levels)
 ```
 
 ```
-## [1] 13.123934  5.027546 10.820888  4.794496  4.794496  1.052434
+##  [1]  0.6680481  0.7140409  1.0524340  5.0519187  4.7944962  5.0275456
+##  [7] 10.8208879 10.7829575 12.9423601 13.1239336
 ```
 
 
 ```r
-head(predict(rpart(y ~ x, data = cat_trn, cp = 0)))
+tree_cat_mod = rpart(y ~ x, data = cat_trn, cp = 0)
+predict(tree_cat_mod, x_levels)
 ```
 
 ```
-##         1         2         3         4         5         6 
-## 13.123934  5.027546 10.820888  4.794496  4.794496  1.052434
+##          1          2          3          4          5          6 
+##  0.6680481  0.7140409  1.0524340  5.0519187  4.7944962  5.0275456 
+##          7          8          9         10 
+## 10.8208879 10.7829575 12.9423601 13.1239336
 ```
 
 
@@ -453,11 +467,14 @@ all.equal(predict(knn_cat_mod, cat_trn), predict(rpart(y ~ x, data = cat_trn, cp
 
 
 ```r
-head(predict(lm(y ~ x, data = cat_trn)))
+lm_cat_mod = lm(y ~ x, data = cat_trn)
+predict(lm_cat_mod, x_levels)
 ```
 
 ```
-##         1         2         3         4         5         6 
-## 13.123934  5.027546 10.820888  4.794496  4.794496  1.052434
+##          1          2          3          4          5          6 
+##  0.6680481  0.7140409  1.0524340  5.0519187  4.7944962  5.0275456 
+##          7          8          9         10 
+## 10.8208879 10.7829575 12.9423601 13.1239336
 ```
 

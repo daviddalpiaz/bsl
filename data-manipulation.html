@@ -321,7 +321,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="data-manipulation" class="section level1">
 <h1><span class="header-section-number">Chapter 21</span> Data Manipulation</h1>
 <hr />
-<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb385-1" data-line-number="1"><span class="kw">library</span>(<span class="st">&quot;tidyverse&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb386-1" data-line-number="1"><span class="kw">library</span>(<span class="st">&quot;tidyverse&quot;</span>)</a></code></pre></div>
 <hr />
 <div id="dplyr" class="section level2">
 <h2><span class="header-section-number">21.1</span> <code>dplyr</code></h2>
@@ -343,22 +343,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="data-splitting-with-dplyranti_join" class="section level2">
 <h2><span class="header-section-number">21.3</span> Data Splitting with <code>dplyr::anti_join</code></h2>
-<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb386-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb386-2" data-line-number="2"><span class="co"># simulate an estimation and validation dataset</span></a>
-<a class="sourceLine" id="cb386-3" data-line-number="3">sim_est =<span class="st"> </span><span class="kw">as_tibble</span>(caret<span class="op">::</span><span class="kw">twoClassSim</span>(<span class="dt">n =</span> <span class="dv">100</span>))</a>
-<a class="sourceLine" id="cb386-4" data-line-number="4">sim_val =<span class="st"> </span><span class="kw">as_tibble</span>(caret<span class="op">::</span><span class="kw">twoClassSim</span>(<span class="dt">n =</span> <span class="dv">100</span>))</a></code></pre></div>
-<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb387-1" data-line-number="1"><span class="co"># merge the rows of the estimation and validation datasets </span></a>
-<a class="sourceLine" id="cb387-2" data-line-number="2"><span class="co"># to create a training dataset</span></a>
-<a class="sourceLine" id="cb387-3" data-line-number="3">sim_trn =<span class="st"> </span>sim_est <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">bind_rows</span>(sim_val)</a></code></pre></div>
-<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb388-1" data-line-number="1"><span class="co"># re-split the data to get better proportions, 80-20 split</span></a>
-<a class="sourceLine" id="cb388-2" data-line-number="2">sim_est =<span class="st"> </span>sim_trn <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sample_frac</span>(<span class="fl">0.8</span>)</a>
-<a class="sourceLine" id="cb388-3" data-line-number="3">sim_val =<span class="st"> </span>sim_trn <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">anti_join</span>(sim_est)</a></code></pre></div>
-<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb389-1" data-line-number="1"><span class="co"># split datasets together are not the training dataset (check for order)</span></a>
-<a class="sourceLine" id="cb389-2" data-line-number="2"><span class="kw">identical</span>(<span class="kw">bind_rows</span>(sim_est, sim_val), sim_trn)</a></code></pre></div>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb387-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb387-2" data-line-number="2"><span class="co"># simulate an estimation and validation dataset</span></a>
+<a class="sourceLine" id="cb387-3" data-line-number="3">sim_est =<span class="st"> </span><span class="kw">as_tibble</span>(caret<span class="op">::</span><span class="kw">twoClassSim</span>(<span class="dt">n =</span> <span class="dv">100</span>))</a>
+<a class="sourceLine" id="cb387-4" data-line-number="4">sim_val =<span class="st"> </span><span class="kw">as_tibble</span>(caret<span class="op">::</span><span class="kw">twoClassSim</span>(<span class="dt">n =</span> <span class="dv">100</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb388-1" data-line-number="1"><span class="co"># merge the rows of the estimation and validation datasets </span></a>
+<a class="sourceLine" id="cb388-2" data-line-number="2"><span class="co"># to create a training dataset</span></a>
+<a class="sourceLine" id="cb388-3" data-line-number="3">sim_trn =<span class="st"> </span>sim_est <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">bind_rows</span>(sim_val)</a></code></pre></div>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb389-1" data-line-number="1"><span class="co"># re-split the data to get better proportions, 80-20 split</span></a>
+<a class="sourceLine" id="cb389-2" data-line-number="2">sim_est =<span class="st"> </span>sim_trn <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sample_frac</span>(<span class="fl">0.8</span>)</a>
+<a class="sourceLine" id="cb389-3" data-line-number="3">sim_val =<span class="st"> </span>sim_trn <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">anti_join</span>(sim_est)</a></code></pre></div>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb390-1" data-line-number="1"><span class="co"># split datasets together are not the training dataset (check for order)</span></a>
+<a class="sourceLine" id="cb390-2" data-line-number="2"><span class="kw">identical</span>(<span class="kw">bind_rows</span>(sim_est, sim_val), sim_trn)</a></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb391-1" data-line-number="1"><span class="co"># bind_rows(sim_est, sim_val)[1, ] == sim_trn[1, ]</span></a></code></pre></div>
-<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb392-1" data-line-number="1"><span class="co"># split datasets together contain the same observations as the training dataset</span></a>
-<a class="sourceLine" id="cb392-2" data-line-number="2"><span class="kw">setequal</span>(<span class="kw">bind_rows</span>(sim_est, sim_val), sim_trn)</a></code></pre></div>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb392-1" data-line-number="1"><span class="co"># bind_rows(sim_est, sim_val)[1, ] == sim_trn[1, ]</span></a></code></pre></div>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb393-1" data-line-number="1"><span class="co"># split datasets together contain the same observations as the training dataset</span></a>
+<a class="sourceLine" id="cb393-2" data-line-number="2"><span class="kw">setequal</span>(<span class="kw">bind_rows</span>(sim_est, sim_val), sim_trn)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 
 </div>

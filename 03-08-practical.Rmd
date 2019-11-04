@@ -158,8 +158,11 @@ fit_caret_scaled
 
 ```{r}
 gen_cat_data = function(sample_size = 250) {
+
+  # generate categorical x data
   x = sample(LETTERS[1:10], size = sample_size, replace = TRUE)
   
+  # generate y data, different means for different categories
   y = case_when(
     x == "A" ~ rnorm(n = sample_size, mean = 1),
     x == "B" ~ rnorm(n = sample_size, mean = 1),
@@ -172,10 +175,16 @@ gen_cat_data = function(sample_size = 250) {
     x == "I" ~ rnorm(n = sample_size, mean = 13),
     x == "J" ~ rnorm(n = sample_size, mean = 13),
   )
-  
-  
+
+  # return tibble
   tibble(x = x, y = y)
 }
+```
+
+```{r}
+x_levels = data.frame(
+  x = LETTERS[1:10]
+)
 ```
 
 ```{r}
@@ -193,11 +202,12 @@ rpart.plot(rpart(y ~ x, data = cat_trn))
 
 ```{r}
 knn_cat_mod = knnreg(y ~ x, data = cat_trn, use.all = TRUE)
-head(predict(knn_cat_mod, cat_trn))
+predict(knn_cat_mod, x_levels)
 ```
 
 ```{r}
-head(predict(rpart(y ~ x, data = cat_trn, cp = 0)))
+tree_cat_mod = rpart(y ~ x, data = cat_trn, cp = 0)
+predict(tree_cat_mod, x_levels)
 ```
 
 ```{r}
@@ -206,6 +216,7 @@ all.equal(predict(knn_cat_mod, cat_trn), predict(rpart(y ~ x, data = cat_trn, cp
 
 
 ```{r}
-head(predict(lm(y ~ x, data = cat_trn)))
+lm_cat_mod = lm(y ~ x, data = cat_trn)
+predict(lm_cat_mod, x_levels)
 ```
 
