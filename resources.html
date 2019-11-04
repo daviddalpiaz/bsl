@@ -24,7 +24,7 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-11-01" />
+<meta name="date" content="2019-11-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -256,6 +256,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="16" data-path="practical-issues.html"><a href="practical-issues.html"><i class="fa fa-check"></i><b>16</b> Practical Issues</a><ul>
 <li class="chapter" data-level="16.1" data-path="practical-issues.html"><a href="practical-issues.html#stat-432-materials-4"><i class="fa fa-check"></i><b>16.1</b> STAT 432 Materials</a></li>
+<li class="chapter" data-level="16.2" data-path="practical-issues.html"><a href="practical-issues.html#feature-scaling"><i class="fa fa-check"></i><b>16.2</b> Feature Scaling</a></li>
+<li class="chapter" data-level="16.3" data-path="practical-issues.html"><a href="practical-issues.html#categorical-features"><i class="fa fa-check"></i><b>16.3</b> Categorical Features</a></li>
 </ul></li>
 <li class="part"><span><b>IV Mathematics</b></span></li>
 <li class="chapter" data-level="17" data-path="introduction-3.html"><a href="introduction-3.html"><i class="fa fa-check"></i><b>17</b> Introduction</a></li>
@@ -401,12 +403,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li>TODO: never use <code>T</code> or <code>F</code>, only <code>TRUE</code> or <code>FALSE</code></li>
 </ul>
-<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb283-1" data-line-number="1"><span class="ot">FALSE</span> <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span></a></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb294-1" data-line-number="1"><span class="ot">FALSE</span> <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span></a></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb285-1" data-line-number="1">F     <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span></a></code></pre></div>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb296-1" data-line-number="1">F     <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span></a></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb287-1" data-line-number="1">F     =<span class="st">  </span><span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb287-2" data-line-number="2">F     <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span></a></code></pre></div>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb298-1" data-line-number="1">F     =<span class="st">  </span><span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb298-2" data-line-number="2">F     <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span></a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <ul>
 <li>TODO: never ever ever use <code>attach()</code></li>
@@ -424,13 +426,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>with your group!</li>
 <li>with your organization!</li>
 </ul>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb289-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">1337</span>);mu=<span class="dv">10</span>;sample_size=<span class="dv">50</span>;samples=<span class="dv">100000</span>;</a>
-<a class="sourceLine" id="cb289-2" data-line-number="2">x_bars=<span class="kw">rep</span>(<span class="dv">0</span>, samples)</a>
-<a class="sourceLine" id="cb289-3" data-line-number="3"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>samples)</a>
-<a class="sourceLine" id="cb289-4" data-line-number="4">{</a>
-<a class="sourceLine" id="cb289-5" data-line-number="5">x_bars[i]=<span class="kw">mean</span>(<span class="kw">rpois</span>(sample_size,<span class="dt">lambda =</span> mu))}</a>
-<a class="sourceLine" id="cb289-6" data-line-number="6">x_bar_hist=<span class="kw">hist</span>(x_bars,<span class="dt">breaks=</span><span class="dv">50</span>,<span class="dt">main=</span><span class="st">&quot;Histogram of Sample Means&quot;</span>,<span class="dt">xlab=</span><span class="st">&quot;Sample Means&quot;</span>,<span class="dt">col=</span><span class="st">&quot;darkorange&quot;</span>,<span class="dt">border =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a>
-<a class="sourceLine" id="cb289-7" data-line-number="7"><span class="kw">mean</span>(x_bars<span class="op">&gt;</span>mu<span class="dv">-2</span><span class="op">*</span><span class="kw">sqrt</span>(mu)<span class="op">/</span><span class="kw">sqrt</span>(sample_size)<span class="op">&amp;</span>x_bars<span class="op">&lt;</span>mu<span class="op">+</span><span class="dv">2</span><span class="op">*</span><span class="kw">sqrt</span>(mu)<span class="op">/</span><span class="kw">sqrt</span>(sample_size))</a></code></pre></div>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb300-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">1337</span>);mu=<span class="dv">10</span>;sample_size=<span class="dv">50</span>;samples=<span class="dv">100000</span>;</a>
+<a class="sourceLine" id="cb300-2" data-line-number="2">x_bars=<span class="kw">rep</span>(<span class="dv">0</span>, samples)</a>
+<a class="sourceLine" id="cb300-3" data-line-number="3"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>samples)</a>
+<a class="sourceLine" id="cb300-4" data-line-number="4">{</a>
+<a class="sourceLine" id="cb300-5" data-line-number="5">x_bars[i]=<span class="kw">mean</span>(<span class="kw">rpois</span>(sample_size,<span class="dt">lambda =</span> mu))}</a>
+<a class="sourceLine" id="cb300-6" data-line-number="6">x_bar_hist=<span class="kw">hist</span>(x_bars,<span class="dt">breaks=</span><span class="dv">50</span>,<span class="dt">main=</span><span class="st">&quot;Histogram of Sample Means&quot;</span>,<span class="dt">xlab=</span><span class="st">&quot;Sample Means&quot;</span>,<span class="dt">col=</span><span class="st">&quot;darkorange&quot;</span>,<span class="dt">border =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a>
+<a class="sourceLine" id="cb300-7" data-line-number="7"><span class="kw">mean</span>(x_bars<span class="op">&gt;</span>mu<span class="dv">-2</span><span class="op">*</span><span class="kw">sqrt</span>(mu)<span class="op">/</span><span class="kw">sqrt</span>(sample_size)<span class="op">&amp;</span>x_bars<span class="op">&lt;</span>mu<span class="op">+</span><span class="dv">2</span><span class="op">*</span><span class="kw">sqrt</span>(mu)<span class="op">/</span><span class="kw">sqrt</span>(sample_size))</a></code></pre></div>
 </div>
 <div id="objects-and-functions" class="section level3">
 <h3><span class="header-section-number">19.2.3</span> Objects and Functions</h3>
@@ -457,8 +459,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="print-versus-return" class="section level3">
 <h3><span class="header-section-number">19.2.4</span> Print versus Return</h3>
-<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb290-1" data-line-number="1">cars_mod =<span class="st"> </span><span class="kw">lm</span>(dist <span class="op">~</span><span class="st"> </span>speed, <span class="dt">data =</span> cars)</a></code></pre></div>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb291-1" data-line-number="1"><span class="kw">summary</span>(cars_mod)</a></code></pre></div>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb301-1" data-line-number="1">cars_mod =<span class="st"> </span><span class="kw">lm</span>(dist <span class="op">~</span><span class="st"> </span>speed, <span class="dt">data =</span> cars)</a></code></pre></div>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb302-1" data-line-number="1"><span class="kw">summary</span>(cars_mod)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = dist ~ speed, data = cars)
@@ -477,13 +479,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Residual standard error: 15.38 on 48 degrees of freedom
 ## Multiple R-squared:  0.6511, Adjusted R-squared:  0.6438 
 ## F-statistic: 89.57 on 1 and 48 DF,  p-value: 1.49e-12</code></pre>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb293-1" data-line-number="1"><span class="kw">is.list</span>(<span class="kw">summary</span>(cars_mod))</a></code></pre></div>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb304-1" data-line-number="1"><span class="kw">is.list</span>(<span class="kw">summary</span>(cars_mod))</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb295-1" data-line-number="1"><span class="kw">names</span>(<span class="kw">summary</span>(cars_mod))</a></code></pre></div>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb306-1" data-line-number="1"><span class="kw">names</span>(<span class="kw">summary</span>(cars_mod))</a></code></pre></div>
 <pre><code>##  [1] &quot;call&quot;          &quot;terms&quot;         &quot;residuals&quot;     &quot;coefficients&quot; 
 ##  [5] &quot;aliased&quot;       &quot;sigma&quot;         &quot;df&quot;            &quot;r.squared&quot;    
 ##  [9] &quot;adj.r.squared&quot; &quot;fstatistic&quot;    &quot;cov.unscaled&quot;</code></pre>
-<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb297-1" data-line-number="1"><span class="kw">str</span>(<span class="kw">summary</span>(cars_mod))</a></code></pre></div>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb308-1" data-line-number="1"><span class="kw">str</span>(<span class="kw">summary</span>(cars_mod))</a></code></pre></div>
 <pre><code>## List of 11
 ##  $ call         : language lm(formula = dist ~ speed, data = cars)
 ##  $ terms        :Classes &#39;terms&#39;, &#39;formula&#39;  language dist ~ speed
@@ -519,8 +521,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   .. ..$ : chr [1:2] &quot;(Intercept)&quot; &quot;speed&quot;
 ##   .. ..$ : chr [1:2] &quot;(Intercept)&quot; &quot;speed&quot;
 ##  - attr(*, &quot;class&quot;)= chr &quot;summary.lm&quot;</code></pre>
-<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb299-1" data-line-number="1"><span class="co"># RStudio only</span></a>
-<a class="sourceLine" id="cb299-2" data-line-number="2"><span class="kw">View</span>(<span class="kw">summary</span>(cars_mod))</a></code></pre></div>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb310-1" data-line-number="1"><span class="co"># RStudio only</span></a>
+<a class="sourceLine" id="cb310-2" data-line-number="2"><span class="kw">View</span>(<span class="kw">summary</span>(cars_mod))</a></code></pre></div>
 </div>
 <div id="help" class="section level3">
 <h3><span class="header-section-number">19.2.5</span> Help</h3>

@@ -12,12 +12,14 @@
 knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
 ```
 
-```{r}
-# load packages
+```{r, message = FALSE, warning = FALSE}
 library("tidyverse")
 library("caret")
 library("rpart")
+library("rpart.plot")
 ```
+
+## Feature Scaling
 
 ```{r}
 # generate date with x1 and x2 on very different scales
@@ -121,5 +123,89 @@ fit_caret_scaled
 ```
 
 ```{r}
-predict(fit_caret_scaled, tst)
+predict(fit_caret_scaled, tst[1:10, ])
 ```
+
+```{r}
+# re-generate train and test sets
+set.seed(42)
+trn = gen_reg_data(beta_1 = 1, beta_2 = 1)
+tst = gen_reg_data(beta_1 = 1, beta_2 = 1)
+```
+
+```{r}
+set.seed(42)
+fit_caret_unscaled = train(
+  y ~ .,
+  data = trn,
+  method = "knn",
+  trControl = trainControl(method = "cv", number = 5)
+)
+fit_caret_unscaled
+```
+
+```{r}
+set.seed(42)
+fit_caret_scaled = train(
+  y ~ ., data = trn,
+  method = "knn",
+  preProcess = c("center", "scale"),
+  trControl = trainControl(method = "cv", number = 5))
+fit_caret_scaled
+```
+
+## Categorical Features
+
+```{r}
+gen_cat_data = function(sample_size = 250) {
+  x = sample(LETTERS[1:10], size = sample_size, replace = TRUE)
+  
+  y = case_when(
+    x == "A" ~ rnorm(n = sample_size, mean = 1),
+    x == "B" ~ rnorm(n = sample_size, mean = 1),
+    x == "C" ~ rnorm(n = sample_size, mean = 1),
+    x == "D" ~ rnorm(n = sample_size, mean = 5),
+    x == "E" ~ rnorm(n = sample_size, mean = 5),
+    x == "F" ~ rnorm(n = sample_size, mean = 5),
+    x == "G" ~ rnorm(n = sample_size, mean = 11),
+    x == "H" ~ rnorm(n = sample_size, mean = 11),
+    x == "I" ~ rnorm(n = sample_size, mean = 13),
+    x == "J" ~ rnorm(n = sample_size, mean = 13),
+  )
+  
+  
+  tibble(x = x, y = y)
+}
+```
+
+```{r}
+cat_trn = gen_cat_data()
+head(cat_trn, n = 10)
+```
+
+```{r}
+lm(y ~ x, data = cat_trn)
+```
+
+```{r}
+rpart.plot(rpart(y ~ x, data = cat_trn))
+```
+
+```{r}
+knn_cat_mod = knnreg(y ~ x, data = cat_trn, use.all = TRUE)
+head(predict(knn_cat_mod, cat_trn))
+```
+
+```{r}
+head(predict(rpart(y ~ x, data = cat_trn, cp = 0)))
+```
+
+```{r}
+all.equal(predict(knn_cat_mod, cat_trn), predict(rpart(y ~ x, data = cat_trn, cp = 0)), check.attributes = FALSE)
+```
+
+
+```{r}
+head(predict(lm(y ~ x, data = cat_trn)))
+```
+

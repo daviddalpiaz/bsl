@@ -24,7 +24,7 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-11-01" />
+<meta name="date" content="2019-11-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -256,6 +256,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="16" data-path="practical-issues.html"><a href="practical-issues.html"><i class="fa fa-check"></i><b>16</b> Practical Issues</a><ul>
 <li class="chapter" data-level="16.1" data-path="practical-issues.html"><a href="practical-issues.html#stat-432-materials-4"><i class="fa fa-check"></i><b>16.1</b> STAT 432 Materials</a></li>
+<li class="chapter" data-level="16.2" data-path="practical-issues.html"><a href="practical-issues.html#feature-scaling"><i class="fa fa-check"></i><b>16.2</b> Feature Scaling</a></li>
+<li class="chapter" data-level="16.3" data-path="practical-issues.html"><a href="practical-issues.html#categorical-features"><i class="fa fa-check"></i><b>16.3</b> Categorical Features</a></li>
 </ul></li>
 <li class="part"><span><b>IV Mathematics</b></span></li>
 <li class="chapter" data-level="17" data-path="introduction-3.html"><a href="introduction-3.html"><i class="fa fa-check"></i><b>17</b> Introduction</a></li>
@@ -325,38 +327,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Suggested Reading: <a href="https://topepo.github.io/caret/model-training-and-tuning.html">The <code>caret</code> Package: Model Training and Tuning</a></li>
 </ul>
 <hr />
-<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb239-1" data-line-number="1"><span class="co"># load packages</span></a>
-<a class="sourceLine" id="cb239-2" data-line-number="2"><span class="kw">library</span>(<span class="st">&quot;tidyverse&quot;</span>)</a></code></pre></div>
-<pre><code>## ── Attaching packages ────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
-<pre><code>## ✔ ggplot2 3.2.1     ✔ purrr   0.3.3
-## ✔ tibble  2.1.3     ✔ dplyr   0.8.3
-## ✔ tidyr   1.0.0     ✔ stringr 1.4.0
-## ✔ readr   1.3.1     ✔ forcats 0.4.0</code></pre>
-<pre><code>## ── Conflicts ───────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()</code></pre>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb243-1" data-line-number="1"><span class="kw">library</span>(<span class="st">&quot;caret&quot;</span>)</a></code></pre></div>
-<pre><code>## Loading required package: lattice</code></pre>
-<pre><code>## 
-## Attaching package: &#39;caret&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:purrr&#39;:
-## 
-##     lift</code></pre>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb247-1" data-line-number="1"><span class="kw">library</span>(<span class="st">&quot;rpart&quot;</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb248-1" data-line-number="1"><span class="co"># generate date with x1 and x2 on very different scales</span></a>
-<a class="sourceLine" id="cb248-2" data-line-number="2">gen_reg_data =<span class="st"> </span><span class="cf">function</span>(<span class="dt">sample_size =</span> <span class="dv">250</span>, <span class="dt">beta_1 =</span> <span class="dv">1</span>, <span class="dt">beta_2 =</span> <span class="dv">1</span>) {</a>
-<a class="sourceLine" id="cb248-3" data-line-number="3">  x_<span class="dv">1</span> =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb248-4" data-line-number="4">  x_<span class="dv">2</span> =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1000</span>)</a>
-<a class="sourceLine" id="cb248-5" data-line-number="5">  y =<span class="st"> </span>beta_<span class="dv">1</span> <span class="op">*</span><span class="st"> </span>x_<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>beta_<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x_<span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size)</a>
-<a class="sourceLine" id="cb248-6" data-line-number="6">  <span class="kw">tibble</span>(<span class="dt">x_1 =</span> x_<span class="dv">1</span>, <span class="dt">x_2 =</span> x_<span class="dv">2</span>, <span class="dt">y =</span> y)</a>
-<a class="sourceLine" id="cb248-7" data-line-number="7">}</a></code></pre></div>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb249-1" data-line-number="1"><span class="co"># generate train and test sets</span></a>
-<a class="sourceLine" id="cb249-2" data-line-number="2"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb249-3" data-line-number="3">trn =<span class="st"> </span><span class="kw">gen_reg_data</span>(<span class="dt">beta_1 =</span> <span class="dv">10</span>, <span class="dt">beta_2 =</span> <span class="fl">0.001</span>)</a>
-<a class="sourceLine" id="cb249-4" data-line-number="4">tst =<span class="st"> </span><span class="kw">gen_reg_data</span>(<span class="dt">beta_1 =</span> <span class="dv">10</span>, <span class="dt">beta_2 =</span> <span class="fl">0.001</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb250-1" data-line-number="1">trn <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb250-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">x1_scaled =</span> <span class="kw">scale</span>(x_<span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb250-3" data-line-number="3">         <span class="dt">x2_scaled =</span> <span class="kw">scale</span>(x_<span class="dv">2</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb239-1" data-line-number="1"><span class="kw">library</span>(<span class="st">&quot;tidyverse&quot;</span>)</a>
+<a class="sourceLine" id="cb239-2" data-line-number="2"><span class="kw">library</span>(<span class="st">&quot;caret&quot;</span>)</a>
+<a class="sourceLine" id="cb239-3" data-line-number="3"><span class="kw">library</span>(<span class="st">&quot;rpart&quot;</span>)</a>
+<a class="sourceLine" id="cb239-4" data-line-number="4"><span class="kw">library</span>(<span class="st">&quot;rpart.plot&quot;</span>)</a></code></pre></div>
+</div>
+<div id="feature-scaling" class="section level2">
+<h2><span class="header-section-number">16.2</span> Feature Scaling</h2>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb240-1" data-line-number="1"><span class="co"># generate date with x1 and x2 on very different scales</span></a>
+<a class="sourceLine" id="cb240-2" data-line-number="2">gen_reg_data =<span class="st"> </span><span class="cf">function</span>(<span class="dt">sample_size =</span> <span class="dv">250</span>, <span class="dt">beta_1 =</span> <span class="dv">1</span>, <span class="dt">beta_2 =</span> <span class="dv">1</span>) {</a>
+<a class="sourceLine" id="cb240-3" data-line-number="3">  x_<span class="dv">1</span> =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb240-4" data-line-number="4">  x_<span class="dv">2</span> =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1000</span>)</a>
+<a class="sourceLine" id="cb240-5" data-line-number="5">  y =<span class="st"> </span>beta_<span class="dv">1</span> <span class="op">*</span><span class="st"> </span>x_<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>beta_<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x_<span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size)</a>
+<a class="sourceLine" id="cb240-6" data-line-number="6">  <span class="kw">tibble</span>(<span class="dt">x_1 =</span> x_<span class="dv">1</span>, <span class="dt">x_2 =</span> x_<span class="dv">2</span>, <span class="dt">y =</span> y)</a>
+<a class="sourceLine" id="cb240-7" data-line-number="7">}</a></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb241-1" data-line-number="1"><span class="co"># generate train and test sets</span></a>
+<a class="sourceLine" id="cb241-2" data-line-number="2"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb241-3" data-line-number="3">trn =<span class="st"> </span><span class="kw">gen_reg_data</span>(<span class="dt">beta_1 =</span> <span class="dv">10</span>, <span class="dt">beta_2 =</span> <span class="fl">0.001</span>)</a>
+<a class="sourceLine" id="cb241-4" data-line-number="4">tst =<span class="st"> </span><span class="kw">gen_reg_data</span>(<span class="dt">beta_1 =</span> <span class="dv">10</span>, <span class="dt">beta_2 =</span> <span class="fl">0.001</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb242-1" data-line-number="1">trn <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb242-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">x1_scaled =</span> <span class="kw">scale</span>(x_<span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb242-3" data-line-number="3">         <span class="dt">x2_scaled =</span> <span class="kw">scale</span>(x_<span class="dv">2</span>))</a></code></pre></div>
 <pre><code>## # A tibble: 250 x 5
 ##      x_1   x_2     y x1_scaled[,1] x2_scaled[,1]
 ##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;
@@ -371,11 +362,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  9 0.657 571.   6.12        0.507          0.345
 ## 10 0.705 619.   7.29        0.672          0.507
 ## # … with 240 more rows</code></pre>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb252-1" data-line-number="1"><span class="co"># create scaled datasets</span></a>
-<a class="sourceLine" id="cb252-2" data-line-number="2">scale_trn =<span class="st"> </span><span class="kw">preProcess</span>(trn[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])</a>
-<a class="sourceLine" id="cb252-3" data-line-number="3">trn_scaled =<span class="st"> </span><span class="kw">predict</span>(scale_trn, trn)</a>
-<a class="sourceLine" id="cb252-4" data-line-number="4">tst_scaled =<span class="st"> </span><span class="kw">predict</span>(scale_trn, tst)</a></code></pre></div>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb253-1" data-line-number="1">trn_scaled</a></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb244-1" data-line-number="1"><span class="co"># create scaled datasets</span></a>
+<a class="sourceLine" id="cb244-2" data-line-number="2">scale_trn =<span class="st"> </span><span class="kw">preProcess</span>(trn[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])</a>
+<a class="sourceLine" id="cb244-3" data-line-number="3">trn_scaled =<span class="st"> </span><span class="kw">predict</span>(scale_trn, trn)</a>
+<a class="sourceLine" id="cb244-4" data-line-number="4">tst_scaled =<span class="st"> </span><span class="kw">predict</span>(scale_trn, tst)</a></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb245-1" data-line-number="1">trn_scaled</a></code></pre></div>
 <pre><code>## # A tibble: 250 x 3
 ##        x_1    x_2     y
 ##      &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
@@ -390,19 +381,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  9  0.507   0.345  6.12
 ## 10  0.672   0.507  7.29
 ## # … with 240 more rows</code></pre>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb255-1" data-line-number="1"><span class="co"># linear models -&gt; scaling doesn&#39;t matter</span></a>
-<a class="sourceLine" id="cb255-2" data-line-number="2"><span class="co"># knn -&gt; scaling does matter!</span></a>
-<a class="sourceLine" id="cb255-3" data-line-number="3"><span class="co"># tress -&gt; scaling doesn&#39;t matter</span></a></code></pre></div>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb256-1" data-line-number="1">lm_u =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> trn)</a>
-<a class="sourceLine" id="cb256-2" data-line-number="2">lm_s =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> trn_scaled)</a></code></pre></div>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb257-1" data-line-number="1"><span class="kw">coef</span>(lm_u)</a></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb247-1" data-line-number="1"><span class="co"># linear models -&gt; scaling doesn&#39;t matter</span></a>
+<a class="sourceLine" id="cb247-2" data-line-number="2"><span class="co"># knn -&gt; scaling does matter!</span></a>
+<a class="sourceLine" id="cb247-3" data-line-number="3"><span class="co"># tress -&gt; scaling doesn&#39;t matter</span></a></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb248-1" data-line-number="1">lm_u =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> trn)</a>
+<a class="sourceLine" id="cb248-2" data-line-number="2">lm_s =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> trn_scaled)</a></code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb249-1" data-line-number="1"><span class="kw">coef</span>(lm_u)</a></code></pre></div>
 <pre><code>##   (Intercept)           x_1           x_2 
 ## -0.0816891578 10.0859803604  0.0009962049</code></pre>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb259-1" data-line-number="1"><span class="kw">coef</span>(lm_s)</a></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb251-1" data-line-number="1"><span class="kw">coef</span>(lm_s)</a></code></pre></div>
 <pre><code>## (Intercept)         x_1         x_2 
 ##   5.5221016   2.9395824   0.2928511</code></pre>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb261-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">cbind</span>(<span class="kw">predict</span>(lm_u, tst),</a>
-<a class="sourceLine" id="cb261-2" data-line-number="2">           <span class="kw">predict</span>(lm_s, tst_scaled)))</a></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb253-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">cbind</span>(<span class="kw">predict</span>(lm_u, tst),</a>
+<a class="sourceLine" id="cb253-2" data-line-number="2">           <span class="kw">predict</span>(lm_s, tst_scaled)))</a></code></pre></div>
 <pre><code>##        [,1]      [,2]
 ## 1 9.2073071 9.2073071
 ## 2 1.3001017 1.3001017
@@ -410,30 +401,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4 5.4156184 5.4156184
 ## 5 5.6232737 5.6232737
 ## 6 0.1839076 0.1839076</code></pre>
-<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb263-1" data-line-number="1"><span class="kw">all</span>(<span class="kw">predict</span>(lm_u, tst) <span class="op">==</span><span class="st"> </span><span class="kw">predict</span>(lm_s, tst_scaled))</a></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb255-1" data-line-number="1"><span class="kw">all</span>(<span class="kw">predict</span>(lm_u, tst) <span class="op">==</span><span class="st"> </span><span class="kw">predict</span>(lm_s, tst_scaled))</a></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb265-1" data-line-number="1"><span class="kw">identical</span>(<span class="kw">predict</span>(lm_u, tst), <span class="kw">predict</span>(lm_s, tst_scaled))</a></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb257-1" data-line-number="1"><span class="kw">identical</span>(<span class="kw">predict</span>(lm_u, tst), <span class="kw">predict</span>(lm_s, tst_scaled))</a></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb267-1" data-line-number="1"><span class="kw">all.equal</span>(<span class="kw">predict</span>(lm_u, tst), <span class="kw">predict</span>(lm_s, tst_scaled))</a></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb259-1" data-line-number="1"><span class="kw">all.equal</span>(<span class="kw">predict</span>(lm_u, tst), <span class="kw">predict</span>(lm_s, tst_scaled))</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb269-1" data-line-number="1">knn_u =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> trn)</a>
-<a class="sourceLine" id="cb269-2" data-line-number="2">knn_s =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> trn_scaled)</a></code></pre></div>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb270-1" data-line-number="1"><span class="kw">all.equal</span>(<span class="kw">predict</span>(knn_u, tst), <span class="kw">predict</span>(knn_s, tst_scaled))</a></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb261-1" data-line-number="1">knn_u =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> trn)</a>
+<a class="sourceLine" id="cb261-2" data-line-number="2">knn_s =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> trn_scaled)</a></code></pre></div>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb262-1" data-line-number="1"><span class="kw">all.equal</span>(<span class="kw">predict</span>(knn_u, tst), <span class="kw">predict</span>(knn_s, tst_scaled))</a></code></pre></div>
 <pre><code>## [1] &quot;Mean relative difference: 0.4687973&quot;</code></pre>
-<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb272-1" data-line-number="1">tree_u =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> trn)</a>
-<a class="sourceLine" id="cb272-2" data-line-number="2">tree_s =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> trn_scaled)</a></code></pre></div>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb273-1" data-line-number="1"><span class="kw">identical</span>(<span class="kw">predict</span>(tree_u, tst), <span class="kw">predict</span>(tree_s, tst_scaled)) <span class="co">#!</span></a></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb264-1" data-line-number="1">tree_u =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> trn)</a>
+<a class="sourceLine" id="cb264-2" data-line-number="2">tree_s =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> trn_scaled)</a></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb265-1" data-line-number="1"><span class="kw">identical</span>(<span class="kw">predict</span>(tree_u, tst), <span class="kw">predict</span>(tree_s, tst_scaled)) <span class="co">#!</span></a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb275-1" data-line-number="1"><span class="kw">all.equal</span>(<span class="kw">predict</span>(tree_u, tst), <span class="kw">predict</span>(tree_s, tst_scaled))</a></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb267-1" data-line-number="1"><span class="kw">all.equal</span>(<span class="kw">predict</span>(tree_u, tst), <span class="kw">predict</span>(tree_s, tst_scaled))</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb277-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb277-2" data-line-number="2">fit_caret_unscaled =<span class="st"> </span><span class="kw">train</span>(</a>
-<a class="sourceLine" id="cb277-3" data-line-number="3">  y <span class="op">~</span><span class="st"> </span>.,</a>
-<a class="sourceLine" id="cb277-4" data-line-number="4">  <span class="dt">data =</span> trn,</a>
-<a class="sourceLine" id="cb277-5" data-line-number="5">  <span class="dt">method =</span> <span class="st">&quot;knn&quot;</span>,</a>
-<a class="sourceLine" id="cb277-6" data-line-number="6">  <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb277-7" data-line-number="7">)</a>
-<a class="sourceLine" id="cb277-8" data-line-number="8">fit_caret_unscaled</a></code></pre></div>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb269-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb269-2" data-line-number="2">fit_caret_unscaled =<span class="st"> </span><span class="kw">train</span>(</a>
+<a class="sourceLine" id="cb269-3" data-line-number="3">  y <span class="op">~</span><span class="st"> </span>.,</a>
+<a class="sourceLine" id="cb269-4" data-line-number="4">  <span class="dt">data =</span> trn,</a>
+<a class="sourceLine" id="cb269-5" data-line-number="5">  <span class="dt">method =</span> <span class="st">&quot;knn&quot;</span>,</a>
+<a class="sourceLine" id="cb269-6" data-line-number="6">  <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb269-7" data-line-number="7">)</a>
+<a class="sourceLine" id="cb269-8" data-line-number="8">fit_caret_unscaled</a></code></pre></div>
 <pre><code>## k-Nearest Neighbors 
 ## 
 ## 250 samples
@@ -451,13 +442,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## RMSE was used to select the optimal model using the smallest value.
 ## The final value used for the model was k = 9.</code></pre>
-<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb279-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb279-2" data-line-number="2">fit_caret_scaled =<span class="st"> </span><span class="kw">train</span>(</a>
-<a class="sourceLine" id="cb279-3" data-line-number="3">  y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> trn,</a>
-<a class="sourceLine" id="cb279-4" data-line-number="4">  <span class="dt">method =</span> <span class="st">&quot;knn&quot;</span>,</a>
-<a class="sourceLine" id="cb279-5" data-line-number="5">  <span class="dt">preProcess =</span> <span class="kw">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;scale&quot;</span>),</a>
-<a class="sourceLine" id="cb279-6" data-line-number="6">  <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>))</a>
-<a class="sourceLine" id="cb279-7" data-line-number="7">fit_caret_scaled</a></code></pre></div>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb271-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb271-2" data-line-number="2">fit_caret_scaled =<span class="st"> </span><span class="kw">train</span>(</a>
+<a class="sourceLine" id="cb271-3" data-line-number="3">  y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> trn,</a>
+<a class="sourceLine" id="cb271-4" data-line-number="4">  <span class="dt">method =</span> <span class="st">&quot;knn&quot;</span>,</a>
+<a class="sourceLine" id="cb271-5" data-line-number="5">  <span class="dt">preProcess =</span> <span class="kw">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;scale&quot;</span>),</a>
+<a class="sourceLine" id="cb271-6" data-line-number="6">  <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>))</a>
+<a class="sourceLine" id="cb271-7" data-line-number="7">fit_caret_scaled</a></code></pre></div>
 <pre><code>## k-Nearest Neighbors 
 ## 
 ## 250 samples
@@ -475,49 +466,122 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## RMSE was used to select the optimal model using the smallest value.
 ## The final value used for the model was k = 9.</code></pre>
-<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb281-1" data-line-number="1"><span class="kw">predict</span>(fit_caret_scaled, tst)</a></code></pre></div>
-<pre><code>##   [1]  8.9527676  1.5439899  8.1698569  5.1921137  5.6422941  0.9428402
-##   [7]  5.8606918  7.5202928  3.0247919  8.7029136  5.3527194  5.9089646
-##  [13]  2.3631140  1.8785465  1.4628721  9.2080534  1.6555496  2.9810578
-##  [19]  8.4516162  3.2697351  8.8936368  1.7519259  3.2574896  3.8306247
-##  [25]  1.9211518  4.9653897  4.3808786  1.6783049  9.4404156  9.2605951
-##  [31]  9.9435929  1.7818664  0.8598750  1.3271484  3.4005296  5.8863736
-##  [37]  9.3254538  6.8427627  4.7657257  1.2479047  9.5835391  3.2619959
-##  [43]  3.2121993  7.2318322  8.3344221  2.1842123  6.0049012  8.4157259
-##  [49]  9.6947759  0.5190365  9.0245357  3.4964364  1.3382749  7.7598367
-##  [55]  2.8679602  8.8959226  7.5415946  6.2901721  1.5481898  3.5052455
-##  [61]  0.9428402  9.0785051  1.4118006  1.0038657  3.9716100  7.0199951
-##  [67]  9.3673932  2.8932812  4.5674353  6.1784035  5.7998128  1.2620623
-##  [73]  5.0143113  9.9113321  2.8728658  8.0171859  9.5035696  1.4578539
-##  [79]  2.3373766  0.9728382  4.7623395 10.0797202  3.9014748  8.2443235
-##  [85]  7.3623528  1.7572069  9.5835391  5.2799754  7.0522089  1.0449684
-##  [91]  9.5035696  0.8598750  8.4951896  5.6852855  3.3333067  6.2901721
-##  [97]  5.1857211  1.1829847  9.3254538  5.9492812  0.8514072  7.9905756
-## [103]  6.2010524  1.0942525  5.4743530  6.5852116  7.8425406  4.3619493
-## [109]  8.4414457  9.0319951  6.1784035  3.8466154  9.5835391  8.1018569
-## [115]  1.6801906  1.7336386  8.4437695  7.6476428  1.5445405  9.5162125
-## [121]  7.4202409  9.3693447  5.2912822  4.1089906  8.3541836  8.3636407
-## [127]  5.6709201  7.6476428  1.1284251  4.9584626  0.5372901  8.2291696
-## [133]  7.8173373  0.5372901  5.6836612  5.8951205  2.8316394  1.4218593
-## [139]  3.6755752  5.4591616  2.4113087  9.9113321  4.0302964  7.0771362
-## [145]  2.0595909  2.8728658  0.4906980  2.8667239  4.5119068  1.7336386
-## [151]  9.1666873  0.9428402  9.6947759  8.1698569  4.6945450  9.8938321
-## [157]  5.1872883  5.6422941  8.4977147  1.4628721  5.2410240  4.8334457
-## [163]  3.5536817  4.8060144  0.9465286  3.3784599  1.7613911  3.5672834
-## [169]  6.6460721  4.1247747  1.1414461  6.8523315  8.8914922  9.0253203
-## [175]  1.1910023  1.9294722  4.4426356  9.7787213  5.8741933  9.9113321
-## [181]  5.0292309  2.1620626  6.2351414  3.4903166  7.6644672  8.6339605
-## [187]  4.6827277  5.0816345  4.1809836  8.8672306  6.0206635  7.6325977
-## [193]  4.1179626  2.1527096  9.0434704  7.3657330  1.0162338  1.6555496
-## [199]  9.2267963  4.5648855  4.3583682  5.3837624  8.0171859  1.8097259
-## [205]  8.3507965  9.6328376  8.3636407  4.8785945  2.5663612  7.2947992
-## [211]  9.8989996  9.6947759  1.0449684  4.1809836  8.7578447  5.8606918
-## [217]  3.0910763  3.7622352  0.9816802  9.0239243  1.5439899  7.3280510
-## [223]  5.8500676  3.9409908  9.5074820  8.3541836  6.9220954  1.5810614
-## [229]  9.3160984  5.9928749  8.0619820  1.9294722  3.5405579  8.4305657
-## [235]  8.1581696  5.6852855  6.5852116  5.5793888  6.2010524  2.1527096
-## [241]  8.9527676  3.8689628  8.4841111  9.4917012  3.2167342  8.7578447
-## [247]  7.0589319  8.5966303  1.9182066  7.8753303</code></pre>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb273-1" data-line-number="1"><span class="kw">predict</span>(fit_caret_scaled, tst[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, ])</a></code></pre></div>
+<pre><code>##  [1] 8.9527676 1.5439899 8.1698569 5.1921137 5.6422941 0.9428402 5.8606918
+##  [8] 7.5202928 3.0247919 8.7029136</code></pre>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb275-1" data-line-number="1"><span class="co"># re-generate train and test sets</span></a>
+<a class="sourceLine" id="cb275-2" data-line-number="2"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb275-3" data-line-number="3">trn =<span class="st"> </span><span class="kw">gen_reg_data</span>(<span class="dt">beta_1 =</span> <span class="dv">1</span>, <span class="dt">beta_2 =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb275-4" data-line-number="4">tst =<span class="st"> </span><span class="kw">gen_reg_data</span>(<span class="dt">beta_1 =</span> <span class="dv">1</span>, <span class="dt">beta_2 =</span> <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb276-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb276-2" data-line-number="2">fit_caret_unscaled =<span class="st"> </span><span class="kw">train</span>(</a>
+<a class="sourceLine" id="cb276-3" data-line-number="3">  y <span class="op">~</span><span class="st"> </span>.,</a>
+<a class="sourceLine" id="cb276-4" data-line-number="4">  <span class="dt">data =</span> trn,</a>
+<a class="sourceLine" id="cb276-5" data-line-number="5">  <span class="dt">method =</span> <span class="st">&quot;knn&quot;</span>,</a>
+<a class="sourceLine" id="cb276-6" data-line-number="6">  <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb276-7" data-line-number="7">)</a>
+<a class="sourceLine" id="cb276-8" data-line-number="8">fit_caret_unscaled</a></code></pre></div>
+<pre><code>## k-Nearest Neighbors 
+## 
+## 250 samples
+##   2 predictor
+## 
+## No pre-processing
+## Resampling: Cross-Validated (5 fold) 
+## Summary of sample sizes: 200, 200, 200, 200, 200 
+## Resampling results across tuning parameters:
+## 
+##   k  RMSE      Rsquared   MAE     
+##   5  3.938920  0.9998145  2.835701
+##   7  4.664098  0.9997504  3.370510
+##   9  5.315904  0.9996846  3.924115
+## 
+## RMSE was used to select the optimal model using the smallest value.
+## The final value used for the model was k = 5.</code></pre>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb278-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb278-2" data-line-number="2">fit_caret_scaled =<span class="st"> </span><span class="kw">train</span>(</a>
+<a class="sourceLine" id="cb278-3" data-line-number="3">  y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> trn,</a>
+<a class="sourceLine" id="cb278-4" data-line-number="4">  <span class="dt">method =</span> <span class="st">&quot;knn&quot;</span>,</a>
+<a class="sourceLine" id="cb278-5" data-line-number="5">  <span class="dt">preProcess =</span> <span class="kw">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;scale&quot;</span>),</a>
+<a class="sourceLine" id="cb278-6" data-line-number="6">  <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>))</a>
+<a class="sourceLine" id="cb278-7" data-line-number="7">fit_caret_scaled</a></code></pre></div>
+<pre><code>## k-Nearest Neighbors 
+## 
+## 250 samples
+##   2 predictor
+## 
+## Pre-processing: centered (2), scaled (2) 
+## Resampling: Cross-Validated (5 fold) 
+## Summary of sample sizes: 200, 200, 200, 200, 200 
+## Resampling results across tuning parameters:
+## 
+##   k  RMSE      Rsquared   MAE     
+##   5  27.58391  0.9914624  21.49055
+##   7  28.15013  0.9915600  21.19110
+##   9  28.90703  0.9914946  22.63816
+## 
+## RMSE was used to select the optimal model using the smallest value.
+## The final value used for the model was k = 5.</code></pre>
+</div>
+<div id="categorical-features" class="section level2">
+<h2><span class="header-section-number">16.3</span> Categorical Features</h2>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb280-1" data-line-number="1">gen_cat_data =<span class="st"> </span><span class="cf">function</span>(<span class="dt">sample_size =</span> <span class="dv">250</span>) {</a>
+<a class="sourceLine" id="cb280-2" data-line-number="2">  x =<span class="st"> </span><span class="kw">sample</span>(LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>], <span class="dt">size =</span> sample_size, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb280-3" data-line-number="3">  </a>
+<a class="sourceLine" id="cb280-4" data-line-number="4">  y =<span class="st"> </span><span class="kw">case_when</span>(</a>
+<a class="sourceLine" id="cb280-5" data-line-number="5">    x <span class="op">==</span><span class="st"> &quot;A&quot;</span> <span class="op">~</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">mean =</span> <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb280-6" data-line-number="6">    x <span class="op">==</span><span class="st"> &quot;B&quot;</span> <span class="op">~</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">mean =</span> <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb280-7" data-line-number="7">    x <span class="op">==</span><span class="st"> &quot;C&quot;</span> <span class="op">~</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">mean =</span> <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb280-8" data-line-number="8">    x <span class="op">==</span><span class="st"> &quot;D&quot;</span> <span class="op">~</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">mean =</span> <span class="dv">5</span>),</a>
+<a class="sourceLine" id="cb280-9" data-line-number="9">    x <span class="op">==</span><span class="st"> &quot;E&quot;</span> <span class="op">~</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">mean =</span> <span class="dv">5</span>),</a>
+<a class="sourceLine" id="cb280-10" data-line-number="10">    x <span class="op">==</span><span class="st"> &quot;F&quot;</span> <span class="op">~</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">mean =</span> <span class="dv">5</span>),</a>
+<a class="sourceLine" id="cb280-11" data-line-number="11">    x <span class="op">==</span><span class="st"> &quot;G&quot;</span> <span class="op">~</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">mean =</span> <span class="dv">11</span>),</a>
+<a class="sourceLine" id="cb280-12" data-line-number="12">    x <span class="op">==</span><span class="st"> &quot;H&quot;</span> <span class="op">~</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">mean =</span> <span class="dv">11</span>),</a>
+<a class="sourceLine" id="cb280-13" data-line-number="13">    x <span class="op">==</span><span class="st"> &quot;I&quot;</span> <span class="op">~</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">mean =</span> <span class="dv">13</span>),</a>
+<a class="sourceLine" id="cb280-14" data-line-number="14">    x <span class="op">==</span><span class="st"> &quot;J&quot;</span> <span class="op">~</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">mean =</span> <span class="dv">13</span>),</a>
+<a class="sourceLine" id="cb280-15" data-line-number="15">  )</a>
+<a class="sourceLine" id="cb280-16" data-line-number="16">  </a>
+<a class="sourceLine" id="cb280-17" data-line-number="17">  </a>
+<a class="sourceLine" id="cb280-18" data-line-number="18">  <span class="kw">tibble</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)</a>
+<a class="sourceLine" id="cb280-19" data-line-number="19">}</a></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb281-1" data-line-number="1">cat_trn =<span class="st"> </span><span class="kw">gen_cat_data</span>()</a>
+<a class="sourceLine" id="cb281-2" data-line-number="2"><span class="kw">head</span>(cat_trn, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 10 x 2
+##    x          y
+##    &lt;chr&gt;  &lt;dbl&gt;
+##  1 J     12.0  
+##  2 F      3.49 
+##  3 G     11.0  
+##  4 E      2.15 
+##  5 E      3.36 
+##  6 C      1.43 
+##  7 F      4.67 
+##  8 E      6.18 
+##  9 I     13.4  
+## 10 B      0.806</code></pre>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb283-1" data-line-number="1"><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> cat_trn)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = y ~ x, data = cat_trn)
+## 
+## Coefficients:
+## (Intercept)           xB           xC           xD           xE  
+##     0.66805      0.04599      0.38439      4.38387      4.12645  
+##          xF           xG           xH           xI           xJ  
+##     4.35950     10.15284     10.11491     12.27431     12.45589</code></pre>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb285-1" data-line-number="1"><span class="kw">rpart.plot</span>(<span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> cat_trn))</a></code></pre></div>
+<p><img src="03-08-practical_files/figure-html/unnamed-chunk-25-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb286-1" data-line-number="1">knn_cat_mod =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> cat_trn, <span class="dt">use.all =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb286-2" data-line-number="2"><span class="kw">head</span>(<span class="kw">predict</span>(knn_cat_mod, cat_trn))</a></code></pre></div>
+<pre><code>## [1] 13.123934  5.027546 10.820888  4.794496  4.794496  1.052434</code></pre>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb288-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">predict</span>(<span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> cat_trn, <span class="dt">cp =</span> <span class="dv">0</span>)))</a></code></pre></div>
+<pre><code>##         1         2         3         4         5         6 
+## 13.123934  5.027546 10.820888  4.794496  4.794496  1.052434</code></pre>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb290-1" data-line-number="1"><span class="kw">all.equal</span>(<span class="kw">predict</span>(knn_cat_mod, cat_trn), <span class="kw">predict</span>(<span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> cat_trn, <span class="dt">cp =</span> <span class="dv">0</span>)), <span class="dt">check.attributes =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb292-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">predict</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> cat_trn)))</a></code></pre></div>
+<pre><code>##         1         2         3         4         5         6 
+## 13.123934  5.027546 10.820888  4.794496  4.794496  1.052434</code></pre>
 
 </div>
 </div>
