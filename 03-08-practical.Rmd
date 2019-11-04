@@ -220,3 +220,15 @@ lm_cat_mod = lm(y ~ x, data = cat_trn)
 predict(lm_cat_mod, x_levels)
 ```
 
+```{r}
+dum_trn = as_tibble(predict(dummyVars(~., data = cat_trn), cat_trn))
+```
+
+```{r}
+lm(y ~ . + 0, data = dum_trn)
+```
+
+```{r}
+rpart.plot(rpart(y ~ ., data = dum_trn))
+```
+

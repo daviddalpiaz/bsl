@@ -328,108 +328,108 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <hr />
 <p><strong>Note:</strong> In the future this should become two chapters, and be greatly expanded. Perhaps introduce simulation, ECDF, and plug-in-principle very early.</p>
-<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb312-1" data-line-number="1"><span class="kw">library</span>(microbenchmark)</a></code></pre></div>
-<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb313-1" data-line-number="1"><span class="co"># create some data</span></a>
-<a class="sourceLine" id="cb313-2" data-line-number="2"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb313-3" data-line-number="3">data =<span class="st"> </span><span class="kw">rexp</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">rate =</span> <span class="fl">0.5</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb314-1" data-line-number="1"><span class="co"># quantities of interest</span></a>
-<a class="sourceLine" id="cb314-2" data-line-number="2"><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="fl">0.5</span> <span class="co"># mean</span></a></code></pre></div>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb316-1" data-line-number="1"><span class="kw">library</span>(microbenchmark)</a></code></pre></div>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb317-1" data-line-number="1"><span class="co"># create some data</span></a>
+<a class="sourceLine" id="cb317-2" data-line-number="2"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb317-3" data-line-number="3">data =<span class="st"> </span><span class="kw">rexp</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">rate =</span> <span class="fl">0.5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb318-1" data-line-number="1"><span class="co"># quantities of interest</span></a>
+<a class="sourceLine" id="cb318-2" data-line-number="2"><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="fl">0.5</span> <span class="co"># mean</span></a></code></pre></div>
 <pre><code>## [1] 2</code></pre>
-<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb316-1" data-line-number="1"><span class="kw">qexp</span>(<span class="fl">0.5</span>, <span class="dt">rate =</span> <span class="fl">0.5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb320-1" data-line-number="1"><span class="kw">qexp</span>(<span class="fl">0.5</span>, <span class="dt">rate =</span> <span class="fl">0.5</span>)</a></code></pre></div>
 <pre><code>## [1] 1.386294</code></pre>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb318-1" data-line-number="1"><span class="kw">pexp</span>(<span class="dv">8</span>, <span class="dt">rate =</span> <span class="fl">0.5</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>) <span class="co"># probability P[X &gt; 8]</span></a></code></pre></div>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb322-1" data-line-number="1"><span class="kw">pexp</span>(<span class="dv">8</span>, <span class="dt">rate =</span> <span class="fl">0.5</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>) <span class="co"># probability P[X &gt; 8]</span></a></code></pre></div>
 <pre><code>## [1] 0.01831564</code></pre>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb320-1" data-line-number="1"><span class="co"># estimates using sampled data</span></a>
-<a class="sourceLine" id="cb320-2" data-line-number="2"><span class="kw">mean</span>(data) <span class="co"># boring</span></a></code></pre></div>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb324-1" data-line-number="1"><span class="co"># estimates using sampled data</span></a>
+<a class="sourceLine" id="cb324-2" data-line-number="2"><span class="kw">mean</span>(data) <span class="co"># boring</span></a></code></pre></div>
 <pre><code>## [1] 2.061353</code></pre>
-<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb322-1" data-line-number="1"><span class="kw">median</span>(data)</a></code></pre></div>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb326-1" data-line-number="1"><span class="kw">median</span>(data)</a></code></pre></div>
 <pre><code>## [1] 1.617539</code></pre>
-<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb324-1" data-line-number="1"><span class="kw">mean</span>(data <span class="op">&gt;</span><span class="st"> </span><span class="dv">8</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb328-1" data-line-number="1"><span class="kw">mean</span>(data <span class="op">&gt;</span><span class="st"> </span><span class="dv">8</span>)</a></code></pre></div>
 <pre><code>## [1] 0.02</code></pre>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb326-1" data-line-number="1"><span class="co"># histogram of data with population distribution</span></a>
-<a class="sourceLine" id="cb326-2" data-line-number="2"><span class="kw">hist</span>(data, </a>
-<a class="sourceLine" id="cb326-3" data-line-number="3">     <span class="dt">border =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">breaks =</span> <span class="dv">20</span>, </a>
-<a class="sourceLine" id="cb326-4" data-line-number="4">     <span class="dt">probability =</span> <span class="ot">TRUE</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">20</span>))</a>
-<a class="sourceLine" id="cb326-5" data-line-number="5"><span class="kw">box</span>()</a>
-<a class="sourceLine" id="cb326-6" data-line-number="6"><span class="kw">grid</span>()</a>
-<a class="sourceLine" id="cb326-7" data-line-number="7"><span class="kw">curve</span>(<span class="kw">dexp</span>(x, <span class="dt">rate =</span> <span class="fl">0.5</span>), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="dt">n =</span> <span class="dv">250</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb330-1" data-line-number="1"><span class="co"># histogram of data with population distribution</span></a>
+<a class="sourceLine" id="cb330-2" data-line-number="2"><span class="kw">hist</span>(data, </a>
+<a class="sourceLine" id="cb330-3" data-line-number="3">     <span class="dt">border =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">breaks =</span> <span class="dv">20</span>, </a>
+<a class="sourceLine" id="cb330-4" data-line-number="4">     <span class="dt">probability =</span> <span class="ot">TRUE</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">20</span>))</a>
+<a class="sourceLine" id="cb330-5" data-line-number="5"><span class="kw">box</span>()</a>
+<a class="sourceLine" id="cb330-6" data-line-number="6"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb330-7" data-line-number="7"><span class="kw">curve</span>(<span class="kw">dexp</span>(x, <span class="dt">rate =</span> <span class="fl">0.5</span>), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="dt">n =</span> <span class="dv">250</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a></code></pre></div>
 <p><img src="05-04-sim-and-boot_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb327-1" data-line-number="1"><span class="co"># define graphical parameters</span></a>
-<a class="sourceLine" id="cb327-2" data-line-number="2">ylim =<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb327-3" data-line-number="3">xlim =<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">20</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb328-1" data-line-number="1"><span class="co"># resampling from the true distribution</span></a>
-<a class="sourceLine" id="cb328-2" data-line-number="2"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb328-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb328-4" data-line-number="4"><span class="kw">hist</span>(<span class="kw">rexp</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">rate =</span> <span class="fl">0.5</span>), </a>
-<a class="sourceLine" id="cb328-5" data-line-number="5">     <span class="dt">border =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">breaks =</span> <span class="dv">20</span>, <span class="dt">probability =</span> <span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb328-6" data-line-number="6">     <span class="dt">ylim =</span> ylim, <span class="dt">xlim =</span> xlim,</a>
-<a class="sourceLine" id="cb328-7" data-line-number="7">     <span class="dt">main =</span> <span class="st">&quot;Sample From Population&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>)</a>
-<a class="sourceLine" id="cb328-8" data-line-number="8"><span class="kw">box</span>()</a>
-<a class="sourceLine" id="cb328-9" data-line-number="9"><span class="kw">grid</span>()</a>
-<a class="sourceLine" id="cb328-10" data-line-number="10"><span class="kw">curve</span>(<span class="kw">dexp</span>(x, <span class="dt">rate =</span> <span class="fl">0.5</span>), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>)</a>
-<a class="sourceLine" id="cb328-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb328-12" data-line-number="12"><span class="kw">hist</span>(<span class="kw">rexp</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">rate =</span> <span class="fl">0.5</span>), </a>
-<a class="sourceLine" id="cb328-13" data-line-number="13">     <span class="dt">border =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">breaks =</span> <span class="dv">20</span>, <span class="dt">probability =</span> <span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb328-14" data-line-number="14">     <span class="dt">ylim =</span> ylim, <span class="dt">xlim =</span> xlim,</a>
-<a class="sourceLine" id="cb328-15" data-line-number="15">     <span class="dt">main =</span> <span class="st">&quot;Sample From Population&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>)</a>
-<a class="sourceLine" id="cb328-16" data-line-number="16"><span class="kw">box</span>()</a>
-<a class="sourceLine" id="cb328-17" data-line-number="17"><span class="kw">grid</span>()</a>
-<a class="sourceLine" id="cb328-18" data-line-number="18"><span class="kw">curve</span>(<span class="kw">dexp</span>(x, <span class="dt">rate =</span> <span class="fl">0.5</span>), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>)</a>
-<a class="sourceLine" id="cb328-19" data-line-number="19"></a>
-<a class="sourceLine" id="cb328-20" data-line-number="20"><span class="kw">hist</span>(<span class="kw">rexp</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">rate =</span> <span class="fl">0.5</span>), </a>
-<a class="sourceLine" id="cb328-21" data-line-number="21">     <span class="dt">border =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">breaks =</span> <span class="dv">20</span>, <span class="dt">probability =</span> <span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb328-22" data-line-number="22">     <span class="dt">ylim =</span> ylim, <span class="dt">xlim =</span> xlim,</a>
-<a class="sourceLine" id="cb328-23" data-line-number="23">     <span class="dt">main =</span> <span class="st">&quot;Sample From Population&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>)</a>
-<a class="sourceLine" id="cb328-24" data-line-number="24"><span class="kw">box</span>()</a>
-<a class="sourceLine" id="cb328-25" data-line-number="25"><span class="kw">grid</span>()</a>
-<a class="sourceLine" id="cb328-26" data-line-number="26"><span class="kw">curve</span>(<span class="kw">dexp</span>(x, <span class="dt">rate =</span> <span class="fl">0.5</span>), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb331-1" data-line-number="1"><span class="co"># define graphical parameters</span></a>
+<a class="sourceLine" id="cb331-2" data-line-number="2">ylim =<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb331-3" data-line-number="3">xlim =<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">20</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb332-1" data-line-number="1"><span class="co"># resampling from the true distribution</span></a>
+<a class="sourceLine" id="cb332-2" data-line-number="2"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb332-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb332-4" data-line-number="4"><span class="kw">hist</span>(<span class="kw">rexp</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">rate =</span> <span class="fl">0.5</span>), </a>
+<a class="sourceLine" id="cb332-5" data-line-number="5">     <span class="dt">border =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">breaks =</span> <span class="dv">20</span>, <span class="dt">probability =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb332-6" data-line-number="6">     <span class="dt">ylim =</span> ylim, <span class="dt">xlim =</span> xlim,</a>
+<a class="sourceLine" id="cb332-7" data-line-number="7">     <span class="dt">main =</span> <span class="st">&quot;Sample From Population&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>)</a>
+<a class="sourceLine" id="cb332-8" data-line-number="8"><span class="kw">box</span>()</a>
+<a class="sourceLine" id="cb332-9" data-line-number="9"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb332-10" data-line-number="10"><span class="kw">curve</span>(<span class="kw">dexp</span>(x, <span class="dt">rate =</span> <span class="fl">0.5</span>), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>)</a>
+<a class="sourceLine" id="cb332-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb332-12" data-line-number="12"><span class="kw">hist</span>(<span class="kw">rexp</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">rate =</span> <span class="fl">0.5</span>), </a>
+<a class="sourceLine" id="cb332-13" data-line-number="13">     <span class="dt">border =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">breaks =</span> <span class="dv">20</span>, <span class="dt">probability =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb332-14" data-line-number="14">     <span class="dt">ylim =</span> ylim, <span class="dt">xlim =</span> xlim,</a>
+<a class="sourceLine" id="cb332-15" data-line-number="15">     <span class="dt">main =</span> <span class="st">&quot;Sample From Population&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>)</a>
+<a class="sourceLine" id="cb332-16" data-line-number="16"><span class="kw">box</span>()</a>
+<a class="sourceLine" id="cb332-17" data-line-number="17"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb332-18" data-line-number="18"><span class="kw">curve</span>(<span class="kw">dexp</span>(x, <span class="dt">rate =</span> <span class="fl">0.5</span>), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>)</a>
+<a class="sourceLine" id="cb332-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb332-20" data-line-number="20"><span class="kw">hist</span>(<span class="kw">rexp</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">rate =</span> <span class="fl">0.5</span>), </a>
+<a class="sourceLine" id="cb332-21" data-line-number="21">     <span class="dt">border =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">breaks =</span> <span class="dv">20</span>, <span class="dt">probability =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb332-22" data-line-number="22">     <span class="dt">ylim =</span> ylim, <span class="dt">xlim =</span> xlim,</a>
+<a class="sourceLine" id="cb332-23" data-line-number="23">     <span class="dt">main =</span> <span class="st">&quot;Sample From Population&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>)</a>
+<a class="sourceLine" id="cb332-24" data-line-number="24"><span class="kw">box</span>()</a>
+<a class="sourceLine" id="cb332-25" data-line-number="25"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb332-26" data-line-number="26"><span class="kw">curve</span>(<span class="kw">dexp</span>(x, <span class="dt">rate =</span> <span class="fl">0.5</span>), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>)</a></code></pre></div>
 <p><img src="05-04-sim-and-boot_files/figure-html/unnamed-chunk-7-1.png" width="1152" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb329-1" data-line-number="1"><span class="kw">qexp</span>(<span class="fl">0.5</span>, <span class="dt">rate =</span> <span class="fl">0.5</span>) <span class="co"># true populaiton median</span></a></code></pre></div>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb333-1" data-line-number="1"><span class="kw">qexp</span>(<span class="fl">0.5</span>, <span class="dt">rate =</span> <span class="fl">0.5</span>) <span class="co"># true populaiton median</span></a></code></pre></div>
 <pre><code>## [1] 1.386294</code></pre>
-<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb331-1" data-line-number="1"><span class="kw">median</span>(data) <span class="co"># sample median</span></a></code></pre></div>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb335-1" data-line-number="1"><span class="kw">median</span>(data) <span class="co"># sample median</span></a></code></pre></div>
 <pre><code>## [1] 1.617539</code></pre>
-<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb333-1" data-line-number="1"><span class="co"># simulating medians</span></a>
-<a class="sourceLine" id="cb333-2" data-line-number="2"><span class="co"># - simulate from known distribution</span></a>
-<a class="sourceLine" id="cb333-3" data-line-number="3"><span class="co"># - calculate median on simualted data</span></a>
-<a class="sourceLine" id="cb333-4" data-line-number="4"><span class="co"># - store result</span></a>
-<a class="sourceLine" id="cb333-5" data-line-number="5">simulated_medians =<span class="st"> </span><span class="kw">replicate</span>(<span class="dt">n =</span> <span class="dv">10000</span>, <span class="kw">median</span>(<span class="kw">rexp</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">rate =</span> <span class="fl">0.5</span>)))</a></code></pre></div>
-<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb334-1" data-line-number="1"><span class="co"># use EDCD and plug-in principle to learn about distribution and make estimates</span></a>
-<a class="sourceLine" id="cb334-2" data-line-number="2"><span class="kw">mean</span>(simulated_medians)</a></code></pre></div>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb337-1" data-line-number="1"><span class="co"># simulating medians</span></a>
+<a class="sourceLine" id="cb337-2" data-line-number="2"><span class="co"># - simulate from known distribution</span></a>
+<a class="sourceLine" id="cb337-3" data-line-number="3"><span class="co"># - calculate median on simualted data</span></a>
+<a class="sourceLine" id="cb337-4" data-line-number="4"><span class="co"># - store result</span></a>
+<a class="sourceLine" id="cb337-5" data-line-number="5">simulated_medians =<span class="st"> </span><span class="kw">replicate</span>(<span class="dt">n =</span> <span class="dv">10000</span>, <span class="kw">median</span>(<span class="kw">rexp</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">rate =</span> <span class="fl">0.5</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb338-1" data-line-number="1"><span class="co"># use EDCD and plug-in principle to learn about distribution and make estimates</span></a>
+<a class="sourceLine" id="cb338-2" data-line-number="2"><span class="kw">mean</span>(simulated_medians)</a></code></pre></div>
 <pre><code>## [1] 1.397316</code></pre>
-<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb336-1" data-line-number="1"><span class="kw">sd</span>(simulated_medians)</a></code></pre></div>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb340-1" data-line-number="1"><span class="kw">sd</span>(simulated_medians)</a></code></pre></div>
 <pre><code>## [1] 0.1993581</code></pre>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb338-1" data-line-number="1"><span class="kw">quantile</span>(simulated_medians, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb342-1" data-line-number="1"><span class="kw">quantile</span>(simulated_medians, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</a></code></pre></div>
 <pre><code>##     2.5%    97.5% 
 ## 1.029307 1.807971</code></pre>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb340-1" data-line-number="1"><span class="co"># plot of ECDF of sample median</span></a>
-<a class="sourceLine" id="cb340-2" data-line-number="2"><span class="kw">hist</span>(simulated_medians, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
-<a class="sourceLine" id="cb340-3" data-line-number="3"><span class="kw">box</span>()</a>
-<a class="sourceLine" id="cb340-4" data-line-number="4"><span class="kw">grid</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb344-1" data-line-number="1"><span class="co"># plot of ECDF of sample median</span></a>
+<a class="sourceLine" id="cb344-2" data-line-number="2"><span class="kw">hist</span>(simulated_medians, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
+<a class="sourceLine" id="cb344-3" data-line-number="3"><span class="kw">box</span>()</a>
+<a class="sourceLine" id="cb344-4" data-line-number="4"><span class="kw">grid</span>()</a></code></pre></div>
 <p><img src="05-04-sim-and-boot_files/figure-html/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb341-1" data-line-number="1"><span class="kw">pexp</span>(<span class="dv">8</span>, <span class="dt">rate =</span> <span class="fl">0.5</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>) <span class="co"># true probability P[X &gt; 8]</span></a></code></pre></div>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb345-1" data-line-number="1"><span class="kw">pexp</span>(<span class="dv">8</span>, <span class="dt">rate =</span> <span class="fl">0.5</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>) <span class="co"># true probability P[X &gt; 8]</span></a></code></pre></div>
 <pre><code>## [1] 0.01831564</code></pre>
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb343-1" data-line-number="1"><span class="kw">mean</span>(data <span class="op">&gt;</span><span class="st"> </span><span class="dv">8</span>) <span class="co"># estimate using ECDF of sample data, mean(I(x &gt; 8))</span></a></code></pre></div>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb347-1" data-line-number="1"><span class="kw">mean</span>(data <span class="op">&gt;</span><span class="st"> </span><span class="dv">8</span>) <span class="co"># estimate using ECDF of sample data, mean(I(x &gt; 8))</span></a></code></pre></div>
 <pre><code>## [1] 0.02</code></pre>
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb345-1" data-line-number="1"><span class="co"># simulating estimates of P[X &gt; 8]</span></a>
-<a class="sourceLine" id="cb345-2" data-line-number="2"><span class="co"># - simulate from known distribution</span></a>
-<a class="sourceLine" id="cb345-3" data-line-number="3"><span class="co"># - calculate proportion of obs greater than 8 in simualted data, mean(I(x &gt; 8))</span></a>
-<a class="sourceLine" id="cb345-4" data-line-number="4"><span class="co"># - store result</span></a>
-<a class="sourceLine" id="cb345-5" data-line-number="5">simulated_probs =<span class="st"> </span><span class="kw">replicate</span>(<span class="dt">n =</span> <span class="dv">10000</span>, <span class="kw">mean</span>(<span class="kw">rexp</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">rate =</span> <span class="fl">0.5</span>) <span class="op">&gt;</span><span class="st"> </span><span class="dv">8</span>))</a></code></pre></div>
-<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb346-1" data-line-number="1"><span class="co"># use EDCD and plug-in principle to learn about distribution and make estimates</span></a>
-<a class="sourceLine" id="cb346-2" data-line-number="2"><span class="kw">mean</span>(simulated_probs)</a></code></pre></div>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb349-1" data-line-number="1"><span class="co"># simulating estimates of P[X &gt; 8]</span></a>
+<a class="sourceLine" id="cb349-2" data-line-number="2"><span class="co"># - simulate from known distribution</span></a>
+<a class="sourceLine" id="cb349-3" data-line-number="3"><span class="co"># - calculate proportion of obs greater than 8 in simualted data, mean(I(x &gt; 8))</span></a>
+<a class="sourceLine" id="cb349-4" data-line-number="4"><span class="co"># - store result</span></a>
+<a class="sourceLine" id="cb349-5" data-line-number="5">simulated_probs =<span class="st"> </span><span class="kw">replicate</span>(<span class="dt">n =</span> <span class="dv">10000</span>, <span class="kw">mean</span>(<span class="kw">rexp</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">rate =</span> <span class="fl">0.5</span>) <span class="op">&gt;</span><span class="st"> </span><span class="dv">8</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb350-1" data-line-number="1"><span class="co"># use EDCD and plug-in principle to learn about distribution and make estimates</span></a>
+<a class="sourceLine" id="cb350-2" data-line-number="2"><span class="kw">mean</span>(simulated_probs)</a></code></pre></div>
 <pre><code>## [1] 0.018517</code></pre>
-<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb348-1" data-line-number="1"><span class="kw">sd</span>(simulated_probs)</a></code></pre></div>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb352-1" data-line-number="1"><span class="kw">sd</span>(simulated_probs)</a></code></pre></div>
 <pre><code>## [1] 0.01353547</code></pre>
-<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb350-1" data-line-number="1"><span class="kw">quantile</span>(simulated_probs, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb354-1" data-line-number="1"><span class="kw">quantile</span>(simulated_probs, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</a></code></pre></div>
 <pre><code>##  2.5% 97.5% 
 ##  0.00  0.05</code></pre>
-<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb352-1" data-line-number="1"><span class="co"># plot of ECDF of sample median</span></a>
-<a class="sourceLine" id="cb352-2" data-line-number="2"><span class="kw">hist</span>(simulated_probs, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
-<a class="sourceLine" id="cb352-3" data-line-number="3"><span class="kw">box</span>()</a>
-<a class="sourceLine" id="cb352-4" data-line-number="4"><span class="kw">grid</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb356-1" data-line-number="1"><span class="co"># plot of ECDF of sample median</span></a>
+<a class="sourceLine" id="cb356-2" data-line-number="2"><span class="kw">hist</span>(simulated_probs, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
+<a class="sourceLine" id="cb356-3" data-line-number="3"><span class="kw">box</span>()</a>
+<a class="sourceLine" id="cb356-4" data-line-number="4"><span class="kw">grid</span>()</a></code></pre></div>
 <p><img src="05-04-sim-and-boot_files/figure-html/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb353-1" data-line-number="1"><span class="co"># bootstrap resampling</span></a>
-<a class="sourceLine" id="cb353-2" data-line-number="2"><span class="kw">sample</span>(<span class="dt">x =</span> data, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb357-1" data-line-number="1"><span class="co"># bootstrap resampling</span></a>
+<a class="sourceLine" id="cb357-2" data-line-number="2"><span class="kw">sample</span>(<span class="dt">x =</span> data, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>##   [1] 0.29409198 4.35754514 5.51848758 2.47520710 0.89490379 2.21187254
 ##   [7] 2.64093586 3.14397369 5.78993707 0.27959052 2.36328556 1.18923530
 ##  [13] 2.78147026 0.41973316 1.52405971 4.56770695 3.56953081 1.62907161
@@ -447,94 +447,94 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  [85] 2.50621071 1.54837553 2.04545175 2.47520710 2.78147026 0.21214525
 ##  [91] 0.26514281 1.98911158 1.10928280 0.57118197 0.57118197 7.91786570
 ##  [97] 0.57118197 7.91786570 1.62907161 3.14397369</code></pre>
-<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb355-1" data-line-number="1"><span class="co"># bootstrap resample from original data</span></a>
-<a class="sourceLine" id="cb355-2" data-line-number="2"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb355-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb355-4" data-line-number="4"><span class="kw">hist</span>(<span class="kw">sample</span>(<span class="dt">x =</span> data, <span class="dt">replace =</span> <span class="ot">TRUE</span>), </a>
-<a class="sourceLine" id="cb355-5" data-line-number="5">     <span class="dt">border =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">breaks =</span> <span class="dv">20</span>, <span class="dt">probability =</span> <span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb355-6" data-line-number="6">     <span class="dt">ylim =</span> ylim, <span class="dt">xlim =</span> xlim,</a>
-<a class="sourceLine" id="cb355-7" data-line-number="7">     <span class="dt">main =</span> <span class="st">&quot;Bootstrap Resample&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>)</a>
-<a class="sourceLine" id="cb355-8" data-line-number="8"><span class="kw">box</span>()</a>
-<a class="sourceLine" id="cb355-9" data-line-number="9"><span class="kw">grid</span>()</a>
-<a class="sourceLine" id="cb355-10" data-line-number="10"><span class="kw">curve</span>(<span class="kw">dexp</span>(x, <span class="dt">rate =</span> <span class="fl">0.5</span>), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>)</a>
-<a class="sourceLine" id="cb355-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb355-12" data-line-number="12"><span class="kw">hist</span>(<span class="kw">sample</span>(<span class="dt">x =</span> data, <span class="dt">replace =</span> <span class="ot">TRUE</span>), </a>
-<a class="sourceLine" id="cb355-13" data-line-number="13">     <span class="dt">border =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">breaks =</span> <span class="dv">20</span>, <span class="dt">probability =</span> <span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb355-14" data-line-number="14">     <span class="dt">ylim =</span> ylim, <span class="dt">xlim =</span> xlim,</a>
-<a class="sourceLine" id="cb355-15" data-line-number="15">     <span class="dt">main =</span> <span class="st">&quot;Bootstrap Resample&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>)</a>
-<a class="sourceLine" id="cb355-16" data-line-number="16"><span class="kw">box</span>()</a>
-<a class="sourceLine" id="cb355-17" data-line-number="17"><span class="kw">grid</span>()</a>
-<a class="sourceLine" id="cb355-18" data-line-number="18"><span class="kw">curve</span>(<span class="kw">dexp</span>(x, <span class="dt">rate =</span> <span class="fl">0.5</span>), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>)</a>
-<a class="sourceLine" id="cb355-19" data-line-number="19"></a>
-<a class="sourceLine" id="cb355-20" data-line-number="20"><span class="kw">hist</span>(<span class="kw">sample</span>(<span class="dt">x =</span> data, <span class="dt">replace =</span> <span class="ot">TRUE</span>), </a>
-<a class="sourceLine" id="cb355-21" data-line-number="21">     <span class="dt">border =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">breaks =</span> <span class="dv">20</span>, <span class="dt">probability =</span> <span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb355-22" data-line-number="22">     <span class="dt">ylim =</span> ylim, <span class="dt">xlim =</span> xlim,</a>
-<a class="sourceLine" id="cb355-23" data-line-number="23">     <span class="dt">main =</span> <span class="st">&quot;Bootstrap Resample&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>)</a>
-<a class="sourceLine" id="cb355-24" data-line-number="24"><span class="kw">box</span>()</a>
-<a class="sourceLine" id="cb355-25" data-line-number="25"><span class="kw">grid</span>()</a>
-<a class="sourceLine" id="cb355-26" data-line-number="26"><span class="kw">curve</span>(<span class="kw">dexp</span>(x, <span class="dt">rate =</span> <span class="fl">0.5</span>), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb359-1" data-line-number="1"><span class="co"># bootstrap resample from original data</span></a>
+<a class="sourceLine" id="cb359-2" data-line-number="2"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb359-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb359-4" data-line-number="4"><span class="kw">hist</span>(<span class="kw">sample</span>(<span class="dt">x =</span> data, <span class="dt">replace =</span> <span class="ot">TRUE</span>), </a>
+<a class="sourceLine" id="cb359-5" data-line-number="5">     <span class="dt">border =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">breaks =</span> <span class="dv">20</span>, <span class="dt">probability =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb359-6" data-line-number="6">     <span class="dt">ylim =</span> ylim, <span class="dt">xlim =</span> xlim,</a>
+<a class="sourceLine" id="cb359-7" data-line-number="7">     <span class="dt">main =</span> <span class="st">&quot;Bootstrap Resample&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>)</a>
+<a class="sourceLine" id="cb359-8" data-line-number="8"><span class="kw">box</span>()</a>
+<a class="sourceLine" id="cb359-9" data-line-number="9"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb359-10" data-line-number="10"><span class="kw">curve</span>(<span class="kw">dexp</span>(x, <span class="dt">rate =</span> <span class="fl">0.5</span>), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>)</a>
+<a class="sourceLine" id="cb359-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb359-12" data-line-number="12"><span class="kw">hist</span>(<span class="kw">sample</span>(<span class="dt">x =</span> data, <span class="dt">replace =</span> <span class="ot">TRUE</span>), </a>
+<a class="sourceLine" id="cb359-13" data-line-number="13">     <span class="dt">border =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">breaks =</span> <span class="dv">20</span>, <span class="dt">probability =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb359-14" data-line-number="14">     <span class="dt">ylim =</span> ylim, <span class="dt">xlim =</span> xlim,</a>
+<a class="sourceLine" id="cb359-15" data-line-number="15">     <span class="dt">main =</span> <span class="st">&quot;Bootstrap Resample&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>)</a>
+<a class="sourceLine" id="cb359-16" data-line-number="16"><span class="kw">box</span>()</a>
+<a class="sourceLine" id="cb359-17" data-line-number="17"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb359-18" data-line-number="18"><span class="kw">curve</span>(<span class="kw">dexp</span>(x, <span class="dt">rate =</span> <span class="fl">0.5</span>), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>)</a>
+<a class="sourceLine" id="cb359-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb359-20" data-line-number="20"><span class="kw">hist</span>(<span class="kw">sample</span>(<span class="dt">x =</span> data, <span class="dt">replace =</span> <span class="ot">TRUE</span>), </a>
+<a class="sourceLine" id="cb359-21" data-line-number="21">     <span class="dt">border =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">breaks =</span> <span class="dv">20</span>, <span class="dt">probability =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb359-22" data-line-number="22">     <span class="dt">ylim =</span> ylim, <span class="dt">xlim =</span> xlim,</a>
+<a class="sourceLine" id="cb359-23" data-line-number="23">     <span class="dt">main =</span> <span class="st">&quot;Bootstrap Resample&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>)</a>
+<a class="sourceLine" id="cb359-24" data-line-number="24"><span class="kw">box</span>()</a>
+<a class="sourceLine" id="cb359-25" data-line-number="25"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb359-26" data-line-number="26"><span class="kw">curve</span>(<span class="kw">dexp</span>(x, <span class="dt">rate =</span> <span class="fl">0.5</span>), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>)</a></code></pre></div>
 <p><img src="05-04-sim-and-boot_files/figure-html/unnamed-chunk-17-1.png" width="1152" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb356-1" data-line-number="1"><span class="kw">qexp</span>(<span class="fl">0.5</span>, <span class="dt">rate =</span> <span class="fl">0.5</span>) <span class="co"># true populaiton median</span></a></code></pre></div>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb360-1" data-line-number="1"><span class="kw">qexp</span>(<span class="fl">0.5</span>, <span class="dt">rate =</span> <span class="fl">0.5</span>) <span class="co"># true populaiton median</span></a></code></pre></div>
 <pre><code>## [1] 1.386294</code></pre>
-<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb358-1" data-line-number="1"><span class="kw">median</span>(data) <span class="co"># sample median</span></a></code></pre></div>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb362-1" data-line-number="1"><span class="kw">median</span>(data) <span class="co"># sample median</span></a></code></pre></div>
 <pre><code>## [1] 1.617539</code></pre>
-<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb360-1" data-line-number="1"><span class="co"># boostrapping medians</span></a>
-<a class="sourceLine" id="cb360-2" data-line-number="2"><span class="co"># - sample with replacement from sample data</span></a>
-<a class="sourceLine" id="cb360-3" data-line-number="3"><span class="co"># - calculate median on resampled data</span></a>
-<a class="sourceLine" id="cb360-4" data-line-number="4"><span class="co"># - store result</span></a>
-<a class="sourceLine" id="cb360-5" data-line-number="5">replicated_medians =<span class="st"> </span><span class="kw">replicate</span>(<span class="dt">n =</span> <span class="dv">10000</span>, <span class="kw">median</span>(<span class="kw">sample</span>(data, <span class="dt">replace =</span> <span class="ot">TRUE</span>)))</a></code></pre></div>
-<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb361-1" data-line-number="1"><span class="co"># use EDCD and plug-in principle to learn about distribution and make estimates</span></a>
-<a class="sourceLine" id="cb361-2" data-line-number="2"><span class="kw">mean</span>(replicated_medians)</a></code></pre></div>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb364-1" data-line-number="1"><span class="co"># boostrapping medians</span></a>
+<a class="sourceLine" id="cb364-2" data-line-number="2"><span class="co"># - sample with replacement from sample data</span></a>
+<a class="sourceLine" id="cb364-3" data-line-number="3"><span class="co"># - calculate median on resampled data</span></a>
+<a class="sourceLine" id="cb364-4" data-line-number="4"><span class="co"># - store result</span></a>
+<a class="sourceLine" id="cb364-5" data-line-number="5">replicated_medians =<span class="st"> </span><span class="kw">replicate</span>(<span class="dt">n =</span> <span class="dv">10000</span>, <span class="kw">median</span>(<span class="kw">sample</span>(data, <span class="dt">replace =</span> <span class="ot">TRUE</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb365-1" data-line-number="1"><span class="co"># use EDCD and plug-in principle to learn about distribution and make estimates</span></a>
+<a class="sourceLine" id="cb365-2" data-line-number="2"><span class="kw">mean</span>(replicated_medians)</a></code></pre></div>
 <pre><code>## [1] 1.626611</code></pre>
-<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb363-1" data-line-number="1"><span class="kw">sd</span>(replicated_medians)</a></code></pre></div>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb367-1" data-line-number="1"><span class="kw">sd</span>(replicated_medians)</a></code></pre></div>
 <pre><code>## [1] 0.2100116</code></pre>
-<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb365-1" data-line-number="1"><span class="co"># a 95% CI for the true median</span></a>
-<a class="sourceLine" id="cb365-2" data-line-number="2"><span class="kw">quantile</span>(replicated_medians, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb369-1" data-line-number="1"><span class="co"># a 95% CI for the true median</span></a>
+<a class="sourceLine" id="cb369-2" data-line-number="2"><span class="kw">quantile</span>(replicated_medians, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</a></code></pre></div>
 <pre><code>##     2.5%    97.5% 
 ## 1.189235 2.045452</code></pre>
-<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb367-1" data-line-number="1"><span class="co"># plot of ECDF of sample median</span></a>
-<a class="sourceLine" id="cb367-2" data-line-number="2"><span class="kw">hist</span>(replicated_medians, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
-<a class="sourceLine" id="cb367-3" data-line-number="3"><span class="kw">box</span>()</a>
-<a class="sourceLine" id="cb367-4" data-line-number="4"><span class="kw">grid</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb371-1" data-line-number="1"><span class="co"># plot of ECDF of sample median</span></a>
+<a class="sourceLine" id="cb371-2" data-line-number="2"><span class="kw">hist</span>(replicated_medians, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
+<a class="sourceLine" id="cb371-3" data-line-number="3"><span class="kw">box</span>()</a>
+<a class="sourceLine" id="cb371-4" data-line-number="4"><span class="kw">grid</span>()</a></code></pre></div>
 <p><img src="05-04-sim-and-boot_files/figure-html/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb368-1" data-line-number="1"><span class="kw">pexp</span>(<span class="dv">8</span>, <span class="dt">rate =</span> <span class="fl">0.5</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>) <span class="co"># true probability P[X &gt; 8]</span></a></code></pre></div>
+<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb372-1" data-line-number="1"><span class="kw">pexp</span>(<span class="dv">8</span>, <span class="dt">rate =</span> <span class="fl">0.5</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>) <span class="co"># true probability P[X &gt; 8]</span></a></code></pre></div>
 <pre><code>## [1] 0.01831564</code></pre>
-<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb370-1" data-line-number="1"><span class="kw">mean</span>(data <span class="op">&gt;</span><span class="st"> </span><span class="dv">8</span>) <span class="co"># estimate using ECDF of sample data, mean(I(x &gt; 8))</span></a></code></pre></div>
+<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb374-1" data-line-number="1"><span class="kw">mean</span>(data <span class="op">&gt;</span><span class="st"> </span><span class="dv">8</span>) <span class="co"># estimate using ECDF of sample data, mean(I(x &gt; 8))</span></a></code></pre></div>
 <pre><code>## [1] 0.02</code></pre>
-<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb372-1" data-line-number="1"><span class="co"># boostrapping mean(I(x &gt; 8))</span></a>
-<a class="sourceLine" id="cb372-2" data-line-number="2"><span class="co"># - sample with replacement from sample data</span></a>
-<a class="sourceLine" id="cb372-3" data-line-number="3"><span class="co"># - calculate proportion of obs greater than 8 in simualted data, mean(I(x &gt; 8))</span></a>
-<a class="sourceLine" id="cb372-4" data-line-number="4"><span class="co"># - store result</span></a>
-<a class="sourceLine" id="cb372-5" data-line-number="5">replicated_probs =<span class="st"> </span><span class="kw">replicate</span>(<span class="dt">n =</span> <span class="dv">10000</span>, <span class="kw">mean</span>(<span class="kw">sample</span>(data, <span class="dt">replace =</span> <span class="ot">TRUE</span>) <span class="op">&gt;</span><span class="st"> </span><span class="dv">8</span>))</a></code></pre></div>
-<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb373-1" data-line-number="1"><span class="co"># use EDCD and plug-in principle to learn about distribution and make estimates</span></a>
-<a class="sourceLine" id="cb373-2" data-line-number="2"><span class="kw">mean</span>(replicated_probs)</a></code></pre></div>
+<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb376-1" data-line-number="1"><span class="co"># boostrapping mean(I(x &gt; 8))</span></a>
+<a class="sourceLine" id="cb376-2" data-line-number="2"><span class="co"># - sample with replacement from sample data</span></a>
+<a class="sourceLine" id="cb376-3" data-line-number="3"><span class="co"># - calculate proportion of obs greater than 8 in simualted data, mean(I(x &gt; 8))</span></a>
+<a class="sourceLine" id="cb376-4" data-line-number="4"><span class="co"># - store result</span></a>
+<a class="sourceLine" id="cb376-5" data-line-number="5">replicated_probs =<span class="st"> </span><span class="kw">replicate</span>(<span class="dt">n =</span> <span class="dv">10000</span>, <span class="kw">mean</span>(<span class="kw">sample</span>(data, <span class="dt">replace =</span> <span class="ot">TRUE</span>) <span class="op">&gt;</span><span class="st"> </span><span class="dv">8</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb377-1" data-line-number="1"><span class="co"># use EDCD and plug-in principle to learn about distribution and make estimates</span></a>
+<a class="sourceLine" id="cb377-2" data-line-number="2"><span class="kw">mean</span>(replicated_probs)</a></code></pre></div>
 <pre><code>## [1] 0.019998</code></pre>
-<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb375-1" data-line-number="1"><span class="kw">sd</span>(replicated_probs)</a></code></pre></div>
+<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb379-1" data-line-number="1"><span class="kw">sd</span>(replicated_probs)</a></code></pre></div>
 <pre><code>## [1] 0.01390249</code></pre>
-<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb377-1" data-line-number="1"><span class="co"># a 95% CI for the true P[X &gt; 8]</span></a>
-<a class="sourceLine" id="cb377-2" data-line-number="2"><span class="kw">quantile</span>(replicated_probs, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb381-1" data-line-number="1"><span class="co"># a 95% CI for the true P[X &gt; 8]</span></a>
+<a class="sourceLine" id="cb381-2" data-line-number="2"><span class="kw">quantile</span>(replicated_probs, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</a></code></pre></div>
 <pre><code>##  2.5% 97.5% 
 ##  0.00  0.05</code></pre>
-<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb379-1" data-line-number="1"><span class="co"># plot of ECDF of sample median</span></a>
-<a class="sourceLine" id="cb379-2" data-line-number="2"><span class="kw">hist</span>(replicated_probs, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
-<a class="sourceLine" id="cb379-3" data-line-number="3"><span class="kw">box</span>()</a>
-<a class="sourceLine" id="cb379-4" data-line-number="4"><span class="kw">grid</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb383-1" data-line-number="1"><span class="co"># plot of ECDF of sample median</span></a>
+<a class="sourceLine" id="cb383-2" data-line-number="2"><span class="kw">hist</span>(replicated_probs, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
+<a class="sourceLine" id="cb383-3" data-line-number="3"><span class="kw">box</span>()</a>
+<a class="sourceLine" id="cb383-4" data-line-number="4"><span class="kw">grid</span>()</a></code></pre></div>
 <p><img src="05-04-sim-and-boot_files/figure-html/unnamed-chunk-27-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb380-1" data-line-number="1"><span class="co"># sample from exponential with mean 2</span></a>
-<a class="sourceLine" id="cb380-2" data-line-number="2"><span class="co"># generate bootstrap replicates of the median</span></a>
-<a class="sourceLine" id="cb380-3" data-line-number="3"><span class="co"># calculate 95% confidence interval use percentile (quantile) method</span></a>
-<a class="sourceLine" id="cb380-4" data-line-number="4"><span class="co"># check if true median is in confidence interval each time (hope for ~95%!)</span></a>
-<a class="sourceLine" id="cb380-5" data-line-number="5">true_median =<span class="st"> </span><span class="kw">qexp</span>(<span class="fl">0.5</span>, <span class="dt">rate =</span> <span class="fl">0.5</span>) <span class="co"># median</span></a></code></pre></div>
-<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb381-1" data-line-number="1">check_if_in_interval =<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb381-2" data-line-number="2">  data =<span class="st"> </span><span class="kw">rexp</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">rate =</span> <span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb381-3" data-line-number="3">  replicated_medians =<span class="st"> </span><span class="kw">replicate</span>(<span class="dt">n =</span> <span class="dv">2000</span>, <span class="kw">median</span>(<span class="kw">sample</span>(data, <span class="dt">replace =</span> <span class="ot">TRUE</span>)))</a>
-<a class="sourceLine" id="cb381-4" data-line-number="4">  interval =<span class="st"> </span><span class="kw">quantile</span>(replicated_medians, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</a>
-<a class="sourceLine" id="cb381-5" data-line-number="5">  interval[<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>true_median <span class="op">&amp;</span><span class="st"> </span>true_median <span class="op">&lt;</span><span class="st"> </span>interval[<span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb381-6" data-line-number="6">}</a></code></pre></div>
-<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb382-1" data-line-number="1">median_in_out =<span class="st"> </span><span class="kw">replicate</span>(<span class="dt">n =</span> <span class="dv">200</span>, <span class="kw">check_if_in_interval</span>())</a>
-<a class="sourceLine" id="cb382-2" data-line-number="2"><span class="kw">mean</span>(median_in_out)</a></code></pre></div>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb384-1" data-line-number="1"><span class="co"># sample from exponential with mean 2</span></a>
+<a class="sourceLine" id="cb384-2" data-line-number="2"><span class="co"># generate bootstrap replicates of the median</span></a>
+<a class="sourceLine" id="cb384-3" data-line-number="3"><span class="co"># calculate 95% confidence interval use percentile (quantile) method</span></a>
+<a class="sourceLine" id="cb384-4" data-line-number="4"><span class="co"># check if true median is in confidence interval each time (hope for ~95%!)</span></a>
+<a class="sourceLine" id="cb384-5" data-line-number="5">true_median =<span class="st"> </span><span class="kw">qexp</span>(<span class="fl">0.5</span>, <span class="dt">rate =</span> <span class="fl">0.5</span>) <span class="co"># median</span></a></code></pre></div>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb385-1" data-line-number="1">check_if_in_interval =<span class="st"> </span><span class="cf">function</span>() {</a>
+<a class="sourceLine" id="cb385-2" data-line-number="2">  data =<span class="st"> </span><span class="kw">rexp</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">rate =</span> <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb385-3" data-line-number="3">  replicated_medians =<span class="st"> </span><span class="kw">replicate</span>(<span class="dt">n =</span> <span class="dv">2000</span>, <span class="kw">median</span>(<span class="kw">sample</span>(data, <span class="dt">replace =</span> <span class="ot">TRUE</span>)))</a>
+<a class="sourceLine" id="cb385-4" data-line-number="4">  interval =<span class="st"> </span><span class="kw">quantile</span>(replicated_medians, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</a>
+<a class="sourceLine" id="cb385-5" data-line-number="5">  interval[<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>true_median <span class="op">&amp;</span><span class="st"> </span>true_median <span class="op">&lt;</span><span class="st"> </span>interval[<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb385-6" data-line-number="6">}</a></code></pre></div>
+<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb386-1" data-line-number="1">median_in_out =<span class="st"> </span><span class="kw">replicate</span>(<span class="dt">n =</span> <span class="dv">200</span>, <span class="kw">check_if_in_interval</span>())</a>
+<a class="sourceLine" id="cb386-2" data-line-number="2"><span class="kw">mean</span>(median_in_out)</a></code></pre></div>
 <pre><code>## [1] 0.925</code></pre>
-<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb384-1" data-line-number="1"><span class="kw">microbenchmark</span>(<span class="kw">check_if_in_interval</span>())</a></code></pre></div>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb388-1" data-line-number="1"><span class="kw">microbenchmark</span>(<span class="kw">check_if_in_interval</span>())</a></code></pre></div>
 <pre><code>## Unit: milliseconds
 ##                    expr      min       lq     mean   median       uq
 ##  check_if_in_interval() 80.59274 87.10038 92.86923 92.61586 96.87218

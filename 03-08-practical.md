@@ -478,3 +478,34 @@ predict(lm_cat_mod, x_levels)
 ## 10.8208879 10.7829575 12.9423601 13.1239336
 ```
 
+
+```r
+dum_trn = as_tibble(predict(dummyVars(~., data = cat_trn), cat_trn))
+```
+
+
+```r
+lm(y ~ . + 0, data = dum_trn)
+```
+
+```
+## 
+## Call:
+## lm(formula = y ~ . + 0, data = dum_trn)
+## 
+## Coefficients:
+##     xA      xB      xC      xD      xE      xF      xG      xH      xI  
+##  0.668   0.714   1.052   5.052   4.794   5.028  10.821  10.783  12.942  
+##     xJ  
+## 13.124
+```
+
+
+```r
+rpart.plot(rpart(y ~ ., data = dum_trn))
+```
+
+
+
+\begin{center}\includegraphics{03-08-practical_files/figure-latex/unnamed-chunk-33-1} \end{center}
+
