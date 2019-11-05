@@ -24,7 +24,7 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-11-04" />
+<meta name="date" content="2019-11-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -327,37 +327,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>ISL Readings: Sections 6.1 - 6.4</li>
 </ul>
 <hr />
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" data-line-number="1"><span class="kw">library</span>(<span class="st">&quot;glmnet&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" data-line-number="1"><span class="kw">library</span>(<span class="st">&quot;glmnet&quot;</span>)</a></code></pre></div>
 </div>
 <div id="adding-bias-to-reduce-variance" class="section level2">
 <h2><span class="header-section-number">14.2</span> adding bias to reduce variance</h2>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" data-line-number="1"><span class="co"># this is a bad function name</span></a>
-<a class="sourceLine" id="cb139-2" data-line-number="2">dgp =<span class="st"> </span><span class="cf">function</span>(<span class="dt">sample_size =</span> <span class="dv">25</span>) {</a>
-<a class="sourceLine" id="cb139-3" data-line-number="3">  x =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size)</a>
-<a class="sourceLine" id="cb139-4" data-line-number="4">  y =<span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size)</a>
-<a class="sourceLine" id="cb139-5" data-line-number="5">  <span class="kw">data.frame</span>(x, y)</a>
-<a class="sourceLine" id="cb139-6" data-line-number="6">}</a></code></pre></div>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb140-1" data-line-number="1"><span class="co"># maybe write a function for each</span></a>
-<a class="sourceLine" id="cb140-2" data-line-number="2">beta_ls =<span class="st"> </span><span class="kw">replicate</span>(<span class="dt">n =</span> <span class="dv">1000</span>, <span class="kw">coef</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>x, <span class="dt">data =</span> <span class="kw">dgp</span>()))[<span class="st">&quot;x&quot;</span>])</a>
-<a class="sourceLine" id="cb140-3" data-line-number="3">beta_<span class="dv">05</span> =<span class="st"> </span><span class="kw">replicate</span>(<span class="dt">n =</span> <span class="dv">1000</span>, <span class="kw">min</span>(<span class="kw">coef</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>x, <span class="dt">data =</span> <span class="kw">dgp</span>()))[<span class="st">&quot;x&quot;</span>], <span class="dv">5</span>))</a>
-<a class="sourceLine" id="cb140-4" data-line-number="4">beta_<span class="dv">04</span> =<span class="st"> </span><span class="kw">replicate</span>(<span class="dt">n =</span> <span class="dv">1000</span>, <span class="kw">min</span>(<span class="kw">coef</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>x, <span class="dt">data =</span> <span class="kw">dgp</span>()))[<span class="st">&quot;x&quot;</span>], <span class="dv">4</span>))</a></code></pre></div>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" data-line-number="1"><span class="co"># add MSE, add names, make tibble</span></a>
-<a class="sourceLine" id="cb141-2" data-line-number="2"><span class="kw">c</span>(<span class="kw">mean</span>(beta_ls) <span class="op">-</span><span class="st"> </span><span class="dv">5</span>, <span class="kw">sd</span>(beta_ls))</a></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" data-line-number="1"><span class="co"># this is a bad function name</span></a>
+<a class="sourceLine" id="cb146-2" data-line-number="2">dgp =<span class="st"> </span><span class="cf">function</span>(<span class="dt">sample_size =</span> <span class="dv">25</span>) {</a>
+<a class="sourceLine" id="cb146-3" data-line-number="3">  x =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size)</a>
+<a class="sourceLine" id="cb146-4" data-line-number="4">  y =<span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size)</a>
+<a class="sourceLine" id="cb146-5" data-line-number="5">  <span class="kw">data.frame</span>(x, y)</a>
+<a class="sourceLine" id="cb146-6" data-line-number="6">}</a></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb147-1" data-line-number="1"><span class="co"># maybe write a function for each</span></a>
+<a class="sourceLine" id="cb147-2" data-line-number="2">beta_ls =<span class="st"> </span><span class="kw">replicate</span>(<span class="dt">n =</span> <span class="dv">1000</span>, <span class="kw">coef</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>x, <span class="dt">data =</span> <span class="kw">dgp</span>()))[<span class="st">&quot;x&quot;</span>])</a>
+<a class="sourceLine" id="cb147-3" data-line-number="3">beta_<span class="dv">05</span> =<span class="st"> </span><span class="kw">replicate</span>(<span class="dt">n =</span> <span class="dv">1000</span>, <span class="kw">min</span>(<span class="kw">coef</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>x, <span class="dt">data =</span> <span class="kw">dgp</span>()))[<span class="st">&quot;x&quot;</span>], <span class="dv">5</span>))</a>
+<a class="sourceLine" id="cb147-4" data-line-number="4">beta_<span class="dv">04</span> =<span class="st"> </span><span class="kw">replicate</span>(<span class="dt">n =</span> <span class="dv">1000</span>, <span class="kw">min</span>(<span class="kw">coef</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>x, <span class="dt">data =</span> <span class="kw">dgp</span>()))[<span class="st">&quot;x&quot;</span>], <span class="dv">4</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" data-line-number="1"><span class="co"># add MSE, add names, make tibble</span></a>
+<a class="sourceLine" id="cb148-2" data-line-number="2"><span class="kw">c</span>(<span class="kw">mean</span>(beta_ls) <span class="op">-</span><span class="st"> </span><span class="dv">5</span>, <span class="kw">sd</span>(beta_ls))</a></code></pre></div>
 <pre><code>## [1] -0.0003759144  0.3629565029</code></pre>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" data-line-number="1"><span class="kw">c</span>(<span class="kw">mean</span>(beta_<span class="dv">05</span>) <span class="op">-</span><span class="st"> </span><span class="dv">5</span>, <span class="kw">sd</span>(beta_<span class="dv">05</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" data-line-number="1"><span class="kw">c</span>(<span class="kw">mean</span>(beta_<span class="dv">05</span>) <span class="op">-</span><span class="st"> </span><span class="dv">5</span>, <span class="kw">sd</span>(beta_<span class="dv">05</span>))</a></code></pre></div>
 <pre><code>## [1] -0.1407815  0.2058658</code></pre>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" data-line-number="1"><span class="kw">c</span>(<span class="kw">mean</span>(beta_<span class="dv">04</span>) <span class="op">-</span><span class="st"> </span><span class="dv">5</span>, <span class="kw">sd</span>(beta_<span class="dv">04</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" data-line-number="1"><span class="kw">c</span>(<span class="kw">mean</span>(beta_<span class="dv">04</span>) <span class="op">-</span><span class="st"> </span><span class="dv">5</span>, <span class="kw">sd</span>(beta_<span class="dv">04</span>))</a></code></pre></div>
 <pre><code>## [1] -1.0000283827  0.0008975389</code></pre>
 </div>
 <div id="scaling-matters" class="section level2">
 <h2><span class="header-section-number">14.3</span> scaling matters?</h2>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb147-1" data-line-number="1">dgp =<span class="st"> </span><span class="cf">function</span>(<span class="dt">sample_size =</span> <span class="dv">25</span>) {</a>
-<a class="sourceLine" id="cb147-2" data-line-number="2">  x =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size)</a>
-<a class="sourceLine" id="cb147-3" data-line-number="3">  y =<span class="st"> </span><span class="dv">-2</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size)</a>
-<a class="sourceLine" id="cb147-4" data-line-number="4">  <span class="kw">data.frame</span>(x, y)</a>
-<a class="sourceLine" id="cb147-5" data-line-number="5">}</a></code></pre></div>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" data-line-number="1">asdf =<span class="st"> </span><span class="kw">dgp</span>()</a>
-<a class="sourceLine" id="cb148-2" data-line-number="2"><span class="kw">predict</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> asdf))</a></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" data-line-number="1">dgp =<span class="st"> </span><span class="cf">function</span>(<span class="dt">sample_size =</span> <span class="dv">25</span>) {</a>
+<a class="sourceLine" id="cb154-2" data-line-number="2">  x =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size)</a>
+<a class="sourceLine" id="cb154-3" data-line-number="3">  y =<span class="st"> </span><span class="dv">-2</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size)</a>
+<a class="sourceLine" id="cb154-4" data-line-number="4">  <span class="kw">data.frame</span>(x, y)</a>
+<a class="sourceLine" id="cb154-5" data-line-number="5">}</a></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" data-line-number="1">asdf =<span class="st"> </span><span class="kw">dgp</span>()</a>
+<a class="sourceLine" id="cb155-2" data-line-number="2"><span class="kw">predict</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> asdf))</a></code></pre></div>
 <pre><code>##            1            2            3            4            5 
 ## -0.382325581  2.335581287  0.454389897  0.003314541 -0.097401253 
 ##            6            7            8            9           10 
@@ -368,8 +368,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  1.773466213 -0.262849108 -0.577681158  1.520661539  1.097667313 
 ##           21           22           23           24           25 
 ## -0.843904758 -0.304753005 -1.055747512  1.700604544 -0.749181170</code></pre>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" data-line-number="1">asdf<span class="op">$</span>x =<span class="st"> </span><span class="kw">scale</span>(asdf<span class="op">$</span>x)</a>
-<a class="sourceLine" id="cb150-2" data-line-number="2"><span class="kw">predict</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> asdf))</a></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" data-line-number="1">asdf<span class="op">$</span>x =<span class="st"> </span><span class="kw">scale</span>(asdf<span class="op">$</span>x)</a>
+<a class="sourceLine" id="cb157-2" data-line-number="2"><span class="kw">predict</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> asdf))</a></code></pre></div>
 <pre><code>##            1            2            3            4            5 
 ## -0.382325581  2.335581287  0.454389897  0.003314541 -0.097401253 
 ##            6            7            8            9           10 
@@ -383,52 +383,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="moving-to-two-dimensions" class="section level2">
 <h2><span class="header-section-number">14.4</span> moving to two dimensions</h2>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" data-line-number="1">gen_linear_data =<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb152-2" data-line-number="2">  x1 =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb152-3" data-line-number="3">  x2 =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb152-4" data-line-number="4">  y =<span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span><span class="dv">-5</span> <span class="op">*</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">*</span><span class="st"> </span>x2 <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb152-5" data-line-number="5">  <span class="kw">data.frame</span>(x1, x2, y)</a>
-<a class="sourceLine" id="cb152-6" data-line-number="6">}</a></code></pre></div>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" data-line-number="1">data =<span class="st"> </span><span class="kw">gen_linear_data</span>()</a>
-<a class="sourceLine" id="cb153-2" data-line-number="2">beta =<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">beta_1 =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>),</a>
-<a class="sourceLine" id="cb153-3" data-line-number="3">                   <span class="dt">beta_2 =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>))</a>
-<a class="sourceLine" id="cb153-4" data-line-number="4">beta_error =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">dim</span>(beta)[<span class="dv">1</span>])</a>
-<a class="sourceLine" id="cb153-5" data-line-number="5"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">dim</span>(beta)[<span class="dv">1</span>]){</a>
-<a class="sourceLine" id="cb153-6" data-line-number="6">  beta_error[i] =<span class="st"> </span><span class="kw">with</span>(data, <span class="kw">sum</span>((y <span class="op">-</span><span class="st"> </span>(beta<span class="op">$</span>beta_<span class="dv">1</span>[i] <span class="op">*</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span>beta<span class="op">$</span>beta_<span class="dv">2</span>[i] <span class="op">*</span><span class="st"> </span>x2)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span> ))</a>
-<a class="sourceLine" id="cb153-7" data-line-number="7">}</a></code></pre></div>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" data-line-number="1"><span class="co"># </span><span class="al">TODO</span><span class="co">: make this into a function</span></a>
-<a class="sourceLine" id="cb154-2" data-line-number="2"><span class="co"># </span><span class="al">TODO</span><span class="co">: add ridge constraint</span></a>
-<a class="sourceLine" id="cb154-3" data-line-number="3"><span class="kw">contour</span>(<span class="dt">x =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>), </a>
-<a class="sourceLine" id="cb154-4" data-line-number="4">        <span class="dt">y =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>), </a>
-<a class="sourceLine" id="cb154-5" data-line-number="5">        <span class="dt">z =</span> <span class="kw">matrix</span>(beta_error, </a>
-<a class="sourceLine" id="cb154-6" data-line-number="6">                   <span class="dt">nrow =</span> <span class="kw">length</span>(<span class="kw">seq</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)),</a>
-<a class="sourceLine" id="cb154-7" data-line-number="7">                   <span class="dt">ncol =</span> <span class="kw">length</span>(<span class="kw">seq</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>))),</a>
-<a class="sourceLine" id="cb154-8" data-line-number="8">        <span class="dt">nlevels =</span> <span class="dv">50</span>,</a>
-<a class="sourceLine" id="cb154-9" data-line-number="9">        <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span></a>
-<a class="sourceLine" id="cb154-10" data-line-number="10">)</a>
-<a class="sourceLine" id="cb154-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb154-12" data-line-number="12"><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb154-13" data-line-number="13"><span class="kw">abline</span>(<span class="dt">v =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb154-14" data-line-number="14">a =<span class="st"> </span><span class="dv">4</span></a>
-<a class="sourceLine" id="cb154-15" data-line-number="15"><span class="kw">segments</span>(<span class="dv">0</span>, a, a, <span class="dv">0</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb154-16" data-line-number="16"><span class="kw">segments</span>(<span class="dv">0</span>, <span class="op">-</span>a, a, <span class="dv">0</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb154-17" data-line-number="17"><span class="kw">segments</span>(<span class="op">-</span>a, <span class="dv">0</span>, <span class="dv">0</span>, a, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb154-18" data-line-number="18"><span class="kw">segments</span>(<span class="op">-</span>a, <span class="dv">0</span>, <span class="dv">0</span>, <span class="op">-</span>a, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb154-19" data-line-number="19"><span class="kw">points</span>(beta[<span class="kw">which.min</span>(beta_error), ], <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" data-line-number="1">gen_linear_data =<span class="st"> </span><span class="cf">function</span>() {</a>
+<a class="sourceLine" id="cb159-2" data-line-number="2">  x1 =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb159-3" data-line-number="3">  x2 =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb159-4" data-line-number="4">  y =<span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span><span class="dv">-5</span> <span class="op">*</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">*</span><span class="st"> </span>x2 <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb159-5" data-line-number="5">  <span class="kw">data.frame</span>(x1, x2, y)</a>
+<a class="sourceLine" id="cb159-6" data-line-number="6">}</a></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" data-line-number="1">data =<span class="st"> </span><span class="kw">gen_linear_data</span>()</a>
+<a class="sourceLine" id="cb160-2" data-line-number="2">beta =<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">beta_1 =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>),</a>
+<a class="sourceLine" id="cb160-3" data-line-number="3">                   <span class="dt">beta_2 =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>))</a>
+<a class="sourceLine" id="cb160-4" data-line-number="4">beta_error =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">dim</span>(beta)[<span class="dv">1</span>])</a>
+<a class="sourceLine" id="cb160-5" data-line-number="5"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">dim</span>(beta)[<span class="dv">1</span>]){</a>
+<a class="sourceLine" id="cb160-6" data-line-number="6">  beta_error[i] =<span class="st"> </span><span class="kw">with</span>(data, <span class="kw">sum</span>((y <span class="op">-</span><span class="st"> </span>(beta<span class="op">$</span>beta_<span class="dv">1</span>[i] <span class="op">*</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span>beta<span class="op">$</span>beta_<span class="dv">2</span>[i] <span class="op">*</span><span class="st"> </span>x2)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span> ))</a>
+<a class="sourceLine" id="cb160-7" data-line-number="7">}</a></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" data-line-number="1"><span class="co"># </span><span class="al">TODO</span><span class="co">: make this into a function</span></a>
+<a class="sourceLine" id="cb161-2" data-line-number="2"><span class="co"># </span><span class="al">TODO</span><span class="co">: add ridge constraint</span></a>
+<a class="sourceLine" id="cb161-3" data-line-number="3"><span class="kw">contour</span>(<span class="dt">x =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>), </a>
+<a class="sourceLine" id="cb161-4" data-line-number="4">        <span class="dt">y =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>), </a>
+<a class="sourceLine" id="cb161-5" data-line-number="5">        <span class="dt">z =</span> <span class="kw">matrix</span>(beta_error, </a>
+<a class="sourceLine" id="cb161-6" data-line-number="6">                   <span class="dt">nrow =</span> <span class="kw">length</span>(<span class="kw">seq</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)),</a>
+<a class="sourceLine" id="cb161-7" data-line-number="7">                   <span class="dt">ncol =</span> <span class="kw">length</span>(<span class="kw">seq</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>))),</a>
+<a class="sourceLine" id="cb161-8" data-line-number="8">        <span class="dt">nlevels =</span> <span class="dv">50</span>,</a>
+<a class="sourceLine" id="cb161-9" data-line-number="9">        <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span></a>
+<a class="sourceLine" id="cb161-10" data-line-number="10">)</a>
+<a class="sourceLine" id="cb161-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb161-12" data-line-number="12"><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb161-13" data-line-number="13"><span class="kw">abline</span>(<span class="dt">v =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb161-14" data-line-number="14">a =<span class="st"> </span><span class="dv">4</span></a>
+<a class="sourceLine" id="cb161-15" data-line-number="15"><span class="kw">segments</span>(<span class="dv">0</span>, a, a, <span class="dv">0</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb161-16" data-line-number="16"><span class="kw">segments</span>(<span class="dv">0</span>, <span class="op">-</span>a, a, <span class="dv">0</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb161-17" data-line-number="17"><span class="kw">segments</span>(<span class="op">-</span>a, <span class="dv">0</span>, <span class="dv">0</span>, a, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb161-18" data-line-number="18"><span class="kw">segments</span>(<span class="op">-</span>a, <span class="dv">0</span>, <span class="dv">0</span>, <span class="op">-</span>a, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb161-19" data-line-number="19"><span class="kw">points</span>(beta[<span class="kw">which.min</span>(beta_error), ], <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="dv">2</span>)</a></code></pre></div>
 <p><img src="03-07-regularization_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="boston-is-boring" class="section level2">
 <h2><span class="header-section-number">14.5</span> boston is boring</h2>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" data-line-number="1">bstn =<span class="st"> </span>MASS<span class="op">::</span>Boston</a>
-<a class="sourceLine" id="cb155-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb155-3" data-line-number="3">bstn<span class="op">$</span>chas =<span class="st"> </span><span class="kw">factor</span>(bstn<span class="op">$</span>chas)</a>
-<a class="sourceLine" id="cb155-4" data-line-number="4">bstn<span class="op">$</span>rad =<span class="st"> </span><span class="kw">factor</span>(bstn<span class="op">$</span>rad)</a>
-<a class="sourceLine" id="cb155-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb155-6" data-line-number="6"><span class="kw">levels</span>(bstn<span class="op">$</span>chas)</a></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" data-line-number="1">bstn =<span class="st"> </span>MASS<span class="op">::</span>Boston</a>
+<a class="sourceLine" id="cb162-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb162-3" data-line-number="3">bstn<span class="op">$</span>chas =<span class="st"> </span><span class="kw">factor</span>(bstn<span class="op">$</span>chas)</a>
+<a class="sourceLine" id="cb162-4" data-line-number="4">bstn<span class="op">$</span>rad =<span class="st"> </span><span class="kw">factor</span>(bstn<span class="op">$</span>rad)</a>
+<a class="sourceLine" id="cb162-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb162-6" data-line-number="6"><span class="kw">levels</span>(bstn<span class="op">$</span>chas)</a></code></pre></div>
 <pre><code>## [1] &quot;0&quot; &quot;1&quot;</code></pre>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" data-line-number="1"><span class="kw">levels</span>(bstn<span class="op">$</span>rad)</a></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" data-line-number="1"><span class="kw">levels</span>(bstn<span class="op">$</span>rad)</a></code></pre></div>
 <pre><code>## [1] &quot;1&quot;  &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;24&quot;</code></pre>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" data-line-number="1"><span class="kw">lm</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> bstn)</a></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" data-line-number="1"><span class="kw">lm</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> bstn)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = medv ~ ., data = bstn)
@@ -444,7 +444,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##    4.839836     7.461674    -0.008748    -0.972419     0.009394  
 ##       lstat  
 ##   -0.529226</code></pre>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" data-line-number="1"><span class="kw">model.matrix</span>(<span class="kw">lm</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> bstn))</a></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" data-line-number="1"><span class="kw">model.matrix</span>(<span class="kw">lm</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> bstn))</a></code></pre></div>
 <pre><code>##     (Intercept)     crim    zn indus chas1    nox    rm   age     dis rad2
 ## 1             1  0.00632  18.0  2.31     0 0.5380 6.575  65.2  4.0900    0
 ## 2             1  0.02731   0.0  7.07     0 0.4690 6.421  78.9  4.9671    1
@@ -1467,9 +1467,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## attr(,&quot;contrasts&quot;)$rad
 ## [1] &quot;contr.treatment&quot;</code></pre>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" data-line-number="1">bstn_x =<span class="st"> </span><span class="kw">model.matrix</span>(<span class="kw">lm</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> bstn))</a>
-<a class="sourceLine" id="cb163-2" data-line-number="2">bstn_y =<span class="st"> </span>bstn<span class="op">$</span>medv</a></code></pre></div>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" data-line-number="1"><span class="kw">coef</span>(<span class="kw">lm.fit</span>(<span class="dt">x =</span> bstn_x, <span class="dt">y =</span> bstn_y))</a></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" data-line-number="1">bstn_x =<span class="st"> </span><span class="kw">model.matrix</span>(<span class="kw">lm</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> bstn))</a>
+<a class="sourceLine" id="cb170-2" data-line-number="2">bstn_y =<span class="st"> </span>bstn<span class="op">$</span>medv</a></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" data-line-number="1"><span class="kw">coef</span>(<span class="kw">lm.fit</span>(<span class="dt">x =</span> bstn_x, <span class="dt">y =</span> bstn_y))</a></code></pre></div>
 <pre><code>##   (Intercept)          crim            zn         indus         chas1 
 ##  3.525962e+01 -1.088210e-01  5.489638e-02  2.376030e-02  2.524163e+00 
 ##           nox            rm           age           dis          rad2 
@@ -1480,22 +1480,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  4.839836e+00  7.461674e+00 -8.748175e-03 -9.724194e-01  9.393803e-03 
 ##         lstat 
 ## -5.292258e-01</code></pre>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" data-line-number="1">bstn_x =<span class="st"> </span><span class="kw">model.matrix</span>(<span class="kw">lm</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> bstn))[, <span class="dv">-1</span>]</a>
-<a class="sourceLine" id="cb166-2" data-line-number="2">bstn_y =<span class="st"> </span>bstn<span class="op">$</span>medv</a></code></pre></div>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb167-2" data-line-number="2"><span class="kw">plot</span>(<span class="kw">glmnet</span>(<span class="dt">x =</span> bstn_x, <span class="dt">y =</span> bstn_y, <span class="dt">alpha =</span> <span class="dv">0</span>), <span class="dt">xvar =</span> <span class="st">&quot;lambda&quot;</span>)</a>
-<a class="sourceLine" id="cb167-3" data-line-number="3"><span class="kw">grid</span>()</a>
-<a class="sourceLine" id="cb167-4" data-line-number="4"><span class="kw">plot</span>(<span class="kw">glmnet</span>(<span class="dt">x =</span> bstn_x, <span class="dt">y =</span> bstn_y, <span class="dt">alpha =</span> <span class="dv">1</span>), <span class="dt">xvar =</span> <span class="st">&quot;lambda&quot;</span>)</a>
-<a class="sourceLine" id="cb167-5" data-line-number="5"><span class="kw">grid</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" data-line-number="1">bstn_x =<span class="st"> </span><span class="kw">model.matrix</span>(<span class="kw">lm</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> bstn))[, <span class="dv">-1</span>]</a>
+<a class="sourceLine" id="cb173-2" data-line-number="2">bstn_y =<span class="st"> </span>bstn<span class="op">$</span>medv</a></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb174-2" data-line-number="2"><span class="kw">plot</span>(<span class="kw">glmnet</span>(<span class="dt">x =</span> bstn_x, <span class="dt">y =</span> bstn_y, <span class="dt">alpha =</span> <span class="dv">0</span>), <span class="dt">xvar =</span> <span class="st">&quot;lambda&quot;</span>)</a>
+<a class="sourceLine" id="cb174-3" data-line-number="3"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb174-4" data-line-number="4"><span class="kw">plot</span>(<span class="kw">glmnet</span>(<span class="dt">x =</span> bstn_x, <span class="dt">y =</span> bstn_y, <span class="dt">alpha =</span> <span class="dv">1</span>), <span class="dt">xvar =</span> <span class="st">&quot;lambda&quot;</span>)</a>
+<a class="sourceLine" id="cb174-5" data-line-number="5"><span class="kw">grid</span>()</a></code></pre></div>
 <p><img src="03-07-regularization_files/figure-html/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb168-2" data-line-number="2"><span class="kw">plot</span>(<span class="kw">cv.glmnet</span>(<span class="dt">x =</span> bstn_x, <span class="dt">y =</span> bstn_y, <span class="dt">alpha =</span> <span class="dv">0</span>))</a>
-<a class="sourceLine" id="cb168-3" data-line-number="3"><span class="kw">plot</span>(<span class="kw">cv.glmnet</span>(<span class="dt">x =</span> bstn_x, <span class="dt">y =</span> bstn_y, <span class="dt">alpha =</span> <span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb175-2" data-line-number="2"><span class="kw">plot</span>(<span class="kw">cv.glmnet</span>(<span class="dt">x =</span> bstn_x, <span class="dt">y =</span> bstn_y, <span class="dt">alpha =</span> <span class="dv">0</span>))</a>
+<a class="sourceLine" id="cb175-3" data-line-number="3"><span class="kw">plot</span>(<span class="kw">cv.glmnet</span>(<span class="dt">x =</span> bstn_x, <span class="dt">y =</span> bstn_y, <span class="dt">alpha =</span> <span class="dv">1</span>))</a></code></pre></div>
 <p><img src="03-07-regularization_files/figure-html/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" data-line-number="1">bstn_ridge =<span class="st"> </span><span class="kw">cv.glmnet</span>(<span class="dt">x =</span> bstn_x, <span class="dt">y =</span> bstn_y, <span class="dt">alpha =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb169-2" data-line-number="2">bstn_lasso =<span class="st"> </span><span class="kw">cv.glmnet</span>(<span class="dt">x =</span> bstn_x, <span class="dt">y =</span> bstn_y, <span class="dt">alpha =</span> <span class="dv">1</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" data-line-number="1"><span class="kw">library</span>(broom)</a></code></pre></div>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" data-line-number="1"><span class="kw">tidy</span>(bstn_lasso)</a></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" data-line-number="1">bstn_ridge =<span class="st"> </span><span class="kw">cv.glmnet</span>(<span class="dt">x =</span> bstn_x, <span class="dt">y =</span> bstn_y, <span class="dt">alpha =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb176-2" data-line-number="2">bstn_lasso =<span class="st"> </span><span class="kw">cv.glmnet</span>(<span class="dt">x =</span> bstn_x, <span class="dt">y =</span> bstn_y, <span class="dt">alpha =</span> <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" data-line-number="1"><span class="kw">library</span>(broom)</a></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" data-line-number="1"><span class="kw">tidy</span>(bstn_lasso)</a></code></pre></div>
 <pre><code>## # A tibble: 83 x 6
 ##    lambda estimate std.error conf.low conf.high nzero
 ##     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
@@ -1510,12 +1510,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  9   3.22     44.1      5.41     38.7      49.5     2
 ## 10   2.93     41.7      5.19     36.5      46.9     3
 ## # … with 73 more rows</code></pre>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" data-line-number="1"><span class="kw">glance</span>(bstn_lasso)</a></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" data-line-number="1"><span class="kw">glance</span>(bstn_lasso)</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 2
 ##   lambda.min lambda.1se
 ##        &lt;dbl&gt;      &lt;dbl&gt;
 ## 1     0.0176      0.379</code></pre>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" data-line-number="1"><span class="kw">predict</span>(bstn_lasso, <span class="dt">newx =</span> bstn_x[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,], <span class="dt">type =</span> <span class="st">&quot;link&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" data-line-number="1"><span class="kw">predict</span>(bstn_lasso, <span class="dt">newx =</span> bstn_x[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,], <span class="dt">type =</span> <span class="st">&quot;link&quot;</span>)</a></code></pre></div>
 <pre><code>##           1
 ## 1  30.30997
 ## 2  25.42896
@@ -1527,7 +1527,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 8  20.76926
 ## 9  12.76269
 ## 10 20.84955</code></pre>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" data-line-number="1"><span class="kw">predict</span>(bstn_lasso, <span class="dt">newx =</span> bstn_x[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" data-line-number="1"><span class="kw">predict</span>(bstn_lasso, <span class="dt">newx =</span> bstn_x[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</a></code></pre></div>
 <pre><code>##           1
 ## 1  30.30997
 ## 2  25.42896
@@ -1539,7 +1539,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 8  20.76926
 ## 9  12.76269
 ## 10 20.84955</code></pre>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" data-line-number="1"><span class="kw">predict</span>(bstn_lasso, <span class="dt">type =</span> <span class="st">&quot;coefficients&quot;</span>, <span class="dt">s=</span><span class="kw">c</span>(<span class="st">&quot;lambda.1se&quot;</span>,<span class="st">&quot;lambda.min&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" data-line-number="1"><span class="kw">predict</span>(bstn_lasso, <span class="dt">type =</span> <span class="st">&quot;coefficients&quot;</span>, <span class="dt">s=</span><span class="kw">c</span>(<span class="st">&quot;lambda.1se&quot;</span>,<span class="st">&quot;lambda.min&quot;</span>))</a></code></pre></div>
 <pre><code>## 21 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
 ##                        1
 ## (Intercept) 17.117690870
@@ -1563,7 +1563,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## ptratio     -0.789308973
 ## black        0.006487415
 ## lstat       -0.518936342</code></pre>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" data-line-number="1"><span class="kw">predict</span>(bstn_lasso, <span class="dt">type =</span> <span class="st">&quot;nonzero&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb188-1" data-line-number="1"><span class="kw">predict</span>(bstn_lasso, <span class="dt">type =</span> <span class="st">&quot;nonzero&quot;</span>)</a></code></pre></div>
 <pre><code>##    X1
 ## 1   1
 ## 2   4
@@ -1578,7 +1578,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="some-more-simulation" class="section level2">
 <h2><span class="header-section-number">14.6</span> some more simulation</h2>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" data-line-number="1"><span class="kw">diag</span>(<span class="dv">100</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" data-line-number="1"><span class="kw">diag</span>(<span class="dv">100</span>)</a></code></pre></div>
 <pre><code>##        [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12]
 ##   [1,]    1    0    0    0    0    0    0    0    0     0     0     0
 ##   [2,]    0    1    0    0    0    0    0    0    0     0     0     0
@@ -2488,19 +2488,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  [98,]     0     0     0     0     0     0     0     0     1     0      0
 ##  [99,]     0     0     0     0     0     0     0     0     0     1      0
 ## [100,]     0     0     0     0     0     0     0     0     0     0      1</code></pre>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" data-line-number="1">p =<span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb185-2" data-line-number="2">A =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">runif</span>(p <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">ncol =</span> p)</a>
-<a class="sourceLine" id="cb185-3" data-line-number="3">Sigma =<span class="st"> </span><span class="kw">t</span>(A) <span class="op">%*%</span><span class="st"> </span>A</a>
-<a class="sourceLine" id="cb185-4" data-line-number="4">sample_size =<span class="st"> </span><span class="dv">500</span></a>
-<a class="sourceLine" id="cb185-5" data-line-number="5">X =<span class="st"> </span>MASS<span class="op">::</span><span class="kw">mvrnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">mu =</span> <span class="kw">rep</span>(<span class="dv">0</span>, p), <span class="dt">Sigma =</span> Sigma)</a>
-<a class="sourceLine" id="cb185-6" data-line-number="6">beta =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">size =</span> p, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="kw">runif</span>(<span class="dt">n =</span> p, <span class="dv">-1</span>, <span class="dv">1</span>), <span class="dv">0</span>) <span class="op">*</span><span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb185-7" data-line-number="7">y =<span class="st"> </span>X <span class="op">%*%</span><span class="st"> </span>beta <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">sd =</span> <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb185-8" data-line-number="8">fit =<span class="st"> </span>glmnet<span class="op">::</span><span class="kw">cv.glmnet</span>(<span class="dt">x =</span> X, <span class="dt">y =</span> y, <span class="dt">alpha =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb185-9" data-line-number="9"><span class="kw">sqrt</span>(<span class="kw">min</span>(fit<span class="op">$</span>cvm))</a></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" data-line-number="1">p =<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb192-2" data-line-number="2">A =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">runif</span>(p <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">ncol =</span> p)</a>
+<a class="sourceLine" id="cb192-3" data-line-number="3">Sigma =<span class="st"> </span><span class="kw">t</span>(A) <span class="op">%*%</span><span class="st"> </span>A</a>
+<a class="sourceLine" id="cb192-4" data-line-number="4">sample_size =<span class="st"> </span><span class="dv">500</span></a>
+<a class="sourceLine" id="cb192-5" data-line-number="5">X =<span class="st"> </span>MASS<span class="op">::</span><span class="kw">mvrnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">mu =</span> <span class="kw">rep</span>(<span class="dv">0</span>, p), <span class="dt">Sigma =</span> Sigma)</a>
+<a class="sourceLine" id="cb192-6" data-line-number="6">beta =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">size =</span> p, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="kw">runif</span>(<span class="dt">n =</span> p, <span class="dv">-1</span>, <span class="dv">1</span>), <span class="dv">0</span>) <span class="op">*</span><span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb192-7" data-line-number="7">y =<span class="st"> </span>X <span class="op">%*%</span><span class="st"> </span>beta <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">sd =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb192-8" data-line-number="8">fit =<span class="st"> </span>glmnet<span class="op">::</span><span class="kw">cv.glmnet</span>(<span class="dt">x =</span> X, <span class="dt">y =</span> y, <span class="dt">alpha =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb192-9" data-line-number="9"><span class="kw">sqrt</span>(<span class="kw">min</span>(fit<span class="op">$</span>cvm))</a></code></pre></div>
 <pre><code>## [1] 4.277672</code></pre>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" data-line-number="1"><span class="kw">plot</span>(fit, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">6</span>, <span class="dv">1</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">30</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" data-line-number="1"><span class="kw">plot</span>(fit, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">6</span>, <span class="dv">1</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">30</span>))</a></code></pre></div>
 <p><img src="03-07-regularization_files/figure-html/unnamed-chunk-27-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb188-1" data-line-number="1"><span class="co"># type.measure = &quot;class&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" data-line-number="1"><span class="co"># type.measure = &quot;class&quot;</span></a></code></pre></div>
 <ul>
 <li>TODO: Least Absolute Shrinkage and Selection Operator</li>
 <li>TODO: <a href="https://statisticaloddsandends.wordpress.com/2018/11/15/a-deep-dive-into-glmnet-standardize/" class="uri">https://statisticaloddsandends.wordpress.com/2018/11/15/a-deep-dive-into-glmnet-standardize/</a></li>
@@ -2531,15 +2531,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",

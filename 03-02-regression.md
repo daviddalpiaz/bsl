@@ -26,18 +26,17 @@ Although it ignores some practical and statistical considerations (which will be
 
 
 ```r
-library(tibble)
-library(caret)
-library(rpart)
-library(knitr)
-library(kableExtra)
-library(dplyr)
+library("tidyverse")
+library("caret")
+library("rpart")
+library("knitr")
+library("kableExtra")
 ```
 
 ## Setup
 
 $$
-Y = f(X) + \epsilon
+Y = f(\boldsymbol{X}) + \epsilon
 $$
 
 - TODO: signal $f(X)$
@@ -46,21 +45,22 @@ $$
 - TODO: random variables versus potential realized values
 
 $$
-X = (X_1, X_2, \ldots, X_p)
+\boldsymbol{X} = (X_1, X_2, \ldots, X_p)
 $$
 
 $$
-x = (x_1, x_2, \ldots, x_p)
+\boldsymbol{x} = (x_1, x_2, \ldots, x_p)
 $$
 
 $$
-\mathbb{E}\left[\left(Y - f(X)^2 \right)\right] = 
+\mathbb{E}\left[\left(Y - f(\boldsymbol{X})^2 \right)\right]
 $$
 
 - TODO: define regression function
+  - above is minimzed when f(x) = mu(x)
 
 $$
-f(x) = \mathbb{E}[Y \mid X = x]
+\mu(\boldsymbol{x}) = \mathbb{E}[Y \mid \boldsymbol{X} = \boldsymbol{x}]
 $$
 
 - TODO: want to learn these "things" which are regression functions
@@ -72,6 +72,10 @@ line_reg_fun = function(x) {
 }
 ```
 
+$$
+\mu_{l}(x) = x
+$$
+
 
 ```r
 quad_reg_fun = function(x) {
@@ -79,12 +83,20 @@ quad_reg_fun = function(x) {
 }
 ```
 
+$$
+\mu_{q}(x) = x^2
+$$
+
 
 ```r
 sine_reg_fun = function(x) {
   sin(x)
 }
 ```
+
+$$
+\mu_{s}(x) = \sin(x)
+$$
 
 
 ```r
@@ -155,7 +167,36 @@ knn_line_01 = knnreg(y ~ x, data = line_data, k = 1)
 ```
 
 
-\begin{center}\includegraphics{03-02-regression_files/figure-latex/unnamed-chunk-15-1} \end{center}
+```r
+calc_dist = function(p1, p2) {
+  sqrt(sum((p1 - p2) ^ 2))
+}
+```
+
+
+```r
+line_data %>% 
+  mutate(dist = purrr::map_dbl(x, calc_dist, p2 = 0)) %>% 
+  top_n(dist, n = -5) %>% 
+  pull(y) %>% 
+  mean()
+```
+
+```
+## [1] -0.1310472
+```
+
+
+```r
+predict(knn_line_05, data.frame(x = 0))
+```
+
+```
+## [1] -0.1310472
+```
+
+
+\begin{center}\includegraphics{03-02-regression_files/figure-latex/unnamed-chunk-18-1} \end{center}
 
 \begin{table}[H]
 \centering
@@ -182,7 +223,7 @@ knn_quad_01 = knnreg(y ~ x, data = quad_data, k = 1)
 ```
 
 
-\begin{center}\includegraphics{03-02-regression_files/figure-latex/unnamed-chunk-18-1} \end{center}
+\begin{center}\includegraphics{03-02-regression_files/figure-latex/unnamed-chunk-21-1} \end{center}
 
 \begin{table}[H]
 \centering
@@ -209,7 +250,7 @@ knn_sine_01 = knnreg(y ~ x, data = sine_data, k = 1)
 ```
 
 
-\begin{center}\includegraphics{03-02-regression_files/figure-latex/unnamed-chunk-21-1} \end{center}
+\begin{center}\includegraphics{03-02-regression_files/figure-latex/unnamed-chunk-24-1} \end{center}
 
 \begin{table}[H]
 \centering
@@ -243,7 +284,7 @@ tree_line_000 = rpart(y ~ x, data = line_data, cp = 0.00, minsplit = 2)
 ```
 
 
-\begin{center}\includegraphics{03-02-regression_files/figure-latex/unnamed-chunk-24-1} \end{center}
+\begin{center}\includegraphics{03-02-regression_files/figure-latex/unnamed-chunk-27-1} \end{center}
 
 \begin{table}[H]
 \centering
@@ -270,7 +311,7 @@ tree_quad_000 = rpart(y ~ x, data = quad_data, cp = 0.00, minsplit = 2)
 ```
 
 
-\begin{center}\includegraphics{03-02-regression_files/figure-latex/unnamed-chunk-27-1} \end{center}
+\begin{center}\includegraphics{03-02-regression_files/figure-latex/unnamed-chunk-30-1} \end{center}
 
 \begin{table}[H]
 \centering
@@ -297,7 +338,7 @@ tree_sine_000 = rpart(y ~ x, data = sine_data, cp = 0.00, minsplit = 2)
 ```
 
 
-\begin{center}\includegraphics{03-02-regression_files/figure-latex/unnamed-chunk-30-1} \end{center}
+\begin{center}\includegraphics{03-02-regression_files/figure-latex/unnamed-chunk-33-1} \end{center}
 
 \begin{table}[H]
 \centering
@@ -412,4 +453,56 @@ calc_rmse = function(model, data, response) {
     - https://www.youtube.com/watch?v=Z6rxFNMGdn0
 - want to minimize E[(y - y_hat)^2]
 - predict() creates estimate of E[Y|X] with supplied model
+
+
+
+$$
+\mathbb{E}\left[\left|Y - f(\boldsymbol{X}) \right|\right]
+$$
+
+$$
+m(\boldsymbol{x}) = \mathbb{M}[Y \mid \boldsymbol{X} = \boldsymbol{x}]
+$$
+
+
+```r
+# define a data generating process
+gen = function() {
+  x = runif(100)
+  y = 2 * x + rnorm(100)
+  tibble(x, y)
+}
+
+# generate and check data
+df = gen()
+
+# define midpoint calculation
+calc_midpoints = function(x) {
+  x = sort(x)
+  x[-length(x)] + diff(x) / 2
+}
+
+# calculate midpoints
+mids = with(df, calc_midpoints(x))
+
+# calculate mse for a proposed split
+calc_mse_split = function(df, cut) {
+  
+  left  = dplyr::filter(df, x < cut)
+  right = dplyr::filter(df, x > cut)
+  
+  mse_left  = with(left,  sum((y - mean(y)) ^ 2))
+  mse_right = with(right, sum((y - mean(y)) ^ 2))
+  
+  mse_left + mse_right
+  
+}
+
+# calculate mse for each possible split, find best
+which.min(purrr::map_dbl(mids, calc_mse_split, df = df))
+```
+
+```
+## [1] 55
+```
 

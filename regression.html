@@ -24,7 +24,7 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-11-04" />
+<meta name="date" content="2019-11-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -342,16 +342,15 @@ Although it ignores some practical and statistical considerations (which will be
 <!-- - TODO: pairs plot? -->
 <!-- - TODO: check document in development folder --></li>
 </ul>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="kw">library</span>(tibble)</a>
-<a class="sourceLine" id="cb50-2" data-line-number="2"><span class="kw">library</span>(caret)</a>
-<a class="sourceLine" id="cb50-3" data-line-number="3"><span class="kw">library</span>(rpart)</a>
-<a class="sourceLine" id="cb50-4" data-line-number="4"><span class="kw">library</span>(knitr)</a>
-<a class="sourceLine" id="cb50-5" data-line-number="5"><span class="kw">library</span>(kableExtra)</a>
-<a class="sourceLine" id="cb50-6" data-line-number="6"><span class="kw">library</span>(dplyr)</a></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="kw">library</span>(<span class="st">&quot;tidyverse&quot;</span>)</a>
+<a class="sourceLine" id="cb50-2" data-line-number="2"><span class="kw">library</span>(<span class="st">&quot;caret&quot;</span>)</a>
+<a class="sourceLine" id="cb50-3" data-line-number="3"><span class="kw">library</span>(<span class="st">&quot;rpart&quot;</span>)</a>
+<a class="sourceLine" id="cb50-4" data-line-number="4"><span class="kw">library</span>(<span class="st">&quot;knitr&quot;</span>)</a>
+<a class="sourceLine" id="cb50-5" data-line-number="5"><span class="kw">library</span>(<span class="st">&quot;kableExtra&quot;</span>)</a></code></pre></div>
 <div id="setup" class="section level2">
 <h2><span class="header-section-number">9.1</span> Setup</h2>
 <p><span class="math display">\[
-Y = f(X) + \epsilon
+Y = f(\boldsymbol{X}) + \epsilon
 \]</span></p>
 <ul>
 <li>TODO: signal <span class="math inline">\(f(X)\)</span></li>
@@ -360,19 +359,22 @@ Y = f(X) + \epsilon
 <li>TODO: random variables versus potential realized values</li>
 </ul>
 <p><span class="math display">\[
-X = (X_1, X_2, \ldots, X_p)
+\boldsymbol{X} = (X_1, X_2, \ldots, X_p)
 \]</span></p>
 <p><span class="math display">\[
-x = (x_1, x_2, \ldots, x_p)
+\boldsymbol{x} = (x_1, x_2, \ldots, x_p)
 \]</span></p>
 <p><span class="math display">\[
-\mathbb{E}\left[\left(Y - f(X)^2 \right)\right] = 
+\mathbb{E}\left[\left(Y - f(\boldsymbol{X})^2 \right)\right]
 \]</span></p>
 <ul>
-<li>TODO: define regression function</li>
+<li>TODO: define regression function
+<ul>
+<li>above is minimzed when f(x) = mu(x)</li>
+</ul></li>
 </ul>
 <p><span class="math display">\[
-f(x) = \mathbb{E}[Y \mid X = x]
+\mu(\boldsymbol{x}) = \mathbb{E}[Y \mid \boldsymbol{X} = \boldsymbol{x}]
 \]</span></p>
 <ul>
 <li>TODO: want to learn these “things” which are regression functions</li>
@@ -380,12 +382,21 @@ f(x) = \mathbb{E}[Y \mid X = x]
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">line_reg_fun =<span class="st"> </span><span class="cf">function</span>(x) {</a>
 <a class="sourceLine" id="cb51-2" data-line-number="2">  x</a>
 <a class="sourceLine" id="cb51-3" data-line-number="3">}</a></code></pre></div>
+<p><span class="math display">\[
+\mu_{l}(x) = x
+\]</span></p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1">quad_reg_fun =<span class="st"> </span><span class="cf">function</span>(x) {</a>
 <a class="sourceLine" id="cb52-2" data-line-number="2">  x <span class="op">^</span><span class="st"> </span><span class="dv">2</span></a>
 <a class="sourceLine" id="cb52-3" data-line-number="3">}</a></code></pre></div>
+<p><span class="math display">\[
+\mu_{q}(x) = x^2
+\]</span></p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1">sine_reg_fun =<span class="st"> </span><span class="cf">function</span>(x) {</a>
 <a class="sourceLine" id="cb53-2" data-line-number="2">  <span class="kw">sin</span>(x)</a>
 <a class="sourceLine" id="cb53-3" data-line-number="3">}</a></code></pre></div>
+<p><span class="math display">\[
+\mu_{s}(x) = \sin(x)
+\]</span></p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1">gen_sim_data =<span class="st"> </span><span class="cf">function</span>(f, <span class="dt">sample_size =</span> <span class="dv">50</span>, <span class="dt">sd =</span> <span class="dv">1</span>) {</a>
 <a class="sourceLine" id="cb54-2" data-line-number="2">  x =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size, <span class="dt">min =</span> <span class="dv">-5</span>, <span class="dt">max =</span> <span class="dv">5</span>)</a>
 <a class="sourceLine" id="cb54-3" data-line-number="3">  y =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">mean =</span> <span class="kw">f</span>(x), <span class="dt">sd =</span> sd)</a>
@@ -433,7 +444,18 @@ f(x) = \mathbb{E}[Y \mid X = x]
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1">knn_line_<span class="dv">25</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> line_data, <span class="dt">k =</span> <span class="dv">25</span>)</a>
 <a class="sourceLine" id="cb58-2" data-line-number="2">knn_line_<span class="dv">05</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> line_data, <span class="dt">k =</span> <span class="dv">5</span>)</a>
 <a class="sourceLine" id="cb58-3" data-line-number="3">knn_line_<span class="dv">01</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> line_data, <span class="dt">k =</span> <span class="dv">1</span>)</a></code></pre></div>
-<p><img src="03-02-regression_files/figure-html/unnamed-chunk-15-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1">calc_dist =<span class="st"> </span><span class="cf">function</span>(p1, p2) {</a>
+<a class="sourceLine" id="cb59-2" data-line-number="2">  <span class="kw">sqrt</span>(<span class="kw">sum</span>((p1 <span class="op">-</span><span class="st"> </span>p2) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb59-3" data-line-number="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1">line_data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb60-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dist =</span> purrr<span class="op">::</span><span class="kw">map_dbl</span>(x, calc_dist, <span class="dt">p2 =</span> <span class="dv">0</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb60-3" data-line-number="3"><span class="st">  </span><span class="kw">top_n</span>(dist, <span class="dt">n =</span> <span class="dv">-5</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb60-4" data-line-number="4"><span class="st">  </span><span class="kw">pull</span>(y) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb60-5" data-line-number="5"><span class="st">  </span><span class="kw">mean</span>()</a></code></pre></div>
+<pre><code>## [1] -0.1310472</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="kw">predict</span>(knn_line_<span class="dv">05</span>, <span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="dv">0</span>))</a></code></pre></div>
+<pre><code>## [1] -0.1310472</code></pre>
+<p><img src="03-02-regression_files/figure-html/unnamed-chunk-18-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -487,10 +509,10 @@ Test RMSE
 </div>
 <div id="quadratic-data" class="section level4">
 <h4><span class="header-section-number">9.2.2.2</span> Quadratic Data</h4>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1">knn_quad_<span class="dv">25</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> quad_data, <span class="dt">k =</span> <span class="dv">25</span>)</a>
-<a class="sourceLine" id="cb59-2" data-line-number="2">knn_quad_<span class="dv">05</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> quad_data, <span class="dt">k =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb59-3" data-line-number="3">knn_quad_<span class="dv">01</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> quad_data, <span class="dt">k =</span> <span class="dv">1</span>)</a></code></pre></div>
-<p><img src="03-02-regression_files/figure-html/unnamed-chunk-18-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1">knn_quad_<span class="dv">25</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> quad_data, <span class="dt">k =</span> <span class="dv">25</span>)</a>
+<a class="sourceLine" id="cb64-2" data-line-number="2">knn_quad_<span class="dv">05</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> quad_data, <span class="dt">k =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb64-3" data-line-number="3">knn_quad_<span class="dv">01</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> quad_data, <span class="dt">k =</span> <span class="dv">1</span>)</a></code></pre></div>
+<p><img src="03-02-regression_files/figure-html/unnamed-chunk-21-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -544,10 +566,10 @@ Test RMSE
 </div>
 <div id="sinusoidal-data" class="section level4">
 <h4><span class="header-section-number">9.2.2.3</span> Sinusoidal Data</h4>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1">knn_sine_<span class="dv">25</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sine_data, <span class="dt">k =</span> <span class="dv">25</span>)</a>
-<a class="sourceLine" id="cb60-2" data-line-number="2">knn_sine_<span class="dv">05</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sine_data, <span class="dt">k =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb60-3" data-line-number="3">knn_sine_<span class="dv">01</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sine_data, <span class="dt">k =</span> <span class="dv">1</span>)</a></code></pre></div>
-<p><img src="03-02-regression_files/figure-html/unnamed-chunk-21-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1">knn_sine_<span class="dv">25</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sine_data, <span class="dt">k =</span> <span class="dv">25</span>)</a>
+<a class="sourceLine" id="cb65-2" data-line-number="2">knn_sine_<span class="dv">05</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sine_data, <span class="dt">k =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb65-3" data-line-number="3">knn_sine_<span class="dv">01</span> =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sine_data, <span class="dt">k =</span> <span class="dv">1</span>)</a></code></pre></div>
+<p><img src="03-02-regression_files/figure-html/unnamed-chunk-24-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -610,10 +632,10 @@ Test RMSE
 </ul>
 <div id="linear-data-1" class="section level4">
 <h4><span class="header-section-number">9.2.3.1</span> Linear Data</h4>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1">tree_line_<span class="dv">010</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> line_data, <span class="dt">cp =</span> <span class="fl">0.10</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb61-2" data-line-number="2">tree_line_<span class="dv">001</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> line_data, <span class="dt">cp =</span> <span class="fl">0.01</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb61-3" data-line-number="3">tree_line_<span class="dv">000</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> line_data, <span class="dt">cp =</span> <span class="fl">0.00</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a></code></pre></div>
-<p><img src="03-02-regression_files/figure-html/unnamed-chunk-24-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1">tree_line_<span class="dv">010</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> line_data, <span class="dt">cp =</span> <span class="fl">0.10</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb66-2" data-line-number="2">tree_line_<span class="dv">001</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> line_data, <span class="dt">cp =</span> <span class="fl">0.01</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb66-3" data-line-number="3">tree_line_<span class="dv">000</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> line_data, <span class="dt">cp =</span> <span class="fl">0.00</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="03-02-regression_files/figure-html/unnamed-chunk-27-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -667,10 +689,10 @@ Test RMSE
 </div>
 <div id="quadratic-data-1" class="section level4">
 <h4><span class="header-section-number">9.2.3.2</span> Quadratic Data</h4>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1">tree_quad_<span class="dv">010</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> quad_data, <span class="dt">cp =</span> <span class="fl">0.10</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb62-2" data-line-number="2">tree_quad_<span class="dv">001</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> quad_data, <span class="dt">cp =</span> <span class="fl">0.01</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb62-3" data-line-number="3">tree_quad_<span class="dv">000</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> quad_data, <span class="dt">cp =</span> <span class="fl">0.00</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a></code></pre></div>
-<p><img src="03-02-regression_files/figure-html/unnamed-chunk-27-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1">tree_quad_<span class="dv">010</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> quad_data, <span class="dt">cp =</span> <span class="fl">0.10</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb67-2" data-line-number="2">tree_quad_<span class="dv">001</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> quad_data, <span class="dt">cp =</span> <span class="fl">0.01</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb67-3" data-line-number="3">tree_quad_<span class="dv">000</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> quad_data, <span class="dt">cp =</span> <span class="fl">0.00</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="03-02-regression_files/figure-html/unnamed-chunk-30-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -724,10 +746,10 @@ Test RMSE
 </div>
 <div id="sinusoidal-data-1" class="section level4">
 <h4><span class="header-section-number">9.2.3.3</span> Sinusoidal Data</h4>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1">tree_sine_<span class="dv">010</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sine_data, <span class="dt">cp =</span> <span class="fl">0.10</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb63-2" data-line-number="2">tree_sine_<span class="dv">001</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sine_data, <span class="dt">cp =</span> <span class="fl">0.01</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb63-3" data-line-number="3">tree_sine_<span class="dv">000</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sine_data, <span class="dt">cp =</span> <span class="fl">0.00</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a></code></pre></div>
-<p><img src="03-02-regression_files/figure-html/unnamed-chunk-30-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1">tree_sine_<span class="dv">010</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sine_data, <span class="dt">cp =</span> <span class="fl">0.10</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb68-2" data-line-number="2">tree_sine_<span class="dv">001</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sine_data, <span class="dt">cp =</span> <span class="fl">0.01</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb68-3" data-line-number="3">tree_sine_<span class="dv">000</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sine_data, <span class="dt">cp =</span> <span class="fl">0.00</span>, <span class="dt">minsplit =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="03-02-regression_files/figure-html/unnamed-chunk-33-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -842,11 +864,11 @@ Test RMSE
 <li>but probably don’t use</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1">calc_rmse =<span class="st"> </span><span class="cf">function</span>(model, data, response) {</a>
-<a class="sourceLine" id="cb64-2" data-line-number="2">  actual =<span class="st"> </span>data[[response]]</a>
-<a class="sourceLine" id="cb64-3" data-line-number="3">  predicted =<span class="st"> </span><span class="kw">predict</span>(model, data)</a>
-<a class="sourceLine" id="cb64-4" data-line-number="4">  <span class="kw">sqrt</span>(<span class="kw">mean</span>((actual <span class="op">-</span><span class="st"> </span>predicted) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb64-5" data-line-number="5">}</a></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1">calc_rmse =<span class="st"> </span><span class="cf">function</span>(model, data, response) {</a>
+<a class="sourceLine" id="cb69-2" data-line-number="2">  actual =<span class="st"> </span>data[[response]]</a>
+<a class="sourceLine" id="cb69-3" data-line-number="3">  predicted =<span class="st"> </span><span class="kw">predict</span>(model, data)</a>
+<a class="sourceLine" id="cb69-4" data-line-number="4">  <span class="kw">sqrt</span>(<span class="kw">mean</span>((actual <span class="op">-</span><span class="st"> </span>predicted) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb69-5" data-line-number="5">}</a></code></pre></div>
 </div>
 <div id="model-complexity" class="section level2">
 <h2><span class="header-section-number">9.6</span> Model Complexity</h2>
@@ -891,6 +913,47 @@ Test RMSE
 <li>want to minimize E[(y - y_hat)^2]</li>
 <li>predict() creates estimate of E[Y|X] with supplied model</li>
 </ul>
+<p><span class="math display">\[
+\mathbb{E}\left[\left|Y - f(\boldsymbol{X}) \right|\right]
+\]</span></p>
+<p><span class="math display">\[
+m(\boldsymbol{x}) = \mathbb{M}[Y \mid \boldsymbol{X} = \boldsymbol{x}]
+\]</span></p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1"><span class="co"># define a data generating process</span></a>
+<a class="sourceLine" id="cb70-2" data-line-number="2">gen =<span class="st"> </span><span class="cf">function</span>() {</a>
+<a class="sourceLine" id="cb70-3" data-line-number="3">  x =<span class="st"> </span><span class="kw">runif</span>(<span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb70-4" data-line-number="4">  y =<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb70-5" data-line-number="5">  <span class="kw">tibble</span>(x, y)</a>
+<a class="sourceLine" id="cb70-6" data-line-number="6">}</a>
+<a class="sourceLine" id="cb70-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb70-8" data-line-number="8"><span class="co"># generate and check data</span></a>
+<a class="sourceLine" id="cb70-9" data-line-number="9">df =<span class="st"> </span><span class="kw">gen</span>()</a>
+<a class="sourceLine" id="cb70-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb70-11" data-line-number="11"><span class="co"># define midpoint calculation</span></a>
+<a class="sourceLine" id="cb70-12" data-line-number="12">calc_midpoints =<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb70-13" data-line-number="13">  x =<span class="st"> </span><span class="kw">sort</span>(x)</a>
+<a class="sourceLine" id="cb70-14" data-line-number="14">  x[<span class="op">-</span><span class="kw">length</span>(x)] <span class="op">+</span><span class="st"> </span><span class="kw">diff</span>(x) <span class="op">/</span><span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb70-15" data-line-number="15">}</a>
+<a class="sourceLine" id="cb70-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb70-17" data-line-number="17"><span class="co"># calculate midpoints</span></a>
+<a class="sourceLine" id="cb70-18" data-line-number="18">mids =<span class="st"> </span><span class="kw">with</span>(df, <span class="kw">calc_midpoints</span>(x))</a>
+<a class="sourceLine" id="cb70-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb70-20" data-line-number="20"><span class="co"># calculate mse for a proposed split</span></a>
+<a class="sourceLine" id="cb70-21" data-line-number="21">calc_mse_split =<span class="st"> </span><span class="cf">function</span>(df, cut) {</a>
+<a class="sourceLine" id="cb70-22" data-line-number="22">  </a>
+<a class="sourceLine" id="cb70-23" data-line-number="23">  left  =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">filter</span>(df, x <span class="op">&lt;</span><span class="st"> </span>cut)</a>
+<a class="sourceLine" id="cb70-24" data-line-number="24">  right =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">filter</span>(df, x <span class="op">&gt;</span><span class="st"> </span>cut)</a>
+<a class="sourceLine" id="cb70-25" data-line-number="25">  </a>
+<a class="sourceLine" id="cb70-26" data-line-number="26">  mse_left  =<span class="st"> </span><span class="kw">with</span>(left,  <span class="kw">sum</span>((y <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(y)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb70-27" data-line-number="27">  mse_right =<span class="st"> </span><span class="kw">with</span>(right, <span class="kw">sum</span>((y <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(y)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb70-28" data-line-number="28">  </a>
+<a class="sourceLine" id="cb70-29" data-line-number="29">  mse_left <span class="op">+</span><span class="st"> </span>mse_right</a>
+<a class="sourceLine" id="cb70-30" data-line-number="30">  </a>
+<a class="sourceLine" id="cb70-31" data-line-number="31">}</a>
+<a class="sourceLine" id="cb70-32" data-line-number="32"></a>
+<a class="sourceLine" id="cb70-33" data-line-number="33"><span class="co"># calculate mse for each possible split, find best</span></a>
+<a class="sourceLine" id="cb70-34" data-line-number="34"><span class="kw">which.min</span>(purrr<span class="op">::</span><span class="kw">map_dbl</span>(mids, calc_mse_split, <span class="dt">df =</span> df))</a></code></pre></div>
+<pre><code>## [1] 55</code></pre>
 
 </div>
 </div>
@@ -916,15 +979,13 @@ Test RMSE
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",

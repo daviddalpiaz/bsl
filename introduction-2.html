@@ -24,7 +24,7 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-11-04" />
+<meta name="date" content="2019-11-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -321,6 +321,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="introduction-2" class="section level1">
 <h1><span class="header-section-number">Chapter 8</span> Introduction</h1>
 <ul>
+<li>TODO: <strong>Goal:</strong> Train models that <em>generalize</em> well, that is, perform well on <em>unseen</em> data.</li>
 <li>TODO: Introduce data splitting:
 <ul>
 <li>Test-Train Split (<code>_tst</code> and <code>_trn</code>)</li>
@@ -331,7 +332,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li><p>TODO: <a href="http://varianceexplained.org/r/ds-ml-ai/s" class="uri">http://varianceexplained.org/r/ds-ml-ai/s</a></p></li>
+<li>TODO: define most of the terms that will be seen here
+<ul>
+<li>at least those that apply to both regression and classification</li>
+</ul></li>
 <li><p>TODO: This section is the heart of STAT 432.</p></li>
+<li>TODO: Note simplifications that we will use in this section.
+<ul>
+<li>No cross-validation</li>
+<li>No data pre-processing</li>
+<li>Minimial care for categorical variables
+<ul>
+<li>Either don’t use them, or let the methods take care of them.</li>
+</ul></li>
+</ul></li>
 </ul>
 
 </div>
@@ -357,15 +371,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",

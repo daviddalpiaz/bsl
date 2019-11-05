@@ -24,7 +24,7 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-11-04" />
+<meta name="date" content="2019-11-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -328,118 +328,118 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>ISL Readings: Sections 8.1 - 8.2</li>
 </ul>
 <hr />
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" data-line-number="1"><span class="kw">library</span>(<span class="st">&quot;tibble&quot;</span>)</a>
-<a class="sourceLine" id="cb189-2" data-line-number="2"><span class="kw">library</span>(<span class="st">&quot;rpart&quot;</span>)</a>
-<a class="sourceLine" id="cb189-3" data-line-number="3"><span class="kw">library</span>(<span class="st">&quot;rpart.plot&quot;</span>)</a>
-<a class="sourceLine" id="cb189-4" data-line-number="4"><span class="kw">library</span>(<span class="st">&quot;caret&quot;</span>)</a>
-<a class="sourceLine" id="cb189-5" data-line-number="5"><span class="kw">library</span>(<span class="st">&quot;purrr&quot;</span>)</a>
-<a class="sourceLine" id="cb189-6" data-line-number="6"><span class="kw">library</span>(<span class="st">&quot;randomForest&quot;</span>)</a>
-<a class="sourceLine" id="cb189-7" data-line-number="7"><span class="kw">library</span>(<span class="st">&quot;gbm&quot;</span>)</a>
-<a class="sourceLine" id="cb189-8" data-line-number="8"><span class="kw">library</span>(<span class="st">&quot;xgboost&quot;</span>)</a>
-<a class="sourceLine" id="cb189-9" data-line-number="9"><span class="kw">library</span>(<span class="st">&quot;knitr&quot;</span>)</a>
-<a class="sourceLine" id="cb189-10" data-line-number="10"><span class="kw">library</span>(<span class="st">&quot;kableExtra&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" data-line-number="1"><span class="kw">library</span>(<span class="st">&quot;tibble&quot;</span>)</a>
+<a class="sourceLine" id="cb196-2" data-line-number="2"><span class="kw">library</span>(<span class="st">&quot;rpart&quot;</span>)</a>
+<a class="sourceLine" id="cb196-3" data-line-number="3"><span class="kw">library</span>(<span class="st">&quot;rpart.plot&quot;</span>)</a>
+<a class="sourceLine" id="cb196-4" data-line-number="4"><span class="kw">library</span>(<span class="st">&quot;caret&quot;</span>)</a>
+<a class="sourceLine" id="cb196-5" data-line-number="5"><span class="kw">library</span>(<span class="st">&quot;purrr&quot;</span>)</a>
+<a class="sourceLine" id="cb196-6" data-line-number="6"><span class="kw">library</span>(<span class="st">&quot;randomForest&quot;</span>)</a>
+<a class="sourceLine" id="cb196-7" data-line-number="7"><span class="kw">library</span>(<span class="st">&quot;gbm&quot;</span>)</a>
+<a class="sourceLine" id="cb196-8" data-line-number="8"><span class="kw">library</span>(<span class="st">&quot;xgboost&quot;</span>)</a>
+<a class="sourceLine" id="cb196-9" data-line-number="9"><span class="kw">library</span>(<span class="st">&quot;knitr&quot;</span>)</a>
+<a class="sourceLine" id="cb196-10" data-line-number="10"><span class="kw">library</span>(<span class="st">&quot;kableExtra&quot;</span>)</a></code></pre></div>
 </div>
 <div id="bagging" class="section level2">
 <h2><span class="header-section-number">15.2</span> Bagging</h2>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" data-line-number="1">sin_dgp =<span class="st"> </span><span class="cf">function</span>(<span class="dt">sample_size =</span> <span class="dv">150</span>) {</a>
-<a class="sourceLine" id="cb190-2" data-line-number="2">  x =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size, <span class="dt">min =</span> <span class="dv">-10</span>, <span class="dt">max =</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb190-3" data-line-number="3">  y =<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x) <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size)</a>
-<a class="sourceLine" id="cb190-4" data-line-number="4">  <span class="kw">tibble</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)</a>
-<a class="sourceLine" id="cb190-5" data-line-number="5">}</a></code></pre></div>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb192-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb192-3" data-line-number="3">some_data =<span class="st"> </span><span class="kw">sin_dgp</span>()</a>
-<a class="sourceLine" id="cb192-4" data-line-number="4"><span class="kw">plot</span>(some_data, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
-<a class="sourceLine" id="cb192-5" data-line-number="5"><span class="kw">grid</span>()</a>
-<a class="sourceLine" id="cb192-6" data-line-number="6"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb192-7" data-line-number="7">fit_<span class="dv">1</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data, <span class="dt">cp =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb192-8" data-line-number="8"><span class="kw">curve</span>(<span class="kw">predict</span>(fit_<span class="dv">1</span>, <span class="kw">tibble</span>(<span class="dt">x =</span> x)), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a>
-<a class="sourceLine" id="cb192-9" data-line-number="9">      </a>
-<a class="sourceLine" id="cb192-10" data-line-number="10">some_data =<span class="st"> </span><span class="kw">sin_dgp</span>()</a>
-<a class="sourceLine" id="cb192-11" data-line-number="11"><span class="kw">plot</span>(some_data, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
-<a class="sourceLine" id="cb192-12" data-line-number="12"><span class="kw">grid</span>()</a>
-<a class="sourceLine" id="cb192-13" data-line-number="13"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb192-14" data-line-number="14">fit_<span class="dv">2</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data, <span class="dt">cp =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb192-15" data-line-number="15"><span class="kw">curve</span>(<span class="kw">predict</span>(fit_<span class="dv">2</span>, <span class="kw">tibble</span>(<span class="dt">x =</span> x)), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a>
-<a class="sourceLine" id="cb192-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb192-17" data-line-number="17">some_data =<span class="st"> </span><span class="kw">sin_dgp</span>()</a>
-<a class="sourceLine" id="cb192-18" data-line-number="18"><span class="kw">plot</span>(some_data, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
-<a class="sourceLine" id="cb192-19" data-line-number="19"><span class="kw">grid</span>()</a>
-<a class="sourceLine" id="cb192-20" data-line-number="20"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb192-21" data-line-number="21">fit_<span class="dv">3</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data, <span class="dt">cp =</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb192-22" data-line-number="22"><span class="kw">curve</span>(<span class="kw">predict</span>(fit_<span class="dv">3</span>, <span class="kw">tibble</span>(<span class="dt">x =</span> x)), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" data-line-number="1">sin_dgp =<span class="st"> </span><span class="cf">function</span>(<span class="dt">sample_size =</span> <span class="dv">150</span>) {</a>
+<a class="sourceLine" id="cb197-2" data-line-number="2">  x =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size, <span class="dt">min =</span> <span class="dv">-10</span>, <span class="dt">max =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb197-3" data-line-number="3">  y =<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x) <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size)</a>
+<a class="sourceLine" id="cb197-4" data-line-number="4">  <span class="kw">tibble</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)</a>
+<a class="sourceLine" id="cb197-5" data-line-number="5">}</a></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb199-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb199-3" data-line-number="3">some_data =<span class="st"> </span><span class="kw">sin_dgp</span>()</a>
+<a class="sourceLine" id="cb199-4" data-line-number="4"><span class="kw">plot</span>(some_data, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
+<a class="sourceLine" id="cb199-5" data-line-number="5"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb199-6" data-line-number="6"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb199-7" data-line-number="7">fit_<span class="dv">1</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data, <span class="dt">cp =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb199-8" data-line-number="8"><span class="kw">curve</span>(<span class="kw">predict</span>(fit_<span class="dv">1</span>, <span class="kw">tibble</span>(<span class="dt">x =</span> x)), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a>
+<a class="sourceLine" id="cb199-9" data-line-number="9">      </a>
+<a class="sourceLine" id="cb199-10" data-line-number="10">some_data =<span class="st"> </span><span class="kw">sin_dgp</span>()</a>
+<a class="sourceLine" id="cb199-11" data-line-number="11"><span class="kw">plot</span>(some_data, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
+<a class="sourceLine" id="cb199-12" data-line-number="12"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb199-13" data-line-number="13"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb199-14" data-line-number="14">fit_<span class="dv">2</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data, <span class="dt">cp =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb199-15" data-line-number="15"><span class="kw">curve</span>(<span class="kw">predict</span>(fit_<span class="dv">2</span>, <span class="kw">tibble</span>(<span class="dt">x =</span> x)), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a>
+<a class="sourceLine" id="cb199-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb199-17" data-line-number="17">some_data =<span class="st"> </span><span class="kw">sin_dgp</span>()</a>
+<a class="sourceLine" id="cb199-18" data-line-number="18"><span class="kw">plot</span>(some_data, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
+<a class="sourceLine" id="cb199-19" data-line-number="19"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb199-20" data-line-number="20"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb199-21" data-line-number="21">fit_<span class="dv">3</span> =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data, <span class="dt">cp =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb199-22" data-line-number="22"><span class="kw">curve</span>(<span class="kw">predict</span>(fit_<span class="dv">3</span>, <span class="kw">tibble</span>(<span class="dt">x =</span> x)), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a></code></pre></div>
 <p><img src="03-08-ensembles_files/figure-html/unnamed-chunk-4-1.png" width="1152" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb193-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb193-3" data-line-number="3"><span class="kw">rpart.plot</span>(fit_<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb193-4" data-line-number="4"><span class="kw">rpart.plot</span>(fit_<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb193-5" data-line-number="5"><span class="kw">rpart.plot</span>(fit_<span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb200-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb200-3" data-line-number="3"><span class="kw">rpart.plot</span>(fit_<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb200-4" data-line-number="4"><span class="kw">rpart.plot</span>(fit_<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb200-5" data-line-number="5"><span class="kw">rpart.plot</span>(fit_<span class="dv">3</span>)</a></code></pre></div>
 <p><img src="03-08-ensembles_files/figure-html/unnamed-chunk-5-1.png" width="1152" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" data-line-number="1">bag_pred =<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb194-2" data-line-number="2">  <span class="kw">apply</span>(<span class="kw">t</span>(<span class="kw">map_df</span>(boot_reps, predict, <span class="kw">data.frame</span>(<span class="dt">x =</span> x))), <span class="dv">2</span>, mean)</a>
-<a class="sourceLine" id="cb194-3" data-line-number="3">}</a>
-<a class="sourceLine" id="cb194-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb194-5" data-line-number="5"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb194-6" data-line-number="6">boot_idx =<span class="st"> </span>caret<span class="op">::</span><span class="kw">createResample</span>(<span class="dt">y =</span> some_data<span class="op">$</span>y, <span class="dt">times =</span> <span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb194-7" data-line-number="7">boot_reps =<span class="st"> </span><span class="kw">map</span>(boot_idx, <span class="op">~</span><span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data[.x, ], <span class="dt">cp =</span> <span class="dv">0</span>))</a>
-<a class="sourceLine" id="cb194-8" data-line-number="8"><span class="kw">bag_pred</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span> , <span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" data-line-number="1">bag_pred =<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb201-2" data-line-number="2">  <span class="kw">apply</span>(<span class="kw">t</span>(<span class="kw">map_df</span>(boot_reps, predict, <span class="kw">data.frame</span>(<span class="dt">x =</span> x))), <span class="dv">2</span>, mean)</a>
+<a class="sourceLine" id="cb201-3" data-line-number="3">}</a>
+<a class="sourceLine" id="cb201-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb201-5" data-line-number="5"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb201-6" data-line-number="6">boot_idx =<span class="st"> </span>caret<span class="op">::</span><span class="kw">createResample</span>(<span class="dt">y =</span> some_data<span class="op">$</span>y, <span class="dt">times =</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb201-7" data-line-number="7">boot_reps =<span class="st"> </span><span class="kw">map</span>(boot_idx, <span class="op">~</span><span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data[.x, ], <span class="dt">cp =</span> <span class="dv">0</span>))</a>
+<a class="sourceLine" id="cb201-8" data-line-number="8"><span class="kw">bag_pred</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span> , <span class="dv">1</span>))</a></code></pre></div>
 <pre><code>## [1] -1.87295394  0.06556445  1.18010317</code></pre>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb196-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb196-3" data-line-number="3">some_data =<span class="st"> </span><span class="kw">sin_dgp</span>()</a>
-<a class="sourceLine" id="cb196-4" data-line-number="4"><span class="kw">plot</span>(some_data, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
-<a class="sourceLine" id="cb196-5" data-line-number="5"><span class="kw">grid</span>()</a>
-<a class="sourceLine" id="cb196-6" data-line-number="6"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb196-7" data-line-number="7">boot_idx =<span class="st"> </span>caret<span class="op">::</span><span class="kw">createResample</span>(<span class="dt">y =</span> some_data<span class="op">$</span>y, <span class="dt">times =</span> <span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb196-8" data-line-number="8">boot_reps =<span class="st"> </span><span class="kw">map</span>(boot_idx, <span class="op">~</span><span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data[.x, ], <span class="dt">cp =</span> <span class="dv">0</span>))</a>
-<a class="sourceLine" id="cb196-9" data-line-number="9"><span class="kw">curve</span>(<span class="kw">bag_pred</span>(<span class="dt">x =</span> x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a>
-<a class="sourceLine" id="cb196-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb196-11" data-line-number="11">some_data =<span class="st"> </span><span class="kw">sin_dgp</span>()</a>
-<a class="sourceLine" id="cb196-12" data-line-number="12"><span class="kw">plot</span>(some_data, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
-<a class="sourceLine" id="cb196-13" data-line-number="13"><span class="kw">grid</span>()</a>
-<a class="sourceLine" id="cb196-14" data-line-number="14"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb196-15" data-line-number="15">boot_idx =<span class="st"> </span>caret<span class="op">::</span><span class="kw">createResample</span>(<span class="dt">y =</span> some_data<span class="op">$</span>y, <span class="dt">times =</span> <span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb196-16" data-line-number="16">boot_reps =<span class="st"> </span><span class="kw">map</span>(boot_idx, <span class="op">~</span><span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data[.x, ], <span class="dt">cp =</span> <span class="dv">0</span>))</a>
-<a class="sourceLine" id="cb196-17" data-line-number="17"><span class="kw">curve</span>(<span class="kw">bag_pred</span>(<span class="dt">x =</span> x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a>
-<a class="sourceLine" id="cb196-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb196-19" data-line-number="19">some_data =<span class="st"> </span><span class="kw">sin_dgp</span>()</a>
-<a class="sourceLine" id="cb196-20" data-line-number="20"><span class="kw">plot</span>(some_data, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
-<a class="sourceLine" id="cb196-21" data-line-number="21"><span class="kw">grid</span>()</a>
-<a class="sourceLine" id="cb196-22" data-line-number="22"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb196-23" data-line-number="23">boot_idx =<span class="st"> </span>caret<span class="op">::</span><span class="kw">createResample</span>(<span class="dt">y =</span> some_data<span class="op">$</span>y, <span class="dt">times =</span> <span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb196-24" data-line-number="24">boot_reps =<span class="st"> </span><span class="kw">map</span>(boot_idx, <span class="op">~</span><span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data[.x, ], <span class="dt">cp =</span> <span class="dv">0</span>))</a>
-<a class="sourceLine" id="cb196-25" data-line-number="25"><span class="kw">curve</span>(<span class="kw">bag_pred</span>(<span class="dt">x =</span> x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb203-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb203-3" data-line-number="3">some_data =<span class="st"> </span><span class="kw">sin_dgp</span>()</a>
+<a class="sourceLine" id="cb203-4" data-line-number="4"><span class="kw">plot</span>(some_data, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
+<a class="sourceLine" id="cb203-5" data-line-number="5"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb203-6" data-line-number="6"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb203-7" data-line-number="7">boot_idx =<span class="st"> </span>caret<span class="op">::</span><span class="kw">createResample</span>(<span class="dt">y =</span> some_data<span class="op">$</span>y, <span class="dt">times =</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb203-8" data-line-number="8">boot_reps =<span class="st"> </span><span class="kw">map</span>(boot_idx, <span class="op">~</span><span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data[.x, ], <span class="dt">cp =</span> <span class="dv">0</span>))</a>
+<a class="sourceLine" id="cb203-9" data-line-number="9"><span class="kw">curve</span>(<span class="kw">bag_pred</span>(<span class="dt">x =</span> x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a>
+<a class="sourceLine" id="cb203-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb203-11" data-line-number="11">some_data =<span class="st"> </span><span class="kw">sin_dgp</span>()</a>
+<a class="sourceLine" id="cb203-12" data-line-number="12"><span class="kw">plot</span>(some_data, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
+<a class="sourceLine" id="cb203-13" data-line-number="13"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb203-14" data-line-number="14"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb203-15" data-line-number="15">boot_idx =<span class="st"> </span>caret<span class="op">::</span><span class="kw">createResample</span>(<span class="dt">y =</span> some_data<span class="op">$</span>y, <span class="dt">times =</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb203-16" data-line-number="16">boot_reps =<span class="st"> </span><span class="kw">map</span>(boot_idx, <span class="op">~</span><span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data[.x, ], <span class="dt">cp =</span> <span class="dv">0</span>))</a>
+<a class="sourceLine" id="cb203-17" data-line-number="17"><span class="kw">curve</span>(<span class="kw">bag_pred</span>(<span class="dt">x =</span> x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a>
+<a class="sourceLine" id="cb203-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb203-19" data-line-number="19">some_data =<span class="st"> </span><span class="kw">sin_dgp</span>()</a>
+<a class="sourceLine" id="cb203-20" data-line-number="20"><span class="kw">plot</span>(some_data, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
+<a class="sourceLine" id="cb203-21" data-line-number="21"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb203-22" data-line-number="22"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb203-23" data-line-number="23">boot_idx =<span class="st"> </span>caret<span class="op">::</span><span class="kw">createResample</span>(<span class="dt">y =</span> some_data<span class="op">$</span>y, <span class="dt">times =</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb203-24" data-line-number="24">boot_reps =<span class="st"> </span><span class="kw">map</span>(boot_idx, <span class="op">~</span><span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data[.x, ], <span class="dt">cp =</span> <span class="dv">0</span>))</a>
+<a class="sourceLine" id="cb203-25" data-line-number="25"><span class="kw">curve</span>(<span class="kw">bag_pred</span>(<span class="dt">x =</span> x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a></code></pre></div>
 <p><img src="03-08-ensembles_files/figure-html/unnamed-chunk-7-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <div id="simultation-study" class="section level3">
 <h3><span class="header-section-number">15.2.1</span> Simultation Study</h3>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" data-line-number="1">new_obs =<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">y =</span> (<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(<span class="dv">0</span>)))</a></code></pre></div>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" data-line-number="1">sim_bagging_vs_single =<span class="st"> </span><span class="cf">function</span>() {</a>
-<a class="sourceLine" id="cb198-2" data-line-number="2">  some_data =<span class="st"> </span><span class="kw">sin_dgp</span>()</a>
-<a class="sourceLine" id="cb198-3" data-line-number="3">  </a>
-<a class="sourceLine" id="cb198-4" data-line-number="4">  single =<span class="st"> </span><span class="kw">predict</span>(<span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data, <span class="dt">cp =</span> <span class="dv">0</span>), new_obs)</a>
-<a class="sourceLine" id="cb198-5" data-line-number="5">  </a>
-<a class="sourceLine" id="cb198-6" data-line-number="6">  boot_idx =<span class="st"> </span>caret<span class="op">::</span><span class="kw">createResample</span>(<span class="dt">y =</span> some_data<span class="op">$</span>y, <span class="dt">times =</span> <span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb198-7" data-line-number="7">  boot_reps =<span class="st"> </span><span class="kw">map</span>(boot_idx, <span class="op">~</span><span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data[.x, ], <span class="dt">cp =</span> <span class="dv">0</span>))</a>
-<a class="sourceLine" id="cb198-8" data-line-number="8">  bagged =<span class="st"> </span><span class="kw">mean</span>(<span class="kw">map_dbl</span>(boot_reps, predict, new_obs))</a>
-<a class="sourceLine" id="cb198-9" data-line-number="9">  <span class="kw">c</span>(<span class="dt">single =</span> single, <span class="dt">bagged =</span> bagged)</a>
-<a class="sourceLine" id="cb198-10" data-line-number="10">}</a>
-<a class="sourceLine" id="cb198-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb198-12" data-line-number="12"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb198-13" data-line-number="13">sim_results =<span class="st"> </span><span class="kw">replicate</span>(<span class="dt">n =</span> <span class="dv">250</span>, <span class="kw">sim_bagging_vs_single</span>())</a>
-<a class="sourceLine" id="cb198-14" data-line-number="14"><span class="kw">apply</span>(sim_results, <span class="dv">1</span>, mean)</a></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" data-line-number="1">new_obs =<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">y =</span> (<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(<span class="dv">0</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" data-line-number="1">sim_bagging_vs_single =<span class="st"> </span><span class="cf">function</span>() {</a>
+<a class="sourceLine" id="cb205-2" data-line-number="2">  some_data =<span class="st"> </span><span class="kw">sin_dgp</span>()</a>
+<a class="sourceLine" id="cb205-3" data-line-number="3">  </a>
+<a class="sourceLine" id="cb205-4" data-line-number="4">  single =<span class="st"> </span><span class="kw">predict</span>(<span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data, <span class="dt">cp =</span> <span class="dv">0</span>), new_obs)</a>
+<a class="sourceLine" id="cb205-5" data-line-number="5">  </a>
+<a class="sourceLine" id="cb205-6" data-line-number="6">  boot_idx =<span class="st"> </span>caret<span class="op">::</span><span class="kw">createResample</span>(<span class="dt">y =</span> some_data<span class="op">$</span>y, <span class="dt">times =</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb205-7" data-line-number="7">  boot_reps =<span class="st"> </span><span class="kw">map</span>(boot_idx, <span class="op">~</span><span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data[.x, ], <span class="dt">cp =</span> <span class="dv">0</span>))</a>
+<a class="sourceLine" id="cb205-8" data-line-number="8">  bagged =<span class="st"> </span><span class="kw">mean</span>(<span class="kw">map_dbl</span>(boot_reps, predict, new_obs))</a>
+<a class="sourceLine" id="cb205-9" data-line-number="9">  <span class="kw">c</span>(<span class="dt">single =</span> single, <span class="dt">bagged =</span> bagged)</a>
+<a class="sourceLine" id="cb205-10" data-line-number="10">}</a>
+<a class="sourceLine" id="cb205-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb205-12" data-line-number="12"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb205-13" data-line-number="13">sim_results =<span class="st"> </span><span class="kw">replicate</span>(<span class="dt">n =</span> <span class="dv">250</span>, <span class="kw">sim_bagging_vs_single</span>())</a>
+<a class="sourceLine" id="cb205-14" data-line-number="14"><span class="kw">apply</span>(sim_results, <span class="dv">1</span>, mean)</a></code></pre></div>
 <pre><code>##    single.1      bagged 
 ## -0.02487810  0.03302126</code></pre>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" data-line-number="1"><span class="kw">apply</span>(sim_results, <span class="dv">1</span>, var)</a></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" data-line-number="1"><span class="kw">apply</span>(sim_results, <span class="dv">1</span>, var)</a></code></pre></div>
 <pre><code>##  single.1    bagged 
 ## 1.0147130 0.3356579</code></pre>
 </div>
 </div>
 <div id="random-forest" class="section level2">
 <h2><span class="header-section-number">15.3</span> Random Forest</h2>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb202-2" data-line-number="2">two_class_data =<span class="st"> </span><span class="kw">as_tibble</span>(caret<span class="op">::</span><span class="kw">twoClassSim</span>(<span class="dt">n =</span> <span class="dv">1250</span>, <span class="dt">noiseVars =</span> <span class="dv">20</span>))</a>
-<a class="sourceLine" id="cb202-3" data-line-number="3">two_class_data</a></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb209-2" data-line-number="2">two_class_data =<span class="st"> </span><span class="kw">as_tibble</span>(caret<span class="op">::</span><span class="kw">twoClassSim</span>(<span class="dt">n =</span> <span class="dv">1250</span>, <span class="dt">noiseVars =</span> <span class="dv">20</span>))</a>
+<a class="sourceLine" id="cb209-3" data-line-number="3">two_class_data</a></code></pre></div>
 <pre><code>## # A tibble: 1,250 x 36
 ##    TwoFactor1 TwoFactor2 Linear01 Linear02 Linear03 Linear04 Linear05
 ##         &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
@@ -461,8 +461,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## #   Noise10 &lt;dbl&gt;, Noise11 &lt;dbl&gt;, Noise12 &lt;dbl&gt;, Noise13 &lt;dbl&gt;,
 ## #   Noise14 &lt;dbl&gt;, Noise15 &lt;dbl&gt;, Noise16 &lt;dbl&gt;, Noise17 &lt;dbl&gt;,
 ## #   Noise18 &lt;dbl&gt;, Noise19 &lt;dbl&gt;, Noise20 &lt;dbl&gt;, Class &lt;fct&gt;</code></pre>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" data-line-number="1">fit =<span class="st"> </span><span class="kw">randomForest</span>(Class <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> two_class_data)</a>
-<a class="sourceLine" id="cb204-2" data-line-number="2">fit</a></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" data-line-number="1">fit =<span class="st"> </span><span class="kw">randomForest</span>(Class <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> two_class_data)</a>
+<a class="sourceLine" id="cb211-2" data-line-number="2">fit</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ##  randomForest(formula = Class ~ ., data = two_class_data) 
@@ -475,15 +475,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##        Class1 Class2 class.error
 ## Class1    562     96   0.1458967
 ## Class2    132    460   0.2229730</code></pre>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" data-line-number="1"><span class="kw">all.equal</span>(<span class="kw">predict</span>(fit), <span class="kw">predict</span>(fit, two_class_data))</a></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" data-line-number="1"><span class="kw">all.equal</span>(<span class="kw">predict</span>(fit), <span class="kw">predict</span>(fit, two_class_data))</a></code></pre></div>
 <pre><code>## [1] &quot;228 string mismatches&quot;</code></pre>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" data-line-number="1"><span class="kw">tibble</span>(</a>
-<a class="sourceLine" id="cb208-2" data-line-number="2">  <span class="st">&quot;Training Observation&quot;</span> =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb208-3" data-line-number="3">  <span class="st">&quot;OOB Predictions&quot;</span> =<span class="st"> </span><span class="kw">head</span>(<span class="kw">predict</span>(fit), <span class="dt">n =</span> <span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb208-4" data-line-number="4">  <span class="st">&quot;Full Forest Predictions&quot;</span> =<span class="st"> </span><span class="kw">head</span>(<span class="kw">predict</span>(fit, two_class_data), <span class="dt">n =</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb208-5" data-line-number="5">) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb208-6" data-line-number="6"><span class="st">  </span><span class="kw">kable</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb208-7" data-line-number="7"><span class="st">  </span><span class="kw">kable_styling</span>(<span class="st">&quot;striped&quot;</span>, <span class="dt">full_width =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" data-line-number="1"><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb215-2" data-line-number="2">  <span class="st">&quot;Training Observation&quot;</span> =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb215-3" data-line-number="3">  <span class="st">&quot;OOB Predictions&quot;</span> =<span class="st"> </span><span class="kw">head</span>(<span class="kw">predict</span>(fit), <span class="dt">n =</span> <span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb215-4" data-line-number="4">  <span class="st">&quot;Full Forest Predictions&quot;</span> =<span class="st"> </span><span class="kw">head</span>(<span class="kw">predict</span>(fit, two_class_data), <span class="dt">n =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb215-5" data-line-number="5">) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb215-6" data-line-number="6"><span class="st">  </span><span class="kw">kable</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb215-7" data-line-number="7"><span class="st">  </span><span class="kw">kable_styling</span>(<span class="st">&quot;striped&quot;</span>, <span class="dt">full_width =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -611,10 +611,10 @@ Class1
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" data-line-number="1"><span class="kw">predict</span>(fit, two_class_data, <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>)[<span class="dv">2</span>, ]</a></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" data-line-number="1"><span class="kw">predict</span>(fit, two_class_data, <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>)[<span class="dv">2</span>, ]</a></code></pre></div>
 <pre><code>## Class1 Class2 
 ##  0.822  0.178</code></pre>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" data-line-number="1"><span class="kw">predict</span>(fit, two_class_data, <span class="dt">predict.all =</span> <span class="ot">TRUE</span>)<span class="op">$</span>individual[<span class="dv">2</span>, ]</a></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" data-line-number="1"><span class="kw">predict</span>(fit, two_class_data, <span class="dt">predict.all =</span> <span class="ot">TRUE</span>)<span class="op">$</span>individual[<span class="dv">2</span>, ]</a></code></pre></div>
 <pre><code>##   [1] &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
 ##   [8] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot;
 ##  [15] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot;
@@ -687,19 +687,19 @@ Class1
 ## [484] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
 ## [491] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
 ## [498] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;</code></pre>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" data-line-number="1"><span class="kw">table</span>(<span class="kw">predict</span>(fit, two_class_data, <span class="dt">predict.all =</span> <span class="ot">TRUE</span>)<span class="op">$</span>individual[<span class="dv">2</span>, ])</a></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" data-line-number="1"><span class="kw">table</span>(<span class="kw">predict</span>(fit, two_class_data, <span class="dt">predict.all =</span> <span class="ot">TRUE</span>)<span class="op">$</span>individual[<span class="dv">2</span>, ])</a></code></pre></div>
 <pre><code>## 
 ## Class1 Class2 
 ##    411     89</code></pre>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" data-line-number="1"><span class="kw">table</span>(<span class="kw">predict</span>(fit, two_class_data, <span class="dt">predict.all =</span> <span class="ot">TRUE</span>)<span class="op">$</span>individual[<span class="dv">2</span>, ]) <span class="op">/</span><span class="st"> </span><span class="dv">500</span></a></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb222-1" data-line-number="1"><span class="kw">table</span>(<span class="kw">predict</span>(fit, two_class_data, <span class="dt">predict.all =</span> <span class="ot">TRUE</span>)<span class="op">$</span>individual[<span class="dv">2</span>, ]) <span class="op">/</span><span class="st"> </span><span class="dv">500</span></a></code></pre></div>
 <pre><code>## 
 ## Class1 Class2 
 ##  0.822  0.178</code></pre>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" data-line-number="1"><span class="kw">mean</span>(fit<span class="op">$</span>oob.times <span class="op">/</span><span class="st"> </span><span class="dv">500</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb224-1" data-line-number="1"><span class="kw">mean</span>(fit<span class="op">$</span>oob.times <span class="op">/</span><span class="st"> </span><span class="dv">500</span>)</a></code></pre></div>
 <pre><code>## [1] 0.368216</code></pre>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" data-line-number="1"><span class="kw">exp</span>(<span class="op">-</span><span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb226-1" data-line-number="1"><span class="kw">exp</span>(<span class="op">-</span><span class="dv">1</span>)</a></code></pre></div>
 <pre><code>## [1] 0.3678794</code></pre>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" data-line-number="1">fit<span class="op">$</span>importance</a></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" data-line-number="1">fit<span class="op">$</span>importance</a></code></pre></div>
 <pre><code>##            MeanDecreaseGini
 ## TwoFactor1        70.393099
 ## TwoFactor2        69.608199
@@ -736,11 +736,11 @@ Class1
 ## Noise18           12.148751
 ## Noise19           11.807009
 ## Noise20           11.396611</code></pre>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" data-line-number="1"><span class="kw">varImpPlot</span>(fit)</a></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" data-line-number="1"><span class="kw">varImpPlot</span>(fit)</a></code></pre></div>
 <p><img src="03-08-ensembles_files/figure-html/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb224-1" data-line-number="1">fit_caret_rf =<span class="st"> </span><span class="kw">train</span>(Class <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> two_class_data,</a>
-<a class="sourceLine" id="cb224-2" data-line-number="2">                     <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;oob&quot;</span>))</a></code></pre></div>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb225-1" data-line-number="1">fit_caret_rf</a></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb231-1" data-line-number="1">fit_caret_rf =<span class="st"> </span><span class="kw">train</span>(Class <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> two_class_data,</a>
+<a class="sourceLine" id="cb231-2" data-line-number="2">                     <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;oob&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb232-1" data-line-number="1">fit_caret_rf</a></code></pre></div>
 <pre><code>## Random Forest 
 ## 
 ## 1250 samples
@@ -760,54 +760,54 @@ Class1
 </div>
 <div id="boosting" class="section level2">
 <h2><span class="header-section-number">15.4</span> Boosting</h2>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb227-1" data-line-number="1">sin_dgp =<span class="st"> </span><span class="cf">function</span>(<span class="dt">sample_size =</span> <span class="dv">150</span>) {</a>
-<a class="sourceLine" id="cb227-2" data-line-number="2">  x =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size, <span class="dt">min =</span> <span class="dv">-10</span>, <span class="dt">max =</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb227-3" data-line-number="3">  y =<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x) <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size)</a>
-<a class="sourceLine" id="cb227-4" data-line-number="4">  <span class="kw">tibble</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)</a>
-<a class="sourceLine" id="cb227-5" data-line-number="5">}</a></code></pre></div>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb228-2" data-line-number="2">sim_data =<span class="st"> </span><span class="kw">sin_dgp</span>()</a></code></pre></div>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb229-1" data-line-number="1"><span class="kw">plot</span>(sim_data, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>), <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
-<a class="sourceLine" id="cb229-2" data-line-number="2"><span class="kw">grid</span>()</a>
-<a class="sourceLine" id="cb229-3" data-line-number="3"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb234-1" data-line-number="1">sin_dgp =<span class="st"> </span><span class="cf">function</span>(<span class="dt">sample_size =</span> <span class="dv">150</span>) {</a>
+<a class="sourceLine" id="cb234-2" data-line-number="2">  x =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size, <span class="dt">min =</span> <span class="dv">-10</span>, <span class="dt">max =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb234-3" data-line-number="3">  y =<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x) <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size)</a>
+<a class="sourceLine" id="cb234-4" data-line-number="4">  <span class="kw">tibble</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)</a>
+<a class="sourceLine" id="cb234-5" data-line-number="5">}</a></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb235-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb235-2" data-line-number="2">sim_data =<span class="st"> </span><span class="kw">sin_dgp</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb236-1" data-line-number="1"><span class="kw">plot</span>(sim_data, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>), <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
+<a class="sourceLine" id="cb236-2" data-line-number="2"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb236-3" data-line-number="3"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a></code></pre></div>
 <p><img src="03-08-ensembles_files/figure-html/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" data-line-number="1">sim_data_for_boosting =<span class="st"> </span>sim_data</a></code></pre></div>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb231-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb231-2" data-line-number="2">splits =<span class="st"> </span><span class="dv">99</span></a>
-<a class="sourceLine" id="cb231-3" data-line-number="3"><span class="cf">while</span>(splits <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
-<a class="sourceLine" id="cb231-4" data-line-number="4">  <span class="kw">plot</span>(sim_data_for_boosting, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>), <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
-<a class="sourceLine" id="cb231-5" data-line-number="5">  <span class="kw">grid</span>()</a>
-<a class="sourceLine" id="cb231-6" data-line-number="6">  fit =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_data_for_boosting, <span class="dt">maxdepth =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb231-7" data-line-number="7">  <span class="kw">curve</span>(<span class="kw">predict</span>(fit, <span class="kw">data.frame</span>(<span class="dt">x =</span> x)), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a>
-<a class="sourceLine" id="cb231-8" data-line-number="8">  sim_data_for_boosting<span class="op">$</span>y =<span class="st"> </span>sim_data_for_boosting<span class="op">$</span>y <span class="op">-</span><span class="st"> </span><span class="fl">0.4</span> <span class="op">*</span><span class="st"> </span><span class="kw">predict</span>(fit)</a>
-<a class="sourceLine" id="cb231-9" data-line-number="9">  splits =<span class="st"> </span><span class="kw">nrow</span>(fit<span class="op">$</span>frame) <span class="op">-</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb231-10" data-line-number="10">}</a></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb237-1" data-line-number="1">sim_data_for_boosting =<span class="st"> </span>sim_data</a></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb238-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb238-2" data-line-number="2">splits =<span class="st"> </span><span class="dv">99</span></a>
+<a class="sourceLine" id="cb238-3" data-line-number="3"><span class="cf">while</span>(splits <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb238-4" data-line-number="4">  <span class="kw">plot</span>(sim_data_for_boosting, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>), <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
+<a class="sourceLine" id="cb238-5" data-line-number="5">  <span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb238-6" data-line-number="6">  fit =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_data_for_boosting, <span class="dt">maxdepth =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb238-7" data-line-number="7">  <span class="kw">curve</span>(<span class="kw">predict</span>(fit, <span class="kw">data.frame</span>(<span class="dt">x =</span> x)), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a>
+<a class="sourceLine" id="cb238-8" data-line-number="8">  sim_data_for_boosting<span class="op">$</span>y =<span class="st"> </span>sim_data_for_boosting<span class="op">$</span>y <span class="op">-</span><span class="st"> </span><span class="fl">0.4</span> <span class="op">*</span><span class="st"> </span><span class="kw">predict</span>(fit)</a>
+<a class="sourceLine" id="cb238-9" data-line-number="9">  splits =<span class="st"> </span><span class="kw">nrow</span>(fit<span class="op">$</span>frame) <span class="op">-</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb238-10" data-line-number="10">}</a></code></pre></div>
 <p><img src="03-08-ensembles_files/figure-html/unnamed-chunk-26-1.png" width="1152" style="display: block; margin: auto;" /><img src="03-08-ensembles_files/figure-html/unnamed-chunk-26-2.png" width="1152" style="display: block; margin: auto;" /><img src="03-08-ensembles_files/figure-html/unnamed-chunk-26-3.png" width="1152" style="display: block; margin: auto;" /><img src="03-08-ensembles_files/figure-html/unnamed-chunk-26-4.png" width="1152" style="display: block; margin: auto;" /><img src="03-08-ensembles_files/figure-html/unnamed-chunk-26-5.png" width="1152" style="display: block; margin: auto;" /><img src="03-08-ensembles_files/figure-html/unnamed-chunk-26-6.png" width="1152" style="display: block; margin: auto;" /><img src="03-08-ensembles_files/figure-html/unnamed-chunk-26-7.png" width="1152" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb232-1" data-line-number="1">sim_data_for_boosting =<span class="st"> </span>sim_data</a>
-<a class="sourceLine" id="cb232-2" data-line-number="2">tree_list =<span class="st"> </span><span class="kw">list</span>()</a>
-<a class="sourceLine" id="cb232-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb232-4" data-line-number="4"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>) {</a>
-<a class="sourceLine" id="cb232-5" data-line-number="5">  fit =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_data_for_boosting, <span class="dt">maxdepth =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb232-6" data-line-number="6">  tree_list[[i]] =<span class="st"> </span>fit</a>
-<a class="sourceLine" id="cb232-7" data-line-number="7">  sim_data_for_boosting<span class="op">$</span>y =<span class="st"> </span>sim_data_for_boosting<span class="op">$</span>y <span class="op">-</span><span class="st"> </span><span class="fl">0.4</span> <span class="op">*</span><span class="st"> </span><span class="kw">predict</span>(fit)</a>
-<a class="sourceLine" id="cb232-8" data-line-number="8">}</a>
-<a class="sourceLine" id="cb232-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb232-10" data-line-number="10"><span class="kw">names</span>(tree_list) =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb232-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb232-12" data-line-number="12">boost_pred =<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb232-13" data-line-number="13">  <span class="kw">apply</span>(<span class="kw">t</span>(<span class="kw">map_df</span>(tree_list, predict, <span class="kw">data.frame</span>(<span class="dt">x =</span> x))), <span class="dv">2</span>, <span class="cf">function</span>(x) {<span class="fl">0.4</span> <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>(x)})</a>
-<a class="sourceLine" id="cb232-14" data-line-number="14">}</a>
-<a class="sourceLine" id="cb232-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb232-16" data-line-number="16"><span class="kw">plot</span>(sim_data, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>), <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
-<a class="sourceLine" id="cb232-17" data-line-number="17"><span class="kw">grid</span>()</a>
-<a class="sourceLine" id="cb232-18" data-line-number="18"><span class="kw">curve</span>(<span class="kw">boost_pred</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a>
-<a class="sourceLine" id="cb232-19" data-line-number="19"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb239-1" data-line-number="1">sim_data_for_boosting =<span class="st"> </span>sim_data</a>
+<a class="sourceLine" id="cb239-2" data-line-number="2">tree_list =<span class="st"> </span><span class="kw">list</span>()</a>
+<a class="sourceLine" id="cb239-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb239-4" data-line-number="4"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>) {</a>
+<a class="sourceLine" id="cb239-5" data-line-number="5">  fit =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_data_for_boosting, <span class="dt">maxdepth =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb239-6" data-line-number="6">  tree_list[[i]] =<span class="st"> </span>fit</a>
+<a class="sourceLine" id="cb239-7" data-line-number="7">  sim_data_for_boosting<span class="op">$</span>y =<span class="st"> </span>sim_data_for_boosting<span class="op">$</span>y <span class="op">-</span><span class="st"> </span><span class="fl">0.4</span> <span class="op">*</span><span class="st"> </span><span class="kw">predict</span>(fit)</a>
+<a class="sourceLine" id="cb239-8" data-line-number="8">}</a>
+<a class="sourceLine" id="cb239-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb239-10" data-line-number="10"><span class="kw">names</span>(tree_list) =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb239-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb239-12" data-line-number="12">boost_pred =<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb239-13" data-line-number="13">  <span class="kw">apply</span>(<span class="kw">t</span>(<span class="kw">map_df</span>(tree_list, predict, <span class="kw">data.frame</span>(<span class="dt">x =</span> x))), <span class="dv">2</span>, <span class="cf">function</span>(x) {<span class="fl">0.4</span> <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>(x)})</a>
+<a class="sourceLine" id="cb239-14" data-line-number="14">}</a>
+<a class="sourceLine" id="cb239-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb239-16" data-line-number="16"><span class="kw">plot</span>(sim_data, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>), <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</a>
+<a class="sourceLine" id="cb239-17" data-line-number="17"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb239-18" data-line-number="18"><span class="kw">curve</span>(<span class="kw">boost_pred</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a>
+<a class="sourceLine" id="cb239-19" data-line-number="19"><span class="kw">curve</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a></code></pre></div>
 <p><img src="03-08-ensembles_files/figure-html/unnamed-chunk-27-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb233-1" data-line-number="1">fit_caret_gbm =<span class="st"> </span><span class="kw">train</span>(Class <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> two_class_data,</a>
-<a class="sourceLine" id="cb233-2" data-line-number="2">                      <span class="dt">method =</span> <span class="st">&quot;gbm&quot;</span>,</a>
-<a class="sourceLine" id="cb233-3" data-line-number="3">                      <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>),</a>
-<a class="sourceLine" id="cb233-4" data-line-number="4">                      <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb234-1" data-line-number="1">fit_caret_gbm</a></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb240-1" data-line-number="1">fit_caret_gbm =<span class="st"> </span><span class="kw">train</span>(Class <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> two_class_data,</a>
+<a class="sourceLine" id="cb240-2" data-line-number="2">                      <span class="dt">method =</span> <span class="st">&quot;gbm&quot;</span>,</a>
+<a class="sourceLine" id="cb240-3" data-line-number="3">                      <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>),</a>
+<a class="sourceLine" id="cb240-4" data-line-number="4">                      <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb241-1" data-line-number="1">fit_caret_gbm</a></code></pre></div>
 <pre><code>## Stochastic Gradient Boosting 
 ## 
 ## 1250 samples
@@ -836,11 +836,11 @@ Class1
 ## Accuracy was used to select the optimal model using the largest value.
 ## The final values used for the model were n.trees = 150,
 ##  interaction.depth = 3, shrinkage = 0.1 and n.minobsinnode = 10.</code></pre>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb236-1" data-line-number="1">fit_caret_xgb =<span class="st"> </span><span class="kw">train</span>(Class <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> two_class_data,</a>
-<a class="sourceLine" id="cb236-2" data-line-number="2">                      <span class="dt">method =</span> <span class="st">&quot;xgbTree&quot;</span>,</a>
-<a class="sourceLine" id="cb236-3" data-line-number="3">                      <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>),</a>
-<a class="sourceLine" id="cb236-4" data-line-number="4">                      <span class="dt">tuneLength =</span> <span class="dv">2</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb237-1" data-line-number="1">fit_caret_xgb</a></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb243-1" data-line-number="1">fit_caret_xgb =<span class="st"> </span><span class="kw">train</span>(Class <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> two_class_data,</a>
+<a class="sourceLine" id="cb243-2" data-line-number="2">                      <span class="dt">method =</span> <span class="st">&quot;xgbTree&quot;</span>,</a>
+<a class="sourceLine" id="cb243-3" data-line-number="3">                      <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>),</a>
+<a class="sourceLine" id="cb243-4" data-line-number="4">                      <span class="dt">tuneLength =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb244-1" data-line-number="1">fit_caret_xgb</a></code></pre></div>
 <pre><code>## eXtreme Gradient Boosting 
 ## 
 ## 1250 samples
@@ -951,15 +951,13 @@ Class1
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",

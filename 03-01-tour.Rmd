@@ -6,6 +6,7 @@
 knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
 ```
 
+- TODO: **Goal:** Train models that *generalize* well, that is, perform well on *unseen* data.
 - TODO: Introduce data splitting:
   - Test-Train Split (`_tst` and `_trn`)
   - Estimation-Validation Split (`_est` and `_val`)
@@ -14,4 +15,13 @@ knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
 
 - TODO: http://varianceexplained.org/r/ds-ml-ai/s
 
+- TODO: define most of the terms that will be seen here
+  - at least those that apply to both regression and classification
+  
 - TODO: This section is the heart of STAT 432.
+
+- TODO: Note simplifications that we will use in this section.
+  - No cross-validation
+  - No data pre-processing
+  - Minimial care for categorical variables
+    - Either don't use them, or let the methods take care of them.
