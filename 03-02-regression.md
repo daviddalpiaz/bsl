@@ -179,7 +179,7 @@ line_data %>%
   mutate(dist = purrr::map_dbl(x, calc_dist, p2 = 0)) %>% 
   top_n(dist, n = -5) %>% 
   pull(y) %>% 
-  mean()
+  mean() # also consider median
 ```
 
 ```
@@ -494,7 +494,7 @@ calc_mse_split = function(df, cut) {
   mse_left  = with(left,  sum((y - mean(y)) ^ 2))
   mse_right = with(right, sum((y - mean(y)) ^ 2))
   
-  mse_left + mse_right
+  mse_left + mse_right # also consider mae
   
 }
 
