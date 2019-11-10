@@ -12,15 +12,17 @@
 knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
 ```
 
-```{r, message=FALSE, warning=FALSE}
+```{r, message = FALSE, warning = FALSE}
+library("tidyverse")
 library("glmnet")
+library("broom")
+library("kableExtra")
 ```
 
-## adding bias to reduce variance
+## Reducing Variance with Added Bias
 
 ```{r}
-# this is a bad function name
-dgp = function(sample_size = 25) {
+gen_simple_data = function(sample_size = 25) {
   x = runif(n = sample_size)
   y = 0 + 5 * x + rnorm(n = sample_size)
   data.frame(x, y)
@@ -28,46 +30,93 @@ dgp = function(sample_size = 25) {
 ```
 
 ```{r}
-# maybe write a function for each
-beta_ls = replicate(n = 1000, coef(lm(y ~ 0 + x, data = dgp()))["x"])
-beta_05 = replicate(n = 1000, min(coef(lm(y ~ 0 + x, data = dgp()))["x"], 5))
-beta_04 = replicate(n = 1000, min(coef(lm(y ~ 0 + x, data = dgp()))["x"], 4))
+set.seed(42)
+simple_data = gen_simple_data()
 ```
 
 ```{r}
-# add MSE, add names, make tibble
-c(mean(beta_ls) - 5, sd(beta_ls))
-c(mean(beta_05) - 5, sd(beta_05))
-c(mean(beta_04) - 5, sd(beta_04))
+# fit least squares
+beta_ls = lm(y ~ 0 + x, data = simple_data)
+
+# fit a biased model
+# restrict beta-hat to be at most 5
+beta_05 = lm(y ~ 0 + x, data = simple_data)
+beta_05$coefficients = min(beta_05$coefficients, 5)
+
+# fit a biased model
+# restrict beta-hat to be at most 4
+beta_04 = lm(y ~ 0 + x, data = simple_data)
+beta_04$coefficients = min(beta_04$coefficients, 4)
+```
+
+```{r}
+map_dbl(list(beta_ls, beta_05, beta_04), coef)
+```
+
+```{r, fig.height = 6, fig.width = 10, echo = FALSE}
+plot(simple_data, pch = 20, col = "darkgrey",
+     xlim = c(0, 1), ylim = c(0, 7))
+grid()
+
+abline(0, 5, lwd = 4)
+abline(beta_ls, col = "firebrick",  lwd = 3, lty = 2)
+abline(beta_05, col = "dodgerblue", lwd = 3, lty = 3)
+abline(beta_04, col = "limegreen",  lwd = 3, lty = 4)
+
+# TODO: add legend
+```
+
+```{r}
+# maybe write a function for each
+# should switch this to make each model fit to the same data
+set.seed(42)
+beta_estimates = list(
+  beta_ls = replicate(n = 5000, coef(lm(y ~ 0 + x, data = gen_simple_data()))["x"]),
+  beta_05 = replicate(n = 5000, min(coef(lm(y ~ 0 + x, data = gen_simple_data()))["x"], 5)),
+  beta_04 = replicate(n = 5000, min(coef(lm(y ~ 0 + x, data = gen_simple_data()))["x"], 4))
+)
+```
+
+```{r, echo = FALSE}
+tibble(
+  Model = c("Least Squares", "Biased to 5", "Biased to 4"),
+  Bias = map_dbl(beta_estimates, ~ {mean(.x) - 5}),
+  Variance = map_dbl(beta_estimates, var),
+  MSE = Bias ^ 2 + Variance
+) %>% 
+  kable(digits = 3) %>% 
+  kable_styling("striped", full_width = FALSE)
 ```
 
 ## scaling matters?
 
 ```{r}
-dgp = function(sample_size = 25) {
+another_dgp = function(sample_size = 25) {
   x = runif(n = sample_size)
   y = -2 + 5 * x + rnorm(n = sample_size)
-  data.frame(x, y)
+  tibble(x, y)
 }
 ```
 
 
 ```{r}
-asdf = dgp()
-predict(lm(y ~ x, data = asdf))
+data_for_scaling = another_dgp()
+predict(lm(y ~ x, data = data_for_scaling))
+coef(lm(y ~ x, data = data_for_scaling))
 
-asdf$x = scale(asdf$x)
-predict(lm(y ~ x, data = asdf))
+data_for_scaling$x = scale(data_for_scaling$x)
+predict(lm(y ~ x, data = data_for_scaling))
+coef(lm(y ~ x, data = data_for_scaling))
 ```
 
-## moving to two dimensions
+## Constraints in Two Dimensions
 
 ```{r}
 gen_linear_data = function() {
   x1 = rnorm(100)
   x2 = rnorm(100)
   y = 0 + -5 * x1 + 5 * x2 + rnorm(100)
-  data.frame(x1, x2, y)
+  tibble(x1 = x1, x2 = x2, y = y)
 }
 ```
 
@@ -103,6 +152,93 @@ segments(-a, 0, 0, -a, col = "dodgerblue", lwd = 2)
 points(beta[which.min(beta_error), ], col = "darkorange", pch = 20, cex = 2)
 ```
 
+## High Dimensional Data
+
+```{r}
+gen_wide_data = function(sample_size = 100, sig_betas = 5, p = 200) {
+  
+  if (p <= sample_size) {
+    warning("You're not generating wide data, despite the name of the function.")
+  }
+  
+  if (sig_betas > p) {
+    stop("Cannot have more significant variables than variables!")
+  }
+  
+  x = map_dfc(1:p, ~ rnorm(n = sample_size))
+  x = x %>% rename_all( ~ str_replace(., "V", "x"))
+  sig_x = x[, 1:sig_betas]
+  beta = rep(3, times = sig_betas)
+  y = as.matrix(sig_x) %*% beta + rnorm(n = sample_size)
+  bind_cols(y = y, x)
+}
+```
+
+```{r}
+some_wide_data = gen_wide_data()
+```
+
+```{r}
+some_wide_data
+```
+
+
+## Ridge Regression
+
+
+$$
+\sum_{i=1}^{n} \left( y_i - \beta_0 - \sum_{j=1}^{p} \beta_j x_{ij}    \right) ^ 2 + \lambda \sum_{j=1}^{p} \beta_j^2 .
+$$
+
+```{r}
+set.seed(42)
+data_for_ridge = gen_wide_data(sample_size = 100, sig_betas = 5, p = 200)
+```
+
+```{r}
+x_ridge = data_for_ridge %>% select(-y) %>% as.matrix()
+y_ridge = data_for_ridge %>% pull(y)
+```
+
+```{r}
+mod_ridge = glmnet(x = x_ridge, y = y_ridge, alpha = 0)
+```
+
+```{r, fig.height = 6, fig.width = 8}
+plot(mod_ridge, xvar = "lambda", label = TRUE)
+grid()
+```
+
+```{r}
+as_tibble(predict(mod_ridge, x_ridge[1:5, ]))
+```
+
+```{r}
+set.seed(42)
+mod_ridge = cv.glmnet(x = x_ridge, y = y_ridge, alpha = 0, nfolds = 5)
+```
+
+```{r}
+glance(mod_ridge)
+```
+
+```{r}
+plot(mod_ridge)
+```
+
+
+```{r}
+tidy(mod_ridge)
+```
+
+## Lasso
+
+
+
+
+
+
+
 
 
 
@@ -123,7 +259,7 @@ lm(medv ~ ., data = bstn)
 ```
 
 ```{r}
-model.matrix(lm(medv ~ ., data = bstn))
+head(as_tibble(model.matrix(lm(medv ~ ., data = bstn))))
 ```
 
 ```{r}
@@ -140,7 +276,7 @@ bstn_x = model.matrix(lm(medv ~ ., data = bstn))[, -1]
 bstn_y = bstn$medv
 ```
 
-```{r}
+```{r, fig.height = 4, fig.width = 8}
 par(mfrow = c(1, 2))
 plot(glmnet(x = bstn_x, y = bstn_y, alpha = 0), xvar = "lambda")
 grid()
@@ -148,7 +284,7 @@ plot(glmnet(x = bstn_x, y = bstn_y, alpha = 1), xvar = "lambda")
 grid()
 ```
 
-```{r}
+```{r, fig.height = 4, fig.width = 8}
 par(mfrow = c(1, 2))
 plot(cv.glmnet(x = bstn_x, y = bstn_y, alpha = 0))
 plot(cv.glmnet(x = bstn_x, y = bstn_y, alpha = 1))
@@ -159,14 +295,14 @@ bstn_ridge = cv.glmnet(x = bstn_x, y = bstn_y, alpha = 0)
 bstn_lasso = cv.glmnet(x = bstn_x, y = bstn_y, alpha = 1)
 ```
 
-
 ```{r}
-library(broom)
+library("broom")
 ```
 
 ```{r}
 tidy(bstn_lasso)
 glance(bstn_lasso)
+# TODO: pull out rows of tidy with the values from glance
 ```
 
 
@@ -190,7 +326,7 @@ predict(bstn_lasso, type = "nonzero")
 ## some more simulation
 
 ```{r}
-diag(100)
+# diag(100)
 ```
 
 
@@ -207,7 +343,7 @@ sqrt(min(fit$cvm))
 ```
 
 ```{r}
-plot(fit, xlim = c(-6, 1), ylim = c(10, 30))
+plot(fit, xlim = c(-6, 1), ylim = c(15, 20))
 ```
 
 
@@ -220,3 +356,4 @@ plot(fit, xlim = c(-6, 1), ylim = c(10, 30))
 - TODO: Least Absolute Shrinkage and Selection Operator
 - TODO: https://statisticaloddsandends.wordpress.com/2018/11/15/a-deep-dive-into-glmnet-standardize/
 - TODO: https://www.jaredlander.com/2018/02/using-coefplot-with-glmnet/
+- TODO: statistical learning with sparsity book
