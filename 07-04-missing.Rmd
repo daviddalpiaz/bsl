@@ -1,5 +1,9 @@
 # Missing Data
 
+```{r, include = FALSE} 
+knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
+```
+
 ```{r}
 library("tidyverse")
 library("caret")
@@ -46,7 +50,7 @@ na.omit(aq)
 ```
 
 ```{r}
-?lm
+# ?lm
 ```
 
 ```{r}
@@ -54,7 +58,6 @@ na.omit(aq)
 #   aq,
 #   predict(preProcess(aq, "bagImpute"), aq)
 # ) %>% View()
-
 ```
 
 ```{r}
@@ -95,7 +98,6 @@ predict(preProcess(aq, "medianImpute"), new_obs)
 ```
 
 ***
-
 
 ```{r}
 library("tidyverse")
@@ -166,7 +168,8 @@ unique(aq$Month)
 ```
 
 ```{r}
-predict(mod_fct, data.frame(Month = 12))
+# error due to lack of factor level
+# predict(mod_fct, data.frame(Month = 12)) 
 ```
 
 ```{r}

@@ -1,5 +1,9 @@
 # Class Imbalance
 
+```{r, include = FALSE} 
+knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
+```
+
 ```{r}
 library("tidyverse")
 library("caret")
@@ -15,7 +19,7 @@ tst = as_tibble(twoClassSim(10000, intercept = -22))
 ```
 
 ```{r}
-trn
+head(trn, n = 10)
 ```
 
 ```{r}
