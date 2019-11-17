@@ -224,9 +224,6 @@ library("randomForest")
 randomForest(Ozone ~ ., data = rfImpute(Ozone ~ ., data = aq))
 ```
 
-
 ```{r}
 head(na.roughfix(aq), n = 10)
 ```
-
-
