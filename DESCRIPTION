@@ -14,6 +14,7 @@ Imports:
   dbscan,
   dendextend,
   devtools,
+  DMwR,
   dplyr,
   e1071,
   ElemStatLearn,
@@ -47,6 +48,7 @@ Imports:
   ranger,
   readr,
   rmarkdown,
+  ROSE
   rpart, 
   rpart.plot,
   rsample,
