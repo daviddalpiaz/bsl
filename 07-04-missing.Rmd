@@ -90,7 +90,7 @@ new_obs
 ```
 
 ```{r, eval = FALSE}
-predict(fit, new_obs, na.action = na.pass)
+# predict(fit, new_obs, na.action = na.pass)
 ```
 
 ```{r}
