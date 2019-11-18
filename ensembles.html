@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 15 Ensembles | Basics of Statistical Learning</title>
   <meta name="description" content="Chapter 15 Ensembles | Basics of Statistical Learning" />
-  <meta name="generator" content="bookdown 0.14.1 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.15.1 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 15 Ensembles | Basics of Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-11-10" />
+<meta name="date" content="2019-11-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -301,6 +301,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="24.3" data-path="additional-reading.html"><a href="additional-reading.html#blog-posts"><i class="fa fa-check"></i><b>24.3</b> Blog Posts</a></li>
 <li class="chapter" data-level="24.4" data-path="additional-reading.html"><a href="additional-reading.html#miscellaneous"><i class="fa fa-check"></i><b>24.4</b> Miscellaneous</a></li>
 </ul></li>
+<li class="chapter" data-level="25" data-path="class-imbalance.html"><a href="class-imbalance.html"><i class="fa fa-check"></i><b>25</b> Class Imbalance</a></li>
+<li class="chapter" data-level="26" data-path="missing-data.html"><a href="missing-data.html"><i class="fa fa-check"></i><b>26</b> Missing Data</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/daviddalpiaz/bsl" target="blank">&copy; 2019 David Dalpiaz</a></li>
 
@@ -444,25 +446,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb227-2" data-line-number="2">two_class_data =<span class="st"> </span><span class="kw">as_tibble</span>(caret<span class="op">::</span><span class="kw">twoClassSim</span>(<span class="dt">n =</span> <span class="dv">1250</span>, <span class="dt">noiseVars =</span> <span class="dv">20</span>))</a>
 <a class="sourceLine" id="cb227-3" data-line-number="3">two_class_data</a></code></pre></div>
 <pre><code>## # A tibble: 1,250 x 36
-##    TwoFactor1 TwoFactor2 Linear01 Linear02 Linear03 Linear04 Linear05
-##         &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-##  1      2.68       0.843  0.617      0.761   0.0712   -0.368    0.294
-##  2     -0.496     -0.955 -0.00454   -0.172   0.970    -1.28    -0.404
-##  3     -0.577      1.51  -0.0913    -0.265   0.310    -1.98    -2.18 
-##  4      1.06       0.567  0.400     -0.424  -0.140    -1.24     0.198
-##  5      1.21      -0.171  0.589      0.689  -0.326    -0.541    1.92 
-##  6     -0.161     -0.112 -0.0169     1.05   -0.119    -0.219   -0.928
-##  7      1.20       2.68   0.419     -2.19    0.894    -1.30    -0.329
-##  8      0.812     -1.06   0.801     -0.503   0.211     1.45     0.952
-##  9      2.74       2.44   0.680      0.880  -0.489    -0.197    1.64 
-## 10     -0.357      0.196  1.31       1.55   -0.220     0.891   -0.764
-## # … with 1,240 more rows, and 29 more variables: Linear06 &lt;dbl&gt;,
-## #   Linear07 &lt;dbl&gt;, Linear08 &lt;dbl&gt;, Linear09 &lt;dbl&gt;, Linear10 &lt;dbl&gt;,
-## #   Nonlinear1 &lt;dbl&gt;, Nonlinear2 &lt;dbl&gt;, Nonlinear3 &lt;dbl&gt;, Noise01 &lt;dbl&gt;,
-## #   Noise02 &lt;dbl&gt;, Noise03 &lt;dbl&gt;, Noise04 &lt;dbl&gt;, Noise05 &lt;dbl&gt;,
-## #   Noise06 &lt;dbl&gt;, Noise07 &lt;dbl&gt;, Noise08 &lt;dbl&gt;, Noise09 &lt;dbl&gt;,
-## #   Noise10 &lt;dbl&gt;, Noise11 &lt;dbl&gt;, Noise12 &lt;dbl&gt;, Noise13 &lt;dbl&gt;,
-## #   Noise14 &lt;dbl&gt;, Noise15 &lt;dbl&gt;, Noise16 &lt;dbl&gt;, Noise17 &lt;dbl&gt;,
+##    TwoFactor1 TwoFactor2 Linear01 Linear02 Linear03 Linear04 Linear05 Linear06
+##         &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+##  1      2.68       0.843  0.617      0.761   0.0712   -0.368    0.294    2.44 
+##  2     -0.496     -0.955 -0.00454   -0.172   0.970    -1.28    -0.404    2.36 
+##  3     -0.577      1.51  -0.0913    -0.265   0.310    -1.98    -2.18     1.49 
+##  4      1.06       0.567  0.400     -0.424  -0.140    -1.24     0.198    0.931
+##  5      1.21      -0.171  0.589      0.689  -0.326    -0.541    1.92    -1.40 
+##  6     -0.161     -0.112 -0.0169     1.05   -0.119    -0.219   -0.928    1.32 
+##  7      1.20       2.68   0.419     -2.19    0.894    -1.30    -0.329   -0.319
+##  8      0.812     -1.06   0.801     -0.503   0.211     1.45     0.952    0.135
+##  9      2.74       2.44   0.680      0.880  -0.489    -0.197    1.64    -2.64 
+## 10     -0.357      0.196  1.31       1.55   -0.220     0.891   -0.764    1.24 
+## # … with 1,240 more rows, and 28 more variables: Linear07 &lt;dbl&gt;,
+## #   Linear08 &lt;dbl&gt;, Linear09 &lt;dbl&gt;, Linear10 &lt;dbl&gt;, Nonlinear1 &lt;dbl&gt;,
+## #   Nonlinear2 &lt;dbl&gt;, Nonlinear3 &lt;dbl&gt;, Noise01 &lt;dbl&gt;, Noise02 &lt;dbl&gt;,
+## #   Noise03 &lt;dbl&gt;, Noise04 &lt;dbl&gt;, Noise05 &lt;dbl&gt;, Noise06 &lt;dbl&gt;, Noise07 &lt;dbl&gt;,
+## #   Noise08 &lt;dbl&gt;, Noise09 &lt;dbl&gt;, Noise10 &lt;dbl&gt;, Noise11 &lt;dbl&gt;, Noise12 &lt;dbl&gt;,
+## #   Noise13 &lt;dbl&gt;, Noise14 &lt;dbl&gt;, Noise15 &lt;dbl&gt;, Noise16 &lt;dbl&gt;, Noise17 &lt;dbl&gt;,
 ## #   Noise18 &lt;dbl&gt;, Noise19 &lt;dbl&gt;, Noise20 &lt;dbl&gt;, Class &lt;fct&gt;</code></pre>
 <div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb229-1" data-line-number="1">fit =<span class="st"> </span><span class="kw">randomForest</span>(Class <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> two_class_data)</a>
 <a class="sourceLine" id="cb229-2" data-line-number="2">fit</a></code></pre></div>
@@ -618,78 +619,69 @@ Class1
 <pre><code>## Class1 Class2 
 ##  0.822  0.178</code></pre>
 <div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb236-1" data-line-number="1"><span class="kw">predict</span>(fit, two_class_data, <span class="dt">predict.all =</span> <span class="ot">TRUE</span>)<span class="op">$</span>individual[<span class="dv">2</span>, ]</a></code></pre></div>
-<pre><code>##   [1] &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-##   [8] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot;
-##  [15] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot;
-##  [22] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-##  [29] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot;
-##  [36] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot;
-##  [43] &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-##  [50] &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-##  [57] &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-##  [64] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-##  [71] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-##  [78] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-##  [85] &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-##  [92] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-##  [99] &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [106] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot;
-## [113] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [120] &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [127] &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot;
-## [134] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class1&quot;
-## [141] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot;
-## [148] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [155] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [162] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [169] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot;
-## [176] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [183] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [190] &quot;Class2&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [197] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [204] &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [211] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [218] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class2&quot;
-## [225] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [232] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot;
-## [239] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [246] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [253] &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot;
-## [260] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [267] &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot;
-## [274] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [281] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [288] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [295] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot;
-## [302] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [309] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot;
-## [316] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [323] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class1&quot;
-## [330] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [337] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [344] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [351] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [358] &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot;
-## [365] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [372] &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class2&quot;
-## [379] &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot;
-## [386] &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class2&quot;
-## [393] &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [400] &quot;Class2&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class2&quot;
-## [407] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot;
-## [414] &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [421] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [428] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot;
-## [435] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [442] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [449] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class1&quot;
-## [456] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [463] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [470] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot;
-## [477] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [484] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [491] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
-## [498] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;</code></pre>
+<pre><code>##   [1] &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+##   [9] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+##  [17] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot;
+##  [25] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+##  [33] &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+##  [41] &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+##  [49] &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+##  [57] &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+##  [65] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+##  [73] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+##  [81] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot;
+##  [89] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot;
+##  [97] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [105] &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot;
+## [113] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot;
+## [121] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [129] &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [137] &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [145] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [153] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [161] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [169] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [177] &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot;
+## [185] &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class2&quot;
+## [193] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [201] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [209] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [217] &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class2&quot;
+## [225] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [233] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [241] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [249] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot;
+## [257] &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [265] &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [273] &quot;Class2&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [281] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [289] &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [297] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [305] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [313] &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [321] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot;
+## [329] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [337] &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [345] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot;
+## [353] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [361] &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot;
+## [369] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot;
+## [377] &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot;
+## [385] &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class2&quot;
+## [393] &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot;
+## [401] &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [409] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot;
+## [417] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [425] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [433] &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [441] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [449] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [457] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [465] &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot;
+## [473] &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [481] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [489] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class2&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;
+## [497] &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot; &quot;Class1&quot;</code></pre>
 <div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb238-1" data-line-number="1"><span class="kw">table</span>(<span class="kw">predict</span>(fit, two_class_data, <span class="dt">predict.all =</span> <span class="ot">TRUE</span>)<span class="op">$</span>individual[<span class="dv">2</span>, ])</a></code></pre></div>
 <pre><code>## 
 ## Class1 Class2 
@@ -837,8 +829,8 @@ Class1
 ## 
 ## Tuning parameter &#39;n.minobsinnode&#39; was held constant at a value of 10
 ## Accuracy was used to select the optimal model using the largest value.
-## The final values used for the model were n.trees = 150,
-##  interaction.depth = 3, shrinkage = 0.1 and n.minobsinnode = 10.</code></pre>
+## The final values used for the model were n.trees = 150, interaction.depth =
+##  3, shrinkage = 0.1 and n.minobsinnode = 10.</code></pre>
 <div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb261-1" data-line-number="1">fit_caret_xgb =<span class="st"> </span><span class="kw">train</span>(Class <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> two_class_data,</a>
 <a class="sourceLine" id="cb261-2" data-line-number="2">                      <span class="dt">method =</span> <span class="st">&quot;xgbTree&quot;</span>,</a>
 <a class="sourceLine" id="cb261-3" data-line-number="3">                      <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>),</a>
@@ -855,80 +847,47 @@ Class1
 ## Summary of sample sizes: 1000, 1001, 999, 1000, 1000 
 ## Resampling results across tuning parameters:
 ## 
-##   eta  max_depth  colsample_bytree  subsample  nrounds  Accuracy 
-##   0.3  1          0.6               0.5         50      0.8392214
-##   0.3  1          0.6               0.5        100      0.8544055
-##   0.3  1          0.6               1.0         50      0.8296052
-##   0.3  1          0.6               1.0        100      0.8464150
-##   0.3  1          0.8               0.5         50      0.8360308
-##   0.3  1          0.8               0.5        100      0.8512021
-##   0.3  1          0.8               1.0         50      0.8288276
-##   0.3  1          0.8               1.0        100      0.8512214
-##   0.3  2          0.6               0.5         50      0.8488278
-##   0.3  2          0.6               0.5        100      0.8536214
-##   0.3  2          0.6               1.0         50      0.8464213
-##   0.3  2          0.6               1.0        100      0.8576247
-##   0.3  2          0.8               0.5         50      0.8456597
-##   0.3  2          0.8               0.5        100      0.8592150
-##   0.3  2          0.8               1.0         50      0.8600023
-##   0.3  2          0.8               1.0        100      0.8631991
-##   0.4  1          0.6               0.5         50      0.8384118
-##   0.4  1          0.6               0.5        100      0.8447894
-##   0.4  1          0.6               1.0         50      0.8384277
-##   0.4  1          0.6               1.0        100      0.8584119
-##   0.4  1          0.8               0.5         50      0.8472086
-##   0.4  1          0.8               0.5        100      0.8599926
-##   0.4  1          0.8               1.0         50      0.8432149
-##   0.4  1          0.8               1.0        100      0.8656152
-##   0.4  2          0.6               0.5         50      0.8400150
-##   0.4  2          0.6               0.5        100      0.8400117
-##   0.4  2          0.6               1.0         50      0.8440118
-##   0.4  2          0.6               1.0        100      0.8472470
-##   0.4  2          0.8               0.5         50      0.8400278
-##   0.4  2          0.8               0.5        100      0.8448117
-##   0.4  2          0.8               1.0         50      0.8520055
-##   0.4  2          0.8               1.0        100      0.8520119
-##   Kappa    
-##   0.6769540
-##   0.7078959
-##   0.6565702
-##   0.6910691
-##   0.6705396
-##   0.7012276
-##   0.6551720
-##   0.7010765
-##   0.6965017
-##   0.7061904
-##   0.6916100
-##   0.7142662
-##   0.6901581
-##   0.7177094
-##   0.7189731
-##   0.7256871
-##   0.6750451
-##   0.6882491
-##   0.6748621
-##   0.7156206
-##   0.6931865
-##   0.7188617
-##   0.6845350
-##   0.7300746
-##   0.6789671
-##   0.6795340
-##   0.6868629
-##   0.6933817
-##   0.6791399
-##   0.6885384
-##   0.7030056
-##   0.7029730
+##   eta  max_depth  colsample_bytree  subsample  nrounds  Accuracy   Kappa    
+##   0.3  1          0.6               0.5         50      0.8392214  0.6769540
+##   0.3  1          0.6               0.5        100      0.8544055  0.7078959
+##   0.3  1          0.6               1.0         50      0.8296052  0.6565702
+##   0.3  1          0.6               1.0        100      0.8464150  0.6910691
+##   0.3  1          0.8               0.5         50      0.8360308  0.6705396
+##   0.3  1          0.8               0.5        100      0.8512021  0.7012276
+##   0.3  1          0.8               1.0         50      0.8288276  0.6551720
+##   0.3  1          0.8               1.0        100      0.8512214  0.7010765
+##   0.3  2          0.6               0.5         50      0.8488278  0.6965017
+##   0.3  2          0.6               0.5        100      0.8536214  0.7061904
+##   0.3  2          0.6               1.0         50      0.8464213  0.6916100
+##   0.3  2          0.6               1.0        100      0.8576247  0.7142662
+##   0.3  2          0.8               0.5         50      0.8456597  0.6901581
+##   0.3  2          0.8               0.5        100      0.8592150  0.7177094
+##   0.3  2          0.8               1.0         50      0.8600023  0.7189731
+##   0.3  2          0.8               1.0        100      0.8631991  0.7256871
+##   0.4  1          0.6               0.5         50      0.8384118  0.6750451
+##   0.4  1          0.6               0.5        100      0.8447894  0.6882491
+##   0.4  1          0.6               1.0         50      0.8384277  0.6748621
+##   0.4  1          0.6               1.0        100      0.8584119  0.7156206
+##   0.4  1          0.8               0.5         50      0.8472086  0.6931865
+##   0.4  1          0.8               0.5        100      0.8599926  0.7188617
+##   0.4  1          0.8               1.0         50      0.8432149  0.6845350
+##   0.4  1          0.8               1.0        100      0.8656152  0.7300746
+##   0.4  2          0.6               0.5         50      0.8400150  0.6789671
+##   0.4  2          0.6               0.5        100      0.8400117  0.6795340
+##   0.4  2          0.6               1.0         50      0.8440118  0.6868629
+##   0.4  2          0.6               1.0        100      0.8472470  0.6933817
+##   0.4  2          0.8               0.5         50      0.8400278  0.6791399
+##   0.4  2          0.8               0.5        100      0.8448117  0.6885384
+##   0.4  2          0.8               1.0         50      0.8520055  0.7030056
+##   0.4  2          0.8               1.0        100      0.8520119  0.7029730
 ## 
 ## Tuning parameter &#39;gamma&#39; was held constant at a value of 0
-## 
-## Tuning parameter &#39;min_child_weight&#39; was held constant at a value of 1
+## Tuning
+##  parameter &#39;min_child_weight&#39; was held constant at a value of 1
 ## Accuracy was used to select the optimal model using the largest value.
-## The final values used for the model were nrounds = 100, max_depth = 1,
-##  eta = 0.4, gamma = 0, colsample_bytree = 0.8, min_child_weight = 1
-##  and subsample = 1.</code></pre>
+## The final values used for the model were nrounds = 100, max_depth = 1, eta
+##  = 0.4, gamma = 0, colsample_bytree = 0.8, min_child_weight = 1 and subsample
+##  = 1.</code></pre>
 
 </div>
 </div>
@@ -954,6 +913,7 @@ Class1
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
+"github": false,
 "facebook": true,
 "twitter": true,
 "linkedin": false,
@@ -972,6 +932,10 @@ gitbook.start({
 "text": "Edit"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 16 Practical Issues | Basics of Statistical Learning</title>
   <meta name="description" content="Chapter 16 Practical Issues | Basics of Statistical Learning" />
-  <meta name="generator" content="bookdown 0.14.1 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.15.1 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 16 Practical Issues | Basics of Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-11-10" />
+<meta name="date" content="2019-11-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -301,6 +301,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="24.3" data-path="additional-reading.html"><a href="additional-reading.html#blog-posts"><i class="fa fa-check"></i><b>24.3</b> Blog Posts</a></li>
 <li class="chapter" data-level="24.4" data-path="additional-reading.html"><a href="additional-reading.html#miscellaneous"><i class="fa fa-check"></i><b>24.4</b> Miscellaneous</a></li>
 </ul></li>
+<li class="chapter" data-level="25" data-path="class-imbalance.html"><a href="class-imbalance.html"><i class="fa fa-check"></i><b>25</b> Class Imbalance</a></li>
+<li class="chapter" data-level="26" data-path="missing-data.html"><a href="missing-data.html"><i class="fa fa-check"></i><b>26</b> Missing Data</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/daviddalpiaz/bsl" target="blank">&copy; 2019 David Dalpiaz</a></li>
 
@@ -574,10 +576,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## lm(formula = y ~ x, data = cat_trn)
 ## 
 ## Coefficients:
-## (Intercept)           xB           xC           xD           xE  
-##     0.66805      0.04599      0.38439      4.38387      4.12645  
-##          xF           xG           xH           xI           xJ  
-##     4.35950     10.15284     10.11491     12.27431     12.45589</code></pre>
+## (Intercept)           xB           xC           xD           xE           xF  
+##     0.66805      0.04599      0.38439      4.38387      4.12645      4.35950  
+##          xG           xH           xI           xJ  
+##    10.15284     10.11491     12.27431     12.45589</code></pre>
 <div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb311-1" data-line-number="1"><span class="kw">rpart.plot</span>(<span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> cat_trn))</a></code></pre></div>
 <p><img src="03-08-practical_files/figure-html/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb312-1" data-line-number="1">knn_cat_mod =<span class="st"> </span><span class="kw">knnreg</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> cat_trn, <span class="dt">use.all =</span> <span class="ot">TRUE</span>)</a>
@@ -586,18 +588,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  [7] 10.8208879 10.7829575 12.9423601 13.1239336</code></pre>
 <div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb314-1" data-line-number="1">tree_cat_mod =<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> cat_trn, <span class="dt">cp =</span> <span class="dv">0</span>)</a>
 <a class="sourceLine" id="cb314-2" data-line-number="2"><span class="kw">predict</span>(tree_cat_mod, x_levels)</a></code></pre></div>
-<pre><code>##          1          2          3          4          5          6 
-##  0.6680481  0.7140409  1.0524340  5.0519187  4.7944962  5.0275456 
-##          7          8          9         10 
-## 10.8208879 10.7829575 12.9423601 13.1239336</code></pre>
+<pre><code>##          1          2          3          4          5          6          7 
+##  0.6680481  0.7140409  1.0524340  5.0519187  4.7944962  5.0275456 10.8208879 
+##          8          9         10 
+## 10.7829575 12.9423601 13.1239336</code></pre>
 <div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb316-1" data-line-number="1"><span class="kw">all.equal</span>(<span class="kw">predict</span>(knn_cat_mod, cat_trn), <span class="kw">predict</span>(<span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> cat_trn, <span class="dt">cp =</span> <span class="dv">0</span>)), <span class="dt">check.attributes =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb318-1" data-line-number="1">lm_cat_mod =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> cat_trn)</a>
 <a class="sourceLine" id="cb318-2" data-line-number="2"><span class="kw">predict</span>(lm_cat_mod, x_levels)</a></code></pre></div>
-<pre><code>##          1          2          3          4          5          6 
-##  0.6680481  0.7140409  1.0524340  5.0519187  4.7944962  5.0275456 
-##          7          8          9         10 
-## 10.8208879 10.7829575 12.9423601 13.1239336</code></pre>
+<pre><code>##          1          2          3          4          5          6          7 
+##  0.6680481  0.7140409  1.0524340  5.0519187  4.7944962  5.0275456 10.8208879 
+##          8          9         10 
+## 10.7829575 12.9423601 13.1239336</code></pre>
 <div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb320-1" data-line-number="1">dum_trn =<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">predict</span>(<span class="kw">dummyVars</span>(<span class="op">~</span>., <span class="dt">data =</span> cat_trn), cat_trn))</a></code></pre></div>
 <div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb321-1" data-line-number="1"><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>. <span class="op">+</span><span class="st"> </span><span class="dv">0</span>, <span class="dt">data =</span> dum_trn)</a></code></pre></div>
 <pre><code>## 
@@ -605,10 +607,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## lm(formula = y ~ . + 0, data = dum_trn)
 ## 
 ## Coefficients:
-##     xA      xB      xC      xD      xE      xF      xG      xH      xI  
-##  0.668   0.714   1.052   5.052   4.794   5.028  10.821  10.783  12.942  
-##     xJ  
-## 13.124</code></pre>
+##     xA      xB      xC      xD      xE      xF      xG      xH      xI      xJ  
+##  0.668   0.714   1.052   5.052   4.794   5.028  10.821  10.783  12.942  13.124</code></pre>
 <div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb323-1" data-line-number="1"><span class="kw">rpart.plot</span>(<span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> dum_trn))</a></code></pre></div>
 <p><img src="03-08-practical_files/figure-html/unnamed-chunk-33-1.png" width="672" style="display: block; margin: auto;" /></p>
 
@@ -639,6 +639,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
+"github": false,
 "facebook": true,
 "twitter": true,
 "linkedin": false,
@@ -657,6 +658,10 @@ gitbook.start({
 "text": "Edit"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },

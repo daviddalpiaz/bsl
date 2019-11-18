@@ -492,10 +492,10 @@ microbenchmark(check_if_in_interval())
 
 ```
 ## Unit: milliseconds
-##                    expr     min       lq     mean   median       uq
-##  check_if_in_interval() 80.1165 86.63489 90.28327 89.58899 92.22633
-##       max neval
-##  144.7638   100
+##                    expr      min       lq     mean   median       uq      max
+##  check_if_in_interval() 110.9175 116.2226 125.9969 119.6187 122.2261 298.3749
+##  neval
+##    100
 ```
 
 ## Misc Notes

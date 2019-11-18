@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Clustering: Basketball Players | Basics of Statistical Learning</title>
   <meta name="description" content="Chapter 4 Clustering: Basketball Players | Basics of Statistical Learning" />
-  <meta name="generator" content="bookdown 0.14.1 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.15.1 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Clustering: Basketball Players | Basics of Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-11-10" />
+<meta name="date" content="2019-11-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -301,6 +301,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="24.3" data-path="additional-reading.html"><a href="additional-reading.html#blog-posts"><i class="fa fa-check"></i><b>24.3</b> Blog Posts</a></li>
 <li class="chapter" data-level="24.4" data-path="additional-reading.html"><a href="additional-reading.html#miscellaneous"><i class="fa fa-check"></i><b>24.4</b> Miscellaneous</a></li>
 </ul></li>
+<li class="chapter" data-level="25" data-path="class-imbalance.html"><a href="class-imbalance.html"><i class="fa fa-check"></i><b>25</b> Class Imbalance</a></li>
+<li class="chapter" data-level="26" data-path="missing-data.html"><a href="missing-data.html"><i class="fa fa-check"></i><b>26</b> Missing Data</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/daviddalpiaz/bsl" target="blank">&copy; 2019 David Dalpiaz</a></li>
 
@@ -367,38 +369,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">nba =<span class="st"> </span><span class="kw">scrape_nba_season_player_stats</span>()</a>
 <a class="sourceLine" id="cb44-2" data-line-number="2">nba<span class="op">$</span>pos =<span class="st"> </span><span class="kw">factor</span>(nba<span class="op">$</span>pos, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;PG&quot;</span>, <span class="st">&quot;SG&quot;</span>, <span class="st">&quot;SF&quot;</span>, <span class="st">&quot;PF&quot;</span>, <span class="st">&quot;C&quot;</span>))</a></code></pre></div>
 <pre><code>## # A tibble: 100 x 93
-##    player_team pos     age tm        g    gs    mp    fg   fga fg_percent
-##    &lt;chr&gt;       &lt;fct&gt; &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
-##  1 Álex Abrin… SG       25 OKC      31     2   588    56   157      0.357
-##  2 Quincy Acy… PF       28 PHO      10     0   123     4    18      0.222
-##  3 Jaylen Ada… PG       22 ATL      34     1   428    38   110      0.345
-##  4 Steven Ada… C        25 OKC      80    80  2669   481   809      0.595
-##  5 Bam Adebay… C        21 MIA      82    28  1913   280   486      0.576
-##  6 Deng Adel … SF       21 CLE      19     3   194    11    36      0.306
-##  7 DeVaughn A… SG       25 DEN       7     0    22     3    10      0.3  
-##  8 LaMarcus A… C        33 SAS      81    81  2687   684  1319      0.519
-##  9 Rawle Alki… SG       21 CHI      10     1   120    13    39      0.333
-## 10 Grayson Al… SG       23 UTA      38     2   416    67   178      0.376
-## # … with 90 more rows, and 83 more variables: x3p &lt;dbl&gt;, x3pa &lt;dbl&gt;,
-## #   x3p_percent &lt;dbl&gt;, x2p &lt;dbl&gt;, x2pa &lt;dbl&gt;, x2p_percent &lt;dbl&gt;,
-## #   e_fg_percent &lt;dbl&gt;, ft &lt;dbl&gt;, fta &lt;dbl&gt;, ft_percent &lt;dbl&gt;, orb &lt;dbl&gt;,
-## #   drb &lt;dbl&gt;, trb &lt;dbl&gt;, ast &lt;dbl&gt;, stl &lt;dbl&gt;, blk &lt;dbl&gt;, tov &lt;dbl&gt;,
-## #   pf &lt;dbl&gt;, pts &lt;dbl&gt;, fg_pm &lt;dbl&gt;, fga_pm &lt;dbl&gt;, fg_percent_pm &lt;dbl&gt;,
-## #   x3p_pm &lt;dbl&gt;, x3pa_pm &lt;dbl&gt;, x3p_percent_pm &lt;dbl&gt;, x2p_pm &lt;dbl&gt;,
-## #   x2pa_pm &lt;dbl&gt;, x2p_percent_pm &lt;dbl&gt;, ft_pm &lt;dbl&gt;, fta_pm &lt;dbl&gt;,
-## #   ft_percent_pm &lt;dbl&gt;, orb_pm &lt;dbl&gt;, drb_pm &lt;dbl&gt;, trb_pm &lt;dbl&gt;,
-## #   ast_pm &lt;dbl&gt;, stl_pm &lt;dbl&gt;, blk_pm &lt;dbl&gt;, tov_pm &lt;dbl&gt;, pf_pm &lt;dbl&gt;,
-## #   pts_pm &lt;dbl&gt;, fg_pp &lt;dbl&gt;, fga_pp &lt;dbl&gt;, fg_percent_pp &lt;dbl&gt;,
+##    player_team pos     age tm        g    gs    mp    fg   fga fg_percent   x3p
+##    &lt;chr&gt;       &lt;fct&gt; &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;
+##  1 Álex Abrin… SG       25 OKC      31     2   588    56   157      0.357    41
+##  2 Quincy Acy… PF       28 PHO      10     0   123     4    18      0.222     2
+##  3 Jaylen Ada… PG       22 ATL      34     1   428    38   110      0.345    25
+##  4 Steven Ada… C        25 OKC      80    80  2669   481   809      0.595     0
+##  5 Bam Adebay… C        21 MIA      82    28  1913   280   486      0.576     3
+##  6 Deng Adel … SF       21 CLE      19     3   194    11    36      0.306     6
+##  7 DeVaughn A… SG       25 DEN       7     0    22     3    10      0.3       0
+##  8 LaMarcus A… C        33 SAS      81    81  2687   684  1319      0.519    10
+##  9 Rawle Alki… SG       21 CHI      10     1   120    13    39      0.333     3
+## 10 Grayson Al… SG       23 UTA      38     2   416    67   178      0.376    32
+## # … with 90 more rows, and 82 more variables: x3pa &lt;dbl&gt;, x3p_percent &lt;dbl&gt;,
+## #   x2p &lt;dbl&gt;, x2pa &lt;dbl&gt;, x2p_percent &lt;dbl&gt;, e_fg_percent &lt;dbl&gt;, ft &lt;dbl&gt;,
+## #   fta &lt;dbl&gt;, ft_percent &lt;dbl&gt;, orb &lt;dbl&gt;, drb &lt;dbl&gt;, trb &lt;dbl&gt;, ast &lt;dbl&gt;,
+## #   stl &lt;dbl&gt;, blk &lt;dbl&gt;, tov &lt;dbl&gt;, pf &lt;dbl&gt;, pts &lt;dbl&gt;, fg_pm &lt;dbl&gt;,
+## #   fga_pm &lt;dbl&gt;, fg_percent_pm &lt;dbl&gt;, x3p_pm &lt;dbl&gt;, x3pa_pm &lt;dbl&gt;,
+## #   x3p_percent_pm &lt;dbl&gt;, x2p_pm &lt;dbl&gt;, x2pa_pm &lt;dbl&gt;, x2p_percent_pm &lt;dbl&gt;,
+## #   ft_pm &lt;dbl&gt;, fta_pm &lt;dbl&gt;, ft_percent_pm &lt;dbl&gt;, orb_pm &lt;dbl&gt;, drb_pm &lt;dbl&gt;,
+## #   trb_pm &lt;dbl&gt;, ast_pm &lt;dbl&gt;, stl_pm &lt;dbl&gt;, blk_pm &lt;dbl&gt;, tov_pm &lt;dbl&gt;,
+## #   pf_pm &lt;dbl&gt;, pts_pm &lt;dbl&gt;, fg_pp &lt;dbl&gt;, fga_pp &lt;dbl&gt;, fg_percent_pp &lt;dbl&gt;,
 ## #   x3p_pp &lt;dbl&gt;, x3pa_pp &lt;dbl&gt;, x3p_percent_pp &lt;dbl&gt;, x2p_pp &lt;dbl&gt;,
 ## #   x2pa_pp &lt;dbl&gt;, x2p_percent_pp &lt;dbl&gt;, ft_pp &lt;dbl&gt;, fta_pp &lt;dbl&gt;,
 ## #   ft_percent_pp &lt;dbl&gt;, orb_pp &lt;dbl&gt;, drb_pp &lt;dbl&gt;, trb_pp &lt;dbl&gt;,
 ## #   ast_pp &lt;dbl&gt;, stl_pp &lt;dbl&gt;, blk_pp &lt;dbl&gt;, tov_pp &lt;dbl&gt;, pf_pp &lt;dbl&gt;,
-## #   pts_pp &lt;dbl&gt;, o_rtg_pp &lt;dbl&gt;, d_rtg_pp &lt;dbl&gt;, per &lt;dbl&gt;,
-## #   ts_percent &lt;dbl&gt;, x3p_ar &lt;dbl&gt;, f_tr &lt;dbl&gt;, orb_percent &lt;dbl&gt;,
-## #   drb_percent &lt;dbl&gt;, trb_percent &lt;dbl&gt;, ast_percent &lt;dbl&gt;,
-## #   stl_percent &lt;dbl&gt;, blk_percent &lt;dbl&gt;, tov_percent &lt;dbl&gt;,
-## #   usg_percent &lt;dbl&gt;, ows &lt;dbl&gt;, dws &lt;dbl&gt;, ws &lt;dbl&gt;, ws_48 &lt;dbl&gt;,
-## #   obpm &lt;dbl&gt;, dbpm &lt;dbl&gt;, bpm &lt;dbl&gt;, vorp &lt;dbl&gt;</code></pre>
+## #   pts_pp &lt;dbl&gt;, o_rtg_pp &lt;dbl&gt;, d_rtg_pp &lt;dbl&gt;, per &lt;dbl&gt;, ts_percent &lt;dbl&gt;,
+## #   x3p_ar &lt;dbl&gt;, f_tr &lt;dbl&gt;, orb_percent &lt;dbl&gt;, drb_percent &lt;dbl&gt;,
+## #   trb_percent &lt;dbl&gt;, ast_percent &lt;dbl&gt;, stl_percent &lt;dbl&gt;, blk_percent &lt;dbl&gt;,
+## #   tov_percent &lt;dbl&gt;, usg_percent &lt;dbl&gt;, ows &lt;dbl&gt;, dws &lt;dbl&gt;, ws &lt;dbl&gt;,
+## #   ws_48 &lt;dbl&gt;, obpm &lt;dbl&gt;, dbpm &lt;dbl&gt;, bpm &lt;dbl&gt;, vorp &lt;dbl&gt;</code></pre>
 </div>
 <div id="eda-2" class="section level2">
 <h2><span class="header-section-number">4.3</span> EDA</h2>
@@ -480,6 +480,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
+"github": false,
 "facebook": true,
 "twitter": true,
 "linkedin": false,
@@ -498,6 +499,10 @@ gitbook.start({
 "text": "Edit"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },

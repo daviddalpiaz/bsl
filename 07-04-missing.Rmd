@@ -1,0 +1,229 @@
+# Missing Data
+
+```{r, include = FALSE} 
+knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
+```
+
+```{r}
+library("tidyverse")
+library("caret")
+```
+
+```{r}
+airquality = as_tibble(airquality)
+```
+
+```{r}
+# airquality %>% View()
+```
+
+```{r}
+count_na = function(x) {
+  sum(is.na(x))
+}
+```
+
+```{r}
+apply(airquality, 2, count_na)
+```
+
+```{r}
+aq = airquality %>% 
+  filter(!is.na(Ozone))
+```
+
+```{r}
+aq
+```
+
+```{r}
+# aq %>% View()
+```
+
+```{r}
+# lm(Ozone ~ ., data = aq, na.action = na.fail)
+```
+
+```{r}
+complete.cases(aq)
+na.omit(aq)
+```
+
+```{r}
+# ?lm
+```
+
+```{r}
+# cbind(
+#   aq,
+#   predict(preProcess(aq, "bagImpute"), aq)
+# ) %>% View()
+```
+
+```{r}
+set.seed(42)
+fit_original = train(
+  Ozone ~ ., data = aq,
+  method = "lm",
+  trControl = trainControl(method = "cv", number = 5),
+  na.action = na.omit
+)
+fit_original$results
+```
+
+```{r, knn-impute, eval = FALSE}
+set.seed(42)
+fit = train(
+  Ozone ~ ., data = aq,
+  method = "lm",
+  trControl = trainControl(method = "cv", number = 5),
+  preProcess = "knnImpute",
+  na.action = na.pass
+)
+fit$results
+```
+
+```{r}
+new_obs = aq[1:3, ]
+new_obs$Solar.R[1:2] = NA
+new_obs
+```
+
+```{r, eval = FALSE}
+# predict(fit, new_obs, na.action = na.pass)
+```
+
+```{r}
+predict(preProcess(aq, "medianImpute"), new_obs)
+```
+
+***
+
+```{r}
+library("tidyverse")
+library("caret")
+```
+
+```{r}
+data("airquality")
+airquality = as_tibble(airquality)
+```
+
+```{r}
+airquality
+```
+
+```{r}
+aq = airquality %>% 
+  filter(!is.na(Ozone))
+```
+
+```{r}
+train(
+  Ozone ~ .,
+  data = aq,
+  method = "lm",
+  trControl = trainControl(method = "cv", number = 5),
+  na.action = na.pass,
+  preProcess = c("medianImpute")
+)
+```
+
+```{r}
+aq
+```
+
+```{r}
+set.seed(42)
+mod_fct = train(
+  Ozone ~ as.factor(Month),
+  data = aq,
+  method = "lm",
+  trControl = trainControl(method = "cv", number = 5)
+)
+
+set.seed(42)
+mod_num = train(
+  Ozone ~ Month,
+  data = aq,
+  method = "lm",
+  trControl = trainControl(method = "cv", number = 5)
+)
+```
+
+```{r}
+sqrt(var(aq$Ozone)) 
+```
+
+```{r}
+mod_num$finalModel
+```
+
+```{r}
+mod_fct$finalModel
+```
+
+```{r}
+unique(aq$Month)
+```
+
+```{r}
+# error due to lack of factor level
+# predict(mod_fct, data.frame(Month = 12)) 
+```
+
+```{r}
+aq$Month[3:7] = NA
+aq$Month = as.factor(aq$Month)
+aq
+```
+
+```{r}
+train(
+  Ozone ~ .,
+  data = aq,
+  method = "lm",
+  trControl = trainControl(method = "cv", number = 5),
+  na.action = na.pass,
+  preProcess = c("medianImpute")
+)
+```
+
+```{r}
+table(aq$Month)
+```
+
+```{r}
+predict(preProcess(predict(dummyVars(Ozone ~ ., data = aq), aq), method = "knnImpute"), predict(dummyVars(Ozone ~ ., data = aq), aq))
+```
+
+```{r}
+predict(dummyVars(Ozone ~ ., data = aq), aq)
+```
+
+```{r}
+data("airquality")
+airquality$Month[airquality$Month == 5] = NA
+airquality$Month = factor(airquality$Month)
+airquality$Month
+```
+
+```{r}
+fct_explicit_na(airquality$Month, na_level = "(Missing)")
+```
+
+```{r}
+head(aq, n = 10)
+```
+
+```{r}
+library("randomForest")
+```
+
+```{r}
+randomForest(Ozone ~ ., data = rfImpute(Ozone ~ ., data = aq))
+```
+
+```{r}
+head(na.roughfix(aq), n = 10)
+```

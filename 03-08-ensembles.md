@@ -183,25 +183,24 @@ two_class_data
 
 ```
 ## # A tibble: 1,250 x 36
-##    TwoFactor1 TwoFactor2 Linear01 Linear02 Linear03 Linear04 Linear05
-##         <dbl>      <dbl>    <dbl>    <dbl>    <dbl>    <dbl>    <dbl>
-##  1      2.68       0.843  0.617      0.761   0.0712   -0.368    0.294
-##  2     -0.496     -0.955 -0.00454   -0.172   0.970    -1.28    -0.404
-##  3     -0.577      1.51  -0.0913    -0.265   0.310    -1.98    -2.18 
-##  4      1.06       0.567  0.400     -0.424  -0.140    -1.24     0.198
-##  5      1.21      -0.171  0.589      0.689  -0.326    -0.541    1.92 
-##  6     -0.161     -0.112 -0.0169     1.05   -0.119    -0.219   -0.928
-##  7      1.20       2.68   0.419     -2.19    0.894    -1.30    -0.329
-##  8      0.812     -1.06   0.801     -0.503   0.211     1.45     0.952
-##  9      2.74       2.44   0.680      0.880  -0.489    -0.197    1.64 
-## 10     -0.357      0.196  1.31       1.55   -0.220     0.891   -0.764
-## # ... with 1,240 more rows, and 29 more variables: Linear06 <dbl>,
-## #   Linear07 <dbl>, Linear08 <dbl>, Linear09 <dbl>, Linear10 <dbl>,
-## #   Nonlinear1 <dbl>, Nonlinear2 <dbl>, Nonlinear3 <dbl>, Noise01 <dbl>,
-## #   Noise02 <dbl>, Noise03 <dbl>, Noise04 <dbl>, Noise05 <dbl>,
-## #   Noise06 <dbl>, Noise07 <dbl>, Noise08 <dbl>, Noise09 <dbl>,
-## #   Noise10 <dbl>, Noise11 <dbl>, Noise12 <dbl>, Noise13 <dbl>,
-## #   Noise14 <dbl>, Noise15 <dbl>, Noise16 <dbl>, Noise17 <dbl>,
+##    TwoFactor1 TwoFactor2 Linear01 Linear02 Linear03 Linear04 Linear05 Linear06
+##         <dbl>      <dbl>    <dbl>    <dbl>    <dbl>    <dbl>    <dbl>    <dbl>
+##  1      2.68       0.843  0.617      0.761   0.0712   -0.368    0.294    2.44 
+##  2     -0.496     -0.955 -0.00454   -0.172   0.970    -1.28    -0.404    2.36 
+##  3     -0.577      1.51  -0.0913    -0.265   0.310    -1.98    -2.18     1.49 
+##  4      1.06       0.567  0.400     -0.424  -0.140    -1.24     0.198    0.931
+##  5      1.21      -0.171  0.589      0.689  -0.326    -0.541    1.92    -1.40 
+##  6     -0.161     -0.112 -0.0169     1.05   -0.119    -0.219   -0.928    1.32 
+##  7      1.20       2.68   0.419     -2.19    0.894    -1.30    -0.329   -0.319
+##  8      0.812     -1.06   0.801     -0.503   0.211     1.45     0.952    0.135
+##  9      2.74       2.44   0.680      0.880  -0.489    -0.197    1.64    -2.64 
+## 10     -0.357      0.196  1.31       1.55   -0.220     0.891   -0.764    1.24 
+## # ... with 1,240 more rows, and 28 more variables: Linear07 <dbl>,
+## #   Linear08 <dbl>, Linear09 <dbl>, Linear10 <dbl>, Nonlinear1 <dbl>,
+## #   Nonlinear2 <dbl>, Nonlinear3 <dbl>, Noise01 <dbl>, Noise02 <dbl>,
+## #   Noise03 <dbl>, Noise04 <dbl>, Noise05 <dbl>, Noise06 <dbl>, Noise07 <dbl>,
+## #   Noise08 <dbl>, Noise09 <dbl>, Noise10 <dbl>, Noise11 <dbl>, Noise12 <dbl>,
+## #   Noise13 <dbl>, Noise14 <dbl>, Noise15 <dbl>, Noise16 <dbl>, Noise17 <dbl>,
 ## #   Noise18 <dbl>, Noise19 <dbl>, Noise20 <dbl>, Class <fct>
 ```
 
@@ -291,78 +290,69 @@ predict(fit, two_class_data, predict.all = TRUE)$individual[2, ]
 ```
 
 ```
-##   [1] "Class2" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
-##   [8] "Class1" "Class1" "Class1" "Class1" "Class2" "Class1" "Class1"
-##  [15] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class2"
-##  [22] "Class1" "Class2" "Class1" "Class1" "Class1" "Class1" "Class1"
-##  [29] "Class1" "Class1" "Class1" "Class1" "Class2" "Class1" "Class1"
-##  [36] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class2"
-##  [43] "Class2" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
-##  [50] "Class1" "Class2" "Class2" "Class2" "Class1" "Class1" "Class1"
-##  [57] "Class1" "Class1" "Class2" "Class2" "Class1" "Class1" "Class1"
-##  [64] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
-##  [71] "Class1" "Class1" "Class1" "Class2" "Class1" "Class1" "Class1"
-##  [78] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
-##  [85] "Class1" "Class1" "Class2" "Class1" "Class1" "Class1" "Class1"
-##  [92] "Class1" "Class1" "Class1" "Class2" "Class1" "Class1" "Class1"
-##  [99] "Class1" "Class1" "Class2" "Class1" "Class1" "Class1" "Class1"
-## [106] "Class1" "Class2" "Class1" "Class2" "Class1" "Class2" "Class1"
-## [113] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
-## [120] "Class2" "Class1" "Class1" "Class1" "Class2" "Class1" "Class1"
-## [127] "Class1" "Class1" "Class2" "Class1" "Class1" "Class1" "Class2"
-## [134] "Class1" "Class1" "Class1" "Class1" "Class2" "Class2" "Class1"
-## [141] "Class1" "Class1" "Class1" "Class1" "Class1" "Class2" "Class1"
-## [148] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
-## [155] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
-## [162] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
-## [169] "Class1" "Class2" "Class1" "Class1" "Class1" "Class2" "Class1"
-## [176] "Class1" "Class1" "Class1" "Class2" "Class2" "Class1" "Class1"
-## [183] "Class1" "Class2" "Class1" "Class1" "Class2" "Class1" "Class1"
-## [190] "Class2" "Class1" "Class2" "Class1" "Class1" "Class1" "Class1"
-## [197] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
-## [204] "Class1" "Class1" "Class2" "Class1" "Class1" "Class1" "Class1"
-## [211] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
-## [218] "Class1" "Class2" "Class1" "Class1" "Class2" "Class2" "Class2"
-## [225] "Class1" "Class1" "Class1" "Class1" "Class2" "Class1" "Class1"
-## [232] "Class1" "Class1" "Class1" "Class1" "Class1" "Class2" "Class2"
-## [239] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
-## [246] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
-## [253] "Class1" "Class1" "Class2" "Class1" "Class1" "Class1" "Class2"
-## [260] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
-## [267] "Class2" "Class1" "Class1" "Class1" "Class1" "Class1" "Class2"
-## [274] "Class1" "Class2" "Class1" "Class1" "Class1" "Class1" "Class1"
-## [281] "Class1" "Class1" "Class1" "Class1" "Class2" "Class1" "Class1"
-## [288] "Class1" "Class2" "Class1" "Class1" "Class1" "Class1" "Class1"
-## [295] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class2"
-## [302] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
-## [309] "Class1" "Class1" "Class1" "Class1" "Class1" "Class2" "Class2"
-## [316] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
-## [323] "Class1" "Class1" "Class1" "Class1" "Class2" "Class2" "Class1"
-## [330] "Class1" "Class1" "Class1" "Class1" "Class2" "Class1" "Class1"
-## [337] "Class1" "Class2" "Class1" "Class1" "Class1" "Class1" "Class1"
-## [344] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
-## [351] "Class1" "Class2" "Class1" "Class1" "Class1" "Class1" "Class1"
-## [358] "Class2" "Class1" "Class1" "Class1" "Class1" "Class2" "Class1"
-## [365] "Class1" "Class1" "Class1" "Class2" "Class1" "Class1" "Class1"
-## [372] "Class2" "Class1" "Class1" "Class2" "Class2" "Class1" "Class2"
-## [379] "Class2" "Class1" "Class1" "Class1" "Class1" "Class2" "Class2"
-## [386] "Class1" "Class1" "Class2" "Class2" "Class2" "Class1" "Class2"
-## [393] "Class1" "Class1" "Class2" "Class1" "Class1" "Class1" "Class1"
-## [400] "Class2" "Class2" "Class1" "Class1" "Class2" "Class1" "Class2"
-## [407] "Class1" "Class1" "Class1" "Class1" "Class1" "Class2" "Class1"
-## [414] "Class1" "Class1" "Class2" "Class1" "Class1" "Class1" "Class1"
-## [421] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
-## [428] "Class1" "Class1" "Class1" "Class1" "Class1" "Class2" "Class1"
-## [435] "Class1" "Class2" "Class1" "Class2" "Class1" "Class1" "Class1"
-## [442] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
-## [449] "Class1" "Class1" "Class1" "Class1" "Class2" "Class2" "Class1"
-## [456] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
-## [463] "Class1" "Class1" "Class1" "Class1" "Class2" "Class1" "Class1"
-## [470] "Class1" "Class2" "Class1" "Class1" "Class1" "Class2" "Class2"
-## [477] "Class1" "Class2" "Class1" "Class1" "Class1" "Class1" "Class1"
-## [484] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
-## [491] "Class1" "Class2" "Class1" "Class1" "Class1" "Class1" "Class1"
-## [498] "Class1" "Class1" "Class1"
+##   [1] "Class2" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
+##   [9] "Class1" "Class1" "Class1" "Class2" "Class1" "Class1" "Class1" "Class1"
+##  [17] "Class1" "Class1" "Class1" "Class1" "Class2" "Class1" "Class2" "Class1"
+##  [25] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
+##  [33] "Class2" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
+##  [41] "Class1" "Class2" "Class2" "Class1" "Class1" "Class1" "Class1" "Class1"
+##  [49] "Class1" "Class1" "Class2" "Class2" "Class2" "Class1" "Class1" "Class1"
+##  [57] "Class1" "Class1" "Class2" "Class2" "Class1" "Class1" "Class1" "Class1"
+##  [65] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
+##  [73] "Class1" "Class2" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
+##  [81] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class2" "Class1"
+##  [89] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class2" "Class1"
+##  [97] "Class1" "Class1" "Class1" "Class1" "Class2" "Class1" "Class1" "Class1"
+## [105] "Class1" "Class1" "Class2" "Class1" "Class2" "Class1" "Class2" "Class1"
+## [113] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class2"
+## [121] "Class1" "Class1" "Class1" "Class2" "Class1" "Class1" "Class1" "Class1"
+## [129] "Class2" "Class1" "Class1" "Class1" "Class2" "Class1" "Class1" "Class1"
+## [137] "Class1" "Class2" "Class2" "Class1" "Class1" "Class1" "Class1" "Class1"
+## [145] "Class1" "Class2" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
+## [153] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
+## [161] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
+## [169] "Class1" "Class2" "Class1" "Class1" "Class1" "Class2" "Class1" "Class1"
+## [177] "Class1" "Class1" "Class2" "Class2" "Class1" "Class1" "Class1" "Class2"
+## [185] "Class1" "Class1" "Class2" "Class1" "Class1" "Class2" "Class1" "Class2"
+## [193] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
+## [201] "Class1" "Class1" "Class1" "Class1" "Class1" "Class2" "Class1" "Class1"
+## [209] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
+## [217] "Class1" "Class1" "Class2" "Class1" "Class1" "Class2" "Class2" "Class2"
+## [225] "Class1" "Class1" "Class1" "Class1" "Class2" "Class1" "Class1" "Class1"
+## [233] "Class1" "Class1" "Class1" "Class1" "Class2" "Class2" "Class1" "Class1"
+## [241] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
+## [249] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class2" "Class1"
+## [257] "Class1" "Class1" "Class2" "Class1" "Class1" "Class1" "Class1" "Class1"
+## [265] "Class1" "Class1" "Class2" "Class1" "Class1" "Class1" "Class1" "Class1"
+## [273] "Class2" "Class1" "Class2" "Class1" "Class1" "Class1" "Class1" "Class1"
+## [281] "Class1" "Class1" "Class1" "Class1" "Class2" "Class1" "Class1" "Class1"
+## [289] "Class2" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
+## [297] "Class1" "Class1" "Class1" "Class1" "Class2" "Class1" "Class1" "Class1"
+## [305] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
+## [313] "Class1" "Class2" "Class2" "Class1" "Class1" "Class1" "Class1" "Class1"
+## [321] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class2" "Class2"
+## [329] "Class1" "Class1" "Class1" "Class1" "Class1" "Class2" "Class1" "Class1"
+## [337] "Class1" "Class2" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
+## [345] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class2"
+## [353] "Class1" "Class1" "Class1" "Class1" "Class1" "Class2" "Class1" "Class1"
+## [361] "Class1" "Class1" "Class2" "Class1" "Class1" "Class1" "Class1" "Class2"
+## [369] "Class1" "Class1" "Class1" "Class2" "Class1" "Class1" "Class2" "Class2"
+## [377] "Class1" "Class2" "Class2" "Class1" "Class1" "Class1" "Class1" "Class2"
+## [385] "Class2" "Class1" "Class1" "Class2" "Class2" "Class2" "Class1" "Class2"
+## [393] "Class1" "Class1" "Class2" "Class1" "Class1" "Class1" "Class1" "Class2"
+## [401] "Class2" "Class1" "Class1" "Class2" "Class1" "Class2" "Class1" "Class1"
+## [409] "Class1" "Class1" "Class1" "Class2" "Class1" "Class1" "Class1" "Class2"
+## [417] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
+## [425] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
+## [433] "Class2" "Class1" "Class1" "Class2" "Class1" "Class2" "Class1" "Class1"
+## [441] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
+## [449] "Class1" "Class1" "Class1" "Class1" "Class2" "Class2" "Class1" "Class1"
+## [457] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
+## [465] "Class1" "Class1" "Class2" "Class1" "Class1" "Class1" "Class2" "Class1"
+## [473] "Class1" "Class1" "Class2" "Class2" "Class1" "Class2" "Class1" "Class1"
+## [481] "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1" "Class1"
+## [489] "Class1" "Class1" "Class1" "Class2" "Class1" "Class1" "Class1" "Class1"
+## [497] "Class1" "Class1" "Class1" "Class1"
 ```
 
 
@@ -630,8 +620,8 @@ fit_caret_gbm
 ## 
 ## Tuning parameter 'n.minobsinnode' was held constant at a value of 10
 ## Accuracy was used to select the optimal model using the largest value.
-## The final values used for the model were n.trees = 150,
-##  interaction.depth = 3, shrinkage = 0.1 and n.minobsinnode = 10.
+## The final values used for the model were n.trees = 150, interaction.depth =
+##  3, shrinkage = 0.1 and n.minobsinnode = 10.
 ```
 
 
@@ -659,78 +649,45 @@ fit_caret_xgb
 ## Summary of sample sizes: 1000, 1001, 999, 1000, 1000 
 ## Resampling results across tuning parameters:
 ## 
-##   eta  max_depth  colsample_bytree  subsample  nrounds  Accuracy 
-##   0.3  1          0.6               0.5         50      0.8392214
-##   0.3  1          0.6               0.5        100      0.8544055
-##   0.3  1          0.6               1.0         50      0.8296052
-##   0.3  1          0.6               1.0        100      0.8464150
-##   0.3  1          0.8               0.5         50      0.8360308
-##   0.3  1          0.8               0.5        100      0.8512021
-##   0.3  1          0.8               1.0         50      0.8288276
-##   0.3  1          0.8               1.0        100      0.8512214
-##   0.3  2          0.6               0.5         50      0.8488278
-##   0.3  2          0.6               0.5        100      0.8536214
-##   0.3  2          0.6               1.0         50      0.8464213
-##   0.3  2          0.6               1.0        100      0.8576247
-##   0.3  2          0.8               0.5         50      0.8456597
-##   0.3  2          0.8               0.5        100      0.8592150
-##   0.3  2          0.8               1.0         50      0.8600023
-##   0.3  2          0.8               1.0        100      0.8631991
-##   0.4  1          0.6               0.5         50      0.8384118
-##   0.4  1          0.6               0.5        100      0.8447894
-##   0.4  1          0.6               1.0         50      0.8384277
-##   0.4  1          0.6               1.0        100      0.8584119
-##   0.4  1          0.8               0.5         50      0.8472086
-##   0.4  1          0.8               0.5        100      0.8599926
-##   0.4  1          0.8               1.0         50      0.8432149
-##   0.4  1          0.8               1.0        100      0.8656152
-##   0.4  2          0.6               0.5         50      0.8400150
-##   0.4  2          0.6               0.5        100      0.8400117
-##   0.4  2          0.6               1.0         50      0.8440118
-##   0.4  2          0.6               1.0        100      0.8472470
-##   0.4  2          0.8               0.5         50      0.8400278
-##   0.4  2          0.8               0.5        100      0.8448117
-##   0.4  2          0.8               1.0         50      0.8520055
-##   0.4  2          0.8               1.0        100      0.8520119
-##   Kappa    
-##   0.6769540
-##   0.7078959
-##   0.6565702
-##   0.6910691
-##   0.6705396
-##   0.7012276
-##   0.6551720
-##   0.7010765
-##   0.6965017
-##   0.7061904
-##   0.6916100
-##   0.7142662
-##   0.6901581
-##   0.7177094
-##   0.7189731
-##   0.7256871
-##   0.6750451
-##   0.6882491
-##   0.6748621
-##   0.7156206
-##   0.6931865
-##   0.7188617
-##   0.6845350
-##   0.7300746
-##   0.6789671
-##   0.6795340
-##   0.6868629
-##   0.6933817
-##   0.6791399
-##   0.6885384
-##   0.7030056
-##   0.7029730
+##   eta  max_depth  colsample_bytree  subsample  nrounds  Accuracy   Kappa    
+##   0.3  1          0.6               0.5         50      0.8392214  0.6769540
+##   0.3  1          0.6               0.5        100      0.8544055  0.7078959
+##   0.3  1          0.6               1.0         50      0.8296052  0.6565702
+##   0.3  1          0.6               1.0        100      0.8464150  0.6910691
+##   0.3  1          0.8               0.5         50      0.8360308  0.6705396
+##   0.3  1          0.8               0.5        100      0.8512021  0.7012276
+##   0.3  1          0.8               1.0         50      0.8288276  0.6551720
+##   0.3  1          0.8               1.0        100      0.8512214  0.7010765
+##   0.3  2          0.6               0.5         50      0.8488278  0.6965017
+##   0.3  2          0.6               0.5        100      0.8536214  0.7061904
+##   0.3  2          0.6               1.0         50      0.8464213  0.6916100
+##   0.3  2          0.6               1.0        100      0.8576247  0.7142662
+##   0.3  2          0.8               0.5         50      0.8456597  0.6901581
+##   0.3  2          0.8               0.5        100      0.8592150  0.7177094
+##   0.3  2          0.8               1.0         50      0.8600023  0.7189731
+##   0.3  2          0.8               1.0        100      0.8631991  0.7256871
+##   0.4  1          0.6               0.5         50      0.8384118  0.6750451
+##   0.4  1          0.6               0.5        100      0.8447894  0.6882491
+##   0.4  1          0.6               1.0         50      0.8384277  0.6748621
+##   0.4  1          0.6               1.0        100      0.8584119  0.7156206
+##   0.4  1          0.8               0.5         50      0.8472086  0.6931865
+##   0.4  1          0.8               0.5        100      0.8599926  0.7188617
+##   0.4  1          0.8               1.0         50      0.8432149  0.6845350
+##   0.4  1          0.8               1.0        100      0.8656152  0.7300746
+##   0.4  2          0.6               0.5         50      0.8400150  0.6789671
+##   0.4  2          0.6               0.5        100      0.8400117  0.6795340
+##   0.4  2          0.6               1.0         50      0.8440118  0.6868629
+##   0.4  2          0.6               1.0        100      0.8472470  0.6933817
+##   0.4  2          0.8               0.5         50      0.8400278  0.6791399
+##   0.4  2          0.8               0.5        100      0.8448117  0.6885384
+##   0.4  2          0.8               1.0         50      0.8520055  0.7030056
+##   0.4  2          0.8               1.0        100      0.8520119  0.7029730
 ## 
 ## Tuning parameter 'gamma' was held constant at a value of 0
-## 
-## Tuning parameter 'min_child_weight' was held constant at a value of 1
+## Tuning
+##  parameter 'min_child_weight' was held constant at a value of 1
 ## Accuracy was used to select the optimal model using the largest value.
-## The final values used for the model were nrounds = 100, max_depth = 1,
-##  eta = 0.4, gamma = 0, colsample_bytree = 0.8, min_child_weight = 1
-##  and subsample = 1.
+## The final values used for the model were nrounds = 100, max_depth = 1, eta
+##  = 0.4, gamma = 0, colsample_bytree = 0.8, min_child_weight = 1 and subsample
+##  = 1.
 ```

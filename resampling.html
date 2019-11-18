@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 12 Resampling | Basics of Statistical Learning</title>
   <meta name="description" content="Chapter 12 Resampling | Basics of Statistical Learning" />
-  <meta name="generator" content="bookdown 0.14.1 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.15.1 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 12 Resampling | Basics of Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2019-11-10" />
+<meta name="date" content="2019-11-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -301,6 +301,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="24.3" data-path="additional-reading.html"><a href="additional-reading.html#blog-posts"><i class="fa fa-check"></i><b>24.3</b> Blog Posts</a></li>
 <li class="chapter" data-level="24.4" data-path="additional-reading.html"><a href="additional-reading.html#miscellaneous"><i class="fa fa-check"></i><b>24.4</b> Miscellaneous</a></li>
 </ul></li>
+<li class="chapter" data-level="25" data-path="class-imbalance.html"><a href="class-imbalance.html"><i class="fa fa-check"></i><b>25</b> Class Imbalance</a></li>
+<li class="chapter" data-level="26" data-path="missing-data.html"><a href="missing-data.html"><i class="fa fa-check"></i><b>26</b> Missing Data</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/daviddalpiaz/bsl" target="blank">&copy; 2019 David Dalpiaz</a></li>
 
@@ -817,36 +819,36 @@ X_j \sim N(\mu = 0, \sigma^2 = 1)
 <a class="sourceLine" id="cb128-6" data-line-number="6">full_data =<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">data.frame</span>(y, x))</a>
 <a class="sourceLine" id="cb128-7" data-line-number="7">full_data</a></code></pre></div>
 <pre><code>## # A tibble: 200 x 10,001
-##        y      X1     X2       X3     X4     X5     X6      X7      X8
-##    &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-##  1     1  1.37   -2.00   1.33    -0.248  0.689  2.33  -0.747   0.877 
-##  2     1 -0.565   0.334 -0.869    0.422  0.725  0.524  0.0366 -1.77  
-##  3     1  0.363   1.17   0.0555   0.988  0.217  0.971  0.323  -0.0457
-##  4     0  0.633   2.06   0.0491   0.836 -0.202  0.377  0.380  -0.395 
-##  5     0  0.404  -1.38  -0.578   -0.661 -1.37  -0.996  0.877  -0.128 
-##  6     1 -0.106  -1.15  -0.999    1.56  -0.309 -0.597  0.933   1.10  
-##  7     1  1.51   -0.706 -0.00243 -1.62  -0.453  0.165 -2.43   -1.26  
-##  8     0 -0.0947 -1.05   0.656    0.864  0.663 -2.93   1.73   -0.265 
-##  9     1  2.02   -0.646  1.48    -0.512  1.31  -0.848  0.456   2.55  
-## 10     0 -0.0627 -0.185 -1.91    -1.92   0.501  0.799 -0.570  -1.48  
-## # … with 190 more rows, and 9,992 more variables: X9 &lt;dbl&gt;, X10 &lt;dbl&gt;,
-## #   X11 &lt;dbl&gt;, X12 &lt;dbl&gt;, X13 &lt;dbl&gt;, X14 &lt;dbl&gt;, X15 &lt;dbl&gt;, X16 &lt;dbl&gt;,
-## #   X17 &lt;dbl&gt;, X18 &lt;dbl&gt;, X19 &lt;dbl&gt;, X20 &lt;dbl&gt;, X21 &lt;dbl&gt;, X22 &lt;dbl&gt;,
-## #   X23 &lt;dbl&gt;, X24 &lt;dbl&gt;, X25 &lt;dbl&gt;, X26 &lt;dbl&gt;, X27 &lt;dbl&gt;, X28 &lt;dbl&gt;,
-## #   X29 &lt;dbl&gt;, X30 &lt;dbl&gt;, X31 &lt;dbl&gt;, X32 &lt;dbl&gt;, X33 &lt;dbl&gt;, X34 &lt;dbl&gt;,
-## #   X35 &lt;dbl&gt;, X36 &lt;dbl&gt;, X37 &lt;dbl&gt;, X38 &lt;dbl&gt;, X39 &lt;dbl&gt;, X40 &lt;dbl&gt;,
-## #   X41 &lt;dbl&gt;, X42 &lt;dbl&gt;, X43 &lt;dbl&gt;, X44 &lt;dbl&gt;, X45 &lt;dbl&gt;, X46 &lt;dbl&gt;,
-## #   X47 &lt;dbl&gt;, X48 &lt;dbl&gt;, X49 &lt;dbl&gt;, X50 &lt;dbl&gt;, X51 &lt;dbl&gt;, X52 &lt;dbl&gt;,
-## #   X53 &lt;dbl&gt;, X54 &lt;dbl&gt;, X55 &lt;dbl&gt;, X56 &lt;dbl&gt;, X57 &lt;dbl&gt;, X58 &lt;dbl&gt;,
-## #   X59 &lt;dbl&gt;, X60 &lt;dbl&gt;, X61 &lt;dbl&gt;, X62 &lt;dbl&gt;, X63 &lt;dbl&gt;, X64 &lt;dbl&gt;,
-## #   X65 &lt;dbl&gt;, X66 &lt;dbl&gt;, X67 &lt;dbl&gt;, X68 &lt;dbl&gt;, X69 &lt;dbl&gt;, X70 &lt;dbl&gt;,
-## #   X71 &lt;dbl&gt;, X72 &lt;dbl&gt;, X73 &lt;dbl&gt;, X74 &lt;dbl&gt;, X75 &lt;dbl&gt;, X76 &lt;dbl&gt;,
-## #   X77 &lt;dbl&gt;, X78 &lt;dbl&gt;, X79 &lt;dbl&gt;, X80 &lt;dbl&gt;, X81 &lt;dbl&gt;, X82 &lt;dbl&gt;,
-## #   X83 &lt;dbl&gt;, X84 &lt;dbl&gt;, X85 &lt;dbl&gt;, X86 &lt;dbl&gt;, X87 &lt;dbl&gt;, X88 &lt;dbl&gt;,
-## #   X89 &lt;dbl&gt;, X90 &lt;dbl&gt;, X91 &lt;dbl&gt;, X92 &lt;dbl&gt;, X93 &lt;dbl&gt;, X94 &lt;dbl&gt;,
-## #   X95 &lt;dbl&gt;, X96 &lt;dbl&gt;, X97 &lt;dbl&gt;, X98 &lt;dbl&gt;, X99 &lt;dbl&gt;, X100 &lt;dbl&gt;,
-## #   X101 &lt;dbl&gt;, X102 &lt;dbl&gt;, X103 &lt;dbl&gt;, X104 &lt;dbl&gt;, X105 &lt;dbl&gt;,
-## #   X106 &lt;dbl&gt;, X107 &lt;dbl&gt;, X108 &lt;dbl&gt;, …</code></pre>
+##        y      X1     X2       X3     X4     X5     X6      X7      X8      X9
+##    &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+##  1     1  1.37   -2.00   1.33    -0.248  0.689  2.33  -0.747   0.877   0.0293
+##  2     1 -0.565   0.334 -0.869    0.422  0.725  0.524  0.0366 -1.77    1.93  
+##  3     1  0.363   1.17   0.0555   0.988  0.217  0.971  0.323  -0.0457  0.838 
+##  4     0  0.633   2.06   0.0491   0.836 -0.202  0.377  0.380  -0.395  -0.185 
+##  5     0  0.404  -1.38  -0.578   -0.661 -1.37  -0.996  0.877  -0.128   0.533 
+##  6     1 -0.106  -1.15  -0.999    1.56  -0.309 -0.597  0.933   1.10    1.78  
+##  7     1  1.51   -0.706 -0.00243 -1.62  -0.453  0.165 -2.43   -1.26    0.190 
+##  8     0 -0.0947 -1.05   0.656    0.864  0.663 -2.93   1.73   -0.265  -0.569 
+##  9     1  2.02   -0.646  1.48    -0.512  1.31  -0.848  0.456   2.55    1.45  
+## 10     0 -0.0627 -0.185 -1.91    -1.92   0.501  0.799 -0.570  -1.48    1.87  
+## # … with 190 more rows, and 9,991 more variables: X10 &lt;dbl&gt;, X11 &lt;dbl&gt;,
+## #   X12 &lt;dbl&gt;, X13 &lt;dbl&gt;, X14 &lt;dbl&gt;, X15 &lt;dbl&gt;, X16 &lt;dbl&gt;, X17 &lt;dbl&gt;,
+## #   X18 &lt;dbl&gt;, X19 &lt;dbl&gt;, X20 &lt;dbl&gt;, X21 &lt;dbl&gt;, X22 &lt;dbl&gt;, X23 &lt;dbl&gt;,
+## #   X24 &lt;dbl&gt;, X25 &lt;dbl&gt;, X26 &lt;dbl&gt;, X27 &lt;dbl&gt;, X28 &lt;dbl&gt;, X29 &lt;dbl&gt;,
+## #   X30 &lt;dbl&gt;, X31 &lt;dbl&gt;, X32 &lt;dbl&gt;, X33 &lt;dbl&gt;, X34 &lt;dbl&gt;, X35 &lt;dbl&gt;,
+## #   X36 &lt;dbl&gt;, X37 &lt;dbl&gt;, X38 &lt;dbl&gt;, X39 &lt;dbl&gt;, X40 &lt;dbl&gt;, X41 &lt;dbl&gt;,
+## #   X42 &lt;dbl&gt;, X43 &lt;dbl&gt;, X44 &lt;dbl&gt;, X45 &lt;dbl&gt;, X46 &lt;dbl&gt;, X47 &lt;dbl&gt;,
+## #   X48 &lt;dbl&gt;, X49 &lt;dbl&gt;, X50 &lt;dbl&gt;, X51 &lt;dbl&gt;, X52 &lt;dbl&gt;, X53 &lt;dbl&gt;,
+## #   X54 &lt;dbl&gt;, X55 &lt;dbl&gt;, X56 &lt;dbl&gt;, X57 &lt;dbl&gt;, X58 &lt;dbl&gt;, X59 &lt;dbl&gt;,
+## #   X60 &lt;dbl&gt;, X61 &lt;dbl&gt;, X62 &lt;dbl&gt;, X63 &lt;dbl&gt;, X64 &lt;dbl&gt;, X65 &lt;dbl&gt;,
+## #   X66 &lt;dbl&gt;, X67 &lt;dbl&gt;, X68 &lt;dbl&gt;, X69 &lt;dbl&gt;, X70 &lt;dbl&gt;, X71 &lt;dbl&gt;,
+## #   X72 &lt;dbl&gt;, X73 &lt;dbl&gt;, X74 &lt;dbl&gt;, X75 &lt;dbl&gt;, X76 &lt;dbl&gt;, X77 &lt;dbl&gt;,
+## #   X78 &lt;dbl&gt;, X79 &lt;dbl&gt;, X80 &lt;dbl&gt;, X81 &lt;dbl&gt;, X82 &lt;dbl&gt;, X83 &lt;dbl&gt;,
+## #   X84 &lt;dbl&gt;, X85 &lt;dbl&gt;, X86 &lt;dbl&gt;, X87 &lt;dbl&gt;, X88 &lt;dbl&gt;, X89 &lt;dbl&gt;,
+## #   X90 &lt;dbl&gt;, X91 &lt;dbl&gt;, X92 &lt;dbl&gt;, X93 &lt;dbl&gt;, X94 &lt;dbl&gt;, X95 &lt;dbl&gt;,
+## #   X96 &lt;dbl&gt;, X97 &lt;dbl&gt;, X98 &lt;dbl&gt;, X99 &lt;dbl&gt;, X100 &lt;dbl&gt;, X101 &lt;dbl&gt;,
+## #   X102 &lt;dbl&gt;, X103 &lt;dbl&gt;, X104 &lt;dbl&gt;, X105 &lt;dbl&gt;, X106 &lt;dbl&gt;, X107 &lt;dbl&gt;,
+## #   X108 &lt;dbl&gt;, X109 &lt;dbl&gt;, …</code></pre>
 <p>Before attempting to perform cross-validation, we test-train split the data, using half of the available data for each. (In practice, with this little data, it would be hard to justify a separate test dataset, but here we do so to illustrate another point.)</p>
 <div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" data-line-number="1">trn_idx  =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(full_data), <span class="kw">trunc</span>(<span class="kw">nrow</span>(full_data) <span class="op">*</span><span class="st"> </span><span class="fl">0.5</span>))</a>
 <a class="sourceLine" id="cb130-2" data-line-number="2">trn_data =<span class="st"> </span>full_data[trn_idx,   ]</a>
@@ -858,16 +860,14 @@ X_j \sim N(\mu = 0, \sigma^2 = 1)
 <p>While many of these correlations are small, many very close to zero, some are as large as 0.40. Since our training data has 50 observations, we’ll select the 25 predictors with the largest (absolute) correlations.</p>
 <div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" data-line-number="1">selected =<span class="st"> </span><span class="kw">order</span>(<span class="kw">abs</span>(correlations), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">25</span>]</a>
 <a class="sourceLine" id="cb132-2" data-line-number="2">correlations[selected]</a></code></pre></div>
-<pre><code>##      X4942       X867      X8617      X8044       X406      X4358 
-##  0.4005771  0.3847397  0.3809371  0.3692479 -0.3571329  0.3553777 
-##      X7725      X1986      X3784        X77      X7010      X9354 
-## -0.3459522 -0.3448612  0.3298109 -0.3252776 -0.3242813  0.3227353 
-##      X8450      X2355      X4381      X2486      X5947      X5767 
-##  0.3220087  0.3192606  0.3157441  0.3149892  0.3131235  0.3114936 
-##      X1227      X1464      X8223       X188      X4203      X2234 
-## -0.3105052 -0.3104528  0.3084551  0.3065491  0.3039848 -0.3036512 
-##      X1098 
-## -0.3036153</code></pre>
+<pre><code>##      X4942       X867      X8617      X8044       X406      X4358      X7725 
+##  0.4005771  0.3847397  0.3809371  0.3692479 -0.3571329  0.3553777 -0.3459522 
+##      X1986      X3784        X77      X7010      X9354      X8450      X2355 
+## -0.3448612  0.3298109 -0.3252776 -0.3242813  0.3227353  0.3220087  0.3192606 
+##      X4381      X2486      X5947      X5767      X1227      X1464      X8223 
+##  0.3157441  0.3149892  0.3131235  0.3114936 -0.3105052 -0.3104528  0.3084551 
+##       X188      X4203      X2234      X1098 
+##  0.3065491  0.3039848 -0.3036512 -0.3036153</code></pre>
 <p>We subset the training and test sets to contain only the response as well as these 25 predictors.</p>
 <div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" data-line-number="1">trn_screen =<span class="st"> </span>trn_data[<span class="kw">c</span>(<span class="dv">1</span>, selected)]</a>
 <a class="sourceLine" id="cb134-2" data-line-number="2">tst_screen =<span class="st"> </span>tst_data[<span class="kw">c</span>(<span class="dv">1</span>, selected)]</a></code></pre></div>
@@ -993,6 +993,7 @@ x, \boldsymbol{x}, X, \boldsymbol{X}, \mathbf{x}, \mathbf{X}, \mathbb{X}, \mathc
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
+"github": false,
 "facebook": true,
 "twitter": true,
 "linkedin": false,
@@ -1011,6 +1012,10 @@ gitbook.start({
 "text": "Edit"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },

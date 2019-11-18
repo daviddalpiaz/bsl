@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 26 Missing Data | Basics of Statistical Learning</title>
+  <meta name="description" content="Chapter 26 Missing Data | Basics of Statistical Learning" />
+  <meta name="generator" content="bookdown 0.15.1 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 26 Missing Data | Basics of Statistical Learning" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://daviddalpiaz.github.io/bsl/" />
+  
+  
+  <meta name="github-repo" content="daviddalpiaz/bsl" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 26 Missing Data | Basics of Statistical Learning" />
+  
+  
+  
+
+<meta name="author" content="David Dalpiaz" />
+
+
+<meta name="date" content="2019-11-18" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="class-imbalance.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Basics of Statistical Learning</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i>Caveat Emptor</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i>Who?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization"><i class="fa fa-check"></i>Organization</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i>License</a></li>
+</ul></li>
+<li class="part"><span><b>I A Machine Learning Preview</b></span></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html"><i class="fa fa-check"></i><b>2</b> Regression: Powerlifting</a><ul>
+<li class="chapter" data-level="2.1" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html#background"><i class="fa fa-check"></i><b>2.1</b> Background</a></li>
+<li class="chapter" data-level="2.2" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html#data"><i class="fa fa-check"></i><b>2.2</b> Data</a></li>
+<li class="chapter" data-level="2.3" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html#eda"><i class="fa fa-check"></i><b>2.3</b> EDA</a></li>
+<li class="chapter" data-level="2.4" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html#modeling"><i class="fa fa-check"></i><b>2.4</b> Modeling</a></li>
+<li class="chapter" data-level="2.5" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html#model-evaluation"><i class="fa fa-check"></i><b>2.5</b> Model Evaluation</a></li>
+<li class="chapter" data-level="2.6" data-path="regression-powerlifting.html"><a href="regression-powerlifting.html#discussion"><i class="fa fa-check"></i><b>2.6</b> Discussion</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="classification-handwriting.html"><a href="classification-handwriting.html"><i class="fa fa-check"></i><b>3</b> Classification: Handwriting</a><ul>
+<li class="chapter" data-level="3.1" data-path="classification-handwriting.html"><a href="classification-handwriting.html#background-1"><i class="fa fa-check"></i><b>3.1</b> Background</a></li>
+<li class="chapter" data-level="3.2" data-path="classification-handwriting.html"><a href="classification-handwriting.html#data-1"><i class="fa fa-check"></i><b>3.2</b> Data</a></li>
+<li class="chapter" data-level="3.3" data-path="classification-handwriting.html"><a href="classification-handwriting.html#eda-1"><i class="fa fa-check"></i><b>3.3</b> EDA</a></li>
+<li class="chapter" data-level="3.4" data-path="classification-handwriting.html"><a href="classification-handwriting.html#modeling-1"><i class="fa fa-check"></i><b>3.4</b> Modeling</a></li>
+<li class="chapter" data-level="3.5" data-path="classification-handwriting.html"><a href="classification-handwriting.html#model-evaluation-1"><i class="fa fa-check"></i><b>3.5</b> Model Evaluation</a></li>
+<li class="chapter" data-level="3.6" data-path="classification-handwriting.html"><a href="classification-handwriting.html#discussion-1"><i class="fa fa-check"></i><b>3.6</b> Discussion</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html"><i class="fa fa-check"></i><b>4</b> Clustering: Basketball Players</a><ul>
+<li class="chapter" data-level="4.1" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html#background-2"><i class="fa fa-check"></i><b>4.1</b> Background</a></li>
+<li class="chapter" data-level="4.2" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html#data-2"><i class="fa fa-check"></i><b>4.2</b> Data</a></li>
+<li class="chapter" data-level="4.3" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html#eda-2"><i class="fa fa-check"></i><b>4.3</b> EDA</a></li>
+<li class="chapter" data-level="4.4" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html#modeling-2"><i class="fa fa-check"></i><b>4.4</b> Modeling</a></li>
+<li class="chapter" data-level="4.5" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html#model-evaluation-2"><i class="fa fa-check"></i><b>4.5</b> Model Evaluation</a></li>
+<li class="chapter" data-level="4.6" data-path="clustering-basketball-players.html"><a href="clustering-basketball-players.html#discussion-2"><i class="fa fa-check"></i><b>4.6</b> Discussion</a></li>
+</ul></li>
+<li class="part"><span><b>II Some Machine Learning Foundations</b></span></li>
+<li class="chapter" data-level="5" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>5</b> Introduction</a></li>
+<li class="chapter" data-level="6" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>6</b> Probability</a><ul>
+<li class="chapter" data-level="6.1" data-path="probability.html"><a href="probability.html#probability-models"><i class="fa fa-check"></i><b>6.1</b> Probability Models</a></li>
+<li class="chapter" data-level="6.2" data-path="probability.html"><a href="probability.html#probability-axioms"><i class="fa fa-check"></i><b>6.2</b> Probability Axioms</a></li>
+<li class="chapter" data-level="6.3" data-path="probability.html"><a href="probability.html#probability-rules"><i class="fa fa-check"></i><b>6.3</b> Probability Rules</a></li>
+<li class="chapter" data-level="6.4" data-path="probability.html"><a href="probability.html#random-variables"><i class="fa fa-check"></i><b>6.4</b> Random Variables</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="probability.html"><a href="probability.html#distributions"><i class="fa fa-check"></i><b>6.4.1</b> Distributions</a></li>
+<li class="chapter" data-level="6.4.2" data-path="probability.html"><a href="probability.html#discrete-random-variables"><i class="fa fa-check"></i><b>6.4.2</b> Discrete Random Variables</a></li>
+<li class="chapter" data-level="6.4.3" data-path="probability.html"><a href="probability.html#continuous-random-variables"><i class="fa fa-check"></i><b>6.4.3</b> Continuous Random Variables</a></li>
+<li class="chapter" data-level="6.4.4" data-path="probability.html"><a href="probability.html#several-random-variables"><i class="fa fa-check"></i><b>6.4.4</b> Several Random Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="probability.html"><a href="probability.html#expectations"><i class="fa fa-check"></i><b>6.5</b> Expectations</a></li>
+<li class="chapter" data-level="6.6" data-path="probability.html"><a href="probability.html#likelihood"><i class="fa fa-check"></i><b>6.6</b> Likelihood</a></li>
+<li class="chapter" data-level="6.7" data-path="probability.html"><a href="probability.html#videos"><i class="fa fa-check"></i><b>6.7</b> Videos</a></li>
+<li class="chapter" data-level="6.8" data-path="probability.html"><a href="probability.html#references"><i class="fa fa-check"></i><b>6.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="estimation.html"><a href="estimation.html"><i class="fa fa-check"></i><b>7</b> Estimation</a><ul>
+<li class="chapter" data-level="7.1" data-path="estimation.html"><a href="estimation.html#probability-1"><i class="fa fa-check"></i><b>7.1</b> Probability</a></li>
+<li class="chapter" data-level="7.2" data-path="estimation.html"><a href="estimation.html#statistics"><i class="fa fa-check"></i><b>7.2</b> Statistics</a></li>
+<li class="chapter" data-level="7.3" data-path="estimation.html"><a href="estimation.html#estimators"><i class="fa fa-check"></i><b>7.3</b> Estimators</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="estimation.html"><a href="estimation.html#properties"><i class="fa fa-check"></i><b>7.3.1</b> Properties</a></li>
+<li class="chapter" data-level="7.3.2" data-path="estimation.html"><a href="estimation.html#methods"><i class="fa fa-check"></i><b>7.3.2</b> Methods</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III A Tour of Machine Learning</b></span></li>
+<li class="chapter" data-level="8" data-path="introduction-2.html"><a href="introduction-2.html"><i class="fa fa-check"></i><b>8</b> Introduction</a></li>
+<li class="chapter" data-level="9" data-path="regression.html"><a href="regression.html"><i class="fa fa-check"></i><b>9</b> Regression</a><ul>
+<li class="chapter" data-level="9.1" data-path="regression.html"><a href="regression.html#setup"><i class="fa fa-check"></i><b>9.1</b> Setup</a></li>
+<li class="chapter" data-level="9.2" data-path="regression.html"><a href="regression.html#modeling-3"><i class="fa fa-check"></i><b>9.2</b> Modeling</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="regression.html"><a href="regression.html#linear-models"><i class="fa fa-check"></i><b>9.2.1</b> Linear Models</a></li>
+<li class="chapter" data-level="9.2.2" data-path="regression.html"><a href="regression.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>9.2.2</b> k-Nearest Neighbors</a></li>
+<li class="chapter" data-level="9.2.3" data-path="regression.html"><a href="regression.html#decision-trees"><i class="fa fa-check"></i><b>9.2.3</b> Decision Trees</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="regression.html"><a href="regression.html#procedure"><i class="fa fa-check"></i><b>9.3</b> Procedure</a></li>
+<li class="chapter" data-level="9.4" data-path="regression.html"><a href="regression.html#data-splitting"><i class="fa fa-check"></i><b>9.4</b> Data Splitting</a></li>
+<li class="chapter" data-level="9.5" data-path="regression.html"><a href="regression.html#metrics"><i class="fa fa-check"></i><b>9.5</b> Metrics</a></li>
+<li class="chapter" data-level="9.6" data-path="regression.html"><a href="regression.html#model-complexity"><i class="fa fa-check"></i><b>9.6</b> Model Complexity</a></li>
+<li class="chapter" data-level="9.7" data-path="regression.html"><a href="regression.html#overfitting"><i class="fa fa-check"></i><b>9.7</b> Overfitting</a></li>
+<li class="chapter" data-level="9.8" data-path="regression.html"><a href="regression.html#multiple-features"><i class="fa fa-check"></i><b>9.8</b> Multiple Features</a></li>
+<li class="chapter" data-level="9.9" data-path="regression.html"><a href="regression.html#example-analysis"><i class="fa fa-check"></i><b>9.9</b> Example Analysis</a></li>
+<li class="chapter" data-level="9.10" data-path="regression.html"><a href="regression.html#misc-todos"><i class="fa fa-check"></i><b>9.10</b> MISC TODOS</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>10</b> Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="10.1" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>10.1</b> Reducible and Irreducible Error</a></li>
+<li class="chapter" data-level="10.2" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>10.2</b> Bias-Variance Decomposition</a></li>
+<li class="chapter" data-level="10.3" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#simulation"><i class="fa fa-check"></i><b>10.3</b> Simulation</a></li>
+<li class="chapter" data-level="10.4" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>10.4</b> Estimating Expected Prediction Error</a></li>
+<li class="chapter" data-level="10.5" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reproducibility"><i class="fa fa-check"></i><b>10.5</b> Reproducibility</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>11</b> Classification</a><ul>
+<li class="chapter" data-level="11.1" data-path="classification.html"><a href="classification.html#stat-432-materials"><i class="fa fa-check"></i><b>11.1</b> STAT 432 Materials</a></li>
+<li class="chapter" data-level="11.2" data-path="classification.html"><a href="classification.html#bayes-classifier"><i class="fa fa-check"></i><b>11.2</b> Bayes Classifier</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="classification.html"><a href="classification.html#bayes-error-rate"><i class="fa fa-check"></i><b>11.2.1</b> Bayes Error Rate</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="classification.html"><a href="classification.html#building-a-classifier"><i class="fa fa-check"></i><b>11.3</b> Building a Classifier</a></li>
+<li class="chapter" data-level="11.4" data-path="classification.html"><a href="classification.html#modeling-4"><i class="fa fa-check"></i><b>11.4</b> Modeling</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="classification.html"><a href="classification.html#linear-models-1"><i class="fa fa-check"></i><b>11.4.1</b> Linear Models</a></li>
+<li class="chapter" data-level="11.4.2" data-path="classification.html"><a href="classification.html#k-nearest-neighbors-1"><i class="fa fa-check"></i><b>11.4.2</b> k-Nearest Neighbors</a></li>
+<li class="chapter" data-level="11.4.3" data-path="classification.html"><a href="classification.html#decision-trees-1"><i class="fa fa-check"></i><b>11.4.3</b> Decision Trees</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="classification.html"><a href="classification.html#misc-todo-stuff"><i class="fa fa-check"></i><b>11.5</b> MISC TODO STUFF</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="resampling.html"><a href="resampling.html"><i class="fa fa-check"></i><b>12</b> Resampling</a><ul>
+<li class="chapter" data-level="12.1" data-path="resampling.html"><a href="resampling.html#stat-432-materials-1"><i class="fa fa-check"></i><b>12.1</b> STAT 432 Materials</a></li>
+<li class="chapter" data-level="12.2" data-path="resampling.html"><a href="resampling.html#validation-set-approach"><i class="fa fa-check"></i><b>12.2</b> Validation-Set Approach</a></li>
+<li class="chapter" data-level="12.3" data-path="resampling.html"><a href="resampling.html#cross-validation"><i class="fa fa-check"></i><b>12.3</b> Cross-Validation</a></li>
+<li class="chapter" data-level="12.4" data-path="resampling.html"><a href="resampling.html#test-data"><i class="fa fa-check"></i><b>12.4</b> Test Data</a></li>
+<li class="chapter" data-level="12.5" data-path="resampling.html"><a href="resampling.html#misc-todos-1"><i class="fa fa-check"></i><b>12.5</b> MISC TODOS</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="supervised-learning.html"><a href="supervised-learning.html"><i class="fa fa-check"></i><b>13</b> Supervised Learning</a></li>
+<li class="chapter" data-level="14" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>14</b> Regularization</a><ul>
+<li class="chapter" data-level="14.1" data-path="regularization.html"><a href="regularization.html#stat-432-materials-2"><i class="fa fa-check"></i><b>14.1</b> STAT 432 Materials</a></li>
+<li class="chapter" data-level="14.2" data-path="regularization.html"><a href="regularization.html#reducing-variance-with-added-bias"><i class="fa fa-check"></i><b>14.2</b> Reducing Variance with Added Bias</a></li>
+<li class="chapter" data-level="14.3" data-path="regularization.html"><a href="regularization.html#scaling-matters"><i class="fa fa-check"></i><b>14.3</b> scaling matters?</a></li>
+<li class="chapter" data-level="14.4" data-path="regularization.html"><a href="regularization.html#constraints-in-two-dimensions"><i class="fa fa-check"></i><b>14.4</b> Constraints in Two Dimensions</a></li>
+<li class="chapter" data-level="14.5" data-path="regularization.html"><a href="regularization.html#high-dimensional-data"><i class="fa fa-check"></i><b>14.5</b> High Dimensional Data</a></li>
+<li class="chapter" data-level="14.6" data-path="regularization.html"><a href="regularization.html#ridge-regression"><i class="fa fa-check"></i><b>14.6</b> Ridge Regression</a></li>
+<li class="chapter" data-level="14.7" data-path="regularization.html"><a href="regularization.html#lasso"><i class="fa fa-check"></i><b>14.7</b> Lasso</a></li>
+<li class="chapter" data-level="14.8" data-path="regularization.html"><a href="regularization.html#boston-is-boring"><i class="fa fa-check"></i><b>14.8</b> boston is boring</a></li>
+<li class="chapter" data-level="14.9" data-path="regularization.html"><a href="regularization.html#some-more-simulation"><i class="fa fa-check"></i><b>14.9</b> some more simulation</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="ensembles.html"><a href="ensembles.html"><i class="fa fa-check"></i><b>15</b> Ensembles</a><ul>
+<li class="chapter" data-level="15.1" data-path="ensembles.html"><a href="ensembles.html#stat-432-materials-3"><i class="fa fa-check"></i><b>15.1</b> STAT 432 Materials</a></li>
+<li class="chapter" data-level="15.2" data-path="ensembles.html"><a href="ensembles.html#bagging"><i class="fa fa-check"></i><b>15.2</b> Bagging</a><ul>
+<li class="chapter" data-level="15.2.1" data-path="ensembles.html"><a href="ensembles.html#simultation-study"><i class="fa fa-check"></i><b>15.2.1</b> Simultation Study</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="ensembles.html"><a href="ensembles.html#random-forest"><i class="fa fa-check"></i><b>15.3</b> Random Forest</a></li>
+<li class="chapter" data-level="15.4" data-path="ensembles.html"><a href="ensembles.html#boosting"><i class="fa fa-check"></i><b>15.4</b> Boosting</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="practical-issues.html"><a href="practical-issues.html"><i class="fa fa-check"></i><b>16</b> Practical Issues</a><ul>
+<li class="chapter" data-level="16.1" data-path="practical-issues.html"><a href="practical-issues.html#stat-432-materials-4"><i class="fa fa-check"></i><b>16.1</b> STAT 432 Materials</a></li>
+<li class="chapter" data-level="16.2" data-path="practical-issues.html"><a href="practical-issues.html#feature-scaling"><i class="fa fa-check"></i><b>16.2</b> Feature Scaling</a></li>
+<li class="chapter" data-level="16.3" data-path="practical-issues.html"><a href="practical-issues.html#categorical-features"><i class="fa fa-check"></i><b>16.3</b> Categorical Features</a></li>
+</ul></li>
+<li class="part"><span><b>IV Mathematics</b></span></li>
+<li class="chapter" data-level="17" data-path="introduction-3.html"><a href="introduction-3.html"><i class="fa fa-check"></i><b>17</b> Introduction</a></li>
+<li class="part"><span><b>V Computing</b></span></li>
+<li class="chapter" data-level="18" data-path="introduction-4.html"><a href="introduction-4.html"><i class="fa fa-check"></i><b>18</b> Introduction</a></li>
+<li class="chapter" data-level="19" data-path="resources.html"><a href="resources.html"><i class="fa fa-check"></i><b>19</b> Resources</a><ul>
+<li class="chapter" data-level="19.1" data-path="resources.html"><a href="resources.html#resources-1"><i class="fa fa-check"></i><b>19.1</b> Resources</a><ul>
+<li class="chapter" data-level="19.1.1" data-path="resources.html"><a href="resources.html#r"><i class="fa fa-check"></i><b>19.1.1</b> R</a></li>
+<li class="chapter" data-level="19.1.2" data-path="resources.html"><a href="resources.html#rstudio"><i class="fa fa-check"></i><b>19.1.2</b> RStudio</a></li>
+<li class="chapter" data-level="19.1.3" data-path="resources.html"><a href="resources.html#r-markdown"><i class="fa fa-check"></i><b>19.1.3</b> R Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="19.2" data-path="resources.html"><a href="resources.html#bsl-idioms"><i class="fa fa-check"></i><b>19.2</b> BSL Idioms</a><ul>
+<li class="chapter" data-level="19.2.1" data-path="resources.html"><a href="resources.html#reference-style"><i class="fa fa-check"></i><b>19.2.1</b> Reference Style</a></li>
+<li class="chapter" data-level="19.2.2" data-path="resources.html"><a href="resources.html#bsl-style-overrides"><i class="fa fa-check"></i><b>19.2.2</b> BSL Style Overrides</a></li>
+<li class="chapter" data-level="19.2.3" data-path="resources.html"><a href="resources.html#objects-and-functions"><i class="fa fa-check"></i><b>19.2.3</b> Objects and Functions</a></li>
+<li class="chapter" data-level="19.2.4" data-path="resources.html"><a href="resources.html#print-versus-return"><i class="fa fa-check"></i><b>19.2.4</b> Print versus Return</a></li>
+<li class="chapter" data-level="19.2.5" data-path="resources.html"><a href="resources.html#help"><i class="fa fa-check"></i><b>19.2.5</b> Help</a></li>
+<li class="chapter" data-level="19.2.6" data-path="resources.html"><a href="resources.html#keyboard-shortcuts"><i class="fa fa-check"></i><b>19.2.6</b> Keyboard Shortcuts</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="resources.html"><a href="resources.html#common-issues"><i class="fa fa-check"></i><b>19.3</b> Common Issues</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="simulation-and-bootstrap.html"><a href="simulation-and-bootstrap.html"><i class="fa fa-check"></i><b>20</b> Simulation and Bootstrap</a><ul>
+<li class="chapter" data-level="20.1" data-path="simulation-and-bootstrap.html"><a href="simulation-and-bootstrap.html#stat-432-materials-5"><i class="fa fa-check"></i><b>20.1</b> STAT 432 Materials</a></li>
+<li class="chapter" data-level="20.2" data-path="simulation-and-bootstrap.html"><a href="simulation-and-bootstrap.html#misc-notes"><i class="fa fa-check"></i><b>20.2</b> Misc Notes</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="data-manipulation.html"><a href="data-manipulation.html"><i class="fa fa-check"></i><b>21</b> Data Manipulation</a><ul>
+<li class="chapter" data-level="21.1" data-path="data-manipulation.html"><a href="data-manipulation.html#dplyr"><i class="fa fa-check"></i><b>21.1</b> <code>dplyr</code></a></li>
+<li class="chapter" data-level="21.2" data-path="data-manipulation.html"><a href="data-manipulation.html#data.table"><i class="fa fa-check"></i><b>21.2</b> <code>data.table</code></a></li>
+<li class="chapter" data-level="21.3" data-path="data-manipulation.html"><a href="data-manipulation.html#data-splitting-with-dplyranti_join"><i class="fa fa-check"></i><b>21.3</b> Data Splitting with <code>dplyr::anti_join</code></a></li>
+</ul></li>
+<li class="part"><span><b>VI Analysis</b></span></li>
+<li class="chapter" data-level="22" data-path="introduction-5.html"><a href="introduction-5.html"><i class="fa fa-check"></i><b>22</b> Introduction</a></li>
+<li class="part"><span><b>VII Appendix</b></span></li>
+<li class="chapter" data-level="23" data-path="introduction-6.html"><a href="introduction-6.html"><i class="fa fa-check"></i><b>23</b> Introduction</a></li>
+<li class="chapter" data-level="24" data-path="additional-reading.html"><a href="additional-reading.html"><i class="fa fa-check"></i><b>24</b> Additional Reading</a><ul>
+<li class="chapter" data-level="24.1" data-path="additional-reading.html"><a href="additional-reading.html#books"><i class="fa fa-check"></i><b>24.1</b> Books</a></li>
+<li class="chapter" data-level="24.2" data-path="additional-reading.html"><a href="additional-reading.html#papers"><i class="fa fa-check"></i><b>24.2</b> Papers</a></li>
+<li class="chapter" data-level="24.3" data-path="additional-reading.html"><a href="additional-reading.html#blog-posts"><i class="fa fa-check"></i><b>24.3</b> Blog Posts</a></li>
+<li class="chapter" data-level="24.4" data-path="additional-reading.html"><a href="additional-reading.html#miscellaneous"><i class="fa fa-check"></i><b>24.4</b> Miscellaneous</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="class-imbalance.html"><a href="class-imbalance.html"><i class="fa fa-check"></i><b>25</b> Class Imbalance</a></li>
+<li class="chapter" data-level="26" data-path="missing-data.html"><a href="missing-data.html"><i class="fa fa-check"></i><b>26</b> Missing Data</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/daviddalpiaz/bsl" target="blank">&copy; 2019 David Dalpiaz</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Basics of Statistical Learning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="missing-data" class="section level1">
+<h1><span class="header-section-number">Chapter 26</span> Missing Data</h1>
+<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb470-1" data-line-number="1"><span class="kw">library</span>(<span class="st">&quot;tidyverse&quot;</span>)</a></code></pre></div>
+<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>## ✔ ggplot2 3.2.1     ✔ purrr   0.3.3
+## ✔ tibble  2.1.3     ✔ dplyr   0.8.3
+## ✔ tidyr   1.0.0     ✔ stringr 1.4.0
+## ✔ readr   1.3.1     ✔ forcats 0.4.0</code></pre>
+<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb474-1" data-line-number="1"><span class="kw">library</span>(<span class="st">&quot;caret&quot;</span>)</a></code></pre></div>
+<pre><code>## Loading required package: lattice</code></pre>
+<pre><code>## 
+## Attaching package: &#39;caret&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:purrr&#39;:
+## 
+##     lift</code></pre>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb478-1" data-line-number="1">airquality =<span class="st"> </span><span class="kw">as_tibble</span>(airquality)</a></code></pre></div>
+<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb479-1" data-line-number="1"><span class="co"># airquality %&gt;% View()</span></a></code></pre></div>
+<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb480-1" data-line-number="1">count_na =<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb480-2" data-line-number="2">  <span class="kw">sum</span>(<span class="kw">is.na</span>(x))</a>
+<a class="sourceLine" id="cb480-3" data-line-number="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb481-1" data-line-number="1"><span class="kw">apply</span>(airquality, <span class="dv">2</span>, count_na)</a></code></pre></div>
+<pre><code>##   Ozone Solar.R    Wind    Temp   Month     Day 
+##      37       7       0       0       0       0</code></pre>
+<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb483-1" data-line-number="1">aq =<span class="st"> </span>airquality <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb483-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(Ozone))</a></code></pre></div>
+<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb484-1" data-line-number="1">aq</a></code></pre></div>
+<pre><code>## # A tibble: 116 x 6
+##    Ozone Solar.R  Wind  Temp Month   Day
+##    &lt;int&gt;   &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+##  1    41     190   7.4    67     5     1
+##  2    36     118   8      72     5     2
+##  3    12     149  12.6    74     5     3
+##  4    18     313  11.5    62     5     4
+##  5    28      NA  14.9    66     5     6
+##  6    23     299   8.6    65     5     7
+##  7    19      99  13.8    59     5     8
+##  8     8      19  20.1    61     5     9
+##  9     7      NA   6.9    74     5    11
+## 10    16     256   9.7    69     5    12
+## # … with 106 more rows</code></pre>
+<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb486-1" data-line-number="1"><span class="co"># aq %&gt;% View()</span></a></code></pre></div>
+<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb487-1" data-line-number="1"><span class="co"># lm(Ozone ~ ., data = aq, na.action = na.fail)</span></a></code></pre></div>
+<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb488-1" data-line-number="1"><span class="kw">complete.cases</span>(aq)</a></code></pre></div>
+<pre><code>##   [1]  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE
+##  [13]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [25]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [37]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [49]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [61]  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [73]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [85]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [97]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+## [109]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
+<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb490-1" data-line-number="1"><span class="kw">na.omit</span>(aq)</a></code></pre></div>
+<pre><code>## # A tibble: 111 x 6
+##    Ozone Solar.R  Wind  Temp Month   Day
+##    &lt;int&gt;   &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+##  1    41     190   7.4    67     5     1
+##  2    36     118   8      72     5     2
+##  3    12     149  12.6    74     5     3
+##  4    18     313  11.5    62     5     4
+##  5    23     299   8.6    65     5     7
+##  6    19      99  13.8    59     5     8
+##  7     8      19  20.1    61     5     9
+##  8    16     256   9.7    69     5    12
+##  9    11     290   9.2    66     5    13
+## 10    14     274  10.9    68     5    14
+## # … with 101 more rows</code></pre>
+<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb492-1" data-line-number="1"><span class="co"># ?lm</span></a></code></pre></div>
+<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb493-1" data-line-number="1"><span class="co"># cbind(</span></a>
+<a class="sourceLine" id="cb493-2" data-line-number="2"><span class="co">#   aq,</span></a>
+<a class="sourceLine" id="cb493-3" data-line-number="3"><span class="co">#   predict(preProcess(aq, &quot;bagImpute&quot;), aq)</span></a>
+<a class="sourceLine" id="cb493-4" data-line-number="4"><span class="co"># ) %&gt;% View()</span></a></code></pre></div>
+<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb494-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb494-2" data-line-number="2">fit_original =<span class="st"> </span><span class="kw">train</span>(</a>
+<a class="sourceLine" id="cb494-3" data-line-number="3">  Ozone <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> aq,</a>
+<a class="sourceLine" id="cb494-4" data-line-number="4">  <span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>,</a>
+<a class="sourceLine" id="cb494-5" data-line-number="5">  <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>),</a>
+<a class="sourceLine" id="cb494-6" data-line-number="6">  <span class="dt">na.action =</span> na.omit</a>
+<a class="sourceLine" id="cb494-7" data-line-number="7">)</a>
+<a class="sourceLine" id="cb494-8" data-line-number="8">fit_original<span class="op">$</span>results</a></code></pre></div>
+<pre><code>##   intercept    RMSE  Rsquared      MAE  RMSESD RsquaredSD    MAESD
+## 1      TRUE 20.9273 0.6315529 15.94474 6.18771  0.1492251 4.319219</code></pre>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb496-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb496-2" data-line-number="2">fit =<span class="st"> </span><span class="kw">train</span>(</a>
+<a class="sourceLine" id="cb496-3" data-line-number="3">  Ozone <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> aq,</a>
+<a class="sourceLine" id="cb496-4" data-line-number="4">  <span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>,</a>
+<a class="sourceLine" id="cb496-5" data-line-number="5">  <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>),</a>
+<a class="sourceLine" id="cb496-6" data-line-number="6">  <span class="dt">preProcess =</span> <span class="st">&quot;knnImpute&quot;</span>,</a>
+<a class="sourceLine" id="cb496-7" data-line-number="7">  <span class="dt">na.action =</span> na.pass</a>
+<a class="sourceLine" id="cb496-8" data-line-number="8">)</a>
+<a class="sourceLine" id="cb496-9" data-line-number="9">fit<span class="op">$</span>results</a></code></pre></div>
+<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb497-1" data-line-number="1">new_obs =<span class="st"> </span>aq[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, ]</a>
+<a class="sourceLine" id="cb497-2" data-line-number="2">new_obs<span class="op">$</span>Solar.R[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] =<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb497-3" data-line-number="3">new_obs</a></code></pre></div>
+<pre><code>## # A tibble: 3 x 6
+##   Ozone Solar.R  Wind  Temp Month   Day
+##   &lt;int&gt;   &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+## 1    41      NA   7.4    67     5     1
+## 2    36      NA   8      72     5     2
+## 3    12     149  12.6    74     5     3</code></pre>
+<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb499-1" data-line-number="1"><span class="co"># predict(fit, new_obs, na.action = na.pass)</span></a></code></pre></div>
+<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb500-1" data-line-number="1"><span class="kw">predict</span>(<span class="kw">preProcess</span>(aq, <span class="st">&quot;medianImpute&quot;</span>), new_obs)</a></code></pre></div>
+<pre><code>## # A tibble: 3 x 6
+##   Ozone Solar.R  Wind  Temp Month   Day
+##   &lt;int&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+## 1    41     207   7.4    67     5     1
+## 2    36     207   8      72     5     2
+## 3    12     149  12.6    74     5     3</code></pre>
+<hr />
+<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb502-1" data-line-number="1"><span class="kw">library</span>(<span class="st">&quot;tidyverse&quot;</span>)</a>
+<a class="sourceLine" id="cb502-2" data-line-number="2"><span class="kw">library</span>(<span class="st">&quot;caret&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb503-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;airquality&quot;</span>)</a>
+<a class="sourceLine" id="cb503-2" data-line-number="2">airquality =<span class="st"> </span><span class="kw">as_tibble</span>(airquality)</a></code></pre></div>
+<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb504-1" data-line-number="1">airquality</a></code></pre></div>
+<pre><code>## # A tibble: 153 x 6
+##    Ozone Solar.R  Wind  Temp Month   Day
+##    &lt;int&gt;   &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+##  1    41     190   7.4    67     5     1
+##  2    36     118   8      72     5     2
+##  3    12     149  12.6    74     5     3
+##  4    18     313  11.5    62     5     4
+##  5    NA      NA  14.3    56     5     5
+##  6    28      NA  14.9    66     5     6
+##  7    23     299   8.6    65     5     7
+##  8    19      99  13.8    59     5     8
+##  9     8      19  20.1    61     5     9
+## 10    NA     194   8.6    69     5    10
+## # … with 143 more rows</code></pre>
+<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb506-1" data-line-number="1">aq =<span class="st"> </span>airquality <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb506-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(Ozone))</a></code></pre></div>
+<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb507-1" data-line-number="1"><span class="kw">train</span>(</a>
+<a class="sourceLine" id="cb507-2" data-line-number="2">  Ozone <span class="op">~</span><span class="st"> </span>.,</a>
+<a class="sourceLine" id="cb507-3" data-line-number="3">  <span class="dt">data =</span> aq,</a>
+<a class="sourceLine" id="cb507-4" data-line-number="4">  <span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>,</a>
+<a class="sourceLine" id="cb507-5" data-line-number="5">  <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>),</a>
+<a class="sourceLine" id="cb507-6" data-line-number="6">  <span class="dt">na.action =</span> na.pass,</a>
+<a class="sourceLine" id="cb507-7" data-line-number="7">  <span class="dt">preProcess =</span> <span class="kw">c</span>(<span class="st">&quot;medianImpute&quot;</span>)</a>
+<a class="sourceLine" id="cb507-8" data-line-number="8">)</a></code></pre></div>
+<pre><code>## Linear Regression 
+## 
+## 116 samples
+##   5 predictor
+## 
+## Pre-processing: median imputation (5) 
+## Resampling: Cross-Validated (5 fold) 
+## Summary of sample sizes: 93, 93, 93, 93, 92 
+## Resampling results:
+## 
+##   RMSE      Rsquared   MAE     
+##   21.36886  0.6367566  15.81676
+## 
+## Tuning parameter &#39;intercept&#39; was held constant at a value of TRUE</code></pre>
+<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb509-1" data-line-number="1">aq</a></code></pre></div>
+<pre><code>## # A tibble: 116 x 6
+##    Ozone Solar.R  Wind  Temp Month   Day
+##    &lt;int&gt;   &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+##  1    41     190   7.4    67     5     1
+##  2    36     118   8      72     5     2
+##  3    12     149  12.6    74     5     3
+##  4    18     313  11.5    62     5     4
+##  5    28      NA  14.9    66     5     6
+##  6    23     299   8.6    65     5     7
+##  7    19      99  13.8    59     5     8
+##  8     8      19  20.1    61     5     9
+##  9     7      NA   6.9    74     5    11
+## 10    16     256   9.7    69     5    12
+## # … with 106 more rows</code></pre>
+<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb511-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb511-2" data-line-number="2">mod_fct =<span class="st"> </span><span class="kw">train</span>(</a>
+<a class="sourceLine" id="cb511-3" data-line-number="3">  Ozone <span class="op">~</span><span class="st"> </span><span class="kw">as.factor</span>(Month),</a>
+<a class="sourceLine" id="cb511-4" data-line-number="4">  <span class="dt">data =</span> aq,</a>
+<a class="sourceLine" id="cb511-5" data-line-number="5">  <span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>,</a>
+<a class="sourceLine" id="cb511-6" data-line-number="6">  <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb511-7" data-line-number="7">)</a>
+<a class="sourceLine" id="cb511-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb511-9" data-line-number="9"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb511-10" data-line-number="10">mod_num =<span class="st"> </span><span class="kw">train</span>(</a>
+<a class="sourceLine" id="cb511-11" data-line-number="11">  Ozone <span class="op">~</span><span class="st"> </span>Month,</a>
+<a class="sourceLine" id="cb511-12" data-line-number="12">  <span class="dt">data =</span> aq,</a>
+<a class="sourceLine" id="cb511-13" data-line-number="13">  <span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>,</a>
+<a class="sourceLine" id="cb511-14" data-line-number="14">  <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb511-15" data-line-number="15">)</a></code></pre></div>
+<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb512-1" data-line-number="1"><span class="kw">sqrt</span>(<span class="kw">var</span>(aq<span class="op">$</span>Ozone)) </a></code></pre></div>
+<pre><code>## [1] 32.98788</code></pre>
+<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb514-1" data-line-number="1">mod_num<span class="op">$</span>finalModel</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = .outcome ~ ., data = dat)
+## 
+## Coefficients:
+## (Intercept)        Month  
+##      15.657        3.678</code></pre>
+<div class="sourceCode" id="cb516"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb516-1" data-line-number="1">mod_fct<span class="op">$</span>finalModel</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = .outcome ~ ., data = dat)
+## 
+## Coefficients:
+##         (Intercept)  `as.factor(Month)6`  `as.factor(Month)7`  
+##              23.615                5.829               35.500  
+## `as.factor(Month)8`  `as.factor(Month)9`  
+##              36.346                7.833</code></pre>
+<div class="sourceCode" id="cb518"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb518-1" data-line-number="1"><span class="kw">unique</span>(aq<span class="op">$</span>Month)</a></code></pre></div>
+<pre><code>## [1] 5 6 7 8 9</code></pre>
+<div class="sourceCode" id="cb520"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb520-1" data-line-number="1"><span class="co"># error due to lack of factor level</span></a>
+<a class="sourceLine" id="cb520-2" data-line-number="2"><span class="co"># predict(mod_fct, data.frame(Month = 12)) </span></a></code></pre></div>
+<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb521-1" data-line-number="1">aq<span class="op">$</span>Month[<span class="dv">3</span><span class="op">:</span><span class="dv">7</span>] =<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb521-2" data-line-number="2">aq<span class="op">$</span>Month =<span class="st"> </span><span class="kw">as.factor</span>(aq<span class="op">$</span>Month)</a>
+<a class="sourceLine" id="cb521-3" data-line-number="3">aq</a></code></pre></div>
+<pre><code>## # A tibble: 116 x 6
+##    Ozone Solar.R  Wind  Temp Month   Day
+##    &lt;int&gt;   &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;fct&gt; &lt;int&gt;
+##  1    41     190   7.4    67 5         1
+##  2    36     118   8      72 5         2
+##  3    12     149  12.6    74 &lt;NA&gt;      3
+##  4    18     313  11.5    62 &lt;NA&gt;      4
+##  5    28      NA  14.9    66 &lt;NA&gt;      6
+##  6    23     299   8.6    65 &lt;NA&gt;      7
+##  7    19      99  13.8    59 &lt;NA&gt;      8
+##  8     8      19  20.1    61 5         9
+##  9     7      NA   6.9    74 5        11
+## 10    16     256   9.7    69 5        12
+## # … with 106 more rows</code></pre>
+<div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb523-1" data-line-number="1"><span class="kw">train</span>(</a>
+<a class="sourceLine" id="cb523-2" data-line-number="2">  Ozone <span class="op">~</span><span class="st"> </span>.,</a>
+<a class="sourceLine" id="cb523-3" data-line-number="3">  <span class="dt">data =</span> aq,</a>
+<a class="sourceLine" id="cb523-4" data-line-number="4">  <span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>,</a>
+<a class="sourceLine" id="cb523-5" data-line-number="5">  <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>),</a>
+<a class="sourceLine" id="cb523-6" data-line-number="6">  <span class="dt">na.action =</span> na.pass,</a>
+<a class="sourceLine" id="cb523-7" data-line-number="7">  <span class="dt">preProcess =</span> <span class="kw">c</span>(<span class="st">&quot;medianImpute&quot;</span>)</a>
+<a class="sourceLine" id="cb523-8" data-line-number="8">)</a></code></pre></div>
+<pre><code>## Linear Regression 
+## 
+## 116 samples
+##   5 predictor
+## 
+## Pre-processing: median imputation (8) 
+## Resampling: Cross-Validated (5 fold) 
+## Summary of sample sizes: 93, 93, 93, 93, 92 
+## Resampling results:
+## 
+##   RMSE      Rsquared   MAE     
+##   21.80517  0.6290986  16.29875
+## 
+## Tuning parameter &#39;intercept&#39; was held constant at a value of TRUE</code></pre>
+<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb525-1" data-line-number="1"><span class="kw">table</span>(aq<span class="op">$</span>Month)</a></code></pre></div>
+<pre><code>## 
+##  5  6  7  8  9 
+## 21  9 26 26 29</code></pre>
+<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb527-1" data-line-number="1"><span class="kw">predict</span>(<span class="kw">preProcess</span>(<span class="kw">predict</span>(<span class="kw">dummyVars</span>(Ozone <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> aq), aq), <span class="dt">method =</span> <span class="st">&quot;knnImpute&quot;</span>), <span class="kw">predict</span>(<span class="kw">dummyVars</span>(Ozone <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> aq), aq))</a></code></pre></div>
+<pre><code>##         Solar.R        Wind        Temp    Month.5    Month.6     Month.7
+## 1    0.05702761 -0.68871845 -1.14603406  2.0608504 -0.2957032 -0.55056939
+## 2   -0.73285918 -0.52087950 -0.61891292  2.0608504 -0.2957032 -0.55056939
+## 3   -0.39276904  0.76588578 -0.40806447  0.0274780  0.4336980 -0.55056939
+## 4    1.40641756  0.45818104 -1.67315520  2.0608504 -0.2957032 -0.55056939
+## 5    0.35542929  1.40926842 -1.25145829  0.5358211 -0.2957032 -0.08046783
+## 6    1.25282846 -0.35304055 -1.35688252  1.5525073 -0.2957032 -0.55056939
+## 7   -0.94130153  1.10156368 -1.98942789  1.0441642 -0.2957032 -0.55056939
+## 8   -1.81895353  2.86387265 -1.77857943  2.0608504 -0.2957032 -0.55056939
+## 9    0.44758275 -0.82858424 -0.40806447  2.0608504 -0.2957032 -0.55056939
+## 10   0.78109051 -0.04533581 -0.93518561  2.0608504 -0.2957032 -0.55056939
+## 11   1.15409261 -0.18520160 -1.25145829  2.0608504 -0.2957032 -0.55056939
+## 12   0.97856221  0.29034209 -1.04060984  2.0608504 -0.2957032 -0.55056939
+## 13  -1.31430363  0.93372473 -2.09485212  2.0608504 -0.2957032 -0.55056939
+## 14   1.63680121  0.45818104 -1.46230675  2.0608504 -0.2957032 -0.55056939
+## 15   1.34059366  0.59804683 -1.25145829  2.0608504 -0.2957032 -0.55056939
+## 16  -1.17168518  2.38832896 -2.20027634  2.0608504 -0.2957032 -0.55056939
+## 17   1.50515341  0.45818104 -1.04060984  2.0608504 -0.2957032 -0.55056939
+## 18  -1.54468728 -0.04533581 -1.67315520  2.0608504 -0.2957032 -0.55056939
+## 19  -1.93963068 -0.04533581 -1.98942789  2.0608504 -0.2957032 -0.55056939
+## 20   1.48321211  1.88481211 -0.51348870  2.0608504 -0.2957032 -0.55056939
+## 21  -1.75312963 -0.04533581 -1.77857943  2.0608504 -0.2957032 -0.55056939
+## 22  -1.01809608  0.59804683 -1.77857943  2.0608504 -0.2957032 -0.55056939
+## 23  -1.88477743  0.59804683 -1.14603406  2.0608504 -0.2957032 -0.55056939
+## 24   0.73720791  1.40926842  0.32990513  2.0608504 -0.2957032 -0.55056939
+## 25   0.41905906 -1.16426214  0.11905667  2.0608504 -0.2957032 -0.55056939
+## 26   1.03341546 -0.68871845 -0.19721601  2.0608504 -0.2957032 -0.55056939
+## 27  -0.63412333 -0.04533581  0.43532936 -0.4808651  3.3513029 -0.55056939
+## 28   1.16506326  1.10156368  1.27872318 -0.4808651  3.3513029 -0.55056939
+## 29   1.51612406  0.45818104  0.96245049 -0.4808651  3.3513029 -0.55056939
+## 30  -0.40373969 -0.52087950  0.43532936 -0.4808651  3.3513029 -0.55056939
+## 31   0.06799826  1.40926842 -0.09179178 -0.4808651  3.3513029 -0.55056939
+## 32   1.08826871  3.03171160 -0.61891292 -0.4808651  3.3513029 -0.55056939
+## 33  -1.62148183 -0.18520160 -1.35688252 -0.4808651  3.3513029 -0.55056939
+## 34  -0.71091788  0.45818104 -0.51348870 -0.4808651  3.3513029 -0.55056939
+## 35  -0.52441684  0.12250314 -0.19721601 -0.4808651  3.3513029 -0.55056939
+## 36   0.92370896 -1.61183267  0.64617781 -0.4808651 -0.2957032  1.79993840
+## 37   0.69332531 -0.18520160  0.75160204 -0.4808651 -0.2957032  1.79993840
+## 38   0.56167751 -0.18520160  0.32990513 -0.4808651 -0.2957032  1.79993840
+## 39  -0.10753214 -1.47196688  0.54075358 -0.4808651 -0.2957032  1.79993840
+## 40   1.41738821  0.29034209  0.54075358 -0.4808651 -0.2957032  1.79993840
+## 41   1.00050351 -1.33210109  1.06787472 -0.4808651 -0.2957032  1.79993840
+## 42   0.90176766 -0.99642319  1.48957163 -0.4808651 -0.2957032  1.79993840
+## 43   0.95662091 -1.16426214  1.48957163 -0.4808651 -0.2957032  1.79993840
+## 44  -0.10753214 -0.68871845  1.17329895 -0.4808651 -0.2957032  1.79993840
+## 45   0.86885571  1.24142947 -0.51348870 -0.4808651 -0.2957032  1.79993840
+## 46  -0.10753214  1.40926842  0.32990513 -0.4808651 -0.2957032  1.79993840
+## 47  -1.50080468  1.24142947  0.22448090 -0.4808651 -0.2957032  1.79993840
+## 48   0.82497311 -0.82858424  0.32990513 -0.4808651 -0.2957032  1.79993840
+## 49   0.97856221  0.12250314  0.43532936 -0.4808651 -0.2957032  1.79993840
+## 50   1.09923936 -0.99642319  0.64617781 -0.4808651 -0.2957032  1.79993840
+## 51   0.02411566 -1.33210109  0.96245049 -0.4808651 -0.2957032  1.79993840
+## 52   0.38614711  0.45818104  0.75160204 -0.4808651 -0.2957032  1.79993840
+## 53  -1.95060133 -0.82858424 -0.40806447 -0.4808651 -0.2957032  1.79993840
+## 54   1.19797521 -0.35304055  0.85702627 -0.4808651 -0.2957032  1.79993840
+## 55   0.41905906 -0.52087950  0.75160204 -0.4808651 -0.2957032  1.79993840
+## 56  -1.13877323 -0.35304055  0.43532936 -0.4808651 -0.2957032  1.79993840
+## 57  -1.12780258  0.59804683  0.85702627 -0.4808651 -0.2957032  1.79993840
+## 58   0.30935256 -0.68871845  1.06787472 -0.4808651 -0.2957032  1.79993840
+## 59   0.98953286 -0.68871845  0.85702627 -0.4808651 -0.2957032  1.79993840
+## 60   0.74817856 -0.68871845  0.54075358 -0.4808651 -0.2957032  1.79993840
+## 61   0.75914921 -0.18520160  0.32990513 -0.4808651 -0.2957032  1.79993840
+## 62  -1.11683193 -0.82858424  0.32990513 -0.4808651 -0.2957032 -0.55056939
+## 63  -1.76410028  1.10156368  0.32990513 -0.4808651 -0.2957032 -0.55056939
+## 64  -1.18265583 -0.68871845  0.43532936 -0.4808651 -0.2957032 -0.55056939
+## 65  -0.16019126 -0.82858424  0.85702627 -0.4808651 -0.2957032 -0.55056939
+## 66  -0.16019126 -0.68871845  0.75160204 -0.4808651 -0.2957032 -0.55056939
+## 67  -0.55074640 -1.47196688  0.96245049 -0.4808651 -0.2957032 -0.55056939
+## 68   0.77011986 -1.63980583  1.17329895 -0.4808651 -0.2957032 -0.55056939
+## 69   0.48488296  0.12250314  1.27872318 -0.4808651 -0.2957032 -0.55056939
+## 70   0.24352866 -0.52087950  1.27872318 -0.4808651 -0.2957032 -0.55056939
+## 71   0.07896891  0.45818104  0.85702627 -0.4808651 -0.2957032 -0.55056939
+## 72   0.96759156  0.45818104  0.43532936 -0.4808651 -0.2957032 -0.55056939
+## 73  -0.30500384 -0.04533581  0.22448090 -0.4808651 -0.2957032 -0.55056939
+## 74  -1.24847973  0.12250314 -0.09179178 -0.4808651 -0.2957032 -0.55056939
+## 75  -1.46789273 -0.99642319  0.11905667 -0.4808651 -0.2957032 -0.55056939
+## 76  -0.76577113 -0.68871845 -0.19721601 -0.4808651 -0.2957032 -0.55056939
+## 77   0.64944271  0.29034209  0.01363244 -0.4808651 -0.2957032 -0.55056939
+## 78   0.05702761  0.12250314  0.01363244 -0.4808651 -0.2957032 -0.55056939
+## 79   0.81400246  1.57710737 -0.09179178 -0.4808651 -0.2957032 -0.55056939
+## 80  -1.63245248  1.24142947 -0.61891292 -0.4808651 -0.2957032 -0.55056939
+## 81   0.29838191 -0.04533581  0.11905667 -0.4808651 -0.2957032 -0.55056939
+## 82   0.58361881 -1.80764478  0.32990513 -0.4808651 -0.2957032 -0.55056939
+## 83   0.33129386 -0.52087950  0.85702627 -0.4808651 -0.2957032 -0.55056939
+## 84   0.19964606 -0.04533581  2.01669277 -0.4808651 -0.2957032 -0.55056939
+## 85   0.44100036 -2.11534952  1.70042009 -0.4808651 -0.2957032 -0.55056939
+## 86   0.57264816 -0.99642319  1.91126855 -0.4808651 -0.2957032 -0.55056939
+## 87   0.03508631 -0.99642319  1.70042009 -0.4808651 -0.2957032 -0.55056939
+## 88  -0.19529734 -0.82858424  1.38414741 -0.4808651 -0.2957032 -0.55056939
+## 89   0.13382216 -1.33210109  1.48957163 -0.4808651 -0.2957032 -0.55056939
+## 90  -0.01976694 -1.97548373  1.59499586 -0.4808651 -0.2957032 -0.55056939
+## 91   0.04605696 -1.47196688  1.59499586 -0.4808651 -0.2957032 -0.55056939
+## 92  -0.98518413 -0.68871845  0.96245049 -0.4808651 -0.2957032 -0.55056939
+## 93  -1.01809608  1.57710737  0.64617781 -0.4808651 -0.2957032 -0.55056939
+## 94   0.73720791  0.29034209  0.22448090 -0.4808651 -0.2957032 -0.55056939
+## 95   0.38614711  0.12250314  0.01363244 -0.4808651 -0.2957032 -0.55056939
+## 96   0.49585361  0.29034209 -0.30264024 -0.4808651 -0.2957032 -0.55056939
+## 97   0.81400246 -0.04533581 -0.51348870 -0.4808651 -0.2957032 -0.55056939
+## 98   0.56167751  1.40926842  0.32990513 -0.4808651 -0.2957032 -0.55056939
+## 99   0.81400246  1.57710737 -0.19721601 -0.4808651 -0.2957032 -0.55056939
+## 100  0.58361881 -0.99642319 -0.09179178 -0.4808651 -0.2957032 -0.55056939
+## 101 -1.76410028  0.29034209 -0.72433715 -0.4808651 -0.2957032 -0.55056939
+## 102 -0.79868308  0.45818104 -0.72433715 -0.4808651 -0.2957032 -0.55056939
+## 103  0.57264816 -0.82858424  0.01363244 -0.4808651 -0.2957032 -0.55056939
+## 104  0.43002971  1.10156368 -1.14603406 -0.4808651 -0.2957032 -0.55056939
+## 105 -1.73118833  0.12250314 -0.19721601 -0.4808651 -0.2957032 -0.55056939
+## 106  0.58361881  0.12250314 -1.04060984 -0.4808651 -0.2957032 -0.55056939
+## 107  0.17770476 -0.52087950  0.43532936 -0.4808651 -0.2957032 -0.55056939
+## 108  0.58361881  0.76588578 -1.46230675 -0.4808651 -0.2957032 -0.55056939
+## 109 -1.87380678 -0.18520160 -0.72433715 -0.4808651 -0.2957032 -0.55056939
+## 110 -0.50247554  0.12250314  0.32990513 -0.4808651 -0.2957032 -0.55056939
+## 111 -1.48983403  0.12250314 -0.93518561 -0.4808651 -0.2957032 -0.55056939
+## 112 -1.80798288  1.88481211 -1.56773098 -0.4808651 -0.2957032 -0.55056939
+## 113  0.08993956 -0.82858424 -0.82976138 -0.4808651 -0.2957032 -0.55056939
+## 114  0.06799826  1.24142947 -0.30264024 -0.4808651 -0.2957032 -0.55056939
+## 115 -0.59024074 -0.52087950 -0.19721601 -0.4808651 -0.2957032 -0.55056939
+## 116  0.41905906  0.45818104 -1.04060984 -0.4808651 -0.2957032 -0.55056939
+##        Month.8    Month.9         Day
+## 1   -0.5505694 -0.5920071 -1.66106728
+## 2   -0.5505694 -0.5920071 -1.54678270
+## 3   -0.5505694  0.7675678 -1.43249811
+## 4   -0.5505694 -0.5920071 -1.31821353
+## 5   -0.5505694  0.3143762 -1.08964437
+## 6   -0.5505694 -0.1388155 -0.97535979
+## 7   -0.5505694  0.3143762 -0.86107521
+## 8   -0.5505694 -0.5920071 -0.74679063
+## 9   -0.5505694 -0.5920071 -0.51822146
+## 10  -0.5505694 -0.5920071 -0.40393688
+## 11  -0.5505694 -0.5920071 -0.28965230
+## 12  -0.5505694 -0.5920071 -0.17536772
+## 13  -0.5505694 -0.5920071 -0.06108314
+## 14  -0.5505694 -0.5920071  0.05320144
+## 15  -0.5505694 -0.5920071  0.16748602
+## 16  -0.5505694 -0.5920071  0.28177061
+## 17  -0.5505694 -0.5920071  0.39605519
+## 18  -0.5505694 -0.5920071  0.51033977
+## 19  -0.5505694 -0.5920071  0.62462435
+## 20  -0.5505694 -0.5920071  0.73890893
+## 21  -0.5505694 -0.5920071  0.85319351
+## 22  -0.5505694 -0.5920071  0.96747809
+## 23  -0.5505694 -0.5920071  1.42461642
+## 24  -0.5505694 -0.5920071  1.53890100
+## 25  -0.5505694 -0.5920071  1.65318558
+## 26  -0.5505694 -0.5920071  1.76747016
+## 27  -0.5505694 -0.5920071 -0.97535979
+## 28  -0.5505694 -0.5920071 -0.74679063
+## 29  -0.5505694 -0.5920071 -0.63250605
+## 30  -0.5505694 -0.5920071 -0.28965230
+## 31  -0.5505694 -0.5920071  0.05320144
+## 32  -0.5505694 -0.5920071  0.16748602
+## 33  -0.5505694 -0.5920071  0.28177061
+## 34  -0.5505694 -0.5920071  0.39605519
+## 35  -0.5505694 -0.5920071  0.51033977
+## 36  -0.5505694 -0.5920071 -1.66106728
+## 37  -0.5505694 -0.5920071 -1.54678270
+## 38  -0.5505694 -0.5920071 -1.43249811
+## 39  -0.5505694 -0.5920071 -1.20392895
+## 40  -0.5505694 -0.5920071 -1.08964437
+## 41  -0.5505694 -0.5920071 -0.97535979
+## 42  -0.5505694 -0.5920071 -0.86107521
+## 43  -0.5505694 -0.5920071 -0.74679063
+## 44  -0.5505694 -0.5920071 -0.63250605
+## 45  -0.5505694 -0.5920071 -0.40393688
+## 46  -0.5505694 -0.5920071 -0.28965230
+## 47  -0.5505694 -0.5920071 -0.06108314
+## 48  -0.5505694 -0.5920071  0.05320144
+## 49  -0.5505694 -0.5920071  0.16748602
+## 50  -0.5505694 -0.5920071  0.28177061
+## 51  -0.5505694 -0.5920071  0.39605519
+## 52  -0.5505694 -0.5920071  0.51033977
+## 53  -0.5505694 -0.5920071  0.62462435
+## 54  -0.5505694 -0.5920071  0.96747809
+## 55  -0.5505694 -0.5920071  1.08176268
+## 56  -0.5505694 -0.5920071  1.19604726
+## 57  -0.5505694 -0.5920071  1.31033184
+## 58  -0.5505694 -0.5920071  1.42461642
+## 59  -0.5505694 -0.5920071  1.53890100
+## 60  -0.5505694 -0.5920071  1.65318558
+## 61  -0.5505694 -0.5920071  1.76747016
+## 62   1.7999384 -0.5920071 -1.66106728
+## 63   1.7999384 -0.5920071 -1.54678270
+## 64   1.7999384 -0.5920071 -1.43249811
+## 65   1.7999384 -0.5920071 -1.31821353
+## 66   1.7999384 -0.5920071 -1.20392895
+## 67   1.7999384 -0.5920071 -1.08964437
+## 68   1.7999384 -0.5920071 -0.97535979
+## 69   1.7999384 -0.5920071 -0.86107521
+## 70   1.7999384 -0.5920071 -0.74679063
+## 71   1.7999384 -0.5920071 -0.40393688
+## 72   1.7999384 -0.5920071 -0.28965230
+## 73   1.7999384 -0.5920071 -0.17536772
+## 74   1.7999384 -0.5920071  0.05320144
+## 75   1.7999384 -0.5920071  0.16748602
+## 76   1.7999384 -0.5920071  0.28177061
+## 77   1.7999384 -0.5920071  0.39605519
+## 78   1.7999384 -0.5920071  0.51033977
+## 79   1.7999384 -0.5920071  0.62462435
+## 80   1.7999384 -0.5920071  0.73890893
+## 81   1.7999384 -0.5920071  0.96747809
+## 82   1.7999384 -0.5920071  1.08176268
+## 83   1.7999384 -0.5920071  1.19604726
+## 84   1.7999384 -0.5920071  1.42461642
+## 85   1.7999384 -0.5920071  1.53890100
+## 86   1.7999384 -0.5920071  1.65318558
+## 87   1.7999384 -0.5920071  1.76747016
+## 88  -0.5505694  1.6739512 -1.66106728
+## 89  -0.5505694  1.6739512 -1.54678270
+## 90  -0.5505694  1.6739512 -1.43249811
+## 91  -0.5505694  1.6739512 -1.31821353
+## 92  -0.5505694  1.6739512 -1.20392895
+## 93  -0.5505694  1.6739512 -1.08964437
+## 94  -0.5505694  1.6739512 -0.97535979
+## 95  -0.5505694  1.6739512 -0.86107521
+## 96  -0.5505694  1.6739512 -0.74679063
+## 97  -0.5505694  1.6739512 -0.63250605
+## 98  -0.5505694  1.6739512 -0.51822146
+## 99  -0.5505694  1.6739512 -0.40393688
+## 100 -0.5505694  1.6739512 -0.28965230
+## 101 -0.5505694  1.6739512 -0.17536772
+## 102 -0.5505694  1.6739512 -0.06108314
+## 103 -0.5505694  1.6739512  0.05320144
+## 104 -0.5505694  1.6739512  0.16748602
+## 105 -0.5505694  1.6739512  0.28177061
+## 106 -0.5505694  1.6739512  0.39605519
+## 107 -0.5505694  1.6739512  0.51033977
+## 108 -0.5505694  1.6739512  0.62462435
+## 109 -0.5505694  1.6739512  0.73890893
+## 110 -0.5505694  1.6739512  0.85319351
+## 111 -0.5505694  1.6739512  0.96747809
+## 112 -0.5505694  1.6739512  1.08176268
+## 113 -0.5505694  1.6739512  1.19604726
+## 114 -0.5505694  1.6739512  1.42461642
+## 115 -0.5505694  1.6739512  1.53890100
+## 116 -0.5505694  1.6739512  1.65318558</code></pre>
+<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb529-1" data-line-number="1"><span class="kw">predict</span>(<span class="kw">dummyVars</span>(Ozone <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> aq), aq)</a></code></pre></div>
+<pre><code>##     Solar.R Wind Temp Month.5 Month.6 Month.7 Month.8 Month.9 Day
+## 1       190  7.4   67       1       0       0       0       0   1
+## 2       118  8.0   72       1       0       0       0       0   2
+## 3       149 12.6   74      NA      NA      NA      NA      NA   3
+## 4       313 11.5   62      NA      NA      NA      NA      NA   4
+## 5        NA 14.9   66      NA      NA      NA      NA      NA   6
+## 6       299  8.6   65      NA      NA      NA      NA      NA   7
+## 7        99 13.8   59      NA      NA      NA      NA      NA   8
+## 8        19 20.1   61       1       0       0       0       0   9
+## 9        NA  6.9   74       1       0       0       0       0  11
+## 10      256  9.7   69       1       0       0       0       0  12
+## 11      290  9.2   66       1       0       0       0       0  13
+## 12      274 10.9   68       1       0       0       0       0  14
+## 13       65 13.2   58       1       0       0       0       0  15
+## 14      334 11.5   64       1       0       0       0       0  16
+## 15      307 12.0   66       1       0       0       0       0  17
+## 16       78 18.4   57       1       0       0       0       0  18
+## 17      322 11.5   68       1       0       0       0       0  19
+## 18       44  9.7   62       1       0       0       0       0  20
+## 19        8  9.7   59       1       0       0       0       0  21
+## 20      320 16.6   73       1       0       0       0       0  22
+## 21       25  9.7   61       1       0       0       0       0  23
+## 22       92 12.0   61       1       0       0       0       0  24
+## 23       13 12.0   67       1       0       0       0       0  28
+## 24      252 14.9   81       1       0       0       0       0  29
+## 25      223  5.7   79       1       0       0       0       0  30
+## 26      279  7.4   76       1       0       0       0       0  31
+## 27      127  9.7   82       0       1       0       0       0   7
+## 28      291 13.8   90       0       1       0       0       0   9
+## 29      323 11.5   87       0       1       0       0       0  10
+## 30      148  8.0   82       0       1       0       0       0  13
+## 31      191 14.9   77       0       1       0       0       0  16
+## 32      284 20.7   72       0       1       0       0       0  17
+## 33       37  9.2   65       0       1       0       0       0  18
+## 34      120 11.5   73       0       1       0       0       0  19
+## 35      137 10.3   76       0       1       0       0       0  20
+## 36      269  4.1   84       0       0       1       0       0   1
+## 37      248  9.2   85       0       0       1       0       0   2
+## 38      236  9.2   81       0       0       1       0       0   3
+## 39      175  4.6   83       0       0       1       0       0   5
+## 40      314 10.9   83       0       0       1       0       0   6
+## 41      276  5.1   88       0       0       1       0       0   7
+## 42      267  6.3   92       0       0       1       0       0   8
+## 43      272  5.7   92       0       0       1       0       0   9
+## 44      175  7.4   89       0       0       1       0       0  10
+## 45      264 14.3   73       0       0       1       0       0  12
+## 46      175 14.9   81       0       0       1       0       0  13
+## 47       48 14.3   80       0       0       1       0       0  15
+## 48      260  6.9   81       0       0       1       0       0  16
+## 49      274 10.3   82       0       0       1       0       0  17
+## 50      285  6.3   84       0       0       1       0       0  18
+## 51      187  5.1   87       0       0       1       0       0  19
+## 52      220 11.5   85       0       0       1       0       0  20
+## 53        7  6.9   74       0       0       1       0       0  21
+## 54      294  8.6   86       0       0       1       0       0  24
+## 55      223  8.0   85       0       0       1       0       0  25
+## 56       81  8.6   82       0       0       1       0       0  26
+## 57       82 12.0   86       0       0       1       0       0  27
+## 58      213  7.4   88       0       0       1       0       0  28
+## 59      275  7.4   86       0       0       1       0       0  29
+## 60      253  7.4   83       0       0       1       0       0  30
+## 61      254  9.2   81       0       0       1       0       0  31
+## 62       83  6.9   81       0       0       0       1       0   1
+## 63       24 13.8   81       0       0       0       1       0   2
+## 64       77  7.4   82       0       0       0       1       0   3
+## 65       NA  6.9   86       0       0       0       1       0   4
+## 66       NA  7.4   85       0       0       0       1       0   5
+## 67       NA  4.6   87       0       0       0       1       0   6
+## 68      255  4.0   89       0       0       0       1       0   7
+## 69      229 10.3   90       0       0       0       1       0   8
+## 70      207  8.0   90       0       0       0       1       0   9
+## 71      192 11.5   86       0       0       0       1       0  12
+## 72      273 11.5   82       0       0       0       1       0  13
+## 73      157  9.7   80       0       0       0       1       0  14
+## 74       71 10.3   77       0       0       0       1       0  16
+## 75       51  6.3   79       0       0       0       1       0  17
+## 76      115  7.4   76       0       0       0       1       0  18
+## 77      244 10.9   78       0       0       0       1       0  19
+## 78      190 10.3   78       0       0       0       1       0  20
+## 79      259 15.5   77       0       0       0       1       0  21
+## 80       36 14.3   72       0       0       0       1       0  22
+## 81      212  9.7   79       0       0       0       1       0  24
+## 82      238  3.4   81       0       0       0       1       0  25
+## 83      215  8.0   86       0       0       0       1       0  26
+## 84      203  9.7   97       0       0       0       1       0  28
+## 85      225  2.3   94       0       0       0       1       0  29
+## 86      237  6.3   96       0       0       0       1       0  30
+## 87      188  6.3   94       0       0       0       1       0  31
+## 88      167  6.9   91       0       0       0       0       1   1
+## 89      197  5.1   92       0       0       0       0       1   2
+## 90      183  2.8   93       0       0       0       0       1   3
+## 91      189  4.6   93       0       0       0       0       1   4
+## 92       95  7.4   87       0       0       0       0       1   5
+## 93       92 15.5   84       0       0       0       0       1   6
+## 94      252 10.9   80       0       0       0       0       1   7
+## 95      220 10.3   78       0       0       0       0       1   8
+## 96      230 10.9   75       0       0       0       0       1   9
+## 97      259  9.7   73       0       0       0       0       1  10
+## 98      236 14.9   81       0       0       0       0       1  11
+## 99      259 15.5   76       0       0       0       0       1  12
+## 100     238  6.3   77       0       0       0       0       1  13
+## 101      24 10.9   71       0       0       0       0       1  14
+## 102     112 11.5   71       0       0       0       0       1  15
+## 103     237  6.9   78       0       0       0       0       1  16
+## 104     224 13.8   67       0       0       0       0       1  17
+## 105      27 10.3   76       0       0       0       0       1  18
+## 106     238 10.3   68       0       0       0       0       1  19
+## 107     201  8.0   82       0       0       0       0       1  20
+## 108     238 12.6   64       0       0       0       0       1  21
+## 109      14  9.2   71       0       0       0       0       1  22
+## 110     139 10.3   81       0       0       0       0       1  23
+## 111      49 10.3   69       0       0       0       0       1  24
+## 112      20 16.6   63       0       0       0       0       1  25
+## 113     193  6.9   70       0       0       0       0       1  26
+## 114     191 14.3   75       0       0       0       0       1  28
+## 115     131  8.0   76       0       0       0       0       1  29
+## 116     223 11.5   68       0       0       0       0       1  30</code></pre>
+<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb531-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;airquality&quot;</span>)</a>
+<a class="sourceLine" id="cb531-2" data-line-number="2">airquality<span class="op">$</span>Month[airquality<span class="op">$</span>Month <span class="op">==</span><span class="st"> </span><span class="dv">5</span>] =<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb531-3" data-line-number="3">airquality<span class="op">$</span>Month =<span class="st"> </span><span class="kw">factor</span>(airquality<span class="op">$</span>Month)</a>
+<a class="sourceLine" id="cb531-4" data-line-number="4">airquality<span class="op">$</span>Month</a></code></pre></div>
+<pre><code>##   [1] &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;
+##  [16] &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;
+##  [31] &lt;NA&gt; 6    6    6    6    6    6    6    6    6    6    6    6    6    6   
+##  [46] 6    6    6    6    6    6    6    6    6    6    6    6    6    6    6   
+##  [61] 6    7    7    7    7    7    7    7    7    7    7    7    7    7    7   
+##  [76] 7    7    7    7    7    7    7    7    7    7    7    7    7    7    7   
+##  [91] 7    7    8    8    8    8    8    8    8    8    8    8    8    8    8   
+## [106] 8    8    8    8    8    8    8    8    8    8    8    8    8    8    8   
+## [121] 8    8    8    9    9    9    9    9    9    9    9    9    9    9    9   
+## [136] 9    9    9    9    9    9    9    9    9    9    9    9    9    9    9   
+## [151] 9    9    9   
+## Levels: 6 7 8 9</code></pre>
+<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb533-1" data-line-number="1"><span class="kw">fct_explicit_na</span>(airquality<span class="op">$</span>Month, <span class="dt">na_level =</span> <span class="st">&quot;(Missing)&quot;</span>)</a></code></pre></div>
+<pre><code>##   [1] (Missing) (Missing) (Missing) (Missing) (Missing) (Missing) (Missing)
+##   [8] (Missing) (Missing) (Missing) (Missing) (Missing) (Missing) (Missing)
+##  [15] (Missing) (Missing) (Missing) (Missing) (Missing) (Missing) (Missing)
+##  [22] (Missing) (Missing) (Missing) (Missing) (Missing) (Missing) (Missing)
+##  [29] (Missing) (Missing) (Missing) 6         6         6         6        
+##  [36] 6         6         6         6         6         6         6        
+##  [43] 6         6         6         6         6         6         6        
+##  [50] 6         6         6         6         6         6         6        
+##  [57] 6         6         6         6         6         7         7        
+##  [64] 7         7         7         7         7         7         7        
+##  [71] 7         7         7         7         7         7         7        
+##  [78] 7         7         7         7         7         7         7        
+##  [85] 7         7         7         7         7         7         7        
+##  [92] 7         8         8         8         8         8         8        
+##  [99] 8         8         8         8         8         8         8        
+## [106] 8         8         8         8         8         8         8        
+## [113] 8         8         8         8         8         8         8        
+## [120] 8         8         8         8         9         9         9        
+## [127] 9         9         9         9         9         9         9        
+## [134] 9         9         9         9         9         9         9        
+## [141] 9         9         9         9         9         9         9        
+## [148] 9         9         9         9         9         9        
+## Levels: 6 7 8 9 (Missing)</code></pre>
+<div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb535-1" data-line-number="1"><span class="kw">head</span>(aq, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 10 x 6
+##    Ozone Solar.R  Wind  Temp Month   Day
+##    &lt;int&gt;   &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;fct&gt; &lt;int&gt;
+##  1    41     190   7.4    67 5         1
+##  2    36     118   8      72 5         2
+##  3    12     149  12.6    74 &lt;NA&gt;      3
+##  4    18     313  11.5    62 &lt;NA&gt;      4
+##  5    28      NA  14.9    66 &lt;NA&gt;      6
+##  6    23     299   8.6    65 &lt;NA&gt;      7
+##  7    19      99  13.8    59 &lt;NA&gt;      8
+##  8     8      19  20.1    61 5         9
+##  9     7      NA   6.9    74 5        11
+## 10    16     256   9.7    69 5        12</code></pre>
+<div class="sourceCode" id="cb537"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb537-1" data-line-number="1"><span class="kw">library</span>(<span class="st">&quot;randomForest&quot;</span>)</a></code></pre></div>
+<pre><code>## randomForest 4.6-14</code></pre>
+<pre><code>## Type rfNews() to see new features/changes/bug fixes.</code></pre>
+<pre><code>## 
+## Attaching package: &#39;randomForest&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     combine</code></pre>
+<pre><code>## The following object is masked from &#39;package:ggplot2&#39;:
+## 
+##     margin</code></pre>
+<div class="sourceCode" id="cb543"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb543-1" data-line-number="1"><span class="kw">randomForest</span>(Ozone <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> <span class="kw">rfImpute</span>(Ozone <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> aq))</a></code></pre></div>
+<pre><code>##      |      Out-of-bag   |
+## Tree |      MSE  %Var(y) |
+##  300 |    341.6    31.67 |
+##      |      Out-of-bag   |
+## Tree |      MSE  %Var(y) |
+##  300 |    349.1    32.36 |
+##      |      Out-of-bag   |
+## Tree |      MSE  %Var(y) |
+##  300 |    349.1    32.36 |
+##      |      Out-of-bag   |
+## Tree |      MSE  %Var(y) |
+##  300 |    349.6    32.41 |
+##      |      Out-of-bag   |
+## Tree |      MSE  %Var(y) |
+##  300 |    342.7    31.76 |
+##      |      Out-of-bag   |
+## Tree |      MSE  %Var(y) |
+##  300 |    342.8    31.78 |
+##      |      Out-of-bag   |
+## Tree |      MSE  %Var(y) |
+##  300 |    347.5    32.21 |
+##      |      Out-of-bag   |
+## Tree |      MSE  %Var(y) |
+##  300 |    339.9    31.51 |
+##      |      Out-of-bag   |
+## Tree |      MSE  %Var(y) |
+##  300 |    337.8    31.31 |
+##      |      Out-of-bag   |
+## Tree |      MSE  %Var(y) |
+##  300 |    347.1    32.18 |</code></pre>
+<pre><code>## 
+## Call:
+##  randomForest(formula = Ozone ~ ., data = rfImpute(Ozone ~ .,      data = aq)) 
+##                Type of random forest: regression
+##                      Number of trees: 500
+## No. of variables tried at each split: 1
+## 
+##           Mean of squared residuals: 340.1159
+##                     % Var explained: 68.47</code></pre>
+<div class="sourceCode" id="cb546"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb546-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">na.roughfix</span>(aq), <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 10 x 6
+##    Ozone Solar.R  Wind  Temp Month   Day
+##    &lt;int&gt;   &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;fct&gt; &lt;int&gt;
+##  1    41     190   7.4    67 5         1
+##  2    36     118   8      72 5         2
+##  3    12     149  12.6    74 9         3
+##  4    18     313  11.5    62 9         4
+##  5    28     207  14.9    66 9         6
+##  6    23     299   8.6    65 9         7
+##  7    19      99  13.8    59 9         8
+##  8     8      19  20.1    61 5         9
+##  9     7     207   6.9    74 5        11
+## 10    16     256   9.7    69 5        12</code></pre>
+
+</div>
+
+
+
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="class-imbalance.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/daviddalpiaz/bsl/edit/master/07-04-missing.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bsl.pdf"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
