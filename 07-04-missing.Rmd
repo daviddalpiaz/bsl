@@ -1,7 +1,7 @@
 # Missing Data
 
 ```{r, include = FALSE} 
-knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
+# knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
 ```
 
 ```{r}
