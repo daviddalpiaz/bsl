@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="missing-data.html"/>
-<link rel="next" href="why-estimate-just-the-mean.html"/>
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -303,10 +303,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="25" data-path="class-imbalance.html"><a href="class-imbalance.html"><i class="fa fa-check"></i><b>25</b> Class Imbalance</a></li>
 <li class="chapter" data-level="26" data-path="missing-data.html"><a href="missing-data.html"><i class="fa fa-check"></i><b>26</b> Missing Data</a></li>
-<li class="chapter" data-level="27" data-path="three-weird-tricks.html"><a href="three-weird-tricks.html"><i class="fa fa-check"></i><b>27</b> Three Weird Tricks</a></li>
-<li class="chapter" data-level="28" data-path="why-estimate-just-the-mean.html"><a href="why-estimate-just-the-mean.html"><i class="fa fa-check"></i><b>28</b> Why Estimate Just The Mean?</a></li>
-<li class="chapter" data-level="29" data-path="predict-i-dont-know.html"><a href="predict-i-dont-know.html"><i class="fa fa-check"></i><b>29</b> Predict “I Don’t Know!”</a></li>
-<li class="chapter" data-level="30" data-path="predict-that-you-shouldnt-predict.html"><a href="predict-that-you-shouldnt-predict.html"><i class="fa fa-check"></i><b>30</b> Predict That You Shouldn’t Predict</a></li>
+<li class="chapter" data-level="27" data-path="three-weird-tricks.html"><a href="three-weird-tricks.html"><i class="fa fa-check"></i><b>27</b> Three Weird Tricks</a><ul>
+<li class="chapter" data-level="27.1" data-path="three-weird-tricks.html"><a href="three-weird-tricks.html#why-estimate-just-the-mean"><i class="fa fa-check"></i><b>27.1</b> Why Estimate Just The Mean?</a></li>
+<li class="chapter" data-level="27.2" data-path="three-weird-tricks.html"><a href="three-weird-tricks.html#predict-i-dont-know"><i class="fa fa-check"></i><b>27.2</b> Predict “I Don’t Know!”</a></li>
+<li class="chapter" data-level="27.3" data-path="three-weird-tricks.html"><a href="three-weird-tricks.html#predict-that-you-shouldnt-predict"><i class="fa fa-check"></i><b>27.3</b> Predict That You Shouldn’t Predict</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/daviddalpiaz/bsl" target="blank">&copy; 2019 David Dalpiaz</a></li>
 
@@ -366,14 +367,238 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## The following object is masked from &#39;package:purrr&#39;:
 ## 
 ##     map</code></pre>
+<div id="why-estimate-just-the-mean" class="section level2">
+<h2><span class="header-section-number">27.1</span> Why Estimate Just The Mean?</h2>
+<div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb568-1" data-line-number="1">cars =<span class="st"> </span><span class="kw">as_tibble</span>(cars)</a></code></pre></div>
+<div class="sourceCode" id="cb569"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb569-1" data-line-number="1">mod_lm =<span class="st"> </span><span class="kw">lm</span>(dist <span class="op">~</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>speed, <span class="dt">data =</span> cars)</a>
+<a class="sourceLine" id="cb569-2" data-line-number="2">mod_qr =<span class="st"> </span><span class="kw">rq</span>(dist <span class="op">~</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>speed, <span class="dt">data =</span> cars, <span class="dt">tau =</span> <span class="kw">c</span>(<span class="fl">0.25</span>, <span class="fl">0.50</span>, <span class="fl">0.75</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb570"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb570-1" data-line-number="1"><span class="kw">predict</span>(mod_qr)</a></code></pre></div>
+<pre><code>##       [,1] [,2] [,3]
+##  [1,]    8 10.4 13.6
+##  [2,]    8 10.4 13.6
+##  [3,]   14 18.2 23.8
+##  [4,]   14 18.2 23.8
+##  [5,]   16 20.8 27.2
+##  [6,]   18 23.4 30.6
+##  [7,]   20 26.0 34.0
+##  [8,]   20 26.0 34.0
+##  [9,]   20 26.0 34.0
+## [10,]   22 28.6 37.4
+## [11,]   22 28.6 37.4
+## [12,]   24 31.2 40.8
+## [13,]   24 31.2 40.8
+## [14,]   24 31.2 40.8
+## [15,]   24 31.2 40.8
+## [16,]   26 33.8 44.2
+## [17,]   26 33.8 44.2
+## [18,]   26 33.8 44.2
+## [19,]   26 33.8 44.2
+## [20,]   28 36.4 47.6
+## [21,]   28 36.4 47.6
+## [22,]   28 36.4 47.6
+## [23,]   28 36.4 47.6
+## [24,]   30 39.0 51.0
+## [25,]   30 39.0 51.0
+## [26,]   30 39.0 51.0
+## [27,]   32 41.6 54.4
+## [28,]   32 41.6 54.4
+## [29,]   34 44.2 57.8
+## [30,]   34 44.2 57.8
+## [31,]   34 44.2 57.8
+## [32,]   36 46.8 61.2
+## [33,]   36 46.8 61.2
+## [34,]   36 46.8 61.2
+## [35,]   36 46.8 61.2
+## [36,]   38 49.4 64.6
+## [37,]   38 49.4 64.6
+## [38,]   38 49.4 64.6
+## [39,]   40 52.0 68.0
+## [40,]   40 52.0 68.0
+## [41,]   40 52.0 68.0
+## [42,]   40 52.0 68.0
+## [43,]   40 52.0 68.0
+## [44,]   44 57.2 74.8
+## [45,]   46 59.8 78.2
+## [46,]   48 62.4 81.6
+## [47,]   48 62.4 81.6
+## [48,]   48 62.4 81.6
+## [49,]   48 62.4 81.6
+## [50,]   50 65.0 85.0</code></pre>
+<div class="sourceCode" id="cb572"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb572-1" data-line-number="1"><span class="kw">plot</span>(dist <span class="op">~</span><span class="st"> </span>speed, <span class="dt">data =</span> cars, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">30</span>))</a>
+<a class="sourceLine" id="cb572-2" data-line-number="2"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb572-3" data-line-number="3"><span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="kw">coef</span>(mod_lm))</a></code></pre></div>
+<p><img src="07-04-threetricks_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<div class="sourceCode" id="cb573"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb573-1" data-line-number="1"><span class="kw">plot</span>(dist <span class="op">~</span><span class="st"> </span>speed, <span class="dt">data =</span> cars, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">30</span>))</a>
+<a class="sourceLine" id="cb573-2" data-line-number="2"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb573-3" data-line-number="3"><span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="kw">coef</span>(mod_qr)[<span class="dv">1</span>], <span class="dt">col =</span> <span class="st">&quot;limegreen&quot;</span>)</a>
+<a class="sourceLine" id="cb573-4" data-line-number="4"><span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="kw">coef</span>(mod_qr)[<span class="dv">2</span>], <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a>
+<a class="sourceLine" id="cb573-5" data-line-number="5"><span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="kw">coef</span>(mod_qr)[<span class="dv">3</span>], <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<p><img src="07-04-threetricks_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<div class="sourceCode" id="cb574"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb574-1" data-line-number="1">bstn =<span class="st"> </span>MASS<span class="op">::</span>Boston</a></code></pre></div>
+<div class="sourceCode" id="cb575"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb575-1" data-line-number="1">gen_weird_data =<span class="st"> </span><span class="cf">function</span>(<span class="dt">sample_size =</span> <span class="dv">500</span>) {</a>
+<a class="sourceLine" id="cb575-2" data-line-number="2">  x =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size, <span class="dt">min =</span> <span class="dv">1</span>, <span class="dt">max =</span> <span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb575-3" data-line-number="3">  y =<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(x) <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">sd =</span> <span class="kw">log</span>(x))</a>
+<a class="sourceLine" id="cb575-4" data-line-number="4">  <span class="kw">tibble</span>(x, y)</a>
+<a class="sourceLine" id="cb575-5" data-line-number="5">}</a></code></pre></div>
+<div class="sourceCode" id="cb576"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb576-1" data-line-number="1">weird_data =<span class="st"> </span><span class="kw">gen_weird_data</span>()</a>
+<a class="sourceLine" id="cb576-2" data-line-number="2"><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> weird_data, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">21</span>))</a></code></pre></div>
+<p><img src="07-04-threetricks_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode" id="cb577"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb577-1" data-line-number="1">x_seq =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">20</span>, <span class="dt">by =</span> <span class="fl">0.1</span>))</a>
+<a class="sourceLine" id="cb577-2" data-line-number="2">mod_qrf =<span class="st"> </span><span class="kw">quantregForest</span>(<span class="dt">x =</span> <span class="kw">as.matrix</span>(weird_data<span class="op">$</span>x), <span class="dt">y =</span> weird_data<span class="op">$</span>y, <span class="dt">nodesize =</span> <span class="dv">50</span>)</a>
+<a class="sourceLine" id="cb577-3" data-line-number="3">p =<span class="st"> </span><span class="kw">predict</span>(mod_qrf, x_seq)</a></code></pre></div>
+<div class="sourceCode" id="cb578"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb578-1" data-line-number="1">weird_data =<span class="st"> </span><span class="kw">gen_weird_data</span>()</a>
+<a class="sourceLine" id="cb578-2" data-line-number="2"><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> weird_data, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">21</span>))</a>
+<a class="sourceLine" id="cb578-3" data-line-number="3"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb578-4" data-line-number="4"><span class="kw">lines</span>(x_seq, p[, <span class="st">&quot;quantile= 0.1&quot;</span>], <span class="dt">col =</span> <span class="st">&quot;limegreen&quot;</span>)</a>
+<a class="sourceLine" id="cb578-5" data-line-number="5"><span class="kw">lines</span>(x_seq, p[, <span class="st">&quot;quantile= 0.5&quot;</span>], <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a>
+<a class="sourceLine" id="cb578-6" data-line-number="6"><span class="kw">lines</span>(x_seq, p[, <span class="st">&quot;quantile= 0.9&quot;</span>], <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<p><img src="07-04-threetricks_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 </div>
+<div id="predict-i-dont-know" class="section level2">
+<h2><span class="header-section-number">27.2</span> Predict “I Don’t Know!”</h2>
+<div class="sourceCode" id="cb579"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb579-1" data-line-number="1">default =<span class="st"> </span><span class="kw">as_tibble</span>(ISLR<span class="op">::</span>Default)</a>
+<a class="sourceLine" id="cb579-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb579-3" data-line-number="3">mod_glm =<span class="st"> </span><span class="kw">glm</span>(default <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> default, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</a>
+<a class="sourceLine" id="cb579-4" data-line-number="4">pred_probs =<span class="st"> </span><span class="kw">predict</span>(mod_glm, default, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</a>
+<a class="sourceLine" id="cb579-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb579-6" data-line-number="6"><span class="kw">case_when</span>(</a>
+<a class="sourceLine" id="cb579-7" data-line-number="7">  pred_probs <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.8</span> <span class="op">~</span><span class="st"> &quot;Yes&quot;</span>,</a>
+<a class="sourceLine" id="cb579-8" data-line-number="8">  pred_probs <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.2</span> <span class="op">~</span><span class="st"> &quot;No&quot;</span>,</a>
+<a class="sourceLine" id="cb579-9" data-line-number="9">  <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> &quot;I DON&#39;T KNOW&quot;</span></a>
+<a class="sourceLine" id="cb579-10" data-line-number="10">) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">table</span>()</a></code></pre></div>
+<pre><code>## .
+## I DON&#39;T KNOW           No          Yes 
+##          446         9520           34</code></pre>
+</div>
+<div id="predict-that-you-shouldnt-predict" class="section level2">
+<h2><span class="header-section-number">27.3</span> Predict That You Shouldn’t Predict</h2>
+<ul>
+<li><a href="https://stat.washington.edu/mclust/" class="uri">https://stat.washington.edu/mclust/</a></li>
+<li><a href="https://cran.r-project.org/web/packages/mclust/vignettes/mclust.html" class="uri">https://cran.r-project.org/web/packages/mclust/vignettes/mclust.html</a></li>
+</ul>
+<div class="sourceCode" id="cb581"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb581-1" data-line-number="1">dens =<span class="st"> </span><span class="kw">densityMclust</span>(faithful<span class="op">$</span>waiting)</a>
+<a class="sourceLine" id="cb581-2" data-line-number="2"><span class="kw">summary</span>(dens, <span class="dt">parameters =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>## ------------------------------------------------------- 
+## Density estimation via Gaussian finite mixture modeling 
+## ------------------------------------------------------- 
+## 
+## Mclust E (univariate, equal variance) model with 2 components: 
+## 
+##  log-likelihood   n df       BIC       ICL
+##       -1034.002 272  4 -2090.427 -2099.576
+## 
+## Mixing probabilities:
+##         1         2 
+## 0.3609461 0.6390539 
+## 
+## Means:
+##        1        2 
+## 54.61675 80.09239 
+## 
+## Variances:
+##        1        2 
+## 34.44093 34.44093</code></pre>
+<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb583-1" data-line-number="1"><span class="kw">plot</span>(dens, <span class="dt">what =</span> <span class="st">&quot;BIC&quot;</span>, <span class="dt">legendArgs =</span> <span class="kw">list</span>(<span class="dt">x =</span> <span class="st">&quot;topright&quot;</span>))</a></code></pre></div>
+<p><img src="07-04-threetricks_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<div class="sourceCode" id="cb584"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb584-1" data-line-number="1"><span class="kw">plot</span>(dens, <span class="dt">what =</span> <span class="st">&quot;density&quot;</span>, <span class="dt">data =</span> faithful<span class="op">$</span>waiting)</a></code></pre></div>
+<p><img src="07-04-threetricks_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
+<div class="sourceCode" id="cb585"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb585-1" data-line-number="1">dens =<span class="st"> </span><span class="kw">densityMclust</span>(faithful, <span class="dt">modelNames =</span> <span class="st">&quot;EEE&quot;</span>, <span class="dt">G =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb585-2" data-line-number="2"><span class="kw">summary</span>(dens)</a></code></pre></div>
+<pre><code>## ------------------------------------------------------- 
+## Density estimation via Gaussian finite mixture modeling 
+## ------------------------------------------------------- 
+## 
+## Mclust EEE (ellipsoidal, equal volume, shape and orientation) model with 2
+## components: 
+## 
+##  log-likelihood   n df      BIC      ICL
+##       -1140.187 272  8 -2325.22 -2326.71</code></pre>
+<div class="sourceCode" id="cb587"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb587-1" data-line-number="1"><span class="kw">summary</span>(dens, <span class="dt">parameters =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>## ------------------------------------------------------- 
+## Density estimation via Gaussian finite mixture modeling 
+## ------------------------------------------------------- 
+## 
+## Mclust EEE (ellipsoidal, equal volume, shape and orientation) model with 2
+## components: 
+## 
+##  log-likelihood   n df      BIC      ICL
+##       -1140.187 272  8 -2325.22 -2326.71
+## 
+## Mixing probabilities:
+##         1         2 
+## 0.6407638 0.3592362 
+## 
+## Means:
+##                [,1]      [,2]
+## eruptions  4.296012  2.046158
+## waiting   80.035996 54.596086
+## 
+## Variances:
+## [,,1]
+##           eruptions    waiting
+## eruptions 0.1327761  0.7515013
+## waiting   0.7515013 35.1702509
+## [,,2]
+##           eruptions    waiting
+## eruptions 0.1327761  0.7515013
+## waiting   0.7515013 35.1702509</code></pre>
+<div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb589-1" data-line-number="1"><span class="kw">plot</span>(dens, <span class="dt">what =</span> <span class="st">&quot;density&quot;</span>, <span class="dt">data =</span> faithful, </a>
+<a class="sourceLine" id="cb589-2" data-line-number="2">     <span class="dt">drawlabels =</span> <span class="ot">FALSE</span>, <span class="dt">points.pch =</span> <span class="dv">20</span>)</a></code></pre></div>
+<p><img src="07-04-threetricks_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<div class="sourceCode" id="cb590"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb590-1" data-line-number="1"><span class="kw">plot</span>(dens, <span class="dt">what =</span> <span class="st">&quot;density&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;hdr&quot;</span>)</a></code></pre></div>
+<p><img src="07-04-threetricks_files/figure-html/unnamed-chunk-14-2.png" width="672" /></p>
+<div class="sourceCode" id="cb591"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb591-1" data-line-number="1"><span class="kw">plot</span>(dens, <span class="dt">what =</span> <span class="st">&quot;density&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;hdr&quot;</span>, <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>))</a></code></pre></div>
+<p><img src="07-04-threetricks_files/figure-html/unnamed-chunk-14-3.png" width="672" /></p>
+<div class="sourceCode" id="cb592"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb592-1" data-line-number="1"><span class="kw">plot</span>(dens, <span class="dt">what =</span> <span class="st">&quot;density&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;hdr&quot;</span>, <span class="dt">data =</span> faithful)</a></code></pre></div>
+<p><img src="07-04-threetricks_files/figure-html/unnamed-chunk-14-4.png" width="672" /></p>
+<div class="sourceCode" id="cb593"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb593-1" data-line-number="1"><span class="kw">plot</span>(dens, <span class="dt">what =</span> <span class="st">&quot;density&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;persp&quot;</span>)</a></code></pre></div>
+<p><img src="07-04-threetricks_files/figure-html/unnamed-chunk-14-5.png" width="672" /></p>
+<div class="sourceCode" id="cb594"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb594-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">predict</span>(dens, <span class="dt">what =</span> <span class="st">&quot;dens&quot;</span>))</a></code></pre></div>
+<pre><code>##           1           2           3           4           5           6 
+## 0.007085957 0.022232181 0.001528346 0.012606154 0.032948304 0.001490981</code></pre>
+<div class="sourceCode" id="cb596"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb596-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">predict</span>(dens, <span class="dt">what =</span> <span class="st">&quot;z&quot;</span>))</a></code></pre></div>
+<pre><code>##              1            2
+## 1 9.999913e-01 8.713631e-06
+## 2 1.478731e-11 1.000000e+00
+## 3 9.966404e-01 3.359577e-03
+## 4 4.615524e-07 9.999995e-01
+## 5 1.000000e+00 8.828277e-13
+## 6 1.675136e-04 9.998325e-01</code></pre>
+<div class="sourceCode" id="cb598"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb598-1" data-line-number="1">bstn =<span class="st"> </span><span class="kw">as_tibble</span>(MASS<span class="op">::</span>Boston)</a>
+<a class="sourceLine" id="cb598-2" data-line-number="2">bstn =<span class="st"> </span>bstn <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">rad =</span> <span class="kw">as.factor</span>(rad))</a>
+<a class="sourceLine" id="cb598-3" data-line-number="3">bstn_x =<span class="st"> </span>bstn <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>medv)</a></code></pre></div>
+<div class="sourceCode" id="cb599"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb599-1" data-line-number="1">bstn_dens =<span class="st"> </span><span class="kw">densityMclust</span>(bstn_x, <span class="dt">G =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb599-2" data-line-number="2"><span class="kw">summary</span>(bstn_dens)</a></code></pre></div>
+<pre><code>## ------------------------------------------------------- 
+## Density estimation via Gaussian finite mixture modeling 
+## ------------------------------------------------------- 
+## 
+## Mclust VEV (ellipsoidal, equal shape) model with 4 components: 
+## 
+##  log-likelihood   n  df       BIC       ICL
+##       -11377.64 506 383 -25140.04 -25141.56</code></pre>
+<div class="sourceCode" id="cb601"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb601-1" data-line-number="1"><span class="kw">hist</span>(<span class="kw">log</span>(<span class="kw">predict</span>(bstn_dens, bstn_x)))</a>
+<a class="sourceLine" id="cb601-2" data-line-number="2"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb601-3" data-line-number="3"><span class="kw">box</span>()</a></code></pre></div>
+<p><img src="07-04-threetricks_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<div class="sourceCode" id="cb602"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb602-1" data-line-number="1"><span class="kw">exp</span>(<span class="op">-</span><span class="dv">300</span>)</a></code></pre></div>
+<pre><code>## [1] 5.1482e-131</code></pre>
+
+</div>
+</div>
+
+
+
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="missing-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="why-estimate-just-the-mean.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="missing-data.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

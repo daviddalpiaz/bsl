@@ -98,7 +98,7 @@ library("mclust")
 ##     map
 ```
 
-# Why Estimate Just The Mean?
+## Why Estimate Just The Mean?
 
 
 ```r
@@ -232,7 +232,7 @@ lines(x_seq, p[, "quantile= 0.9"], col = "red")
 
 ![](07-04-threetricks_files/figure-latex/unnamed-chunk-11-1.pdf)<!-- --> 
 
-# Predict "I Don't Know!"
+## Predict "I Don't Know!"
 
 
 ```r
@@ -255,7 +255,7 @@ case_when(
 ```
 
 
-# Predict That You Shouldn't Predict
+## Predict That You Shouldn't Predict
 
 - https://stat.washington.edu/mclust/
 - https://cran.r-project.org/web/packages/mclust/vignettes/mclust.html
