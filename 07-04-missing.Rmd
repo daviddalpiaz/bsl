@@ -1,7 +1,7 @@
 # Missing Data
 
 ```{r, include = FALSE} 
-# knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
+knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
 ```
 
 ```{r}
@@ -71,7 +71,7 @@ fit_original = train(
 fit_original$results
 ```
 
-```{r, knn-impute}
+```{r, knn-impute, eval = FALSE}
 set.seed(42)
 fit = train(
   Ozone ~ ., data = aq,
@@ -89,7 +89,7 @@ new_obs$Solar.R[1:2] = NA
 new_obs
 ```
 
-```{r}
+```{r, eval = FALSE}
 predict(fit, new_obs, na.action = na.pass)
 ```
 
@@ -194,7 +194,7 @@ table(aq$Month)
 ```
 
 ```{r}
-predict(preProcess(predict(dummyVars(Ozone ~ ., data = aq), aq), method = "knnImpute"), predict(dummyVars(Ozone ~ ., data = aq), aq)) %>% View()
+predict(preProcess(predict(dummyVars(Ozone ~ ., data = aq), aq), method = "knnImpute"), predict(dummyVars(Ozone ~ ., data = aq), aq))
 ```
 
 ```{r}
