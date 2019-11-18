@@ -46,6 +46,7 @@ Imports:
   purrr,
   randomForest,
   ranger,
+  RANN,
   readr,
   rmarkdown,
   ROSE,
