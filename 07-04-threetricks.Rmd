@@ -1,0 +1,149 @@
+# Three Weird Tricks
+
+```{r}
+library("tidyverse")
+library("quantreg")
+library("quantregForest")
+library("mclust")
+```
+
+# Why Estimate Just The Mean?
+
+```{r}
+cars = as_tibble(cars)
+```
+
+```{r}
+mod_lm = lm(dist ~ 0 + speed, data = cars)
+mod_qr = rq(dist ~ 0 + speed, data = cars, tau = c(0.25, 0.50, 0.75))
+```
+
+```{r}
+predict(mod_qr)
+```
+
+```{r}
+plot(dist ~ speed, data = cars, pch = 20, col = "darkgrey", xlim = c(0, 30))
+grid()
+abline(a = 0, b = coef(mod_lm))
+```
+
+```{r}
+plot(dist ~ speed, data = cars, pch = 20, col = "darkgrey", xlim = c(0, 30))
+grid()
+abline(a = 0, b = coef(mod_qr)[1], col = "limegreen")
+abline(a = 0, b = coef(mod_qr)[2], col = "dodgerblue")
+abline(a = 0, b = coef(mod_qr)[3], col = "red")
+```
+
+```{r}
+bstn = MASS::Boston
+```
+
+
+```{r}
+gen_weird_data = function(sample_size = 500) {
+  x = runif(n = sample_size, min = 1, max = 20)
+  y = 2 * sin(x) + rnorm(n = sample_size, sd = log(x))
+  tibble(x, y)
+}
+```
+
+```{r}
+weird_data = gen_weird_data()
+plot(y ~ x, data = weird_data, pch = 20, col = "darkgrey", xlim = c(0, 21))
+```
+
+```{r}
+x_seq = matrix(seq(1, 20, by = 0.1))
+mod_qrf = quantregForest(x = as.matrix(weird_data$x), y = weird_data$y, nodesize = 50)
+p = predict(mod_qrf, x_seq)
+```
+
+```{r}
+weird_data = gen_weird_data()
+plot(y ~ x, data = weird_data, pch = 20, col = "darkgrey", xlim = c(0, 21))
+grid()
+lines(x_seq, p[, "quantile= 0.1"], col = "limegreen")
+lines(x_seq, p[, "quantile= 0.5"], col = "dodgerblue")
+lines(x_seq, p[, "quantile= 0.9"], col = "red")
+```
+
+# Predict "I Don't Know!"
+
+```{r}
+default = as_tibble(ISLR::Default)
+
+mod_glm = glm(default ~ ., data = default, family = "binomial")
+pred_probs = predict(mod_glm, default, type = "response")
+
+case_when(
+  pred_probs > 0.8 ~ "Yes",
+  pred_probs < 0.2 ~ "No",
+  TRUE ~ "I DON'T KNOW"
+) %>% table()
+
+```
+
+
+# Predict That You Shouldn't Predict
+
+- https://stat.washington.edu/mclust/
+- https://cran.r-project.org/web/packages/mclust/vignettes/mclust.html
+
+```{r}
+dens = densityMclust(faithful$waiting)
+summary(dens, parameters = TRUE)
+plot(dens, what = "BIC", legendArgs = list(x = "topright"))
+plot(dens, what = "density", data = faithful$waiting)
+```
+
+```{r}
+dens = densityMclust(faithful, modelNames = "EEE", G = 2)
+summary(dens)
+summary(dens, parameters = TRUE)
+plot(dens, what = "density", data = faithful, 
+     drawlabels = FALSE, points.pch = 20)
+plot(dens, what = "density", type = "hdr")
+plot(dens, what = "density", type = "hdr", prob = c(0.1, 0.9))
+plot(dens, what = "density", type = "hdr", data = faithful)
+plot(dens, what = "density", type = "persp")
+```
+
+```{r}
+head(predict(dens, what = "dens"))
+head(predict(dens, what = "z"))
+```
+
+```{r}
+bstn = as_tibble(MASS::Boston)
+bstn = bstn %>% mutate(rad = as.factor(rad))
+bstn_x = bstn %>% select(-medv)
+```
+
+```{r}
+bstn_dens = densityMclust(bstn_x, G = 4)
+summary(bstn_dens)
+```
+
+```{r}
+hist(log(predict(bstn_dens, bstn_x)))
+grid()
+box()
+```
+
+```{r}
+exp(-300)
+```
+
+
+
+
+
+
+
+
+
+
+
+

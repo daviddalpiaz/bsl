@@ -38,6 +38,7 @@ Imports:
   leaps,
   lubridate,
   MASS,
+  mclust,
   microbenchmark,
   mlbench,
   nnet, 
