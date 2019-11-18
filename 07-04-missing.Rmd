@@ -72,16 +72,15 @@ fit_original$results
 ```
 
 ```{r, knn-impute}
-# this is commented out to try to get travis to build
-# set.seed(42)
-# fit = train(
-#   Ozone ~ ., data = aq,
-#   method = "lm",
-#   trControl = trainControl(method = "cv", number = 5),
-#   preProcess = "knnImpute",
-#   na.action = na.pass
-# )
-# fit$results
+set.seed(42)
+fit = train(
+  Ozone ~ ., data = aq,
+  method = "lm",
+  trControl = trainControl(method = "cv", number = 5),
+  preProcess = "knnImpute",
+  na.action = na.pass
+)
+fit$results
 ```
 
 ```{r}
