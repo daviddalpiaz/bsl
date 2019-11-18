@@ -45,6 +45,8 @@ Imports:
   plotrix,
   pROC,
   purrr,
+  quantreg,
+  quantregForest,
   randomForest,
   ranger,
   RANN,
