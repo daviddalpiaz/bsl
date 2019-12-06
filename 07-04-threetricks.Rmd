@@ -52,6 +52,7 @@ gen_weird_data = function(sample_size = 500) {
 ```{r}
 weird_data = gen_weird_data()
 plot(y ~ x, data = weird_data, pch = 20, col = "darkgrey", xlim = c(0, 21))
+grid()
 ```
 
 ```{r}
@@ -85,7 +86,6 @@ case_when(
 
 ```
 
-
 ## Predict That You Shouldn't Predict
 
 - https://stat.washington.edu/mclust/
@@ -115,6 +115,24 @@ head(predict(dens, what = "dens"))
 head(predict(dens, what = "z"))
 ```
 
+
+```{r}
+hist(predict(dens, what = "dens"))
+```
+
+
+```{r}
+hist(log(predict(dens, what = "dens")))
+```
+
+```{r}
+exp(-7)
+```
+
+
+
+
+
 ```{r}
 bstn = as_tibble(MASS::Boston)
 bstn = bstn %>% mutate(rad = as.factor(rad))
@@ -136,10 +154,26 @@ box()
 exp(-300)
 ```
 
+```{r}
+predict(bstn_dens, bstn_x[1, ])
+```
 
+```{r}
+new = bstn_x[1, ]
+new[1, 1:13] = 0
+```
 
+```{r}
+new$rad[1] = 2
+```
 
+```{r}
+new
+```
 
+```{r}
+predict(bstn_dens, new)
+```
 
 
 
