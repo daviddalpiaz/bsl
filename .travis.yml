@@ -1,5 +1,6 @@
 language: r
-sudo: true
+before_install:
+  - tlmgr install unicode-math
 cache:
   packages: true
   directories:
