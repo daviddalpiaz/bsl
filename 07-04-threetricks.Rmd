@@ -19,7 +19,7 @@ mod_qr = rq(dist ~ 0 + speed, data = cars, tau = c(0.25, 0.50, 0.75))
 ```
 
 ```{r}
-predict(mod_qr)
+predict(mod_qr)[1:10]
 ```
 
 ```{r}
@@ -83,7 +83,6 @@ case_when(
   pred_probs < 0.2 ~ "No",
   TRUE ~ "I DON'T KNOW"
 ) %>% table()
-
 ```
 
 ## Predict That You Shouldn't Predict
@@ -129,10 +128,6 @@ hist(log(predict(dens, what = "dens")))
 exp(-7)
 ```
 
-
-
-
-
 ```{r}
 bstn = as_tibble(MASS::Boston)
 bstn = bstn %>% mutate(rad = as.factor(rad))
@@ -174,10 +169,3 @@ new
 ```{r}
 predict(bstn_dens, new)
 ```
-
-
-
-
-
-
-
