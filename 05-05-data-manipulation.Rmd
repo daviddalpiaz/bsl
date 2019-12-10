@@ -26,7 +26,6 @@ library("tidyverse")
 - [`data.table` Website](https://rdatatable.gitlab.io/data.table/)
 - [`data.table` Cheat Sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/master/datatable.pdf)
 
-
 ## Data Splitting with `dplyr::anti_join`
 
 ```{r}
