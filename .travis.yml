@@ -1,7 +1,9 @@
 language: r
+sudo: required
 before_install:
-  - tlmgr update --self
+  - tlmgr install tex-gyre-math
   - tlmgr install unicode-math
+  - tlmgr update --self --all
 cache:
   packages: true
   directories:
