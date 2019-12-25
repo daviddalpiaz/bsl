@@ -1,6 +1,7 @@
 language: r
 before_install:
-  - sudo tlmgr update unicode-math
+  - tlmgr update --self
+  - tlmgr install unicode-math
 cache:
   packages: true
   directories:
