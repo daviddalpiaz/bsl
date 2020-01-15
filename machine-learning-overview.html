@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Basics of Statistical Learning</title>
-  <meta name="description" content="Basics of Statistical Learning" />
+  <title>Chapter 2 Machine Learning Overview | Basics of Statistical Learning</title>
+  <meta name="description" content="Chapter 2 Machine Learning Overview | Basics of Statistical Learning" />
   <meta name="generator" content="bookdown 0.17.1 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Basics of Statistical Learning" />
+  <meta property="og:title" content="Chapter 2 Machine Learning Overview | Basics of Statistical Learning" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://statisticallearning.org/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="daviddalpiaz/bsl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Basics of Statistical Learning" />
+  <meta name="twitter:title" content="Chapter 2 Machine Learning Overview | Basics of Statistical Learning" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
+<link rel="prev" href="ten-simple-rules-for-success-in-stat-432.html"/>
 
-<link rel="next" href="ten-simple-rules-for-success-in-stat-432.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -109,65 +109,21 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Basics of Statistical Learning</h1>
-<p class="author"><em><a href="https://daviddalpiaz.com/">David Dalpiaz</a></em></p>
-<p class="date"><em>2020-01-15</em></p>
-</div>
-<div id="start-here" class="section level1 unnumbered">
-<h1>Start Here</h1>
-<p><img src="img/wordmark.png" style="display: block; margin: auto;" /></p>
+<div id="machine-learning-overview" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Machine Learning Overview</h1>
 <hr />
-<p>Welcome to Basics of Statistical Learning! What a boring title! The title was chosen to mirror the <a href="https://illinois.edu/">University of Illinois</a> course <a href="www.stat432.org">STAT 432 - Basics of Statistical Learning</a>. That title was chosen to meet certain University course naming conventions, hence the boring title. A more appropriate title would be “Machine Learning from the Perspective of a Statistician who uses R,” which is more descriptive, but still a boring title. Anyway, this “book” will often be referred to as <strong>BSL</strong>.[^1]</p>
-<hr />
-<div id="caveat-emptor" class="section level2 unnumbered">
-<h2>Caveat Emptor</h2>
-<p><strong>This “book” is under active development.</strong> Literally every element of the book is subject to change, at any moment. This text, BSL, is the successor to <a href="https://daviddalpiaz.github.io/r4sl/">R4SL</a>, an unfinished work that began as a supplement to <a href="https://faculty.marshall.usc.edu/gareth-james/ISL/">Introduction to Statistical Learning</a>, but was never finished. (In some sense, this book is just a fresh start due to the author wanting to change the presentation of the material. The author is seriously worried that he will encounter the <a href="https://en.wikipedia.org/wiki/Second-system_effect">second-system effect.</a>)</p>
-<p>Because this book is written with a course in mind, that is actively being taught, often out of convenience, the text will speak directly to the students of that course. Thus, be aware that any reference to a “course” are a reference to <a href="www.stat432.org">STAT 432 @ UIUC</a>.</p>
-<!-- A [**PDF** version](bsl.pdf) is maintained for use offline, however, given the pace of development, this should only be used if absolutely necessary. During development formatting in the PDF version will largely be ignored. -->
-<p>Since this book is under active development you may encounter errors ranging from typos, to broken code, to poorly explained topics. If you do, please let us know! <a href="https://yihui.name/en/2013/06/fix-typo-in-documentation/">Better yet, fix the issue yourself!</a> If you are familiar with R Markdown and GitHub, <a href="https://github.com/daviddalpiaz/bsl">pull requests are highly encouraged!</a>. This process is partially automated by the edit button in the top-left corner of the html version. If your suggestion or fix becomes part of the book, you will be added to the list at the end of this chapter. We’ll also link to your GitHub account, or personal website upon request. If you’re not familiar with version control systems feel free to email the author, <code>dalpiaz2 AT illinois DOT edu</code>. (But also consider using this opportunity to learn a bit about version control!) See additional details in the Acknowledgements section.</p>
-<p>While development is taking place, you may see “TODO” scattered throughout the text. These are mostly notes for internal use, but give the reader some idea of what development is still to come. For additional details on the development process, please see the <a href="https://github.com/daviddalpiaz/bsl/blob/master/README.md">README</a> file on GitHub as well as the <a href="https://github.com/daviddalpiaz/bsl/issues">Issues</a> page.</p>
-<hr />
-</div>
-<div id="who" class="section level2 unnumbered">
-<h2>Who?</h2>
-<p>This book is targeted at advanced undergraduate or first year MS students in Statistics who have no prior machine learning experience. While both will be discussed in great detail, previous experience with both statistical modeling and R are assumed.</p>
-<hr />
-</div>
-<div id="acknowledgements" class="section level2 unnumbered">
-<h2>Acknowledgements</h2>
-<p>The following is a (likely incomplete) list of helpful contributors. This book was also influenced by the helpful <a href="https://daviddalpiaz.github.io/r4sl/index.html#acknowledgements">contributors to R4SL</a>.</p>
 <ul>
-<li><a href="https://www.linkedin.com/in/jae-ho-lee-32052710b/">Jae-Ho Lee</a> - STAT 432, Fall 2019</li>
+<li>TODO: link the david robinson article here</li>
 </ul>
-<p>Your name could be here! Please see the <a href="https://github.com/daviddalpiaz/bsl/blob/master/CONTRIBUTING.md">CONTRIBUTING</a> document on GitHub for details on interacting with this project. Pull requests encouraged!</p>
-<p>Looking for ways to contribute?</p>
-<ul>
-<li>You’ll notice that a lot of the plotting code is not displayed in the text, but is available in the source. Currently that code was written to accomplish a task, but without much thought about the best way to accomplish the task. Try refactoring some of this code.</li>
-<li>Fix typos. Since the book is actively being developed, typos are getting added all the time.</li>
-<li>Suggest edits. Good feedback can be just as helpful as actually contributing code changes.</li>
-</ul>
-<p>TODO: Standing on the shoulder of giants. High level acknowledgements.</p>
-<hr />
-</div>
-<div id="license" class="section level2 unnumbered">
-<h2>License</h2>
-<div class="figure">
-<img src="img/cc.png" alt="CC NC SA" />
-<p class="caption">CC NC SA</p>
-</div>
-<p>This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a></p>
-<hr />
 
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
+<a href="ten-simple-rules-for-success-in-stat-432.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="ten-simple-rules-for-success-in-stat-432.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -198,7 +154,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/daviddalpiaz/bsl/edit/master/index.Rmd",
+"link": "https://github.com/daviddalpiaz/bsl/edit/master/02-ml-overview.Rmd",
 "text": "Edit"
 },
 "history": {
