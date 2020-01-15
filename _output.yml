@@ -11,8 +11,8 @@ bookdown::gitbook:
 #    download: [pdf]
     edit: https://github.com/daviddalpiaz/bsl/edit/master/%s
 # bookdown::pdf_book:
-#   includes:
-#     in_header: preamble.tex
+#   # includes:
+#   #   in_header: preamble.tex
 #   dev: "cairo_pdf"
 #   latex_engine: xelatex
 #   citation_package: natbib

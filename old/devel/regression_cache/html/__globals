@@ -1,0 +1,10 @@
+unnamed-chunk-2	library
+unnamed-chunk-3	^	data.frame	rnorm	runif	seq	set.seed
+unnamed-chunk-4	~	$	knn.reg	lm	rpart	rpart.control	sim_trn_data	x_grid
+unnamed-chunk-5	$	knn_fit_h	knn_fit_l	knn_fit_m	poly_fit_h	poly_fit_l	poly_fit_m	predict	tree_fit_h	tree_fit_l	tree_fit_m	x_grid
+unnamed-chunk-6	~	$	c	grid	lines	par	plot	sim_trn_data	tree_fit_h_pred	tree_fit_l_pred	tree_fit_m_pred	x_grid
+unnamed-chunk-7	~	$	c	grid	knn_fit_h_pred	knn_fit_l_pred	knn_fit_m_pred	lines	par	plot	sim_trn_data	x_grid
+unnamed-chunk-8	~	$	c	grid	lines	par	plot	poly_fit_h_pred	poly_fit_l_pred	poly_fit_m_pred	sim_trn_data	x_grid
+unnamed-chunk-9	data.frame	rnorm	runif
+unnamed-chunk-10	data.frame	gen_sim_data	seq	set.seed	sin
+unnamed-chunk-11	~	curve	data.frame	grid	plot	predict	sim_trn_data	sin	tree_fit_m	x

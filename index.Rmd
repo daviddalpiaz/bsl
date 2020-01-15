@@ -3,16 +3,10 @@ title: "Basics of Statistical Learning"
 author: "[David Dalpiaz](https://daviddalpiaz.com/)"
 date: "`r Sys.Date()`"
 github-repo: daviddalpiaz/bsl
-url: 'http\://daviddalpiaz.github.io/bsl/'
+url: 'https\://statisticallearning.org/'
 knit: "bookdown::render_book"
 site: bookdown::bookdown_site
 documentclass: book
-bibliography: [references.bib]
-biblio-style: apalike
-#favicon: "favicon.ico"
-link-citations: yes
-urlcolor: cyan
-description: ""
 ---
 
 ```{r global.options, include = FALSE}
@@ -21,7 +15,7 @@ knitr::opts_chunk$set(fig.align = "center")
 
 ***
 
-# Preface {-}
+# Start Here {-}
 
 ```{r, echo = FALSE}
 knitr::include_graphics("img/wordmark.png")
@@ -29,7 +23,7 @@ knitr::include_graphics("img/wordmark.png")
 
 ***
 
-Welcome to Basics of Statistical Learning! What a boring title! The title was chosen to mirror the [University of Illinois](https://illinois.edu/) course [STAT 432 - Basics of Statistical Learning](www.stat432.org). That title was chosen to meet certain University course naming conventions, hence the boring title. A more appropriate title would be "Machine Learning from the Perspective of a Statistician who uses R," which is more descriptive, but still a boring title. Anyway, this book will often be referred to as **BSL**.[^1]
+Welcome to Basics of Statistical Learning! What a boring title! The title was chosen to mirror the [University of Illinois](https://illinois.edu/) course [STAT 432 - Basics of Statistical Learning](www.stat432.org). That title was chosen to meet certain University course naming conventions, hence the boring title. A more appropriate title would be "Machine Learning from the Perspective of a Statistician who uses R," which is more descriptive, but still a boring title. Anyway, this "book" will often be referred to as **BSL**.[^1]
 
 ***
 
@@ -37,9 +31,9 @@ Welcome to Basics of Statistical Learning! What a boring title! The title was ch
 
 **This "book" is under active development.** Literally every element of the book is subject to change, at any moment. This text, BSL, is the successor to [R4SL](https://daviddalpiaz.github.io/r4sl/), an unfinished work that began as a supplement to [Introduction to Statistical Learning](https://faculty.marshall.usc.edu/gareth-james/ISL/), but was never finished. (In some sense, this book is just a fresh start due to the author wanting to change the presentation of the material. The author is seriously worried that he will encounter the [second-system effect.](https://en.wikipedia.org/wiki/Second-system_effect))
 
-Because this book is written with a course in mind, that is actively being taught, sometimes out of convenience, the text will speak directly to the students of that course. Thus, be aware that any reference to a "course" are a reference to [STAT 432 @ UIUC](www.stat432.org).
+Because this book is written with a course in mind, that is actively being taught, often out of convenience, the text will speak directly to the students of that course. Thus, be aware that any reference to a "course" are a reference to [STAT 432 @ UIUC](www.stat432.org).
 
-A [**PDF** version](bsl.pdf) is maintained for use offline, however, given the pace of development, this should only be used if absolutely necessary. During development formatting in the PDF version will largely be ignored.
+<!-- A [**PDF** version](bsl.pdf) is maintained for use offline, however, given the pace of development, this should only be used if absolutely necessary. During development formatting in the PDF version will largely be ignored. -->
 
 Since this book is under active development you may encounter errors ranging from typos, to broken code, to poorly explained topics. If you do, please let us know! [Better yet, fix the issue yourself!](https://yihui.name/en/2013/06/fix-typo-in-documentation/) If you are familiar with R Markdown and GitHub, [pull requests are highly encouraged!](https://github.com/daviddalpiaz/bsl). This process is partially automated by the edit button in the top-left corner of the html version. If your suggestion or fix becomes part of the book, you will be added to the list at the end of this chapter. We’ll also link to your GitHub account, or personal website upon request. If you're not familiar with version control systems feel free to email the author, `dalpiaz2 AT illinois DOT edu`. (But also consider using this opportunity to learn a bit about version control!) See additional details in the Acknowledgements section.
 
@@ -50,63 +44,6 @@ While development is taking place, you may see "TODO" scattered throughout the t
 ## Who? {-}
 
 This book is targeted at advanced undergraduate or first year MS students in Statistics who have no prior machine learning experience. While both will be discussed in great detail, previous experience with both statistical modeling and R are assumed.
-
-***
-
-## Organization {-}
-
-Note: This is somewhat speculative.
-
-01 - A Machine Learning Preview
-
-1. Introduction
-2. Regression (Powerlifting)
-3. Classification (Handwriting)
-4. Clustering (NBA Players)
-  
-02 - Some Machine Learning Foundations
-
-1. Introduction
-2. Probability (A Quick Tour)
-3. Statistics and Estimation (A Quick Tour)
-4. Density Estimation (?)
-
-03 - A Tour of Machine Learning
-
-1. Introduction
-   - Data Splitting
-   - Generalization to Unseen Data
-2. Regression
-3. Bias, Variane, Loss, Risk
-4. Classification
-5. Resampling
-6. Recap and Overview of Supervised Learning
-7. Regularization
-8. Ensemble Learning
-9. Practical Issues
-10. Clustering (Unsupervised Learning)
-    - Recap the unsupervised learning that was done throughout.
-    - Introduce clustering specifically.
-  
-04 - Mathematics (Miscellaneous chapters further exploring mathematical details)
-
-1. Introduction
-2. Bayes Theorem
-3. Multivariate Normal
-
-05 - Computing (Miscellaneous chapters further exploring computing details)
-
-1. Introduction
-2. Getting up to speed with R (Currently "Computing" in the main narrative.)
-3. `purrr::map()`
-4. Simulation? Bootstrap?
-
-06 - Analysis (Examples of using the material with "real world" datasets)
-
-07 - Appendix (Additional Readings and References)
-
-- Misc papers, blogs, tutorials, etc
-- Misc videos
 
 ***
 
@@ -134,6 +71,4 @@ TODO: Standing on the shoulder of giants. High level acknowledgements.
 
 This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/)
 
-<!-- *** -->
-
-[^1]: Just an example footnote, please ignore.
+***
