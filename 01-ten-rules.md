@@ -2,8 +2,6 @@
 
 
 
-[[**STAT 432**](https://stat432.org/)] [Spring 2020](https://spring-2020.stat432.org/)
-
 ***
 
 STAT 432 is a difficult course. Although, as a result of the [historical grade distribution](http://waf.cs.illinois.edu/discovery/grade_disparity_between_sections_at_uiuc/) I believe some students enter the course believing that it is an "easy" course. This document was written to help address the reasons for this difference between perception and reality. The style is stolen from the popular "Ten Rules" articles published in PLOS journals. A relevant example is  [Ten Simple Rules for Effective Statistical Practice](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1004961).
@@ -110,5 +108,11 @@ Stated practically and with relevance to STAT 432:
 ## Conclusion
 
 In summary, if you bring an open mind and a bit of effort, we believe that you will succeed in STAT 432. We don't believe that the course is easy, but we hope that it is ultimately rewarding.
+
+***
+
+## Source
+
+- `R` Markdown: [`01-ten-rules.Rmd`](01-ten-rules.Rmd)
 
 ***
