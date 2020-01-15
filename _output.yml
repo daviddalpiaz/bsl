@@ -7,7 +7,8 @@ bookdown::gitbook:
       before: |
         <li><a href="./">Basics of Statistical Learning</a></li>
       after: |
-        <li><a href="https://github.com/daviddalpiaz/bsl" target="blank">&copy; 2019 David Dalpiaz</a></li>
+        <li><a href="https://daviddalpiaz.com" target="blank">&copy; 2020 David Dalpiaz</a></li>
+        <li><a href="https://spring-2020.stat432.org" target="blank">[STAT 432] Spring 2020</a></li>
 #    download: [pdf]
     edit: https://github.com/daviddalpiaz/bsl/edit/master/%s
 # bookdown::pdf_book:
