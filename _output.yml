@@ -2,6 +2,10 @@ bookdown::gitbook:
   css: style.css
   split_by: chapter
   config:
+    fontsettings:
+      theme: white
+      family: sans
+      size: 1
     toc:
       collapse: section
       before: |
@@ -12,10 +16,6 @@ bookdown::gitbook:
 #    download: [pdf]
     download: no
     edit: https://github.com/daviddalpiaz/bsl/edit/master/%s
-    fontsettings:
-      theme: white
-      family: sans
-      size: 1
     sharing: null
 # bookdown::pdf_book:
 #   # includes:
