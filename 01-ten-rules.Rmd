@@ -1,10 +1,7 @@
 # Ten Simple Rules for Success in STAT 432
 
 ```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = TRUE, 
-                      fig.align = "center", 
-                      cache = TRUE, 
-                      autodep = TRUE)
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center", cache = TRUE, autodep = TRUE)
 ```
 
 ***
