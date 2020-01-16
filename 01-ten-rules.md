@@ -26,7 +26,7 @@ Applied to the data analyses done in STAT 432: There is no single correct answer
 
 ***
 
-## Rules 3: Previous Learning is Not Gospel
+## Rule 3: Previous Learning is Not Gospel
 
 A trap many students fall into is believing that **everything** they have previously learned is relevant in future courses. This is not the case. Just because a method was taught in STAT 420 or STAT 425 does not mean that it is relevant in STAT 432. The most common example of this is Variance Inflation Factors. Students seem to love to drag this concept into STAT 432. While it is certainly possible to appeal to VIFs in STAT 432, they seem to be misapplied more often than not. This is because VIFs are more relevant for inference than prediction. STAT 432 cares about prediction much more than STAT 420 and STAT 425.
 
