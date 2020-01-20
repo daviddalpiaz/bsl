@@ -11,7 +11,7 @@ bookdown::gitbook:
       before: |
         <li><a href="./">Basics of Statistical Learning</a></li>
       after: |
-        <li><a href="https://daviddalpiaz.com" target="blank">&copy; 2020 David Dalpiaz</a></li>
+        <li><a href="https://daviddalpiaz.org" target="blank">&copy; 2020 David Dalpiaz</a></li>
         <li><a href="https://spring-2020.stat432.org" target="blank">[STAT 432] Spring 2020</a></li>
 #    download: [pdf]
     download: no
