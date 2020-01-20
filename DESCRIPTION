@@ -5,7 +5,7 @@ Authors@R: c(person("David", "Dalpiaz" , "dalpiaz2@illinois.edu", c("aut", "cre"
 Depends: R (>= 3.6.2)
 URL: https://github.com/daviddalpiaz/bsl
 Imports: 
-  bookdown
+  bookdown,
   tidyverse
 Remotes: 
   rstudio/bookdown
