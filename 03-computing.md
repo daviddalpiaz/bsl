@@ -78,6 +78,30 @@ R tutorials and advice are plentiful online. While we do not want to discourage 
 
 In other words, information below here supersedes any information from the above sources.
 
+### R Versions
+
+You should always use the most up-to-date version of R and RStudio. You **must** use at least R verions 3.6.2.
+
+Importantly, R versions after 3.6.0 have slightly different random number generation. Although, even with the most recent version, sometimes R keeps the old ranomd number generation. To check that you are on the most recent random number generation, run:
+
+
+```r
+RNGkind()
+```
+
+```
+## [1] "Mersenne-Twister" "Inversion"        "Rejection"
+```
+
+If your output matches the output above, you're all set. If not, run:
+
+
+```r
+RNGversion(getRversion())
+```
+
+Then re-run `RNGkind()` and everything should match up and you should be go to go!
+
 ### Code Style
 
 Code needs to be read by two distinct groups:

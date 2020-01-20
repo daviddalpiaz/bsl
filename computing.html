@@ -172,16 +172,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2.3" data-path="computing.html"><a href="computing.html#r-markdown"><i class="fa fa-check"></i><b>3.2.3</b> R Markdown</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="computing.html"><a href="computing.html#stat-432-idioms"><i class="fa fa-check"></i><b>3.3</b> STAT 432 Idioms</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="computing.html"><a href="computing.html#code-style"><i class="fa fa-check"></i><b>3.3.1</b> Code Style</a></li>
-<li class="chapter" data-level="3.3.2" data-path="computing.html"><a href="computing.html#reference-style"><i class="fa fa-check"></i><b>3.3.2</b> Reference Style</a></li>
-<li class="chapter" data-level="3.3.3" data-path="computing.html"><a href="computing.html#stat-432-r-style-overrides"><i class="fa fa-check"></i><b>3.3.3</b> STAT 432 R Style Overrides</a></li>
-<li class="chapter" data-level="3.3.4" data-path="computing.html"><a href="computing.html#stat-432-r-markdown-style"><i class="fa fa-check"></i><b>3.3.4</b> STAT 432 R Markdown Style</a></li>
-<li class="chapter" data-level="3.3.5" data-path="computing.html"><a href="computing.html#style-hueristics"><i class="fa fa-check"></i><b>3.3.5</b> Style Hueristics</a></li>
-<li class="chapter" data-level="3.3.6" data-path="computing.html"><a href="computing.html#objects-and-functions"><i class="fa fa-check"></i><b>3.3.6</b> Objects and Functions</a></li>
-<li class="chapter" data-level="3.3.7" data-path="computing.html"><a href="computing.html#print-versus-return"><i class="fa fa-check"></i><b>3.3.7</b> Print versus Return</a></li>
-<li class="chapter" data-level="3.3.8" data-path="computing.html"><a href="computing.html#help"><i class="fa fa-check"></i><b>3.3.8</b> Help</a></li>
-<li class="chapter" data-level="3.3.9" data-path="computing.html"><a href="computing.html#keyboard-shortcuts"><i class="fa fa-check"></i><b>3.3.9</b> Keyboard Shortcuts</a></li>
-<li class="chapter" data-level="3.3.10" data-path="computing.html"><a href="computing.html#common-issues"><i class="fa fa-check"></i><b>3.3.10</b> Common Issues</a></li>
+<li class="chapter" data-level="3.3.1" data-path="computing.html"><a href="computing.html#r-versions"><i class="fa fa-check"></i><b>3.3.1</b> R Versions</a></li>
+<li class="chapter" data-level="3.3.2" data-path="computing.html"><a href="computing.html#code-style"><i class="fa fa-check"></i><b>3.3.2</b> Code Style</a></li>
+<li class="chapter" data-level="3.3.3" data-path="computing.html"><a href="computing.html#reference-style"><i class="fa fa-check"></i><b>3.3.3</b> Reference Style</a></li>
+<li class="chapter" data-level="3.3.4" data-path="computing.html"><a href="computing.html#stat-432-r-style-overrides"><i class="fa fa-check"></i><b>3.3.4</b> STAT 432 R Style Overrides</a></li>
+<li class="chapter" data-level="3.3.5" data-path="computing.html"><a href="computing.html#stat-432-r-markdown-style"><i class="fa fa-check"></i><b>3.3.5</b> STAT 432 R Markdown Style</a></li>
+<li class="chapter" data-level="3.3.6" data-path="computing.html"><a href="computing.html#style-hueristics"><i class="fa fa-check"></i><b>3.3.6</b> Style Hueristics</a></li>
+<li class="chapter" data-level="3.3.7" data-path="computing.html"><a href="computing.html#objects-and-functions"><i class="fa fa-check"></i><b>3.3.7</b> Objects and Functions</a></li>
+<li class="chapter" data-level="3.3.8" data-path="computing.html"><a href="computing.html#print-versus-return"><i class="fa fa-check"></i><b>3.3.8</b> Print versus Return</a></li>
+<li class="chapter" data-level="3.3.9" data-path="computing.html"><a href="computing.html#help"><i class="fa fa-check"></i><b>3.3.9</b> Help</a></li>
+<li class="chapter" data-level="3.3.10" data-path="computing.html"><a href="computing.html#keyboard-shortcuts"><i class="fa fa-check"></i><b>3.3.10</b> Keyboard Shortcuts</a></li>
+<li class="chapter" data-level="3.3.11" data-path="computing.html"><a href="computing.html#common-issues"><i class="fa fa-check"></i><b>3.3.11</b> Common Issues</a></li>
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="computing.html"><a href="computing.html#source-2"><i class="fa fa-check"></i><b>3.4</b> Source</a></li>
 </ul></li>
@@ -329,8 +330,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">3.3</span> STAT 432 Idioms</h2>
 <p>R tutorials and advice are plentiful online. While we do not want to discourage you from using the resources above, or using your own creativity, the following sections will specify some strong suggestinons for how to use R, RStudio, and R Markdown in STAT 432.</p>
 <p>In other words, information below here supersedes any information from the above sources.</p>
+<div id="r-versions" class="section level3">
+<h3><span class="header-section-number">3.3.1</span> R Versions</h3>
+<p>You should always use the most up-to-date version of R and RStudio. You <strong>must</strong> use at least R verions 3.6.2.</p>
+<p>Importantly, R versions after 3.6.0 have slightly different random number generation. Although, even with the most recent version, sometimes R keeps the old ranomd number generation. To check that you are on the most recent random number generation, run:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">RNGkind</span>()</a></code></pre></div>
+<pre><code>## [1] &quot;Mersenne-Twister&quot; &quot;Inversion&quot;        &quot;Rejection&quot;</code></pre>
+<p>If your output matches the output above, you’re all set. If not, run:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">RNGversion</span>(<span class="kw">getRversion</span>())</a></code></pre></div>
+<p>Then re-run <code>RNGkind()</code> and everything should match up and you should be go to go!</p>
+</div>
 <div id="code-style" class="section level3">
-<h3><span class="header-section-number">3.3.1</span> Code Style</h3>
+<h3><span class="header-section-number">3.3.2</span> Code Style</h3>
 <p>Code needs to be read by two distinct groups:</p>
 <ul>
 <li>Computers</li>
@@ -340,41 +351,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>While computers will complain about bad code, does anyone really care about wasting their time? (OK, sure, computer scientists might.) If we give them bad code, they try to run it, fail, then complain. However, they’re soulless machines, they can handle it.</p>
 <p>Humans on the other hand have a finite amount of time on this earth. Even if we solve aging, we still have to deal with the <a href="https://en.m.wikipedia.org/wiki/Heat_death_of_the_universe">heat death of the universe</a>. Thus, while wasting a computer’s time is no big deal, wasting a human’s time is, frankly, immoral. What does this have to do with R programming? Humans are going to read your R code. One of those humans is likely to be you, but future you. To make this reading possible and efficient, you need to develop <strong>style</strong>.</p>
 <p>Here is some code that a computer can read, but a human will struggle to read:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">1337</span>);mu=<span class="dv">10</span>;sample_size=<span class="dv">50</span>;samples=<span class="dv">100000</span>;x_bars=<span class="kw">rep</span>(<span class="dv">0</span>, samples);</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>samples){x_bars[i]=<span class="kw">mean</span>(<span class="kw">rpois</span>(sample_size,<span class="dt">lambda =</span> mu))}</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">x_bar_hist=<span class="kw">hist</span>(x_bars,<span class="dt">breaks=</span><span class="dv">50</span>,<span class="dt">main=</span><span class="st">&quot;Histogram of Sample Means&quot;</span>,</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="dt">xlab=</span><span class="st">&quot;Sample Means&quot;</span>,<span class="dt">col=</span><span class="st">&quot;darkorange&quot;</span>,<span class="dt">border =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">1337</span>);mu=<span class="dv">10</span>;sample_size=<span class="dv">50</span>;samples=<span class="dv">100000</span>;x_bars=<span class="kw">rep</span>(<span class="dv">0</span>, samples);</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>samples){x_bars[i]=<span class="kw">mean</span>(<span class="kw">rpois</span>(sample_size,<span class="dt">lambda =</span> mu))}</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">x_bar_hist=<span class="kw">hist</span>(x_bars,<span class="dt">breaks=</span><span class="dv">50</span>,<span class="dt">main=</span><span class="st">&quot;Histogram of Sample Means&quot;</span>,</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="dt">xlab=</span><span class="st">&quot;Sample Means&quot;</span>,<span class="dt">col=</span><span class="st">&quot;darkorange&quot;</span>,<span class="dt">border =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a></code></pre></div>
 <p>Now, written again, but readable by a human:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># set seed for reproducibility</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">set.seed</span>(<span class="dv">1337</span>)</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co"># setup simulation parameters</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">mu =<span class="st"> </span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">sample_size =<span class="st"> </span><span class="dv">50</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">samples =<span class="st"> </span><span class="dv">100000</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co"># create vector to store simulation results</span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10">x_bars =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, samples)</a>
-<a class="sourceLine" id="cb2-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co"># run simulation</span></a>
-<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>samples) {</a>
-<a class="sourceLine" id="cb2-14" data-line-number="14">  x_bars[i] =<span class="st"> </span><span class="kw">mean</span>(<span class="kw">rpois</span>(sample_size, <span class="dt">lambda =</span> mu))</a>
-<a class="sourceLine" id="cb2-15" data-line-number="15">}</a>
-<a class="sourceLine" id="cb2-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co"># plot results</span></a>
-<a class="sourceLine" id="cb2-18" data-line-number="18">x_bar_hist =<span class="st"> </span><span class="kw">hist</span>(</a>
-<a class="sourceLine" id="cb2-19" data-line-number="19">  x_bars,</a>
-<a class="sourceLine" id="cb2-20" data-line-number="20">  <span class="dt">breaks =</span> <span class="dv">50</span>,</a>
-<a class="sourceLine" id="cb2-21" data-line-number="21">  <span class="dt">main =</span> <span class="st">&quot;Histogram of Sample Means&quot;</span>,</a>
-<a class="sourceLine" id="cb2-22" data-line-number="22">  <span class="dt">xlab =</span> <span class="st">&quot;Sample Means&quot;</span>,</a>
-<a class="sourceLine" id="cb2-23" data-line-number="23">  <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>,</a>
-<a class="sourceLine" id="cb2-24" data-line-number="24">  <span class="dt">border =</span> <span class="st">&quot;dodgerblue&quot;</span></a>
-<a class="sourceLine" id="cb2-25" data-line-number="25">)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># set seed for reproducibility</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">set.seed</span>(<span class="dv">1337</span>)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co"># setup simulation parameters</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">mu =<span class="st"> </span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">sample_size =<span class="st"> </span><span class="dv">50</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">samples =<span class="st"> </span><span class="dv">100000</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co"># create vector to store simulation results</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">x_bars =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, samples)</a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co"># run simulation</span></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>samples) {</a>
+<a class="sourceLine" id="cb5-14" data-line-number="14">  x_bars[i] =<span class="st"> </span><span class="kw">mean</span>(<span class="kw">rpois</span>(sample_size, <span class="dt">lambda =</span> mu))</a>
+<a class="sourceLine" id="cb5-15" data-line-number="15">}</a>
+<a class="sourceLine" id="cb5-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co"># plot results</span></a>
+<a class="sourceLine" id="cb5-18" data-line-number="18">x_bar_hist =<span class="st"> </span><span class="kw">hist</span>(</a>
+<a class="sourceLine" id="cb5-19" data-line-number="19">  x_bars,</a>
+<a class="sourceLine" id="cb5-20" data-line-number="20">  <span class="dt">breaks =</span> <span class="dv">50</span>,</a>
+<a class="sourceLine" id="cb5-21" data-line-number="21">  <span class="dt">main =</span> <span class="st">&quot;Histogram of Sample Means&quot;</span>,</a>
+<a class="sourceLine" id="cb5-22" data-line-number="22">  <span class="dt">xlab =</span> <span class="st">&quot;Sample Means&quot;</span>,</a>
+<a class="sourceLine" id="cb5-23" data-line-number="23">  <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>,</a>
+<a class="sourceLine" id="cb5-24" data-line-number="24">  <span class="dt">border =</span> <span class="st">&quot;dodgerblue&quot;</span></a>
+<a class="sourceLine" id="cb5-25" data-line-number="25">)</a></code></pre></div>
 <p>To the computer, these are the same. To a human, one makes you want to pull your hair out, the other you can glance at and have a pretty good idea about what is going on.</p>
 <p>Style is subjective, but we’ll define some guiding principles, and a few rules.</p>
 </div>
 <div id="reference-style" class="section level3">
-<h3><span class="header-section-number">3.3.2</span> Reference Style</h3>
+<h3><span class="header-section-number">3.3.3</span> Reference Style</h3>
 <p>So as to not have to define a style from the ground up, we will use the <code>tidyverse</code> style as our initial reference.</p>
 <ul>
 <li><a href="https://style.tidyverse.org/"><code>tidyverse</code> Style Guide</a></li>
@@ -382,7 +393,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We will agree with the vast majority of the guidelines here. The exceptions are listed in the next seciton.</p>
 </div>
 <div id="stat-432-r-style-overrides" class="section level3">
-<h3><span class="header-section-number">3.3.3</span> STAT 432 R Style Overrides</h3>
+<h3><span class="header-section-number">3.3.4</span> STAT 432 R Style Overrides</h3>
 <ul>
 <li>All commas must be followed by a space. (Additionally, commas should never be preceded by a space.)</li>
 <li><a href="https://style.tidyverse.org/syntax.html#infix-operators">Infix operators (<code>==</code>, <code>+</code>, <code>-</code>, <code>&lt;-</code>, etc.) should always be surrounded by spaces.</a>
@@ -396,14 +407,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li>Never use <code>T</code> or <code>F</code>, only <code>TRUE</code> or <code>FALSE</code>. While this should never happen, take a look at this terrifying example.</li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="ot">FALSE</span> <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span> <span class="co"># checking for equality</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="ot">FALSE</span> <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span> <span class="co"># checking for equality</span></a></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">F <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span> <span class="co"># checking for equality</span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">F <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span> <span class="co"># checking for equality</span></a></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">F =<span class="st">  </span><span class="ot">TRUE</span> <span class="co"># A VERY BAD ASSIGNMENT! DO NOT DO THIS!</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">F <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span> <span class="co"># checking for equality, with a wild result!</span></a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">F =<span class="st">  </span><span class="ot">TRUE</span> <span class="co"># A VERY BAD ASSIGNMENT! DO NOT DO THIS!</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">F <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span> <span class="co"># checking for equality, with a wild result!</span></a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># TRUE = FALSE # This won&#39;t run, which is good!</span></a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co"># TRUE = FALSE # This won&#39;t run, which is good!</span></a></code></pre></div>
 <ul>
 <li>Do not use <code>;</code>. This is mostly a readability issue.</li>
 <li>Do not use <code>attach()</code>. Without going into the details, you will save yourself a lot of headache someday if you follow this advice.</li>
@@ -420,7 +431,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </div>
 <div id="stat-432-r-markdown-style" class="section level3">
-<h3><span class="header-section-number">3.3.4</span> STAT 432 R Markdown Style</h3>
+<h3><span class="header-section-number">3.3.5</span> STAT 432 R Markdown Style</h3>
 <p>Some of the previous section applies here as well, but additionally, some more specific R Markdown style guidelines:</p>
 <ul>
 <li>No more than one newline (blank line) in a row in an R Markdown document.</li>
@@ -433,7 +444,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </div>
 <div id="style-hueristics" class="section level3">
-<h3><span class="header-section-number">3.3.5</span> Style Hueristics</h3>
+<h3><span class="header-section-number">3.3.6</span> Style Hueristics</h3>
 <p>Now that we’ve overwhelmed you with information about style, will leave you with the real advise. The most important thing to consider when evaluating the style of your code is <strong>consistency</strong>.</p>
 <p>In order, you should be consistent:</p>
 <ul>
@@ -444,7 +455,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Blindly following the rules is foolish. Breaking rules can be fun! If you do it in a way that makes life easier for everyone, by all mean, do it.</p>
 </div>
 <div id="objects-and-functions" class="section level3">
-<h3><span class="header-section-number">3.3.6</span> Objects and Functions</h3>
+<h3><span class="header-section-number">3.3.7</span> Objects and Functions</h3>
 <blockquote>
 <p>To understand computations in R, two slogans are helpful:</p>
 <ul>
@@ -464,12 +475,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>If you become proficent at creating, manipulating, and accessing these objects, you will likely have succsess in STAT 432.</p>
 </div>
 <div id="print-versus-return" class="section level3">
-<h3><span class="header-section-number">3.3.7</span> Print versus Return</h3>
+<h3><span class="header-section-number">3.3.8</span> Print versus Return</h3>
 <p>One of the more confusing aspects of R is the difference between what is returned when running a function, and what is printed when running a function (interactively) as a user.</p>
 <p>Consider fitting the following linear model.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">cars_mod =<span class="st"> </span><span class="kw">lm</span>(dist <span class="op">~</span><span class="st"> </span>speed, <span class="dt">data =</span> cars)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">cars_mod =<span class="st"> </span><span class="kw">lm</span>(dist <span class="op">~</span><span class="st"> </span>speed, <span class="dt">data =</span> cars)</a></code></pre></div>
 <p>You might think that you can simply type <code>cars_mod</code> to see what was returned by <code>lm()</code>.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">cars_mod</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">cars_mod</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = dist ~ speed, data = cars)
@@ -478,7 +489,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## (Intercept)        speed  
 ##     -17.579        3.932</code></pre>
 <p>However, this is <strong>not</strong> what was <em>returned</em>. This is what was <em>printed</em>. To better understand what was returned, we use the `str() function.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">str</span>(cars_mod)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">str</span>(cars_mod)</a></code></pre></div>
 <pre><code>## List of 12
 ##  $ coefficients : Named num [1:2] -17.58 3.93
 ##   ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;(Intercept)&quot; &quot;speed&quot;
@@ -537,28 +548,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   .. .. .. ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;dist&quot; &quot;speed&quot;
 ##  - attr(*, &quot;class&quot;)= chr &quot;lm&quot;</code></pre>
 <p>This is a huge mess, but most importantly, at the top we are told that <code>cars_mod</code> is a <strong>list</strong>. (It’s technically a object of class <code>&quot;lm&quot;</code>, but it functions like a list.)</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">class</span>(cars_mod)</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">class</span>(cars_mod)</a></code></pre></div>
 <pre><code>## [1] &quot;lm&quot;</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">is.list</span>(cars_mod)</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">is.list</span>(cars_mod)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>Thus to access certain informaiton returned by <code>lm()</code> we need to access <code>cars_mod</code> as a list.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">cars_mod<span class="op">$</span>coefficients</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">cars_mod<span class="op">$</span>coefficients</a></code></pre></div>
 <pre><code>## (Intercept)       speed 
 ##  -17.579095    3.932409</code></pre>
 <p>Note that what is returned here is a vector, so we could pull out a particular value using vector syntax.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">is.vector</span>(cars_mod<span class="op">$</span>coefficients)</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">is.vector</span>(cars_mod<span class="op">$</span>coefficients)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">cars_mod<span class="op">$</span>coefficients[<span class="st">&quot;speed&quot;</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">cars_mod<span class="op">$</span>coefficients[<span class="st">&quot;speed&quot;</span>]</a></code></pre></div>
 <pre><code>##    speed 
 ## 3.932409</code></pre>
 <p>Since <code>lm()</code> truly returns an object of type <code>&quot;lm&quot;</code> we can pass <code>cars_mods</code> to some generic functions, and then specific versions for objects of type <code>&quot;lm&quot;</code> will be used.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">coef</span>(cars_mod)</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw">coef</span>(cars_mod)</a></code></pre></div>
 <pre><code>## (Intercept)       speed 
 ##  -17.579095    3.932409</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw">predict</span>(cars_mod, <span class="kw">data.frame</span>(<span class="dt">speed =</span> <span class="dv">5</span><span class="op">:</span><span class="dv">10</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw">predict</span>(cars_mod, <span class="kw">data.frame</span>(<span class="dt">speed =</span> <span class="dv">5</span><span class="op">:</span><span class="dv">10</span>))</a></code></pre></div>
 <pre><code>##         1         2         3         4         5         6 
 ##  2.082949  6.015358  9.947766 13.880175 17.812584 21.744993</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw">summary</span>(cars_mod)</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw">summary</span>(cars_mod)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = dist ~ speed, data = cars)
@@ -578,24 +589,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Multiple R-squared:  0.6511, Adjusted R-squared:  0.6438 
 ## F-statistic: 89.57 on 1 and 48 DF,  p-value: 1.49e-12</code></pre>
 <p>Hey, wait, what is returned by <code>summary()</code>?</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw">class</span>(<span class="kw">summary</span>(cars_mod))</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw">class</span>(<span class="kw">summary</span>(cars_mod))</a></code></pre></div>
 <pre><code>## [1] &quot;summary.lm&quot;</code></pre>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw">is.list</span>(<span class="kw">summary</span>(cars_mod))</a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw">is.list</span>(<span class="kw">summary</span>(cars_mod))</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>The <code>summary()</code> function returns an object of type <code>&quot;summary.lm&quot;</code> which functions as a list!</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="kw">summary</span>(cars_mod)<span class="op">$</span>fstatistic</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">summary</span>(cars_mod)<span class="op">$</span>fstatistic</a></code></pre></div>
 <pre><code>##    value    numdf    dendf 
 ## 89.56711  1.00000 48.00000</code></pre>
 <p>You can also use the <code>View()</code> function, which is specific to RStudio, to view the structure of any object.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="kw">View</span>(<span class="kw">summary</span>(cars_mod)) <span class="co"># RStudio only</span></a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw">View</span>(<span class="kw">summary</span>(cars_mod)) <span class="co"># RStudio only</span></a></code></pre></div>
 </div>
 <div id="help" class="section level3">
-<h3><span class="header-section-number">3.3.8</span> Help</h3>
+<h3><span class="header-section-number">3.3.9</span> Help</h3>
 <p>To get documentation about a function in R, simply put a question mark in front of the function name and RStudio will display the documentation, for example:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1">?log</a>
-<a class="sourceLine" id="cb38-2" data-line-number="2">?sin</a>
-<a class="sourceLine" id="cb38-3" data-line-number="3">?paste</a>
-<a class="sourceLine" id="cb38-4" data-line-number="4">?lm</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1">?log</a>
+<a class="sourceLine" id="cb41-2" data-line-number="2">?sin</a>
+<a class="sourceLine" id="cb41-3" data-line-number="3">?paste</a>
+<a class="sourceLine" id="cb41-4" data-line-number="4">?lm</a></code></pre></div>
 <p>Frequently one of the most difficult things to do when learning R is asking for help. First, you need to decide to ask for help, then you need to know how to ask for help. Your very first line of defense should be to Google your error message or a short description of your issue. (The ability to solve problems using this method is quickly becoming an extremely valuable skill.) If that fails, and it eventually will, you should ask for help. There are a number of things you should include when emailing an instructor, or posting to a help website such as Stack Exchange.</p>
 <ul>
 <li>Describe what you <strong>expect</strong> the code to do.</li>
@@ -610,7 +621,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>While taking STAT 432: Come to office hours!</p>
 </div>
 <div id="keyboard-shortcuts" class="section level3">
-<h3><span class="header-section-number">3.3.9</span> Keyboard Shortcuts</h3>
+<h3><span class="header-section-number">3.3.10</span> Keyboard Shortcuts</h3>
 <p>This section should be expanded over time, but for now, two strong suggestions:</p>
 <ul>
 <li>Get in the habit of using the keyboard as much as possible, and the mouse as little as possible.
@@ -627,7 +638,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <hr />
 </div>
 <div id="common-issues" class="section level3">
-<h3><span class="header-section-number">3.3.10</span> Common Issues</h3>
+<h3><span class="header-section-number">3.3.11</span> Common Issues</h3>
 <p>As they arrise throughout the semester, we will try to track and explain common issues here.</p>
 <hr />
 </div>
