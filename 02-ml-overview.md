@@ -370,7 +370,7 @@ Unsupervised learning is a very broad task that is rather difficult to define. E
 
 #### Clustering
 
-Clustering is essentially the task of **grouping** the observations of a dataset. In the above data, can you see an obvious grouping? (Hint: Compare the first five observations to the second five observations.)
+Clustering is essentially the task of **grouping** the observations of a dataset. In the above data, can you see an obvious grouping? (Hint: Compare the first five observations to the second five observations.) In general, we try to group observations that are similar.
 
 #### Density Estimation
 
@@ -418,10 +418,6 @@ While we will dedicate a large amount of time to answering this question, someti
 - *How* do we **evaluate** how well are learned functions work?
 
 This text places a high priority on being able to **do** machine learning, specifically do machine learning in R. You can actually do a lot of machine learning without fully understanding how the learning is taking place. That makes the *evaluation* of ML models extremely important.
-
-We close with an incomplete list of questions you may have had while reading this chapter. We hope to answer these throughout the semester:
-
-- TODO
 
 ## Source
 
