@@ -177,7 +177,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.3.3" data-path="computing.html"><a href="computing.html#reference-style"><i class="fa fa-check"></i><b>3.3.3</b> Reference Style</a></li>
 <li class="chapter" data-level="3.3.4" data-path="computing.html"><a href="computing.html#stat-432-r-style-overrides"><i class="fa fa-check"></i><b>3.3.4</b> STAT 432 R Style Overrides</a></li>
 <li class="chapter" data-level="3.3.5" data-path="computing.html"><a href="computing.html#stat-432-r-markdown-style"><i class="fa fa-check"></i><b>3.3.5</b> STAT 432 R Markdown Style</a></li>
-<li class="chapter" data-level="3.3.6" data-path="computing.html"><a href="computing.html#style-hueristics"><i class="fa fa-check"></i><b>3.3.6</b> Style Hueristics</a></li>
+<li class="chapter" data-level="3.3.6" data-path="computing.html"><a href="computing.html#style-heuristics"><i class="fa fa-check"></i><b>3.3.6</b> Style Heuristics</a></li>
 <li class="chapter" data-level="3.3.7" data-path="computing.html"><a href="computing.html#objects-and-functions"><i class="fa fa-check"></i><b>3.3.7</b> Objects and Functions</a></li>
 <li class="chapter" data-level="3.3.8" data-path="computing.html"><a href="computing.html#print-versus-return"><i class="fa fa-check"></i><b>3.3.8</b> Print versus Return</a></li>
 <li class="chapter" data-level="3.3.9" data-path="computing.html"><a href="computing.html#help"><i class="fa fa-check"></i><b>3.3.9</b> Help</a></li>
@@ -246,7 +246,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <hr />
 <div id="reading-1" class="section level2">
 <h2><span class="header-section-number">3.1</span> Reading</h2>
-<p>The following reading suggestions are long. While it may seem daunting to read all of this material, it will likely prove to be valuable. A smart strategry would be:</p>
+<p>The following reading suggestions are long. While it may seem daunting to read all of this material, it will likely prove to be valuable. A smart strategy would be:</p>
 <ul>
 <li>“Read” as much of the information here, where “read” simply means read every single word and line of code, but don’t slow down if you don’t fully understand.</li>
 <li>Return to some selections from this reading <strong>every week</strong> spending more time understanding specific sections.</li>
@@ -328,12 +328,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="stat-432-idioms" class="section level2">
 <h2><span class="header-section-number">3.3</span> STAT 432 Idioms</h2>
-<p>R tutorials and advice are plentiful online. While we do not want to discourage you from using the resources above, or using your own creativity, the following sections will specify some strong suggestinons for how to use R, RStudio, and R Markdown in STAT 432.</p>
+<p>R tutorials and advice are plentiful online. While we do not want to discourage you from using the resources above, or using your own creativity, the following sections will specify some strong suggestions for how to use R, RStudio, and R Markdown in STAT 432.</p>
 <p>In other words, information below here supersedes any information from the above sources.</p>
 <div id="r-versions" class="section level3">
 <h3><span class="header-section-number">3.3.1</span> R Versions</h3>
-<p>You should always use the most up-to-date version of R and RStudio. You <strong>must</strong> use at least R verions 3.6.2.</p>
-<p>Importantly, R versions after 3.6.0 have slightly different random number generation. Although, even with the most recent version, sometimes R keeps the old ranomd number generation. To check that you are on the most recent random number generation, run:</p>
+<p>You should always use the most up-to-date version of R and RStudio. You <strong>must</strong> use at least R versions 3.6.2.</p>
+<p>Importantly, R versions after 3.6.0 have slightly different random number generation. Although, even with the most recent version, sometimes R keeps the old random number generation. To check that you are on the most recent random number generation, run:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">RNGkind</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;Mersenne-Twister&quot; &quot;Inversion&quot;        &quot;Rejection&quot;</code></pre>
 <p>If your output matches the output above, you’re all set. If not, run:</p>
@@ -347,7 +347,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Computers</li>
 <li><strong>Humans</strong></li>
 </ul>
-<p>Computers will complain, very loudly, when you write “bad” code, that is code does not run. We need to write code that is syntactically correct for the computer to be able to “read” our code. Computers <strong>only</strong> care about syntax. If we relate this to natuarl langauge, we would say that computers really only care about grammar and punctuation. They don’t worry about style like phrasing, tone, etc.</p>
+<p>Computers will complain, very loudly, when you write “bad” code, that is code does not run. We need to write code that is syntactically correct for the computer to be able to “read” our code. Computers <strong>only</strong> care about syntax. If we relate this to natural language, we would say that computers really only care about grammar and punctuation. They don’t worry about style like phrasing, tone, etc.</p>
 <p>While computers will complain about bad code, does anyone really care about wasting their time? (OK, sure, computer scientists might.) If we give them bad code, they try to run it, fail, then complain. However, they’re soulless machines, they can handle it.</p>
 <p>Humans on the other hand have a finite amount of time on this earth. Even if we solve aging, we still have to deal with the <a href="https://en.m.wikipedia.org/wiki/Heat_death_of_the_universe">heat death of the universe</a>. Thus, while wasting a computer’s time is no big deal, wasting a human’s time is, frankly, immoral. What does this have to do with R programming? Humans are going to read your R code. One of those humans is likely to be you, but future you. To make this reading possible and efficient, you need to develop <strong>style</strong>.</p>
 <p>Here is some code that a computer can read, but a human will struggle to read:</p>
@@ -390,7 +390,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><a href="https://style.tidyverse.org/"><code>tidyverse</code> Style Guide</a></li>
 </ul>
-<p>We will agree with the vast majority of the guidelines here. The exceptions are listed in the next seciton.</p>
+<p>We will agree with the vast majority of the guidelines here. The exceptions are listed in the next section.</p>
 </div>
 <div id="stat-432-r-style-overrides" class="section level3">
 <h3><span class="header-section-number">3.3.4</span> STAT 432 R Style Overrides</h3>
@@ -443,8 +443,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>One plot per chunk! Plotting chunks should return one plot and nothing else. (No numeric printing.)</li>
 </ul>
 </div>
-<div id="style-hueristics" class="section level3">
-<h3><span class="header-section-number">3.3.6</span> Style Hueristics</h3>
+<div id="style-heuristics" class="section level3">
+<h3><span class="header-section-number">3.3.6</span> Style Heuristics</h3>
 <p>Now that we’ve overwhelmed you with information about style, will leave you with the real advise. The most important thing to consider when evaluating the style of your code is <strong>consistency</strong>.</p>
 <p>In order, you should be consistent:</p>
 <ul>
@@ -472,7 +472,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>data frames</li>
 <li>model objects (Mostly lists with a class of the model type.)</li>
 </ul>
-<p>If you become proficent at creating, manipulating, and accessing these objects, you will likely have succsess in STAT 432.</p>
+<p>If you become proficient at creating, manipulating, and accessing these objects, you will likely have success in STAT 432.</p>
 </div>
 <div id="print-versus-return" class="section level3">
 <h3><span class="header-section-number">3.3.8</span> Print versus Return</h3>
@@ -552,7 +552,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] &quot;lm&quot;</code></pre>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">is.list</span>(cars_mod)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<p>Thus to access certain informaiton returned by <code>lm()</code> we need to access <code>cars_mod</code> as a list.</p>
+<p>Thus to access certain information returned by <code>lm()</code> we need to access <code>cars_mod</code> as a list.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">cars_mod<span class="op">$</span>coefficients</a></code></pre></div>
 <pre><code>## (Intercept)       speed 
 ##  -17.579095    3.932409</code></pre>
@@ -639,7 +639,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="common-issues" class="section level3">
 <h3><span class="header-section-number">3.3.11</span> Common Issues</h3>
-<p>As they arrise throughout the semester, we will try to track and explain common issues here.</p>
+<p>As they arise throughout the semester, we will try to track and explain common issues here.</p>
 <hr />
 </div>
 </div>

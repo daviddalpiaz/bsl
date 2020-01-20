@@ -10,7 +10,7 @@ STAT 432 is **not** a course about R. It is however, a course that makes heavy u
 
 ## Reading
 
-The following reading suggestions are long. While it may seem daunting to read all of this material, it will likely prove to be valuable. A smart strategry would be:
+The following reading suggestions are long. While it may seem daunting to read all of this material, it will likely prove to be valuable. A smart strategy would be:
 
 - "Read" as much of the information here, where "read" simply means read every single word and line of code, but don't slow down if you don't fully understand.
 - Return to some selections from this reading **every week** spending more time understanding specific sections.
@@ -74,15 +74,15 @@ In addition to the above readings, the following resources are more specific or 
 
 ## STAT 432 Idioms
 
-R tutorials and advice are plentiful online. While we do not want to discourage you from using the resources above, or using your own creativity, the following sections will specify some strong suggestinons for how to use R, RStudio, and R Markdown in STAT 432.
+R tutorials and advice are plentiful online. While we do not want to discourage you from using the resources above, or using your own creativity, the following sections will specify some strong suggestions for how to use R, RStudio, and R Markdown in STAT 432.
 
 In other words, information below here supersedes any information from the above sources.
 
 ### R Versions
 
-You should always use the most up-to-date version of R and RStudio. You **must** use at least R verions 3.6.2.
+You should always use the most up-to-date version of R and RStudio. You **must** use at least R versions 3.6.2.
 
-Importantly, R versions after 3.6.0 have slightly different random number generation. Although, even with the most recent version, sometimes R keeps the old ranomd number generation. To check that you are on the most recent random number generation, run:
+Importantly, R versions after 3.6.0 have slightly different random number generation. Although, even with the most recent version, sometimes R keeps the old random number generation. To check that you are on the most recent random number generation, run:
 
 
 ```r
@@ -109,7 +109,7 @@ Code needs to be read by two distinct groups:
 - Computers
 - **Humans**
 
-Computers will complain, very loudly, when you write "bad" code, that is code does not run. We need to write code that is syntactically correct for the computer to be able to "read" our code. Computers **only** care about syntax. If we relate this to natuarl langauge, we would say that computers really only care about grammar and punctuation. They don't worry about style like phrasing, tone, etc.
+Computers will complain, very loudly, when you write "bad" code, that is code does not run. We need to write code that is syntactically correct for the computer to be able to "read" our code. Computers **only** care about syntax. If we relate this to natural language, we would say that computers really only care about grammar and punctuation. They don't worry about style like phrasing, tone, etc.
 
 While computers will complain about bad code, does anyone really care about wasting their time? (OK, sure, computer scientists might.) If we give them bad code, they try to run it, fail, then complain. However, they're soulless machines, they can handle it.
 
@@ -166,7 +166,7 @@ So as to not have to define a style from the ground up, we will use the `tidyver
 
 - [`tidyverse` Style Guide](https://style.tidyverse.org/)
 
-We will agree with the vast majority of the guidelines here. The exceptions are listed in the next seciton.
+We will agree with the vast majority of the guidelines here. The exceptions are listed in the next section.
 
 ### STAT 432 R Style Overrides
 
@@ -231,7 +231,7 @@ Some of the previous section applies here as well, but additionally, some more s
 - Load all needed packages at the beginning of an analysis in a single chunk.
 - One plot per chunk! Plotting chunks should return one plot and nothing else. (No numeric printing.)
 
-### Style Hueristics
+### Style Heuristics
 
 Now that we've overwhelmed you with information about style, will leave you with the real advise. The most important thing to consider when evaluating the style of your code is **consistency**.
 
@@ -261,7 +261,7 @@ In STAT 432, the objects that we will encounter will almost always be:
 - data frames
 - model objects (Mostly lists with a class of the model type.)
 
-If you become proficent at creating, manipulating, and accessing these objects, you will likely have succsess in STAT 432.
+If you become proficient at creating, manipulating, and accessing these objects, you will likely have success in STAT 432.
 
 ### Print versus Return
 
@@ -378,7 +378,7 @@ is.list(cars_mod)
 ## [1] TRUE
 ```
 
-Thus to access certain informaiton returned by `lm()` we need to access `cars_mod` as a list.
+Thus to access certain information returned by `lm()` we need to access `cars_mod` as a list.
 
 
 ```r
@@ -537,7 +537,7 @@ This section should be expanded over time, but for now, two strong suggestions:
 
 ### Common Issues
 
-As they arrise throughout the semester, we will try to track and explain common issues here.
+As they arise throughout the semester, we will try to track and explain common issues here.
 
 ***
 
