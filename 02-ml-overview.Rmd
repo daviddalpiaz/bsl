@@ -199,7 +199,7 @@ The two previous sections were probably more confusing than helpful. But of cour
 
 That's what this text will be about! We will spend a lot of time on this question. It's is what us statisticians call fitting a model. On some level the answer is: look at a bunch of old data before predicting on new data. 
 
-While we will dedicate a large amount of time to answering this question, sometimes, some of the details might go unanswered. Since this is an introductory text, we can only go so far. However, as long as we answer another questions, this will be ok.
+While we will dedicate a large amount of time to answering this question, sometimes, some of the details might go unanswered. Since this is an introductory text, we can only go so far. However, as long as we answer another questions, this will be OK.
 
 - *How* do we **evaluate** how well are learned functions work?
 

@@ -6,6 +6,7 @@ Depends: R (>= 3.6.2)
 URL: https://github.com/daviddalpiaz/bsl
 Imports: 
   bookdown,
-  tidyverse
+  tidyverse,
+  kableExtra
 Remotes: 
   rstudio/bookdown
