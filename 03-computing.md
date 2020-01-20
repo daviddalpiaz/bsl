@@ -146,10 +146,13 @@ We will agree with the vast majority of the guidelines here. The exceptions are 
 
 ### STAT 432 R Style Overrides
 
-You may use `=` instead of `<-`.  This is very much a [minority position](http://thecoatlessprofessor.com/programming/an-opinionated-tale-of-why-you-should-replace---with-/) in the R community. But we see [more examples](http://www.win-vector.com/blog/2013/04/prefer-for-assignment-in-r/) of it being promoted every day. My reasoning for this is complicated (and I should write more about it soon) but not super important. Instead, what is important: **Do not mix assignment operators.** Either use `=` or use `<-` but do not mix and match in the same script.
-
-Never use `T` or `F`, only `TRUE` or `FALSE`. While this should never happen, take a look at this terrifying example.
-
+- All commas must be followed by a space. (Additionally, commas should never be preceded by a space.)
+- [Infix operators (`==`, `+`, `-`, `<-`, etc.) should always be surrounded by spaces.](https://style.tidyverse.org/syntax.html#infix-operators)
+    - Exceptions: `:`, `::`, `$`, `[`, `[[`, `]`, `]]`
+    - `^`: Use `x ^ 2` instead of  `x^2`.
+- You may use `=` instead of `<-`.
+  - This is very much a [minority position](http://thecoatlessprofessor.com/programming/an-opinionated-tale-of-why-you-should-replace---with-/) in the R community. But we see [more examples](http://www.win-vector.com/blog/2013/04/prefer-for-assignment-in-r/) of it being promoted every day. My reasoning for this is complicated (and I should write more about it soon) but not super important. Instead, what is important: **Do not mix assignment operators.** Either use `=` or use `<-` but do not mix and match in the same script.
+- Never use `T` or `F`, only `TRUE` or `FALSE`. While this should never happen, take a look at this terrifying example.
 
 ```r
 FALSE == TRUE # checking for equality
@@ -176,39 +179,33 @@ F == TRUE # checking for equality, with a wild result!
 ## [1] TRUE
 ```
 
-In contrast, the next line of code will not run, but instead produce an error.
-
-
 ```r
-# TRUE = FALSE
+# TRUE = FALSE # This won't run, which is good!
 ```
-
-Do not use `;`. This is mostly a readability issue.
-
-Do not use `attach()`. Without going into the details, you will save yourself a lot of headache someday if you follow this advice.
-
-Do not use `<<-`. You probably didn't know this exists. Pretend that is still the case.
-
-Do not set a working directory by using `setwd()` or any other method. This will make your scripts and R Markdown documents much more reproducible.
-
-Do not put spaces in filenames. Use dashes `-` or underscores `_`. Also consider only using lowercase.
-
-SPACES AROUND BINARY OPERATORS
-
-Be mindful about whitespace
-- TODO: check fall 2019 analysis directions
-- TODO: load all packages before setting a seed
-- TODO: NAME MOST ARGUMENTS
+- Do not use `;`. This is mostly a readability issue.
+- Do not use `attach()`. Without going into the details, you will save yourself a lot of headache someday if you follow this advice.
+- Do not use `<<-`. You probably didn't know this exists. Pretend that is still the case.
+- Do not set a working directory by using `setwd()` or any other method. This will make your scripts and R Markdown documents much more reproducible.
+- Do not use absolute paths.
+- Place a space after any `#` used to create a comment.
+- No more than one newline (blank line) in a row
+- Do not put spaces in filenames. Use dashes `-` or underscores `_`. Also consider only using lowercase.
+- Load all packages before setting a seed.
+- Opening (left) curly braces should not be on their own line.
+- Except for the first argument to a function, argument names should be written in function calls. (Exception for the `predict()` function. **Do not name the section argument to the `predict()` function.**)
+- Place a newline at the end of the file.
 
 ### STAT 432 R Markdown Style
 
-- TODO: some things above apply here, but also...
+Some of the previous section applies here as well, but additionally, some more specific R Markdown style guidelines:
 
-- TODO: use headers appropriately! (short names, good structure)
-- TODO: a newline before and after any chunk
-- TODO: load all needed packages at the beginning of an analysis in a single chunk (TODO: pros and cons of this approach)
-- TODO: one plot per chunk! no other printed output
-- TODO: spaces after #s
+- No more than one newline (blank line) in a row in an R Markdown document.
+- No more than one newline (blank line) in a row in an R chunk.
+- A newline before and after each chunk in an R Markdown document.
+- No newline to start a chunk. No newline at end of chunk. (The first and last line of each chunk should contain code, or a comment for the first line.)
+- Use headers appropriately! (Short names, good structure.)
+- Load all needed packages at the beginning of an analysis in a single chunk.
+- One plot per chunk! Plotting chunks should return one plot and nothing else. (No numeric printing.)
 
 ### Style Hueristics
 

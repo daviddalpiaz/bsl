@@ -383,8 +383,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="stat-432-r-style-overrides" class="section level3">
 <h3><span class="header-section-number">3.3.3</span> STAT 432 R Style Overrides</h3>
-<p>You may use <code>=</code> instead of <code>&lt;-</code>. This is very much a <a href="http://thecoatlessprofessor.com/programming/an-opinionated-tale-of-why-you-should-replace---with-/">minority position</a> in the R community. But we see <a href="http://www.win-vector.com/blog/2013/04/prefer-for-assignment-in-r/">more examples</a> of it being promoted every day. My reasoning for this is complicated (and I should write more about it soon) but not super important. Instead, what is important: <strong>Do not mix assignment operators.</strong> Either use <code>=</code> or use <code>&lt;-</code> but do not mix and match in the same script.</p>
-<p>Never use <code>T</code> or <code>F</code>, only <code>TRUE</code> or <code>FALSE</code>. While this should never happen, take a look at this terrifying example.</p>
+<ul>
+<li>All commas must be followed by a space. (Additionally, commas should never be preceded by a space.)</li>
+<li><a href="https://style.tidyverse.org/syntax.html#infix-operators">Infix operators (<code>==</code>, <code>+</code>, <code>-</code>, <code>&lt;-</code>, etc.) should always be surrounded by spaces.</a>
+<ul>
+<li>Exceptions: <code>:</code>, <code>::</code>, <code>$</code>, <code>[</code>, <code>[[</code>, <code>]</code>, <code>]]</code></li>
+<li><code>^</code>: Use <code>x ^ 2</code> instead of <code>x^2</code>.</li>
+</ul></li>
+<li>You may use <code>=</code> instead of <code>&lt;-</code>.
+<ul>
+<li>This is very much a <a href="http://thecoatlessprofessor.com/programming/an-opinionated-tale-of-why-you-should-replace---with-/">minority position</a> in the R community. But we see <a href="http://www.win-vector.com/blog/2013/04/prefer-for-assignment-in-r/">more examples</a> of it being promoted every day. My reasoning for this is complicated (and I should write more about it soon) but not super important. Instead, what is important: <strong>Do not mix assignment operators.</strong> Either use <code>=</code> or use <code>&lt;-</code> but do not mix and match in the same script.</li>
+</ul></li>
+<li>Never use <code>T</code> or <code>F</code>, only <code>TRUE</code> or <code>FALSE</code>. While this should never happen, take a look at this terrifying example.</li>
+</ul>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="ot">FALSE</span> <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span> <span class="co"># checking for equality</span></a></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">F <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span> <span class="co"># checking for equality</span></a></code></pre></div>
@@ -392,28 +403,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">F =<span class="st">  </span><span class="ot">TRUE</span> <span class="co"># A VERY BAD ASSIGNMENT! DO NOT DO THIS!</span></a>
 <a class="sourceLine" id="cb7-2" data-line-number="2">F <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span> <span class="co"># checking for equality, with a wild result!</span></a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<p>In contrast, the next line of code will not run, but instead produce an error.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># TRUE = FALSE</span></a></code></pre></div>
-<p>Do not use <code>;</code>. This is mostly a readability issue.</p>
-<p>Do not use <code>attach()</code>. Without going into the details, you will save yourself a lot of headache someday if you follow this advice.</p>
-<p>Do not use <code>&lt;&lt;-</code>. You probably didn’t know this exists. Pretend that is still the case.</p>
-<p>Do not set a working directory by using <code>setwd()</code> or any other method. This will make your scripts and R Markdown documents much more reproducible.</p>
-<p>Do not put spaces in filenames. Use dashes <code>-</code> or underscores <code>_</code>. Also consider only using lowercase.</p>
-<p>SPACES AROUND BINARY OPERATORS</p>
-<p>Be mindful about whitespace
-- TODO: check fall 2019 analysis directions
-- TODO: load all packages before setting a seed
-- TODO: NAME MOST ARGUMENTS</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># TRUE = FALSE # This won&#39;t run, which is good!</span></a></code></pre></div>
+<ul>
+<li>Do not use <code>;</code>. This is mostly a readability issue.</li>
+<li>Do not use <code>attach()</code>. Without going into the details, you will save yourself a lot of headache someday if you follow this advice.</li>
+<li>Do not use <code>&lt;&lt;-</code>. You probably didn’t know this exists. Pretend that is still the case.</li>
+<li>Do not set a working directory by using <code>setwd()</code> or any other method. This will make your scripts and R Markdown documents much more reproducible.</li>
+<li>Do not use absolute paths.</li>
+<li>Place a space after any <code>#</code> used to create a comment.</li>
+<li>No more than one newline (blank line) in a row</li>
+<li>Do not put spaces in filenames. Use dashes <code>-</code> or underscores <code>_</code>. Also consider only using lowercase.</li>
+<li>Load all packages before setting a seed.</li>
+<li>Opening (left) curly braces should not be on their own line.</li>
+<li>Except for the first argument to a function, argument names should be written in function calls. (Exception for the <code>predict()</code> function. <strong>Do not name the section argument to the <code>predict()</code> function.</strong>)</li>
+<li>Place a newline at the end of the file.</li>
+</ul>
 </div>
 <div id="stat-432-r-markdown-style" class="section level3">
 <h3><span class="header-section-number">3.3.4</span> STAT 432 R Markdown Style</h3>
+<p>Some of the previous section applies here as well, but additionally, some more specific R Markdown style guidelines:</p>
 <ul>
-<li><p>TODO: some things above apply here, but also…</p></li>
-<li>TODO: use headers appropriately! (short names, good structure)</li>
-<li>TODO: a newline before and after any chunk</li>
-<li>TODO: load all needed packages at the beginning of an analysis in a single chunk (TODO: pros and cons of this approach)</li>
-<li>TODO: one plot per chunk! no other printed output</li>
-<li><p>TODO: spaces after #s</p></li>
+<li>No more than one newline (blank line) in a row in an R Markdown document.</li>
+<li>No more than one newline (blank line) in a row in an R chunk.</li>
+<li>A newline before and after each chunk in an R Markdown document.</li>
+<li>No newline to start a chunk. No newline at end of chunk. (The first and last line of each chunk should contain code, or a comment for the first line.)</li>
+<li>Use headers appropriately! (Short names, good structure.)</li>
+<li>Load all needed packages at the beginning of an analysis in a single chunk.</li>
+<li>One plot per chunk! Plotting chunks should return one plot and nothing else. (No numeric printing.)</li>
 </ul>
 </div>
 <div id="style-hueristics" class="section level3">
