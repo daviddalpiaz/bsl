@@ -31,7 +31,7 @@ To quickly address some buzzwords that come up when discussing machine learning:
 - Does **big data** exist? If it does, I would bet a lot of money that you haven't seen it, and probably won't see it.
 - **Analytics** is just a fancy word for doing data analysis. Machine learning can be used in analyses! When it is, it is often called "Predictive Analytics."
 
-What makes machine learning interesting is the uses of these functions. We could develop a functions that have applications in a wide variety of fields.
+What makes machine learning interesting is the uses of these functions. We could develop functions that have applications in a wide variety of fields.
 
 In **medicine**, we could develop a function that helps detect skin cancer.
 
@@ -70,7 +70,7 @@ When doing machine learning, we will classify our *tasks* into one of two catego
 
 ### Supervised Learning
 
-In supervised learning, we want to "predict" a specific target, outcome, or response variable. In the following examples, this is the `y` variable. Supervised learning tasks are called **regression** if the response variable is *numeric*. If a supervised learning tasks has a *categorical* response, it is called classification.
+In supervised learning, we want to "predict" a specific target, outcome, or response variable. In the following examples, this is the `y` variable. Supervised learning tasks are called **regression** if the response variable is *numeric*. If a supervised learning tasks has a *categorical* response, it is called **classification**.
 
 #### Regression
 
@@ -374,7 +374,7 @@ Clustering is essentially the task of **grouping** the observations of a dataset
 
 #### Density Estimation
 
-Density estimation tries to do exactly what the name implies, estimation the density. In this case, the joint density of $X_1, X_2, X_3, X_4, X_5$. In other words, we would like to learn the **function** that generated this data. (You could take the position that this is the **only** machine learning tasks, and all other tasks are subset of this task. We'll hold off on explaining this for a while.)
+Density estimation tries to do exactly what the name implies, estimate the density. In this case, the joint density of $X_1, X_2, X_3, X_4, X_5$. In other words, we would like to learn the **function** that generated this data. (You could take the position that this is the **only** machine learning tasks, and all other tasks are subset of this task. We'll hold off on explaining this for a while.)
 
 #### Outlier Detection
 
