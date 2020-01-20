@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 Machine Learning Overview | Basics of Statistical Learning</title>
   <meta name="description" content="Chapter 2 Machine Learning Overview | Basics of Statistical Learning" />
-  <meta name="generator" content="bookdown 0.17.1 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.17.2 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 Machine Learning Overview | Basics of Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2020-01-16" />
+<meta name="date" content="2020-01-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,7 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 
@@ -91,11 +92,16 @@
 </ul></li>
 <li class="chapter" data-level="2" data-path="machine-learning-overview.html"><a href="machine-learning-overview.html"><i class="fa fa-check"></i><b>2</b> Machine Learning Overview</a><ul>
 <li class="chapter" data-level="2.1" data-path="machine-learning-overview.html"><a href="machine-learning-overview.html#reading"><i class="fa fa-check"></i><b>2.1</b> Reading</a></li>
-<li class="chapter" data-level="2.2" data-path="machine-learning-overview.html"><a href="machine-learning-overview.html#machine-learning-tasks"><i class="fa fa-check"></i><b>2.2</b> Machine Learning Tasks</a></li>
-<li class="chapter" data-level="2.3" data-path="machine-learning-overview.html"><a href="machine-learning-overview.html#source-1"><i class="fa fa-check"></i><b>2.3</b> Source</a></li>
+<li class="chapter" data-level="2.2" data-path="machine-learning-overview.html"><a href="machine-learning-overview.html#what-is-machine-learning"><i class="fa fa-check"></i><b>2.2</b> What is Machine Learning?</a></li>
+<li class="chapter" data-level="2.3" data-path="machine-learning-overview.html"><a href="machine-learning-overview.html#machine-learning-tasks"><i class="fa fa-check"></i><b>2.3</b> Machine Learning Tasks</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="machine-learning-overview.html"><a href="machine-learning-overview.html#supervised-learning"><i class="fa fa-check"></i><b>2.3.1</b> Supervised Learning</a></li>
+<li class="chapter" data-level="2.3.2" data-path="machine-learning-overview.html"><a href="machine-learning-overview.html#unsupervised-learning"><i class="fa fa-check"></i><b>2.3.2</b> Unsupervised Learning</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="machine-learning-overview.html"><a href="machine-learning-overview.html#open-questions"><i class="fa fa-check"></i><b>2.4</b> Open Questions</a></li>
+<li class="chapter" data-level="2.5" data-path="machine-learning-overview.html"><a href="machine-learning-overview.html#source-1"><i class="fa fa-check"></i><b>2.5</b> Source</a></li>
 </ul></li>
 <li class="divider"></li>
-<li><a href="https://daviddalpiaz.com" target="blank">&copy; 2020 David Dalpiaz</a></li>
+<li><a href="https://daviddalpiaz.org" target="blank">&copy; 2020 David Dalpiaz</a></li>
 <li><a href="https://spring-2020.stat432.org" target="blank">[STAT 432] Spring 2020</a></li>
 
 </ul>
@@ -118,6 +124,8 @@
 <div id="machine-learning-overview" class="section level1">
 <h1><span class="header-section-number">Chapter 2</span> Machine Learning Overview</h1>
 <hr />
+<p>STAT 432 is a course about machine learning? Let’s try to define machine learning.</p>
+<hr />
 <div id="reading" class="section level2">
 <h2><span class="header-section-number">2.1</span> Reading</h2>
 <ul>
@@ -130,26 +138,720 @@
 </ul>
 <hr />
 </div>
-<div id="machine-learning-tasks" class="section level2">
-<h2><span class="header-section-number">2.2</span> Machine Learning Tasks</h2>
+<div id="what-is-machine-learning" class="section level2">
+<h2><span class="header-section-number">2.2</span> What is Machine Learning?</h2>
+<p>Machine learning (ML) is about <strong>learning <em>functions</em> from <em>data</em></strong>. That’s it. Really. Pretty boring, right?</p>
+<p>To quickly address some buzzwords that come up when discussing machine learning:</p>
 <ul>
-<li>Superverised Learning
-<ul>
-<li>Regression</li>
-<li>Classification</li>
-</ul></li>
-<li>Unsupervised Learning
-<ul>
-<li>Density Estimation</li>
-<li>Clustering</li>
-<li>Outlier Detection</li>
-</ul></li>
-<li>Reinforcement Learning</li>
+<li><strong>Deep learning</strong> is just a subset of machine learning.</li>
+<li><strong>Artificial Intelligence</strong> (AI) overlaps machine learning but has much loftier goals. In general, if someone claims to be using AI, they are not. (They’re probably using function learning! For example, we will learn logistic regression in this course. People in marketing might call that AI! Someone who understands ML will simply call it function learning. Don’t buy the hype! We don’t need to call simple methods AI to make the effective.)</li>
+<li>Machine learning is not <strong>data science</strong>. Data science sometimes uses machine learning.</li>
+<li>Does <strong>big data</strong> exist? If it does, I would bet a lot of money that you haven’t seen it, and probably won’t see it.</li>
+<li><strong>Analytics</strong> is just a fancy word for doing data analysis. Machine learning can be used in analyses! When it is, it is often called “Predictive Analytics.”</li>
 </ul>
+<p>What makes machine learning interesting is the uses of these functions. We could develop a functions that have applications in a wide variety of fields.</p>
+<p>In <strong>medicine</strong>, we could develop a function that helps detect skin cancer.</p>
+<ul>
+<li>Input: Pixels from an image of mole</li>
+<li>Output: A probability of skin cancer</li>
+</ul>
+<p>In <strong>sport analytics</strong>, we could develop a function that helps determine player salary.</p>
+<ul>
+<li>Input: Lifetime statistics of an NBA player</li>
+<li>Output: An estimate of player’s salary</li>
+</ul>
+<p>In <strong>meteorology</strong>, we could develop a function to predict the weather.</p>
+<ul>
+<li>Input: Historic weather data in Champaign, IL</li>
+<li>Output: A probability of rain tomorrow in Champaign, IL</li>
+</ul>
+<p>In <strong>political science</strong> we could develop a function that predicts the mood of the president.</p>
+<ul>
+<li>Input: The text of a tweet from President Donald Trump</li>
+<li>Output: A prediction of Donald’s mood (happy, sad, angry, etc)</li>
+</ul>
+<p>In <strong>urban planning</strong> we could develop a function that predicts the rental prices of Airbnbs.</p>
+<ul>
+<li>Input: The attributes of the location for rent</li>
+<li>Output: An estimate of the rent of the property</li>
+</ul>
+<p>How do learn these functions? By looking at many previous examples, that is, data! Again, we will learn functions from data. That’s what were here to do.</p>
 <hr />
 </div>
+<div id="machine-learning-tasks" class="section level2">
+<h2><span class="header-section-number">2.3</span> Machine Learning Tasks</h2>
+<p>When doing machine learning, we will classify our <em>tasks</em> into one of two categories, <strong>supervised</strong> or <strong>unsupervised</strong> learning. (There are technically other tasks such as reinforcement learning and semi-supervised learning, but they are outside the scope of this text. To understand these advanced tasks, you should first learn the basics!) Within these two broad categories of ML tasks, we will define some specifics.</p>
+<div id="supervised-learning" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> Supervised Learning</h3>
+<p>In supervised learning, we want to “predict” a specific target, outcome, or response variable. In the following examples, this is the <code>y</code> variable. Supervised learning tasks are called <strong>regression</strong> if the response variable is <em>numeric</em>. If a supervised learning tasks has a <em>categorical</em> response, it is called classification.</p>
+<div id="regression" class="section level4">
+<h4><span class="header-section-number">2.3.1.1</span> Regression</h4>
+<p>In the regression task, we want to predict <strong>numeric</strong> response variables. The predictor variables, which we will call the feature variables, or simply <strong>features</strong> can be either <em>categorical</em> or <em>numeric</em>.</p>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+x1
+</th>
+<th style="text-align:right;">
+x2
+</th>
+<th style="text-align:right;">
+x3
+</th>
+<th style="text-align:right;">
+y
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+-0.66
+</td>
+<td style="text-align:right;">
+0.48
+</td>
+<td style="text-align:right;">
+14.09
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+1.55
+</td>
+<td style="text-align:right;">
+0.97
+</td>
+<td style="text-align:right;">
+2.92
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+-1.19
+</td>
+<td style="text-align:right;">
+-0.81
+</td>
+<td style="text-align:right;">
+15.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+9.29
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:right;">
+-1.09
+</td>
+<td style="text-align:right;">
+-0.16
+</td>
+<td style="text-align:right;">
+17.57
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:right;">
+1.61
+</td>
+<td style="text-align:right;">
+1.94
+</td>
+<td style="text-align:right;">
+2.12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:right;">
+0.04
+</td>
+<td style="text-align:right;">
+1.72
+</td>
+<td style="text-align:right;">
+8.92
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+1.31
+</td>
+<td style="text-align:right;">
+0.36
+</td>
+<td style="text-align:right;">
+4.40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+0.98
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+4.40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+0.88
+</td>
+<td style="text-align:right;">
+-0.39
+</td>
+<td style="text-align:right;">
+4.52
+</td>
+</tr>
+</tbody>
+</table>
+<p>With the data above, our goal would be to learn a function that takes as input values of the three features (<code>x1</code>, <code>x2</code>, and <code>x3</code>) and returns a predict (best guess) for the true (but usually unknown) value of the response <code>y</code>. For example, we could obtain some “new” data that does not contain the response.</p>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+x1
+</th>
+<th style="text-align:right;">
+x2
+</th>
+<th style="text-align:right;">
+x3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:right;">
+-0.85
+</td>
+<td style="text-align:right;">
+-2.41
+</td>
+</tr>
+</tbody>
+</table>
+<p>We would then pass this data to our function, which would return a prediction of the value of <code>y</code>. Stated mathematically, our prediction will often be an estimate the conditional mean of <span class="math inline">\(Y\)</span>, given vales of the <span class="math inline">\(\boldsymbol{X}\)</span> variables.</p>
+<p><span class="math display">\[
+\mu(\boldsymbol{x}) = \mathbb{E}[Y \mid \boldsymbol{X} = \boldsymbol{x}]
+\]</span></p>
+<p>In other words, we want to learn this function, <span class="math inline">\(\mu(\boldsymbol{x})\)</span>. Much more on this later. (You can safely ignore this for now.)</p>
+</div>
+<div id="classification" class="section level4">
+<h4><span class="header-section-number">2.3.1.2</span> Classification</h4>
+<p>Classification is similar to regression, except it considers <strong>categorical</strong> response variables.</p>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+x1
+</th>
+<th style="text-align:right;">
+x2
+</th>
+<th style="text-align:right;">
+x3
+</th>
+<th style="text-align:left;">
+y
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Q
+</td>
+<td style="text-align:right;">
+0.46
+</td>
+<td style="text-align:right;">
+5.42
+</td>
+<td style="text-align:left;">
+B
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Q
+</td>
+<td style="text-align:right;">
+0.72
+</td>
+<td style="text-align:right;">
+0.83
+</td>
+<td style="text-align:left;">
+C
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Q
+</td>
+<td style="text-align:right;">
+0.93
+</td>
+<td style="text-align:right;">
+5.93
+</td>
+<td style="text-align:left;">
+B
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Q
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+5.68
+</td>
+<td style="text-align:left;">
+A
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P
+</td>
+<td style="text-align:right;">
+0.46
+</td>
+<td style="text-align:right;">
+0.49
+</td>
+<td style="text-align:left;">
+B
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P
+</td>
+<td style="text-align:right;">
+0.94
+</td>
+<td style="text-align:right;">
+3.09
+</td>
+<td style="text-align:left;">
+B
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P
+</td>
+<td style="text-align:right;">
+0.98
+</td>
+<td style="text-align:right;">
+2.34
+</td>
+<td style="text-align:left;">
+C
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P
+</td>
+<td style="text-align:right;">
+0.12
+</td>
+<td style="text-align:right;">
+5.43
+</td>
+<td style="text-align:left;">
+C
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Q
+</td>
+<td style="text-align:right;">
+0.47
+</td>
+<td style="text-align:right;">
+2.68
+</td>
+<td style="text-align:left;">
+B
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P
+</td>
+<td style="text-align:right;">
+0.56
+</td>
+<td style="text-align:right;">
+5.02
+</td>
+<td style="text-align:left;">
+B
+</td>
+</tr>
+</tbody>
+</table>
+<p>As before we want to learn a function from this data using the same inputs, except this time, we want it to output one of <code>A</code>, <code>B</code>, or <code>C</code> for predictions of the <code>y</code> variable. Again, consider some new data:</p>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+x1
+</th>
+<th style="text-align:right;">
+x2
+</th>
+<th style="text-align:right;">
+x3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+P
+</td>
+<td style="text-align:right;">
+0.96
+</td>
+<td style="text-align:right;">
+5.33
+</td>
+</tr>
+</tbody>
+</table>
+<p>While ultimately we would like our function to return one of <code>A</code>, <code>B</code>, or <code>C</code>, what we actually would like is an intermediate return of probabilities that <code>y</code> is <code>A</code>, <code>B</code>, or <code>C</code>. In other words, we are attempting to estimate the conditional probability that <span class="math inline">\(Y\)</span> is each of the possible categories, given values of the <span class="math inline">\(\boldsymbol{X}\)</span> values.</p>
+<p><span class="math display">\[
+p_k(\boldsymbol{x}) = P\left[ Y = k \mid \boldsymbol{X} = \boldsymbol{x} \right]
+\]</span></p>
+<p>We want to learn this function, <span class="math inline">\(p_k(\boldsymbol{x})\)</span>. Much more on this later. (You can safely ignore this for now.)</p>
+</div>
+</div>
+<div id="unsupervised-learning" class="section level3">
+<h3><span class="header-section-number">2.3.2</span> Unsupervised Learning</h3>
+<p>Unsupervised learning is a very broad task that is rather difficult to define. Essentially, it is learning without a response variable. To get a better idea about what unsupervised learning is, consider some specific tasks.</p>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+x1
+</th>
+<th style="text-align:right;">
+x2
+</th>
+<th style="text-align:right;">
+x3
+</th>
+<th style="text-align:right;">
+x4
+</th>
+<th style="text-align:right;">
+x5
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+2.74
+</td>
+<td style="text-align:right;">
+0.46
+</td>
+<td style="text-align:right;">
+5.42
+</td>
+<td style="text-align:right;">
+4.43
+</td>
+<td style="text-align:right;">
+2.28
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2.81
+</td>
+<td style="text-align:right;">
+0.72
+</td>
+<td style="text-align:right;">
+0.83
+</td>
+<td style="text-align:right;">
+4.87
+</td>
+<td style="text-align:right;">
+2.61
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+0.86
+</td>
+<td style="text-align:right;">
+0.93
+</td>
+<td style="text-align:right;">
+5.93
+</td>
+<td style="text-align:right;">
+2.33
+</td>
+<td style="text-align:right;">
+0.22
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2.49
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+5.68
+</td>
+<td style="text-align:right;">
+4.11
+</td>
+<td style="text-align:right;">
+5.84
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1.93
+</td>
+<td style="text-align:right;">
+0.46
+</td>
+<td style="text-align:right;">
+0.49
+</td>
+<td style="text-align:right;">
+0.02
+</td>
+<td style="text-align:right;">
+2.59
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-8.44
+</td>
+<td style="text-align:right;">
+-9.06
+</td>
+<td style="text-align:right;">
+-6.91
+</td>
+<td style="text-align:right;">
+-5.00
+</td>
+<td style="text-align:right;">
+-4.25
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-7.79
+</td>
+<td style="text-align:right;">
+-9.02
+</td>
+<td style="text-align:right;">
+-7.66
+</td>
+<td style="text-align:right;">
+-9.96
+</td>
+<td style="text-align:right;">
+-4.67
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-9.60
+</td>
+<td style="text-align:right;">
+-9.88
+</td>
+<td style="text-align:right;">
+-4.57
+</td>
+<td style="text-align:right;">
+-8.75
+</td>
+<td style="text-align:right;">
+-6.16
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-8.03
+</td>
+<td style="text-align:right;">
+-9.53
+</td>
+<td style="text-align:right;">
+-7.32
+</td>
+<td style="text-align:right;">
+-4.56
+</td>
+<td style="text-align:right;">
+-4.17
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-7.88
+</td>
+<td style="text-align:right;">
+-9.44
+</td>
+<td style="text-align:right;">
+-4.98
+</td>
+<td style="text-align:right;">
+-6.33
+</td>
+<td style="text-align:right;">
+-6.29
+</td>
+</tr>
+</tbody>
+</table>
+<div id="clustering" class="section level4">
+<h4><span class="header-section-number">2.3.2.1</span> Clustering</h4>
+<p>Clustering is essentially the task of <strong>grouping</strong> the observations of a dataset. In the above data, can you see an obvious grouping? (Hint: Compare the first five observations to the second five observations.)</p>
+</div>
+<div id="density-estimation" class="section level4">
+<h4><span class="header-section-number">2.3.2.2</span> Density Estimation</h4>
+<p>Density estimation tries to do exactly what the name implies, estimation the density. In this case, the joint density of <span class="math inline">\(X_1, X_2, X_3, X_4, X_5\)</span>. In other words, we would like to learn the <strong>function</strong> that generated this data. (You could take the position that this is the <strong>only</strong> machine learning tasks, and all other tasks are subset of this task. We’ll hold off on explaining this for a while.)</p>
+</div>
+<div id="outlier-detection" class="section level4">
+<h4><span class="header-section-number">2.3.2.3</span> Outlier Detection</h4>
+<p>Consider some new data:</p>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+x1
+</th>
+<th style="text-align:right;">
+x2
+</th>
+<th style="text-align:right;">
+x3
+</th>
+<th style="text-align:right;">
+x4
+</th>
+<th style="text-align:right;">
+x5
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+67
+</td>
+<td style="text-align:right;">
+66.68
+</td>
+<td style="text-align:right;">
+66.26
+</td>
+<td style="text-align:right;">
+69.49
+</td>
+<td style="text-align:right;">
+70
+</td>
+</tr>
+</tbody>
+</table>
+<p>Was this data generated by the same process as the data above? If no, we would call it an outlier.</p>
+<hr />
+</div>
+</div>
+</div>
+<div id="open-questions" class="section level2">
+<h2><span class="header-section-number">2.4</span> Open Questions</h2>
+<p>The two previous sections were probably more confusing than helpful. But of course, because we haven’t started learning yet! Hopefully, you are currently pondering one very specific question:</p>
+<ul>
+<li><em>How</em> do we <strong>learn</strong> functions from data?</li>
+</ul>
+<p>That’s what this text will be about! We will spend a lot of time on this question. It’s is what us statisticians call fitting a model. On some level the answer is: look at a bunch of old data before predicting on new data.</p>
+<p>While we will dedicate a large amount of time to answering this question, sometimes, some of the details might go unanswered. Since this is an introductory text, we can only go so far. However, as long as we answer another questions, this will be OK.</p>
+<ul>
+<li><em>How</em> do we <strong>evaluate</strong> how well are learned functions work?</li>
+</ul>
+<p>This text places a high priority on being able to <strong>do</strong> machine learning, specifically do machine learning in R. You can actually do a lot of machine learning without fully understanding how the learning is taking place. That makes the <em>evaluation</em> of ML models extremely important.</p>
+<p>We close with an incomplete list of questions you may have had while reading this chapter. We hope to answer these throughout the semester:</p>
+<ul>
+<li>TODO</li>
+</ul>
+</div>
 <div id="source-1" class="section level2">
-<h2><span class="header-section-number">2.3</span> Source</h2>
+<h2><span class="header-section-number">2.5</span> Source</h2>
 <ul>
 <li><code>R</code> Markdown: <a href="02-ml-overview.Rmd"><code>02-ml-overview.Rmd</code></a></li>
 </ul>
@@ -204,6 +906,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
