@@ -20,8 +20,6 @@ STAT 432 is a course about statistics, in particular, some specific statistics. 
 
 <!-- - TODO: Where we are going, estimating conditional means and distributions. -->
 <!-- - TODO: estimation = learning. "learning from data." what are we learning about? often parameters. -->
-<!-- - TODO: <http://stat400.org> -->
-<!-- - TODO: <http://stat420.org> -->
 
 <!-- ## Statistics -->
 
@@ -186,6 +184,6 @@ Note that $\text{MSE}\left[\hat{\mu}\right]$ is small when $\mu$ is close to 0.
 
 ## Source
 
-- `R` Markdown: [`04-statistics.Rmd`](04-statistics.Rmd)
+- `R` Markdown: [`05-statistics.Rmd`](05-statistics.Rmd)
 
 ***

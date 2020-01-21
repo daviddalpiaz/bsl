@@ -336,6 +336,6 @@ Any of the following are either dedicated to, or contain a good coverage of the 
 
 ## Source
 
-- `R` Markdown: [`03-probability.Rmd`](04-probability.Rmd)
+- `R` Markdown: [`04-probability.Rmd`](04-probability.Rmd)
 
 ***

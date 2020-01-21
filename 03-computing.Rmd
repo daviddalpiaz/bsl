@@ -363,6 +363,6 @@ As they arise throughout the semester, we will try to track and explain common i
 
 ## Source
 
-- R Markdown: [`05-computing.Rmd`](03-computing.Rmd)
+- R Markdown: [`03-computing.Rmd`](03-computing.Rmd)
 
 ***

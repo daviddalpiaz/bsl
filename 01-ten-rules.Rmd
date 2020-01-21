@@ -89,6 +89,8 @@ Do note that while there really are no stupid questions, there are some annoying
 
 The second bullet requires some explaining. The direct answer to that question is technically "Yes." However, please note that the course staff is not a debugging machine. If you simply supply us with a bunch of code and asks us what is wrong, you'll be met with a bit of frustration. We expect that you at least pinpoint *where* there is an issue with the code, within reason. (We will give some advice on how best to do this as the semester progresses.) In other words, try to ask your code question in a way that demonstrates that you have already thought about solving your issue. (See Rule #9.) We will always work with you to resolve your issue, but we ask that we are not your first attempt at a resolution.
 
+Corollary: There are no "quick" questions. Student often like to preface a question with the phrase "Just one quick question." If you're asking the question, how do you know how long it will take to answer? (I suppose if you know it's in the syllabus, then the answer will be quick, but ...) More often than not students ask *excellent* questions but then expect a short, succinct answer. When you ask a good question, this is often not possible. The point is, please come to office hours where we can have an in depth conversation, that is not time limited, with additional input from you!
+
 ***
 
 ## Rule 10: Learn By Doing
