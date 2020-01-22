@@ -54,6 +54,7 @@ In other words, this books is for students in STAT 432.
 The following is a (likely incomplete) list of helpful contributors. This book was also influenced by the helpful [contributors to R4SL](https://daviddalpiaz.github.io/r4sl/index.html#acknowledgements).
 
 - [Jae-Ho Lee](https://www.linkedin.com/in/jae-ho-lee-32052710b/) - STAT 432, Fall 2019
+- [W. Jonas Reger](https://www.linkedin.com/in/wjonasreger/) - STAT 432, Spring 2020
 
 Your name could be here! Please see the [CONTRIBUTING](https://github.com/daviddalpiaz/bsl/blob/master/CONTRIBUTING.md) document on GitHub for details on interacting with this project. Pull requests encouraged!
 
