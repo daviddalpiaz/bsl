@@ -80,6 +80,22 @@ R tutorials and advice are plentiful online. While we do not want to discourage 
 
 In other words, information below here supersedes any information from the above sources.
 
+### Don't Restore Old Workspaces
+
+Due to some odd default settings in RStudio, some students **never** clear their R envrioment. This is a problem for a number of reasons. (It could prevent your results from being reproducible.) To get ready for STAT 432, do the following:
+
+1. Clear your current enviroment.
+
+![](img/clear-env.png)
+
+2. Change some RStudio defaults.
+- Deselect "Restore .RData into workspace at startup.
+- Set "Save workspace .RData on exit:" to "Never"
+
+![](img/dont-restore.png)
+
+This will save you a lot of headache in STAT 432 and the future.
+
 ### R Versions
 
 You should always use the most up-to-date version of R and RStudio. You **must** use at least R versions 3.6.2.
