@@ -7,10 +7,6 @@
 - "3D" plots like in regression overview
 - EST, VAL, TRN, TST
 - goal: 1. do, 2. understand
-- main themes
-    1. write a song. (start with a four chord song) 
-    2. estimation. 
-    3. do / understand
 - Write a "cheat sheet"
 - https://gracious-allen-b2d17f.netlify.com/
 - https://github.com/rstudio-education/stat545-reboot
@@ -90,4 +86,65 @@
 - https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html
 - http://seankross.com/2016/11/17/How-to-Start-a-Bookdown-Book.html
 
+## Old Package List
 
+```
+boot,
+broom,
+caret,
+class,
+cluster,
+dbscan,
+dendextend,
+devtools,
+DMwR,
+dplyr,
+e1071,
+ElemStatLearn,
+ellipse, 
+extraTrees, 
+factoextra,
+FNN,
+gam,
+gbm, 
+ggplot2,
+ggridges,
+ggthemes,
+glmnet,
+ISLR,
+janitor,
+kableExtra,
+kernlab, 
+klaR,
+knitr,
+lattice,
+leaps,
+lubridate,
+MASS,
+mclust,
+microbenchmark,
+mlbench,
+nnet, 
+plotrix,
+pROC,
+purrr,
+quantreg,
+quantregForest,
+randomForest,
+ranger,
+RANN,
+readr,
+rmarkdown,
+ROSE,
+rpart, 
+rpart.plot,
+rsample,
+rvest,
+sos,
+sparcl,
+tibble,
+tidymodels,
+tidyverse,
+tree,
+xgboost
+```
