@@ -32,12 +32,12 @@ Machine learning (ML) is about **learning _functions_ from _data_**. That's it. 
 To quickly address some buzzwords that come up when discussing machine learning:
 
 - **Deep learning** is just a subset of machine learning.
-- **Artificial Intelligence** (AI) overlaps machine learning but has much loftier goals. In general, if someone claims to be using AI, they are not. (They're probably using function learning! For example, we will learn logistic regression in this course. People in marketing might call that AI! Someone who understands ML will simply call it function learning. Don't buy the hype! We don't need to call simple methods AI to make the effective.)
+- **Artificial Intelligence** (AI) overlaps machine learning but has much loftier goals. In general, if someone claims to be using AI, they are not. (They're probably using function learning! For example, we will learn logistic regression in this course. People in marketing might call that AI! Someone who understands ML will simply call it function learning. Don't buy the hype! We don't need to call simple methods AI to make them effective.)
 - Machine learning is not **data science**. Data science sometimes uses machine learning.
 - Does **big data** exist? If it does, I would bet a lot of money that you haven't seen it, and probably won't see it.
 - **Analytics** is just a fancy word for doing data analysis. Machine learning can be used in analyses! When it is, it is often called "Predictive Analytics."
 
-What makes machine learning interesting is the uses of these functions. We could develop functions that have applications in a wide variety of fields.
+What makes machine learning interesting are the uses of these functions. We could develop functions that have applications in a wide variety of fields.
 
 In **medicine**, we could develop a function that helps detect skin cancer.
 
@@ -64,7 +64,7 @@ In **urban planning** we could develop a function that predicts the rental price
 - Input: The attributes of the location for rent
 - Output: An estimate of the rent of the property
 
-How do learn these functions? By looking at many previous examples, that is, data! Again, we will learn functions from data. That's what were here to do.
+How do we learn these functions? By looking at many previous examples, that is, data! Again, we will learn functions from data. That's what we're here to do.
 
 ***
 
@@ -115,7 +115,7 @@ gen_sup_reg() %>%
   kable_styling(full_width = FALSE)
 ```
 
-With the data above, our goal would be to learn a function that takes as input values of the three features (`x1`, `x2`, and `x3`) and returns a predict (best guess) for the true (but usually unknown) value of the response `y`. For example, we could obtain some "new" data that does not contain the response.
+With the data above, our goal would be to learn a function that takes as input values of the three features (`x1`, `x2`, and `x3`) and returns a prediction (best guess) for the true (but usually unknown) value of the response `y`. For example, we could obtain some "new" data that does not contain the response.
 
 ```{r, echo = FALSE}
 gen_sup_reg(sample_size = 1)[, -4] %>% 
@@ -123,7 +123,7 @@ gen_sup_reg(sample_size = 1)[, -4] %>%
   kable_styling(full_width = FALSE)
 ```
 
-We would then pass this data to our function, which would return a prediction of the value of `y`. Stated mathematically, our prediction will often be an estimate the conditional mean of $Y$, given vales of the $\boldsymbol{X}$ variables. 
+We would then pass this data to our function, which would return a prediction of the value of `y`. Stated mathematically, our prediction will often be an estimate the conditional mean of $Y$, given values of the $\boldsymbol{X}$ variables. 
 
 $$
 \mu(\boldsymbol{x}) = \mathbb{E}[Y \mid \boldsymbol{X} = \boldsymbol{x}]
@@ -197,11 +197,11 @@ The two previous sections were probably more confusing than helpful. But of cour
 
 - *How* do we **learn** functions from data?
 
-That's what this text will be about! We will spend a lot of time on this question. It's is what us statisticians call fitting a model. On some level the answer is: look at a bunch of old data before predicting on new data. 
+That's what this text will be about! We will spend a lot of time on this question. It is what us statisticians call fitting a model. On some level the answer is: look at a bunch of old data before predicting on new data. 
 
-While we will dedicate a large amount of time to answering this question, sometimes, some of the details might go unanswered. Since this is an introductory text, we can only go so far. However, as long as we answer another questions, this will be OK.
+While we will dedicate a large amount of time to answering this question, sometimes, some of the details might go unanswered. Since this is an introductory text, we can only go so far. However, as long as we answer another question, this will be OK.
 
-- *How* do we **evaluate** how well are learned functions work?
+- *How* do we **evaluate** how well learned functions work?
 
 This text places a high priority on being able to **do** machine learning, specifically do machine learning in R. You can actually do a lot of machine learning without fully understanding how the learning is taking place. That makes the *evaluation* of ML models extremely important.
 
