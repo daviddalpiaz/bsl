@@ -24,7 +24,7 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2020-01-23" />
+<meta name="date" content="2020-01-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -263,12 +263,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>To quickly address some buzzwords that come up when discussing machine learning:</p>
 <ul>
 <li><strong>Deep learning</strong> is just a subset of machine learning.</li>
-<li><strong>Artificial Intelligence</strong> (AI) overlaps machine learning but has much loftier goals. In general, if someone claims to be using AI, they are not. (They’re probably using function learning! For example, we will learn logistic regression in this course. People in marketing might call that AI! Someone who understands ML will simply call it function learning. Don’t buy the hype! We don’t need to call simple methods AI to make the effective.)</li>
+<li><strong>Artificial Intelligence</strong> (AI) overlaps machine learning but has much loftier goals. In general, if someone claims to be using AI, they are not. (They’re probably using function learning! For example, we will learn logistic regression in this course. People in marketing might call that AI! Someone who understands ML will simply call it function learning. Don’t buy the hype! We don’t need to call simple methods AI to make them effective.)</li>
 <li>Machine learning is not <strong>data science</strong>. Data science sometimes uses machine learning.</li>
 <li>Does <strong>big data</strong> exist? If it does, I would bet a lot of money that you haven’t seen it, and probably won’t see it.</li>
 <li><strong>Analytics</strong> is just a fancy word for doing data analysis. Machine learning can be used in analyses! When it is, it is often called “Predictive Analytics.”</li>
 </ul>
-<p>What makes machine learning interesting is the uses of these functions. We could develop functions that have applications in a wide variety of fields.</p>
+<p>What makes machine learning interesting are the uses of these functions. We could develop functions that have applications in a wide variety of fields.</p>
 <p>In <strong>medicine</strong>, we could develop a function that helps detect skin cancer.</p>
 <ul>
 <li>Input: Pixels from an image of mole</li>
@@ -294,7 +294,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Input: The attributes of the location for rent</li>
 <li>Output: An estimate of the rent of the property</li>
 </ul>
-<p>How do learn these functions? By looking at many previous examples, that is, data! Again, we will learn functions from data. That’s what were here to do.</p>
+<p>How do we learn these functions? By looking at many previous examples, that is, data! Again, we will learn functions from data. That’s what we’re here to do.</p>
 <hr />
 </div>
 <div id="machine-learning-tasks" class="section level2">
@@ -466,7 +466,7 @@ C
 </tr>
 </tbody>
 </table>
-<p>With the data above, our goal would be to learn a function that takes as input values of the three features (<code>x1</code>, <code>x2</code>, and <code>x3</code>) and returns a predict (best guess) for the true (but usually unknown) value of the response <code>y</code>. For example, we could obtain some “new” data that does not contain the response.</p>
+<p>With the data above, our goal would be to learn a function that takes as input values of the three features (<code>x1</code>, <code>x2</code>, and <code>x3</code>) and returns a prediction (best guess) for the true (but usually unknown) value of the response <code>y</code>. For example, we could obtain some “new” data that does not contain the response.</p>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -495,7 +495,7 @@ B
 </tr>
 </tbody>
 </table>
-<p>We would then pass this data to our function, which would return a prediction of the value of <code>y</code>. Stated mathematically, our prediction will often be an estimate the conditional mean of <span class="math inline">\(Y\)</span>, given vales of the <span class="math inline">\(\boldsymbol{X}\)</span> variables.</p>
+<p>We would then pass this data to our function, which would return a prediction of the value of <code>y</code>. Stated mathematically, our prediction will often be an estimate the conditional mean of <span class="math inline">\(Y\)</span>, given values of the <span class="math inline">\(\boldsymbol{X}\)</span> variables.</p>
 <p><span class="math display">\[
 \mu(\boldsymbol{x}) = \mathbb{E}[Y \mid \boldsymbol{X} = \boldsymbol{x}]
 \]</span></p>
@@ -958,10 +958,10 @@ x5
 <ul>
 <li><em>How</em> do we <strong>learn</strong> functions from data?</li>
 </ul>
-<p>That’s what this text will be about! We will spend a lot of time on this question. It’s is what us statisticians call fitting a model. On some level the answer is: look at a bunch of old data before predicting on new data.</p>
-<p>While we will dedicate a large amount of time to answering this question, sometimes, some of the details might go unanswered. Since this is an introductory text, we can only go so far. However, as long as we answer another questions, this will be OK.</p>
+<p>That’s what this text will be about! We will spend a lot of time on this question. It is what us statisticians call fitting a model. On some level the answer is: look at a bunch of old data before predicting on new data.</p>
+<p>While we will dedicate a large amount of time to answering this question, sometimes, some of the details might go unanswered. Since this is an introductory text, we can only go so far. However, as long as we answer another question, this will be OK.</p>
 <ul>
-<li><em>How</em> do we <strong>evaluate</strong> how well are learned functions work?</li>
+<li><em>How</em> do we <strong>evaluate</strong> how well learned functions work?</li>
 </ul>
 <p>This text places a high priority on being able to <strong>do</strong> machine learning, specifically do machine learning in R. You can actually do a lot of machine learning without fully understanding how the learning is taking place. That makes the <em>evaluation</em> of ML models extremely important.</p>
 </div>
