@@ -44,6 +44,7 @@ In addition to the above readings, the following resources are more specific or 
 - [R Programming for Data Science](https://bookdown.org/rdpeng/rprogdatascience/)
 - [R Graphics Cookbook](https://r-graphics.org/)
 - [Modern Dive](https://moderndive.com/index.html)
+- [What They Forgot to Teach You About R](https://rstats.wtf/)
 - [The R Inferno](https://www.burns-stat.com/pages/Tutor/R_inferno.pdf)
 - [Data Wrangling, Exploration, and Analysis with R](https://stat545.com/)
 - [The `tidyverse` Website](tidyverse.org/)
