@@ -19,7 +19,6 @@ Use the validation set to evaluate models that have been trained using the estim
 Use numeric metrics such as **root-mean-square error (RMSE)** or graphical summaries such as **actual versus predicted plots**.
 Although it ignores some practical and statistical considerations (which will be discussed later), the model that acheives the lowest RMSE on the validation data will be deemed the "best" model. After finding this model, refit the model to the entire training dataset. Report the RMSE of this model on the test data as a final quantification of performance.
 
-- TODO: add ISL readings
 - TODO: <www.stat420.org>
 - TODO: add "why least squares?" readings
 <!-- - TODO: glossary of terms? -->
@@ -35,34 +34,6 @@ library("kableExtra")
 ```
 
 ## Setup
-
-$$
-Y = f(\boldsymbol{X}) + \epsilon
-$$
-
-- TODO: signal $f(X)$
-- TODO: noise $\epsilon$
-- TODO: goal: learn the signal, not the noise
-- TODO: random variables versus potential realized values
-
-$$
-\boldsymbol{X} = (X_1, X_2, \ldots, X_p)
-$$
-
-$$
-\boldsymbol{x} = (x_1, x_2, \ldots, x_p)
-$$
-
-$$
-\mathbb{E}\left[\left(Y - f(\boldsymbol{X})^2 \right)\right]
-$$
-
-- TODO: define regression function
-  - above is minimzed when f(x) = mu(x)
-
-$$
-\mu(\boldsymbol{x}) = \mathbb{E}[Y \mid \boldsymbol{X} = \boldsymbol{x}]
-$$
 
 - TODO: want to learn these "things" which are regression functions
 
@@ -142,18 +113,6 @@ grid()
 ```
 
 ## Modeling
-
-- TODO: for now, only use formula syntax
-  - https://rviews.rstudio.com/2017/02/01/the-r-formula-method-the-good-parts/
-  - https://rviews.rstudio.com/2017/03/01/the-r-formula-method-the-bad-parts/
-  
-```{r, echo = FALSE}
-calc_rmse = function(model, data, response) {
-  actual = data[[response]]
-  predicted = predict(model, data)
-  sqrt(mean((actual - predicted) ^ 2))
-}
-```
 
 ### Linear Models
 
@@ -548,51 +507,13 @@ tibble(k = c(25, 5, 1),
 - TODO: Validation Data
     - https://en.wikipedia.org/wiki/Infinite_monkey_theorem
 
-$$
-\mathcal{D} = \{ (x_i, y_i) \in \mathbb{R}^p \times \mathbb{R}, \ i = 1, 2, \ldots n \}
-$$
-
-
-$$
-\mathcal{D} = \mathcal{D}_{\texttt{trn}} \cup \mathcal{D}_{\texttt{tst}}
-$$
-
-$$
-\mathcal{D}_{\texttt{trn}} = \mathcal{D}_{\texttt{est}} \cup \mathcal{D}_{\texttt{val}}
-$$
-
 ## Metrics
 
 - TODO: RMSE
-
-$$
-\text{rmse}\left(\hat{f}_{\texttt{set}}, \mathcal{D}_{\texttt{set}} \right) = \sqrt{\frac{1}{n_{\texttt{set}}}\displaystyle\sum_{i \in {\texttt{set}}}^{}\left(y_i - \hat{f}_{\texttt{set}}({x}_i)\right)^2}
-$$
-
-$$
-\text{RMSE}_{\texttt{trn}} = \text{rmse}\left(\hat{f}_{\texttt{est}}, \mathcal{D}_{\texttt{est}}\right) = \sqrt{\frac{1}{n_{\texttt{est}}}\displaystyle\sum_{i \in {\texttt{est}}}^{}\left(y_i - \hat{f}_{\texttt{est}}({x}_i)\right)^2}
-$$
-
-$$
-\text{RMSE}_{\texttt{val}} = \text{rmse}\left(\hat{f}_{\texttt{est}}, \mathcal{D}_{\texttt{val}}\right) = \sqrt{\frac{1}{n_{\texttt{val}}}\displaystyle\sum_{i \in {\texttt{val}}}^{}\left(y_i - \hat{f}_{\texttt{est}}({x}_i)\right)^2}
-$$
-
-$$
-\text{RMSE}_{\texttt{tst}} = \text{rmse}\left(\hat{f}_{\texttt{trn}}, \mathcal{D}_{\texttt{tst}}\right) = \sqrt{\frac{1}{n_{\texttt{tst}}}\displaystyle\sum_{i \in {\texttt{tst}}}^{}\left(y_i - \hat{f}_{\texttt{trn}}({x}_i)\right)^2}
-$$
-
 - TODO: MAE
 - TODO: MAPE
     - https://en.wikipedia.org/wiki/Mean_absolute_percentage_error
     - but probably don't use
-
-```{r}
-calc_rmse = function(model, data, response) {
-  actual = data[[response]]
-  predicted = predict(model, data)
-  sqrt(mean((actual - predicted) ^ 2))
-}
-```
 
 ## Model Complexity
 
@@ -624,7 +545,7 @@ calc_rmse = function(model, data, response) {
 - lex fridman with ian: dataset (represent), model, optimize
     - https://www.youtube.com/watch?v=Z6rxFNMGdn0
 - want to minimize E[(y - y_hat)^2]
-- predict() creates estimate of E[Y|X] with supplied model
+
 
 
 
