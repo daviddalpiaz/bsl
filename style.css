@@ -2,17 +2,43 @@ p.caption {
   color: #777;
   margin-top: 10px;
 }
+
 p code {
   white-space: inherit;
+  box-shadow: 1px 1px 1px #cccccc;
 }
+a code {
+  white-space: inherit;
+  box-shadow: 1px 1px 1px #cccccc;
+}
+
+li code {
+  white-space: inherit;
+  box-shadow: 1px 1px 1px #cccccc;
+}
+
 pre {
   word-break: normal;
   word-wrap: normal;
 }
+
 pre code {
   white-space: inherit;
 }
 
 .book .book-body .page-wrapper .page-inner section.normal hr {
   height: 1px;
+}
+
+.book .book-body .page-wrapper .page-inner section.normal pre {
+  box-shadow: 1px 1px 3px 1px #cccccc;
+}
+
+.book .book-body .page-wrapper .page-inner section.normal pre.sourceCode {
+  border: 1px outset #999999;
+  box-shadow: none;
+}
+
+.book .book-body .page-wrapper .page-inner section.normal code {
+  padding: .1em;
 }
