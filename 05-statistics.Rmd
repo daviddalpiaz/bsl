@@ -187,3 +187,4 @@ Note that $\text{MSE}\left[\hat{\mu}\right]$ is small when $\mu$ is close to 0.
 - `R` Markdown: [`05-statistics.Rmd`](05-statistics.Rmd)
 
 ***
+
