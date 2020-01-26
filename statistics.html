@@ -201,17 +201,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.6" data-path="probability.html"><a href="probability.html#expectations"><i class="fa fa-check"></i><b>4.6</b> Expectations</a></li>
 <li class="chapter" data-level="4.7" data-path="probability.html"><a href="probability.html#likelihood"><i class="fa fa-check"></i><b>4.7</b> Likelihood</a></li>
-<li class="chapter" data-level="4.8" data-path="probability.html"><a href="probability.html#videos"><i class="fa fa-check"></i><b>4.8</b> Videos</a></li>
-<li class="chapter" data-level="4.9" data-path="probability.html"><a href="probability.html#references"><i class="fa fa-check"></i><b>4.9</b> References</a></li>
-<li class="chapter" data-level="4.10" data-path="probability.html"><a href="probability.html#source-3"><i class="fa fa-check"></i><b>4.10</b> Source</a></li>
+<li class="chapter" data-level="4.8" data-path="probability.html"><a href="probability.html#references"><i class="fa fa-check"></i><b>4.8</b> References</a><ul>
+<li class="chapter" data-level="4.8.1" data-path="probability.html"><a href="probability.html#videos"><i class="fa fa-check"></i><b>4.8.1</b> Videos</a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="probability.html"><a href="probability.html#source-3"><i class="fa fa-check"></i><b>4.9</b> Source</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>5</b> Statistics</a><ul>
 <li class="chapter" data-level="5.1" data-path="statistics.html"><a href="statistics.html#reading-3"><i class="fa fa-check"></i><b>5.1</b> Reading</a></li>
-<li class="chapter" data-level="5.2" data-path="statistics.html"><a href="statistics.html#estimators"><i class="fa fa-check"></i><b>5.2</b> Estimators</a><ul>
-<li class="chapter" data-level="5.2.1" data-path="statistics.html"><a href="statistics.html#properties"><i class="fa fa-check"></i><b>5.2.1</b> Properties</a></li>
-<li class="chapter" data-level="5.2.2" data-path="statistics.html"><a href="statistics.html#example"><i class="fa fa-check"></i><b>5.2.2</b> Example</a></li>
+<li class="chapter" data-level="5.2" data-path="statistics.html"><a href="statistics.html#statistics-1"><i class="fa fa-check"></i><b>5.2</b> Statistics</a></li>
+<li class="chapter" data-level="5.3" data-path="statistics.html"><a href="statistics.html#estimators"><i class="fa fa-check"></i><b>5.3</b> Estimators</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="statistics.html"><a href="statistics.html#properties"><i class="fa fa-check"></i><b>5.3.1</b> Properties</a></li>
+<li class="chapter" data-level="5.3.2" data-path="statistics.html"><a href="statistics.html#example-mse-of-an-estimator"><i class="fa fa-check"></i><b>5.3.2</b> Example: MSE of an Estimator</a></li>
+<li class="chapter" data-level="5.3.3" data-path="statistics.html"><a href="statistics.html#estimation-methods"><i class="fa fa-check"></i><b>5.3.3</b> Estimation Methods</a></li>
+<li class="chapter" data-level="5.3.4" data-path="statistics.html"><a href="statistics.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>5.3.4</b> Maximum Likelihood Estimation</a></li>
+<li class="chapter" data-level="5.3.5" data-path="statistics.html"><a href="statistics.html#method-of-moments"><i class="fa fa-check"></i><b>5.3.5</b> Method of Moments</a></li>
+<li class="chapter" data-level="5.3.6" data-path="statistics.html"><a href="statistics.html#empirical-distribution-function"><i class="fa fa-check"></i><b>5.3.6</b> Empirical Distribution Function</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="statistics.html"><a href="statistics.html#source-4"><i class="fa fa-check"></i><b>5.3</b> Source</a></li>
+<li class="chapter" data-level="5.4" data-path="statistics.html"><a href="statistics.html#source-4"><i class="fa fa-check"></i><b>5.4</b> Source</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="the-backlog.html"><a href="the-backlog.html"><i class="fa fa-check"></i><b>A</b> The Backlog</a><ul>
@@ -244,43 +250,82 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 5</span> Statistics</h1>
 <hr />
 <p>STAT 432 is a course about statistics, in particular, some specific statistics. To discuss the statistics of interest in STAT 432, we will need some general concepts about statistics.</p>
-<p><strong>Note:</strong> This section has been published while being nearly empty to provide easy access to a few definitions needed for Quiz 01.</p>
+<!-- - TODO: Where we are going, estimating conditional means and distributions. -->
+<!-- - TODO: estimation = learning. "learning from data." what are we learning about? often parameters. -->
+<p><strong>Note:</strong> This section has been published while being nearly empty to provide easy access to a few definitions needed for Quiz 01. Additional information was added ahead of Quiz 02, but it is still very sparse as it is difficult to summarize all of statistics in one chapter. In reality we just need to state a few definitions here and then move on to the next chapter, where the fun begins.</p>
 <hr />
 <div id="reading-3" class="section level2">
 <h2><span class="header-section-number">5.1</span> Reading</h2>
 <ul>
-<li><strong>Reference:</strong> <a href="http://stat400.org">STAT 400</a></li>
+<li><strong>Reference:</strong> <a href="http://stat400.org">STAT 400 @ UIUC: Notes and Homework</a></li>
+<li><strong>Reference:</strong> <a href="https://daviddalpiaz.github.io/stat3202-sp19/notes/fitting.html">STAT 3202 @ OSU: Fitting a Probability Model</a></li>
+<li><strong>Reference:</strong> <a href="https://online.stat.psu.edu/stat414/node/213/">STAT 415 @ PSU: Notes</a></li>
 </ul>
 <hr />
-<!-- - TODO: Where we are going, estimating conditional means and distributions. -->
-<!-- - TODO: estimation = learning. "learning from data." what are we learning about? often parameters. -->
-<!-- ## Statistics -->
-<!-- - TODO: parameters are a function of the population distribution -->
-<!-- - TODO: statistics are a function of data. -->
-<!-- - TODO: parameters:population::statistics::data -->
-<!-- - TODO: statistic vs value of a statistic -->
+</div>
+<div id="statistics-1" class="section level2">
+<h2><span class="header-section-number">5.2</span> Statistics</h2>
+<p>In short: a <strong>statistic</strong> is a <em>function of (sample) data</em>. (This mirrors <strong>parameters</strong> being <em>functions of (population) distributions</em>. In SAT terminology, statistics : data :: parameter : distribution.)</p>
+<p>Consider a random variable <span class="math inline">\(X\)</span>, with PDF <span class="math inline">\(f(x)\)</span> which defines the distribution of <span class="math inline">\(X\)</span>. Now consider the parameter <span class="math inline">\(\mu\)</span>, which we usually refer to as the mean of a distribution. We use <span class="math inline">\(\mu_X\)</span> to note that <span class="math inline">\(\mu\)</span> is dependent on the distribution of <span class="math inline">\(X\)</span>.</p>
+<p><span class="math display">\[
+\mu_X = \text{E}[X] = \int_{-\infty}^{\infty}xf(x)dx
+\]</span></p>
+<p>Note that this expression is a <em>function</em> of <span class="math inline">\(f(x)\)</span>. When we change the distribution of <span class="math inline">\(X\)</span>, that is, it has a different <span class="math inline">\(f(x)\)</span>, that effects <span class="math inline">\(\mu\)</span>.</p>
+<p>Now, given a random sample <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span>, define a statistic,</p>
+<p><span class="math display">\[
+\hat{\mu}(x_1, x_2, \ldots, x_n) = \frac{1}{n}\sum_{i = 1}^{n}x_i
+\]</span></p>
+<p>Often, we will simplify notation and instead simply write</p>
+<p><span class="math display">\[
+\hat{\mu} = \frac{1}{n}\sum_{i = 1}^{n}x_i
+\]</span></p>
+<p>and the fact that <span class="math inline">\(\hat{\mu}\)</span> is a function of the sample is implied. (You might also notice that this is the sample mean, which is often denoted by <span class="math inline">\(\bar{x}\)</span>.)</p>
+<p>Another confusing aspect of statistics is that they are <em>random variables</em>! Sometimes we would write the above as</p>
+<p><span class="math display">\[
+\hat{\mu}(X_1, X_2, \ldots, X_n) = \frac{1}{n}\sum_{i = 1}^{n}X_i
+\]</span></p>
+<p>When written this way, we are emphasizing that the random sample has not yet be observed, thus is still random. When this is the case, we can investigate the properties of the statistic as a random variable. When the sample has been observed, we use <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span> to note that we are inputting these observed values into a function, which outputs some value. (Sometimes we, and others, will be notationally sloppy and simply use lower case <span class="math inline">\(x\)</span> and you will be expected to understand via context if we are dealing with random variables or observed values of random variables. This is admittedly confusing.)</p>
+<p>As a final note, suppose we observe some data</p>
+<p><span class="math display">\[
+x_1 = 2, x_2 = 1, x_3 =5
+\]</span></p>
+<p>and we calculate <span class="math inline">\(\hat{\mu}\)</span> given these values. We would obtain</p>
+<p><span class="math display">\[
+\hat{\mu} = \frac{8}{3} \approx 2.66
+\]</span></p>
+<p>Note that 2.66 is <strong>not a statistic</strong>. It is the <strong>value</strong> of a statistic given a particular set of data. The statistic is still <span class="math inline">\(\hat{\mu}\)</span> which has output the value 2.66. Statistics output values given some data.</p>
 </div>
 <div id="estimators" class="section level2">
-<h2><span class="header-section-number">5.2</span> Estimators</h2>
-<!-- - TODO: estimator vs estimate -->
+<h2><span class="header-section-number">5.3</span> Estimators</h2>
+<p>Estimators are just statistics with a purpose, that is, estimators are statistics that attempt to estimate some quantity of interest, usually some parameter. Like statistics, estimators are functions of data that output values, which we call estimates.</p>
 <div id="properties" class="section level3">
-<h3><span class="header-section-number">5.2.1</span> Properties</h3>
+<h3><span class="header-section-number">5.3.1</span> Properties</h3>
+<div class="figure">
+<img src="img/bias-var.png" alt="Bias and Variance Visually Illustrated" />
+<p class="caption">Bias and Variance Visually Illustrated</p>
+</div>
+<!-- - TODO: explain image above, source copyright or recreate. -->
+<p>Because they are just statistics, estimators are simply functions of data. What makes an estimator <em>good</em>? Essentially, an estimator is good if it produces estimates that are close to the thing being estimated. The following properties help to better define this “closeness” as a function of the errors made by estimators.</p>
+<p>To estimate some parameter <span class="math inline">\(\theta\)</span> we will consider some estimator <span class="math inline">\(\hat{\theta}\)</span>.</p>
 <div id="bias" class="section level4">
-<h4><span class="header-section-number">5.2.1.1</span> Bias</h4>
+<h4><span class="header-section-number">5.3.1.1</span> Bias</h4>
+<p>The <strong>bias</strong> of an estimator defines the systematic error of the estimator, that is, how the estimator “misses” on average.</p>
 <p><span class="math display">\[
 \text{bias}\left[\hat{\theta}\right] \triangleq
 \mathbb{E}\left[\hat{\theta}\right] - \theta
 \]</span></p>
 </div>
 <div id="variance" class="section level4">
-<h4><span class="header-section-number">5.2.1.2</span> Variance</h4>
+<h4><span class="header-section-number">5.3.1.2</span> Variance</h4>
+<p>The <strong>variance</strong> of an estimator defines how close resulting estimates are to each other. (Assuming the estimated was repeated.)</p>
 <p><span class="math display">\[
 \text{var}\left[\hat{\theta}\right] \triangleq
 \mathbb{E}\left[ \left( \hat{\theta} - \mathbb{E}\left[\hat{\theta}\right] \right)^2 \right]
 \]</span></p>
 </div>
 <div id="mean-squared-error" class="section level4">
-<h4><span class="header-section-number">5.2.1.3</span> Mean Squared Error</h4>
+<h4><span class="header-section-number">5.3.1.3</span> Mean Squared Error</h4>
+<p>The <strong>mean squared error</strong> (MSE) is exactly what the name suggests, it is the average squared error of the estimator. Interestingly, the MSE decomposes into terms related to the bias and the variance. We will return to this idea later for a detailed discussion in the context of machine learning.</p>
 <p><span class="math display">\[
 \text{MSE}\left[\hat{\theta}\right] \triangleq
 \mathbb{E}\left[\left(\hat{\theta} - \theta\right)^2\right] =
@@ -288,9 +333,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \text{var}\left[\hat{\theta}\right]
 \]</span></p>
 </div>
+<div id="consistency" class="section level4">
+<h4><span class="header-section-number">5.3.1.4</span> Consistency</h4>
+<p>An estimator <span class="math inline">\(\hat{\theta}_n\)</span> is said to be a <strong>consistent estimator</strong> of <span class="math inline">\(\theta\)</span> if, for any positive <span class="math inline">\(\epsilon\)</span>,</p>
+<p><span class="math display">\[
+\lim_{n \rightarrow \infty} P\left( \left| \hat{\theta}_n - \theta \right| \leq  \epsilon\right) =1
+\]</span></p>
+<p>or, equivalently,</p>
+<p><span class="math display">\[
+\lim_{n \rightarrow \infty} P\left( \left| \hat{\theta}_n - \theta \right| &gt;  \epsilon\right) =0
+\]</span></p>
+<p>We say that <span class="math inline">\(\hat{\theta}_n\)</span> <strong>converges in probability</strong> to <span class="math inline">\(\theta\)</span> and we write <span class="math inline">\(\hat{\theta}_n \overset P \rightarrow \theta\)</span>.</p>
 </div>
-<div id="example" class="section level3">
-<h3><span class="header-section-number">5.2.2</span> Example</h3>
+</div>
+<div id="example-mse-of-an-estimator" class="section level3">
+<h3><span class="header-section-number">5.3.2</span> Example: MSE of an Estimator</h3>
 <p>Consider <span class="math inline">\(X_1, X_2, X_3 \sim N(\mu, \sigma^2)\)</span>.</p>
 <p>Define two estimators for the true mean, <span class="math inline">\(\mu\)</span>.</p>
 <p><span class="math display">\[
@@ -299,9 +356,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display">\[
 \hat{\mu} = \frac{1}{4}X_1 + \frac{1}{5}X_2 + \frac{1}{6}X_3
 \]</span></p>
-<ul>
-<li>Calculate and compare the mean square error of both <span class="math inline">\(\bar{X}\)</span> and <span class="math inline">\(\hat{\mu}\)</span> as estimators of <span class="math inline">\(\mu\)</span>.</li>
-</ul>
+<p>We will now calculate and compare the mean squared error of both <span class="math inline">\(\bar{X}\)</span> and <span class="math inline">\(\hat{\mu}\)</span> as estimators of <span class="math inline">\(\mu\)</span>.</p>
 <p>First, recall from properties of the sample mean that</p>
 <p><span class="math display">\[
 \text{E}\left[\bar{X}\right] = \mu
@@ -347,37 +402,82 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \frac{469}{3600}\sigma^2
 \]</span></p>
 <p>Note that <span class="math inline">\(\text{MSE}\left[\hat{\mu}\right]\)</span> is small when <span class="math inline">\(\mu\)</span> is close to 0.</p>
-<!-- #### Consistency -->
-<!-- An estimator $\hat{\theta}_n$ is said to be a **consistent estimator** of $\theta$ if, for any positive $\epsilon$, -->
+</div>
+<div id="estimation-methods" class="section level3">
+<h3><span class="header-section-number">5.3.3</span> Estimation Methods</h3>
+<p>So far we have discussed properties of estimators, but how do we <em>create</em> estimators? You <em>could</em> just define a bunch of estimators and then evaluate them to see what works best (an idea we will return to later in the context of ML) but (the field of) statistics has develop some methods that result in estimators with desirable properties.</p>
+</div>
+<div id="maximum-likelihood-estimation" class="section level3">
+<h3><span class="header-section-number">5.3.4</span> Maximum Likelihood Estimation</h3>
+<p>Given a random sample <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> from a population with parameter <span class="math inline">\(\theta\)</span> and density or mass <span class="math inline">\(f(x; \theta)\)</span>, we define the likelihood as</p>
+<p><span class="math display">\[
+\mathcal{L}(\theta \mid x_1, x_2, \ldots x_n) \triangleq f(x_1, x_2, \ldots, x_n; \theta) = \prod_{i = 1}^n f(x_i; \theta)
+\]</span></p>
+<p>The <strong>Maximum Likelihood Estimator</strong>, <span class="math inline">\(\hat{\theta}\)</span></p>
+<p><span class="math display">\[
+\hat{\theta} \triangleq \underset{\theta}{\text{argmax}} \ \mathcal{L}(\theta \mid x_1, x_2, \ldots x_n) = \underset{\theta}{\text{argmax}} \ \log \mathcal{L}(\theta \mid x_1, x_2, \ldots x_n)
+\]</span></p>
+<div id="invariance-principle" class="section level4">
+<h4><span class="header-section-number">5.3.4.1</span> Invariance Principle</h4>
+<p>If <span class="math inline">\(\hat{\theta}\)</span> is the MLE of <span class="math inline">\(\theta\)</span> and the function <span class="math inline">\(h(\theta)\)</span> is continuous, then <span class="math inline">\(h(\hat{\theta})\)</span> is the MLE of <span class="math inline">\(h(\theta)\)</span>.</p>
+</div>
+</div>
+<div id="method-of-moments" class="section level3">
+<h3><span class="header-section-number">5.3.5</span> Method of Moments</h3>
+<p>While it is very unlikely that we will use the <a href="https://online.stat.psu.edu/stat414/node/193/">Method of Moments</a> in STAT 432, you should still be aware of its existence.</p>
+</div>
+<div id="empirical-distribution-function" class="section level3">
+<h3><span class="header-section-number">5.3.6</span> Empirical Distribution Function</h3>
+<p>Consider a random variable <span class="math inline">\(X\)</span> with CDF <span class="math inline">\(F(k) = P(X &lt; k)\)</span> and an iid random sample <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span>. We can estimate <span class="math inline">\(F(k)\)</span> using the <a href="https://en.wikipedia.org/wiki/Empirical_distribution_function"><strong>Empirical Distribution Function</strong></a> (EDF),</p>
+<p><span class="math display">\[
+\hat{F}(k) = \frac{\text{# of elements in sample} \leq k}{n} = \frac{1}{n} \sum_{i = 1}^n I(x_i \leq k)
+\]</span></p>
+<p>where <span class="math inline">\(I(x_i \leq k)\)</span> is an indicator such that</p>
+<p><span class="math display">\[
+I(x_i \leq k) = 
+\begin{cases} 
+      1 &amp; \text{if } x_i \leq k \\
+      0 &amp; \text{if } x_i &gt; k 
+   \end{cases}
+\]</span></p>
+<!-- - TODO: Maybe consider this notation, but for now, gotta stop worrying about notation!!! -->
 <!-- $$ -->
-<!-- \lim_{n \rightarrow \infty} P\left( \left| \hat{\theta}_n - \theta \right| \leq  \epsilon\right) =1 -->
+<!-- \mathbf{1}_{[x_i \le t]} -->
 <!-- $$ -->
-<!-- or, equivalently, -->
-<!-- $$ -->
-<!-- \lim_{n \rightarrow \infty} P\left( \left| \hat{\theta}_n - \theta \right| >  \epsilon\right) =0 -->
-<!-- $$ -->
-<!-- We say that $\hat{\theta}_n$ **converges in probability** to $\theta$ and we write $\hat{\theta}_n \overset P \rightarrow \theta$. -->
-<!-- ### Methods -->
-<!-- - TODO: MLE -->
-<!-- Given a random sample $X_1, X_2, \ldots, X_n$ from a population with parameter $\theta$ and density or mass $f(x \mid \theta)$, we have: -->
-<!-- The Likelihood, $L(\theta)$, -->
-<!-- $$ -->
-<!-- L(\theta) = f(x_1, x_2, \ldots, x_n) = \prod_{i = 1}^{n} f(x_i \mid \theta) -->
-<!-- $$ -->
-<!-- The **Maximum Likelihood Estimator**, $\hat{\theta}$ -->
-<!-- $$ -->
-<!-- \hat{\theta} =  \underset{\theta}{\text{argmax}} \ L(\theta) = \underset{\theta}{\text{argmax}} \ \log L(\theta) -->
-<!-- $$ -->
-<!-- - TODO: Invariance Principle -->
-<!-- If $\hat{\theta}$ is the MLE of $\theta$ and the function $h(\theta)$ is continuous, then $h(\hat{\theta})$ is the MLE of $h(\theta)$. -->
-<!-- - TODO: MOM -->
-<!-- - TODO: https://daviddalpiaz.github.io/stat3202-sp19/notes/fitting.html -->
-<!-- - TODO: ECDF: https://en.wikipedia.org/wiki/Empirical_distribution_function -->
+<!-- - TODO: Add properties? See All of Nonparametric Statistics. (Mean, Var, Convergence, Intervals)-->
+<p>Given a data vector in R that is assumed to be a random sample, say, <code>y</code>, and some value, say <code>k</code>, it is easy to calculate <span class="math inline">\(\hat{F}(k)\)</span>.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">66</span>)</a>
+<a class="sourceLine" id="cb42-2" data-line-number="2">y =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">25</span>, <span class="dt">mean =</span> <span class="dv">6</span>, <span class="dt">sd =</span> <span class="fl">2.6</span>) <span class="co"># generate sample</span></a>
+<a class="sourceLine" id="cb42-3" data-line-number="3">k =<span class="st"> </span><span class="dv">4</span> <span class="co"># pick some k</span></a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="co"># using the EDF</span></a>
+<a class="sourceLine" id="cb43-2" data-line-number="2"><span class="kw">mean</span>(y <span class="op">&lt;</span><span class="st"> </span>k)</a></code></pre></div>
+<pre><code>## [1] 0.2</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="co"># using an estimated normal distribution (not quite using the MLE)</span></a>
+<a class="sourceLine" id="cb45-2" data-line-number="2"><span class="kw">pnorm</span>(<span class="dt">q =</span> k, <span class="dt">mean =</span> <span class="kw">mean</span>(y), <span class="dt">sd =</span> <span class="kw">sd</span>(y))</a></code></pre></div>
+<pre><code>## [1] 0.2088465</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="co"># using the true (but assumed unknown) CDF</span></a>
+<a class="sourceLine" id="cb47-2" data-line-number="2"><span class="kw">pnorm</span>(<span class="dt">q =</span> k, <span class="dt">mean =</span> <span class="dv">6</span>, <span class="dt">sd =</span> <span class="fl">2.6</span>) </a></code></pre></div>
+<pre><code>## [1] 0.2208782</code></pre>
+<p>Note that technically <code>sd(x)</code> does not return the MLE of <span class="math inline">\(\sigma\)</span> since it uses the unbiased estimator with a denominator of <span class="math inline">\(n - 1\)</span> instead of <span class="math inline">\(n\)</span>, but we’re being lazy for the sake of some cleaner code.</p>
+<!-- - TODO: Create plot of results of above. Like this: https://en.wikipedia.org/wiki/Empirical_distribution_function#/media/File:ECDF-100.png -->
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw">plot</span>(<span class="kw">ecdf</span>(y), </a>
+<a class="sourceLine" id="cb49-2" data-line-number="2">     <span class="dt">col.01line =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">verticals =</span> <span class="ot">TRUE</span>, <span class="dt">do.points =</span> <span class="ot">FALSE</span>, </a>
+<a class="sourceLine" id="cb49-3" data-line-number="3">     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">15</span>), <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">ylab =</span> <span class="st">&quot;F(y)&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;y&quot;</span>,</a>
+<a class="sourceLine" id="cb49-4" data-line-number="4">     <span class="dt">main =</span> <span class="st">&quot;Comparing the EDF to The Truth and MLE&quot;</span>)</a>
+<a class="sourceLine" id="cb49-5" data-line-number="5"><span class="kw">curve</span>(<span class="kw">pnorm</span>(x, <span class="dt">mean =</span> <span class="dv">6</span>, <span class="dt">sd =</span> <span class="fl">2.6</span>), </a>
+<a class="sourceLine" id="cb49-6" data-line-number="6">      <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">15</span>), <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb49-7" data-line-number="7"><span class="kw">curve</span>(<span class="kw">pnorm</span>(x, <span class="dt">mean =</span> <span class="kw">mean</span>(y), <span class="dt">sd =</span> <span class="kw">sd</span>(y)), </a>
+<a class="sourceLine" id="cb49-8" data-line-number="8">      <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">15</span>), <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="dt">lty =</span> <span class="dv">3</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb49-9" data-line-number="9"><span class="kw">legend</span>(<span class="st">&quot;bottomright&quot;</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;EDF&quot;</span>, <span class="st">&quot;Truth&quot;</span>, <span class="st">&quot;MLE&quot;</span>),</a>
+<a class="sourceLine" id="cb49-10" data-line-number="10">  <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;dodgerblue&quot;</span>, <span class="st">&quot;darkorange&quot;</span>), <span class="dt">lty =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb49-11" data-line-number="11"><span class="kw">grid</span>()</a></code></pre></div>
+<p><img src="05-statistics_files/figure-html/unnamed-chunk-3-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>We have purposefully used a “small” sample size here so that the EDF is visibly a step function. Modify the code above to increase the sample size. You should notice that the three functions converge as the sample size increases.</p>
 <hr />
 </div>
 </div>
 <div id="source-4" class="section level2">
-<h2><span class="header-section-number">5.3</span> Source</h2>
+<h2><span class="header-section-number">5.4</span> Source</h2>
 <ul>
 <li><code>R</code> Markdown: <a href="05-statistics.Rmd"><code>05-statistics.Rmd</code></a></li>
 </ul>
