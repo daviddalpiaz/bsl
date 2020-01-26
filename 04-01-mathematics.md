@@ -1,7 +1,0 @@
-# (PART) Mathematics {-}
-
-# Introduction
-
-
-
-asdf

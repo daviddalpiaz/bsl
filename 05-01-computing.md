@@ -1,7 +1,0 @@
-# (PART) Computing {-}
-
-# Introduction
-
-
-
-asdf
