@@ -15,7 +15,11 @@ We give a very brief review of some necessary probability concepts. As the treat
 ## Reading
 
 - **Required:** [Probability Distributions in R](http://www.stat.umn.edu/geyer/old/5101/rlook.html)
-- **Reference:** [STAT 400](http://stat400.org)
+- **Reference:** [STAT 400 @ UIUC: Notes and Homework](http://stat400.org)
+- **Reference:** [MIT 6.041: Video Lectures](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010/video-lectures/)
+- **Reference:** [MIT 6.041: Lecture Notes](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010/lecture-notes/)
+- **Reference:** [MIT 6.041: Readings](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010/readings/)
+- **Reference:** [STAT 414 @ PSU: Notes](https://online.stat.psu.edu/stat414/node/287/)
 
 ***
 
@@ -104,7 +108,7 @@ $$
 \bigcup_{i = 1}^{n} A_i = \Omega.
 $$
 
-Now, let $A_1, A_2, \ldots, A_n$ form a partition of the sample space where $P[A_i] > 0$ for all $i$. Then for any event $B$ with $P[B] > 0$ we have **Bayes' Rule**:
+Now, let $A_1, A_2, \ldots, A_n$ form a partition of the sample space where $P[A_i] > 0$ for all $i$. Then for any event $B$ with $P[B] > 0$ we have **Bayes' Theorem**:
 
 $$
 P[A_i | B] = \frac{P[A_i]P[B | A_i]}{P[B]} = \frac{P[A_i]P[B | A_i]}{\sum_{i = 1}^{n}P[A_i]P[B | A_i]}
@@ -115,6 +119,8 @@ The denominator of the latter equality is often called the **law of total probab
 $$
 P[B] = \sum_{i = 1}^{n}P[A_i]P[B | A_i]
 $$
+
+Note: When working with [Bayes' Theorem](https://en.m.wikipedia.org/wiki/Bayes'_theorem) it is often useful to draw a [tree diagram](https://en.m.wikipedia.org/wiki/Tree_diagram_(probability_theory)).
 
 Two events $A$ and $B$ are said to be **independent** if they satisfy
 
@@ -307,17 +313,6 @@ $$
 
 ***
 
-## Videos
-
-The YouTube channel [mathematicalmonk](https://www.youtube.com/user/mathematicalmonk) has a great [Probability Primer playlist](https://www.youtube.com/playlist?list=PL17567A1A3F5DB5E4) containing lectures on many fundamental probability concepts. Some of the more important concepts are covered in the following videos:
-
-- [Conditional Probability](https://www.youtube.com/watch?v=5BWk5qe5EJ8&index=11&list=PL17567A1A3F5DB5E4)
-- [Independence](https://www.youtube.com/watch?v=KK9jvGl9FY0&index=12&list=PL17567A1A3F5DB5E4)
-- [More Independence](https://www.youtube.com/watch?v=RMS-WglZP-c&index=13&list=PL17567A1A3F5DB5E4)
-- [Bayes Rule](https://www.youtube.com/watch?v=cM1BqBv11U8&index=14&list=PL17567A1A3F5DB5E4)
-
-***
-
 ## References
 
 Any of the following are either dedicated to, or contain a good coverage of the details of the topics above.
@@ -331,6 +326,15 @@ Any of the following are either dedicated to, or contain a good coverage of the 
 - Statistics Texts with Introduction to Probability
     - [Probability and Statistical Inference](https://www.pearsonhighered.com/program/Hogg-Probability-and-Statistical-Inference-9th-Edition/PGM91556.html) by Robert V. Hogg, Elliot Tanis, and Dale Zimmerman
     - [Introduction to Mathematical Statistics](https://www.pearsonhighered.com/program/Hogg-Introduction-to-Mathematical-Statistics-7th-Edition/PGM49624.html) by Robert V. Hogg, Joseph McKean, and Allen T. Craig
+
+### Videos
+
+The YouTube channel [mathematicalmonk](https://www.youtube.com/user/mathematicalmonk) has a great [Probability Primer playlist](https://www.youtube.com/playlist?list=PL17567A1A3F5DB5E4) containing lectures on many fundamental probability concepts. Some of the more important concepts are covered in the following videos:
+
+- [Conditional Probability](https://www.youtube.com/watch?v=5BWk5qe5EJ8&index=11&list=PL17567A1A3F5DB5E4)
+- [Independence](https://www.youtube.com/watch?v=KK9jvGl9FY0&index=12&list=PL17567A1A3F5DB5E4)
+- [More Independence](https://www.youtube.com/watch?v=RMS-WglZP-c&index=13&list=PL17567A1A3F5DB5E4)
+- [Bayes Rule](https://www.youtube.com/watch?v=cM1BqBv11U8&index=14&list=PL17567A1A3F5DB5E4)
 
 ***
 
