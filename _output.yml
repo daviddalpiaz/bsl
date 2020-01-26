@@ -1,11 +1,12 @@
 bookdown::gitbook:
   css: style.css
   split_by: chapter
+#  df_print: paged
   config:
     fontsettings:
       theme: white
       family: sans
-      size: 1
+#      size: 1
     toc:
       collapse: section
       before: |
