@@ -264,6 +264,11 @@ Given a data vector in R that is assumed to be a random sample, say, `y`, and so
 set.seed(66)
 y = rnorm(n = 25, mean = 6, sd = 2.6) # generate sample
 k = 4 # pick some k
+head(y) # check data
+```
+
+```
+## [1] 12.042334  6.564140  7.087301  5.503419  5.181420  4.315569
 ```
 
 

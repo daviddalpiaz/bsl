@@ -220,8 +220,8 @@ $$
 
 R is an excellent, if not best, tool for performing probability distribution calculations. For a large number of distributions, it has four built in functions:
 
-- `d*(x, ...)` returns the pdf at $x$ (for continuous distributions) or the pmf at $x$ (for discrete distributions)
-- `p*(q, ...)` returns the cdf at quantile $q$, that is $P[X \leq q]$
+- `d*(x, ...)` returns the PDF at $x$ (for continuous distributions) or the PMG at $x$ (for discrete distributions)
+- `p*(q, ...)` returns the CDF at quantile $q$, that is $P[X \leq q]$
 - `q*(p, ...)` returns $c$ such that $P[x \leq c] = p$
 - `r*(n, ...)` returns $n$ randomly generated observations
 
@@ -308,6 +308,55 @@ Maximizing a likelihood is a common technique for fitting a model to data, howev
 $$
 \log \mathcal{L}(\theta \mid x_1, x_2, \ldots x_n) = \sum_{i = 1}^{n} \log f(x_i; \theta)
 $$
+
+As an example, suppose that the data vector `x_data` contains observations from a random sample $X_1, X_2, \ldots, X_n$ that is assumed to be sampled from a Poisson distribution with (unknown) parameter $\lambda$.
+
+
+```r
+set.seed(42)
+x_data = rpois(n = 25, lambda = 6) # generating data (assume this is not known)
+head(x_data) # check data
+```
+
+```
+## [1]  9 10  5  8  7  6
+```
+
+We can use R to calculate the likelihood for various possible values of $\lambda$ given this data.
+
+
+```r
+# calculate the likelihood when lambda = 5
+prod(dpois(x = x_data, lambda = 5)) 
+```
+
+```
+## [1] 2.609375e-30
+```
+
+The above code takes advantage of the vectorized nature of the `dpois()` function. Often, especially for computational reasons, we prefer to directly obtain the log-likelihood.
+
+
+```r
+# calculate the log-likelihood when lambda = 5
+sum(log(dpois(x = x_data, lambda = 5))) 
+```
+
+```
+## [1] -68.11844
+```
+
+To understand why this is necessary, repeat the above, but with a much larger sample size. Also note that the `d*()` functions in R have an option to return logged values.
+
+
+```r
+# calculate the log-likelihood when lambda = 5
+sum(dpois(x = x_data, lambda = 5, log = TRUE)) 
+```
+
+```
+## [1] -68.11844
+```
 
 ***
 

@@ -412,8 +412,8 @@ X \sim N(\mu, \sigma^2)
 <h3><span class="header-section-number">4.5.4</span> Distributions in R</h3>
 <p>R is an excellent, if not best, tool for performing probability distribution calculations. For a large number of distributions, it has four built in functions:</p>
 <ul>
-<li><code>d*(x, ...)</code> returns the pdf at <span class="math inline">\(x\)</span> (for continuous distributions) or the pmf at <span class="math inline">\(x\)</span> (for discrete distributions)</li>
-<li><code>p*(q, ...)</code> returns the cdf at quantile <span class="math inline">\(q\)</span>, that is <span class="math inline">\(P[X \leq q]\)</span></li>
+<li><code>d*(x, ...)</code> returns the PDF at <span class="math inline">\(x\)</span> (for continuous distributions) or the PMG at <span class="math inline">\(x\)</span> (for discrete distributions)</li>
+<li><code>p*(q, ...)</code> returns the CDF at quantile <span class="math inline">\(q\)</span>, that is <span class="math inline">\(P[X \leq q]\)</span></li>
 <li><code>q*(p, ...)</code> returns <span class="math inline">\(c\)</span> such that <span class="math inline">\(P[x \leq c] = p\)</span></li>
 <li><code>r*(n, ...)</code> returns <span class="math inline">\(n\)</span> randomly generated observations</li>
 </ul>
@@ -476,6 +476,23 @@ f(x, y) = f(x) \cdot f(y)
 <p><span class="math display">\[
 \log \mathcal{L}(\theta \mid x_1, x_2, \ldots x_n) = \sum_{i = 1}^{n} \log f(x_i; \theta)
 \]</span></p>
+<p>As an example, suppose that the data vector <code>x_data</code> contains observations from a random sample <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> that is assumed to be sampled from a Poisson distribution with (unknown) parameter <span class="math inline">\(\lambda\)</span>.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb42-2" data-line-number="2">x_data =<span class="st"> </span><span class="kw">rpois</span>(<span class="dt">n =</span> <span class="dv">25</span>, <span class="dt">lambda =</span> <span class="dv">6</span>) <span class="co"># generating data (assume this is not known)</span></a>
+<a class="sourceLine" id="cb42-3" data-line-number="3"><span class="kw">head</span>(x_data) <span class="co"># check data</span></a></code></pre></div>
+<pre><code>## [1]  9 10  5  8  7  6</code></pre>
+<p>We can use R to calculate the likelihood for various possible values of <span class="math inline">\(\lambda\)</span> given this data.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="co"># calculate the likelihood when lambda = 5</span></a>
+<a class="sourceLine" id="cb44-2" data-line-number="2"><span class="kw">prod</span>(<span class="kw">dpois</span>(<span class="dt">x =</span> x_data, <span class="dt">lambda =</span> <span class="dv">5</span>)) </a></code></pre></div>
+<pre><code>## [1] 2.609375e-30</code></pre>
+<p>The above code takes advantage of the vectorized nature of the <code>dpois()</code> function. Often, especially for computational reasons, we prefer to directly obtain the log-likelihood.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="co"># calculate the log-likelihood when lambda = 5</span></a>
+<a class="sourceLine" id="cb46-2" data-line-number="2"><span class="kw">sum</span>(<span class="kw">log</span>(<span class="kw">dpois</span>(<span class="dt">x =</span> x_data, <span class="dt">lambda =</span> <span class="dv">5</span>))) </a></code></pre></div>
+<pre><code>## [1] -68.11844</code></pre>
+<p>To understand why this is necessary, repeat the above, but with a much larger sample size. Also note that the <code>d*()</code> functions in R have an option to return logged values.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="co"># calculate the log-likelihood when lambda = 5</span></a>
+<a class="sourceLine" id="cb48-2" data-line-number="2"><span class="kw">sum</span>(<span class="kw">dpois</span>(<span class="dt">x =</span> x_data, <span class="dt">lambda =</span> <span class="dv">5</span>, <span class="dt">log =</span> <span class="ot">TRUE</span>)) </a></code></pre></div>
+<pre><code>## [1] -68.11844</code></pre>
 <hr />
 </div>
 <div id="references" class="section level2">
