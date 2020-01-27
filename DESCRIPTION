@@ -8,6 +8,7 @@ Imports:
   bookdown,
   tidyverse,
   kableExtra,
-  GGally
+  GGally,
+  ISLR
 Remotes: 
   rstudio/bookdown
