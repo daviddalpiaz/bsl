@@ -233,9 +233,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6.10" data-path="linear-regression.html"><a href="linear-regression.html#example-simple-simulated-data"><i class="fa fa-check"></i><b>6.10</b> Example: “Simple” Simulated Data</a></li>
 <li class="chapter" data-level="6.11" data-path="linear-regression.html"><a href="linear-regression.html#example-diamonds-data"><i class="fa fa-check"></i><b>6.11</b> Example: Diamonds Data</a></li>
-<li class="chapter" data-level="6.12" data-path="linear-regression.html"><a href="linear-regression.html#example-fuel-efficiency-data"><i class="fa fa-check"></i><b>6.12</b> Example: Fuel Efficiency Data</a></li>
-<li class="chapter" data-level="6.13" data-path="linear-regression.html"><a href="linear-regression.html#example-credit-card-data"><i class="fa fa-check"></i><b>6.13</b> Example: Credit Card Data</a></li>
-<li class="chapter" data-level="6.14" data-path="linear-regression.html"><a href="linear-regression.html#source-5"><i class="fa fa-check"></i><b>6.14</b> Source</a></li>
+<li class="chapter" data-level="6.12" data-path="linear-regression.html"><a href="linear-regression.html#example-credit-card-data"><i class="fa fa-check"></i><b>6.12</b> Example: Credit Card Data</a></li>
+<li class="chapter" data-level="6.13" data-path="linear-regression.html"><a href="linear-regression.html#source-5"><i class="fa fa-check"></i><b>6.13</b> Source</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="the-backlog.html"><a href="the-backlog.html"><i class="fa fa-check"></i><b>A</b> The Backlog</a><ul>
@@ -364,7 +363,7 @@ Y \mid X \sim \text{N}(1 - 2x - 3x ^ 2 + 5x ^ 3, \sigma^2)
 \mu(x) = \mathbb{E}[Y \mid \boldsymbol{X} = \boldsymbol{x}] = 1 - 2x - 3x ^ 2 + 5x ^ 3
 \]</span></p>
 <p>What do linear models do? More specifically than before, linear regression models estimate the conditional mean of <span class="math inline">\(Y\)</span> given <span class="math inline">\(\boldsymbol{X}\)</span> by assuming this conditional mean is a <strong>linear combination of the feature variables</strong>.</p>
-<p>Suppose for a moment that we did not know the above <strong>true</strong> probability model, or even the more specificly the regression function. Instead, all we had was some data, <span class="math inline">\((x_i, y_i)\)</span> for <span class="math inline">\(i = 1, 2, \ldots, n\)</span>.</p>
+<p>Suppose for a moment that we did not know the above <strong>true</strong> probability model, or even the more specifically the regression function. Instead, all we had was some data, <span class="math inline">\((x_i, y_i)\)</span> for <span class="math inline">\(i = 1, 2, \ldots, n\)</span>.</p>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -809,7 +808,7 @@ X_6 = 0.6]
 <a class="sourceLine" id="cb89-2" data-line-number="2">mlr_trn_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(sim_mlr_data), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(sim_mlr_data))</a>
 <a class="sourceLine" id="cb89-3" data-line-number="3">mlr_trn =<span class="st"> </span>sim_mlr_data[mlr_trn_idx, ]</a>
 <a class="sourceLine" id="cb89-4" data-line-number="4">mlr_tst =<span class="st"> </span>sim_mlr_data[<span class="op">-</span>mlr_trn_idx, ]</a></code></pre></div>
-<p>Here we randomly select 80% of the rows of the full data, and store these indicies as <code>mlr_trn_idx</code>. We then create the <code>mlr_trn</code> and <code>mlr_tst</code> datasets by either selecting or anti-selecting these rows from the original dataset.</p>
+<p>Here we randomly select 80% of the rows of the full data, and store these indices as <code>mlr_trn_idx</code>. We then create the <code>mlr_trn</code> and <code>mlr_tst</code> datasets by either selecting or anti-selecting these rows from the original dataset.</p>
 <div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1"><span class="co"># estimation-validation split</span></a>
 <a class="sourceLine" id="cb90-2" data-line-number="2">mlr_est_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(mlr_trn), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(mlr_trn))</a>
 <a class="sourceLine" id="cb90-3" data-line-number="3">mlr_est =<span class="st"> </span>mlr_trn[mlr_est_idx, ]</a>
@@ -1027,7 +1026,7 @@ X_6 = 0.6]
 <div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" data-line-number="1">dmnd_mod_val_pred =<span class="st"> </span><span class="kw">map</span>(dmnd_mod_list, predict, dmnd_val)</a>
 <a class="sourceLine" id="cb137-2" data-line-number="2"><span class="kw">map_dbl</span>(dmnd_mod_val_pred, calc_rmse, <span class="dt">actual =</span> dmnd_val<span class="op">$</span>price) </a></code></pre></div>
 <pre><code>## [1] 1583.558 1517.080 1634.396 1350.659</code></pre>
-<p>It looks like model <code>dmnd_mod_4_est</code> achieves the lowest validation error. We re-fit this model, then repot the test RMSE.</p>
+<p>It looks like model <code>dmnd_mod_4_est</code> achieves the lowest validation error. We re-fit this model, then report the test RMSE.</p>
 <div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" data-line-number="1">dmnd_mod_<span class="dv">4</span>_trn =<span class="st"> </span><span class="kw">lm</span>(price <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(carat, <span class="dt">degree =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>carat, <span class="dt">data =</span> dmnd_trn)</a>
 <a class="sourceLine" id="cb139-2" data-line-number="2"><span class="kw">calc_rmse</span>(<span class="dt">actual =</span> dmnd_tst<span class="op">$</span>price,</a>
 <a class="sourceLine" id="cb139-3" data-line-number="3">          <span class="dt">predicted =</span> <span class="kw">predict</span>(dmnd_mod_<span class="dv">4</span>_trn, dmnd_tst))</a></code></pre></div>
@@ -1048,98 +1047,101 @@ X_6 = 0.6]
 <p>Some things to consider:</p>
 <ul>
 <li>Could you use the predicted versus actual plot to assist in selecting a model with the validation data?</li>
+<li>Note that the model we have chosen is not necessarily the “best” model. It is simply the model with the lowest validation RMSE. This is currently a very simplistic analysis.</li>
 <li>Can you improve this model? Would a log transform of price help?</li>
 </ul>
 <hr />
 </div>
-<div id="example-fuel-efficiency-data" class="section level2">
-<h2><span class="header-section-number">6.12</span> Example: Fuel Efficiency Data</h2>
-<ul>
-<li>TODO: This section is still being worked on. Should be updated soon.</li>
-</ul>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" data-line-number="1"><span class="co"># load data</span></a>
-<a class="sourceLine" id="cb142-2" data-line-number="2">mpg =<span class="st"> </span>ggplot2<span class="op">::</span>mpg</a></code></pre></div>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" data-line-number="1"><span class="co"># data prep</span></a>
-<a class="sourceLine" id="cb143-2" data-line-number="2">mpg =<span class="st"> </span>mpg <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb143-3" data-line-number="3"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>manufacturer, <span class="op">-</span>model) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb143-4" data-line-number="4"><span class="st">  </span><span class="kw">mutate_if</span>(is.character, as_factor) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb143-5" data-line-number="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">cyl =</span> <span class="kw">as_factor</span>(cyl))</a></code></pre></div>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" data-line-number="1"><span class="co"># test-train split</span></a>
-<a class="sourceLine" id="cb144-2" data-line-number="2">mpg_trn_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(mpg), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(mpg))</a>
-<a class="sourceLine" id="cb144-3" data-line-number="3">mpg_trn =<span class="st"> </span>mpg[mpg_trn_idx, ]</a>
-<a class="sourceLine" id="cb144-4" data-line-number="4">mpg_tst =<span class="st"> </span>mpg[<span class="op">-</span>mpg_trn_idx, ]</a></code></pre></div>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" data-line-number="1"><span class="co"># estimation-validation split</span></a>
-<a class="sourceLine" id="cb145-2" data-line-number="2">mpg_est_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(mpg_trn), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(mpg_trn))</a>
-<a class="sourceLine" id="cb145-3" data-line-number="3">mpg_est =<span class="st"> </span>mpg_trn[mpg_est_idx, ]</a>
-<a class="sourceLine" id="cb145-4" data-line-number="4">mpg_val =<span class="st"> </span>mpg_trn[<span class="op">-</span>mpg_est_idx, ]</a></code></pre></div>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" data-line-number="1"><span class="co"># check data</span></a>
-<a class="sourceLine" id="cb146-2" data-line-number="2"><span class="kw">head</span>(mpg_trn, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
-<pre><code>## # A tibble: 10 x 9
-##    displ  year cyl   trans      drv     cty   hwy fl    class  
-##    &lt;dbl&gt; &lt;int&gt; &lt;fct&gt; &lt;fct&gt;      &lt;fct&gt; &lt;int&gt; &lt;int&gt; &lt;fct&gt; &lt;fct&gt;  
-##  1   3    2008 6     auto(l5)   4        17    22 d     suv    
-##  2   6    2008 8     auto(l4)   r        12    17 r     suv    
-##  3   4.7  2008 8     manual(m6) 4        12    16 r     pickup 
-##  4   5.7  1999 8     manual(m6) r        16    26 p     2seater
-##  5   4.7  1999 8     auto(l4)   4        14    17 r     suv    
-##  6   4.7  2008 8     auto(l5)   4        14    17 r     suv    
-##  7   4.6  1999 8     manual(m5) 4        13    16 r     pickup 
-##  8   4.7  2008 8     auto(l5)   4        14    19 r     pickup 
-##  9   2.5  2008 4     auto(s4)   4        20    27 r     compact
-## 10   2.7  1999 4     auto(l4)   4        16    20 r     suv</code></pre>
-<hr />
-</div>
 <div id="example-credit-card-data" class="section level2">
-<h2><span class="header-section-number">6.13</span> Example: Credit Card Data</h2>
-<ul>
-<li>TODO: This section is still being worked on. Should be updated soon.</li>
-</ul>
-<!-- - TODO: setup: local bank doesn't want to pay for credit ratings -->
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" data-line-number="1"><span class="co"># load data, coerce to tibble</span></a>
-<a class="sourceLine" id="cb148-2" data-line-number="2">crdt =<span class="st"> </span><span class="kw">as_tibble</span>(ISLR<span class="op">::</span>Credit)</a></code></pre></div>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" data-line-number="1"><span class="co"># data prep</span></a>
-<a class="sourceLine" id="cb149-2" data-line-number="2">crdt =<span class="st"> </span>crdt <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb149-3" data-line-number="3"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>ID)</a></code></pre></div>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" data-line-number="1"><span class="co"># test-train split</span></a>
-<a class="sourceLine" id="cb150-2" data-line-number="2">crdt_trn_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(crdt), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(crdt))</a>
-<a class="sourceLine" id="cb150-3" data-line-number="3">crdt_trn =<span class="st"> </span>crdt[crdt_trn_idx, ]</a>
-<a class="sourceLine" id="cb150-4" data-line-number="4">crdt_tst =<span class="st"> </span>crdt[<span class="op">-</span>crdt_trn_idx, ]</a></code></pre></div>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" data-line-number="1"><span class="co"># estimation-validation split</span></a>
-<a class="sourceLine" id="cb151-2" data-line-number="2">crdt_est_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(crdt_trn), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(crdt_trn))</a>
-<a class="sourceLine" id="cb151-3" data-line-number="3">crdt_est =<span class="st"> </span>crdt_trn[crdt_est_idx, ]</a>
-<a class="sourceLine" id="cb151-4" data-line-number="4">crdt_val =<span class="st"> </span>crdt_trn[<span class="op">-</span>crdt_est_idx, ]</a></code></pre></div>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" data-line-number="1"><span class="co"># check data</span></a>
-<a class="sourceLine" id="cb152-2" data-line-number="2"><span class="kw">head</span>(crdt_trn, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
+<h2><span class="header-section-number">6.12</span> Example: Credit Card Data</h2>
+<p>Suppose you work for a small local bank, perhaps a credit union, that has a credit card product offering. For years, you relied on credit agencies to provide a rating of your customer’s credit, however, this costs your bank money. One day, you realize that it might be possible to reverse engineer your customers’ (and thus potential customers) credit rating based on the credit ratings that you already have already purchase, as well as the demographic and credit card information that you already have, such as age, education level, credit limit, etc. (We make no comment on the legality or ethics of this idea. Consider these before using at your own risk.)</p>
+<p>So long as you can estimate customers’ credit rating with a reasonable error, you could stop buying the ratings from an agency. Effectively, you will have created your own rating.</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" data-line-number="1"><span class="co"># load data, coerce to tibble</span></a>
+<a class="sourceLine" id="cb142-2" data-line-number="2">crdt =<span class="st"> </span><span class="kw">as_tibble</span>(ISLR<span class="op">::</span>Credit)</a></code></pre></div>
+<p>To perform this analysis, we will use the <code>Credit</code> data form the <code>ISLR</code> package. Note: <strong>this is not real data.</strong> It has been simulated.</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" data-line-number="1"><span class="co"># data prep</span></a>
+<a class="sourceLine" id="cb143-2" data-line-number="2">crdt =<span class="st"> </span>crdt <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb143-3" data-line-number="3"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>ID) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb143-4" data-line-number="4"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Rating, <span class="kw">everything</span>())</a></code></pre></div>
+<p>We remove the <code>ID</code> variable as it should have no predictive power. We also move the <code>Rating</code> variable to the last column with a clever <code>dplyr</code> trick. This is in no way necessary, but is useful in creating some plots.</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" data-line-number="1"><span class="co"># test-train split</span></a>
+<a class="sourceLine" id="cb144-2" data-line-number="2">crdt_trn_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(crdt), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(crdt))</a>
+<a class="sourceLine" id="cb144-3" data-line-number="3">crdt_trn =<span class="st"> </span>crdt[crdt_trn_idx, ]</a>
+<a class="sourceLine" id="cb144-4" data-line-number="4">crdt_tst =<span class="st"> </span>crdt[<span class="op">-</span>crdt_trn_idx, ]</a></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" data-line-number="1"><span class="co"># estimation-validation split</span></a>
+<a class="sourceLine" id="cb145-2" data-line-number="2">crdt_est_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(crdt_trn), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(crdt_trn))</a>
+<a class="sourceLine" id="cb145-3" data-line-number="3">crdt_est =<span class="st"> </span>crdt_trn[crdt_est_idx, ]</a>
+<a class="sourceLine" id="cb145-4" data-line-number="4">crdt_val =<span class="st"> </span>crdt_trn[<span class="op">-</span>crdt_est_idx, ]</a></code></pre></div>
+<p>After train-test and estimation-validation splitting the data, we look at the train data.</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" data-line-number="1"><span class="co"># check data</span></a>
+<a class="sourceLine" id="cb146-2" data-line-number="2"><span class="kw">head</span>(crdt_trn, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 10 x 11
-##    Income Limit Rating Cards   Age Education Gender Student Married Ethnicity
-##     &lt;dbl&gt; &lt;int&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt;     &lt;int&gt; &lt;fct&gt;  &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;    
-##  1   28.9  2733    210     5    43        16 &quot; Mal… No      Yes     Asian    
-##  2   63.8  7530    515     1    56        12 &quot; Mal… No      Yes     Caucasian
-##  3   63.5  8100    581     2    50        17 &quot;Fema… No      Yes     Caucasian
-##  4   58.8  7402    538     2    81        12 &quot;Fema… No      Yes     Asian    
-##  5   33.7  6196    450     6    55         9 &quot;Fema… No      No      Caucasian
-##  6   75.4  3874    298     3    41        14 &quot;Fema… No      Yes     Asian    
-##  7   55.2  5352    385     4    50        17 &quot;Fema… No      Yes     Caucasian
-##  8   27.8  3807    301     4    35         8 &quot;Fema… No      Yes     African …
-##  9   53.3  2860    214     1    84        10 &quot; Mal… No      Yes     Caucasian
-## 10   36.5  6386    469     4    79         6 &quot;Fema… No      Yes     Caucasian
-## # … with 1 more variable: Balance &lt;int&gt;</code></pre>
+##    Income Limit Cards   Age Education Gender Student Married Ethnicity Balance
+##     &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;     &lt;int&gt; &lt;fct&gt;  &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;       &lt;int&gt;
+##  1   62.6  7056     1    84        11 &quot;Fema… No      No      Caucasian     904
+##  2  128.   6982     2    78        11 &quot;Fema… No      Yes     Caucasian     250
+##  3   31.0  2863     2    66        17 &quot; Mal… Yes     Yes     Asian         415
+##  4   54.3  3063     3    59         8 &quot;Fema… Yes     No      Caucasian     269
+##  5  102.   8029     2    84        11 &quot; Mal… No      Yes     Caucasian     849
+##  6   28.3  4391     2    29        10 &quot;Fema… No      No      Caucasian     453
+##  7  152.  12066     4    41        12 &quot;Fema… No      Yes     Asian        1779
+##  8   44.2  5441     1    32        12 &quot; Mal… No      Yes     Caucasian     607
+##  9  122.  10673     3    54        16 &quot; Mal… No      No      African …    1573
+## 10  160.  10748     2    69        17 &quot; Mal… No      No      Caucasian    1192
+## # … with 1 more variable: Rating &lt;int&gt;</code></pre>
+<p>To get a better “look” at the data, consider running the following:</p>
 <ul>
-<li>TODO: <code>skimr::skim(crdt_trn)</code>, <code>str(crdt_trn)</code>, <code>View(crdt_trn)</code></li>
+<li><code>skimr::skim(crdt_trn)</code></li>
+<li><code>str(crdt_trn)</code></li>
+<li><code>View(crdt_trn)</code></li>
 </ul>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" data-line-number="1">crdt_trn <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb154-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Rating)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb154-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">20</span>)</a></code></pre></div>
-<p><img src="06-linear-regression_files/figure-html/unnamed-chunk-77-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" data-line-number="1">mod =<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> Rating <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> crdt_trn)</a>
-<a class="sourceLine" id="cb155-2" data-line-number="2"><span class="kw">sqrt</span>(<span class="kw">mean</span>((<span class="kw">predict</span>(mod, crdt_tst) <span class="op">-</span><span class="st"> </span>crdt_tst<span class="op">$</span>Rating) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</a></code></pre></div>
-<pre><code>## [1] 9.998283</code></pre>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" data-line-number="1"><span class="kw">sd</span>(crdt_trn<span class="op">$</span>Rating)</a></code></pre></div>
-<pre><code>## [1] 153.821</code></pre>
+<p>We also create a pairs plot.</p>
+<p><img src="06-linear-regression_files/figure-html/unnamed-chunk-72-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>We immediately notice three variables that have a strong correlation with <code>Rating</code>: <code>Income</code>, <code>Limit</code>, and <code>Balance</code>. Based on this, we evaluate five candidate models.</p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" data-line-number="1">crdt_mod_<span class="dv">0</span>_est =<span class="st"> </span><span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> crdt_est)</a>
+<a class="sourceLine" id="cb148-2" data-line-number="2">crdt_mod_<span class="dv">1</span>_est =<span class="st"> </span><span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span>Limit, <span class="dt">data =</span> crdt_est)</a>
+<a class="sourceLine" id="cb148-3" data-line-number="3">crdt_mod_<span class="dv">2</span>_est =<span class="st"> </span><span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span>Limit <span class="op">+</span><span class="st"> </span>Income <span class="op">+</span><span class="st"> </span>Balance, <span class="dt">data =</span> crdt_est)</a>
+<a class="sourceLine" id="cb148-4" data-line-number="4">crdt_mod_<span class="dv">3</span>_est =<span class="st"> </span><span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> crdt_est)</a>
+<a class="sourceLine" id="cb148-5" data-line-number="5">crdt_mod_<span class="dv">4</span>_est =<span class="st"> </span><span class="kw">step</span>(<span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span>. <span class="op">^</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">data =</span> crdt_est), <span class="dt">trace =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" data-line-number="1">crdt_mod_list =<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb149-2" data-line-number="2">  crdt_mod_<span class="dv">0</span>_est,</a>
+<a class="sourceLine" id="cb149-3" data-line-number="3">  crdt_mod_<span class="dv">1</span>_est,</a>
+<a class="sourceLine" id="cb149-4" data-line-number="4">  crdt_mod_<span class="dv">2</span>_est,</a>
+<a class="sourceLine" id="cb149-5" data-line-number="5">  crdt_mod_<span class="dv">3</span>_est,</a>
+<a class="sourceLine" id="cb149-6" data-line-number="6">  crdt_mod_<span class="dv">4</span>_est</a>
+<a class="sourceLine" id="cb149-7" data-line-number="7">)</a></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" data-line-number="1">crdt_mod_val_pred =<span class="st"> </span><span class="kw">map</span>(crdt_mod_list, predict, crdt_val)</a>
+<a class="sourceLine" id="cb150-2" data-line-number="2"><span class="kw">map_dbl</span>(crdt_mod_val_pred, calc_rmse, <span class="dt">actual =</span> crdt_val<span class="op">$</span>Rating) </a></code></pre></div>
+<pre><code>## [1] 166.29754  13.39134  12.86612  10.70981  10.55483</code></pre>
+<p>From these results, it appears that the additive model, including all terms performs best. We move forward with this model.</p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" data-line-number="1">final_credit_model =<span class="st"> </span><span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> crdt_trn)</a>
+<a class="sourceLine" id="cb152-2" data-line-number="2"><span class="kw">sqrt</span>(<span class="kw">mean</span>((<span class="kw">predict</span>(final_credit_model, crdt_tst) <span class="op">-</span><span class="st"> </span>crdt_tst<span class="op">$</span>Rating) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</a></code></pre></div>
+<pre><code>## [1] 8.974805</code></pre>
+<p>It seems that on average, this model errors by about 10 credit points.</p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" data-line-number="1"><span class="kw">range</span>(crdt_trn<span class="op">$</span>Rating)</a></code></pre></div>
+<pre><code>## [1]  93 982</code></pre>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" data-line-number="1"><span class="kw">sd</span>(crdt_trn<span class="op">$</span>Rating)</a></code></pre></div>
+<pre><code>## [1] 159.527</code></pre>
+<p>Given the range of possible ratings, this seem pretty good! What do you think?</p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" data-line-number="1"><span class="kw">plot</span>(</a>
+<a class="sourceLine" id="cb158-2" data-line-number="2">  <span class="dt">x =</span> crdt_tst<span class="op">$</span>Rating,</a>
+<a class="sourceLine" id="cb158-3" data-line-number="3">  <span class="dt">y =</span> <span class="kw">predict</span>(final_credit_model, crdt_tst),</a>
+<a class="sourceLine" id="cb158-4" data-line-number="4">  <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,</a>
+<a class="sourceLine" id="cb158-5" data-line-number="5">  <span class="co"># xlim = c(0, 25000), ylim = c(0, 25000),</span></a>
+<a class="sourceLine" id="cb158-6" data-line-number="6">  <span class="dt">main =</span> <span class="st">&quot;Credit: Predicted vs Actual, Test Data&quot;</span>,</a>
+<a class="sourceLine" id="cb158-7" data-line-number="7">  <span class="dt">xlab =</span> <span class="st">&quot;Actual&quot;</span>,</a>
+<a class="sourceLine" id="cb158-8" data-line-number="8">  <span class="dt">ylab =</span> <span class="st">&quot;Predicted&quot;</span></a>
+<a class="sourceLine" id="cb158-9" data-line-number="9">)</a>
+<a class="sourceLine" id="cb158-10" data-line-number="10"><span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb158-11" data-line-number="11"><span class="kw">grid</span>()</a></code></pre></div>
+<p><img src="06-linear-regression_files/figure-html/unnamed-chunk-78-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>The predicted versus actual plot almost looks too good to be true! Wow! (Oh, wait. This was simulated data…)</p>
+<p>In summary, if this data were real, we might have an interesting result!</p>
+<p>Do note, that both this example and the previous should not be considered <strong>data analyses</strong>, but instead, examples that reinforce how to use the validation and test sets. As part of a true analysis, we will need to be much more careful about some of our decision. More on this later! Up next: nonparametric regression methods.</p>
 <hr />
 </div>
 <div id="source-5" class="section level2">
-<h2><span class="header-section-number">6.14</span> Source</h2>
+<h2><span class="header-section-number">6.13</span> Source</h2>
 <ul>
 <li><code>R</code> Markdown: <a href="06-linear-regression.Rmd"><code>06-linear-regression.Rmd</code></a></li>
 </ul>

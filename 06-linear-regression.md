@@ -125,7 +125,7 @@ $$
 
 What do linear models do? More specifically than before, linear regression models estimate the conditional mean of $Y$ given $\boldsymbol{X}$ by assuming this conditional mean is a **linear combination of the feature variables**. 
 
-Suppose for a moment that we did not know the above **true** probability model, or even the more specificly the regression function. Instead, all we had was some data, $(x_i, y_i)$ for $i = 1, 2, \ldots, n$.
+Suppose for a moment that we did not know the above **true** probability model, or even the more specifically the regression function. Instead, all we had was some data, $(x_i, y_i)$ for $i = 1, 2, \ldots, n$.
 
 
 
@@ -751,7 +751,7 @@ mlr_trn = sim_mlr_data[mlr_trn_idx, ]
 mlr_tst = sim_mlr_data[-mlr_trn_idx, ]
 ```
 
-Here we randomly select 80% of the rows of the full data, and store these indicies as `mlr_trn_idx`. We then create the `mlr_trn` and `mlr_tst` datasets by either selecting or anti-selecting these rows from the original dataset.
+Here we randomly select 80% of the rows of the full data, and store these indices as `mlr_trn_idx`. We then create the `mlr_trn` and `mlr_tst` datasets by either selecting or anti-selecting these rows from the original dataset.
 
 
 ```r
@@ -1183,7 +1183,7 @@ map_dbl(dmnd_mod_val_pred, calc_rmse, actual = dmnd_val$price)
 ## [1] 1583.558 1517.080 1634.396 1350.659
 ```
 
-It looks like model `dmnd_mod_4_est` achieves the lowest validation error. We re-fit this model, then repot the test RMSE.
+It looks like model `dmnd_mod_4_est` achieves the lowest validation error. We re-fit this model, then report the test RMSE.
 
 
 ```r
@@ -1218,75 +1218,16 @@ grid()
 Some things to consider:
 
 - Could you use the predicted versus actual plot to assist in selecting a model with the validation data?
+- Note that the model we have chosen is not necessarily the "best" model. It is simply the model with the lowest validation RMSE. This is currently a very simplistic analysis.
 - Can you improve this model? Would a log transform of price help?
-
-***
-
-## Example: Fuel Efficiency Data
-
-- TODO: This section is still being worked on. Should be updated soon.
-
-
-```r
-# load data
-mpg = ggplot2::mpg
-```
-
-
-```r
-# data prep
-mpg = mpg %>% 
-  select(-manufacturer, -model) %>% 
-  mutate_if(is.character, as_factor) %>% 
-  mutate(cyl = as_factor(cyl))
-```
-
-
-
-```r
-# test-train split
-mpg_trn_idx = sample(nrow(mpg), size = 0.8 * nrow(mpg))
-mpg_trn = mpg[mpg_trn_idx, ]
-mpg_tst = mpg[-mpg_trn_idx, ]
-```
-
-
-```r
-# estimation-validation split
-mpg_est_idx = sample(nrow(mpg_trn), size = 0.8 * nrow(mpg_trn))
-mpg_est = mpg_trn[mpg_est_idx, ]
-mpg_val = mpg_trn[-mpg_est_idx, ]
-```
-
-
-```r
-# check data
-head(mpg_trn, n = 10)
-```
-
-```
-## # A tibble: 10 x 9
-##    displ  year cyl   trans      drv     cty   hwy fl    class  
-##    <dbl> <int> <fct> <fct>      <fct> <int> <int> <fct> <fct>  
-##  1   3    2008 6     auto(l5)   4        17    22 d     suv    
-##  2   6    2008 8     auto(l4)   r        12    17 r     suv    
-##  3   4.7  2008 8     manual(m6) 4        12    16 r     pickup 
-##  4   5.7  1999 8     manual(m6) r        16    26 p     2seater
-##  5   4.7  1999 8     auto(l4)   4        14    17 r     suv    
-##  6   4.7  2008 8     auto(l5)   4        14    17 r     suv    
-##  7   4.6  1999 8     manual(m5) 4        13    16 r     pickup 
-##  8   4.7  2008 8     auto(l5)   4        14    19 r     pickup 
-##  9   2.5  2008 4     auto(s4)   4        20    27 r     compact
-## 10   2.7  1999 4     auto(l4)   4        16    20 r     suv
-```
 
 ***
 
 ## Example: Credit Card Data
 
-- TODO: This section is still being worked on. Should be updated soon.
+Suppose you work for a small local bank, perhaps a credit union, that has a credit card product offering. For years, you relied on credit agencies to provide a rating of your customer's credit, however, this costs your bank money. One day, you realize that it might be possible to reverse engineer your customers' (and thus potential customers) credit rating based on the credit ratings that you already have already purchase, as well as the demographic and credit card information that you already have, such as age, education level, credit limit, etc. (We make no comment on the legality or ethics of this idea. Consider these before using at your own risk.)
 
-<!-- - TODO: setup: local bank doesn't want to pay for credit ratings -->
+So long as you can estimate customers' credit rating with a reasonable error, you could stop buying the ratings from an agency. Effectively, you will have created your own rating.
 
 
 ```r
@@ -1294,12 +1235,17 @@ head(mpg_trn, n = 10)
 crdt = as_tibble(ISLR::Credit)
 ```
 
+To perform this analysis, we will use the `Credit` data form the `ISLR` package. Note: **this is not real data.** It has been simulated.
+
 
 ```r
 # data prep
 crdt = crdt %>% 
-  select(-ID)
+  select(-ID) %>% 
+  select(-Rating, everything())
 ```
+
+We remove the `ID` variable as it should have no predictive power. We also move the `Rating` variable to the last column with a clever `dplyr` trick. This is in no way necessary, but is useful in creating some plots.
 
 
 ```r
@@ -1317,6 +1263,8 @@ crdt_est = crdt_trn[crdt_est_idx, ]
 crdt_val = crdt_trn[-crdt_est_idx, ]
 ```
 
+After train-test and estimation-validation splitting the data, we look at the train data.
+
 
 ```r
 # check data
@@ -1325,50 +1273,118 @@ head(crdt_trn, n = 10)
 
 ```
 ## # A tibble: 10 x 11
-##    Income Limit Rating Cards   Age Education Gender Student Married Ethnicity
-##     <dbl> <int>  <int> <int> <int>     <int> <fct>  <fct>   <fct>   <fct>    
-##  1   28.9  2733    210     5    43        16 " Mal… No      Yes     Asian    
-##  2   63.8  7530    515     1    56        12 " Mal… No      Yes     Caucasian
-##  3   63.5  8100    581     2    50        17 "Fema… No      Yes     Caucasian
-##  4   58.8  7402    538     2    81        12 "Fema… No      Yes     Asian    
-##  5   33.7  6196    450     6    55         9 "Fema… No      No      Caucasian
-##  6   75.4  3874    298     3    41        14 "Fema… No      Yes     Asian    
-##  7   55.2  5352    385     4    50        17 "Fema… No      Yes     Caucasian
-##  8   27.8  3807    301     4    35         8 "Fema… No      Yes     African …
-##  9   53.3  2860    214     1    84        10 " Mal… No      Yes     Caucasian
-## 10   36.5  6386    469     4    79         6 "Fema… No      Yes     Caucasian
-## # … with 1 more variable: Balance <int>
+##    Income Limit Cards   Age Education Gender Student Married Ethnicity Balance
+##     <dbl> <int> <int> <int>     <int> <fct>  <fct>   <fct>   <fct>       <int>
+##  1   62.6  7056     1    84        11 "Fema… No      No      Caucasian     904
+##  2  128.   6982     2    78        11 "Fema… No      Yes     Caucasian     250
+##  3   31.0  2863     2    66        17 " Mal… Yes     Yes     Asian         415
+##  4   54.3  3063     3    59         8 "Fema… Yes     No      Caucasian     269
+##  5  102.   8029     2    84        11 " Mal… No      Yes     Caucasian     849
+##  6   28.3  4391     2    29        10 "Fema… No      No      Caucasian     453
+##  7  152.  12066     4    41        12 "Fema… No      Yes     Asian        1779
+##  8   44.2  5441     1    32        12 " Mal… No      Yes     Caucasian     607
+##  9  122.  10673     3    54        16 " Mal… No      No      African …    1573
+## 10  160.  10748     2    69        17 " Mal… No      No      Caucasian    1192
+## # … with 1 more variable: Rating <int>
 ```
 
-- TODO: `skimr::skim(crdt_trn)`, `str(crdt_trn)`, `View(crdt_trn)`
+To get a better "look" at the data, consider running the following:
+
+- `skimr::skim(crdt_trn)`
+- `str(crdt_trn)`
+- `View(crdt_trn)`
+
+We also create a pairs plot.
+
+<img src="06-linear-regression_files/figure-html/unnamed-chunk-72-1.png" width="1152" style="display: block; margin: auto;" />
+
+We immediately notice three variables that have a strong correlation with `Rating`: `Income`, `Limit`, and `Balance`. Based on this, we evaluate five candidate models.
 
 
 ```r
-crdt_trn %>% 
-  ggplot(aes(x = Rating)) +
-  geom_histogram(bins = 20)
+crdt_mod_0_est = lm(Rating ~ 1, data = crdt_est)
+crdt_mod_1_est = lm(Rating ~ Limit, data = crdt_est)
+crdt_mod_2_est = lm(Rating ~ Limit + Income + Balance, data = crdt_est)
+crdt_mod_3_est = lm(Rating ~ ., data = crdt_est)
+crdt_mod_4_est = step(lm(Rating ~ . ^ 2, data = crdt_est), trace = FALSE)
 ```
-
-<img src="06-linear-regression_files/figure-html/unnamed-chunk-77-1.png" width="672" style="display: block; margin: auto;" />
 
 
 ```r
-mod = lm(formula = Rating ~ ., data = crdt_trn)
-sqrt(mean((predict(mod, crdt_tst) - crdt_tst$Rating) ^ 2))
+crdt_mod_list = list(
+  crdt_mod_0_est,
+  crdt_mod_1_est,
+  crdt_mod_2_est,
+  crdt_mod_3_est,
+  crdt_mod_4_est
+)
+```
+
+
+```r
+crdt_mod_val_pred = map(crdt_mod_list, predict, crdt_val)
+map_dbl(crdt_mod_val_pred, calc_rmse, actual = crdt_val$Rating) 
 ```
 
 ```
-## [1] 9.998283
+## [1] 166.29754  13.39134  12.86612  10.70981  10.55483
 ```
 
+From these results, it appears that the additive model, including all terms performs best. We move forward with this model.
+
+
+```r
+final_credit_model = lm(Rating ~ ., data = crdt_trn)
+sqrt(mean((predict(final_credit_model, crdt_tst) - crdt_tst$Rating) ^ 2))
+```
+
+```
+## [1] 8.974805
+```
+
+It seems that on average, this model errors by about 10 credit points.
+
+
+```r
+range(crdt_trn$Rating)
+```
+
+```
+## [1]  93 982
+```
 
 ```r
 sd(crdt_trn$Rating)
 ```
 
 ```
-## [1] 153.821
+## [1] 159.527
 ```
+
+Given the range of possible ratings, this seem pretty good! What do you think?
+
+
+```r
+plot(
+  x = crdt_tst$Rating,
+  y = predict(final_credit_model, crdt_tst),
+  pch = 20, col = "darkgrey",
+  # xlim = c(0, 25000), ylim = c(0, 25000),
+  main = "Credit: Predicted vs Actual, Test Data",
+  xlab = "Actual",
+  ylab = "Predicted"
+)
+abline(a = 0, b = 1, lwd = 2)
+grid()
+```
+
+<img src="06-linear-regression_files/figure-html/unnamed-chunk-78-1.png" width="576" style="display: block; margin: auto;" />
+
+The predicted versus actual plot almost looks too good to be true! Wow! (Oh, wait. This was simulated data...)
+
+In summary, if this data were real, we might have an interesting result!
+
+Do note, that both this example and the previous should not be considered **data analyses**, but instead, examples that reinforce how to use the validation and test sets. As part of a true analysis, we will need to be much more careful about some of our decision. More on this later! Up next: nonparametric regression methods.
 
 ***
 
