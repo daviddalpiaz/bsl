@@ -1026,6 +1026,7 @@ We remove the `ID` variable as it should have no predictive power. We also move 
 
 ```{r}
 # test-train split
+set.seed(1)
 crdt_trn_idx = sample(nrow(crdt), size = 0.8 * nrow(crdt))
 crdt_trn = crdt[crdt_trn_idx, ]
 crdt_tst = crdt[-crdt_trn_idx, ]

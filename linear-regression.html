@@ -1065,9 +1065,10 @@ X_6 = 0.6]
 <a class="sourceLine" id="cb143-4" data-line-number="4"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Rating, <span class="kw">everything</span>())</a></code></pre></div>
 <p>We remove the <code>ID</code> variable as it should have no predictive power. We also move the <code>Rating</code> variable to the last column with a clever <code>dplyr</code> trick. This is in no way necessary, but is useful in creating some plots.</p>
 <div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" data-line-number="1"><span class="co"># test-train split</span></a>
-<a class="sourceLine" id="cb144-2" data-line-number="2">crdt_trn_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(crdt), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(crdt))</a>
-<a class="sourceLine" id="cb144-3" data-line-number="3">crdt_trn =<span class="st"> </span>crdt[crdt_trn_idx, ]</a>
-<a class="sourceLine" id="cb144-4" data-line-number="4">crdt_tst =<span class="st"> </span>crdt[<span class="op">-</span>crdt_trn_idx, ]</a></code></pre></div>
+<a class="sourceLine" id="cb144-2" data-line-number="2"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb144-3" data-line-number="3">crdt_trn_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(crdt), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(crdt))</a>
+<a class="sourceLine" id="cb144-4" data-line-number="4">crdt_trn =<span class="st"> </span>crdt[crdt_trn_idx, ]</a>
+<a class="sourceLine" id="cb144-5" data-line-number="5">crdt_tst =<span class="st"> </span>crdt[<span class="op">-</span>crdt_trn_idx, ]</a></code></pre></div>
 <div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" data-line-number="1"><span class="co"># estimation-validation split</span></a>
 <a class="sourceLine" id="cb145-2" data-line-number="2">crdt_est_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(crdt_trn), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(crdt_trn))</a>
 <a class="sourceLine" id="cb145-3" data-line-number="3">crdt_est =<span class="st"> </span>crdt_trn[crdt_est_idx, ]</a>
@@ -1078,16 +1079,16 @@ X_6 = 0.6]
 <pre><code>## # A tibble: 10 x 11
 ##    Income Limit Cards   Age Education Gender Student Married Ethnicity Balance
 ##     &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;     &lt;int&gt; &lt;fct&gt;  &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;       &lt;int&gt;
-##  1   62.6  7056     1    84        11 &quot;Fema… No      No      Caucasian     904
-##  2  128.   6982     2    78        11 &quot;Fema… No      Yes     Caucasian     250
-##  3   31.0  2863     2    66        17 &quot; Mal… Yes     Yes     Asian         415
-##  4   54.3  3063     3    59         8 &quot;Fema… Yes     No      Caucasian     269
-##  5  102.   8029     2    84        11 &quot; Mal… No      Yes     Caucasian     849
-##  6   28.3  4391     2    29        10 &quot;Fema… No      No      Caucasian     453
-##  7  152.  12066     4    41        12 &quot;Fema… No      Yes     Asian        1779
-##  8   44.2  5441     1    32        12 &quot; Mal… No      Yes     Caucasian     607
-##  9  122.  10673     3    54        16 &quot; Mal… No      No      African …    1573
-## 10  160.  10748     2    69        17 &quot; Mal… No      No      Caucasian    1192
+##  1  183.  13913     4    98        17 &quot; Mal… No      Yes     Caucasian    1999
+##  2   35.7  2880     2    35        15 &quot; Mal… No      No      African …       0
+##  3  123.   8376     2    89        17 &quot; Mal… Yes     No      African …    1259
+##  4   20.8  2672     1    70        18 &quot;Fema… No      No      African …       0
+##  5   39.1  5565     4    48        18 &quot;Fema… No      Yes     Caucasian     772
+##  6   36.5  3806     2    52        13 &quot; Mal… No      No      African …     188
+##  7   45.1  3762     3    80         8 &quot; Mal… No      Yes     Caucasian      70
+##  8   43.5  2906     4    69        11 &quot; Mal… No      No      Caucasian       0
+##  9   23.1  3476     2    50        15 &quot;Fema… No      No      Caucasian     209
+## 10   53.2  4943     2    46        16 &quot;Fema… No      Yes     Asian         382
 ## # … with 1 more variable: Rating &lt;int&gt;</code></pre>
 <p>To get a better “look” at the data, consider running the following:</p>
 <ul>
@@ -1112,16 +1113,16 @@ X_6 = 0.6]
 <a class="sourceLine" id="cb149-7" data-line-number="7">)</a></code></pre></div>
 <div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" data-line-number="1">crdt_mod_val_pred =<span class="st"> </span><span class="kw">map</span>(crdt_mod_list, predict, crdt_val)</a>
 <a class="sourceLine" id="cb150-2" data-line-number="2"><span class="kw">map_dbl</span>(crdt_mod_val_pred, calc_rmse, <span class="dt">actual =</span> crdt_val<span class="op">$</span>Rating) </a></code></pre></div>
-<pre><code>## [1] 166.29754  13.39134  12.86612  10.70981  10.55483</code></pre>
+<pre><code>## [1] 140.080591  12.244099  12.333767   9.890607  11.575484</code></pre>
 <p>From these results, it appears that the additive model, including all terms performs best. We move forward with this model.</p>
 <div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" data-line-number="1">final_credit_model =<span class="st"> </span><span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> crdt_trn)</a>
 <a class="sourceLine" id="cb152-2" data-line-number="2"><span class="kw">sqrt</span>(<span class="kw">mean</span>((<span class="kw">predict</span>(final_credit_model, crdt_tst) <span class="op">-</span><span class="st"> </span>crdt_tst<span class="op">$</span>Rating) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</a></code></pre></div>
-<pre><code>## [1] 8.974805</code></pre>
+<pre><code>## [1] 10.47727</code></pre>
 <p>It seems that on average, this model errors by about 10 credit points.</p>
 <div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" data-line-number="1"><span class="kw">range</span>(crdt_trn<span class="op">$</span>Rating)</a></code></pre></div>
 <pre><code>## [1]  93 982</code></pre>
 <div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" data-line-number="1"><span class="kw">sd</span>(crdt_trn<span class="op">$</span>Rating)</a></code></pre></div>
-<pre><code>## [1] 159.527</code></pre>
+<pre><code>## [1] 157.5897</code></pre>
 <p>Given the range of possible ratings, this seem pretty good! What do you think?</p>
 <div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" data-line-number="1"><span class="kw">plot</span>(</a>
 <a class="sourceLine" id="cb158-2" data-line-number="2">  <span class="dt">x =</span> crdt_tst<span class="op">$</span>Rating,</a>

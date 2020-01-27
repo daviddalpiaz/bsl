@@ -1250,6 +1250,7 @@ We remove the `ID` variable as it should have no predictive power. We also move 
 
 ```r
 # test-train split
+set.seed(1)
 crdt_trn_idx = sample(nrow(crdt), size = 0.8 * nrow(crdt))
 crdt_trn = crdt[crdt_trn_idx, ]
 crdt_tst = crdt[-crdt_trn_idx, ]
@@ -1275,16 +1276,16 @@ head(crdt_trn, n = 10)
 ## # A tibble: 10 x 11
 ##    Income Limit Cards   Age Education Gender Student Married Ethnicity Balance
 ##     <dbl> <int> <int> <int>     <int> <fct>  <fct>   <fct>   <fct>       <int>
-##  1   62.6  7056     1    84        11 "Fema… No      No      Caucasian     904
-##  2  128.   6982     2    78        11 "Fema… No      Yes     Caucasian     250
-##  3   31.0  2863     2    66        17 " Mal… Yes     Yes     Asian         415
-##  4   54.3  3063     3    59         8 "Fema… Yes     No      Caucasian     269
-##  5  102.   8029     2    84        11 " Mal… No      Yes     Caucasian     849
-##  6   28.3  4391     2    29        10 "Fema… No      No      Caucasian     453
-##  7  152.  12066     4    41        12 "Fema… No      Yes     Asian        1779
-##  8   44.2  5441     1    32        12 " Mal… No      Yes     Caucasian     607
-##  9  122.  10673     3    54        16 " Mal… No      No      African …    1573
-## 10  160.  10748     2    69        17 " Mal… No      No      Caucasian    1192
+##  1  183.  13913     4    98        17 " Mal… No      Yes     Caucasian    1999
+##  2   35.7  2880     2    35        15 " Mal… No      No      African …       0
+##  3  123.   8376     2    89        17 " Mal… Yes     No      African …    1259
+##  4   20.8  2672     1    70        18 "Fema… No      No      African …       0
+##  5   39.1  5565     4    48        18 "Fema… No      Yes     Caucasian     772
+##  6   36.5  3806     2    52        13 " Mal… No      No      African …     188
+##  7   45.1  3762     3    80         8 " Mal… No      Yes     Caucasian      70
+##  8   43.5  2906     4    69        11 " Mal… No      No      Caucasian       0
+##  9   23.1  3476     2    50        15 "Fema… No      No      Caucasian     209
+## 10   53.2  4943     2    46        16 "Fema… No      Yes     Asian         382
 ## # … with 1 more variable: Rating <int>
 ```
 
@@ -1327,7 +1328,7 @@ map_dbl(crdt_mod_val_pred, calc_rmse, actual = crdt_val$Rating)
 ```
 
 ```
-## [1] 166.29754  13.39134  12.86612  10.70981  10.55483
+## [1] 140.080591  12.244099  12.333767   9.890607  11.575484
 ```
 
 From these results, it appears that the additive model, including all terms performs best. We move forward with this model.
@@ -1339,7 +1340,7 @@ sqrt(mean((predict(final_credit_model, crdt_tst) - crdt_tst$Rating) ^ 2))
 ```
 
 ```
-## [1] 8.974805
+## [1] 10.47727
 ```
 
 It seems that on average, this model errors by about 10 credit points.
@@ -1358,7 +1359,7 @@ sd(crdt_trn$Rating)
 ```
 
 ```
-## [1] 159.527
+## [1] 157.5897
 ```
 
 Given the range of possible ratings, this seem pretty good! What do you think?
