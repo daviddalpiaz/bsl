@@ -131,7 +131,7 @@ $$
 
 What do linear models do? More specifically than before, linear regression models estimate the conditional mean of $Y$ given $\boldsymbol{X}$ by assuming this conditional mean is a **linear combination of the feature variables**. 
 
-Suppose for a moment that we did not know the above **true** probability model, or even the more specificly the regression function. Instead, all we had was some data, $(x_i, y_i)$ for $i = 1, 2, \ldots, n$.
+Suppose for a moment that we did not know the above **true** probability model, or even the more specifically the regression function. Instead, all we had was some data, $(x_i, y_i)$ for $i = 1, 2, \ldots, n$.
 
 ```{r, echo = FALSE}
 cubic_mean = function(x) {
@@ -673,7 +673,7 @@ mlr_trn = sim_mlr_data[mlr_trn_idx, ]
 mlr_tst = sim_mlr_data[-mlr_trn_idx, ]
 ```
 
-Here we randomly select 80% of the rows of the full data, and store these indicies as `mlr_trn_idx`. We then create the `mlr_trn` and `mlr_tst` datasets by either selecting or anti-selecting these rows from the original dataset.
+Here we randomly select 80% of the rows of the full data, and store these indices as `mlr_trn_idx`. We then create the `mlr_trn` and `mlr_tst` datasets by either selecting or anti-selecting these rows from the original dataset.
 
 ```{r}
 # estimation-validation split
@@ -970,7 +970,7 @@ dmnd_mod_val_pred = map(dmnd_mod_list, predict, dmnd_val)
 map_dbl(dmnd_mod_val_pred, calc_rmse, actual = dmnd_val$price) 
 ```
 
-It looks like model `dmnd_mod_4_est` achieves the lowest validation error. We re-fit this model, then repot the test RMSE.
+It looks like model `dmnd_mod_4_est` achieves the lowest validation error. We re-fit this model, then report the test RMSE.
 
 ```{r}
 dmnd_mod_4_trn = lm(price ~ poly(carat, degree = 2) + . - carat, data = dmnd_trn)
@@ -997,65 +997,32 @@ grid()
 Some things to consider:
 
 - Could you use the predicted versus actual plot to assist in selecting a model with the validation data?
+- Note that the model we have chosen is not necessarily the "best" model. It is simply the model with the lowest validation RMSE. This is currently a very simplistic analysis.
 - Can you improve this model? Would a log transform of price help?
-
-***
-
-## Example: Fuel Efficiency Data
-
-- TODO: This section is still being worked on. Should be updated soon.
-
-```{r}
-# load data
-mpg = ggplot2::mpg
-```
-
-```{r}
-# data prep
-mpg = mpg %>% 
-  select(-manufacturer, -model) %>% 
-  mutate_if(is.character, as_factor) %>% 
-  mutate(cyl = as_factor(cyl))
-```
-
-
-```{r}
-# test-train split
-mpg_trn_idx = sample(nrow(mpg), size = 0.8 * nrow(mpg))
-mpg_trn = mpg[mpg_trn_idx, ]
-mpg_tst = mpg[-mpg_trn_idx, ]
-```
-
-```{r}
-# estimation-validation split
-mpg_est_idx = sample(nrow(mpg_trn), size = 0.8 * nrow(mpg_trn))
-mpg_est = mpg_trn[mpg_est_idx, ]
-mpg_val = mpg_trn[-mpg_est_idx, ]
-```
-
-```{r}
-# check data
-head(mpg_trn, n = 10)
-```
 
 ***
 
 ## Example: Credit Card Data
 
-- TODO: This section is still being worked on. Should be updated soon.
+Suppose you work for a small local bank, perhaps a credit union, that has a credit card product offering. For years, you relied on credit agencies to provide a rating of your customer's credit, however, this costs your bank money. One day, you realize that it might be possible to reverse engineer your customers' (and thus potential customers) credit rating based on the credit ratings that you already have already purchase, as well as the demographic and credit card information that you already have, such as age, education level, credit limit, etc. (We make no comment on the legality or ethics of this idea. Consider these before using at your own risk.)
 
-<!-- - TODO: setup: local bank doesn't want to pay for credit ratings -->
+So long as you can estimate customers' credit rating with a reasonable error, you could stop buying the ratings from an agency. Effectively, you will have created your own rating.
 
 ```{r}
 # load data, coerce to tibble
 crdt = as_tibble(ISLR::Credit)
 ```
 
+To perform this analysis, we will use the `Credit` data form the `ISLR` package. Note: **this is not real data.** It has been simulated.
+
 ```{r}
 # data prep
 crdt = crdt %>% 
-  select(-ID)
+  select(-ID) %>% 
+  select(-Rating, everything())
 ```
+
+We remove the `ID` variable as it should have no predictive power. We also move the `Rating` variable to the last column with a clever `dplyr` trick. This is in no way necessary, but is useful in creating some plots.
 
 ```{r}
 # test-train split
@@ -1071,27 +1038,85 @@ crdt_est = crdt_trn[crdt_est_idx, ]
 crdt_val = crdt_trn[-crdt_est_idx, ]
 ```
 
+After train-test and estimation-validation splitting the data, we look at the train data.
+
 ```{r}
 # check data
 head(crdt_trn, n = 10)
 ```
 
-- TODO: `skimr::skim(crdt_trn)`, `str(crdt_trn)`, `View(crdt_trn)`
+To get a better "look" at the data, consider running the following:
+
+- `skimr::skim(crdt_trn)`
+- `str(crdt_trn)`
+- `View(crdt_trn)`
+
+We also create a pairs plot.
+
+```{r, fig.height = 12, fig.width = 12, echo = FALSE, warning = FALSE, message = FALSE}
+GGally::ggpairs(crdt_trn, progress = FALSE)
+```
+
+We immediately notice three variables that have a strong correlation with `Rating`: `Income`, `Limit`, and `Balance`. Based on this, we evaluate five candidate models.
 
 ```{r}
-crdt_trn %>% 
-  ggplot(aes(x = Rating)) +
-  geom_histogram(bins = 20)
+crdt_mod_0_est = lm(Rating ~ 1, data = crdt_est)
+crdt_mod_1_est = lm(Rating ~ Limit, data = crdt_est)
+crdt_mod_2_est = lm(Rating ~ Limit + Income + Balance, data = crdt_est)
+crdt_mod_3_est = lm(Rating ~ ., data = crdt_est)
+crdt_mod_4_est = step(lm(Rating ~ . ^ 2, data = crdt_est), trace = FALSE)
 ```
 
 ```{r}
-mod = lm(formula = Rating ~ ., data = crdt_trn)
-sqrt(mean((predict(mod, crdt_tst) - crdt_tst$Rating) ^ 2))
+crdt_mod_list = list(
+  crdt_mod_0_est,
+  crdt_mod_1_est,
+  crdt_mod_2_est,
+  crdt_mod_3_est,
+  crdt_mod_4_est
+)
 ```
 
 ```{r}
+crdt_mod_val_pred = map(crdt_mod_list, predict, crdt_val)
+map_dbl(crdt_mod_val_pred, calc_rmse, actual = crdt_val$Rating) 
+```
+
+From these results, it appears that the additive model, including all terms performs best. We move forward with this model.
+
+```{r}
+final_credit_model = lm(Rating ~ ., data = crdt_trn)
+sqrt(mean((predict(final_credit_model, crdt_tst) - crdt_tst$Rating) ^ 2))
+```
+
+It seems that on average, this model errors by about 10 credit points.
+
+```{r}
+range(crdt_trn$Rating)
 sd(crdt_trn$Rating)
 ```
+
+Given the range of possible ratings, this seem pretty good! What do you think?
+
+```{r, fig.height = 6, fig.width = 6}
+plot(
+  x = crdt_tst$Rating,
+  y = predict(final_credit_model, crdt_tst),
+  pch = 20, col = "darkgrey",
+  # xlim = c(0, 25000), ylim = c(0, 25000),
+  main = "Credit: Predicted vs Actual, Test Data",
+  xlab = "Actual",
+  ylab = "Predicted"
+)
+abline(a = 0, b = 1, lwd = 2)
+grid()
+```
+
+The predicted versus actual plot almost looks too good to be true! Wow! (Oh, wait. This was simulated data...)
+
+In summary, if this data were real, we might have an interesting result!
+
+Do note, that both this example and the previous should not be considered **data analyses**, but instead, examples that reinforce how to use the validation and test sets. As part of a true analysis, we will need to be much more careful about some of our decision. More on this later! Up next: nonparametric regression methods.
 
 ***
 
