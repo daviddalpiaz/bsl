@@ -71,8 +71,7 @@ Note that 2.66 is **not a statistic**. It is the **value** of a statistic given 
 
 ## Estimators
 
-Estimators are just statistics with a purpose, that is, estimators are statistics that attempt to estimate some quantity of interest, usually some parameter. Like statistics, estimators are functions of data that output values, which we call estimates.
-
+Estimators are just statistics with a purpose, that is, estimators are statistics that attempt to estimate some quantity of interest, usually some parameter. (In other words, *learn* from data.) Like statistics, estimators are functions of data that output values, which we call estimates.
 
 ### Properties
 
