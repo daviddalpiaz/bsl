@@ -6,7 +6,7 @@
 
 ***
 
-This chapter will discuss linear regression models, but for a very specific purpose: using linear regression models to make **predictions**.
+This chapter will discuss **linear regression** models, but for a very specific purpose: using linear regression models to make **predictions**.
 
 Specifically, we will discuss:
 
