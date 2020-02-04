@@ -9,6 +9,9 @@ Imports:
   tidyverse,
   kableExtra,
   GGally,
-  ISLR
+  ISLR,
+  rpart,
+  rpart.plot,
+  caret
 Remotes: 
   rstudio/bookdown
