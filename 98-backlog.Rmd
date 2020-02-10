@@ -25,6 +25,11 @@ Why are we so darn focused on **means**?
 
 - https://atrebas.github.io/post/2019-01-15-2018-learning/
 - Don't load previous worksapce. (Screenshot of this option in RStudio.)
+- How do we make prediction **intervals**?
+- What is **quantile regression**?
+- How do we detect and deal with **outliers**?
+  - In response versus features?
+  - At train time versus test time?
 
 ## Source
 

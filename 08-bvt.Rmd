@@ -1,8 +1,16 @@
 # Bias–Variance Tradeoff
 
-```{r bvt_opts, include = FALSE}
-knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center", cache = TRUE, autodep = TRUE)
 ```
+
+***
+
+This chapter will begin to dig into some theoretical details of estimating the true regression function.  Don't fret if this presentation seems overwhelming. Next chapter we will review some general concepts about regression before moving on to classification.
+
+- TODO: Proofread for technical and notational correctness.
+
+***
 
 Consider the general regression setup where we are given a random pair $(X, Y) \in \mathbb{R}^p \times \mathbb{R}$. We would like to "predict" $Y$ with some function of $X$, say, $f(X)$.
 
@@ -26,14 +34,13 @@ $$
 
 Minimizing the right-hand side is much easier, as it simply amounts to minimizing the inner expectation with respect to $Y \mid X$, essentially minimizing the risk pointwise, for each $x$.
 
-It turns out, that the risk is minimized by the conditional mean of $Y$ given $X$,
+It turns out, that the risk is minimized by setting $f(x)$ to be equal the conditional mean of $Y$ given $X$,
 
 $$
 f(x) = \mathbb{E}(Y \mid X = x)
 $$
 
-which we call the **regression function**.
-
+which we call the **regression function**. (Note that in this chapter, we will refer to $f(x)$ as the regression function instead of $\mu(x)$ for unimportant and arbitrary reasons.)
 
 Note that the choice of squared error loss is somewhat arbitrary. Suppose instead we chose absolute error loss.
 
@@ -41,7 +48,7 @@ $$
 L(Y, f(X)) \triangleq | Y - f(X) | 
 $$
 
-The risk would then be minimized by the conditional median.
+The risk would then be minimized setting $f(x)$ equal to the conditional median.
 
 $$
 f(x) = \text{median}(Y \mid X = x)
@@ -564,8 +571,10 @@ We'll use the empirical results of our simulations to estimate these quantities.
 To estimate the mean squared error of our predictions, we'll use
 
 $$
-\widehat{\text{MSE}}\left(f(0.90), \hat{f}_k(0.90)\right) = \frac{1}{n_{\texttt{sims}}}\sum_{i = 1}^{n_{\texttt{sims}}} \left(f(0.90) - \hat{f}_k(0.90) \right)^2
+\widehat{\text{MSE}}\left(f(0.90), \hat{f}_k(0.90)\right) = \frac{1}{n_{\texttt{sims}}}\sum_{i = 1}^{n_{\texttt{sims}}} \left(f(0.90) - \hat{f}_k^{[i]}(0.90) \right)^2
 $$
+
+where $\hat{f}_k^{[i]}(0.90)$ is the estimate of $f(0.90)$ using the $i$-th from the polynomial degree $k$ model.
 
 We also write an accompanying `R` function.
 
@@ -578,7 +587,7 @@ get_mse = function(truth, estimate) {
 Similarly, for the bias of our predictions we use,
 
 $$
-\widehat{\text{bias}} \left(\hat{f}(0.90) \right)  = \frac{1}{n_{\texttt{sims}}}\sum_{i = 1}^{n_{\texttt{sims}}} \left(\hat{f}_k(0.90) \right) - f(0.90)
+\widehat{\text{bias}} \left(\hat{f}(0.90) \right)  = \frac{1}{n_{\texttt{sims}}}\sum_{i = 1}^{n_{\texttt{sims}}} \left(\hat{f}_k^{[i]}(0.90) \right) - f(0.90)
 $$
 
 And again, we write an accompanying `R` function.
@@ -592,7 +601,7 @@ get_bias = function(estimate, truth) {
 Lastly, for the variance of our predictions we have
 
 $$
-\widehat{\text{var}} \left(\hat{f}(0.90) \right) = \frac{1}{n_{\texttt{sims}}}\sum_{i = 1}^{n_{\texttt{sims}}} \left(\hat{f}_k(0.90) - \frac{1}{n_{\texttt{sims}}}\sum_{i = 1}^{n_{\texttt{sims}}}\hat{f}_k(0.90) \right)^2
+\widehat{\text{var}} \left(\hat{f}(0.90) \right) = \frac{1}{n_{\texttt{sims}}}\sum_{i = 1}^{n_{\texttt{sims}}} \left(\hat{f}_k^{[i]}(0.90) - \frac{1}{n_{\texttt{sims}}}\sum_{i = 1}^{n_{\texttt{sims}}}\hat{f}_k^{[i]}(0.90) \right)^2 
 $$
 
 While there is already `R` function for variance, the following is more appropriate in this situation.
@@ -651,7 +660,7 @@ $$
 Then, since least squares estimation is unbiased, importantly,
 
 $$
-\mathbb{E}[\hat{\beta}_d] = \beta_d = 0
+\mathbb{E}\left[\hat{\beta}_d\right] = \beta_d = 0
 $$
 
 for $d = 3, 4, \ldots 9$, we have
@@ -782,6 +791,10 @@ the expected prediction error. (In practice we prefer RMSE to MSE for comparing 
 
 How good is this estimate? Well, if $\mathcal{D}$ is a random sample from $(X, Y)$, and $\texttt{tst}$ are randomly sampled observations randomly sampled from $i = 1, 2, \ldots, n$, then it is a reasonable estimate. However, it is rather variable due to the randomness of selecting the observations for the test set. How variable? It turns out, pretty variable. While it's a justified estimate, eventually we'll introduce cross-validation as a procedure better suited to performing this estimation to select a model.
 
-## Reproducibility
+***
 
-The R Markdown file for this chapter can be found [**here**](05-bvt.Rmd). The file was created using `R` version `r paste0(version$major, "." ,version$minor)`.
+## Source
+
+- `R` Markdown: [`08-bvt.Rmd`](08-bvt.Rmd)
+
+***

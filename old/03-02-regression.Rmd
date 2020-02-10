@@ -487,33 +487,6 @@ tibble(k = c(25, 5, 1),
   kable_styling("striped", full_width = FALSE)
 ```
 
-## Procedure
-
-- TODO: Look at data
-- TODO: Pick candiate models
-- TODO: Tune / train models
-- TODO: Pick "best" model
-    - based on validation RMSE (note the issues with this)
-- TODO: Use best model / report test metrics
-
-## Data Splitting
-
-- TODO: want to generalize to unseen data
-- TODO: for now, all variables should either be numeric, or factor
-
-- TODO: Training (Train) Data
-- TODO: Testing (Test) Data
-- TODO: Estimation Data
-- TODO: Validation Data
-    - https://en.wikipedia.org/wiki/Infinite_monkey_theorem
-
-## Metrics
-
-- TODO: RMSE
-- TODO: MAE
-- TODO: MAPE
-    - https://en.wikipedia.org/wiki/Mean_absolute_percentage_error
-    - but probably don't use
 
 ## Model Complexity
 
@@ -533,12 +506,6 @@ tibble(k = c(25, 5, 1),
 - TODO: more features = more complex
 - TODO: how do the three models add additional features?
 
-
-## Example Analysis
-
-- TODO: Diamonds analysis
-
-- TODO: model.matrix()
 
 ## MISC TODOS
 
