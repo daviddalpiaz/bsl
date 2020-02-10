@@ -24,14 +24,14 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2020-02-04" />
+<meta name="date" content="2020-02-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="nonparametric-regression.html"/>
+<link rel="prev" href="regression-overview.html"/>
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -244,11 +244,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.5" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#example-credit-card-data-1"><i class="fa fa-check"></i><b>7.5</b> Example: Credit Card Data</a></li>
 <li class="chapter" data-level="7.6" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#source-6"><i class="fa fa-check"></i><b>7.6</b> Source</a></li>
 </ul></li>
+<li class="chapter" data-level="8" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="8.1" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>8.1</b> Reducible and Irreducible Error</a></li>
+<li class="chapter" data-level="8.2" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>8.2</b> Bias-Variance Decomposition</a></li>
+<li class="chapter" data-level="8.3" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#simulation"><i class="fa fa-check"></i><b>8.3</b> Simulation</a></li>
+<li class="chapter" data-level="8.4" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>8.4</b> Estimating Expected Prediction Error</a></li>
+<li class="chapter" data-level="8.5" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#source-7"><i class="fa fa-check"></i><b>8.5</b> Source</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>9</b> Regression Overview</a><ul>
+<li class="chapter" data-level="9.1" data-path="regression-overview.html"><a href="regression-overview.html#source-8"><i class="fa fa-check"></i><b>9.1</b> Source</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="the-backlog.html"><a href="the-backlog.html"><i class="fa fa-check"></i><b>A</b> The Backlog</a><ul>
 <li class="chapter" data-level="A.1" data-path="the-backlog.html"><a href="the-backlog.html#sorted"><i class="fa fa-check"></i><b>A.1</b> Sorted</a></li>
 <li class="chapter" data-level="A.2" data-path="the-backlog.html"><a href="the-backlog.html#unsorted"><i class="fa fa-check"></i><b>A.2</b> Unsorted</a></li>
-<li class="chapter" data-level="A.3" data-path="the-backlog.html"><a href="the-backlog.html#source-7"><i class="fa fa-check"></i><b>A.3</b> Source</a></li>
+<li class="chapter" data-level="A.3" data-path="the-backlog.html"><a href="the-backlog.html#source-9"><i class="fa fa-check"></i><b>A.3</b> Source</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://daviddalpiaz.org" target="blank">&copy; 2020 David Dalpiaz</a></li>
@@ -292,9 +302,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><a href="https://atrebas.github.io/post/2019-01-15-2018-learning/" class="uri">https://atrebas.github.io/post/2019-01-15-2018-learning/</a></li>
 <li>Don’t load previous worksapce. (Screenshot of this option in RStudio.)</li>
+<li>How do we make prediction <strong>intervals</strong>?</li>
+<li>What is <strong>quantile regression</strong>?</li>
+<li>How do we detect and deal with <strong>outliers</strong>?
+<ul>
+<li>In response versus features?</li>
+<li>At train time versus test time?</li>
+</ul></li>
 </ul>
 </div>
-<div id="source-7" class="section level2">
+<div id="source-9" class="section level2">
 <h2><span class="header-section-number">A.3</span> Source</h2>
 <ul>
 <li><code>R</code> Markdown: <a href="98-backlog.Rmd"><code>98-backlog.Rmd</code></a></li>
@@ -308,7 +325,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="nonparametric-regression.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="regression-overview.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>
