@@ -440,12 +440,12 @@ set.seed(430)
 sim_data_1 = gen_sim_data(f)
 sim_data_2 = gen_sim_data(f)
 sim_data_3 = gen_sim_data(f)
-fit_0_1 = FNN::knn.reg(train = sim_data_1["x"], test = data.frame(x = grid), y = sim_data_1["y"], k = 5)$pred
-fit_0_2 = FNN::knn.reg(train = sim_data_2["x"], test = data.frame(x = grid), y = sim_data_2["y"], k = 5)$pred
-fit_0_3 = FNN::knn.reg(train = sim_data_3["x"], test = data.frame(x = grid), y = sim_data_3["y"], k = 5)$pred
-fit_9_1 = FNN::knn.reg(train = sim_data_1["x"], test = data.frame(x = grid), y = sim_data_1["y"], k = 100)$pred
-fit_9_2 = FNN::knn.reg(train = sim_data_2["x"], test = data.frame(x = grid), y = sim_data_2["y"], k = 100)$pred
-fit_9_3 = FNN::knn.reg(train = sim_data_3["x"], test = data.frame(x = grid), y = sim_data_3["y"], k = 100)$pred
+fit_0_1 = predict(caret::knnreg(y ~ x, data = sim_data_1, k = 5), data.frame(x = grid))
+fit_0_2 = predict(caret::knnreg(y ~ x, data = sim_data_2, k = 5), data.frame(x = grid))
+fit_0_3 = predict(caret::knnreg(y ~ x, data = sim_data_3, k = 5), data.frame(x = grid))
+fit_9_1 = predict(caret::knnreg(y ~ x, data = sim_data_1, k = 100), data.frame(x = grid))
+fit_9_2 = predict(caret::knnreg(y ~ x, data = sim_data_2, k = 100), data.frame(x = grid))
+fit_9_3 = predict(caret::knnreg(y ~ x, data = sim_data_3, k = 100), data.frame(x = grid))
 
 plot(y ~ x, data = sim_data_1, col = "grey", pch = 20, main = "Simulated Dataset 1")
 grid()
