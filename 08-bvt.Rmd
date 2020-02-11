@@ -251,18 +251,18 @@ g = function(x) {
 par(mgp = c(1.5, 1.5, 0)) 
 plot(x, g(x), ylim = c(0, 3), type = "l", lwd = 2,
      ylab = "Error", xlab = "",
-     main = "Error versus Model Complexity", col = "darkorange", 
+     main = "Error versus Model Flexibility", col = "darkorange", 
      axes = FALSE)
 grid()
 axis(1, labels = FALSE)
 axis(2, labels = FALSE)
 box()
-ylabels = list(bquote("Low" %<-% "Complexity" %->% "High"), 
+ylabels = list(bquote("Low" %<-% "Flexibility" %->% "High"), 
                bquote("High" %<-% "Bias" %->% "Low"),
                bquote("Low" %<-% "Variance" %->% "High"))
 mtext(do.call(expression, ylabels), side = 1, line = 2:4)
 curve(f, lty = 6, col = "dodgerblue", lwd = 3, add = TRUE)
-legend("bottomleft", c("(Expected) Test", "Train"), lty = c(6, 1), lwd = 3,
+legend("bottomleft", c("Validation", "Train"), lty = c(6, 1), lwd = 3,
        col = c("dodgerblue", "darkorange"))
 ```
 

@@ -24,7 +24,7 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2020-02-10" />
+<meta name="date" content="2020-02-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -252,7 +252,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#source-7"><i class="fa fa-check"></i><b>8.5</b> Source</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>9</b> Regression Overview</a><ul>
-<li class="chapter" data-level="9.1" data-path="regression-overview.html"><a href="regression-overview.html#source-8"><i class="fa fa-check"></i><b>9.1</b> Source</a></li>
+<li class="chapter" data-level="9.1" data-path="regression-overview.html"><a href="regression-overview.html#goal"><i class="fa fa-check"></i><b>9.1</b> Goal</a></li>
+<li class="chapter" data-level="9.2" data-path="regression-overview.html"><a href="regression-overview.html#strategy"><i class="fa fa-check"></i><b>9.2</b> Strategy</a></li>
+<li class="chapter" data-level="9.3" data-path="regression-overview.html"><a href="regression-overview.html#models"><i class="fa fa-check"></i><b>9.3</b> Models</a></li>
+<li class="chapter" data-level="9.4" data-path="regression-overview.html"><a href="regression-overview.html#model-flexibility"><i class="fa fa-check"></i><b>9.4</b> Model Flexibility</a></li>
+<li class="chapter" data-level="9.5" data-path="regression-overview.html"><a href="regression-overview.html#overfitting"><i class="fa fa-check"></i><b>9.5</b> Overfitting</a></li>
+<li class="chapter" data-level="9.6" data-path="regression-overview.html"><a href="regression-overview.html#bias-variance-tradeoff"><i class="fa fa-check"></i><b>9.6</b> Bias-Variance Tradeoff</a></li>
+<li class="chapter" data-level="9.7" data-path="regression-overview.html"><a href="regression-overview.html#source-8"><i class="fa fa-check"></i><b>9.7</b> Source</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="the-backlog.html"><a href="the-backlog.html"><i class="fa fa-check"></i><b>A</b> The Backlog</a><ul>
@@ -285,13 +291,139 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 9</span> Regression Overview</h1>
 <hr />
 <p>This chapter will provide an overview of the <strong>regression</strong> concepts that we have learned thus far. It will also serve to outline the general concepts of <strong>supervised learning</strong> which will also apply to our next task, <em>classification.</em></p>
+<p>The information here may eventually be merged into the previous chapter, but for now it is separated for clarify. (Also, much of this information already appears there.)</p>
 <hr />
+<div id="goal" class="section level2">
+<h2><span class="header-section-number">9.1</span> Goal</h2>
+<p>What is the goal of regression models in the context of machine learning? We can discuss it in two ways:</p>
 <ul>
-<li>TODO: Coming soon!</li>
+<li>Make <strong>predictions</strong> on <em>unseen data</em>.</li>
+<li>Estimate the <strong>regression function</strong>, which under squared error loss is the <em>conditional mean</em> of <span class="math inline">\(Y\)</span>, the response, given <span class="math inline">\(X\)</span>, the features.</li>
 </ul>
+<p>These goal are essentially the same. We want to fit a model that “generalizes” well, that is, works well on unseen data. To do this, we want to use a model of appropriate <strong>flexibility</strong> so as not to <strong>overfit</strong> to the train data. In other words, we want to train a models that learns the <strong>signal</strong>, the regression function, and not the <strong>noise</strong>, the random variation in the training data.</p>
+<p>In previous chapters we have formalized this goal a bit more mathematically, but for a general recap, we stick to more casual language.</p>
 <hr />
+</div>
+<div id="strategy" class="section level2">
+<h2><span class="header-section-number">9.2</span> Strategy</h2>
+<p>How do we find and train models that generalize well to unseen data? We generally follow these steps.</p>
+<ol style="list-style-type: decimal">
+<li><em>Split</em> the data in to <strong>training data</strong> and <strong>testing data</strong>.
+<ul>
+<li>Within the training data, we will do whatever we would.</li>
+<li>The testing data will never be used to make any decision that lead to the selection of a model.</li>
+<li>We often use 80% of the available data for training.</li>
+</ul></li>
+<li><em>Split</em> the training data into <strong>estimation data</strong> and <strong>validation data</strong>.
+<ul>
+<li>We often use 80% of the available data for estimation.</li>
+</ul></li>
+<li><em>Decide</em> on a set of <strong>candidate models</strong>.<br />
+</li>
+<li><em>Fit</em> (train) each candidate model to the <strong>estimation data</strong>.</li>
+<li><em>Evaluate</em> all candidate models fit to the estimation data based on their performance on the <strong>validation data</strong>.
+<ul>
+<li>Performance here is based on the ability of the model to predict on the validation data which was <strong>not</strong> used to train the models.</li>
+</ul></li>
+<li><em>Select</em> one of the candidate models based on the <strong>validation performance</strong>.</li>
+<li><em>Fit</em> the chosen model to the entire <strong>training dataset</strong>.</li>
+<li><em>Estimate</em> model performance using the <strong>test data</strong>.</li>
+</ol>
+<p>Note that we are using the <strong>validation data</strong> to <em>select</em> a model, while the <strong>test data</strong> is used to <em>estimate model performance</em>.</p>
+<p>**</p>
+</div>
+<div id="models" class="section level2">
+<h2><span class="header-section-number">9.3</span> Models</h2>
+<p>While there are many, many models that can be used for regression, we have focused on three <strong>families</strong> of models. We saw how each can be used to estimate the regression function. Importantly, each model family can be made more or less flexible to accommodate different datasets in order to find a model that predicts well.</p>
+<div id="linear-models" class="section level4">
+<h4><span class="header-section-number">9.3.0.1</span> Linear Models</h4>
+<p><strong>Linear models</strong> are a family of <strong>parametric</strong> models which assume that the regression function is a linear combination of the features. For example, with a single feature <span class="math inline">\(x\)</span>, we could assume</p>
+<p><span class="math display">\[
+\mu(x) = \beta_0 + \beta_1 x + \beta_2 x^2 + \beta_3 x^3 + \ldots + \beta_9 x^9
+\]</span></p>
+<p>Here, the <span class="math inline">\(\beta\)</span> coefficients are <em>model parameters</em> that are learned from the data via least squares or maximum likelihood. (Additionally, we could assume a conditional normal distribution with a constant variance, which would require estimating the <span class="math inline">\(\sigma\)</span> parameters. This is not necessary to estimate the mean.)</p>
+</div>
+<div id="k-nearest-neighbors-1" class="section level4">
+<h4><span class="header-section-number">9.3.0.2</span> k-Nearest Neighbors</h4>
+<p><strong>k-Nearest Neighbors</strong> models are a family of <strong>nonparametric models</strong> with a single <em>tuning parameter</em>, <span class="math inline">\(k\)</span>, the number of neighbors to use when estimating the regression function. We can also control which features are used when measuring distances.</p>
+</div>
+<div id="decision-trees-1" class="section level4">
+<h4><span class="header-section-number">9.3.0.3</span> Decision Trees</h4>
+<p><strong>Decision Tree</strong> models are a family of <strong>nonparametric models</strong> with a number of <em>tuning parameters</em>, but most notably, <code>cp</code>, the “complexity parameter” which indirectly controls the number of splits used to create neighborhoods of observations. We can also control which features are used when considering splits.</p>
+</div>
+</div>
+<div id="model-flexibility" class="section level2">
+<h2><span class="header-section-number">9.4</span> Model Flexibility</h2>
+<p>While we may not have explicitly stated this relationship, the plot below shows how train and validation “error” change as a function of model flexibility.</p>
+<p><img src="09-regression-overview_files/figure-html/unnamed-chunk-1-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>The “error” in this plot could be any reasonable error metric used, for example, RMSE. While here we are specifically discussing estimation and validation error, we more generally are discussing an error metric calculated on the same data used to train the model (estimation) and an error metric calculated on data <strong>not</strong> used to train the model, for example the validation data.</p>
+<p>The “line” and “curve” seen above are highly idealized, that is, you won’t see nice linear and quadratic trends in practice. However, you will see that <em>training error</em> <strong>decreases</strong> as <em>model flexibility</em> <strong>increases</strong>. (This is essentially one of the few use cases for actually calculating training error, to verify this relationship as a sanity check.) On the other hand, often we will see that <em>validation error</em> first <strong>decreases</strong>, then <strong>increases</strong> as <em>model flexibility</em> <strong>increases</strong>. (Sometimes you might see only an increase or decrease which would suggest you need to also try additional models with more or less flexibility.) While the validation “curve” is idealized as a “curve” that decrease then increases, in practice, it might be a bit more “wiggly” just due to the random nature of the validation split.</p>
+<p>How can we modify the flexibility of the models we have considered?</p>
+<div id="linear-models-1" class="section level4">
+<h4><span class="header-section-number">9.4.0.1</span> Linear Models</h4>
+<p>To increase the flexibility of linear models, add additional transformed features or simply add features.</p>
+<p>For example a model that assumes a quadratic mean function</p>
+<p><span class="math display">\[
+\mu_1(x) = \beta_0 + \beta_1 x + \beta_2 x ^ 2
+\]</span></p>
+<p>is more flexible than a model that assumes a linear mean function</p>
+<p><span class="math display">\[
+\mu_2(x) = \beta_0 + \beta_1 x
+\]</span></p>
+<p>The model that assumes a quadratic mean function <strong>can</strong> learn a linear mean function, but this added flexibility comes with a price. (Possible overfitting.)</p>
+<p>Similarly, a model that assumes the mean function is a function of two features</p>
+<p><span class="math display">\[
+\mu_1(x) = \beta_0 + \beta_1 x_1 + \beta_2 x_2
+\]</span></p>
+<p>is more flexible than a model that assumes the mean function is only a function of one of these features.</p>
+<p><span class="math display">\[
+\mu_2(x) = \beta_0 + \beta_1 x
+\]</span></p>
+</div>
+<div id="k-nearest-neighbors-2" class="section level4">
+<h4><span class="header-section-number">9.4.0.2</span> k-Nearest Neighbors</h4>
+<p>Given a set of feature variables, as <span class="math inline">\(k\)</span> increases, model flexibility <strong>decreases.</strong> (Note that adding and removing features does have an effect on model flexibility, generally adding flexibility with additional features, there are situations where adding features will decrease training error.)</p>
+</div>
+<div id="decision" class="section level4">
+<h4><span class="header-section-number">9.4.0.3</span> Decision</h4>
+<p>Given a set of feature variables, as <code>cp</code> increases, model flexibility <strong>decreases.</strong> (Note that adding and removing features does have an effect on model flexibility, generally adding flexibility with additional features, there are situations where adding features will decrease training error.)</p>
+</div>
+</div>
+<div id="overfitting" class="section level2">
+<h2><span class="header-section-number">9.5</span> Overfitting</h2>
+<p>Overfitting occurs when we have fit to not just the <strong>signal</strong> but also the <strong>noise.</strong> That is, a model performs too well on the training data.</p>
+<p>Let’s take a look at this visually.</p>
+<p><img src="09-regression-overview_files/figure-html/unnamed-chunk-5-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>In each of the plots above, the dashed black curve represents the true mean function of interest, in this case,</p>
+<p><span class="math display">\[
+\mu(x) = \sin(x)
+\]</span></p>
+<p>with points simulated about this mean according to a standard normal. (This is the noise is standard normal.)</p>
+<p>We see that the model with <span class="math inline">\(k = 1\)</span> has fit far too well to the training data. The estimated mean function, seen in green, goes through each training point. That is, there is no training error. This model is <strong>too flexible</strong> and is <strong>overfitting</strong>. We have learned <strong>both</strong> the signal and the noise, thus this model will predict poorly on new data.</p>
+<p>The model with <span class="math inline">\(k = 25\)</span> has fits the training data poorly. The estimated mean function, seen in red, does not match the true mean function well. The points are far from the estimated mean function. his model is <strong>too inflexible</strong> and is <strong>underfitting</strong>. It has learned neither the signal not the noise.</p>
+<p>The model with <span class="math inline">\(k = 5\)</span> seems like a reasonable in-between. Doesn’t seem to be chasing noise. Seems to reasonably approximate the true mean function.</p>
+<p>How do we assess over and underfitting in practice, when we don’t know the true mean function? We have to look at train and validation errors.</p>
+<ul>
+<li>Model that are probably <strong>underfitting</strong>: “Large” Train RMSE and a Validation RMSE larger than the smallest. The less flexible, the more probable the underfitting.</li>
+<li>Model that are probably <strong>overfitting</strong>: “Small” Train RMSE and a Validation RMSE larger than the smallest. The more flexible, the more probable the underfitting.</li>
+</ul>
+<p><img src="09-regression-overview_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>The further a model is to the <em>left</em> of this plot, the greater the chance it is <strong>underfit</strong>. The further a model is to the <em>right</em> of this plot, the greater the chance it is <strong>overfit</strong>.</p>
+</div>
+<div id="bias-variance-tradeoff" class="section level2">
+<h2><span class="header-section-number">9.6</span> Bias-Variance Tradeoff</h2>
+<p><strong>Why</strong> does changing the model flexibility influence the predictive performance of these models? The bias-variance tradeoff.</p>
+<p>As models <em>increase</em> in <strong>flexibility</strong>,</p>
+<ul>
+<li><strong>bias</strong> is <em>decreased</em></li>
+<li><strong>variance</strong> is <em>increased</em></li>
+</ul>
+<p>And together, the MSE is equal to the bias squared plus the variance.</p>
+<p>However, the rate at which the variance increases can be and generally is different than the rate at which the bias deceases. This is why we must validate our models. Essentially, by modifying the model complexity and validating the results, we are trying to find the right balance between bias and variance.</p>
+<hr />
+</div>
 <div id="source-8" class="section level2">
-<h2><span class="header-section-number">9.1</span> Source</h2>
+<h2><span class="header-section-number">9.7</span> Source</h2>
 <ul>
 <li><code>R</code> Markdown: <a href="09-regression-overview.Rmd"><code>09-regression-overview.Rmd</code></a></li>
 </ul>
