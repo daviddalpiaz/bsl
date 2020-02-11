@@ -209,7 +209,7 @@ $$
 \mu(x) = \sin(x)
 $$
 
-with points simulated about this mean according to a standard normal. (This is the noise is standard normal.)
+with points simulated about this mean according to a standard normal. (That is, the noise is standard normal.)
 
 We see that the model with $k = 1$ has fit far too well to the training data. The estimated mean function, seen in green, goes through each training point. That is, there is no training error. This model is **too flexible** and is **overfitting**. We have learned **both** the signal and the noise, thus this model will predict poorly on new data.
 
