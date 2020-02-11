@@ -400,7 +400,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display">\[
 \mu(x) = \sin(x)
 \]</span></p>
-<p>with points simulated about this mean according to a standard normal. (This is the noise is standard normal.)</p>
+<p>with points simulated about this mean according to a standard normal. (That is, the noise is standard normal.)</p>
 <p>We see that the model with <span class="math inline">\(k = 1\)</span> has fit far too well to the training data. The estimated mean function, seen in green, goes through each training point. That is, there is no training error. This model is <strong>too flexible</strong> and is <strong>overfitting</strong>. We have learned <strong>both</strong> the signal and the noise, thus this model will predict poorly on new data.</p>
 <p>The model with <span class="math inline">\(k = 25\)</span> has fits the training data poorly. The estimated mean function, seen in red, does not match the true mean function well. The points are far from the estimated mean function. his model is <strong>too inflexible</strong> and is <strong>underfitting</strong>. It has learned neither the signal not the noise.</p>
 <p>The model with <span class="math inline">\(k = 5\)</span> seems like a reasonable in-between. Doesn’t seem to be chasing noise. Seems to reasonably approximate the true mean function.</p>
