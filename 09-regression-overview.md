@@ -45,7 +45,7 @@ How do we find and train models that generalize well to unseen data? We generall
 
 Note that we are using the **validation data** to *select* a model, while the **test data** is used to *estimate model performance*.
 
-**
+***
 
 ## Models
 
@@ -68,6 +68,8 @@ Here, the $\beta$ coefficients are *model parameters* that are learned from the 
 #### Decision Trees
 
 **Decision Tree** models are a family of **nonparametric models** with a number of *tuning parameters*, but most notably, `cp`, the "complexity parameter" which indirectly controls the number of splits used to create neighborhoods of observations. We can also control which features are used when considering splits.
+
+***
 
 ## Model Flexibility
 
@@ -119,6 +121,8 @@ Given a set of feature variables, as $k$ increases, model flexibility **decrease
 
 Given a set of feature variables, as `cp` increases, model flexibility **decreases.** (Note that adding and removing features does have an effect on model flexibility, generally adding flexibility with additional features, there are situations where adding features will decrease training error.)
 
+***
+
 ## Overfitting
 
 Overfitting occurs when we have fit to not just the **signal** but also the **noise.** That is, a model performs too well on the training data.
@@ -155,6 +159,8 @@ How do we assess over and underfitting in practice, when we don't know the true 
 <img src="09-regression-overview_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto;" />
 
 The further a model is to the *left* of this plot, the greater the chance it is **underfit**. The further a model is to the *right* of this plot, the greater the chance it is **overfit**.
+
+***
 
 ## Bias-Variance Tradeoff
 

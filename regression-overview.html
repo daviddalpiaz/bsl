@@ -330,7 +330,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><em>Estimate</em> model performance using the <strong>test data</strong>.</li>
 </ol>
 <p>Note that we are using the <strong>validation data</strong> to <em>select</em> a model, while the <strong>test data</strong> is used to <em>estimate model performance</em>.</p>
-<p>**</p>
+<hr />
 </div>
 <div id="models" class="section level2">
 <h2><span class="header-section-number">9.3</span> Models</h2>
@@ -350,6 +350,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="decision-trees-1" class="section level4">
 <h4><span class="header-section-number">9.3.0.3</span> Decision Trees</h4>
 <p><strong>Decision Tree</strong> models are a family of <strong>nonparametric models</strong> with a number of <em>tuning parameters</em>, but most notably, <code>cp</code>, the “complexity parameter” which indirectly controls the number of splits used to create neighborhoods of observations. We can also control which features are used when considering splits.</p>
+<hr />
 </div>
 </div>
 <div id="model-flexibility" class="section level2">
@@ -387,6 +388,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="decision" class="section level4">
 <h4><span class="header-section-number">9.4.0.3</span> Decision</h4>
 <p>Given a set of feature variables, as <code>cp</code> increases, model flexibility <strong>decreases.</strong> (Note that adding and removing features does have an effect on model flexibility, generally adding flexibility with additional features, there are situations where adding features will decrease training error.)</p>
+<hr />
 </div>
 </div>
 <div id="overfitting" class="section level2">
@@ -409,6 +411,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p><img src="09-regression-overview_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto;" /></p>
 <p>The further a model is to the <em>left</em> of this plot, the greater the chance it is <strong>underfit</strong>. The further a model is to the <em>right</em> of this plot, the greater the chance it is <strong>overfit</strong>.</p>
+<hr />
 </div>
 <div id="bias-variance-tradeoff" class="section level2">
 <h2><span class="header-section-number">9.6</span> Bias-Variance Tradeoff</h2>
