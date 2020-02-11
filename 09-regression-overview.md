@@ -150,7 +150,7 @@ The model with $k = 5$ seems like a reasonable in-between. Doesn't seem to be ch
 How do we assess over and underfitting in practice, when we don't know the true mean function? We have to look at train and validation errors.
 
 - Model that are probably **underfitting**: "Large" Train RMSE and a Validation RMSE larger than the smallest. The less flexible, the more probable the underfitting.
-- Model that are probably **overfitting**: "Small" Train RMSE and a Validation RMSE larger than the smallest. The more flexible, the more probable the underfitting.
+- Model that are probably **overfitting**: "Small" Train RMSE and a Validation RMSE larger than the smallest. The more flexible, the more probable the overfitting.
 
 <img src="09-regression-overview_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto;" />
 
