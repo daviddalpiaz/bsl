@@ -121,7 +121,7 @@ $$
 
 In a perfect world, we would be able to find some $\hat{f}$ which is **unbiased**, that is $\text{bias}\left(\hat{f}(x) \right) = 0$, which also has low variance. In practice, this isn't always possible.
 
-It turns out, there is a **bias-variance tradeoff**. That is, often, the more bias in our estimation, the lesser the variance. Similarly, less variance is often accompanied by more bias. Complex models tend to be unbiased, but highly variable. Simple models are often extremely biased, but have low variance.
+It turns out, there is a **bias-variance tradeoff**. That is, often, the more bias in our estimation, the lesser the variance. Similarly, less bias is often accompanied by more variance. Complex models tend to be unbiased, but highly variable. Simple models are often extremely biased, but have low variance.
 
 In the context of regression, models are biased when:
 
