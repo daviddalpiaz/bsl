@@ -30,6 +30,8 @@ Why are we so darn focused on **means**?
 - How do we detect and deal with **outliers**?
   - In response versus features?
   - At train time versus test time?
+- Factor versus numeric features for random forests.
+- Scaling features in various models, especially KNN.
 
 ## Source
 
