@@ -1,7 +1,7 @@
 --- 
 title: "Basics of Statistical Learning"
 author: "[David Dalpiaz](https://daviddalpiaz.com/)"
-date: "2020-03-04"
+date: "2020-03-08"
 github-repo: daviddalpiaz/bsl
 url: 'https\://statisticallearning.org/'
 knit: "bookdown::render_book"
