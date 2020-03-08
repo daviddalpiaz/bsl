@@ -10,6 +10,7 @@ Imports:
   kableExtra,
   GGally,
   ISLR,
+  klaR,
   rpart,
   rpart.plot,
   caret
