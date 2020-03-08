@@ -13,6 +13,7 @@ Imports:
   klaR,
   rpart,
   rpart.plot,
-  caret
+  caret,
+  ellipse
 Remotes: 
   rstudio/bookdown
