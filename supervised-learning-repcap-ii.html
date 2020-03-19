@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 1 Ten Simple Rules for Success in STAT 432 | Basics of Statistical Learning</title>
-  <meta name="description" content="Chapter 1 Ten Simple Rules for Success in STAT 432 | Basics of Statistical Learning" />
+  <title>Chapter 17 Supervised Learning Repcap II | Basics of Statistical Learning</title>
+  <meta name="description" content="Chapter 17 Supervised Learning Repcap II | Basics of Statistical Learning" />
   <meta name="generator" content="bookdown 0.18.1 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 1 Ten Simple Rules for Success in STAT 432 | Basics of Statistical Learning" />
+  <meta property="og:title" content="Chapter 17 Supervised Learning Repcap II | Basics of Statistical Learning" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://statisticallearning.org/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="daviddalpiaz/bsl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 1 Ten Simple Rules for Success in STAT 432 | Basics of Statistical Learning" />
+  <meta name="twitter:title" content="Chapter 17 Supervised Learning Repcap II | Basics of Statistical Learning" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="machine-learning-overview.html"/>
+<link rel="prev" href="cross-validation.html"/>
+<link rel="next" href="the-backlog.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -331,115 +331,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="ten-simple-rules-for-success-in-stat-432" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Ten Simple Rules for Success in STAT 432</h1>
+<div id="supervised-learning-repcap-ii" class="section level1">
+<h1><span class="header-section-number">Chapter 17</span> Supervised Learning Repcap II</h1>
 <hr />
-<p>STAT 432 is a difficult course. Although, as a result of the <a href="http://waf.cs.illinois.edu/discovery/grade_disparity_between_sections_at_uiuc/">historical grade distribution</a> I believe some students enter the course believing that it is an “easy” course. This document was written to help address the reasons for this difference between perception and reality. The style is stolen from the popular “Ten Rules” articles published in PLOS journals. A relevant example is <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1004961">Ten Simple Rules for Effective Statistical Practice</a>.</p>
+<p>In this chapter…</p>
 <hr />
-<div id="rule-1-there-are-no-rules" class="section level2">
-<h2><span class="header-section-number">1.1</span> Rule 1: There Are No Rules</h2>
-<p>Perhaps it is odd to begin a list of rules exclaiming that there are no rules.</p>
-<p>Many students that enroll in STAT 432 have an extensive mathematics background where everything follows a set of rules. However, statistics is not mathematics. While there are certainly rules in statistics, in applied statistics, an analyst must make decisions that can only be guided by heuristics. Students often ask questions such as “What method should I use in this situation?” hoping for a specific answer. While it would be easy to simply provide an “answer” of some specific model or procedure, the reality is that the answer will almost always be “it depends” and the analyst will have to make a somewhat subjective decision based on an extremely long set of heuristics. (The other answer to “Which method should I use in this situation?” will be &quot;Who knows? Try a few and <strong>evaluate</strong> which is working best. Evaluating methods will be a big focus in the course. We care more about the ability to evaluate methods than understanding the inner workings of each method.)</p>
-<p>In other words, while we could simply write some sort of flow-chart that tells you what to do in any situation encountered in the course, we reject this authoritarian approach. We prefer to present some heuristics, some reasoning behind them, and allow you to think for yourself. Skepticism is encouraged. You are allowed to form your own opinions about the course material.</p>
-<p>Applied to the data analyses done in STAT 432: There is no single correct answer. There are only good arguments and bad arguments.</p>
-<hr />
-</div>
-<div id="rule-2-read-the-syllabus" class="section level2">
-<h2><span class="header-section-number">1.2</span> Rule 2: Read the Syllabus</h2>
-<p><strong>Please.</strong> A familiarity with the syllabus will make your experience in the course much smoother. I would suggest returning to the syllabus a number of times throughout the semester, perhaps shortly before the exams.</p>
-<hr />
-</div>
-<div id="rule-3-previous-learning-is-not-gospel" class="section level2">
-<h2><span class="header-section-number">1.3</span> Rule 3: Previous Learning is Not Gospel</h2>
-<p>A trap many students fall into is believing that <strong>everything</strong> they have previously learned is relevant in future courses. This is not the case. Just because a method was taught in STAT 420 or STAT 425 does not mean that it is relevant in STAT 432. The most common example of this is Variance Inflation Factors. Students seem to love to drag this concept into STAT 432. While it is certainly possible to appeal to VIFs in STAT 432, they seem to be misapplied more often than not. This is because VIFs are more relevant for inference than prediction. STAT 432 cares about prediction much more than STAT 420 and STAT 425.</p>
-<hr />
-</div>
-<div id="rule-4-all-statements-are-true" class="section level2">
-<h2><span class="header-section-number">1.4</span> Rule 4: All Statements Are True</h2>
-<p>Rule 4 is somewhat related to Rule 3. The full rule would read: “All statements are true, given the correct conditions.” Rule 3 is relevant here because students will often search for information on the internet. They’ll arrive at some prescription such as “Method X is good at Task Y.” In reality, this statement is always more correctly stated as “Method X is good at Task Y <strong>under Condition Z</strong>.”</p>
-<p>In other words, context is extremely important.</p>
-<hr />
-</div>
-<div id="rule-5-dont-miss-the-forest-for-the-trees" class="section level2">
-<h2><span class="header-section-number">1.5</span> Rule 5: Don’t Miss The Forest For The Trees</h2>
-<p>STAT 432 covers a lot of content, sometimes at a surface level. When only scratching the surface, students find the lack of details unsatisfying. This is understandable, but realize that STAT 432 is a <strong>first</strong> course in machine learning. We don’t believe it is possible to learn all of machine learning in a single course. STAT 432 is about having an understanding of what machine learning is and what you can do with it. Our goal is not to teach you every single detail. (That is impossible.) Instead, we would like to provide a high level overview that will serve as a foundation for future learning. (Both self-study and future courses.)</p>
-<hr />
-</div>
-<div id="rule-6-you-will-struggle" class="section level2">
-<h2><span class="header-section-number">1.6</span> Rule 6: You Will Struggle</h2>
-<p>You will struggle, and that is a good thing. If everything in the course were “easy,” very little learning would take place. However, we are not advocating struggle for the sake of struggle. We want to support your “struggle” with the material. The course staff is not the enemy. The material is the “enemy.” We are here to help you. <strong>Do not hesitate to ask the course staff questions!</strong> Come to office hours! Post on Piazza!</p>
-<hr />
-</div>
-<div id="rule-7-keep-it-simple" class="section level2">
-<h2><span class="header-section-number">1.7</span> Rule 7: Keep It Simple</h2>
-<p>Please keep the <a href="https://en.wikipedia.org/wiki/KISS_principle">KISS Principle</a> in mind. (The name is somewhat unfortunate. No, we are not calling you stupid.) Complexity does not imply valuable.</p>
-<p>Within the context of STAT 432:</p>
+<div id="reading-13" class="section level2">
+<h2><span class="header-section-number">17.1</span> Reading</h2>
 <ul>
-<li>All else being equal, we prefer “simple” methods and models.</li>
-<li>When writing reports, shorter is better. (As long as you convey the necessary information.)</li>
+<li><strong>Required:</strong> ???</li>
 </ul>
 <hr />
-</div>
-<div id="rule-8-rtfm" class="section level2">
-<h2><span class="header-section-number">1.8</span> Rule 8: RTFM</h2>
-<p>Warning, the following link contains foul language: <a href="https://en.wikipedia.org/wiki/RTFM">RTFM</a>. RTFM is a common phrase in coding culture. While extremely insensitive, it is perhaps some of the most relevant advice for STAT 432.</p>
-<p>In short, if you experience a coding issue:</p>
-<ul>
-<li>Read the documentation of the function you are trying to use. (Anything you are doing in <code>R</code> involves running a function.)</li>
-<li>Search the internet (“Google”) for any error messages you’ve encountered.</li>
-</ul>
-<p>This should always be your first line of defense any time you encounter an issue. <strong>However,</strong> we do not expect you to be able to solve all your problems with this method! That’s why office hours exists! We simply would like you to get into this habit. Having gone through this step, you are more likely to solve the problem yourself. Additionally, you will be better prepared to discuss any issue with the course staff if you are unable to solve it yourself.</p>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb290-1" data-line-number="1"><span class="kw">library</span>(<span class="st">&quot;tidyverse&quot;</span>)</a></code></pre></div>
+<hr />
+<p>TBD</p>
 <hr />
 </div>
-<div id="rule-9-there-are-no-stupid-questions" class="section level2">
-<h2><span class="header-section-number">1.9</span> Rule 9: There Are No Stupid Questions</h2>
-<p>It sounds cliche, but it is true. <strong>Do not hesitate to ask the course staff questions!</strong> Come to office hours! Post on Piazza!</p>
-<p>Do note that while there really are no stupid questions, there are some annoying questions. For example:</p>
+<div id="source-16" class="section level2">
+<h2><span class="header-section-number">17.2</span> Source</h2>
 <ul>
-<li>Questions that can be answered by reading the syllabus. (“When is Exam 01?” “When are office hours?”)</li>
-<li>“Can you tell me what is wrong with my code?”</li>
-</ul>
-<p>The second bullet requires some explaining. The direct answer to that question is technically “Yes.” However, please note that the course staff is not a debugging machine. If you simply supply us with a bunch of code and asks us what is wrong, you’ll be met with a bit of frustration. We expect that you at least pinpoint <em>where</em> there is an issue with the code, within reason. (We will give some advice on how best to do this as the semester progresses.) In other words, try to ask your code question in a way that demonstrates that you have already thought about solving your issue. (See Rule #9.) We will always work with you to resolve your issue, but we ask that we are not your first attempt at a resolution.</p>
-<p>Corollary: There are no “quick” questions. Student often like to preface a question with the phrase “Just one quick question.” If you’re asking the question, how do you know how long it will take to answer? (I suppose if you know it’s in the syllabus, then the answer will be quick, but …) More often than not students ask <em>excellent</em> questions but then expect a short, succinct answer. When you ask a good question, this is often not possible. The point is, please come to office hours where we can have an in depth conversation, that is not time limited, with additional input from you!</p>
-<hr />
-</div>
-<div id="rule-10-learn-by-doing" class="section level2">
-<h2><span class="header-section-number">1.10</span> Rule 10: Learn By Doing</h2>
-<p>Students overvalue lecture and undervalue homework. STAT 432 will probably contain less “lecture” than you expect, and far too much “work” in the form of quizzes and analyses.</p>
-<p>Watching a lecture is a <strong>passive</strong> activity. Taking quizzes is an <strong>active</strong> activity. Reading is a <strong>passive</strong> activity. Performing an analysis is an <strong>active</strong> activity. In my opinion, students enjoy (or more specifically don’t dislike) lecture because it requires zero input from them. On the other hand, quizzes are frustrating, but that is a good thing! That frustration means that there is something to learn!</p>
-<p>Stated practically and with relevance to STAT 432:</p>
-<ul>
-<li>The quizzes and other course activities should be given highest priority when allotting your time.</li>
-<li>You should read all posted notes <em>twice</em>.
-<ul>
-<li>The first time you should read every word of the assigned material from top to bottom. Try to understand as best as possible, but don’t spend too much time reading any particular section. In a first read, it is somewhat more important to read the material to know what is there than to fully understand it.</li>
-<li>When taking the quizzes or performing an analysis, return to the relevant section of the reading. (Because you read it once before, you’ll know a certain section exists, even if you don’t understand it.) Read it again. This time you’ll have more context, and a better chance of understanding. Run the code. Modify the code and run it again. Write some similar code from scratch by yourself. Now, return to the quiz.</li>
-</ul></li>
-<li>Recorded lectures will be sparse, but if they exist, watch it once (possibly at 2x speed) but then go back to focusing on the “active” activities.</li>
-</ul>
-<hr />
-</div>
-<div id="conclusion" class="section level2">
-<h2><span class="header-section-number">1.11</span> Conclusion</h2>
-<p>In summary, if you bring an open mind and a bit of effort, we believe that you will succeed in STAT 432. We don’t believe that the course is easy, but we hope that it is ultimately rewarding.</p>
-<hr />
-</div>
-<div id="source" class="section level2">
-<h2><span class="header-section-number">1.12</span> Source</h2>
-<ul>
-<li><code>R</code> Markdown: <a href="01-ten-rules.Rmd"><code>01-ten-rules.Rmd</code></a></li>
+<li><code>R</code> Markdown: <a href="17-supervised-ii.Rmd"><code>17-supervised-ii.Rmd</code></a></li>
 </ul>
 <hr />
 
 </div>
 </div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="machine-learning-overview.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="cross-validation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="the-backlog.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -461,7 +387,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/daviddalpiaz/bsl/edit/master/01-ten-rules.Rmd",
+"link": "https://github.com/daviddalpiaz/bsl/edit/master/17-supervised-ii.Rmd",
 "text": "Edit"
 },
 "history": {
