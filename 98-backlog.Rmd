@@ -32,6 +32,7 @@ Why are we so darn focused on **means**?
   - At train time versus test time?
 - Factor versus numeric features for random forests.
 - Scaling features in various models, especially KNN.
+- Generalized linear models. (Chapter. Use for graduate students?)
 
 ## Source
 
