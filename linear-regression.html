@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 6 Linear Regression | Basics of Statistical Learning</title>
-  <meta name="description" content="Chapter 6 Linear Regression | Basics of Statistical Learning" />
+  <title>Chapter 2 Linear Regression | Basics of Statistical Learning</title>
+  <meta name="description" content="Chapter 2 Linear Regression | Basics of Statistical Learning" />
   <meta name="generator" content="bookdown 0.18.1 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 6 Linear Regression | Basics of Statistical Learning" />
+  <meta property="og:title" content="Chapter 2 Linear Regression | Basics of Statistical Learning" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://statisticallearning.org/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="daviddalpiaz/bsl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 6 Linear Regression | Basics of Statistical Learning" />
+  <meta name="twitter:title" content="Chapter 2 Linear Regression | Basics of Statistical Learning" />
   
   
   
@@ -31,7 +31,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="statistics.html"/>
+<link rel="prev" href="machine-learning-overview.html"/>
 <link rel="next" href="nonparametric-regression.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -140,175 +140,195 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i>License</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="ten-simple-rules-for-success-in-stat-432.html"><a href="ten-simple-rules-for-success-in-stat-432.html"><i class="fa fa-check"></i><b>1</b> Ten Simple Rules for Success in STAT 432</a><ul>
-<li class="chapter" data-level="1.1" data-path="ten-simple-rules-for-success-in-stat-432.html"><a href="ten-simple-rules-for-success-in-stat-432.html#rule-1-there-are-no-rules"><i class="fa fa-check"></i><b>1.1</b> Rule 1: There Are No Rules</a></li>
-<li class="chapter" data-level="1.2" data-path="ten-simple-rules-for-success-in-stat-432.html"><a href="ten-simple-rules-for-success-in-stat-432.html#rule-2-read-the-syllabus"><i class="fa fa-check"></i><b>1.2</b> Rule 2: Read the Syllabus</a></li>
-<li class="chapter" data-level="1.3" data-path="ten-simple-rules-for-success-in-stat-432.html"><a href="ten-simple-rules-for-success-in-stat-432.html#rule-3-previous-learning-is-not-gospel"><i class="fa fa-check"></i><b>1.3</b> Rule 3: Previous Learning is Not Gospel</a></li>
-<li class="chapter" data-level="1.4" data-path="ten-simple-rules-for-success-in-stat-432.html"><a href="ten-simple-rules-for-success-in-stat-432.html#rule-4-all-statements-are-true"><i class="fa fa-check"></i><b>1.4</b> Rule 4: All Statements Are True</a></li>
-<li class="chapter" data-level="1.5" data-path="ten-simple-rules-for-success-in-stat-432.html"><a href="ten-simple-rules-for-success-in-stat-432.html#rule-5-dont-miss-the-forest-for-the-trees"><i class="fa fa-check"></i><b>1.5</b> Rule 5: Don’t Miss The Forest For The Trees</a></li>
-<li class="chapter" data-level="1.6" data-path="ten-simple-rules-for-success-in-stat-432.html"><a href="ten-simple-rules-for-success-in-stat-432.html#rule-6-you-will-struggle"><i class="fa fa-check"></i><b>1.6</b> Rule 6: You Will Struggle</a></li>
-<li class="chapter" data-level="1.7" data-path="ten-simple-rules-for-success-in-stat-432.html"><a href="ten-simple-rules-for-success-in-stat-432.html#rule-7-keep-it-simple"><i class="fa fa-check"></i><b>1.7</b> Rule 7: Keep It Simple</a></li>
-<li class="chapter" data-level="1.8" data-path="ten-simple-rules-for-success-in-stat-432.html"><a href="ten-simple-rules-for-success-in-stat-432.html#rule-8-rtfm"><i class="fa fa-check"></i><b>1.8</b> Rule 8: RTFM</a></li>
-<li class="chapter" data-level="1.9" data-path="ten-simple-rules-for-success-in-stat-432.html"><a href="ten-simple-rules-for-success-in-stat-432.html#rule-9-there-are-no-stupid-questions"><i class="fa fa-check"></i><b>1.9</b> Rule 9: There Are No Stupid Questions</a></li>
-<li class="chapter" data-level="1.10" data-path="ten-simple-rules-for-success-in-stat-432.html"><a href="ten-simple-rules-for-success-in-stat-432.html#rule-10-learn-by-doing"><i class="fa fa-check"></i><b>1.10</b> Rule 10: Learn By Doing</a></li>
-<li class="chapter" data-level="1.11" data-path="ten-simple-rules-for-success-in-stat-432.html"><a href="ten-simple-rules-for-success-in-stat-432.html#conclusion"><i class="fa fa-check"></i><b>1.11</b> Conclusion</a></li>
-<li class="chapter" data-level="1.12" data-path="ten-simple-rules-for-success-in-stat-432.html"><a href="ten-simple-rules-for-success-in-stat-432.html#source"><i class="fa fa-check"></i><b>1.12</b> Source</a></li>
+<li class="chapter" data-level="1" data-path="machine-learning-overview.html"><a href="machine-learning-overview.html"><i class="fa fa-check"></i><b>1</b> Machine Learning Overview</a><ul>
+<li class="chapter" data-level="1.1" data-path="machine-learning-overview.html"><a href="machine-learning-overview.html#reading"><i class="fa fa-check"></i><b>1.1</b> Reading</a></li>
+<li class="chapter" data-level="1.2" data-path="machine-learning-overview.html"><a href="machine-learning-overview.html#what-is-machine-learning"><i class="fa fa-check"></i><b>1.2</b> What is Machine Learning?</a></li>
+<li class="chapter" data-level="1.3" data-path="machine-learning-overview.html"><a href="machine-learning-overview.html#machine-learning-tasks"><i class="fa fa-check"></i><b>1.3</b> Machine Learning Tasks</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="machine-learning-overview.html"><a href="machine-learning-overview.html#supervised-learning"><i class="fa fa-check"></i><b>1.3.1</b> Supervised Learning</a></li>
+<li class="chapter" data-level="1.3.2" data-path="machine-learning-overview.html"><a href="machine-learning-overview.html#unsupervised-learning"><i class="fa fa-check"></i><b>1.3.2</b> Unsupervised Learning</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="machine-learning-overview.html"><a href="machine-learning-overview.html"><i class="fa fa-check"></i><b>2</b> Machine Learning Overview</a><ul>
-<li class="chapter" data-level="2.1" data-path="machine-learning-overview.html"><a href="machine-learning-overview.html#reading"><i class="fa fa-check"></i><b>2.1</b> Reading</a></li>
-<li class="chapter" data-level="2.2" data-path="machine-learning-overview.html"><a href="machine-learning-overview.html#what-is-machine-learning"><i class="fa fa-check"></i><b>2.2</b> What is Machine Learning?</a></li>
-<li class="chapter" data-level="2.3" data-path="machine-learning-overview.html"><a href="machine-learning-overview.html#machine-learning-tasks"><i class="fa fa-check"></i><b>2.3</b> Machine Learning Tasks</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="machine-learning-overview.html"><a href="machine-learning-overview.html#supervised-learning"><i class="fa fa-check"></i><b>2.3.1</b> Supervised Learning</a></li>
-<li class="chapter" data-level="2.3.2" data-path="machine-learning-overview.html"><a href="machine-learning-overview.html#unsupervised-learning"><i class="fa fa-check"></i><b>2.3.2</b> Unsupervised Learning</a></li>
+<li class="chapter" data-level="1.4" data-path="machine-learning-overview.html"><a href="machine-learning-overview.html#open-questions"><i class="fa fa-check"></i><b>1.4</b> Open Questions</a></li>
+<li class="chapter" data-level="1.5" data-path="machine-learning-overview.html"><a href="machine-learning-overview.html#source"><i class="fa fa-check"></i><b>1.5</b> Source</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="machine-learning-overview.html"><a href="machine-learning-overview.html#open-questions"><i class="fa fa-check"></i><b>2.4</b> Open Questions</a></li>
-<li class="chapter" data-level="2.5" data-path="machine-learning-overview.html"><a href="machine-learning-overview.html#source-1"><i class="fa fa-check"></i><b>2.5</b> Source</a></li>
+<li class="chapter" data-level="2" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>2</b> Linear Regression</a><ul>
+<li class="chapter" data-level="2.1" data-path="linear-regression.html"><a href="linear-regression.html#reading-1"><i class="fa fa-check"></i><b>2.1</b> Reading</a></li>
+<li class="chapter" data-level="2.2" data-path="linear-regression.html"><a href="linear-regression.html#explanation-versus-prediction"><i class="fa fa-check"></i><b>2.2</b> Explanation versus Prediction</a></li>
+<li class="chapter" data-level="2.3" data-path="linear-regression.html"><a href="linear-regression.html#setup"><i class="fa fa-check"></i><b>2.3</b> Setup</a></li>
+<li class="chapter" data-level="2.4" data-path="linear-regression.html"><a href="linear-regression.html#mathematical-setup"><i class="fa fa-check"></i><b>2.4</b> Mathematical Setup</a></li>
+<li class="chapter" data-level="2.5" data-path="linear-regression.html"><a href="linear-regression.html#linear-regression-models"><i class="fa fa-check"></i><b>2.5</b> Linear Regression Models</a></li>
+<li class="chapter" data-level="2.6" data-path="linear-regression.html"><a href="linear-regression.html#using-lm"><i class="fa fa-check"></i><b>2.6</b> Using <code>lm()</code></a></li>
+<li class="chapter" data-level="2.7" data-path="linear-regression.html"><a href="linear-regression.html#the-predict-function"><i class="fa fa-check"></i><b>2.7</b> The <code>predict()</code> Function</a></li>
+<li class="chapter" data-level="2.8" data-path="linear-regression.html"><a href="linear-regression.html#data-splitting"><i class="fa fa-check"></i><b>2.8</b> Data Splitting</a></li>
+<li class="chapter" data-level="2.9" data-path="linear-regression.html"><a href="linear-regression.html#regression-metrics"><i class="fa fa-check"></i><b>2.9</b> Regression Metrics</a><ul>
+<li class="chapter" data-level="2.9.1" data-path="linear-regression.html"><a href="linear-regression.html#graphical-evaluation"><i class="fa fa-check"></i><b>2.9.1</b> Graphical Evaluation</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="computing.html"><a href="computing.html"><i class="fa fa-check"></i><b>3</b> Computing</a><ul>
-<li class="chapter" data-level="3.1" data-path="computing.html"><a href="computing.html#reading-1"><i class="fa fa-check"></i><b>3.1</b> Reading</a></li>
-<li class="chapter" data-level="3.2" data-path="computing.html"><a href="computing.html#additional-resources"><i class="fa fa-check"></i><b>3.2</b> Additional Resources</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="computing.html"><a href="computing.html#r"><i class="fa fa-check"></i><b>3.2.1</b> R</a></li>
-<li class="chapter" data-level="3.2.2" data-path="computing.html"><a href="computing.html#rstudio"><i class="fa fa-check"></i><b>3.2.2</b> RStudio</a></li>
-<li class="chapter" data-level="3.2.3" data-path="computing.html"><a href="computing.html#r-markdown"><i class="fa fa-check"></i><b>3.2.3</b> R Markdown</a></li>
+<li class="chapter" data-level="2.10" data-path="linear-regression.html"><a href="linear-regression.html#example-simple-simulated-data"><i class="fa fa-check"></i><b>2.10</b> Example: “Simple” Simulated Data</a></li>
+<li class="chapter" data-level="2.11" data-path="linear-regression.html"><a href="linear-regression.html#example-diamonds-data"><i class="fa fa-check"></i><b>2.11</b> Example: Diamonds Data</a></li>
+<li class="chapter" data-level="2.12" data-path="linear-regression.html"><a href="linear-regression.html#example-credit-card-data"><i class="fa fa-check"></i><b>2.12</b> Example: Credit Card Data</a></li>
+<li class="chapter" data-level="2.13" data-path="linear-regression.html"><a href="linear-regression.html#source-1"><i class="fa fa-check"></i><b>2.13</b> Source</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="computing.html"><a href="computing.html#stat-432-idioms"><i class="fa fa-check"></i><b>3.3</b> STAT 432 Idioms</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="computing.html"><a href="computing.html#dont-restore-old-workspaces"><i class="fa fa-check"></i><b>3.3.1</b> Don’t Restore Old Workspaces</a></li>
-<li class="chapter" data-level="3.3.2" data-path="computing.html"><a href="computing.html#r-versions"><i class="fa fa-check"></i><b>3.3.2</b> R Versions</a></li>
-<li class="chapter" data-level="3.3.3" data-path="computing.html"><a href="computing.html#code-style"><i class="fa fa-check"></i><b>3.3.3</b> Code Style</a></li>
-<li class="chapter" data-level="3.3.4" data-path="computing.html"><a href="computing.html#reference-style"><i class="fa fa-check"></i><b>3.3.4</b> Reference Style</a></li>
-<li class="chapter" data-level="3.3.5" data-path="computing.html"><a href="computing.html#stat-432-r-style-overrides"><i class="fa fa-check"></i><b>3.3.5</b> STAT 432 R Style Overrides</a></li>
-<li class="chapter" data-level="3.3.6" data-path="computing.html"><a href="computing.html#stat-432-r-markdown-style"><i class="fa fa-check"></i><b>3.3.6</b> STAT 432 R Markdown Style</a></li>
-<li class="chapter" data-level="3.3.7" data-path="computing.html"><a href="computing.html#style-heuristics"><i class="fa fa-check"></i><b>3.3.7</b> Style Heuristics</a></li>
-<li class="chapter" data-level="3.3.8" data-path="computing.html"><a href="computing.html#objects-and-functions"><i class="fa fa-check"></i><b>3.3.8</b> Objects and Functions</a></li>
-<li class="chapter" data-level="3.3.9" data-path="computing.html"><a href="computing.html#print-versus-return"><i class="fa fa-check"></i><b>3.3.9</b> Print versus Return</a></li>
-<li class="chapter" data-level="3.3.10" data-path="computing.html"><a href="computing.html#help"><i class="fa fa-check"></i><b>3.3.10</b> Help</a></li>
-<li class="chapter" data-level="3.3.11" data-path="computing.html"><a href="computing.html#keyboard-shortcuts"><i class="fa fa-check"></i><b>3.3.11</b> Keyboard Shortcuts</a></li>
-<li class="chapter" data-level="3.3.12" data-path="computing.html"><a href="computing.html#common-issues"><i class="fa fa-check"></i><b>3.3.12</b> Common Issues</a></li>
+<li class="chapter" data-level="3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html"><i class="fa fa-check"></i><b>3</b> Nonparametric Regression</a><ul>
+<li class="chapter" data-level="3.1" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#reading-2"><i class="fa fa-check"></i><b>3.1</b> Reading</a></li>
+<li class="chapter" data-level="3.2" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#mathematical-setup-1"><i class="fa fa-check"></i><b>3.2</b> Mathematical Setup</a></li>
+<li class="chapter" data-level="3.3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>3.3</b> k-Nearest Neighbors</a></li>
+<li class="chapter" data-level="3.4" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#decision-trees"><i class="fa fa-check"></i><b>3.4</b> Decision Trees</a></li>
+<li class="chapter" data-level="3.5" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#example-credit-card-data-1"><i class="fa fa-check"></i><b>3.5</b> Example: Credit Card Data</a></li>
+<li class="chapter" data-level="3.6" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#source-2"><i class="fa fa-check"></i><b>3.6</b> Source</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="computing.html"><a href="computing.html#source-2"><i class="fa fa-check"></i><b>3.4</b> Source</a></li>
+<li class="chapter" data-level="4" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>4</b> Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="4.1" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>4.1</b> Reducible and Irreducible Error</a></li>
+<li class="chapter" data-level="4.2" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>4.2</b> Bias-Variance Decomposition</a></li>
+<li class="chapter" data-level="4.3" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#simulation"><i class="fa fa-check"></i><b>4.3</b> Simulation</a></li>
+<li class="chapter" data-level="4.4" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>4.4</b> Estimating Expected Prediction Error</a></li>
+<li class="chapter" data-level="4.5" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#source-3"><i class="fa fa-check"></i><b>4.5</b> Source</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>4</b> Probability</a><ul>
-<li class="chapter" data-level="4.1" data-path="probability.html"><a href="probability.html#reading-2"><i class="fa fa-check"></i><b>4.1</b> Reading</a></li>
-<li class="chapter" data-level="4.2" data-path="probability.html"><a href="probability.html#probability-models"><i class="fa fa-check"></i><b>4.2</b> Probability Models</a></li>
-<li class="chapter" data-level="4.3" data-path="probability.html"><a href="probability.html#probability-axioms"><i class="fa fa-check"></i><b>4.3</b> Probability Axioms</a></li>
-<li class="chapter" data-level="4.4" data-path="probability.html"><a href="probability.html#probability-rules"><i class="fa fa-check"></i><b>4.4</b> Probability Rules</a></li>
-<li class="chapter" data-level="4.5" data-path="probability.html"><a href="probability.html#random-variables"><i class="fa fa-check"></i><b>4.5</b> Random Variables</a><ul>
-<li class="chapter" data-level="4.5.1" data-path="probability.html"><a href="probability.html#distributions"><i class="fa fa-check"></i><b>4.5.1</b> Distributions</a></li>
-<li class="chapter" data-level="4.5.2" data-path="probability.html"><a href="probability.html#discrete-random-variables"><i class="fa fa-check"></i><b>4.5.2</b> Discrete Random Variables</a></li>
-<li class="chapter" data-level="4.5.3" data-path="probability.html"><a href="probability.html#continuous-random-variables"><i class="fa fa-check"></i><b>4.5.3</b> Continuous Random Variables</a></li>
-<li class="chapter" data-level="4.5.4" data-path="probability.html"><a href="probability.html#distributions-in-r"><i class="fa fa-check"></i><b>4.5.4</b> Distributions in R</a></li>
-<li class="chapter" data-level="4.5.5" data-path="probability.html"><a href="probability.html#several-random-variables"><i class="fa fa-check"></i><b>4.5.5</b> Several Random Variables</a></li>
+<li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Regression Overview</a><ul>
+<li class="chapter" data-level="5.1" data-path="regression-overview.html"><a href="regression-overview.html#goal"><i class="fa fa-check"></i><b>5.1</b> Goal</a></li>
+<li class="chapter" data-level="5.2" data-path="regression-overview.html"><a href="regression-overview.html#strategy"><i class="fa fa-check"></i><b>5.2</b> Strategy</a></li>
+<li class="chapter" data-level="5.3" data-path="regression-overview.html"><a href="regression-overview.html#models"><i class="fa fa-check"></i><b>5.3</b> Models</a></li>
+<li class="chapter" data-level="5.4" data-path="regression-overview.html"><a href="regression-overview.html#model-flexibility"><i class="fa fa-check"></i><b>5.4</b> Model Flexibility</a></li>
+<li class="chapter" data-level="5.5" data-path="regression-overview.html"><a href="regression-overview.html#overfitting"><i class="fa fa-check"></i><b>5.5</b> Overfitting</a></li>
+<li class="chapter" data-level="5.6" data-path="regression-overview.html"><a href="regression-overview.html#bias-variance-tradeoff"><i class="fa fa-check"></i><b>5.6</b> Bias-Variance Tradeoff</a></li>
+<li class="chapter" data-level="5.7" data-path="regression-overview.html"><a href="regression-overview.html#source-4"><i class="fa fa-check"></i><b>5.7</b> Source</a></li>
 </ul></li>
-<li class="chapter" data-level="4.6" data-path="probability.html"><a href="probability.html#expectations"><i class="fa fa-check"></i><b>4.6</b> Expectations</a></li>
-<li class="chapter" data-level="4.7" data-path="probability.html"><a href="probability.html#likelihood"><i class="fa fa-check"></i><b>4.7</b> Likelihood</a></li>
-<li class="chapter" data-level="4.8" data-path="probability.html"><a href="probability.html#references"><i class="fa fa-check"></i><b>4.8</b> References</a><ul>
-<li class="chapter" data-level="4.8.1" data-path="probability.html"><a href="probability.html#videos"><i class="fa fa-check"></i><b>4.8.1</b> Videos</a></li>
+<li class="chapter" data-level="6" data-path="classification-1.html"><a href="classification-1.html"><i class="fa fa-check"></i><b>6</b> Classification</a><ul>
+<li class="chapter" data-level="6.1" data-path="classification-1.html"><a href="classification-1.html#reading-3"><i class="fa fa-check"></i><b>6.1</b> Reading</a></li>
+<li class="chapter" data-level="6.2" data-path="classification-1.html"><a href="classification-1.html#classification-metrics"><i class="fa fa-check"></i><b>6.2</b> Classification Metrics</a></li>
+<li class="chapter" data-level="6.3" data-path="classification-1.html"><a href="classification-1.html#source-5"><i class="fa fa-check"></i><b>6.3</b> Source</a></li>
 </ul></li>
-<li class="chapter" data-level="4.9" data-path="probability.html"><a href="probability.html#source-3"><i class="fa fa-check"></i><b>4.9</b> Source</a></li>
+<li class="chapter" data-level="7" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html"><i class="fa fa-check"></i><b>7</b> Nonparametric Classification</a><ul>
+<li class="chapter" data-level="7.1" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html#reading-4"><i class="fa fa-check"></i><b>7.1</b> Reading</a></li>
+<li class="chapter" data-level="7.2" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html#source-6"><i class="fa fa-check"></i><b>7.2</b> Source</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>5</b> Statistics</a><ul>
-<li class="chapter" data-level="5.1" data-path="statistics.html"><a href="statistics.html#reading-3"><i class="fa fa-check"></i><b>5.1</b> Reading</a></li>
-<li class="chapter" data-level="5.2" data-path="statistics.html"><a href="statistics.html#statistics-1"><i class="fa fa-check"></i><b>5.2</b> Statistics</a></li>
-<li class="chapter" data-level="5.3" data-path="statistics.html"><a href="statistics.html#estimators"><i class="fa fa-check"></i><b>5.3</b> Estimators</a><ul>
-<li class="chapter" data-level="5.3.1" data-path="statistics.html"><a href="statistics.html#properties"><i class="fa fa-check"></i><b>5.3.1</b> Properties</a></li>
-<li class="chapter" data-level="5.3.2" data-path="statistics.html"><a href="statistics.html#example-mse-of-an-estimator"><i class="fa fa-check"></i><b>5.3.2</b> Example: MSE of an Estimator</a></li>
-<li class="chapter" data-level="5.3.3" data-path="statistics.html"><a href="statistics.html#estimation-methods"><i class="fa fa-check"></i><b>5.3.3</b> Estimation Methods</a></li>
-<li class="chapter" data-level="5.3.4" data-path="statistics.html"><a href="statistics.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>5.3.4</b> Maximum Likelihood Estimation</a></li>
-<li class="chapter" data-level="5.3.5" data-path="statistics.html"><a href="statistics.html#method-of-moments"><i class="fa fa-check"></i><b>5.3.5</b> Method of Moments</a></li>
-<li class="chapter" data-level="5.3.6" data-path="statistics.html"><a href="statistics.html#empirical-distribution-function"><i class="fa fa-check"></i><b>5.3.6</b> Empirical Distribution Function</a></li>
+<li class="chapter" data-level="8" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>8</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="8.1" data-path="logistic-regression.html"><a href="logistic-regression.html#reading-5"><i class="fa fa-check"></i><b>8.1</b> Reading</a></li>
+<li class="chapter" data-level="8.2" data-path="logistic-regression.html"><a href="logistic-regression.html#source-7"><i class="fa fa-check"></i><b>8.2</b> Source</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="statistics.html"><a href="statistics.html#source-4"><i class="fa fa-check"></i><b>5.4</b> Source</a></li>
+<li class="chapter" data-level="9" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>9</b> Binary Classification</a><ul>
+<li class="chapter" data-level="9.1" data-path="binary-classification.html"><a href="binary-classification.html#reading-6"><i class="fa fa-check"></i><b>9.1</b> Reading</a></li>
+<li class="chapter" data-level="9.2" data-path="binary-classification.html"><a href="binary-classification.html#source-8"><i class="fa fa-check"></i><b>9.2</b> Source</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>6</b> Linear Regression</a><ul>
-<li class="chapter" data-level="6.1" data-path="linear-regression.html"><a href="linear-regression.html#reading-4"><i class="fa fa-check"></i><b>6.1</b> Reading</a></li>
-<li class="chapter" data-level="6.2" data-path="linear-regression.html"><a href="linear-regression.html#explanation-versus-prediction"><i class="fa fa-check"></i><b>6.2</b> Explanation versus Prediction</a></li>
-<li class="chapter" data-level="6.3" data-path="linear-regression.html"><a href="linear-regression.html#setup"><i class="fa fa-check"></i><b>6.3</b> Setup</a></li>
-<li class="chapter" data-level="6.4" data-path="linear-regression.html"><a href="linear-regression.html#mathematical-setup"><i class="fa fa-check"></i><b>6.4</b> Mathematical Setup</a></li>
-<li class="chapter" data-level="6.5" data-path="linear-regression.html"><a href="linear-regression.html#linear-regression-models"><i class="fa fa-check"></i><b>6.5</b> Linear Regression Models</a></li>
-<li class="chapter" data-level="6.6" data-path="linear-regression.html"><a href="linear-regression.html#using-lm"><i class="fa fa-check"></i><b>6.6</b> Using <code>lm()</code></a></li>
-<li class="chapter" data-level="6.7" data-path="linear-regression.html"><a href="linear-regression.html#the-predict-function"><i class="fa fa-check"></i><b>6.7</b> The <code>predict()</code> Function</a></li>
-<li class="chapter" data-level="6.8" data-path="linear-regression.html"><a href="linear-regression.html#data-splitting"><i class="fa fa-check"></i><b>6.8</b> Data Splitting</a></li>
-<li class="chapter" data-level="6.9" data-path="linear-regression.html"><a href="linear-regression.html#regression-metrics"><i class="fa fa-check"></i><b>6.9</b> Regression Metrics</a><ul>
-<li class="chapter" data-level="6.9.1" data-path="linear-regression.html"><a href="linear-regression.html#graphical-evaluation"><i class="fa fa-check"></i><b>6.9.1</b> Graphical Evaluation</a></li>
+<li class="chapter" data-level="10" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>10</b> Generative Models</a><ul>
+<li class="chapter" data-level="10.1" data-path="generative-models.html"><a href="generative-models.html#reading-7"><i class="fa fa-check"></i><b>10.1</b> Reading</a></li>
+<li class="chapter" data-level="10.2" data-path="generative-models.html"><a href="generative-models.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>10.2</b> Linear Discriminant Analysis</a></li>
+<li class="chapter" data-level="10.3" data-path="generative-models.html"><a href="generative-models.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>10.3</b> Quadratic Discriminant Analysis</a></li>
+<li class="chapter" data-level="10.4" data-path="generative-models.html"><a href="generative-models.html#naive-bayes"><i class="fa fa-check"></i><b>10.4</b> Naive Bayes</a></li>
+<li class="chapter" data-level="10.5" data-path="generative-models.html"><a href="generative-models.html#discrete-inputs"><i class="fa fa-check"></i><b>10.5</b> Discrete Inputs</a></li>
+<li class="chapter" data-level="10.6" data-path="generative-models.html"><a href="generative-models.html#source-9"><i class="fa fa-check"></i><b>10.6</b> Source</a></li>
 </ul></li>
-<li class="chapter" data-level="6.10" data-path="linear-regression.html"><a href="linear-regression.html#example-simple-simulated-data"><i class="fa fa-check"></i><b>6.10</b> Example: “Simple” Simulated Data</a></li>
-<li class="chapter" data-level="6.11" data-path="linear-regression.html"><a href="linear-regression.html#example-diamonds-data"><i class="fa fa-check"></i><b>6.11</b> Example: Diamonds Data</a></li>
-<li class="chapter" data-level="6.12" data-path="linear-regression.html"><a href="linear-regression.html#example-credit-card-data"><i class="fa fa-check"></i><b>6.12</b> Example: Credit Card Data</a></li>
-<li class="chapter" data-level="6.13" data-path="linear-regression.html"><a href="linear-regression.html#source-5"><i class="fa fa-check"></i><b>6.13</b> Source</a></li>
+<li class="chapter" data-level="11" data-path="supervised-learning-overview-i.html"><a href="supervised-learning-overview-i.html"><i class="fa fa-check"></i><b>11</b> Supervised Learning Overview I</a><ul>
+<li class="chapter" data-level="11.1" data-path="supervised-learning-overview-i.html"><a href="supervised-learning-overview-i.html#reading-8"><i class="fa fa-check"></i><b>11.1</b> Reading</a></li>
+<li class="chapter" data-level="11.2" data-path="supervised-learning-overview-i.html"><a href="supervised-learning-overview-i.html#source-10"><i class="fa fa-check"></i><b>11.2</b> Source</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html"><i class="fa fa-check"></i><b>7</b> Nonparametric Regression</a><ul>
-<li class="chapter" data-level="7.1" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#reading-5"><i class="fa fa-check"></i><b>7.1</b> Reading</a></li>
-<li class="chapter" data-level="7.2" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#mathematical-setup-1"><i class="fa fa-check"></i><b>7.2</b> Mathematical Setup</a></li>
-<li class="chapter" data-level="7.3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>7.3</b> k-Nearest Neighbors</a></li>
-<li class="chapter" data-level="7.4" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#decision-trees"><i class="fa fa-check"></i><b>7.4</b> Decision Trees</a></li>
-<li class="chapter" data-level="7.5" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#example-credit-card-data-1"><i class="fa fa-check"></i><b>7.5</b> Example: Credit Card Data</a></li>
-<li class="chapter" data-level="7.6" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#source-6"><i class="fa fa-check"></i><b>7.6</b> Source</a></li>
+<li class="chapter" data-level="12" data-path="simulation-1.html"><a href="simulation-1.html"><i class="fa fa-check"></i><b>12</b> Simulation</a><ul>
+<li class="chapter" data-level="12.1" data-path="simulation-1.html"><a href="simulation-1.html#reading-9"><i class="fa fa-check"></i><b>12.1</b> Reading</a></li>
+<li class="chapter" data-level="12.2" data-path="simulation-1.html"><a href="simulation-1.html#source-11"><i class="fa fa-check"></i><b>12.2</b> Source</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html"><i class="fa fa-check"></i><b>8</b> Bias–Variance Tradeoff</a><ul>
-<li class="chapter" data-level="8.1" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>8.1</b> Reducible and Irreducible Error</a></li>
-<li class="chapter" data-level="8.2" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>8.2</b> Bias-Variance Decomposition</a></li>
-<li class="chapter" data-level="8.3" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#simulation"><i class="fa fa-check"></i><b>8.3</b> Simulation</a></li>
-<li class="chapter" data-level="8.4" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>8.4</b> Estimating Expected Prediction Error</a></li>
-<li class="chapter" data-level="8.5" data-path="biasvariance-tradeoff.html"><a href="biasvariance-tradeoff.html#source-7"><i class="fa fa-check"></i><b>8.5</b> Source</a></li>
+<li class="chapter" data-level="13" data-path="bootstrap-resampling.html"><a href="bootstrap-resampling.html"><i class="fa fa-check"></i><b>13</b> Bootstrap Resampling</a><ul>
+<li class="chapter" data-level="13.1" data-path="bootstrap-resampling.html"><a href="bootstrap-resampling.html#reading-10"><i class="fa fa-check"></i><b>13.1</b> Reading</a></li>
+<li class="chapter" data-level="13.2" data-path="bootstrap-resampling.html"><a href="bootstrap-resampling.html#source-12"><i class="fa fa-check"></i><b>13.2</b> Source</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>9</b> Regression Overview</a><ul>
-<li class="chapter" data-level="9.1" data-path="regression-overview.html"><a href="regression-overview.html#goal"><i class="fa fa-check"></i><b>9.1</b> Goal</a></li>
-<li class="chapter" data-level="9.2" data-path="regression-overview.html"><a href="regression-overview.html#strategy"><i class="fa fa-check"></i><b>9.2</b> Strategy</a></li>
-<li class="chapter" data-level="9.3" data-path="regression-overview.html"><a href="regression-overview.html#models"><i class="fa fa-check"></i><b>9.3</b> Models</a></li>
-<li class="chapter" data-level="9.4" data-path="regression-overview.html"><a href="regression-overview.html#model-flexibility"><i class="fa fa-check"></i><b>9.4</b> Model Flexibility</a></li>
-<li class="chapter" data-level="9.5" data-path="regression-overview.html"><a href="regression-overview.html#overfitting"><i class="fa fa-check"></i><b>9.5</b> Overfitting</a></li>
-<li class="chapter" data-level="9.6" data-path="regression-overview.html"><a href="regression-overview.html#bias-variance-tradeoff"><i class="fa fa-check"></i><b>9.6</b> Bias-Variance Tradeoff</a></li>
-<li class="chapter" data-level="9.7" data-path="regression-overview.html"><a href="regression-overview.html#source-8"><i class="fa fa-check"></i><b>9.7</b> Source</a></li>
+<li class="chapter" data-level="14" data-path="cross-validation.html"><a href="cross-validation.html"><i class="fa fa-check"></i><b>14</b> Cross-Validation</a><ul>
+<li class="chapter" data-level="14.1" data-path="cross-validation.html"><a href="cross-validation.html#reading-11"><i class="fa fa-check"></i><b>14.1</b> Reading</a></li>
+<li class="chapter" data-level="14.2" data-path="cross-validation.html"><a href="cross-validation.html#source-13"><i class="fa fa-check"></i><b>14.2</b> Source</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="classification-1.html"><a href="classification-1.html"><i class="fa fa-check"></i><b>10</b> Classification</a><ul>
-<li class="chapter" data-level="10.1" data-path="classification-1.html"><a href="classification-1.html#reading-6"><i class="fa fa-check"></i><b>10.1</b> Reading</a></li>
-<li class="chapter" data-level="10.2" data-path="classification-1.html"><a href="classification-1.html#classification-metrics"><i class="fa fa-check"></i><b>10.2</b> Classification Metrics</a></li>
-<li class="chapter" data-level="10.3" data-path="classification-1.html"><a href="classification-1.html#source-9"><i class="fa fa-check"></i><b>10.3</b> Source</a></li>
+<li class="chapter" data-level="15" data-path="supervised-learning-overview-ii.html"><a href="supervised-learning-overview-ii.html"><i class="fa fa-check"></i><b>15</b> Supervised Learning Overview II</a><ul>
+<li class="chapter" data-level="15.1" data-path="supervised-learning-overview-ii.html"><a href="supervised-learning-overview-ii.html#reading-12"><i class="fa fa-check"></i><b>15.1</b> Reading</a></li>
+<li class="chapter" data-level="15.2" data-path="supervised-learning-overview-ii.html"><a href="supervised-learning-overview-ii.html#source-14"><i class="fa fa-check"></i><b>15.2</b> Source</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>11</b> Logistic Regression</a><ul>
-<li class="chapter" data-level="11.1" data-path="logistic-regression.html"><a href="logistic-regression.html#reading-7"><i class="fa fa-check"></i><b>11.1</b> Reading</a></li>
-<li class="chapter" data-level="11.2" data-path="logistic-regression.html"><a href="logistic-regression.html#source-10"><i class="fa fa-check"></i><b>11.2</b> Source</a></li>
+<li class="chapter" data-level="16" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>16</b> Regularization</a><ul>
+<li class="chapter" data-level="16.1" data-path="regularization.html"><a href="regularization.html#reading-13"><i class="fa fa-check"></i><b>16.1</b> Reading</a></li>
+<li class="chapter" data-level="16.2" data-path="regularization.html"><a href="regularization.html#source-15"><i class="fa fa-check"></i><b>16.2</b> Source</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="generative-models.html"><a href="generative-models.html"><i class="fa fa-check"></i><b>12</b> Generative Models</a><ul>
-<li class="chapter" data-level="12.1" data-path="generative-models.html"><a href="generative-models.html#reading-8"><i class="fa fa-check"></i><b>12.1</b> Reading</a></li>
-<li class="chapter" data-level="12.2" data-path="generative-models.html"><a href="generative-models.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>12.2</b> Linear Discriminant Analysis</a></li>
-<li class="chapter" data-level="12.3" data-path="generative-models.html"><a href="generative-models.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>12.3</b> Quadratic Discriminant Analysis</a></li>
-<li class="chapter" data-level="12.4" data-path="generative-models.html"><a href="generative-models.html#naive-bayes"><i class="fa fa-check"></i><b>12.4</b> Naive Bayes</a></li>
-<li class="chapter" data-level="12.5" data-path="generative-models.html"><a href="generative-models.html#discrete-inputs"><i class="fa fa-check"></i><b>12.5</b> Discrete Inputs</a></li>
-<li class="chapter" data-level="12.6" data-path="generative-models.html"><a href="generative-models.html#source-11"><i class="fa fa-check"></i><b>12.6</b> Source</a></li>
+<li class="chapter" data-level="17" data-path="dimension-reduction.html"><a href="dimension-reduction.html"><i class="fa fa-check"></i><b>17</b> Dimension Reduction</a><ul>
+<li class="chapter" data-level="17.1" data-path="dimension-reduction.html"><a href="dimension-reduction.html#reading-14"><i class="fa fa-check"></i><b>17.1</b> Reading</a></li>
+<li class="chapter" data-level="17.2" data-path="dimension-reduction.html"><a href="dimension-reduction.html#source-16"><i class="fa fa-check"></i><b>17.2</b> Source</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="supervised-learning-repcap-i.html"><a href="supervised-learning-repcap-i.html"><i class="fa fa-check"></i><b>13</b> Supervised Learning Repcap I</a><ul>
-<li class="chapter" data-level="13.1" data-path="supervised-learning-repcap-i.html"><a href="supervised-learning-repcap-i.html#reading-9"><i class="fa fa-check"></i><b>13.1</b> Reading</a></li>
-<li class="chapter" data-level="13.2" data-path="supervised-learning-repcap-i.html"><a href="supervised-learning-repcap-i.html#source-12"><i class="fa fa-check"></i><b>13.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="14" data-path="simulation-1.html"><a href="simulation-1.html"><i class="fa fa-check"></i><b>14</b> Simulation</a><ul>
-<li class="chapter" data-level="14.1" data-path="simulation-1.html"><a href="simulation-1.html#reading-10"><i class="fa fa-check"></i><b>14.1</b> Reading</a></li>
-<li class="chapter" data-level="14.2" data-path="simulation-1.html"><a href="simulation-1.html#source-13"><i class="fa fa-check"></i><b>14.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="15" data-path="bootstrap-resampling.html"><a href="bootstrap-resampling.html"><i class="fa fa-check"></i><b>15</b> Bootstrap Resampling</a><ul>
-<li class="chapter" data-level="15.1" data-path="bootstrap-resampling.html"><a href="bootstrap-resampling.html#reading-11"><i class="fa fa-check"></i><b>15.1</b> Reading</a></li>
-<li class="chapter" data-level="15.2" data-path="bootstrap-resampling.html"><a href="bootstrap-resampling.html#source-14"><i class="fa fa-check"></i><b>15.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="16" data-path="cross-validation.html"><a href="cross-validation.html"><i class="fa fa-check"></i><b>16</b> Cross-Validation</a><ul>
-<li class="chapter" data-level="16.1" data-path="cross-validation.html"><a href="cross-validation.html#reading-12"><i class="fa fa-check"></i><b>16.1</b> Reading</a></li>
-<li class="chapter" data-level="16.2" data-path="cross-validation.html"><a href="cross-validation.html#source-15"><i class="fa fa-check"></i><b>16.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="17" data-path="supervised-learning-repcap-ii.html"><a href="supervised-learning-repcap-ii.html"><i class="fa fa-check"></i><b>17</b> Supervised Learning Repcap II</a><ul>
-<li class="chapter" data-level="17.1" data-path="supervised-learning-repcap-ii.html"><a href="supervised-learning-repcap-ii.html#reading-13"><i class="fa fa-check"></i><b>17.1</b> Reading</a></li>
-<li class="chapter" data-level="17.2" data-path="supervised-learning-repcap-ii.html"><a href="supervised-learning-repcap-ii.html#source-16"><i class="fa fa-check"></i><b>17.2</b> Source</a></li>
+<li class="chapter" data-level="18" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>18</b> Ensemble Methods</a><ul>
+<li class="chapter" data-level="18.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#reading-15"><i class="fa fa-check"></i><b>18.1</b> Reading</a></li>
+<li class="chapter" data-level="18.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#source-17"><i class="fa fa-check"></i><b>18.2</b> Source</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="the-backlog.html"><a href="the-backlog.html"><i class="fa fa-check"></i><b>A</b> The Backlog</a><ul>
 <li class="chapter" data-level="A.1" data-path="the-backlog.html"><a href="the-backlog.html#sorted"><i class="fa fa-check"></i><b>A.1</b> Sorted</a></li>
 <li class="chapter" data-level="A.2" data-path="the-backlog.html"><a href="the-backlog.html#unsorted"><i class="fa fa-check"></i><b>A.2</b> Unsorted</a></li>
-<li class="chapter" data-level="A.3" data-path="the-backlog.html"><a href="the-backlog.html#source-17"><i class="fa fa-check"></i><b>A.3</b> Source</a></li>
+<li class="chapter" data-level="A.3" data-path="the-backlog.html"><a href="the-backlog.html#source-18"><i class="fa fa-check"></i><b>A.3</b> Source</a></li>
 </ul></li>
 <li class="chapter" data-level="B" data-path="additional-reading.html"><a href="additional-reading.html"><i class="fa fa-check"></i><b>B</b> Additional Reading</a><ul>
 <li class="chapter" data-level="B.1" data-path="additional-reading.html"><a href="additional-reading.html#books"><i class="fa fa-check"></i><b>B.1</b> Books</a></li>
 <li class="chapter" data-level="B.2" data-path="additional-reading.html"><a href="additional-reading.html#papers"><i class="fa fa-check"></i><b>B.2</b> Papers</a></li>
 <li class="chapter" data-level="B.3" data-path="additional-reading.html"><a href="additional-reading.html#blog-posts"><i class="fa fa-check"></i><b>B.3</b> Blog Posts</a></li>
 <li class="chapter" data-level="B.4" data-path="additional-reading.html"><a href="additional-reading.html#miscellaneous"><i class="fa fa-check"></i><b>B.4</b> Miscellaneous</a></li>
-<li class="chapter" data-level="B.5" data-path="additional-reading.html"><a href="additional-reading.html#source-18"><i class="fa fa-check"></i><b>B.5</b> Source</a></li>
+<li class="chapter" data-level="B.5" data-path="additional-reading.html"><a href="additional-reading.html#source-19"><i class="fa fa-check"></i><b>B.5</b> Source</a></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="ten-simple-rules-for-success-in-stat-432.html"><a href="ten-simple-rules-for-success-in-stat-432.html"><i class="fa fa-check"></i><b>C</b> Ten Simple Rules for Success in STAT 432</a><ul>
+<li class="chapter" data-level="C.1" data-path="ten-simple-rules-for-success-in-stat-432.html"><a href="ten-simple-rules-for-success-in-stat-432.html#rule-1-there-are-no-rules"><i class="fa fa-check"></i><b>C.1</b> Rule 1: There Are No Rules</a></li>
+<li class="chapter" data-level="C.2" data-path="ten-simple-rules-for-success-in-stat-432.html"><a href="ten-simple-rules-for-success-in-stat-432.html#rule-2-read-the-syllabus"><i class="fa fa-check"></i><b>C.2</b> Rule 2: Read the Syllabus</a></li>
+<li class="chapter" data-level="C.3" data-path="ten-simple-rules-for-success-in-stat-432.html"><a href="ten-simple-rules-for-success-in-stat-432.html#rule-3-previous-learning-is-not-gospel"><i class="fa fa-check"></i><b>C.3</b> Rule 3: Previous Learning is Not Gospel</a></li>
+<li class="chapter" data-level="C.4" data-path="ten-simple-rules-for-success-in-stat-432.html"><a href="ten-simple-rules-for-success-in-stat-432.html#rule-4-all-statements-are-true"><i class="fa fa-check"></i><b>C.4</b> Rule 4: All Statements Are True</a></li>
+<li class="chapter" data-level="C.5" data-path="ten-simple-rules-for-success-in-stat-432.html"><a href="ten-simple-rules-for-success-in-stat-432.html#rule-5-dont-miss-the-forest-for-the-trees"><i class="fa fa-check"></i><b>C.5</b> Rule 5: Don’t Miss The Forest For The Trees</a></li>
+<li class="chapter" data-level="C.6" data-path="ten-simple-rules-for-success-in-stat-432.html"><a href="ten-simple-rules-for-success-in-stat-432.html#rule-6-you-will-struggle"><i class="fa fa-check"></i><b>C.6</b> Rule 6: You Will Struggle</a></li>
+<li class="chapter" data-level="C.7" data-path="ten-simple-rules-for-success-in-stat-432.html"><a href="ten-simple-rules-for-success-in-stat-432.html#rule-7-keep-it-simple"><i class="fa fa-check"></i><b>C.7</b> Rule 7: Keep It Simple</a></li>
+<li class="chapter" data-level="C.8" data-path="ten-simple-rules-for-success-in-stat-432.html"><a href="ten-simple-rules-for-success-in-stat-432.html#rule-8-rtfm"><i class="fa fa-check"></i><b>C.8</b> Rule 8: RTFM</a></li>
+<li class="chapter" data-level="C.9" data-path="ten-simple-rules-for-success-in-stat-432.html"><a href="ten-simple-rules-for-success-in-stat-432.html#rule-9-there-are-no-stupid-questions"><i class="fa fa-check"></i><b>C.9</b> Rule 9: There Are No Stupid Questions</a></li>
+<li class="chapter" data-level="C.10" data-path="ten-simple-rules-for-success-in-stat-432.html"><a href="ten-simple-rules-for-success-in-stat-432.html#rule-10-learn-by-doing"><i class="fa fa-check"></i><b>C.10</b> Rule 10: Learn By Doing</a></li>
+<li class="chapter" data-level="C.11" data-path="ten-simple-rules-for-success-in-stat-432.html"><a href="ten-simple-rules-for-success-in-stat-432.html#conclusion"><i class="fa fa-check"></i><b>C.11</b> Conclusion</a></li>
+<li class="chapter" data-level="C.12" data-path="ten-simple-rules-for-success-in-stat-432.html"><a href="ten-simple-rules-for-success-in-stat-432.html#source-20"><i class="fa fa-check"></i><b>C.12</b> Source</a></li>
+</ul></li>
+<li class="chapter" data-level="D" data-path="computing.html"><a href="computing.html"><i class="fa fa-check"></i><b>D</b> Computing</a><ul>
+<li class="chapter" data-level="D.1" data-path="computing.html"><a href="computing.html#reading-16"><i class="fa fa-check"></i><b>D.1</b> Reading</a></li>
+<li class="chapter" data-level="D.2" data-path="computing.html"><a href="computing.html#additional-resources"><i class="fa fa-check"></i><b>D.2</b> Additional Resources</a><ul>
+<li class="chapter" data-level="D.2.1" data-path="computing.html"><a href="computing.html#r"><i class="fa fa-check"></i><b>D.2.1</b> R</a></li>
+<li class="chapter" data-level="D.2.2" data-path="computing.html"><a href="computing.html#rstudio"><i class="fa fa-check"></i><b>D.2.2</b> RStudio</a></li>
+<li class="chapter" data-level="D.2.3" data-path="computing.html"><a href="computing.html#r-markdown"><i class="fa fa-check"></i><b>D.2.3</b> R Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="D.3" data-path="computing.html"><a href="computing.html#stat-432-idioms"><i class="fa fa-check"></i><b>D.3</b> STAT 432 Idioms</a><ul>
+<li class="chapter" data-level="D.3.1" data-path="computing.html"><a href="computing.html#dont-restore-old-workspaces"><i class="fa fa-check"></i><b>D.3.1</b> Don’t Restore Old Workspaces</a></li>
+<li class="chapter" data-level="D.3.2" data-path="computing.html"><a href="computing.html#r-versions"><i class="fa fa-check"></i><b>D.3.2</b> R Versions</a></li>
+<li class="chapter" data-level="D.3.3" data-path="computing.html"><a href="computing.html#code-style"><i class="fa fa-check"></i><b>D.3.3</b> Code Style</a></li>
+<li class="chapter" data-level="D.3.4" data-path="computing.html"><a href="computing.html#reference-style"><i class="fa fa-check"></i><b>D.3.4</b> Reference Style</a></li>
+<li class="chapter" data-level="D.3.5" data-path="computing.html"><a href="computing.html#stat-432-r-style-overrides"><i class="fa fa-check"></i><b>D.3.5</b> STAT 432 R Style Overrides</a></li>
+<li class="chapter" data-level="D.3.6" data-path="computing.html"><a href="computing.html#stat-432-r-markdown-style"><i class="fa fa-check"></i><b>D.3.6</b> STAT 432 R Markdown Style</a></li>
+<li class="chapter" data-level="D.3.7" data-path="computing.html"><a href="computing.html#style-heuristics"><i class="fa fa-check"></i><b>D.3.7</b> Style Heuristics</a></li>
+<li class="chapter" data-level="D.3.8" data-path="computing.html"><a href="computing.html#objects-and-functions"><i class="fa fa-check"></i><b>D.3.8</b> Objects and Functions</a></li>
+<li class="chapter" data-level="D.3.9" data-path="computing.html"><a href="computing.html#print-versus-return"><i class="fa fa-check"></i><b>D.3.9</b> Print versus Return</a></li>
+<li class="chapter" data-level="D.3.10" data-path="computing.html"><a href="computing.html#help"><i class="fa fa-check"></i><b>D.3.10</b> Help</a></li>
+<li class="chapter" data-level="D.3.11" data-path="computing.html"><a href="computing.html#keyboard-shortcuts"><i class="fa fa-check"></i><b>D.3.11</b> Keyboard Shortcuts</a></li>
+<li class="chapter" data-level="D.3.12" data-path="computing.html"><a href="computing.html#common-issues"><i class="fa fa-check"></i><b>D.3.12</b> Common Issues</a></li>
+</ul></li>
+<li class="chapter" data-level="D.4" data-path="computing.html"><a href="computing.html#source-21"><i class="fa fa-check"></i><b>D.4</b> Source</a></li>
+</ul></li>
+<li class="chapter" data-level="E" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>E</b> Probability</a><ul>
+<li class="chapter" data-level="E.1" data-path="probability.html"><a href="probability.html#reading-17"><i class="fa fa-check"></i><b>E.1</b> Reading</a></li>
+<li class="chapter" data-level="E.2" data-path="probability.html"><a href="probability.html#probability-models"><i class="fa fa-check"></i><b>E.2</b> Probability Models</a></li>
+<li class="chapter" data-level="E.3" data-path="probability.html"><a href="probability.html#probability-axioms"><i class="fa fa-check"></i><b>E.3</b> Probability Axioms</a></li>
+<li class="chapter" data-level="E.4" data-path="probability.html"><a href="probability.html#probability-rules"><i class="fa fa-check"></i><b>E.4</b> Probability Rules</a></li>
+<li class="chapter" data-level="E.5" data-path="probability.html"><a href="probability.html#random-variables"><i class="fa fa-check"></i><b>E.5</b> Random Variables</a><ul>
+<li class="chapter" data-level="E.5.1" data-path="probability.html"><a href="probability.html#distributions"><i class="fa fa-check"></i><b>E.5.1</b> Distributions</a></li>
+<li class="chapter" data-level="E.5.2" data-path="probability.html"><a href="probability.html#discrete-random-variables"><i class="fa fa-check"></i><b>E.5.2</b> Discrete Random Variables</a></li>
+<li class="chapter" data-level="E.5.3" data-path="probability.html"><a href="probability.html#continuous-random-variables"><i class="fa fa-check"></i><b>E.5.3</b> Continuous Random Variables</a></li>
+<li class="chapter" data-level="E.5.4" data-path="probability.html"><a href="probability.html#distributions-in-r"><i class="fa fa-check"></i><b>E.5.4</b> Distributions in R</a></li>
+<li class="chapter" data-level="E.5.5" data-path="probability.html"><a href="probability.html#several-random-variables"><i class="fa fa-check"></i><b>E.5.5</b> Several Random Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="E.6" data-path="probability.html"><a href="probability.html#expectations"><i class="fa fa-check"></i><b>E.6</b> Expectations</a></li>
+<li class="chapter" data-level="E.7" data-path="probability.html"><a href="probability.html#likelihood"><i class="fa fa-check"></i><b>E.7</b> Likelihood</a></li>
+<li class="chapter" data-level="E.8" data-path="probability.html"><a href="probability.html#references"><i class="fa fa-check"></i><b>E.8</b> References</a><ul>
+<li class="chapter" data-level="E.8.1" data-path="probability.html"><a href="probability.html#videos"><i class="fa fa-check"></i><b>E.8.1</b> Videos</a></li>
+</ul></li>
+<li class="chapter" data-level="E.9" data-path="probability.html"><a href="probability.html#source-22"><i class="fa fa-check"></i><b>E.9</b> Source</a></li>
+</ul></li>
+<li class="chapter" data-level="F" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>F</b> Statistics</a><ul>
+<li class="chapter" data-level="F.1" data-path="statistics.html"><a href="statistics.html#reading-18"><i class="fa fa-check"></i><b>F.1</b> Reading</a></li>
+<li class="chapter" data-level="F.2" data-path="statistics.html"><a href="statistics.html#statistics-1"><i class="fa fa-check"></i><b>F.2</b> Statistics</a></li>
+<li class="chapter" data-level="F.3" data-path="statistics.html"><a href="statistics.html#estimators"><i class="fa fa-check"></i><b>F.3</b> Estimators</a><ul>
+<li class="chapter" data-level="F.3.1" data-path="statistics.html"><a href="statistics.html#properties"><i class="fa fa-check"></i><b>F.3.1</b> Properties</a></li>
+<li class="chapter" data-level="F.3.2" data-path="statistics.html"><a href="statistics.html#example-mse-of-an-estimator"><i class="fa fa-check"></i><b>F.3.2</b> Example: MSE of an Estimator</a></li>
+<li class="chapter" data-level="F.3.3" data-path="statistics.html"><a href="statistics.html#estimation-methods"><i class="fa fa-check"></i><b>F.3.3</b> Estimation Methods</a></li>
+<li class="chapter" data-level="F.3.4" data-path="statistics.html"><a href="statistics.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>F.3.4</b> Maximum Likelihood Estimation</a></li>
+<li class="chapter" data-level="F.3.5" data-path="statistics.html"><a href="statistics.html#method-of-moments"><i class="fa fa-check"></i><b>F.3.5</b> Method of Moments</a></li>
+<li class="chapter" data-level="F.3.6" data-path="statistics.html"><a href="statistics.html#empirical-distribution-function"><i class="fa fa-check"></i><b>F.3.6</b> Empirical Distribution Function</a></li>
+</ul></li>
+<li class="chapter" data-level="F.4" data-path="statistics.html"><a href="statistics.html#source-23"><i class="fa fa-check"></i><b>F.4</b> Source</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://daviddalpiaz.org" target="blank">&copy; 2020 David Dalpiaz</a></li>
@@ -332,7 +352,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="linear-regression" class="section level1">
-<h1><span class="header-section-number">Chapter 6</span> Linear Regression</h1>
+<h1><span class="header-section-number">Chapter 2</span> Linear Regression</h1>
 <hr />
 <p>This chapter will discuss <strong>linear regression</strong> models, but for a very specific purpose: using linear regression models to make <strong>predictions</strong>.</p>
 <p>Specifically, we will discuss:</p>
@@ -342,8 +362,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Data splits to evaluate model performance for machine learning tasks.</li>
 </ul>
 <hr />
-<div id="reading-4" class="section level2">
-<h2><span class="header-section-number">6.1</span> Reading</h2>
+<div id="reading-1" class="section level2">
+<h2><span class="header-section-number">2.1</span> Reading</h2>
 <ul>
 <li><strong>Required:</strong> <a href="https://faculty.marshall.usc.edu/gareth-james/ISL/ISLR%20Seventh%20Printing.pdf">ISL Chapter 3</a>
 <ul>
@@ -358,7 +378,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <hr />
 </div>
 <div id="explanation-versus-prediction" class="section level2">
-<h2><span class="header-section-number">6.2</span> Explanation versus Prediction</h2>
+<h2><span class="header-section-number">2.2</span> Explanation versus Prediction</h2>
 <p>Before we even begin to discuss regression, we make a bold announcement: <strong>STAT 432 is not a course about inference.</strong> It is very possible that there will be <strong>zero</strong> causal claims in this book. While it would certainly be nice (but extremely difficult) to uncover causal relationships, our focus will be on predictive relationships.</p>
 <p>Suppose (although it is likely untrue) that there is a strong correlation between wearing a wrist watch, and car accidents. Depending on your frame of reference, you should view this information in very different ways.</p>
 <ul>
@@ -368,7 +388,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><em>Disclaimer:</em> Extremely high correlation should not simply be ignored. For example, there is a very high correlation between smoking and lung cancer. (Fun fact: <a href="https://en.wikipedia.org/wiki/Ronald_Fisher">RA Fisher</a>, the most famous statistician, did not believe that smoking caused cancer. It’s actually a part of a larger <a href="https://rss.onlinelibrary.wiley.com/doi/full/10.1111/j.1740-9713.2014.00765.x">fasinating story</a>.) However, this strong correlation is not proof that smoking causes lung cancer. Instead, additional study is needed to rule out confounders, establish mechanistic relationships, and more.</p>
 </div>
 <div id="setup" class="section level2">
-<h2><span class="header-section-number">6.3</span> Setup</h2>
+<h2><span class="header-section-number">2.3</span> Setup</h2>
 <p>We now introduce the <strong>regression</strong> task. Regression is a subset of a broader machine learning tasks called <em>supervised learning</em>, which also include <em>classification</em>. (We will return later to discuss supervised learning in general after getting through some specifics of regression and classification.)</p>
 <p>Stated simply, the regression tasks seeks to estimate (predict) a <strong>numeric</strong> quantity. For example:</p>
 <ul>
@@ -380,7 +400,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Each of these quantities is some numeric value. The goal of regression is to estimate (predict) these quantities when they are unknown through the use of additional, possibly correlated quantities.</p>
 </div>
 <div id="mathematical-setup" class="section level2">
-<h2><span class="header-section-number">6.4</span> Mathematical Setup</h2>
+<h2><span class="header-section-number">2.4</span> Mathematical Setup</h2>
 <p>To get a better grasp of what regression is, we move to defining the task mathematically. Consider a random variable <span class="math inline">\(Y\)</span> which represents a <strong>response</strong> (or outcome or target) variable, and <span class="math inline">\(p\)</span> <strong>feature</strong> variables <span class="math inline">\(\boldsymbol{X} = (X_1, X_2, \ldots, X_p)\)</span>. Features are also called covariates or predictors. (We find the “predictors” nomenclature to be problematic when discussing prediction tasks.)</p>
 <p>In the most common regression setup, we assume that the response variable <span class="math inline">\(Y\)</span> is some function of the features, plus some random noise.</p>
 <p><span class="math display">\[
@@ -415,7 +435,7 @@ R(Y, f(\boldsymbol{X})) \triangleq \mathbb{E}[L(Y, f(\boldsymbol{X}))] = \mathbb
 <p>We can now state the goal of the regression task: we want to <strong>estimate</strong> the <strong>regression function</strong>. How do we do that?</p>
 </div>
 <div id="linear-regression-models" class="section level2">
-<h2><span class="header-section-number">6.5</span> Linear Regression Models</h2>
+<h2><span class="header-section-number">2.5</span> Linear Regression Models</h2>
 <p>What do linear regression models <strong>do</strong>? They estimate the conditional mean of <span class="math inline">\(Y\)</span> given <span class="math inline">\(\boldsymbol{X}\)</span>! (How convenient.)</p>
 <p>Consider the following probability model</p>
 <p><span class="math display">\[
@@ -565,7 +585,7 @@ y
 \]</span></p>
 <p>This model is also flawed, but for a different reason. (Later we will say this model is too “flexible.”) After using least squares, we will obtain some <span class="math inline">\(\hat{\beta}_9\)</span> even though there is not a 9th degree term in the true regression function!</p>
 <p>Let’s take a look at this visually.</p>
-<p><img src="06-linear-regression_files/figure-html/unnamed-chunk-6-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="linear-regression_files/figure-html/unnamed-chunk-6-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>Here we see the three models fit to the data above. The dashed black curve is the true mean function, that is the true mean of <span class="math inline">\(Y\)</span> given <span class="math inline">\(x\)</span>, and the solid colored curves are the estimated mean functions.</p>
 <p>Now we ask the question: which of these models is best? Given these pictures, there are two criteria that we could consider.</p>
 <ul>
@@ -573,7 +593,7 @@ y
 <li>How close is the estimated regression (mean) function to the true regression (mean) function? (Degree 3 is best.)</li>
 </ul>
 <p>From the presentation here, it’s probably clear that the latter is actually what matters. We can demonstrate this by generating some “new” data.</p>
-<p><img src="06-linear-regression_files/figure-html/unnamed-chunk-8-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="linear-regression_files/figure-html/unnamed-chunk-8-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>These plots match the plots above, except newly simulated data is shown. (The regression functions were still estimated with the previous data.) Note that the degree 3 polynomial matches the data about the same as before. The degree 9 polynomial now correctly predicts none of the new data and makes some <strong>huge</strong> errors.</p>
 <p>We will define these concepts more generally later, but for now we note that:</p>
 <ul>
@@ -583,25 +603,25 @@ y
 <p>There’s a bit of a problem though! In practice, we don’t know the true mean function, and we don’t have the magical ability to simulate new data! Yikes! After we discuss a bit about how to fit these models in R, we’ll return to this issue. (Spoiler: Don’t fit the model to all the available data. Pretend the data you didn’t use is “new” when you evaluate models.)</p>
 </div>
 <div id="using-lm" class="section level2">
-<h2><span class="header-section-number">6.6</span> Using <code>lm()</code></h2>
+<h2><span class="header-section-number">2.6</span> Using <code>lm()</code></h2>
 <p>Before we continue, let’s consider a different data generating process. We first define this data generating process as an R function.</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1">gen_mlr_data =<span class="st"> </span><span class="cf">function</span>(<span class="dt">sample_size =</span> <span class="dv">250</span>) {</a>
-<a class="sourceLine" id="cb59-2" data-line-number="2">  x1 =<span class="st"> </span><span class="kw">round</span>(<span class="kw">runif</span>(<span class="dt">n =</span> sample_size), <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb59-3" data-line-number="3">  x2 =<span class="st"> </span><span class="kw">round</span>(<span class="kw">runif</span>(<span class="dt">n =</span> sample_size), <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb59-4" data-line-number="4">  x3 =<span class="st"> </span><span class="kw">round</span>(<span class="kw">runif</span>(<span class="dt">n =</span> sample_size), <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb59-5" data-line-number="5">  x4 =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>), <span class="dt">size =</span> sample_size, <span class="dt">replace =</span> <span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb59-6" data-line-number="6">  x5 =<span class="st"> </span><span class="kw">round</span>(<span class="kw">runif</span>(<span class="dt">n =</span> sample_size), <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb59-7" data-line-number="7">  x6 =<span class="st"> </span><span class="kw">round</span>(<span class="kw">runif</span>(<span class="dt">n =</span> sample_size), <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb59-8" data-line-number="8">  y =<span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span><span class="kw">sin</span>(x2) <span class="op">+</span><span class="st"> </span><span class="dv">3</span> <span class="op">*</span><span class="st"> </span>x3 <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb59-9" data-line-number="9"><span class="st">    </span><span class="dv">3</span> <span class="op">*</span><span class="st"> </span>(x4 <span class="op">==</span><span class="st"> &quot;B&quot;</span>) <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>(x4 <span class="op">==</span><span class="st"> &quot;C&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb59-10" data-line-number="10"><span class="st">    </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb59-11" data-line-number="11">  <span class="kw">tibble</span>(y, x1, x2, x3, x4, x5, x6)</a>
-<a class="sourceLine" id="cb59-12" data-line-number="12">}</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">gen_mlr_data =<span class="st"> </span><span class="cf">function</span>(<span class="dt">sample_size =</span> <span class="dv">250</span>) {</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">  x1 =<span class="st"> </span><span class="kw">round</span>(<span class="kw">runif</span>(<span class="dt">n =</span> sample_size), <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">  x2 =<span class="st"> </span><span class="kw">round</span>(<span class="kw">runif</span>(<span class="dt">n =</span> sample_size), <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">  x3 =<span class="st"> </span><span class="kw">round</span>(<span class="kw">runif</span>(<span class="dt">n =</span> sample_size), <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">  x4 =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>), <span class="dt">size =</span> sample_size, <span class="dt">replace =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">  x5 =<span class="st"> </span><span class="kw">round</span>(<span class="kw">runif</span>(<span class="dt">n =</span> sample_size), <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">  x6 =<span class="st"> </span><span class="kw">round</span>(<span class="kw">runif</span>(<span class="dt">n =</span> sample_size), <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">  y =<span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span><span class="kw">sin</span>(x2) <span class="op">+</span><span class="st"> </span><span class="dv">3</span> <span class="op">*</span><span class="st"> </span>x3 <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="st">    </span><span class="dv">3</span> <span class="op">*</span><span class="st"> </span>(x4 <span class="op">==</span><span class="st"> &quot;B&quot;</span>) <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>(x4 <span class="op">==</span><span class="st"> &quot;C&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="st">    </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">  <span class="kw">tibble</span>(y, x1, x2, x3, x4, x5, x6)</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">}</a></code></pre></div>
 <p>We then run the function and store the data that is returned.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb60-2" data-line-number="2">sim_mlr_data =<span class="st"> </span><span class="kw">gen_mlr_data</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">sim_mlr_data =<span class="st"> </span><span class="kw">gen_mlr_data</span>()</a></code></pre></div>
 <p>We then inspect the data.</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1"><span class="kw">head</span>(sim_mlr_data)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">head</span>(sim_mlr_data)</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 7
 ##       y    x1    x2    x3 x4       x5    x6
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -644,34 +664,34 @@ Y \mid \boldsymbol{X} \sim \text{N}(2 + 1\cdot x_1 + 1 \cdot \sin(x_2) + 3 \cdot
 \mu_4(\boldsymbol{x}) = \beta_0 + \beta_1 x_1 + \beta_2 \sin(x_2) + \beta_3 x_3^3 + \beta_{4B} x_{4B} + \beta_{4C} x_{4C}
 \]</span></p>
 <p>Now, finally, R!</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1">mod_<span class="dv">1</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x1, <span class="dt">data =</span> sim_mlr_data)</a>
-<a class="sourceLine" id="cb63-2" data-line-number="2"><span class="kw">coef</span>(mod_<span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">mod_<span class="dv">1</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x1, <span class="dt">data =</span> sim_mlr_data)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">coef</span>(mod_<span class="dv">1</span>)</a></code></pre></div>
 <pre><code>## (Intercept)          x1 
 ##   3.7834423   0.9530758</code></pre>
 <p>Nothing too interesting here about fitting Model 1. We see that the <code>coef()</code> function returns estimate of the <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> parameters defined above.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1">mod_<span class="dv">2</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span>x2, <span class="dt">data =</span> sim_mlr_data)</a>
-<a class="sourceLine" id="cb65-2" data-line-number="2"><span class="kw">coef</span>(mod_<span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">mod_<span class="dv">2</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span>x2, <span class="dt">data =</span> sim_mlr_data)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">coef</span>(mod_<span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## (Intercept)          x1          x2 
 ##   3.8747999   0.9400654  -0.1802538</code></pre>
 <p>Again, Model 2 isn’t too interesting. We see that the <code>coef()</code> function returns estimate of the <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span>, and <span class="math inline">\(\beta_2\)</span> parameters defined above.</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1">mod_<span class="dv">3</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> sim_mlr_data)</a>
-<a class="sourceLine" id="cb67-2" data-line-number="2"><span class="kw">coef</span>(mod_<span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">mod_<span class="dv">3</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> sim_mlr_data)</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw">coef</span>(mod_<span class="dv">3</span>)</a></code></pre></div>
 <pre><code>## (Intercept)          x1          x2          x3         x4B         x4C 
 ##  1.71015079  0.76017877  0.77637360  3.00479841  3.06812204 -1.93068734 
 ##          x5          x6 
 ## -0.12248770 -0.04797294</code></pre>
 <p>Now, Model 3, we see a couple interesting things. First, the formula syntax <code>y ~ .</code> fits a model with <code>y</code> as the response, and all other variables in the <code>sim_mlr_data</code> data frame (tibble) as features.</p>
 <p>Also note: <strong>we did not manually create the needed dummy variables!</strong> R did this for us!</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1"><span class="kw">levels</span>(sim_mlr_data<span class="op">$</span>x4)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">levels</span>(sim_mlr_data<span class="op">$</span>x4)</a></code></pre></div>
 <pre><code>## [1] &quot;A&quot; &quot;B&quot; &quot;C&quot;</code></pre>
 <p>Because <code>x4</code> is a factor variable, R uses the first level, <code>A</code>, as the reference level, and then creates dummy variables for the remaining levels. Cool!</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1">mod_<span class="dv">4</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(<span class="kw">sin</span>(x2)) <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(x3 <span class="op">^</span><span class="st"> </span><span class="dv">3</span>) <span class="op">+</span><span class="st"> </span>x4, <span class="dt">data =</span> sim_mlr_data)</a>
-<a class="sourceLine" id="cb71-2" data-line-number="2"><span class="kw">coef</span>(mod_<span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">mod_<span class="dv">4</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(<span class="kw">sin</span>(x2)) <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(x3 <span class="op">^</span><span class="st"> </span><span class="dv">3</span>) <span class="op">+</span><span class="st"> </span>x4, <span class="dt">data =</span> sim_mlr_data)</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="kw">coef</span>(mod_<span class="dv">4</span>)</a></code></pre></div>
 <pre><code>## (Intercept)          x1  I(sin(x2))     I(x3^3)         x4B         x4C 
 ##   2.3435702   0.8176247   0.9159963   3.0446314   3.0369950  -1.9421931</code></pre>
 <p>Our last model, <code>mod_4</code> is the most interesting. It makes use of the inhibit function, <code>I()</code>. This allows for on-the-fly feature engineering based on available features. We’re creating new features via R’s formula syntax as we fit the model.</p>
 <p>To see why this is necessary, consider the following:</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" data-line-number="1"><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>(x1 <span class="op">+</span><span class="st"> </span>x2) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">data =</span> sim_mlr_data)</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>(x1 <span class="op">+</span><span class="st"> </span>x2) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">data =</span> sim_mlr_data)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = y ~ (x1 + x2)^2, data = sim_mlr_data)
@@ -686,7 +706,7 @@ Y \mid \boldsymbol{X} \sim \text{N}(2 + 1\cdot x_1 + 1 \cdot \sin(x_2) + 3 \cdot
 </ul>
 <p>For the first half of this book, we will always keep the data mostly untouched, and rely heavily on the use of R’s formula syntax.</p>
 <p>If you are ever interested in what’s happening under the hood when you use the formula syntax, and you recall the linear algebra necessary to perform linear regression, the <code>model.matrix()</code> function will be useful.</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">model.matrix</span>(mod_<span class="dv">4</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">model.matrix</span>(mod_<span class="dv">4</span>))</a></code></pre></div>
 <pre><code>##   (Intercept)   x1 I(sin(x2))  I(x3^3) x4B x4C
 ## 1           1 0.91 0.32404303 0.002744   0   0
 ## 2           1 0.94 0.18885889 0.005832   1   0
@@ -714,7 +734,7 @@ Y \mid \boldsymbol{X} \sim \text{N}(2 + 1\cdot x_1 + 1 \cdot \sin(x_2) + 3 \cdot
 <li><span class="math inline">\(\beta_6 = 0\)</span> (<span class="math inline">\(x_6\)</span> is not used in the true mean function.)</li>
 </ul>
 <p>We also have the estimated coefficients from <code>mod_4</code>.</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1"><span class="kw">coef</span>(mod_<span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">coef</span>(mod_<span class="dv">4</span>)</a></code></pre></div>
 <pre><code>## (Intercept)          x1  I(sin(x2))     I(x3^3)         x4B         x4C 
 ##   2.3435702   0.8176247   0.9159963   3.0446314   3.0369950  -1.9421931</code></pre>
 <ul>
@@ -735,12 +755,12 @@ Y \mid \boldsymbol{X} \sim \text{N}(2 + 1\cdot x_1 + 1 \cdot \sin(x_2) + 3 \cdot
 <p>Note that the other models are “bad” in this case because they are either missing features (<code>mod_1</code> and <code>mod_2</code>) or the are both missing features and contain unnecessary features <code>(mod_3</code>).</p>
 </div>
 <div id="the-predict-function" class="section level2">
-<h2><span class="header-section-number">6.7</span> The <code>predict()</code> Function</h2>
+<h2><span class="header-section-number">2.7</span> The <code>predict()</code> Function</h2>
 <p>We stated previously that fitting a linear regression model means that we are learning the regression (mean) <strong>function</strong>. Now that we fit and stored some models, how do we access these estimated regression (mean) functions? The <code>predict()</code> function!</p>
 <p>The <code>predict()</code> function will be the workhorse of STAT 432. Let’s see how to use it with models fit using the <code>lm()</code> function.</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb79-2" data-line-number="2">new_obs =<span class="st"> </span><span class="kw">gen_mlr_data</span>(<span class="dt">sample_size =</span> <span class="dv">1</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1">new_obs</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">new_obs =<span class="st"> </span><span class="kw">gen_mlr_data</span>(<span class="dt">sample_size =</span> <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">new_obs</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 7
 ##       y    x1    x2    x3 x4       x5    x6
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -766,7 +786,7 @@ X_5 = 0.6,
 X_6 = 0.6]
 \]</span></p>
 <p>The <code>predict()</code> function to the rescue!</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1"><span class="kw">predict</span>(mod_<span class="dv">1</span>, new_obs)</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">predict</span>(mod_<span class="dv">1</span>, new_obs)</a></code></pre></div>
 <pre><code>##        1 
 ## 3.945465</code></pre>
 <p>What’s being returned here?</p>
@@ -774,7 +794,7 @@ X_6 = 0.6]
 \hat{\mu}_1(\texttt{new_obs}) = \hat{\mathbb{E}}[Y \mid \boldsymbol{X} = \texttt{new_obs}] = 3.9454652
 \]</span></p>
 <p>The predict function <strong>is</strong> essentially the estimated regression (mean) function! Supply a different model, then you get that estimated regression (mean) function.</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1"><span class="kw">predict</span>(mod_<span class="dv">4</span>, new_obs)</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw">predict</span>(mod_<span class="dv">4</span>, new_obs)</a></code></pre></div>
 <pre><code>##        1 
 ## 1.370883</code></pre>
 <p>What’s being returned here?</p>
@@ -783,9 +803,9 @@ X_6 = 0.6]
 \]</span></p>
 <p>We could compare these two estimates of the conditional mean of <span class="math inline">\(Y\)</span> to the true value of <code>y</code> observed in the observation. More on that in the next section.</p>
 <p>If given an entire dataset, instead of a single observation, <code>predict()</code> returns the estimated conditional mean of each observation.</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">9</span>)</a>
-<a class="sourceLine" id="cb86-2" data-line-number="2">some_more_data =<span class="st"> </span><span class="kw">gen_mlr_data</span>(<span class="dt">sample_size =</span> <span class="dv">10</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" data-line-number="1"><span class="kw">predict</span>(mod_<span class="dv">4</span>, some_more_data)</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">9</span>)</a>
+<a class="sourceLine" id="cb28-2" data-line-number="2">some_more_data =<span class="st"> </span><span class="kw">gen_mlr_data</span>(<span class="dt">sample_size =</span> <span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw">predict</span>(mod_<span class="dv">4</span>, some_more_data)</a></code></pre></div>
 <pre><code>##         1         2         3         4         5         6         7         8 
 ## 7.8896349 5.4061018 1.3788387 0.8560024 6.6246872 8.2203544 3.2140060 3.5738889 
 ##         9        10 
@@ -794,7 +814,7 @@ X_6 = 0.6]
 <p>A warning: <strong>Do not <em>name</em> the second argument to the predict function.</strong> This will cause issues because sometimes the name of that argument is <code>newdata</code>, as it is here, but sometimes it is <code>data</code>. If you use the wrong name, bad things will happen. It is safer to simply never name this argument. (However, in general, arguments after the first should be named. The <code>predict()</code> function is the exception.)</p>
 </div>
 <div id="data-splitting" class="section level2">
-<h2><span class="header-section-number">6.8</span> Data Splitting</h2>
+<h2><span class="header-section-number">2.8</span> Data Splitting</h2>
 <p>(Note: Many readers will have possibly seen some machine learning previously. <strong>For now, please pretend that you have never heard of or seen cross-validation</strong>. Cross-validation will clutter the initial introduction of many concepts. We will return to and formalize it later.)</p>
 <p>OK. So now we can fit models, and make predictions (create estimates of the conditional mean of <span class="math inline">\(Y\)</span> given values of the features), how do we evaluate how well our models perform, <strong>without</strong> knowing the true model!</p>
 <p>First, let’s state a somewhat specific goal. We would like to train models that <strong>generalize</strong> well, that is, perform well on “new” or “unseen” data that was <strong>not</strong> used to train the model.</p>
@@ -837,7 +857,7 @@ X_6 = 0.6]
 <p>Now that we have data for estimation, and validation, we need some <strong>metrics</strong> for evaluating these models.</p>
 </div>
 <div id="regression-metrics" class="section level2">
-<h2><span class="header-section-number">6.9</span> Regression Metrics</h2>
+<h2><span class="header-section-number">2.9</span> Regression Metrics</h2>
 <p>If our goal is to “predict” then we want small errors. In general there are two types of errors we consider:</p>
 <ul>
 <li>Squared Errors: <span class="math inline">\((y_i - \hat{\mu}(\boldsymbol{x})) ^2\)</span></li>
@@ -872,82 +892,82 @@ X_6 = 0.6]
 \]</span></p>
 <p>For the rest of this chapter, we will largely ignore train error. It’s a bit confusing, since it doesn’t use the full training data! However, think of training error this way: training error evaluates how well a model performs on the data used to fit the model.</p>
 <p>Let’s return to the <code>sim_mlr_data</code> data and apply these splits and metrics to this data.</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" data-line-number="1"><span class="co"># test-train split</span></a>
-<a class="sourceLine" id="cb89-2" data-line-number="2">mlr_trn_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(sim_mlr_data), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(sim_mlr_data))</a>
-<a class="sourceLine" id="cb89-3" data-line-number="3">mlr_trn =<span class="st"> </span>sim_mlr_data[mlr_trn_idx, ]</a>
-<a class="sourceLine" id="cb89-4" data-line-number="4">mlr_tst =<span class="st"> </span>sim_mlr_data[<span class="op">-</span>mlr_trn_idx, ]</a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="co"># test-train split</span></a>
+<a class="sourceLine" id="cb31-2" data-line-number="2">mlr_trn_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(sim_mlr_data), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(sim_mlr_data))</a>
+<a class="sourceLine" id="cb31-3" data-line-number="3">mlr_trn =<span class="st"> </span>sim_mlr_data[mlr_trn_idx, ]</a>
+<a class="sourceLine" id="cb31-4" data-line-number="4">mlr_tst =<span class="st"> </span>sim_mlr_data[<span class="op">-</span>mlr_trn_idx, ]</a></code></pre></div>
 <p>Here we randomly select 80% of the rows of the full data, and store these indices as <code>mlr_trn_idx</code>. We then create the <code>mlr_trn</code> and <code>mlr_tst</code> datasets by either selecting or anti-selecting these rows from the original dataset.</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1"><span class="co"># estimation-validation split</span></a>
-<a class="sourceLine" id="cb90-2" data-line-number="2">mlr_est_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(mlr_trn), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(mlr_trn))</a>
-<a class="sourceLine" id="cb90-3" data-line-number="3">mlr_est =<span class="st"> </span>mlr_trn[mlr_est_idx, ]</a>
-<a class="sourceLine" id="cb90-4" data-line-number="4">mlr_val =<span class="st"> </span>mlr_trn[<span class="op">-</span>mlr_est_idx, ]</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="co"># estimation-validation split</span></a>
+<a class="sourceLine" id="cb32-2" data-line-number="2">mlr_est_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(mlr_trn), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(mlr_trn))</a>
+<a class="sourceLine" id="cb32-3" data-line-number="3">mlr_est =<span class="st"> </span>mlr_trn[mlr_est_idx, ]</a>
+<a class="sourceLine" id="cb32-4" data-line-number="4">mlr_val =<span class="st"> </span>mlr_trn[<span class="op">-</span>mlr_est_idx, ]</a></code></pre></div>
 <p>We then repeat the process from above within the train data.</p>
 <p>Now, let’s compare <code>mod_3</code> and <code>mod_4</code>. To do so, we first fit both models to the estimation data.</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1">mod_<span class="dv">3</span>_est =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> mlr_est)</a>
-<a class="sourceLine" id="cb91-2" data-line-number="2">mod_<span class="dv">4</span>_est =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(<span class="kw">sin</span>(x2)) <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(x3 <span class="op">^</span><span class="st"> </span><span class="dv">3</span>) <span class="op">+</span><span class="st"> </span>x4, <span class="dt">data =</span> mlr_est)</a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">mod_<span class="dv">3</span>_est =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> mlr_est)</a>
+<a class="sourceLine" id="cb33-2" data-line-number="2">mod_<span class="dv">4</span>_est =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(<span class="kw">sin</span>(x2)) <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(x3 <span class="op">^</span><span class="st"> </span><span class="dv">3</span>) <span class="op">+</span><span class="st"> </span>x4, <span class="dt">data =</span> mlr_est)</a></code></pre></div>
 <p>We then calculate the validation error for both. Because we will do it so often, we go ahead and write a function to calculate RMSE, given vectors of the actual values (from the data used to evaluate) and the predictions from the model.</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1">calc_rmse =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</a>
-<a class="sourceLine" id="cb92-2" data-line-number="2">  <span class="kw">sqrt</span>(<span class="kw">mean</span>((actual <span class="op">-</span><span class="st"> </span>predicted) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb92-3" data-line-number="3">}</a></code></pre></div>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1"><span class="co"># calculate validation RMSE, model 3</span></a>
-<a class="sourceLine" id="cb93-2" data-line-number="2"><span class="kw">calc_rmse</span>(<span class="dt">actual =</span> mlr_val<span class="op">$</span>y,</a>
-<a class="sourceLine" id="cb93-3" data-line-number="3">          <span class="dt">predicted =</span> <span class="kw">predict</span>(mod_<span class="dv">3</span>_est, mlr_val))</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">calc_rmse =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</a>
+<a class="sourceLine" id="cb34-2" data-line-number="2">  <span class="kw">sqrt</span>(<span class="kw">mean</span>((actual <span class="op">-</span><span class="st"> </span>predicted) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb34-3" data-line-number="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="co"># calculate validation RMSE, model 3</span></a>
+<a class="sourceLine" id="cb35-2" data-line-number="2"><span class="kw">calc_rmse</span>(<span class="dt">actual =</span> mlr_val<span class="op">$</span>y,</a>
+<a class="sourceLine" id="cb35-3" data-line-number="3">          <span class="dt">predicted =</span> <span class="kw">predict</span>(mod_<span class="dv">3</span>_est, mlr_val))</a></code></pre></div>
 <pre><code>## [1] 0.5788282</code></pre>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" data-line-number="1"><span class="co"># calculate validation RMSE, model 4</span></a>
-<a class="sourceLine" id="cb95-2" data-line-number="2"><span class="kw">calc_rmse</span>(<span class="dt">actual =</span> mlr_val<span class="op">$</span>y,</a>
-<a class="sourceLine" id="cb95-3" data-line-number="3">          <span class="dt">predicted =</span> <span class="kw">predict</span>(mod_<span class="dv">4</span>_est, mlr_val))</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="co"># calculate validation RMSE, model 4</span></a>
+<a class="sourceLine" id="cb37-2" data-line-number="2"><span class="kw">calc_rmse</span>(<span class="dt">actual =</span> mlr_val<span class="op">$</span>y,</a>
+<a class="sourceLine" id="cb37-3" data-line-number="3">          <span class="dt">predicted =</span> <span class="kw">predict</span>(mod_<span class="dv">4</span>_est, mlr_val))</a></code></pre></div>
 <pre><code>## [1] 0.5452852</code></pre>
 <p>Here we see that <code>mod_4_est</code> achieves a lower validation error, so we move forward with this model. We then refit to the full train data, then evaluate on test.</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" data-line-number="1">mod_<span class="dv">4</span>_trn =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(<span class="kw">sin</span>(x2)) <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(x3 <span class="op">^</span><span class="st"> </span><span class="dv">3</span>) <span class="op">+</span><span class="st"> </span>x4, <span class="dt">data =</span> mlr_trn)</a></code></pre></div>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" data-line-number="1"><span class="co"># calculate test RMSE, model 4</span></a>
-<a class="sourceLine" id="cb98-2" data-line-number="2"><span class="kw">calc_rmse</span>(<span class="dt">actual =</span> mlr_tst<span class="op">$</span>y,</a>
-<a class="sourceLine" id="cb98-3" data-line-number="3">          <span class="dt">predicted =</span> <span class="kw">predict</span>(mod_<span class="dv">4</span>_trn, mlr_tst))</a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">mod_<span class="dv">4</span>_trn =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(<span class="kw">sin</span>(x2)) <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(x3 <span class="op">^</span><span class="st"> </span><span class="dv">3</span>) <span class="op">+</span><span class="st"> </span>x4, <span class="dt">data =</span> mlr_trn)</a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="co"># calculate test RMSE, model 4</span></a>
+<a class="sourceLine" id="cb40-2" data-line-number="2"><span class="kw">calc_rmse</span>(<span class="dt">actual =</span> mlr_tst<span class="op">$</span>y,</a>
+<a class="sourceLine" id="cb40-3" data-line-number="3">          <span class="dt">predicted =</span> <span class="kw">predict</span>(mod_<span class="dv">4</span>_trn, mlr_tst))</a></code></pre></div>
 <pre><code>## [1] 0.538057</code></pre>
 <p>We ignore the validation metrics. (we already used them for selecting a model.) This test RMSE is our estimate of how well our selected model will perform on unseen data, on average (in a squared error sense).</p>
 <p>Note that for selecting a model there is no difference between MSE and RMSE, but for the sake of understanding, RMSE has preferential units, the same units as the response variables. (Whereas MSE has units squared.) We will always report RMSE.</p>
 <div id="graphical-evaluation" class="section level3">
-<h3><span class="header-section-number">6.9.1</span> Graphical Evaluation</h3>
+<h3><span class="header-section-number">2.9.1</span> Graphical Evaluation</h3>
 <p>In addition to numeric evaluations, we can evaluate a regression model graphical, in particular with a <strong>predicted versus actual</strong> plot.</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" data-line-number="1"><span class="kw">plot</span>(</a>
-<a class="sourceLine" id="cb100-2" data-line-number="2">  <span class="dt">x =</span> mlr_tst<span class="op">$</span>y,</a>
-<a class="sourceLine" id="cb100-3" data-line-number="3">  <span class="dt">y =</span> <span class="kw">predict</span>(mod_<span class="dv">4</span>_trn, mlr_tst),</a>
-<a class="sourceLine" id="cb100-4" data-line-number="4">  <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,</a>
-<a class="sourceLine" id="cb100-5" data-line-number="5">  <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">10</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb100-6" data-line-number="6">  <span class="dt">main =</span> <span class="st">&quot;Predicted vs Actual, Model 4, Test Data&quot;</span>,</a>
-<a class="sourceLine" id="cb100-7" data-line-number="7">  <span class="dt">xlab =</span> <span class="st">&quot;Actual&quot;</span>,</a>
-<a class="sourceLine" id="cb100-8" data-line-number="8">  <span class="dt">ylab =</span> <span class="st">&quot;Predicted&quot;</span></a>
-<a class="sourceLine" id="cb100-9" data-line-number="9">)</a>
-<a class="sourceLine" id="cb100-10" data-line-number="10"><span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb100-11" data-line-number="11"><span class="kw">grid</span>()</a></code></pre></div>
-<p><img src="06-linear-regression_files/figure-html/unnamed-chunk-34-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw">plot</span>(</a>
+<a class="sourceLine" id="cb42-2" data-line-number="2">  <span class="dt">x =</span> mlr_tst<span class="op">$</span>y,</a>
+<a class="sourceLine" id="cb42-3" data-line-number="3">  <span class="dt">y =</span> <span class="kw">predict</span>(mod_<span class="dv">4</span>_trn, mlr_tst),</a>
+<a class="sourceLine" id="cb42-4" data-line-number="4">  <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,</a>
+<a class="sourceLine" id="cb42-5" data-line-number="5">  <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">10</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb42-6" data-line-number="6">  <span class="dt">main =</span> <span class="st">&quot;Predicted vs Actual, Model 4, Test Data&quot;</span>,</a>
+<a class="sourceLine" id="cb42-7" data-line-number="7">  <span class="dt">xlab =</span> <span class="st">&quot;Actual&quot;</span>,</a>
+<a class="sourceLine" id="cb42-8" data-line-number="8">  <span class="dt">ylab =</span> <span class="st">&quot;Predicted&quot;</span></a>
+<a class="sourceLine" id="cb42-9" data-line-number="9">)</a>
+<a class="sourceLine" id="cb42-10" data-line-number="10"><span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb42-11" data-line-number="11"><span class="kw">grid</span>()</a></code></pre></div>
+<p><img src="linear-regression_files/figure-html/unnamed-chunk-34-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>The closer to the line the better. Also, the less of a pattern the better. In other words, this plot will help diagnose if our model is making similar sized errors for all predictions, or if there are systematic differences.</p>
 <p>This might get you thinking about “checking the assumptions” of a linear model. Assessing things like: normality, constant variance, etc. Note that while these are nice things to have, we aren’t really concerned with these things. If we care how well our model <em>predicts</em>, then we will directly evaluate how well it predicts. Least squares is least squares. It minimizes errors. It doesn’t care about model assumptions.</p>
 <hr />
 </div>
 </div>
 <div id="example-simple-simulated-data" class="section level2">
-<h2><span class="header-section-number">6.10</span> Example: “Simple” Simulated Data</h2>
+<h2><span class="header-section-number">2.10</span> Example: “Simple” Simulated Data</h2>
 <p>Let’s return to our initial dataset with a single feature <span class="math inline">\(x\)</span>. This time we’ll generate more data, and then split it.</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" data-line-number="1">cubic_mean =<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb101-2" data-line-number="2">  <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x <span class="op">-</span><span class="st"> </span><span class="dv">3</span> <span class="op">*</span><span class="st"> </span>x <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">*</span><span class="st"> </span>x <span class="op">^</span><span class="st"> </span><span class="dv">3</span></a>
-<a class="sourceLine" id="cb101-3" data-line-number="3">}</a></code></pre></div>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" data-line-number="1">gen_slr_data =<span class="st"> </span><span class="cf">function</span>(<span class="dt">sample_size =</span> <span class="dv">100</span>, mu) {</a>
-<a class="sourceLine" id="cb102-2" data-line-number="2">  x =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size, <span class="dt">min =</span> <span class="dv">-1</span>, <span class="dt">max =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb102-3" data-line-number="3">  y =<span class="st"> </span><span class="kw">mu</span>(x) <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size)</a>
-<a class="sourceLine" id="cb102-4" data-line-number="4">  <span class="kw">tibble</span>(x, y)</a>
-<a class="sourceLine" id="cb102-5" data-line-number="5">}</a></code></pre></div>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb103-2" data-line-number="2">sim_slr_data =<span class="st"> </span><span class="kw">gen_slr_data</span>(<span class="dt">sample_size =</span> <span class="dv">100</span>, <span class="dt">mu =</span> cubic_mean)</a></code></pre></div>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1"><span class="co"># test-train split</span></a>
-<a class="sourceLine" id="cb104-2" data-line-number="2">slr_trn_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(sim_slr_data), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(sim_slr_data))</a>
-<a class="sourceLine" id="cb104-3" data-line-number="3">slr_trn =<span class="st"> </span>sim_slr_data[slr_trn_idx, ]</a>
-<a class="sourceLine" id="cb104-4" data-line-number="4">slr_tst =<span class="st"> </span>sim_slr_data[<span class="op">-</span>slr_trn_idx, ]</a></code></pre></div>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" data-line-number="1"><span class="co"># estimation-validation split</span></a>
-<a class="sourceLine" id="cb105-2" data-line-number="2">slr_est_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(slr_trn), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(slr_trn))</a>
-<a class="sourceLine" id="cb105-3" data-line-number="3">slr_est =<span class="st"> </span>slr_trn[slr_est_idx, ]</a>
-<a class="sourceLine" id="cb105-4" data-line-number="4">slr_val =<span class="st"> </span>slr_trn[<span class="op">-</span>slr_est_idx, ]</a></code></pre></div>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" data-line-number="1"><span class="co"># check data</span></a>
-<a class="sourceLine" id="cb106-2" data-line-number="2"><span class="kw">head</span>(slr_trn, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1">cubic_mean =<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb43-2" data-line-number="2">  <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x <span class="op">-</span><span class="st"> </span><span class="dv">3</span> <span class="op">*</span><span class="st"> </span>x <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">*</span><span class="st"> </span>x <span class="op">^</span><span class="st"> </span><span class="dv">3</span></a>
+<a class="sourceLine" id="cb43-3" data-line-number="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">gen_slr_data =<span class="st"> </span><span class="cf">function</span>(<span class="dt">sample_size =</span> <span class="dv">100</span>, mu) {</a>
+<a class="sourceLine" id="cb44-2" data-line-number="2">  x =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size, <span class="dt">min =</span> <span class="dv">-1</span>, <span class="dt">max =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb44-3" data-line-number="3">  y =<span class="st"> </span><span class="kw">mu</span>(x) <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size)</a>
+<a class="sourceLine" id="cb44-4" data-line-number="4">  <span class="kw">tibble</span>(x, y)</a>
+<a class="sourceLine" id="cb44-5" data-line-number="5">}</a></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb45-2" data-line-number="2">sim_slr_data =<span class="st"> </span><span class="kw">gen_slr_data</span>(<span class="dt">sample_size =</span> <span class="dv">100</span>, <span class="dt">mu =</span> cubic_mean)</a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="co"># test-train split</span></a>
+<a class="sourceLine" id="cb46-2" data-line-number="2">slr_trn_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(sim_slr_data), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(sim_slr_data))</a>
+<a class="sourceLine" id="cb46-3" data-line-number="3">slr_trn =<span class="st"> </span>sim_slr_data[slr_trn_idx, ]</a>
+<a class="sourceLine" id="cb46-4" data-line-number="4">slr_tst =<span class="st"> </span>sim_slr_data[<span class="op">-</span>slr_trn_idx, ]</a></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="co"># estimation-validation split</span></a>
+<a class="sourceLine" id="cb47-2" data-line-number="2">slr_est_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(slr_trn), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(slr_trn))</a>
+<a class="sourceLine" id="cb47-3" data-line-number="3">slr_est =<span class="st"> </span>slr_trn[slr_est_idx, ]</a>
+<a class="sourceLine" id="cb47-4" data-line-number="4">slr_val =<span class="st"> </span>slr_trn[<span class="op">-</span>slr_est_idx, ]</a></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="co"># check data</span></a>
+<a class="sourceLine" id="cb48-2" data-line-number="2"><span class="kw">head</span>(slr_trn, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 10 x 2
 ##         x      y
 ##     &lt;dbl&gt;  &lt;dbl&gt;
@@ -962,19 +982,19 @@ X_6 = 0.6]
 ##  9 -0.664  0.269
 ## 10 -0.777 -2.02</code></pre>
 <p>This time let’s evaluate nine different models. Polynomial models from degree 1 to 9. We fit each model to the estimation data, and store the results in a list.</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" data-line-number="1">poly_mod_est_list =<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb108-2" data-line-number="2">  <span class="dt">poly_mod_1_est =</span> <span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">1</span>), <span class="dt">data =</span> slr_est),</a>
-<a class="sourceLine" id="cb108-3" data-line-number="3">  <span class="dt">poly_mod_2_est =</span> <span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">2</span>), <span class="dt">data =</span> slr_est),</a>
-<a class="sourceLine" id="cb108-4" data-line-number="4">  <span class="dt">poly_mod_3_est =</span> <span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">3</span>), <span class="dt">data =</span> slr_est),</a>
-<a class="sourceLine" id="cb108-5" data-line-number="5">  <span class="dt">poly_mod_4_est =</span> <span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">4</span>), <span class="dt">data =</span> slr_est),</a>
-<a class="sourceLine" id="cb108-6" data-line-number="6">  <span class="dt">poly_mod_5_est =</span> <span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">5</span>), <span class="dt">data =</span> slr_est),</a>
-<a class="sourceLine" id="cb108-7" data-line-number="7">  <span class="dt">poly_mod_6_est =</span> <span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">6</span>), <span class="dt">data =</span> slr_est),</a>
-<a class="sourceLine" id="cb108-8" data-line-number="8">  <span class="dt">poly_mod_7_est =</span> <span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">7</span>), <span class="dt">data =</span> slr_est),</a>
-<a class="sourceLine" id="cb108-9" data-line-number="9">  <span class="dt">poly_mod_8_est =</span> <span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">8</span>), <span class="dt">data =</span> slr_est),</a>
-<a class="sourceLine" id="cb108-10" data-line-number="10">  <span class="dt">poly_mod_9_est =</span> <span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">9</span>), <span class="dt">data =</span> slr_est)</a>
-<a class="sourceLine" id="cb108-11" data-line-number="11">)</a></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1">poly_mod_est_list =<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb50-2" data-line-number="2">  <span class="dt">poly_mod_1_est =</span> <span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">1</span>), <span class="dt">data =</span> slr_est),</a>
+<a class="sourceLine" id="cb50-3" data-line-number="3">  <span class="dt">poly_mod_2_est =</span> <span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">2</span>), <span class="dt">data =</span> slr_est),</a>
+<a class="sourceLine" id="cb50-4" data-line-number="4">  <span class="dt">poly_mod_3_est =</span> <span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">3</span>), <span class="dt">data =</span> slr_est),</a>
+<a class="sourceLine" id="cb50-5" data-line-number="5">  <span class="dt">poly_mod_4_est =</span> <span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">4</span>), <span class="dt">data =</span> slr_est),</a>
+<a class="sourceLine" id="cb50-6" data-line-number="6">  <span class="dt">poly_mod_5_est =</span> <span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">5</span>), <span class="dt">data =</span> slr_est),</a>
+<a class="sourceLine" id="cb50-7" data-line-number="7">  <span class="dt">poly_mod_6_est =</span> <span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">6</span>), <span class="dt">data =</span> slr_est),</a>
+<a class="sourceLine" id="cb50-8" data-line-number="8">  <span class="dt">poly_mod_7_est =</span> <span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">7</span>), <span class="dt">data =</span> slr_est),</a>
+<a class="sourceLine" id="cb50-9" data-line-number="9">  <span class="dt">poly_mod_8_est =</span> <span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">8</span>), <span class="dt">data =</span> slr_est),</a>
+<a class="sourceLine" id="cb50-10" data-line-number="10">  <span class="dt">poly_mod_9_est =</span> <span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">9</span>), <span class="dt">data =</span> slr_est)</a>
+<a class="sourceLine" id="cb50-11" data-line-number="11">)</a></code></pre></div>
 <p>So, for example, to access the third model, we would use</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" data-line-number="1">poly_mod_est_list[[<span class="dv">3</span>]]</a></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">poly_mod_est_list[[<span class="dv">3</span>]]</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = y ~ poly(x, degree = 3), data = slr_est)
@@ -985,9 +1005,9 @@ X_6 = 0.6]
 ## poly(x, degree = 3)3  
 ##               6.7638</code></pre>
 <p>But let’s back up. That code was terrible to write. Too much repeated code. Consider the following code</p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" data-line-number="1">poly_mod_est_list =<span class="st"> </span><span class="kw">map</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="op">~</span><span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> .x), <span class="dt">data =</span> slr_est))</a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1">poly_mod_est_list =<span class="st"> </span><span class="kw">map</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="op">~</span><span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> .x), <span class="dt">data =</span> slr_est))</a></code></pre></div>
 <p>This accomplishes the same task, but is much cleaner!</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" data-line-number="1">poly_mod_est_list[[<span class="dv">3</span>]]</a></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1">poly_mod_est_list[[<span class="dv">3</span>]]</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = y ~ poly(x, degree = .x), data = slr_est)
@@ -998,12 +1018,12 @@ X_6 = 0.6]
 ## poly(x, degree = .x)3  
 ##                6.7638</code></pre>
 <p>Here we are using the <code>map()</code> function from the <code>purrr</code> package. The <code>~</code> here is used to create a function in place. We’ll consider another way to make it a bit clearer, that is, without writing the function within <code>map()</code>.</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" data-line-number="1">fit_poly_mod_to_est_data =<span class="st"> </span><span class="cf">function</span>(d) {</a>
-<a class="sourceLine" id="cb114-2" data-line-number="2">  <span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> d), <span class="dt">data =</span> slr_est)</a>
-<a class="sourceLine" id="cb114-3" data-line-number="3">}</a></code></pre></div>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" data-line-number="1">poly_mod_est_list =<span class="st"> </span><span class="kw">map</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, fit_poly_mod_to_est_data)</a></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1">fit_poly_mod_to_est_data =<span class="st"> </span><span class="cf">function</span>(d) {</a>
+<a class="sourceLine" id="cb56-2" data-line-number="2">  <span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> d), <span class="dt">data =</span> slr_est)</a>
+<a class="sourceLine" id="cb56-3" data-line-number="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1">poly_mod_est_list =<span class="st"> </span><span class="kw">map</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, fit_poly_mod_to_est_data)</a></code></pre></div>
 <p>Again, the same thing.</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb116-1" data-line-number="1">poly_mod_est_list[[<span class="dv">3</span>]]</a></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1">poly_mod_est_list[[<span class="dv">3</span>]]</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = y ~ poly(x, degree = d), data = slr_est)
@@ -1014,54 +1034,54 @@ X_6 = 0.6]
 ## poly(x, degree = d)3  
 ##               6.7638</code></pre>
 <p>We’ll continue to use this <code>map()</code> function throughout. We’ll explain more and more as we go. Note that the <code>map()</code> function returns a list. The following makes predictions for each of the models, once using the estimation data, once using validation.</p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" data-line-number="1">poly_mod_est_pred =<span class="st"> </span><span class="kw">map</span>(poly_mod_est_list, predict, slr_est)</a>
-<a class="sourceLine" id="cb118-2" data-line-number="2">poly_mod_val_pred =<span class="st"> </span><span class="kw">map</span>(poly_mod_est_list, predict, slr_val)</a></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1">poly_mod_est_pred =<span class="st"> </span><span class="kw">map</span>(poly_mod_est_list, predict, slr_est)</a>
+<a class="sourceLine" id="cb60-2" data-line-number="2">poly_mod_val_pred =<span class="st"> </span><span class="kw">map</span>(poly_mod_est_list, predict, slr_val)</a></code></pre></div>
 <p>If instead we wanted to return a numeric vector, we would use, <code>map_dbl()</code>. Let’s use this to calculate train and validation RMSE.</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" data-line-number="1"><span class="co"># calculate train RMSE</span></a>
-<a class="sourceLine" id="cb119-2" data-line-number="2">slr_est_rmse =<span class="st"> </span><span class="kw">map_dbl</span>(poly_mod_est_pred, calc_rmse, <span class="dt">actual =</span> slr_est<span class="op">$</span>y) </a>
-<a class="sourceLine" id="cb119-3" data-line-number="3"><span class="co"># calculate validation RMSE</span></a>
-<a class="sourceLine" id="cb119-4" data-line-number="4">slr_val_rmse =<span class="st"> </span><span class="kw">map_dbl</span>(poly_mod_val_pred, calc_rmse, <span class="dt">actual =</span> slr_val<span class="op">$</span>y) </a></code></pre></div>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb120-1" data-line-number="1">slr_est_rmse</a></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1"><span class="co"># calculate train RMSE</span></a>
+<a class="sourceLine" id="cb61-2" data-line-number="2">slr_est_rmse =<span class="st"> </span><span class="kw">map_dbl</span>(poly_mod_est_pred, calc_rmse, <span class="dt">actual =</span> slr_est<span class="op">$</span>y) </a>
+<a class="sourceLine" id="cb61-3" data-line-number="3"><span class="co"># calculate validation RMSE</span></a>
+<a class="sourceLine" id="cb61-4" data-line-number="4">slr_val_rmse =<span class="st"> </span><span class="kw">map_dbl</span>(poly_mod_val_pred, calc_rmse, <span class="dt">actual =</span> slr_val<span class="op">$</span>y) </a></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1">slr_est_rmse</a></code></pre></div>
 <pre><code>## [1] 1.5748180 1.2717458 0.9500069 0.9480786 0.9302359 0.9187948 0.9151668
 ## [8] 0.9120942 0.9117093</code></pre>
 <p>Note that training error goes down as degree goes up. More on this next chapter.</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb122-1" data-line-number="1">slr_val_rmse</a></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1">slr_val_rmse</a></code></pre></div>
 <pre><code>## [1] 1.6584930 1.2791685 0.9574010 0.9729928 1.0104449 1.0505615 1.0617693
 ## [8] 1.0953461 1.0968283</code></pre>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" data-line-number="1"><span class="kw">which.min</span>(slr_val_rmse)</a></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="kw">which.min</span>(slr_val_rmse)</a></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <p>The model with polynomial degree 3 has the lowest validation error, so we move forward with this model. We re-fit to the full train dataset, then evaluate on the test set one last time.</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" data-line-number="1">poly_mod_<span class="dv">3</span>_trn =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">3</span>), <span class="dt">data =</span> slr_trn)</a></code></pre></div>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1"><span class="kw">calc_rmse</span>(<span class="dt">actual =</span> slr_tst<span class="op">$</span>y,</a>
-<a class="sourceLine" id="cb127-2" data-line-number="2">          <span class="dt">predicted =</span> <span class="kw">predict</span>(poly_mod_<span class="dv">3</span>_trn, slr_tst))</a></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1">poly_mod_<span class="dv">3</span>_trn =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">3</span>), <span class="dt">data =</span> slr_trn)</a></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1"><span class="kw">calc_rmse</span>(<span class="dt">actual =</span> slr_tst<span class="op">$</span>y,</a>
+<a class="sourceLine" id="cb69-2" data-line-number="2">          <span class="dt">predicted =</span> <span class="kw">predict</span>(poly_mod_<span class="dv">3</span>_trn, slr_tst))</a></code></pre></div>
 <pre><code>## [1] 0.7198306</code></pre>
 <p>Note: There are hints here that this process is a bit unstable. See if you can figure out why. Hint: See what happens when you change the seed to generate or split the data. We’ll return to this issue when we introduce cross-validation, but for now, we’ll pretend we didn’t notice.</p>
 <p>We’ll round out this chapter with three “real” data examples.</p>
 <hr />
 </div>
 <div id="example-diamonds-data" class="section level2">
-<h2><span class="header-section-number">6.11</span> Example: Diamonds Data</h2>
+<h2><span class="header-section-number">2.11</span> Example: Diamonds Data</h2>
 <p>For this example, we use (a subset of) the <code>diamonds</code> data from the <code>ggplot2</code> package.</p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" data-line-number="1"><span class="co"># load (subset of) data</span></a>
-<a class="sourceLine" id="cb129-2" data-line-number="2"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb129-3" data-line-number="3">dmnd =<span class="st"> </span>ggplot2<span class="op">::</span>diamonds[<span class="kw">sample</span>(<span class="kw">nrow</span>(diamonds), <span class="dt">size =</span> <span class="dv">5000</span>), ]</a></code></pre></div>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" data-line-number="1"><span class="co"># data prep</span></a>
-<a class="sourceLine" id="cb130-2" data-line-number="2">dmnd =<span class="st"> </span>dmnd <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb130-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">cut =</span> <span class="kw">factor</span>(cut, <span class="dt">ordered =</span> <span class="ot">FALSE</span>),</a>
-<a class="sourceLine" id="cb130-4" data-line-number="4">         <span class="dt">color =</span> <span class="kw">factor</span>(color, <span class="dt">ordered =</span> <span class="ot">FALSE</span>),</a>
-<a class="sourceLine" id="cb130-5" data-line-number="5">         <span class="dt">clarity =</span> <span class="kw">factor</span>(clarity, <span class="dt">ordered =</span> <span class="ot">FALSE</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb130-6" data-line-number="6"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>price, <span class="kw">everything</span>())</a></code></pre></div>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" data-line-number="1"><span class="co"># test-train split</span></a>
-<a class="sourceLine" id="cb131-2" data-line-number="2">dmnd_trn_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(dmnd), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(dmnd))</a>
-<a class="sourceLine" id="cb131-3" data-line-number="3">dmnd_trn =<span class="st"> </span>dmnd[dmnd_trn_idx, ]</a>
-<a class="sourceLine" id="cb131-4" data-line-number="4">dmnd_tst =<span class="st"> </span>dmnd[<span class="op">-</span>dmnd_trn_idx, ]</a></code></pre></div>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" data-line-number="1"><span class="co"># estimation-validation split</span></a>
-<a class="sourceLine" id="cb132-2" data-line-number="2">dmnd_est_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(dmnd_trn), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(dmnd_trn))</a>
-<a class="sourceLine" id="cb132-3" data-line-number="3">dmnd_est =<span class="st"> </span>dmnd_trn[dmnd_est_idx, ]</a>
-<a class="sourceLine" id="cb132-4" data-line-number="4">dmnd_val =<span class="st"> </span>dmnd_trn[<span class="op">-</span>dmnd_est_idx, ]</a></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1"><span class="co"># load (subset of) data</span></a>
+<a class="sourceLine" id="cb71-2" data-line-number="2"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb71-3" data-line-number="3">dmnd =<span class="st"> </span>ggplot2<span class="op">::</span>diamonds[<span class="kw">sample</span>(<span class="kw">nrow</span>(diamonds), <span class="dt">size =</span> <span class="dv">5000</span>), ]</a></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1"><span class="co"># data prep</span></a>
+<a class="sourceLine" id="cb72-2" data-line-number="2">dmnd =<span class="st"> </span>dmnd <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb72-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">cut =</span> <span class="kw">factor</span>(cut, <span class="dt">ordered =</span> <span class="ot">FALSE</span>),</a>
+<a class="sourceLine" id="cb72-4" data-line-number="4">         <span class="dt">color =</span> <span class="kw">factor</span>(color, <span class="dt">ordered =</span> <span class="ot">FALSE</span>),</a>
+<a class="sourceLine" id="cb72-5" data-line-number="5">         <span class="dt">clarity =</span> <span class="kw">factor</span>(clarity, <span class="dt">ordered =</span> <span class="ot">FALSE</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb72-6" data-line-number="6"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>price, <span class="kw">everything</span>())</a></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" data-line-number="1"><span class="co"># test-train split</span></a>
+<a class="sourceLine" id="cb73-2" data-line-number="2">dmnd_trn_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(dmnd), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(dmnd))</a>
+<a class="sourceLine" id="cb73-3" data-line-number="3">dmnd_trn =<span class="st"> </span>dmnd[dmnd_trn_idx, ]</a>
+<a class="sourceLine" id="cb73-4" data-line-number="4">dmnd_tst =<span class="st"> </span>dmnd[<span class="op">-</span>dmnd_trn_idx, ]</a></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1"><span class="co"># estimation-validation split</span></a>
+<a class="sourceLine" id="cb74-2" data-line-number="2">dmnd_est_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(dmnd_trn), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(dmnd_trn))</a>
+<a class="sourceLine" id="cb74-3" data-line-number="3">dmnd_est =<span class="st"> </span>dmnd_trn[dmnd_est_idx, ]</a>
+<a class="sourceLine" id="cb74-4" data-line-number="4">dmnd_val =<span class="st"> </span>dmnd_trn[<span class="op">-</span>dmnd_est_idx, ]</a></code></pre></div>
 <p>The code above loads the data, then performs a test-train split, then additionally an estimation-validation split. We then look at the <strong>train</strong> data. That is we do not even look at the test data.</p>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" data-line-number="1"><span class="co"># check data</span></a>
-<a class="sourceLine" id="cb133-2" data-line-number="2"><span class="kw">head</span>(dmnd_trn, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" data-line-number="1"><span class="co"># check data</span></a>
+<a class="sourceLine" id="cb75-2" data-line-number="2"><span class="kw">head</span>(dmnd_trn, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 10 x 10
 ##    carat cut       color clarity depth table     x     y     z price
 ##    &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt; &lt;fct&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
@@ -1076,42 +1096,42 @@ X_6 = 0.6]
 ##  9 0.570 Ideal     H     VS1      61.7  54    5.33  5.36  3.3   1554
 ## 10 0.34  Ideal     H     VS2      62.5  54    4.54  4.49  2.82   689</code></pre>
 <p>Our goal here will be to build a model to predict the <code>price</code> of a diamond given it’s characteristics. Let’s create a few EDA plots.</p>
-<p><img src="06-linear-regression_files/figure-html/unnamed-chunk-60-1.png" width="1152" style="display: block; margin: auto;" /></p>
-<p><img src="06-linear-regression_files/figure-html/unnamed-chunk-61-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="linear-regression_files/figure-html/unnamed-chunk-60-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="linear-regression_files/figure-html/unnamed-chunk-61-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>Note that these plots do <strong>not</strong> contain the test data. If they did, we would be using the test data to influence model building and selection, a big no-no.</p>
 <p>Let’s consider four possible models, each of which we fit to the estimation data.</p>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" data-line-number="1">dmnd_mod_<span class="dv">1</span>_est =<span class="st"> </span><span class="kw">lm</span>(price <span class="op">~</span><span class="st"> </span>carat, <span class="dt">data =</span> dmnd_est)</a>
-<a class="sourceLine" id="cb135-2" data-line-number="2">dmnd_mod_<span class="dv">2</span>_est =<span class="st"> </span><span class="kw">lm</span>(price <span class="op">~</span><span class="st"> </span>carat <span class="op">+</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>y <span class="op">+</span><span class="st"> </span>z, <span class="dt">data =</span> dmnd_est)</a>
-<a class="sourceLine" id="cb135-3" data-line-number="3">dmnd_mod_<span class="dv">3</span>_est =<span class="st"> </span><span class="kw">lm</span>(price <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(carat, <span class="dt">degree =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>y <span class="op">+</span><span class="st"> </span>z, <span class="dt">data =</span> dmnd_est)</a>
-<a class="sourceLine" id="cb135-4" data-line-number="4">dmnd_mod_<span class="dv">4</span>_est =<span class="st"> </span><span class="kw">lm</span>(price <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(carat, <span class="dt">degree =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>carat, <span class="dt">data =</span> dmnd_est)</a></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1">dmnd_mod_<span class="dv">1</span>_est =<span class="st"> </span><span class="kw">lm</span>(price <span class="op">~</span><span class="st"> </span>carat, <span class="dt">data =</span> dmnd_est)</a>
+<a class="sourceLine" id="cb77-2" data-line-number="2">dmnd_mod_<span class="dv">2</span>_est =<span class="st"> </span><span class="kw">lm</span>(price <span class="op">~</span><span class="st"> </span>carat <span class="op">+</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>y <span class="op">+</span><span class="st"> </span>z, <span class="dt">data =</span> dmnd_est)</a>
+<a class="sourceLine" id="cb77-3" data-line-number="3">dmnd_mod_<span class="dv">3</span>_est =<span class="st"> </span><span class="kw">lm</span>(price <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(carat, <span class="dt">degree =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>y <span class="op">+</span><span class="st"> </span>z, <span class="dt">data =</span> dmnd_est)</a>
+<a class="sourceLine" id="cb77-4" data-line-number="4">dmnd_mod_<span class="dv">4</span>_est =<span class="st"> </span><span class="kw">lm</span>(price <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(carat, <span class="dt">degree =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>carat, <span class="dt">data =</span> dmnd_est)</a></code></pre></div>
 <p>Now, let’s calculate the validation RMSE of each.</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb136-1" data-line-number="1">dmnd_mod_list =<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb136-2" data-line-number="2">  dmnd_mod_<span class="dv">1</span>_est,</a>
-<a class="sourceLine" id="cb136-3" data-line-number="3">  dmnd_mod_<span class="dv">2</span>_est,</a>
-<a class="sourceLine" id="cb136-4" data-line-number="4">  dmnd_mod_<span class="dv">3</span>_est,</a>
-<a class="sourceLine" id="cb136-5" data-line-number="5">  dmnd_mod_<span class="dv">4</span>_est</a>
-<a class="sourceLine" id="cb136-6" data-line-number="6">)</a></code></pre></div>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" data-line-number="1">dmnd_mod_val_pred =<span class="st"> </span><span class="kw">map</span>(dmnd_mod_list, predict, dmnd_val)</a>
-<a class="sourceLine" id="cb137-2" data-line-number="2"><span class="kw">map_dbl</span>(dmnd_mod_val_pred, calc_rmse, <span class="dt">actual =</span> dmnd_val<span class="op">$</span>price) </a></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1">dmnd_mod_list =<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb78-2" data-line-number="2">  dmnd_mod_<span class="dv">1</span>_est,</a>
+<a class="sourceLine" id="cb78-3" data-line-number="3">  dmnd_mod_<span class="dv">2</span>_est,</a>
+<a class="sourceLine" id="cb78-4" data-line-number="4">  dmnd_mod_<span class="dv">3</span>_est,</a>
+<a class="sourceLine" id="cb78-5" data-line-number="5">  dmnd_mod_<span class="dv">4</span>_est</a>
+<a class="sourceLine" id="cb78-6" data-line-number="6">)</a></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1">dmnd_mod_val_pred =<span class="st"> </span><span class="kw">map</span>(dmnd_mod_list, predict, dmnd_val)</a>
+<a class="sourceLine" id="cb79-2" data-line-number="2"><span class="kw">map_dbl</span>(dmnd_mod_val_pred, calc_rmse, <span class="dt">actual =</span> dmnd_val<span class="op">$</span>price) </a></code></pre></div>
 <pre><code>## [1] 1583.558 1517.080 1634.396 1350.659</code></pre>
 <p>It looks like model <code>dmnd_mod_4_est</code> achieves the lowest validation error. We re-fit this model, then report the test RMSE.</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" data-line-number="1">dmnd_mod_<span class="dv">4</span>_trn =<span class="st"> </span><span class="kw">lm</span>(price <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(carat, <span class="dt">degree =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>carat, <span class="dt">data =</span> dmnd_trn)</a>
-<a class="sourceLine" id="cb139-2" data-line-number="2"><span class="kw">calc_rmse</span>(<span class="dt">actual =</span> dmnd_tst<span class="op">$</span>price,</a>
-<a class="sourceLine" id="cb139-3" data-line-number="3">          <span class="dt">predicted =</span> <span class="kw">predict</span>(dmnd_mod_<span class="dv">4</span>_trn, dmnd_tst))</a></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1">dmnd_mod_<span class="dv">4</span>_trn =<span class="st"> </span><span class="kw">lm</span>(price <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(carat, <span class="dt">degree =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>carat, <span class="dt">data =</span> dmnd_trn)</a>
+<a class="sourceLine" id="cb81-2" data-line-number="2"><span class="kw">calc_rmse</span>(<span class="dt">actual =</span> dmnd_tst<span class="op">$</span>price,</a>
+<a class="sourceLine" id="cb81-3" data-line-number="3">          <span class="dt">predicted =</span> <span class="kw">predict</span>(dmnd_mod_<span class="dv">4</span>_trn, dmnd_tst))</a></code></pre></div>
 <pre><code>## [1] 1094.916</code></pre>
 <p>So, on average, this model is “wrong” by about $1000 dollars. However, less-so when it is a low cost diamond, more so with high priced diamonds, as we can see in the plot below.</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" data-line-number="1"><span class="kw">plot</span>(</a>
-<a class="sourceLine" id="cb141-2" data-line-number="2">  <span class="dt">x =</span> dmnd_tst<span class="op">$</span>price,</a>
-<a class="sourceLine" id="cb141-3" data-line-number="3">  <span class="dt">y =</span> <span class="kw">predict</span>(dmnd_mod_<span class="dv">4</span>_trn, dmnd_tst),</a>
-<a class="sourceLine" id="cb141-4" data-line-number="4">  <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,</a>
-<a class="sourceLine" id="cb141-5" data-line-number="5">  <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">25000</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">25000</span>),</a>
-<a class="sourceLine" id="cb141-6" data-line-number="6">  <span class="dt">main =</span> <span class="st">&quot;Diamonds: Predicted vs Actual, Model 4, Test Data&quot;</span>,</a>
-<a class="sourceLine" id="cb141-7" data-line-number="7">  <span class="dt">xlab =</span> <span class="st">&quot;Actual&quot;</span>,</a>
-<a class="sourceLine" id="cb141-8" data-line-number="8">  <span class="dt">ylab =</span> <span class="st">&quot;Predicted&quot;</span></a>
-<a class="sourceLine" id="cb141-9" data-line-number="9">)</a>
-<a class="sourceLine" id="cb141-10" data-line-number="10"><span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb141-11" data-line-number="11"><span class="kw">grid</span>()</a></code></pre></div>
-<p><img src="06-linear-regression_files/figure-html/unnamed-chunk-66-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1"><span class="kw">plot</span>(</a>
+<a class="sourceLine" id="cb83-2" data-line-number="2">  <span class="dt">x =</span> dmnd_tst<span class="op">$</span>price,</a>
+<a class="sourceLine" id="cb83-3" data-line-number="3">  <span class="dt">y =</span> <span class="kw">predict</span>(dmnd_mod_<span class="dv">4</span>_trn, dmnd_tst),</a>
+<a class="sourceLine" id="cb83-4" data-line-number="4">  <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,</a>
+<a class="sourceLine" id="cb83-5" data-line-number="5">  <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">25000</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">25000</span>),</a>
+<a class="sourceLine" id="cb83-6" data-line-number="6">  <span class="dt">main =</span> <span class="st">&quot;Diamonds: Predicted vs Actual, Model 4, Test Data&quot;</span>,</a>
+<a class="sourceLine" id="cb83-7" data-line-number="7">  <span class="dt">xlab =</span> <span class="st">&quot;Actual&quot;</span>,</a>
+<a class="sourceLine" id="cb83-8" data-line-number="8">  <span class="dt">ylab =</span> <span class="st">&quot;Predicted&quot;</span></a>
+<a class="sourceLine" id="cb83-9" data-line-number="9">)</a>
+<a class="sourceLine" id="cb83-10" data-line-number="10"><span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb83-11" data-line-number="11"><span class="kw">grid</span>()</a></code></pre></div>
+<p><img src="linear-regression_files/figure-html/unnamed-chunk-66-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Some things to consider:</p>
 <ul>
 <li>Could you use the predicted versus actual plot to assist in selecting a model with the validation data?</li>
@@ -1121,29 +1141,29 @@ X_6 = 0.6]
 <hr />
 </div>
 <div id="example-credit-card-data" class="section level2">
-<h2><span class="header-section-number">6.12</span> Example: Credit Card Data</h2>
+<h2><span class="header-section-number">2.12</span> Example: Credit Card Data</h2>
 <p>Suppose you work for a small local bank, perhaps a credit union, that has a credit card product offering. For years, you relied on credit agencies to provide a rating of your customer’s credit, however, this costs your bank money. One day, you realize that it might be possible to reverse engineer your customers’ (and thus potential customers) credit rating based on the credit ratings that you already have already purchase, as well as the demographic and credit card information that you already have, such as age, education level, credit limit, etc. (We make no comment on the legality or ethics of this idea. Consider these before using at your own risk.)</p>
 <p>So long as you can estimate customers’ credit rating with a reasonable error, you could stop buying the ratings from an agency. Effectively, you will have created your own rating.</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" data-line-number="1"><span class="co"># load data, coerce to tibble</span></a>
-<a class="sourceLine" id="cb142-2" data-line-number="2">crdt =<span class="st"> </span><span class="kw">as_tibble</span>(ISLR<span class="op">::</span>Credit)</a></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1"><span class="co"># load data, coerce to tibble</span></a>
+<a class="sourceLine" id="cb84-2" data-line-number="2">crdt =<span class="st"> </span><span class="kw">as_tibble</span>(ISLR<span class="op">::</span>Credit)</a></code></pre></div>
 <p>To perform this analysis, we will use the <code>Credit</code> data form the <code>ISLR</code> package. Note: <strong>this is not real data.</strong> It has been simulated.</p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" data-line-number="1"><span class="co"># data prep</span></a>
-<a class="sourceLine" id="cb143-2" data-line-number="2">crdt =<span class="st"> </span>crdt <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb143-3" data-line-number="3"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>ID) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb143-4" data-line-number="4"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Rating, <span class="kw">everything</span>())</a></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" data-line-number="1"><span class="co"># data prep</span></a>
+<a class="sourceLine" id="cb85-2" data-line-number="2">crdt =<span class="st"> </span>crdt <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb85-3" data-line-number="3"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>ID) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb85-4" data-line-number="4"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Rating, <span class="kw">everything</span>())</a></code></pre></div>
 <p>We remove the <code>ID</code> variable as it should have no predictive power. We also move the <code>Rating</code> variable to the last column with a clever <code>dplyr</code> trick. This is in no way necessary, but is useful in creating some plots.</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" data-line-number="1"><span class="co"># test-train split</span></a>
-<a class="sourceLine" id="cb144-2" data-line-number="2"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb144-3" data-line-number="3">crdt_trn_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(crdt), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(crdt))</a>
-<a class="sourceLine" id="cb144-4" data-line-number="4">crdt_trn =<span class="st"> </span>crdt[crdt_trn_idx, ]</a>
-<a class="sourceLine" id="cb144-5" data-line-number="5">crdt_tst =<span class="st"> </span>crdt[<span class="op">-</span>crdt_trn_idx, ]</a></code></pre></div>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" data-line-number="1"><span class="co"># estimation-validation split</span></a>
-<a class="sourceLine" id="cb145-2" data-line-number="2">crdt_est_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(crdt_trn), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(crdt_trn))</a>
-<a class="sourceLine" id="cb145-3" data-line-number="3">crdt_est =<span class="st"> </span>crdt_trn[crdt_est_idx, ]</a>
-<a class="sourceLine" id="cb145-4" data-line-number="4">crdt_val =<span class="st"> </span>crdt_trn[<span class="op">-</span>crdt_est_idx, ]</a></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1"><span class="co"># test-train split</span></a>
+<a class="sourceLine" id="cb86-2" data-line-number="2"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb86-3" data-line-number="3">crdt_trn_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(crdt), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(crdt))</a>
+<a class="sourceLine" id="cb86-4" data-line-number="4">crdt_trn =<span class="st"> </span>crdt[crdt_trn_idx, ]</a>
+<a class="sourceLine" id="cb86-5" data-line-number="5">crdt_tst =<span class="st"> </span>crdt[<span class="op">-</span>crdt_trn_idx, ]</a></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" data-line-number="1"><span class="co"># estimation-validation split</span></a>
+<a class="sourceLine" id="cb87-2" data-line-number="2">crdt_est_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(crdt_trn), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(crdt_trn))</a>
+<a class="sourceLine" id="cb87-3" data-line-number="3">crdt_est =<span class="st"> </span>crdt_trn[crdt_est_idx, ]</a>
+<a class="sourceLine" id="cb87-4" data-line-number="4">crdt_val =<span class="st"> </span>crdt_trn[<span class="op">-</span>crdt_est_idx, ]</a></code></pre></div>
 <p>After train-test and estimation-validation splitting the data, we look at the train data.</p>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" data-line-number="1"><span class="co"># check data</span></a>
-<a class="sourceLine" id="cb146-2" data-line-number="2"><span class="kw">head</span>(crdt_trn, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1"><span class="co"># check data</span></a>
+<a class="sourceLine" id="cb88-2" data-line-number="2"><span class="kw">head</span>(crdt_trn, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 10 x 11
 ##    Income Limit Cards   Age Education Gender Student Married Ethnicity Balance
 ##     &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;     &lt;int&gt; &lt;fct&gt;  &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;       &lt;int&gt;
@@ -1165,54 +1185,54 @@ X_6 = 0.6]
 <li><code>View(crdt_trn)</code></li>
 </ul>
 <p>We also create a pairs plot.</p>
-<p><img src="06-linear-regression_files/figure-html/unnamed-chunk-72-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="linear-regression_files/figure-html/unnamed-chunk-72-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>We immediately notice three variables that have a strong correlation with <code>Rating</code>: <code>Income</code>, <code>Limit</code>, and <code>Balance</code>. Based on this, we evaluate five candidate models.</p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" data-line-number="1">crdt_mod_<span class="dv">0</span>_est =<span class="st"> </span><span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> crdt_est)</a>
-<a class="sourceLine" id="cb148-2" data-line-number="2">crdt_mod_<span class="dv">1</span>_est =<span class="st"> </span><span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span>Limit, <span class="dt">data =</span> crdt_est)</a>
-<a class="sourceLine" id="cb148-3" data-line-number="3">crdt_mod_<span class="dv">2</span>_est =<span class="st"> </span><span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span>Limit <span class="op">+</span><span class="st"> </span>Income <span class="op">+</span><span class="st"> </span>Balance, <span class="dt">data =</span> crdt_est)</a>
-<a class="sourceLine" id="cb148-4" data-line-number="4">crdt_mod_<span class="dv">3</span>_est =<span class="st"> </span><span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> crdt_est)</a>
-<a class="sourceLine" id="cb148-5" data-line-number="5">crdt_mod_<span class="dv">4</span>_est =<span class="st"> </span><span class="kw">step</span>(<span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span>. <span class="op">^</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">data =</span> crdt_est), <span class="dt">trace =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" data-line-number="1">crdt_mod_list =<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb149-2" data-line-number="2">  crdt_mod_<span class="dv">0</span>_est,</a>
-<a class="sourceLine" id="cb149-3" data-line-number="3">  crdt_mod_<span class="dv">1</span>_est,</a>
-<a class="sourceLine" id="cb149-4" data-line-number="4">  crdt_mod_<span class="dv">2</span>_est,</a>
-<a class="sourceLine" id="cb149-5" data-line-number="5">  crdt_mod_<span class="dv">3</span>_est,</a>
-<a class="sourceLine" id="cb149-6" data-line-number="6">  crdt_mod_<span class="dv">4</span>_est</a>
-<a class="sourceLine" id="cb149-7" data-line-number="7">)</a></code></pre></div>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" data-line-number="1">crdt_mod_val_pred =<span class="st"> </span><span class="kw">map</span>(crdt_mod_list, predict, crdt_val)</a>
-<a class="sourceLine" id="cb150-2" data-line-number="2"><span class="kw">map_dbl</span>(crdt_mod_val_pred, calc_rmse, <span class="dt">actual =</span> crdt_val<span class="op">$</span>Rating) </a></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1">crdt_mod_<span class="dv">0</span>_est =<span class="st"> </span><span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> crdt_est)</a>
+<a class="sourceLine" id="cb90-2" data-line-number="2">crdt_mod_<span class="dv">1</span>_est =<span class="st"> </span><span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span>Limit, <span class="dt">data =</span> crdt_est)</a>
+<a class="sourceLine" id="cb90-3" data-line-number="3">crdt_mod_<span class="dv">2</span>_est =<span class="st"> </span><span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span>Limit <span class="op">+</span><span class="st"> </span>Income <span class="op">+</span><span class="st"> </span>Balance, <span class="dt">data =</span> crdt_est)</a>
+<a class="sourceLine" id="cb90-4" data-line-number="4">crdt_mod_<span class="dv">3</span>_est =<span class="st"> </span><span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> crdt_est)</a>
+<a class="sourceLine" id="cb90-5" data-line-number="5">crdt_mod_<span class="dv">4</span>_est =<span class="st"> </span><span class="kw">step</span>(<span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span>. <span class="op">^</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">data =</span> crdt_est), <span class="dt">trace =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1">crdt_mod_list =<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb91-2" data-line-number="2">  crdt_mod_<span class="dv">0</span>_est,</a>
+<a class="sourceLine" id="cb91-3" data-line-number="3">  crdt_mod_<span class="dv">1</span>_est,</a>
+<a class="sourceLine" id="cb91-4" data-line-number="4">  crdt_mod_<span class="dv">2</span>_est,</a>
+<a class="sourceLine" id="cb91-5" data-line-number="5">  crdt_mod_<span class="dv">3</span>_est,</a>
+<a class="sourceLine" id="cb91-6" data-line-number="6">  crdt_mod_<span class="dv">4</span>_est</a>
+<a class="sourceLine" id="cb91-7" data-line-number="7">)</a></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1">crdt_mod_val_pred =<span class="st"> </span><span class="kw">map</span>(crdt_mod_list, predict, crdt_val)</a>
+<a class="sourceLine" id="cb92-2" data-line-number="2"><span class="kw">map_dbl</span>(crdt_mod_val_pred, calc_rmse, <span class="dt">actual =</span> crdt_val<span class="op">$</span>Rating) </a></code></pre></div>
 <pre><code>## [1] 140.080591  12.244099  12.333767   9.890607  11.575484</code></pre>
 <p>From these results, it appears that the additive model, including all terms performs best. We move forward with this model.</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" data-line-number="1">final_credit_model =<span class="st"> </span><span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> crdt_trn)</a>
-<a class="sourceLine" id="cb152-2" data-line-number="2"><span class="kw">sqrt</span>(<span class="kw">mean</span>((<span class="kw">predict</span>(final_credit_model, crdt_tst) <span class="op">-</span><span class="st"> </span>crdt_tst<span class="op">$</span>Rating) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1">final_credit_model =<span class="st"> </span><span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> crdt_trn)</a>
+<a class="sourceLine" id="cb94-2" data-line-number="2"><span class="kw">sqrt</span>(<span class="kw">mean</span>((<span class="kw">predict</span>(final_credit_model, crdt_tst) <span class="op">-</span><span class="st"> </span>crdt_tst<span class="op">$</span>Rating) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</a></code></pre></div>
 <pre><code>## [1] 10.47727</code></pre>
 <p>It seems that on average, this model errors by about 10 credit points.</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" data-line-number="1"><span class="kw">range</span>(crdt_trn<span class="op">$</span>Rating)</a></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" data-line-number="1"><span class="kw">range</span>(crdt_trn<span class="op">$</span>Rating)</a></code></pre></div>
 <pre><code>## [1]  93 982</code></pre>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" data-line-number="1"><span class="kw">sd</span>(crdt_trn<span class="op">$</span>Rating)</a></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" data-line-number="1"><span class="kw">sd</span>(crdt_trn<span class="op">$</span>Rating)</a></code></pre></div>
 <pre><code>## [1] 157.5897</code></pre>
 <p>Given the range of possible ratings, this seem pretty good! What do you think?</p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" data-line-number="1"><span class="kw">plot</span>(</a>
-<a class="sourceLine" id="cb158-2" data-line-number="2">  <span class="dt">x =</span> crdt_tst<span class="op">$</span>Rating,</a>
-<a class="sourceLine" id="cb158-3" data-line-number="3">  <span class="dt">y =</span> <span class="kw">predict</span>(final_credit_model, crdt_tst),</a>
-<a class="sourceLine" id="cb158-4" data-line-number="4">  <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,</a>
-<a class="sourceLine" id="cb158-5" data-line-number="5">  <span class="co"># xlim = c(0, 25000), ylim = c(0, 25000),</span></a>
-<a class="sourceLine" id="cb158-6" data-line-number="6">  <span class="dt">main =</span> <span class="st">&quot;Credit: Predicted vs Actual, Test Data&quot;</span>,</a>
-<a class="sourceLine" id="cb158-7" data-line-number="7">  <span class="dt">xlab =</span> <span class="st">&quot;Actual&quot;</span>,</a>
-<a class="sourceLine" id="cb158-8" data-line-number="8">  <span class="dt">ylab =</span> <span class="st">&quot;Predicted&quot;</span></a>
-<a class="sourceLine" id="cb158-9" data-line-number="9">)</a>
-<a class="sourceLine" id="cb158-10" data-line-number="10"><span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb158-11" data-line-number="11"><span class="kw">grid</span>()</a></code></pre></div>
-<p><img src="06-linear-regression_files/figure-html/unnamed-chunk-78-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" data-line-number="1"><span class="kw">plot</span>(</a>
+<a class="sourceLine" id="cb100-2" data-line-number="2">  <span class="dt">x =</span> crdt_tst<span class="op">$</span>Rating,</a>
+<a class="sourceLine" id="cb100-3" data-line-number="3">  <span class="dt">y =</span> <span class="kw">predict</span>(final_credit_model, crdt_tst),</a>
+<a class="sourceLine" id="cb100-4" data-line-number="4">  <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,</a>
+<a class="sourceLine" id="cb100-5" data-line-number="5">  <span class="co"># xlim = c(0, 25000), ylim = c(0, 25000),</span></a>
+<a class="sourceLine" id="cb100-6" data-line-number="6">  <span class="dt">main =</span> <span class="st">&quot;Credit: Predicted vs Actual, Test Data&quot;</span>,</a>
+<a class="sourceLine" id="cb100-7" data-line-number="7">  <span class="dt">xlab =</span> <span class="st">&quot;Actual&quot;</span>,</a>
+<a class="sourceLine" id="cb100-8" data-line-number="8">  <span class="dt">ylab =</span> <span class="st">&quot;Predicted&quot;</span></a>
+<a class="sourceLine" id="cb100-9" data-line-number="9">)</a>
+<a class="sourceLine" id="cb100-10" data-line-number="10"><span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb100-11" data-line-number="11"><span class="kw">grid</span>()</a></code></pre></div>
+<p><img src="linear-regression_files/figure-html/unnamed-chunk-78-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>The predicted versus actual plot almost looks too good to be true! Wow! (Oh, wait. This was simulated data…)</p>
 <p>In summary, if this data were real, we might have an interesting result!</p>
 <p>Do note, that both this example and the previous should not be considered <strong>data analyses</strong>, but instead, examples that reinforce how to use the validation and test sets. As part of a true analysis, we will need to be much more careful about some of our decision. More on this later! Up next: nonparametric regression methods.</p>
 <hr />
 </div>
-<div id="source-5" class="section level2">
-<h2><span class="header-section-number">6.13</span> Source</h2>
+<div id="source-1" class="section level2">
+<h2><span class="header-section-number">2.13</span> Source</h2>
 <ul>
-<li><code>R</code> Markdown: <a href="06-linear-regression.Rmd"><code>06-linear-regression.Rmd</code></a></li>
+<li><code>R</code> Markdown: <a href="linear-regression.Rmd"><code>linear-regression.Rmd</code></a></li>
 </ul>
 <hr />
 
@@ -1223,7 +1243,7 @@ X_6 = 0.6]
           </div>
         </div>
       </div>
-<a href="statistics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="machine-learning-overview.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="nonparametric-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
@@ -1246,7 +1266,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/daviddalpiaz/bsl/edit/master/06-linear-regression.Rmd",
+"link": "https://github.com/daviddalpiaz/bsl/edit/master/linear-regression.Rmd",
 "text": "Edit"
 },
 "history": {

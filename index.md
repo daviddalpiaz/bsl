@@ -19,7 +19,7 @@ documentclass: book
 
 ***
 
-Welcome to Basics of Statistical Learning! What a boring title! The title was chosen to mirror the [University of Illinois](https://illinois.edu/) course [STAT 432 - Basics of Statistical Learning](www.stat432.org). That title was chosen to meet certain University course naming conventions, hence the boring title. A more appropriate title would be "Machine Learning from the Perspective of a Statistician who uses R," which is more descriptive, but still a boring title. Anyway, this "book" will often be referred to as **BSL**.
+Welcome to Basics of Statistical Learning! What a boring title! The title was chosen to mirror the [University of Illinois](https://illinois.edu/) course [STAT 432 - Basics of Statistical Learning](https://stat432.org/). That title was chosen to meet certain University course naming conventions, hence the boring title. A more appropriate title would be "Machine Learning from the Perspective of a Statistician who uses R," which is more descriptive, but still a boring title. Anyway, this "book" will often be referred to as **BSL**.
 
 ***
 
