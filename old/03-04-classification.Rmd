@@ -62,26 +62,8 @@ $$
 
 - TODO: first estimation conditional distribution, then classify to label with highest probability
 
-```{r}
-set.seed(1)
-joint_probs = round(1:12 / sum(1:12), 2)
-joint_probs = sample(joint_probs)
-joint_dist = matrix(data  = joint_probs, nrow = 3, ncol = 4)
-colnames(joint_dist) = c("$X = 1$", "$X = 2$", "$X = 3$", "$X = 4$")
-rownames(joint_dist) = c("$Y = A$", "$Y = B$", "$Y = C$")
-joint_dist %>% 
-  kable() %>% 
-  kable_styling("striped", full_width = FALSE) %>% 
-  column_spec(column = 1, bold = TRUE, background = "white", border_right = TRUE)
-```
 
-```{r}
-# marginal distribution of Y
-t(colSums(joint_dist)) %>% kable() %>% kable_styling(full_width = FALSE)
 
-# marginal distribution of X
-t(rowSums(joint_dist)) %>% kable() %>% kable_styling(full_width = FALSE)
-```
 
 ```{r}
 gen_data = function(n = 100) {
@@ -122,7 +104,34 @@ predict(multinom(y ~ x, data = some_data, trace = FALSE), test_cases, type = "pr
 
 
 
+## Data Setup
 
+## Mathematical Setup
+
+## Example
+
+```{r}
+set.seed(1)
+joint_probs = round(1:12 / sum(1:12), 2)
+joint_probs = sample(joint_probs)
+joint_dist = matrix(data  = joint_probs, nrow = 3, ncol = 4)
+colnames(joint_dist) = c("$X = 1$", "$X = 2$", "$X = 3$", "$X = 4$")
+rownames(joint_dist) = c("$Y = A$", "$Y = B$", "$Y = C$")
+joint_dist %>% 
+  kable() %>% 
+  kable_styling("striped", full_width = FALSE) %>% 
+  column_spec(column = 1, bold = TRUE, background = "white", border_right = TRUE)
+```
+
+```{r}
+# marginal distribution of Y
+t(colSums(joint_dist)) %>% kable() %>% kable_styling(full_width = FALSE)
+```
+
+```{r}
+# marginal distribution of X
+t(rowSums(joint_dist)) %>% kable() %>% kable_styling(full_width = FALSE)
+```
 
 
 
