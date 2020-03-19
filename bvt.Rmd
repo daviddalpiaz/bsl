@@ -795,6 +795,6 @@ How good is this estimate? Well, if $\mathcal{D}$ is a random sample from $(X, Y
 
 ## Source
 
-- `R` Markdown: [`08-bvt.Rmd`](08-bvt.Rmd)
+- `R` Markdown: [`bvt.Rmd`](bvt.Rmd)
 
 ***

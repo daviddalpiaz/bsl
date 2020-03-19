@@ -270,6 +270,6 @@ However, the rate at which the variance increases can be and generally is differ
 
 ## Source
 
-- `R` Markdown: [`09-regression-overview.Rmd`](09-regression-overview.Rmd)
+- `R` Markdown: [`regression-overview.Rmd`](regression-overview.Rmd)
 
 ***

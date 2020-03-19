@@ -207,6 +207,6 @@ This text places a high priority on being able to **do** machine learning, speci
 
 ## Source
 
-- `R` Markdown: [`02-ml-overview.Rmd`](02-ml-overview.Rmd)
+- `R` Markdown: [`ml-overview.Rmd`](ml-overview.Rmd)
 
 ***

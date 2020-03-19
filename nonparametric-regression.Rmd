@@ -667,6 +667,6 @@ What does this code do? It estimates the mean `Rating` given the feature informa
 
 ## Source
 
-- `R` Markdown: [`07-nonparametric-regression.Rmd`](07-nonparametric-regression.Rmd)
+- `R` Markdown: [`nonparametric-regression.Rmd`](nonparametric-regression.Rmd)
 
 ***

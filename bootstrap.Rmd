@@ -1,4 +1,4 @@
-# Supervised Learning Repcap II
+# Bootstrap Resampling
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE, fig.align = "center", cache = TRUE, autodep = TRUE)
@@ -28,6 +28,6 @@ TBD
 
 ## Source
 
-- `R` Markdown: [`17-supervised-ii.Rmd`](17-supervised-ii.Rmd)
+- `R` Markdown: [`bootstrap.Rmd`](bootstrap.Rmd)
 
 ***

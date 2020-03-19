@@ -65,6 +65,6 @@ knitr::opts_chunk$set(echo = TRUE, fig.align = "center", cache = TRUE, autodep =
 
 ## Source
 
-- `R` Markdown: [`99-additional-reading.Rmd`](99-additional-reading.Rmd)
+- `R` Markdown: [`additional-reading.Rmd`](additional-reading.Rmd)
 
 ***

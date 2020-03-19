@@ -369,6 +369,6 @@ The YouTube channel [mathematicalmonk](https://www.youtube.com/user/mathematical
 
 ## Source
 
-- `R` Markdown: [`04-probability.Rmd`](04-probability.Rmd)
+- `R` Markdown: [`probability.Rmd`](probability.Rmd)
 
 ***

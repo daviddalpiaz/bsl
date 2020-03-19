@@ -300,6 +300,6 @@ We have purposefully used a "small" sample size here so that the EDF is visibly 
 
 ## Source
 
-- `R` Markdown: [`05-statistics.Rmd`](05-statistics.Rmd)
+- `R` Markdown: [`statistics.Rmd`](statistics.Rmd)
 
 ***

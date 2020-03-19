@@ -49,6 +49,6 @@ calc_accuracy = function(actual, predicted) {
 
 ## Source
 
-- `R` Markdown: [`10-classification.Rmd`](10-classification.Rmd)
+- `R` Markdown: [`classification.Rmd`](classification.Rmd)
 
 ***

@@ -356,6 +356,6 @@ LDA (and QDA) however creates dummy variables, here with `Large` as the referenc
 
 ## Source
 
-- `R` Markdown: [`12-generative.Rmd`](12-generative.Rmd)
+- `R` Markdown: [`generative.Rmd`](generative.Rmd)
 
 ***

@@ -1123,6 +1123,6 @@ Do note, that both this example and the previous should not be considered **data
 
 ## Source
 
-- `R` Markdown: [`06-linear-regression.Rmd`](06-linear-regression.Rmd)
+- `R` Markdown: [`linear-regression.Rmd`](linear-regression.Rmd)
 
 ***

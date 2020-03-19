@@ -3,3 +3,32 @@ chapter_name: "Chapter "
 repo: https://github.com/daviddalpiaz/bsl
 new_session: yes
 delete_merged_file: true # set to false to debug the book md
+
+rmd_files: [
+  "index.Rmd",
+  "ml-overview.Rmd",
+  "linear-regression.Rmd",
+  "nonparametric-regression.Rmd",
+  "bvt.Rmd",
+  "regression-overview.Rmd",
+  "classification.Rmd",
+  "nonparametric-classification.Rmd",
+  "logistic-regression.Rmd",
+  "binary-classification.Rmd",
+  "generative.Rmd",
+  "supervised-i.Rmd",
+  "simulation.Rmd",
+  "bootstrap.Rmd",
+  "cross-validation.Rmd",
+  "supervised-ii.Rmd",
+  "regularization.Rmd",
+  "dimension-reduction.Rmd",
+  "ensemble-methods.Rmd",
+  "regularization.Rmd",
+  "backlog.Rmd",
+  "additional-reading.Rmd",
+  "ten-rules.Rmd",
+  "computing.Rmd",
+  "probability.Rmd",
+  "statistics.Rmd"
+]

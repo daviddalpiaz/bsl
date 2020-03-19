@@ -33,6 +33,6 @@ TBD
 
 ## Source
 
-- `R` Markdown: [`11-logistic-regression.Rmd`](11-logistic-regression.Rmd)
+- `R` Markdown: [`logistic-regression.Rmd`](logistic-regression.Rmd)
 
 ***
