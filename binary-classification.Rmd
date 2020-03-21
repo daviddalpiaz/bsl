@@ -12,7 +12,10 @@ In this chapter...
 
 ## Reading
 
-- **Required:** ???
+- **Required:** [Wikipedia: Confusion Matrix](https://en.wikipedia.org/wiki/Confusion_matrix)
+- **Required:** [Wikipedia: Sensitivity and Specificity](https://en.wikipedia.org/wiki/Sensitivity_and_specificity)
+- **Required:** [Wikipedia: Precision and Recall](https://en.wikipedia.org/wiki/Precision_and_recall)
+- **Required:** [Wikipedia: Evaluation of Binary Classifiers](https://en.wikipedia.org/wiki/Evaluation_of_binary_classifiers)
 
 ***
 
