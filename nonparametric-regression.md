@@ -344,8 +344,12 @@ $$
 
 where
 
-- $N_L$ are the data in the left neighborhood
+- $N_L$ are the data in the left neighborhood, that is $x < c$
+- $N_R$ are the data in the right neighborhood, that is $x > c$
 - $\hat{\mu}_{N_L}$ is the mean of the $y_i$ for data in the left neighborhood
+- $\hat{\mu}_{N_R}$ is the mean of the $y_i$ for data in the right neighborhood
+
+This quantity is the sum of two sum of squared errors, one for the left neighborhood, and one for the right neighborhood.
 
 
 
@@ -353,9 +357,9 @@ where
  <thead>
   <tr>
    <th style="text-align:right;"> Cutoff </th>
-   <th style="text-align:right;"> Total MSE </th>
-   <th style="text-align:right;"> Left MSE </th>
-   <th style="text-align:right;"> Right MSE </th>
+   <th style="text-align:right;"> Total SSE </th>
+   <th style="text-align:right;"> Left SSE </th>
+   <th style="text-align:right;"> Right SSE </th>
   </tr>
  </thead>
 <tbody>

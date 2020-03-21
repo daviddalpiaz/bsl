@@ -292,18 +292,22 @@ $$
 
 where
 
-- $N_L$ are the data in the left neighborhood
+- $N_L$ are the data in the left neighborhood, that is $x < c$
+- $N_R$ are the data in the right neighborhood, that is $x > c$
 - $\hat{\mu}_{N_L}$ is the mean of the $y_i$ for data in the left neighborhood
+- $\hat{\mu}_{N_R}$ is the mean of the $y_i$ for data in the right neighborhood
+
+This quantity is the sum of two sum of squared errors, one for the left neighborhood, and one for the right neighborhood.
 
 ```{r, echo = FALSE}
-calc_split_mse = function(cut = 0) {
+calc_split_sse = function(cut = 0) {
   l_pred = mean(sim_slr_data$y[sim_slr_data$x < cut])
   r_pred = mean(sim_slr_data$y[sim_slr_data$x > cut])
 
   l_mse = round(sum((sim_slr_data$y[sim_slr_data$x < cut] - l_pred) ^ 2), 2)
   r_mse = round(sum((sim_slr_data$y[sim_slr_data$x > cut] - r_pred) ^ 2), 2)
   t_mse = round(l_mse + r_mse, 2)
-  c("Total MSE" = t_mse, "Left MSE" = l_mse, "Right MSE" = r_mse)
+  c("Total SSE" = t_mse, "Left SSE" = l_mse, "Right SSE" = r_mse)
 }
 ```
 
@@ -311,9 +315,9 @@ calc_split_mse = function(cut = 0) {
 cbind(
   "Cutoff" = c(-0.5, 0.0, 0.75),
   rbind(
-    calc_split_mse(cut = -0.5),
-    calc_split_mse(cut = 0),
-    calc_split_mse(cut = 0.75)
+    calc_split_sse(cut = -0.5),
+    calc_split_sse(cut = 0),
+    calc_split_sse(cut = 0.75)
   ) 
 ) %>% 
   kable() %>% 

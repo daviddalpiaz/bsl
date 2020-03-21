@@ -741,9 +741,12 @@ y
 \]</span></p>
 <p>where</p>
 <ul>
-<li><span class="math inline">\(N_L\)</span> are the data in the left neighborhood</li>
+<li><span class="math inline">\(N_L\)</span> are the data in the left neighborhood, that is <span class="math inline">\(x &lt; c\)</span></li>
+<li><span class="math inline">\(N_R\)</span> are the data in the right neighborhood, that is <span class="math inline">\(x &gt; c\)</span></li>
 <li><span class="math inline">\(\hat{\mu}_{N_L}\)</span> is the mean of the <span class="math inline">\(y_i\)</span> for data in the left neighborhood</li>
+<li><span class="math inline">\(\hat{\mu}_{N_R}\)</span> is the mean of the <span class="math inline">\(y_i\)</span> for data in the right neighborhood</li>
 </ul>
+<p>This quantity is the sum of two sum of squared errors, one for the left neighborhood, and one for the right neighborhood.</p>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -751,13 +754,13 @@ y
 Cutoff
 </th>
 <th style="text-align:right;">
-Total MSE
+Total SSE
 </th>
 <th style="text-align:right;">
-Left MSE
+Left SSE
 </th>
 <th style="text-align:right;">
-Right MSE
+Right SSE
 </th>
 </tr>
 </thead>
