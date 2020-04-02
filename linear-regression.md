@@ -32,7 +32,7 @@ Before we even begin to discuss regression, we make a bold announcement: **STAT 
 
 Suppose (although it is likely untrue) that there is a strong correlation between wearing a wrist watch, and car accidents. Depending on your frame of reference, you should view this information in very different ways.
 
-- Suppose you are a car insurance company. This is great news! You can now more accurately predict the number of accidents of your policy holders. For the sake of understanding how much your company will need to pay out in a year, you don't care what *causes* accidents, you just want to be able to **predict** (estimate) the number of accidents.
+- Suppose you are a car insurance company. This is great news! You can now more accurately predict the number of accidents of your policy holders if you know whether or not they wear a wrist watch. For the sake of understanding how much your company will need to pay out in a year, you don't care what *causes* accidents, you just want to be able to **predict** (estimate) the number of accidents.
 - Suppose you are a car driver. As a driver, you want to stay safe. That is, you want to do things that decrease accidents. In this framing, you care about things that **cause** accidents, not things that *predict* accidents. In other words, this correlation information should **not** lead to you throwing away your wrist watch.
 
 *Disclaimer:* Extremely high correlation should not simply be ignored. For example, there is a very high correlation between smoking and lung cancer. (Fun fact: [RA Fisher](https://en.wikipedia.org/wiki/Ronald_Fisher), the most famous statistician, did not believe that smoking caused cancer. It's actually a part of a larger [fasinating story](https://rss.onlinelibrary.wiley.com/doi/full/10.1111/j.1740-9713.2014.00765.x).) However, this strong correlation is not proof that smoking causes lung cancer. Instead, additional study is needed to rule out confounders, establish mechanistic relationships, and more.
@@ -45,10 +45,10 @@ Stated simply, the regression tasks seeks to estimate (predict) a **numeric** qu
 
 - Estimating the **salary** of a baseball player.
 - Estimating the **price** of a home for sale.
-- Estimating the **credit score** of a bank customer.
+- Estimating the **credit score** of a bank customer, 
 - Estimating the number of **downloads** of a podcast.
 
-Each of these quantities is some numeric value. The goal of regression is to estimate (predict) these quantities when they are unknown through the use of additional, possibly correlated quantities.
+Each of these quantities is some numeric value. The goal of regression is to estimate (predict) these quantities when they are unknown through the use of additional, possibly correlated quantities, for example the offensive and defensive statistics of a baseball player, or the location and attributes of a home.
 
 ## Mathematical Setup
 
@@ -66,13 +66,13 @@ $$
 So our goal will be to find some $f$ such that $f(\boldsymbol{X})$ is close to $Y$. But how do we define close? There are many ways but we will start with, and most often consider, squared error loss. Specifically, we define a loss function, 
 
 $$
-L(Y, \boldsymbol{X}) \triangleq (Y - \boldsymbol{X}) ^ 2
+L(Y, f(\boldsymbol{X})) \triangleq \left(Y - f(\boldsymbol{X})\right) ^ 2
 $$
 
 Now we can clarify the goal of regression, which is to minimize the above loss, *on average*. We call this the **risk** of estimating $Y$ using $f(\boldsymbol{X})$.
 
 $$
-R(Y, f(\boldsymbol{X})) \triangleq \mathbb{E}[L(Y, f(\boldsymbol{X}))] = \mathbb{E}_{X, Y}[(Y - f(\boldsymbol{X})) ^ 2]
+R(Y, f(\boldsymbol{X})) \triangleq \mathbb{E}[L(Y, f(\boldsymbol{X}))] = \mathbb{E}_{\boldsymbol{X}, Y}[(Y - f(\boldsymbol{X})) ^ 2]
 $$
 
 Before attempting to minimize the risk, we first re-write the risk after conditioning on $\boldsymbol{X}$.
@@ -89,9 +89,9 @@ $$
 \mu(\boldsymbol{x}) \triangleq \mathbb{E}[Y \mid \boldsymbol{X} = \boldsymbol{x}]
 $$
 
-which we call the **regression function**.
+which we call the **regression function**. (This is not a learned function, this is the function we would like to learn in order to minimize the squared error loss on average. $f$ is any function, $\mu$ is the function that would minimize squared error loss on average if we knew if, but will instead need to learn it form the data.
 
-Note that $\boldsymbol{x}$ represents realized values of the random variables $\boldsymbol{X}$, as discussed in the previous chapter.
+Note that $\boldsymbol{x}$ represents (potential) realized values of the random variables $\boldsymbol{X}$.
 
 $$
 \boldsymbol{x} = (x_1, x_2, \ldots, x_p)
@@ -142,49 +142,49 @@ Suppose for a moment that we did not know the above **true** probability model, 
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:right;"> -0.4689827 </td>
-   <td style="text-align:right;"> -0.0580887 </td>
+   <td style="text-align:right;"> -0.47 </td>
+   <td style="text-align:right;"> -0.06 </td>
   </tr>
   <tr>
-   <td style="text-align:right;"> -0.2557522 </td>
-   <td style="text-align:right;"> 1.7190632 </td>
+   <td style="text-align:right;"> -0.26 </td>
+   <td style="text-align:right;"> 1.72 </td>
   </tr>
   <tr>
-   <td style="text-align:right;"> 0.1457067 </td>
-   <td style="text-align:right;"> 1.3986870 </td>
+   <td style="text-align:right;"> 0.15 </td>
+   <td style="text-align:right;"> 1.39 </td>
   </tr>
   <tr>
-   <td style="text-align:right;"> 0.8164156 </td>
-   <td style="text-align:right;"> 0.6641923 </td>
+   <td style="text-align:right;"> 0.82 </td>
+   <td style="text-align:right;"> 0.68 </td>
   </tr>
   <tr>
-   <td style="text-align:right;"> -0.5966361 </td>
-   <td style="text-align:right;"> -0.2419769 </td>
+   <td style="text-align:right;"> -0.60 </td>
+   <td style="text-align:right;"> -0.27 </td>
   </tr>
   <tr>
-   <td style="text-align:right;"> 0.7967794 </td>
-   <td style="text-align:right;"> 1.5428566 </td>
+   <td style="text-align:right;"> 0.80 </td>
+   <td style="text-align:right;"> 1.55 </td>
   </tr>
   <tr>
-   <td style="text-align:right;"> 0.8893505 </td>
-   <td style="text-align:right;"> 0.7554431 </td>
+   <td style="text-align:right;"> 0.89 </td>
+   <td style="text-align:right;"> 0.76 </td>
   </tr>
   <tr>
-   <td style="text-align:right;"> 0.3215956 </td>
-   <td style="text-align:right;"> -0.4083999 </td>
+   <td style="text-align:right;"> 0.32 </td>
+   <td style="text-align:right;"> -0.40 </td>
   </tr>
   <tr>
-   <td style="text-align:right;"> 0.2582281 </td>
-   <td style="text-align:right;"> -1.8451058 </td>
+   <td style="text-align:right;"> 0.26 </td>
+   <td style="text-align:right;"> -1.85 </td>
   </tr>
   <tr>
-   <td style="text-align:right;"> -0.8764275 </td>
-   <td style="text-align:right;"> -1.7926190 </td>
+   <td style="text-align:right;"> -0.88 </td>
+   <td style="text-align:right;"> -1.85 </td>
   </tr>
 </tbody>
 </table>
 
-How do we fit (or "train" in the ML language) a linear model with this data? In order words, how to be learn the regression function from this data with a linear regression model?
+How do we fit (or "train" in ML language) a linear model with this data? In order words, how to be learn the regression function from this data with a linear regression model?
 
 First, we need to make assumptions about the *form* of the regression function, up to, but **not** including some unknown parameters. Consider three possible linear models, in particular, three possible regression functions.
 
@@ -213,7 +213,7 @@ So how do we actually **fit** these models, that is train them, with the given d
 To fit the degree 3 polynomial using least squares, we *minimize*
 
 $$
-\sum_{i = 1}^{n}(y_i - (\beta_0 + \beta_1 x_i + \beta_2 x_i^2 + \beta_3 x_i^3)) ^ 2
+\sum_{i = 1}^{n}\left(y_i - (\beta_0 + \beta_1 x_i + \beta_2 x_i^2 + \beta_3 x_i^3)\right) ^ 2
 $$
 
 Skipping the details of the minimization, we would acquire $\hat{\beta}_0$, $\hat{\beta}_1$, $\hat{\beta}_2$, and $\hat{\beta}_3$ which are estimates of ${\beta}_0$, ${\beta}_1$, ${\beta}_2$, and ${\beta}_3$.
@@ -342,7 +342,7 @@ $$
 
 Now, finally, let's fit some models it R to this data! To do so, we will use one of the most important functions in R, the `lm()` function.
 
-Let's specify some assumed mean functions of models that we would like to fit.
+Let's specify the form of some assumed mean functions of models that we would like to fit.
 
 **Model 1** or `mod_1` in R
 
@@ -596,7 +596,7 @@ $$
 \hat{\mu}_1(\texttt{new_obs}) = \hat{\mathbb{E}}[Y \mid \boldsymbol{X} = \texttt{new_obs}] = 3.9454652
 $$
 
-The predict function **is** essentially the estimated regression (mean) function! Supply a different model, then you get that estimated regression (mean) function.
+The predict function, together with a trained model, **is** the estimated regression (mean) function! Supply a different trained model, then you get that estimated regression (mean) function.
 
 
 ```r
@@ -664,7 +664,7 @@ We first split this data into a **train** and **test** set. We will discuss thes
   - Additionally, you should not **select** models using test data.
   - In STAT 432, we will only use test data to provide a final estimate of the generalization error of a chosen model. (Much more on this along the way.)
 
-Again, **Do not, ever, for any reason, fit a model using test data!** I repeat: **Do not, ever, for any reason, fit a model using test data!** (You've been warned.)
+Again, **do not, ever, for any reason, fit a model using test data!** I repeat: **Do not, ever, for any reason, fit a model using test data!** (You've been warned.)
 
 To perform this split, we will *randomly* select some observations for the train (`trn`) set, the remainder will be used for the test (`tst`) set.
 
@@ -697,8 +697,8 @@ Now that we have data for estimation, and validation, we need some **metrics** f
 
 If our goal is to "predict" then we want small errors. In general there are two types of errors we consider:
 
-- Squared Errors: $(y_i - \hat{\mu}(\boldsymbol{x})) ^2$
-- Absolute Errors: $|y_i - \hat{\mu}(\boldsymbol{x})|$
+- Squared Errors: $(y_i - \hat{\mu}(\boldsymbol{x}_i)) ^2$
+- Absolute Errors: $|y_i - \hat{\mu}(\boldsymbol{x}_i)|$
 
 In both cases, we will want to consider the average errors made. We define two metrics.
 
@@ -739,7 +739,7 @@ $$
 \text{RMSE}_{\texttt{tst}} = \text{rmse}\left(\hat{f}_{\texttt{trn}}, \mathcal{D}_{\texttt{tst}}\right) = \sqrt{\frac{1}{n_{\texttt{tst}}}\displaystyle\sum_{i \in {\texttt{tst}}}^{}\left(y_i - \hat{f}_{\texttt{trn}}({x}_i)\right)^2}
 $$
 
-For the rest of this chapter, we will largely ignore train error. It's a bit confusing, since it doesn't use the full training data! However, think of training error this way: training error evaluates how well a model performs on the data used to fit the model.
+For the rest of this chapter, we will largely ignore train error. It's a bit confusing, since it doesn't use the full training data! However, think of training error this way: training error evaluates how well a model performs on the data used to fit the model. (This is the general concept behind "training error." Others might simply call the "estimation" set the training set. We use "estimation" so that we can reserve "train" for the full training dataset, not just the subset use to initially fit the model.)
 
 Let's return to the `sim_mlr_data` data and apply these splits and metrics to this data.
 
@@ -820,13 +820,13 @@ calc_rmse(actual = mlr_tst$y,
 ## [1] 0.538057
 ```
 
-We ignore the validation metrics. (we already used them for selecting a model.) This test RMSE is our estimate of how well our selected model will perform on unseen data, on average (in a squared error sense). 
+We ignore the validation metrics. (We already used them for selecting a model.) This test RMSE is our estimate of how well our selected model will perform on unseen data, on average (in a squared error sense). 
 
 Note that for selecting a model there is no difference between MSE and RMSE, but for the sake of understanding, RMSE has preferential units, the same units as the response variables. (Whereas MSE has units squared.) We will always report RMSE.
 
 ### Graphical Evaluation
 
-In addition to numeric evaluations, we can evaluate a regression model graphical, in particular with a **predicted versus actual** plot.
+In addition to numeric evaluations, we can evaluate a regression model graphically, in particular with a **predicted versus actual** plot.
 
 
 ```r
@@ -845,7 +845,7 @@ grid()
 
 <img src="linear-regression_files/figure-html/unnamed-chunk-34-1.png" width="576" style="display: block; margin: auto;" />
 
-The closer to the line the better. Also, the less of a pattern the better. In other words, this plot will help diagnose if our model is making similar sized errors for all predictions, or if there are systematic differences.
+The closer to the line the better. Also, the less of a pattern the better. In other words, this plot will help diagnose if our model is making similar sized errors for all predictions, or if there are systematic differences. It can also help identify large errors. Sometimes, errors can be on average small, but include some huge errors. In some settings, this may be extremely undiserable.
 
 This might get you thinking about "checking the assumptions" of a linear model. Assessing things like: normality, constant variance, etc. Note that while these are nice things to have, we aren't really concerned with these things. If we care how well our model *predicts*, then we will directly evaluate how well it predicts. Least squares is least squares. It minimizes errors. It doesn't care about model assumptions.
 
@@ -1225,9 +1225,9 @@ Some things to consider:
 
 ## Example: Credit Card Data
 
-Suppose you work for a small local bank, perhaps a credit union, that has a credit card product offering. For years, you relied on credit agencies to provide a rating of your customer's credit, however, this costs your bank money. One day, you realize that it might be possible to reverse engineer your customers' (and thus potential customers) credit rating based on the credit ratings that you already have already purchase, as well as the demographic and credit card information that you already have, such as age, education level, credit limit, etc. (We make no comment on the legality or ethics of this idea. Consider these before using at your own risk.)
+Suppose you work for a small local bank, perhaps a credit union, that has a credit card product offering. For years, you relied on credit agencies to provide a rating of your customer's credit, however, this costs your bank money. One day, you realize that it might be possible to reverse engineer your customers' (and thus potential customers) credit rating based on the credit ratings that you have already purchased, as well as the demographic and credit card information that you already have, such as age, education level, credit limit, etc. (We make no comment on the legality or ethics of this idea. Consider these before using at your own risk.)
 
-So long as you can estimate customers' credit rating with a reasonable error, you could stop buying the ratings from an agency. Effectively, you will have created your own rating.
+So long as you can estimate customers' credit ratings with a reasonable error, you could stop buying the ratings from an outside agency. Effectively, you will have created your own rating.
 
 
 ```r
@@ -1303,21 +1303,12 @@ We immediately notice three variables that have a strong correlation with `Ratin
 
 
 ```r
-crdt_mod_0_est = lm(Rating ~ 1, data = crdt_est)
-crdt_mod_1_est = lm(Rating ~ Limit, data = crdt_est)
-crdt_mod_2_est = lm(Rating ~ Limit + Income + Balance, data = crdt_est)
-crdt_mod_3_est = lm(Rating ~ ., data = crdt_est)
-crdt_mod_4_est = step(lm(Rating ~ . ^ 2, data = crdt_est), trace = FALSE)
-```
-
-
-```r
 crdt_mod_list = list(
-  crdt_mod_0_est,
-  crdt_mod_1_est,
-  crdt_mod_2_est,
-  crdt_mod_3_est,
-  crdt_mod_4_est
+  crdt_mod_0_est = lm(Rating ~ 1, data = crdt_est),
+  crdt_mod_1_est = lm(Rating ~ Limit, data = crdt_est),
+  crdt_mod_2_est = lm(Rating ~ Limit + Income + Balance, data = crdt_est),
+  crdt_mod_3_est = lm(Rating ~ ., data = crdt_est),
+  crdt_mod_4_est = step(lm(Rating ~ . ^ 2, data = crdt_est), trace = FALSE)
 )
 ```
 
@@ -1328,7 +1319,8 @@ map_dbl(crdt_mod_val_pred, calc_rmse, actual = crdt_val$Rating)
 ```
 
 ```
-## [1] 140.080591  12.244099  12.333767   9.890607  11.575484
+## crdt_mod_0_est crdt_mod_1_est crdt_mod_2_est crdt_mod_3_est crdt_mod_4_est 
+##     140.080591      12.244099      12.333767       9.890607      11.575484
 ```
 
 From these results, it appears that the additive model, including all terms performs best. We move forward with this model.
@@ -1379,7 +1371,7 @@ abline(a = 0, b = 1, lwd = 2)
 grid()
 ```
 
-<img src="linear-regression_files/figure-html/unnamed-chunk-78-1.png" width="576" style="display: block; margin: auto;" />
+<img src="linear-regression_files/figure-html/unnamed-chunk-77-1.png" width="576" style="display: block; margin: auto;" />
 
 The predicted versus actual plot almost looks too good to be true! Wow! (Oh, wait. This was simulated data...)
 

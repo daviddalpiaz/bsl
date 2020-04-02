@@ -24,7 +24,7 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2020-03-21" />
+<meta name="date" content="2020-04-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -365,13 +365,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="classification-metrics" class="section level2">
 <h2><span class="header-section-number">6.2</span> Classification Metrics</h2>
 <p><strong>Misclassification</strong> Rate</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" data-line-number="1">calc_misclass =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</a>
-<a class="sourceLine" id="cb165-2" data-line-number="2">  <span class="kw">mean</span>(actual <span class="op">!=</span><span class="st"> </span>predicted)</a>
-<a class="sourceLine" id="cb165-3" data-line-number="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" data-line-number="1">calc_misclass =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</a>
+<a class="sourceLine" id="cb164-2" data-line-number="2">  <span class="kw">mean</span>(actual <span class="op">!=</span><span class="st"> </span>predicted)</a>
+<a class="sourceLine" id="cb164-3" data-line-number="3">}</a></code></pre></div>
 <p><strong>Accuracy</strong></p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" data-line-number="1">calc_accuracy =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</a>
-<a class="sourceLine" id="cb166-2" data-line-number="2">  <span class="kw">mean</span>(actual <span class="op">==</span><span class="st"> </span>predicted)</a>
-<a class="sourceLine" id="cb166-3" data-line-number="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" data-line-number="1">calc_accuracy =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</a>
+<a class="sourceLine" id="cb165-2" data-line-number="2">  <span class="kw">mean</span>(actual <span class="op">==</span><span class="st"> </span>predicted)</a>
+<a class="sourceLine" id="cb165-3" data-line-number="3">}</a></code></pre></div>
 <hr />
 </div>
 <div id="source-5" class="section level2">

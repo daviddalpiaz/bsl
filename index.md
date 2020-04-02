@@ -1,7 +1,7 @@
 --- 
 title: "Basics of Statistical Learning"
 author: "[David Dalpiaz](https://daviddalpiaz.com/)"
-date: "2020-03-21"
+date: "2020-04-02"
 github-repo: daviddalpiaz/bsl
 url: 'https\://statisticallearning.org/'
 knit: "bookdown::render_book"
@@ -39,7 +39,7 @@ While development is taking place, you may see "TODO" scattered throughout the t
 
 ## Who? {-}
 
-This book is targeted at advanced undergraduate or first year MS students in Statistics who have no prior machine learning experience. While both will be discussed in great detail, previous experience with both statistical modeling and R are assumed.
+This book is targeted at advanced undergraduate or first year MS students in Statistics who have *no prior machine learning experience*. While both will be discussed in great detail, previous experience with both statistical modeling and R are assumed.
 
 In other words, this books is for students in STAT 432.
 

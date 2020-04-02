@@ -24,7 +24,7 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2020-03-21" />
+<meta name="date" content="2020-04-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -382,7 +382,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Before we even begin to discuss regression, we make a bold announcement: <strong>STAT 432 is not a course about inference.</strong> It is very possible that there will be <strong>zero</strong> causal claims in this book. While it would certainly be nice (but extremely difficult) to uncover causal relationships, our focus will be on predictive relationships.</p>
 <p>Suppose (although it is likely untrue) that there is a strong correlation between wearing a wrist watch, and car accidents. Depending on your frame of reference, you should view this information in very different ways.</p>
 <ul>
-<li>Suppose you are a car insurance company. This is great news! You can now more accurately predict the number of accidents of your policy holders. For the sake of understanding how much your company will need to pay out in a year, you don’t care what <em>causes</em> accidents, you just want to be able to <strong>predict</strong> (estimate) the number of accidents.</li>
+<li>Suppose you are a car insurance company. This is great news! You can now more accurately predict the number of accidents of your policy holders if you know whether or not they wear a wrist watch. For the sake of understanding how much your company will need to pay out in a year, you don’t care what <em>causes</em> accidents, you just want to be able to <strong>predict</strong> (estimate) the number of accidents.</li>
 <li>Suppose you are a car driver. As a driver, you want to stay safe. That is, you want to do things that decrease accidents. In this framing, you care about things that <strong>cause</strong> accidents, not things that <em>predict</em> accidents. In other words, this correlation information should <strong>not</strong> lead to you throwing away your wrist watch.</li>
 </ul>
 <p><em>Disclaimer:</em> Extremely high correlation should not simply be ignored. For example, there is a very high correlation between smoking and lung cancer. (Fun fact: <a href="https://en.wikipedia.org/wiki/Ronald_Fisher">RA Fisher</a>, the most famous statistician, did not believe that smoking caused cancer. It’s actually a part of a larger <a href="https://rss.onlinelibrary.wiley.com/doi/full/10.1111/j.1740-9713.2014.00765.x">fasinating story</a>.) However, this strong correlation is not proof that smoking causes lung cancer. Instead, additional study is needed to rule out confounders, establish mechanistic relationships, and more.</p>
@@ -394,10 +394,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Estimating the <strong>salary</strong> of a baseball player.</li>
 <li>Estimating the <strong>price</strong> of a home for sale.</li>
-<li>Estimating the <strong>credit score</strong> of a bank customer.</li>
+<li>Estimating the <strong>credit score</strong> of a bank customer,</li>
 <li>Estimating the number of <strong>downloads</strong> of a podcast.</li>
 </ul>
-<p>Each of these quantities is some numeric value. The goal of regression is to estimate (predict) these quantities when they are unknown through the use of additional, possibly correlated quantities.</p>
+<p>Each of these quantities is some numeric value. The goal of regression is to estimate (predict) these quantities when they are unknown through the use of additional, possibly correlated quantities, for example the offensive and defensive statistics of a baseball player, or the location and attributes of a home.</p>
 </div>
 <div id="mathematical-setup" class="section level2">
 <h2><span class="header-section-number">2.4</span> Mathematical Setup</h2>
@@ -412,11 +412,11 @@ Y = f(\boldsymbol{X}) + \epsilon
 </ul>
 <p>So our goal will be to find some <span class="math inline">\(f\)</span> such that <span class="math inline">\(f(\boldsymbol{X})\)</span> is close to <span class="math inline">\(Y\)</span>. But how do we define close? There are many ways but we will start with, and most often consider, squared error loss. Specifically, we define a loss function,</p>
 <p><span class="math display">\[
-L(Y, \boldsymbol{X}) \triangleq (Y - \boldsymbol{X}) ^ 2
+L(Y, f(\boldsymbol{X})) \triangleq \left(Y - f(\boldsymbol{X})\right) ^ 2
 \]</span></p>
 <p>Now we can clarify the goal of regression, which is to minimize the above loss, <em>on average</em>. We call this the <strong>risk</strong> of estimating <span class="math inline">\(Y\)</span> using <span class="math inline">\(f(\boldsymbol{X})\)</span>.</p>
 <p><span class="math display">\[
-R(Y, f(\boldsymbol{X})) \triangleq \mathbb{E}[L(Y, f(\boldsymbol{X}))] = \mathbb{E}_{X, Y}[(Y - f(\boldsymbol{X})) ^ 2]
+R(Y, f(\boldsymbol{X})) \triangleq \mathbb{E}[L(Y, f(\boldsymbol{X}))] = \mathbb{E}_{\boldsymbol{X}, Y}[(Y - f(\boldsymbol{X})) ^ 2]
 \]</span></p>
 <p>Before attempting to minimize the risk, we first re-write the risk after conditioning on <span class="math inline">\(\boldsymbol{X}\)</span>.</p>
 <p><span class="math display">\[
@@ -427,8 +427,8 @@ R(Y, f(\boldsymbol{X})) \triangleq \mathbb{E}[L(Y, f(\boldsymbol{X}))] = \mathbb
 <p><span class="math display">\[
 \mu(\boldsymbol{x}) \triangleq \mathbb{E}[Y \mid \boldsymbol{X} = \boldsymbol{x}]
 \]</span></p>
-<p>which we call the <strong>regression function</strong>.</p>
-<p>Note that <span class="math inline">\(\boldsymbol{x}\)</span> represents realized values of the random variables <span class="math inline">\(\boldsymbol{X}\)</span>, as discussed in the previous chapter.</p>
+<p>which we call the <strong>regression function</strong>. (This is not a learned function, this is the function we would like to learn in order to minimize the squared error loss on average. <span class="math inline">\(f\)</span> is any function, <span class="math inline">\(\mu\)</span> is the function that would minimize squared error loss on average if we knew if, but will instead need to learn it form the data.</p>
+<p>Note that <span class="math inline">\(\boldsymbol{x}\)</span> represents (potential) realized values of the random variables <span class="math inline">\(\boldsymbol{X}\)</span>.</p>
 <p><span class="math display">\[
 \boldsymbol{x} = (x_1, x_2, \ldots, x_p)
 \]</span></p>
@@ -466,87 +466,87 @@ y
 <tbody>
 <tr>
 <td style="text-align:right;">
--0.4689827
+-0.47
 </td>
 <td style="text-align:right;">
--0.0580887
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
--0.2557522
-</td>
-<td style="text-align:right;">
-1.7190632
+-0.06
 </td>
 </tr>
 <tr>
 <td style="text-align:right;">
-0.1457067
+-0.26
 </td>
 <td style="text-align:right;">
-1.3986870
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-0.8164156
-</td>
-<td style="text-align:right;">
-0.6641923
+1.72
 </td>
 </tr>
 <tr>
 <td style="text-align:right;">
--0.5966361
+0.15
 </td>
 <td style="text-align:right;">
--0.2419769
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-0.7967794
-</td>
-<td style="text-align:right;">
-1.5428566
+1.39
 </td>
 </tr>
 <tr>
 <td style="text-align:right;">
-0.8893505
+0.82
 </td>
 <td style="text-align:right;">
-0.7554431
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-0.3215956
-</td>
-<td style="text-align:right;">
--0.4083999
+0.68
 </td>
 </tr>
 <tr>
 <td style="text-align:right;">
-0.2582281
+-0.60
 </td>
 <td style="text-align:right;">
--1.8451058
+-0.27
 </td>
 </tr>
 <tr>
 <td style="text-align:right;">
--0.8764275
+0.80
 </td>
 <td style="text-align:right;">
--1.7926190
+1.55
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+0.89
+</td>
+<td style="text-align:right;">
+0.76
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+0.32
+</td>
+<td style="text-align:right;">
+-0.40
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+-1.85
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-0.88
+</td>
+<td style="text-align:right;">
+-1.85
 </td>
 </tr>
 </tbody>
 </table>
-<p>How do we fit (or “train” in the ML language) a linear model with this data? In order words, how to be learn the regression function from this data with a linear regression model?</p>
+<p>How do we fit (or “train” in ML language) a linear model with this data? In order words, how to be learn the regression function from this data with a linear regression model?</p>
 <p>First, we need to make assumptions about the <em>form</em> of the regression function, up to, but <strong>not</strong> including some unknown parameters. Consider three possible linear models, in particular, three possible regression functions.</p>
 <p><strong>Degree 1 Polynomial</strong></p>
 <p><span class="math display">\[
@@ -564,7 +564,7 @@ y
 <p>So how do we actually <strong>fit</strong> these models, that is train them, with the given data. We have a couple of options: Maximum Likelihood or <strong>Least Squares</strong>! In this case, they actually produce the same result, so we use least squares for simplicity of explanation.</p>
 <p>To fit the degree 3 polynomial using least squares, we <em>minimize</em></p>
 <p><span class="math display">\[
-\sum_{i = 1}^{n}(y_i - (\beta_0 + \beta_1 x_i + \beta_2 x_i^2 + \beta_3 x_i^3)) ^ 2
+\sum_{i = 1}^{n}\left(y_i - (\beta_0 + \beta_1 x_i + \beta_2 x_i^2 + \beta_3 x_i^3)\right) ^ 2
 \]</span></p>
 <p>Skipping the details of the minimization, we would acquire <span class="math inline">\(\hat{\beta}_0\)</span>, <span class="math inline">\(\hat{\beta}_1\)</span>, <span class="math inline">\(\hat{\beta}_2\)</span>, and <span class="math inline">\(\hat{\beta}_3\)</span> which are estimates of <span class="math inline">\({\beta}_0\)</span>, <span class="math inline">\({\beta}_1\)</span>, <span class="math inline">\({\beta}_2\)</span>, and <span class="math inline">\({\beta}_3\)</span>.</p>
 <p>Taken together, we would have</p>
@@ -646,7 +646,7 @@ Y \mid \boldsymbol{X} \sim \text{N}(2 + 1\cdot x_1 + 1 \cdot \sin(x_2) + 3 \cdot
 \mu(\boldsymbol{x}) = 2 + 1\cdot x_1 + 1 \cdot \sin(x_2) + 3 \cdot x_3^3 + 3 \cdot x_{4B} -2 \cdot x_{4C}
 \]</span></p>
 <p>Now, finally, let’s fit some models it R to this data! To do so, we will use one of the most important functions in R, the <code>lm()</code> function.</p>
-<p>Let’s specify some assumed mean functions of models that we would like to fit.</p>
+<p>Let’s specify the form of some assumed mean functions of models that we would like to fit.</p>
 <p><strong>Model 1</strong> or <code>mod_1</code> in R</p>
 <p><span class="math display">\[
 \mu_1(\boldsymbol{x}) = \beta_0 + \beta_1 x_1
@@ -793,7 +793,7 @@ X_6 = 0.6]
 <p><span class="math display">\[
 \hat{\mu}_1(\texttt{new_obs}) = \hat{\mathbb{E}}[Y \mid \boldsymbol{X} = \texttt{new_obs}] = 3.9454652
 \]</span></p>
-<p>The predict function <strong>is</strong> essentially the estimated regression (mean) function! Supply a different model, then you get that estimated regression (mean) function.</p>
+<p>The predict function, together with a trained model, <strong>is</strong> the estimated regression (mean) function! Supply a different trained model, then you get that estimated regression (mean) function.</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw">predict</span>(mod_<span class="dv">4</span>, new_obs)</a></code></pre></div>
 <pre><code>##        1 
 ## 1.370883</code></pre>
@@ -835,7 +835,7 @@ X_6 = 0.6]
 <li>In STAT 432, we will only use test data to provide a final estimate of the generalization error of a chosen model. (Much more on this along the way.)</li>
 </ul></li>
 </ul>
-<p>Again, <strong>Do not, ever, for any reason, fit a model using test data!</strong> I repeat: <strong>Do not, ever, for any reason, fit a model using test data!</strong> (You’ve been warned.)</p>
+<p>Again, <strong>do not, ever, for any reason, fit a model using test data!</strong> I repeat: <strong>Do not, ever, for any reason, fit a model using test data!</strong> (You’ve been warned.)</p>
 <p>To perform this split, we will <em>randomly</em> select some observations for the train (<code>trn</code>) set, the remainder will be used for the test (<code>tst</code>) set.</p>
 <p><span class="math display">\[
 \mathcal{D} = \mathcal{D}_{\texttt{trn}} \cup \mathcal{D}_{\texttt{tst}}
@@ -860,8 +860,8 @@ X_6 = 0.6]
 <h2><span class="header-section-number">2.9</span> Regression Metrics</h2>
 <p>If our goal is to “predict” then we want small errors. In general there are two types of errors we consider:</p>
 <ul>
-<li>Squared Errors: <span class="math inline">\((y_i - \hat{\mu}(\boldsymbol{x})) ^2\)</span></li>
-<li>Absolute Errors: <span class="math inline">\(|y_i - \hat{\mu}(\boldsymbol{x})|\)</span></li>
+<li>Squared Errors: <span class="math inline">\((y_i - \hat{\mu}(\boldsymbol{x}_i)) ^2\)</span></li>
+<li>Absolute Errors: <span class="math inline">\(|y_i - \hat{\mu}(\boldsymbol{x}_i)|\)</span></li>
 </ul>
 <p>In both cases, we will want to consider the average errors made. We define two metrics.</p>
 <p><strong>Root Mean Square Error</strong> (RMSE)</p>
@@ -890,7 +890,7 @@ X_6 = 0.6]
 <p><span class="math display">\[
 \text{RMSE}_{\texttt{tst}} = \text{rmse}\left(\hat{f}_{\texttt{trn}}, \mathcal{D}_{\texttt{tst}}\right) = \sqrt{\frac{1}{n_{\texttt{tst}}}\displaystyle\sum_{i \in {\texttt{tst}}}^{}\left(y_i - \hat{f}_{\texttt{trn}}({x}_i)\right)^2}
 \]</span></p>
-<p>For the rest of this chapter, we will largely ignore train error. It’s a bit confusing, since it doesn’t use the full training data! However, think of training error this way: training error evaluates how well a model performs on the data used to fit the model.</p>
+<p>For the rest of this chapter, we will largely ignore train error. It’s a bit confusing, since it doesn’t use the full training data! However, think of training error this way: training error evaluates how well a model performs on the data used to fit the model. (This is the general concept behind “training error.” Others might simply call the “estimation” set the training set. We use “estimation” so that we can reserve “train” for the full training dataset, not just the subset use to initially fit the model.)</p>
 <p>Let’s return to the <code>sim_mlr_data</code> data and apply these splits and metrics to this data.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="co"># test-train split</span></a>
 <a class="sourceLine" id="cb31-2" data-line-number="2">mlr_trn_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(sim_mlr_data), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(sim_mlr_data))</a>
@@ -923,11 +923,11 @@ X_6 = 0.6]
 <a class="sourceLine" id="cb40-2" data-line-number="2"><span class="kw">calc_rmse</span>(<span class="dt">actual =</span> mlr_tst<span class="op">$</span>y,</a>
 <a class="sourceLine" id="cb40-3" data-line-number="3">          <span class="dt">predicted =</span> <span class="kw">predict</span>(mod_<span class="dv">4</span>_trn, mlr_tst))</a></code></pre></div>
 <pre><code>## [1] 0.538057</code></pre>
-<p>We ignore the validation metrics. (we already used them for selecting a model.) This test RMSE is our estimate of how well our selected model will perform on unseen data, on average (in a squared error sense).</p>
+<p>We ignore the validation metrics. (We already used them for selecting a model.) This test RMSE is our estimate of how well our selected model will perform on unseen data, on average (in a squared error sense).</p>
 <p>Note that for selecting a model there is no difference between MSE and RMSE, but for the sake of understanding, RMSE has preferential units, the same units as the response variables. (Whereas MSE has units squared.) We will always report RMSE.</p>
 <div id="graphical-evaluation" class="section level3">
 <h3><span class="header-section-number">2.9.1</span> Graphical Evaluation</h3>
-<p>In addition to numeric evaluations, we can evaluate a regression model graphical, in particular with a <strong>predicted versus actual</strong> plot.</p>
+<p>In addition to numeric evaluations, we can evaluate a regression model graphically, in particular with a <strong>predicted versus actual</strong> plot.</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw">plot</span>(</a>
 <a class="sourceLine" id="cb42-2" data-line-number="2">  <span class="dt">x =</span> mlr_tst<span class="op">$</span>y,</a>
 <a class="sourceLine" id="cb42-3" data-line-number="3">  <span class="dt">y =</span> <span class="kw">predict</span>(mod_<span class="dv">4</span>_trn, mlr_tst),</a>
@@ -940,7 +940,7 @@ X_6 = 0.6]
 <a class="sourceLine" id="cb42-10" data-line-number="10"><span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb42-11" data-line-number="11"><span class="kw">grid</span>()</a></code></pre></div>
 <p><img src="linear-regression_files/figure-html/unnamed-chunk-34-1.png" width="576" style="display: block; margin: auto;" /></p>
-<p>The closer to the line the better. Also, the less of a pattern the better. In other words, this plot will help diagnose if our model is making similar sized errors for all predictions, or if there are systematic differences.</p>
+<p>The closer to the line the better. Also, the less of a pattern the better. In other words, this plot will help diagnose if our model is making similar sized errors for all predictions, or if there are systematic differences. It can also help identify large errors. Sometimes, errors can be on average small, but include some huge errors. In some settings, this may be extremely undiserable.</p>
 <p>This might get you thinking about “checking the assumptions” of a linear model. Assessing things like: normality, constant variance, etc. Note that while these are nice things to have, we aren’t really concerned with these things. If we care how well our model <em>predicts</em>, then we will directly evaluate how well it predicts. Least squares is least squares. It minimizes errors. It doesn’t care about model assumptions.</p>
 <hr />
 </div>
@@ -1142,8 +1142,8 @@ X_6 = 0.6]
 </div>
 <div id="example-credit-card-data" class="section level2">
 <h2><span class="header-section-number">2.12</span> Example: Credit Card Data</h2>
-<p>Suppose you work for a small local bank, perhaps a credit union, that has a credit card product offering. For years, you relied on credit agencies to provide a rating of your customer’s credit, however, this costs your bank money. One day, you realize that it might be possible to reverse engineer your customers’ (and thus potential customers) credit rating based on the credit ratings that you already have already purchase, as well as the demographic and credit card information that you already have, such as age, education level, credit limit, etc. (We make no comment on the legality or ethics of this idea. Consider these before using at your own risk.)</p>
-<p>So long as you can estimate customers’ credit rating with a reasonable error, you could stop buying the ratings from an agency. Effectively, you will have created your own rating.</p>
+<p>Suppose you work for a small local bank, perhaps a credit union, that has a credit card product offering. For years, you relied on credit agencies to provide a rating of your customer’s credit, however, this costs your bank money. One day, you realize that it might be possible to reverse engineer your customers’ (and thus potential customers) credit rating based on the credit ratings that you have already purchased, as well as the demographic and credit card information that you already have, such as age, education level, credit limit, etc. (We make no comment on the legality or ethics of this idea. Consider these before using at your own risk.)</p>
+<p>So long as you can estimate customers’ credit ratings with a reasonable error, you could stop buying the ratings from an outside agency. Effectively, you will have created your own rating.</p>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1"><span class="co"># load data, coerce to tibble</span></a>
 <a class="sourceLine" id="cb84-2" data-line-number="2">crdt =<span class="st"> </span><span class="kw">as_tibble</span>(ISLR<span class="op">::</span>Credit)</a></code></pre></div>
 <p>To perform this analysis, we will use the <code>Credit</code> data form the <code>ISLR</code> package. Note: <strong>this is not real data.</strong> It has been simulated.</p>
@@ -1187,43 +1187,39 @@ X_6 = 0.6]
 <p>We also create a pairs plot.</p>
 <p><img src="linear-regression_files/figure-html/unnamed-chunk-72-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>We immediately notice three variables that have a strong correlation with <code>Rating</code>: <code>Income</code>, <code>Limit</code>, and <code>Balance</code>. Based on this, we evaluate five candidate models.</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1">crdt_mod_<span class="dv">0</span>_est =<span class="st"> </span><span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> crdt_est)</a>
-<a class="sourceLine" id="cb90-2" data-line-number="2">crdt_mod_<span class="dv">1</span>_est =<span class="st"> </span><span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span>Limit, <span class="dt">data =</span> crdt_est)</a>
-<a class="sourceLine" id="cb90-3" data-line-number="3">crdt_mod_<span class="dv">2</span>_est =<span class="st"> </span><span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span>Limit <span class="op">+</span><span class="st"> </span>Income <span class="op">+</span><span class="st"> </span>Balance, <span class="dt">data =</span> crdt_est)</a>
-<a class="sourceLine" id="cb90-4" data-line-number="4">crdt_mod_<span class="dv">3</span>_est =<span class="st"> </span><span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> crdt_est)</a>
-<a class="sourceLine" id="cb90-5" data-line-number="5">crdt_mod_<span class="dv">4</span>_est =<span class="st"> </span><span class="kw">step</span>(<span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span>. <span class="op">^</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">data =</span> crdt_est), <span class="dt">trace =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1">crdt_mod_list =<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb91-2" data-line-number="2">  crdt_mod_<span class="dv">0</span>_est,</a>
-<a class="sourceLine" id="cb91-3" data-line-number="3">  crdt_mod_<span class="dv">1</span>_est,</a>
-<a class="sourceLine" id="cb91-4" data-line-number="4">  crdt_mod_<span class="dv">2</span>_est,</a>
-<a class="sourceLine" id="cb91-5" data-line-number="5">  crdt_mod_<span class="dv">3</span>_est,</a>
-<a class="sourceLine" id="cb91-6" data-line-number="6">  crdt_mod_<span class="dv">4</span>_est</a>
-<a class="sourceLine" id="cb91-7" data-line-number="7">)</a></code></pre></div>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1">crdt_mod_val_pred =<span class="st"> </span><span class="kw">map</span>(crdt_mod_list, predict, crdt_val)</a>
-<a class="sourceLine" id="cb92-2" data-line-number="2"><span class="kw">map_dbl</span>(crdt_mod_val_pred, calc_rmse, <span class="dt">actual =</span> crdt_val<span class="op">$</span>Rating) </a></code></pre></div>
-<pre><code>## [1] 140.080591  12.244099  12.333767   9.890607  11.575484</code></pre>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1">crdt_mod_list =<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb90-2" data-line-number="2">  <span class="dt">crdt_mod_0_est =</span> <span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> crdt_est),</a>
+<a class="sourceLine" id="cb90-3" data-line-number="3">  <span class="dt">crdt_mod_1_est =</span> <span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span>Limit, <span class="dt">data =</span> crdt_est),</a>
+<a class="sourceLine" id="cb90-4" data-line-number="4">  <span class="dt">crdt_mod_2_est =</span> <span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span>Limit <span class="op">+</span><span class="st"> </span>Income <span class="op">+</span><span class="st"> </span>Balance, <span class="dt">data =</span> crdt_est),</a>
+<a class="sourceLine" id="cb90-5" data-line-number="5">  <span class="dt">crdt_mod_3_est =</span> <span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> crdt_est),</a>
+<a class="sourceLine" id="cb90-6" data-line-number="6">  <span class="dt">crdt_mod_4_est =</span> <span class="kw">step</span>(<span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span>. <span class="op">^</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">data =</span> crdt_est), <span class="dt">trace =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb90-7" data-line-number="7">)</a></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1">crdt_mod_val_pred =<span class="st"> </span><span class="kw">map</span>(crdt_mod_list, predict, crdt_val)</a>
+<a class="sourceLine" id="cb91-2" data-line-number="2"><span class="kw">map_dbl</span>(crdt_mod_val_pred, calc_rmse, <span class="dt">actual =</span> crdt_val<span class="op">$</span>Rating) </a></code></pre></div>
+<pre><code>## crdt_mod_0_est crdt_mod_1_est crdt_mod_2_est crdt_mod_3_est crdt_mod_4_est 
+##     140.080591      12.244099      12.333767       9.890607      11.575484</code></pre>
 <p>From these results, it appears that the additive model, including all terms performs best. We move forward with this model.</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1">final_credit_model =<span class="st"> </span><span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> crdt_trn)</a>
-<a class="sourceLine" id="cb94-2" data-line-number="2"><span class="kw">sqrt</span>(<span class="kw">mean</span>((<span class="kw">predict</span>(final_credit_model, crdt_tst) <span class="op">-</span><span class="st"> </span>crdt_tst<span class="op">$</span>Rating) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1">final_credit_model =<span class="st"> </span><span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> crdt_trn)</a>
+<a class="sourceLine" id="cb93-2" data-line-number="2"><span class="kw">sqrt</span>(<span class="kw">mean</span>((<span class="kw">predict</span>(final_credit_model, crdt_tst) <span class="op">-</span><span class="st"> </span>crdt_tst<span class="op">$</span>Rating) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</a></code></pre></div>
 <pre><code>## [1] 10.47727</code></pre>
 <p>It seems that on average, this model errors by about 10 credit points.</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" data-line-number="1"><span class="kw">range</span>(crdt_trn<span class="op">$</span>Rating)</a></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" data-line-number="1"><span class="kw">range</span>(crdt_trn<span class="op">$</span>Rating)</a></code></pre></div>
 <pre><code>## [1]  93 982</code></pre>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" data-line-number="1"><span class="kw">sd</span>(crdt_trn<span class="op">$</span>Rating)</a></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" data-line-number="1"><span class="kw">sd</span>(crdt_trn<span class="op">$</span>Rating)</a></code></pre></div>
 <pre><code>## [1] 157.5897</code></pre>
 <p>Given the range of possible ratings, this seem pretty good! What do you think?</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" data-line-number="1"><span class="kw">plot</span>(</a>
-<a class="sourceLine" id="cb100-2" data-line-number="2">  <span class="dt">x =</span> crdt_tst<span class="op">$</span>Rating,</a>
-<a class="sourceLine" id="cb100-3" data-line-number="3">  <span class="dt">y =</span> <span class="kw">predict</span>(final_credit_model, crdt_tst),</a>
-<a class="sourceLine" id="cb100-4" data-line-number="4">  <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,</a>
-<a class="sourceLine" id="cb100-5" data-line-number="5">  <span class="co"># xlim = c(0, 25000), ylim = c(0, 25000),</span></a>
-<a class="sourceLine" id="cb100-6" data-line-number="6">  <span class="dt">main =</span> <span class="st">&quot;Credit: Predicted vs Actual, Test Data&quot;</span>,</a>
-<a class="sourceLine" id="cb100-7" data-line-number="7">  <span class="dt">xlab =</span> <span class="st">&quot;Actual&quot;</span>,</a>
-<a class="sourceLine" id="cb100-8" data-line-number="8">  <span class="dt">ylab =</span> <span class="st">&quot;Predicted&quot;</span></a>
-<a class="sourceLine" id="cb100-9" data-line-number="9">)</a>
-<a class="sourceLine" id="cb100-10" data-line-number="10"><span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb100-11" data-line-number="11"><span class="kw">grid</span>()</a></code></pre></div>
-<p><img src="linear-regression_files/figure-html/unnamed-chunk-78-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" data-line-number="1"><span class="kw">plot</span>(</a>
+<a class="sourceLine" id="cb99-2" data-line-number="2">  <span class="dt">x =</span> crdt_tst<span class="op">$</span>Rating,</a>
+<a class="sourceLine" id="cb99-3" data-line-number="3">  <span class="dt">y =</span> <span class="kw">predict</span>(final_credit_model, crdt_tst),</a>
+<a class="sourceLine" id="cb99-4" data-line-number="4">  <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>,</a>
+<a class="sourceLine" id="cb99-5" data-line-number="5">  <span class="co"># xlim = c(0, 25000), ylim = c(0, 25000),</span></a>
+<a class="sourceLine" id="cb99-6" data-line-number="6">  <span class="dt">main =</span> <span class="st">&quot;Credit: Predicted vs Actual, Test Data&quot;</span>,</a>
+<a class="sourceLine" id="cb99-7" data-line-number="7">  <span class="dt">xlab =</span> <span class="st">&quot;Actual&quot;</span>,</a>
+<a class="sourceLine" id="cb99-8" data-line-number="8">  <span class="dt">ylab =</span> <span class="st">&quot;Predicted&quot;</span></a>
+<a class="sourceLine" id="cb99-9" data-line-number="9">)</a>
+<a class="sourceLine" id="cb99-10" data-line-number="10"><span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb99-11" data-line-number="11"><span class="kw">grid</span>()</a></code></pre></div>
+<p><img src="linear-regression_files/figure-html/unnamed-chunk-77-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>The predicted versus actual plot almost looks too good to be true! Wow! (Oh, wait. This was simulated data…)</p>
 <p>In summary, if this data were real, we might have an interesting result!</p>
 <p>Do note, that both this example and the previous should not be considered <strong>data analyses</strong>, but instead, examples that reinforce how to use the validation and test sets. As part of a true analysis, we will need to be much more careful about some of our decision. More on this later! Up next: nonparametric regression methods.</p>

@@ -28,7 +28,7 @@ To quickly address some buzzwords that come up when discussing machine learning:
 - **Deep learning** is just a subset of machine learning.
 - **Artificial Intelligence** (AI) overlaps machine learning but has much loftier goals. In general, if someone claims to be using AI, they are not. (They're probably using function learning! For example, we will learn logistic regression in this course. People in marketing might call that AI! Someone who understands ML will simply call it function learning. Don't buy the hype! We don't need to call simple methods AI to make them effective.)
 - Machine learning is not **data science**. Data science sometimes uses machine learning.
-- Does **big data** exist? If it does, I would bet a lot of money that you haven't seen it, and probably won't see it.
+- Does **big data** exist? If it does, I would bet a lot of money that you haven't seen it, and probably won't see it that often.
 - **Analytics** is just a fancy word for doing data analysis. Machine learning can be used in analyses! When it is, it is often called "Predictive Analytics."
 
 What makes machine learning interesting are the uses of these functions. We could develop functions that have applications in a wide variety of fields.
@@ -70,7 +70,7 @@ When doing machine learning, we will classify our *tasks* into one of two catego
 
 ### Supervised Learning
 
-In supervised learning, we want to "predict" a specific target, outcome, or response variable. In the following examples, this is the `y` variable. Supervised learning tasks are called **regression** if the response variable is *numeric*. If a supervised learning tasks has a *categorical* response, it is called **classification**.
+In supervised learning, we want to "predict" a specific *response variable*. (The response variable might also be called the target or outcome variable.) In the following examples, this is the `y` variable. Supervised learning tasks are called **regression** if the response variable is *numeric*. If a supervised learning tasks has a *categorical* response, it is called **classification**.
 
 #### Regression
 

@@ -24,7 +24,7 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2020-03-21" />
+<meta name="date" content="2020-04-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -663,7 +663,7 @@ y
 \mu(x) = \mathbb{E}[Y \mid \boldsymbol{X} = \boldsymbol{x}] = \beta_0 + \beta_1 x + \beta_2 x^2 + \beta_3 x^3
 \]</span></p>
 <p>which is fit in R using the <code>lm()</code> function</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" data-line-number="1"><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(x <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(x <span class="op">^</span><span class="st"> </span><span class="dv">3</span>), <span class="dt">data =</span> sim_slr_data)</a></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" data-line-number="1"><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(x <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(x <span class="op">^</span><span class="st"> </span><span class="dv">3</span>), <span class="dt">data =</span> sim_slr_data)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = y ~ x + I(x^2) + I(x^3), data = sim_slr_data)
@@ -838,26 +838,26 @@ Right SSE
 <div id="example-credit-card-data-1" class="section level2">
 <h2><span class="header-section-number">3.5</span> Example: Credit Card Data</h2>
 <p>Let’s return to the credit card data from the previous chapter. While last time we used the data to inform a bit of analysis, this time we will simply use the dataset to illustrate some concepts.</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" data-line-number="1"><span class="co"># load data, coerce to tibble</span></a>
-<a class="sourceLine" id="cb103-2" data-line-number="2">crdt =<span class="st"> </span><span class="kw">as_tibble</span>(ISLR<span class="op">::</span>Credit)</a></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" data-line-number="1"><span class="co"># load data, coerce to tibble</span></a>
+<a class="sourceLine" id="cb102-2" data-line-number="2">crdt =<span class="st"> </span><span class="kw">as_tibble</span>(ISLR<span class="op">::</span>Credit)</a></code></pre></div>
 <p>Again, we are using the <code>Credit</code> data form the <code>ISLR</code> package. Note: <strong>this is not real data.</strong> It has been simulated.</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1"><span class="co"># data prep</span></a>
-<a class="sourceLine" id="cb104-2" data-line-number="2">crdt =<span class="st"> </span>crdt <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb104-3" data-line-number="3"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>ID) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb104-4" data-line-number="4"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Rating, <span class="kw">everything</span>())</a></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" data-line-number="1"><span class="co"># data prep</span></a>
+<a class="sourceLine" id="cb103-2" data-line-number="2">crdt =<span class="st"> </span>crdt <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-3" data-line-number="3"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>ID) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb103-4" data-line-number="4"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Rating, <span class="kw">everything</span>())</a></code></pre></div>
 <p>We remove the <code>ID</code> variable as it should have no predictive power. We also move the <code>Rating</code> variable to the last column with a clever <code>dplyr</code> trick. This is in no way necessary, but is useful in creating some plots.</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" data-line-number="1"><span class="co"># test-train split</span></a>
-<a class="sourceLine" id="cb105-2" data-line-number="2"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb105-3" data-line-number="3">crdt_trn_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(crdt), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(crdt))</a>
-<a class="sourceLine" id="cb105-4" data-line-number="4">crdt_trn =<span class="st"> </span>crdt[crdt_trn_idx, ]</a>
-<a class="sourceLine" id="cb105-5" data-line-number="5">crdt_tst =<span class="st"> </span>crdt[<span class="op">-</span>crdt_trn_idx, ]</a></code></pre></div>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" data-line-number="1"><span class="co"># estimation-validation split</span></a>
-<a class="sourceLine" id="cb106-2" data-line-number="2">crdt_est_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(crdt_trn), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(crdt_trn))</a>
-<a class="sourceLine" id="cb106-3" data-line-number="3">crdt_est =<span class="st"> </span>crdt_trn[crdt_est_idx, ]</a>
-<a class="sourceLine" id="cb106-4" data-line-number="4">crdt_val =<span class="st"> </span>crdt_trn[<span class="op">-</span>crdt_est_idx, ]</a></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1"><span class="co"># test-train split</span></a>
+<a class="sourceLine" id="cb104-2" data-line-number="2"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb104-3" data-line-number="3">crdt_trn_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(crdt), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(crdt))</a>
+<a class="sourceLine" id="cb104-4" data-line-number="4">crdt_trn =<span class="st"> </span>crdt[crdt_trn_idx, ]</a>
+<a class="sourceLine" id="cb104-5" data-line-number="5">crdt_tst =<span class="st"> </span>crdt[<span class="op">-</span>crdt_trn_idx, ]</a></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" data-line-number="1"><span class="co"># estimation-validation split</span></a>
+<a class="sourceLine" id="cb105-2" data-line-number="2">crdt_est_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(crdt_trn), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(crdt_trn))</a>
+<a class="sourceLine" id="cb105-3" data-line-number="3">crdt_est =<span class="st"> </span>crdt_trn[crdt_est_idx, ]</a>
+<a class="sourceLine" id="cb105-4" data-line-number="4">crdt_val =<span class="st"> </span>crdt_trn[<span class="op">-</span>crdt_est_idx, ]</a></code></pre></div>
 <p>After train-test and estimation-validation splitting the data, we look at the train data.</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" data-line-number="1"><span class="co"># check data</span></a>
-<a class="sourceLine" id="cb107-2" data-line-number="2"><span class="kw">head</span>(crdt_trn, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" data-line-number="1"><span class="co"># check data</span></a>
+<a class="sourceLine" id="cb106-2" data-line-number="2"><span class="kw">head</span>(crdt_trn, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 10 x 11
 ##    Income Limit Cards   Age Education Gender Student Married Ethnicity Balance
 ##     &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;     &lt;int&gt; &lt;fct&gt;  &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;       &lt;int&gt;
@@ -874,13 +874,13 @@ Right SSE
 ## # … with 1 more variable: Rating &lt;int&gt;</code></pre>
 <p>Recall that we would like to predict the <code>Rating</code> variable. This time, let’s try to use only demographic information as predictors. In particular, let’s focus on <code>Age</code> (numeric), <code>Gender</code> (categorical), and <code>Student</code> (categorical).</p>
 <p>Let’s fit KNN models with these features, and various values of <span class="math inline">\(k\)</span>. To do so, we use the <code>knnreg()</code> function from the <code>caret</code> package. (There are many other KNN functions in R. However, the operation and syntax of <code>knnreg()</code> better matches other functions we will use in this course.) Use <code>?knnreg</code> for documentation and details.</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" data-line-number="1">crdt_knn_<span class="dv">01</span> =<span class="st"> </span><span class="kw">knnreg</span>(Rating <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Gender <span class="op">+</span><span class="st"> </span>Student, <span class="dt">data =</span> crdt_est, <span class="dt">k =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb109-2" data-line-number="2">crdt_knn_<span class="dv">10</span> =<span class="st"> </span><span class="kw">knnreg</span>(Rating <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Gender <span class="op">+</span><span class="st"> </span>Student, <span class="dt">data =</span> crdt_est, <span class="dt">k =</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb109-3" data-line-number="3">crdt_knn_<span class="dv">25</span> =<span class="st"> </span><span class="kw">knnreg</span>(Rating <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Gender <span class="op">+</span><span class="st"> </span>Student, <span class="dt">data =</span> crdt_est, <span class="dt">k =</span> <span class="dv">25</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" data-line-number="1">crdt_knn_<span class="dv">01</span> =<span class="st"> </span><span class="kw">knnreg</span>(Rating <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Gender <span class="op">+</span><span class="st"> </span>Student, <span class="dt">data =</span> crdt_est, <span class="dt">k =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb108-2" data-line-number="2">crdt_knn_<span class="dv">10</span> =<span class="st"> </span><span class="kw">knnreg</span>(Rating <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Gender <span class="op">+</span><span class="st"> </span>Student, <span class="dt">data =</span> crdt_est, <span class="dt">k =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb108-3" data-line-number="3">crdt_knn_<span class="dv">25</span> =<span class="st"> </span><span class="kw">knnreg</span>(Rating <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Gender <span class="op">+</span><span class="st"> </span>Student, <span class="dt">data =</span> crdt_est, <span class="dt">k =</span> <span class="dv">25</span>)</a></code></pre></div>
 <p>Here, we fit three models to the estimation data. We supply the variables that will be used as features as we would with <code>lm()</code>. We also specify how many neighbors to consider via the <code>k</code> argument.</p>
 <p>But wait a second, what is the distance from non-student to student? From male to female? In other words, how does KNN handle categorical variables? It doesn’t! Like <code>lm()</code> it creates dummy variables under the hood.</p>
 <p><strong>Note:</strong> To this point, and until we specify otherwise, we will always coerce categorical variables to be factor variables in R. We will then let modeling functions such as <code>lm()</code> or <code>knnreg()</code> deal with the creation of dummy variables internally.</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" data-line-number="1"><span class="kw">head</span>(crdt_knn_<span class="dv">10</span><span class="op">$</span>learn<span class="op">$</span>X)</a></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" data-line-number="1"><span class="kw">head</span>(crdt_knn_<span class="dv">10</span><span class="op">$</span>learn<span class="op">$</span>X)</a></code></pre></div>
 <pre><code>##   Age GenderFemale StudentYes
 ## 1  30            0          0
 ## 2  25            0          0
@@ -889,32 +889,32 @@ Right SSE
 ## 5  44            0          1
 ## 6  71            0          0</code></pre>
 <p>Once these dummy variables have been created, we have a numeric <span class="math inline">\(X\)</span> matrix, which makes distance calculations easy. For example, the distance between the 4th and 5th observation here is 29.02.</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" data-line-number="1"><span class="kw">dist</span>(<span class="kw">head</span>(crdt_knn_<span class="dv">10</span><span class="op">$</span>learn<span class="op">$</span>X))</a></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" data-line-number="1"><span class="kw">dist</span>(<span class="kw">head</span>(crdt_knn_<span class="dv">10</span><span class="op">$</span>learn<span class="op">$</span>X))</a></code></pre></div>
 <pre><code>##           1         2         3         4         5
 ## 2  5.000000                                        
 ## 3 14.000000 19.000000                              
 ## 4 43.011626 48.010416 29.017236                    
 ## 5 14.035669 19.026298  1.000000 29.034462          
 ## 6 41.000000 46.000000 27.000000  2.236068 27.018512</code></pre>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" data-line-number="1"><span class="kw">sqrt</span>(<span class="kw">sum</span>((crdt_knn_<span class="dv">10</span><span class="op">$</span>learn<span class="op">$</span>X[<span class="dv">4</span>, ] <span class="op">-</span><span class="st"> </span>crdt_knn_<span class="dv">10</span><span class="op">$</span>learn<span class="op">$</span>X[<span class="dv">5</span>, ]) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" data-line-number="1"><span class="kw">sqrt</span>(<span class="kw">sum</span>((crdt_knn_<span class="dv">10</span><span class="op">$</span>learn<span class="op">$</span>X[<span class="dv">4</span>, ] <span class="op">-</span><span class="st"> </span>crdt_knn_<span class="dv">10</span><span class="op">$</span>learn<span class="op">$</span>X[<span class="dv">5</span>, ]) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</a></code></pre></div>
 <pre><code>## [1] 29.03446</code></pre>
 <p>(What about interactions? Basically, you’d have to create them the same way as you do for linear models. We only mention this to contrast with trees in a bit.)</p>
 <p>OK, so of these three models, which one performs best? (Where for now, “best” is obtaining the lowest validation RMSE.)</p>
 <p>First, note that we return to the <code>predict()</code> function as we did with <code>lm()</code>.</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb116-1" data-line-number="1"><span class="kw">predict</span>(crdt_knn_<span class="dv">10</span>, crdt_val[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, ])</a></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" data-line-number="1"><span class="kw">predict</span>(crdt_knn_<span class="dv">10</span>, crdt_val[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, ])</a></code></pre></div>
 <pre><code>## [1] 337.7857 356.0000 295.7692 360.8182 306.8000</code></pre>
 <p>This uses the 10-NN (10 nearest neighbors) model to make predictions (estimate the regression function) given the first five observations of the validation data. (<strong>Note:</strong> We did not name the second argument to <code>predict()</code>. Again, you’ve been warned.)</p>
 <p>Now that we know we already know how to use the <code>predict()</code> function, let’s calculate the validation RMSE for each of these models.</p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" data-line-number="1">knn_mod_list =<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb118-2" data-line-number="2">  <span class="dt">crdt_knn_01 =</span> <span class="kw">knnreg</span>(Rating <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Gender <span class="op">+</span><span class="st"> </span>Student, <span class="dt">data =</span> crdt_est, <span class="dt">k =</span> <span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb118-3" data-line-number="3">  <span class="dt">crdt_knn_10 =</span> <span class="kw">knnreg</span>(Rating <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Gender <span class="op">+</span><span class="st"> </span>Student, <span class="dt">data =</span> crdt_est, <span class="dt">k =</span> <span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb118-4" data-line-number="4">  <span class="dt">crdt_knn_25 =</span> <span class="kw">knnreg</span>(Rating <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Gender <span class="op">+</span><span class="st"> </span>Student, <span class="dt">data =</span> crdt_est, <span class="dt">k =</span> <span class="dv">25</span>)</a>
-<a class="sourceLine" id="cb118-5" data-line-number="5">)</a></code></pre></div>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" data-line-number="1">knn_val_pred =<span class="st"> </span><span class="kw">map</span>(knn_mod_list, predict, crdt_val)</a></code></pre></div>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb120-1" data-line-number="1">calc_rmse =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</a>
-<a class="sourceLine" id="cb120-2" data-line-number="2">  <span class="kw">sqrt</span>(<span class="kw">mean</span>((actual <span class="op">-</span><span class="st"> </span>predicted) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb120-3" data-line-number="3">}</a></code></pre></div>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" data-line-number="1"><span class="kw">map_dbl</span>(knn_val_pred, calc_rmse, crdt_val<span class="op">$</span>Rating)</a></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" data-line-number="1">knn_mod_list =<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb117-2" data-line-number="2">  <span class="dt">crdt_knn_01 =</span> <span class="kw">knnreg</span>(Rating <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Gender <span class="op">+</span><span class="st"> </span>Student, <span class="dt">data =</span> crdt_est, <span class="dt">k =</span> <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb117-3" data-line-number="3">  <span class="dt">crdt_knn_10 =</span> <span class="kw">knnreg</span>(Rating <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Gender <span class="op">+</span><span class="st"> </span>Student, <span class="dt">data =</span> crdt_est, <span class="dt">k =</span> <span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb117-4" data-line-number="4">  <span class="dt">crdt_knn_25 =</span> <span class="kw">knnreg</span>(Rating <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Gender <span class="op">+</span><span class="st"> </span>Student, <span class="dt">data =</span> crdt_est, <span class="dt">k =</span> <span class="dv">25</span>)</a>
+<a class="sourceLine" id="cb117-5" data-line-number="5">)</a></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" data-line-number="1">knn_val_pred =<span class="st"> </span><span class="kw">map</span>(knn_mod_list, predict, crdt_val)</a></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" data-line-number="1">calc_rmse =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</a>
+<a class="sourceLine" id="cb119-2" data-line-number="2">  <span class="kw">sqrt</span>(<span class="kw">mean</span>((actual <span class="op">-</span><span class="st"> </span>predicted) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb119-3" data-line-number="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb120-1" data-line-number="1"><span class="kw">map_dbl</span>(knn_val_pred, calc_rmse, crdt_val<span class="op">$</span>Rating)</a></code></pre></div>
 <pre><code>## crdt_knn_01 crdt_knn_10 crdt_knn_25 
 ##    182.3469    149.2172    138.6527</code></pre>
 <p>So, of these three values of <span class="math inline">\(k\)</span>, the model with <span class="math inline">\(k = 25\)</span> achieves the lowest validation RMSE.</p>
@@ -922,8 +922,8 @@ Right SSE
 <p>In the next chapters, we will discuss the details of model flexibility and model tuning, and how these concepts are tied together. However, even though we will present some theory behind this relationship, in practice, <strong>you must tune and validate your models</strong>. There is no theory that will inform you ahead of tuning and validation which model will be the best. By teaching you <em>how</em> to fit KNN models in R and how to calculate validation RMSE, you already have all the tools you need to find a good model.</p>
 <p>Let’s turn to decision trees which we will fit with the <code>rpart()</code> function from the <code>rpart</code> package. Use <code>?rpart</code> and <code>?rpart.control</code> for documentation and details.</p>
 <p>We’ll start by using default tuning parameters.</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" data-line-number="1">crdt_tree =<span class="st"> </span><span class="kw">rpart</span>(Rating <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Gender <span class="op">+</span><span class="st"> </span>Student, <span class="dt">data =</span> crdt_est)</a></code></pre></div>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" data-line-number="1">crdt_tree</a></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb122-1" data-line-number="1">crdt_tree =<span class="st"> </span><span class="kw">rpart</span>(Rating <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Gender <span class="op">+</span><span class="st"> </span>Student, <span class="dt">data =</span> crdt_est)</a></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" data-line-number="1">crdt_tree</a></code></pre></div>
 <pre><code>## n= 256 
 ## 
 ## node), split, n, deviance, yval
@@ -943,7 +943,7 @@ Right SSE
 ##           47) Age&lt; 50.5 57 1738665.0 406.0877 *
 ##    3) Age&gt;=82.5 14  539190.9 490.2857 *</code></pre>
 <p>Above we see the resulting tree printed, however, this is difficult to read. Instead, we use the <code>rpart.plot()</code> function from the <code>rpart.plot</code> package to better visualize the tree.</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" data-line-number="1"><span class="kw">rpart.plot</span>(crdt_tree)</a></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb125-1" data-line-number="1"><span class="kw">rpart.plot</span>(crdt_tree)</a></code></pre></div>
 <p><img src="nonparametric-regression_files/figure-html/unnamed-chunk-41-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>At each split, the variable used to split is listed together with a condition. (If the condition is true for a data point, send it to the left neighborhood.) Although the <code>Gender</code> variable was used, we only see splits based on <code>Age</code> and <code>Student</code>. (This hints at the relative importance of these variables for prediction. More on this much later.)</p>
 <p>Categorical variables are split based on potential categories! This is <strong>excellent</strong>. This means that trees naturally handle categorical features without needing to convert to numeric under the hood. We see a split that puts students into one neighborhood, and non-students into another.</p>
@@ -962,36 +962,36 @@ Right SSE
 <li>Trees naturally incorporate interaction.</li>
 </ul>
 <p>Now let’s fit another tree that is more flexible by relaxing some tuning parameters. (By default, <code>cp = 0.1</code> and <code>minsplit = 20</code>.)</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1">crdt_tree_big =<span class="st"> </span><span class="kw">rpart</span>(Rating <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Gender <span class="op">+</span><span class="st"> </span>Student, <span class="dt">data =</span> crdt_est, </a>
-<a class="sourceLine" id="cb127-2" data-line-number="2">                      <span class="dt">cp =</span> <span class="fl">0.0</span>, <span class="dt">minsplit =</span> <span class="dv">20</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" data-line-number="1"><span class="kw">rpart.plot</span>(crdt_tree_big)</a></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" data-line-number="1">crdt_tree_big =<span class="st"> </span><span class="kw">rpart</span>(Rating <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Gender <span class="op">+</span><span class="st"> </span>Student, <span class="dt">data =</span> crdt_est, </a>
+<a class="sourceLine" id="cb126-2" data-line-number="2">                      <span class="dt">cp =</span> <span class="fl">0.0</span>, <span class="dt">minsplit =</span> <span class="dv">20</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1"><span class="kw">rpart.plot</span>(crdt_tree_big)</a></code></pre></div>
 <p><img src="nonparametric-regression_files/figure-html/unnamed-chunk-43-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>To make the tree even bigger, we could reduce <code>minsplit</code>, but in practice we mostly consider the <code>cp</code> parameter. (We will occasionally modify the <code>minsplit</code> parameter on quizzes.) Since <code>minsplit</code> has been kept the same, but <code>cp</code> was reduced, we see the same splits as the smaller tree, but many additional splits.</p>
 <p>Now let’s fit a bunch of trees, with different values of <code>cp</code>, for tuning.</p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" data-line-number="1">tree_mod_list =<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb129-2" data-line-number="2">  <span class="dt">crdt_tree_0000 =</span> <span class="kw">rpart</span>(Rating <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Gender <span class="op">+</span><span class="st"> </span>Student, <span class="dt">data =</span> crdt_est, <span class="dt">cp =</span> <span class="fl">0.000</span>),</a>
-<a class="sourceLine" id="cb129-3" data-line-number="3">  <span class="dt">crdt_tree_0001 =</span> <span class="kw">rpart</span>(Rating <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Gender <span class="op">+</span><span class="st"> </span>Student, <span class="dt">data =</span> crdt_est, <span class="dt">cp =</span> <span class="fl">0.001</span>),</a>
-<a class="sourceLine" id="cb129-4" data-line-number="4">  <span class="dt">crdt_tree_0010 =</span> <span class="kw">rpart</span>(Rating <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Gender <span class="op">+</span><span class="st"> </span>Student, <span class="dt">data =</span> crdt_est, <span class="dt">cp =</span> <span class="fl">0.010</span>),</a>
-<a class="sourceLine" id="cb129-5" data-line-number="5">  <span class="dt">crdt_tree_0100 =</span> <span class="kw">rpart</span>(Rating <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Gender <span class="op">+</span><span class="st"> </span>Student, <span class="dt">data =</span> crdt_est, <span class="dt">cp =</span> <span class="fl">0.100</span>)</a>
-<a class="sourceLine" id="cb129-6" data-line-number="6">)</a></code></pre></div>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" data-line-number="1">tree_val_pred =<span class="st"> </span><span class="kw">map</span>(tree_mod_list, predict, crdt_val)</a></code></pre></div>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" data-line-number="1"><span class="kw">map_dbl</span>(tree_val_pred, calc_rmse, crdt_val<span class="op">$</span>Rating)</a></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" data-line-number="1">tree_mod_list =<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb128-2" data-line-number="2">  <span class="dt">crdt_tree_0000 =</span> <span class="kw">rpart</span>(Rating <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Gender <span class="op">+</span><span class="st"> </span>Student, <span class="dt">data =</span> crdt_est, <span class="dt">cp =</span> <span class="fl">0.000</span>),</a>
+<a class="sourceLine" id="cb128-3" data-line-number="3">  <span class="dt">crdt_tree_0001 =</span> <span class="kw">rpart</span>(Rating <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Gender <span class="op">+</span><span class="st"> </span>Student, <span class="dt">data =</span> crdt_est, <span class="dt">cp =</span> <span class="fl">0.001</span>),</a>
+<a class="sourceLine" id="cb128-4" data-line-number="4">  <span class="dt">crdt_tree_0010 =</span> <span class="kw">rpart</span>(Rating <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Gender <span class="op">+</span><span class="st"> </span>Student, <span class="dt">data =</span> crdt_est, <span class="dt">cp =</span> <span class="fl">0.010</span>),</a>
+<a class="sourceLine" id="cb128-5" data-line-number="5">  <span class="dt">crdt_tree_0100 =</span> <span class="kw">rpart</span>(Rating <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Gender <span class="op">+</span><span class="st"> </span>Student, <span class="dt">data =</span> crdt_est, <span class="dt">cp =</span> <span class="fl">0.100</span>)</a>
+<a class="sourceLine" id="cb128-6" data-line-number="6">)</a></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" data-line-number="1">tree_val_pred =<span class="st"> </span><span class="kw">map</span>(tree_mod_list, predict, crdt_val)</a></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" data-line-number="1"><span class="kw">map_dbl</span>(tree_val_pred, calc_rmse, crdt_val<span class="op">$</span>Rating)</a></code></pre></div>
 <pre><code>## crdt_tree_0000 crdt_tree_0001 crdt_tree_0010 crdt_tree_0100 
 ##       156.3527       155.4262       151.9081       140.0806</code></pre>
 <p>Here we see the least flexible model, with <code>cp = 0.100</code>, performs best.</p>
 <p>Note that by only using these three features, we are severely limiting our models performance. Let’s quickly assess using all available predictors.</p>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" data-line-number="1">crdt_tree_all =<span class="st"> </span><span class="kw">rpart</span>(Rating <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> crdt_est)</a></code></pre></div>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" data-line-number="1"><span class="kw">rpart.plot</span>(crdt_tree_all)</a></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" data-line-number="1">crdt_tree_all =<span class="st"> </span><span class="kw">rpart</span>(Rating <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> crdt_est)</a></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" data-line-number="1"><span class="kw">rpart.plot</span>(crdt_tree_all)</a></code></pre></div>
 <p><img src="nonparametric-regression_files/figure-html/unnamed-chunk-48-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Notice that this model <strong>only</strong> splits based on <code>Limit</code> despite using all features. (This should be a big hint about which variables are useful for prediction.)</p>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" data-line-number="1"><span class="kw">calc_rmse</span>(</a>
-<a class="sourceLine" id="cb135-2" data-line-number="2">  <span class="dt">actual =</span> crdt_val<span class="op">$</span>Rating,</a>
-<a class="sourceLine" id="cb135-3" data-line-number="3">  <span class="dt">predicted =</span> <span class="kw">predict</span>(crdt_tree_all, crdt_val)</a>
-<a class="sourceLine" id="cb135-4" data-line-number="4">)</a></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" data-line-number="1"><span class="kw">calc_rmse</span>(</a>
+<a class="sourceLine" id="cb134-2" data-line-number="2">  <span class="dt">actual =</span> crdt_val<span class="op">$</span>Rating,</a>
+<a class="sourceLine" id="cb134-3" data-line-number="3">  <span class="dt">predicted =</span> <span class="kw">predict</span>(crdt_tree_all, crdt_val)</a>
+<a class="sourceLine" id="cb134-4" data-line-number="4">)</a></code></pre></div>
 <pre><code>## [1] 28.8498</code></pre>
 <p>This model performs much better. You should try something similar with the KNN models above. Also, consider comparing this result to results from last chapter using linear models.</p>
 <p>Notice that we’ve been using that trusty <code>predict()</code> function here again.</p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" data-line-number="1"><span class="kw">predict</span>(crdt_tree_all, crdt_val[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, ])</a></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb136-1" data-line-number="1"><span class="kw">predict</span>(crdt_tree_all, crdt_val[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, ])</a></code></pre></div>
 <pre><code>##        1        2        3        4        5 
 ## 292.8182 467.5152 467.5152 467.5152 772.4000</code></pre>
 <p>What does this code do? It estimates the mean <code>Rating</code> given the feature information (the “x” values) from the first five observations from the validation data using a decision tree model with default tuning parameters. Hopefully a theme is emerging.</p>

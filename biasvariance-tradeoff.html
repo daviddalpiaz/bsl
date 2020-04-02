@@ -24,7 +24,7 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2020-03-21" />
+<meta name="date" content="2020-04-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -469,9 +469,9 @@ f(x) = \text{median}(Y \mid X = x)
 <div id="simulation" class="section level2">
 <h2><span class="header-section-number">4.3</span> Simulation</h2>
 <p>We will illustrate these decompositions, most importantly the bias-variance tradeoff, through simulation. Suppose we would like to train a model to learn the true regression function function <span class="math inline">\(f(x) = x^2\)</span>.</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" data-line-number="1">f =<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb139-2" data-line-number="2">  x <span class="op">^</span><span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb139-3" data-line-number="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" data-line-number="1">f =<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb138-2" data-line-number="2">  x <span class="op">^</span><span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb138-3" data-line-number="3">}</a></code></pre></div>
 <p>More specifically, we’d like to predict an observation, <span class="math inline">\(Y\)</span>, given that <span class="math inline">\(X = x\)</span> by using <span class="math inline">\(\hat{f}(x)\)</span> where</p>
 <p><span class="math display">\[
 \mathbb{E}[Y \mid X = x] = f(x) = x^2
@@ -486,18 +486,18 @@ Y = f(X) + \epsilon
 \]</span></p>
 <p>where <span class="math inline">\(\mathbb{E}[\epsilon] = 0\)</span> and <span class="math inline">\(\mathbb{V}[\epsilon] = \sigma ^ 2\)</span>. In this formulation, we call <span class="math inline">\(f(X)\)</span> the <strong>signal</strong> and <span class="math inline">\(\epsilon\)</span> the <strong>noise</strong>.</p>
 <p>To carry out a concrete simulation example, we need to fully specify the data generating process. We do so with the following <code>R</code> code.</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" data-line-number="1">gen_sim_data =<span class="st"> </span><span class="cf">function</span>(f, <span class="dt">sample_size =</span> <span class="dv">100</span>) {</a>
+<a class="sourceLine" id="cb139-2" data-line-number="2">  x =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb139-3" data-line-number="3">  y =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">mean =</span> <span class="kw">f</span>(x), <span class="dt">sd =</span> <span class="fl">0.3</span>)</a>
+<a class="sourceLine" id="cb139-4" data-line-number="4">  <span class="kw">data.frame</span>(x, y)</a>
+<a class="sourceLine" id="cb139-5" data-line-number="5">}</a></code></pre></div>
+<p>Also note that if you prefer to think of this situation using the <span class="math inline">\(Y = f(X) + \epsilon\)</span> formulation, the following code represents the same data generating process.</p>
 <div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb140-1" data-line-number="1">gen_sim_data =<span class="st"> </span><span class="cf">function</span>(f, <span class="dt">sample_size =</span> <span class="dv">100</span>) {</a>
 <a class="sourceLine" id="cb140-2" data-line-number="2">  x =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb140-3" data-line-number="3">  y =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">mean =</span> <span class="kw">f</span>(x), <span class="dt">sd =</span> <span class="fl">0.3</span>)</a>
-<a class="sourceLine" id="cb140-4" data-line-number="4">  <span class="kw">data.frame</span>(x, y)</a>
-<a class="sourceLine" id="cb140-5" data-line-number="5">}</a></code></pre></div>
-<p>Also note that if you prefer to think of this situation using the <span class="math inline">\(Y = f(X) + \epsilon\)</span> formulation, the following code represents the same data generating process.</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" data-line-number="1">gen_sim_data =<span class="st"> </span><span class="cf">function</span>(f, <span class="dt">sample_size =</span> <span class="dv">100</span>) {</a>
-<a class="sourceLine" id="cb141-2" data-line-number="2">  x =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb141-3" data-line-number="3">  eps =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="fl">0.75</span>)</a>
-<a class="sourceLine" id="cb141-4" data-line-number="4">  y =<span class="st"> </span><span class="kw">f</span>(x) <span class="op">+</span><span class="st"> </span>eps</a>
-<a class="sourceLine" id="cb141-5" data-line-number="5">  <span class="kw">data.frame</span>(x, y)</a>
-<a class="sourceLine" id="cb141-6" data-line-number="6">}</a></code></pre></div>
+<a class="sourceLine" id="cb140-3" data-line-number="3">  eps =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="fl">0.75</span>)</a>
+<a class="sourceLine" id="cb140-4" data-line-number="4">  y =<span class="st"> </span><span class="kw">f</span>(x) <span class="op">+</span><span class="st"> </span>eps</a>
+<a class="sourceLine" id="cb140-5" data-line-number="5">  <span class="kw">data.frame</span>(x, y)</a>
+<a class="sourceLine" id="cb140-6" data-line-number="6">}</a></code></pre></div>
 <p>To completely specify the data generating process, we have made more model assumptions than simply <span class="math inline">\(\mathbb{E}[Y \mid X = x] = x^2\)</span> and <span class="math inline">\(\mathbb{V}[Y \mid X = x] = \sigma ^ 2\)</span>. In particular,</p>
 <ul>
 <li>The <span class="math inline">\(x_i\)</span> in <span class="math inline">\(\mathcal{D}\)</span> are sampled from a uniform distribution over <span class="math inline">\([0, 1]\)</span>.</li>
@@ -517,12 +517,12 @@ Y \mid X \sim N(f(x), \sigma^2)
 \end{aligned}
 \]</span></p>
 <p>To get a sense of the data and these four models, we generate one simulated dataset, and fit the four models.</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb142-2" data-line-number="2">sim_data =<span class="st"> </span><span class="kw">gen_sim_data</span>(f)</a></code></pre></div>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" data-line-number="1">fit_<span class="dv">0</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,                   <span class="dt">data =</span> sim_data)</a>
-<a class="sourceLine" id="cb143-2" data-line-number="2">fit_<span class="dv">1</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">1</span>), <span class="dt">data =</span> sim_data)</a>
-<a class="sourceLine" id="cb143-3" data-line-number="3">fit_<span class="dv">2</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">2</span>), <span class="dt">data =</span> sim_data)</a>
-<a class="sourceLine" id="cb143-4" data-line-number="4">fit_<span class="dv">9</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">9</span>), <span class="dt">data =</span> sim_data)</a></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb141-2" data-line-number="2">sim_data =<span class="st"> </span><span class="kw">gen_sim_data</span>(f)</a></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" data-line-number="1">fit_<span class="dv">0</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,                   <span class="dt">data =</span> sim_data)</a>
+<a class="sourceLine" id="cb142-2" data-line-number="2">fit_<span class="dv">1</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">1</span>), <span class="dt">data =</span> sim_data)</a>
+<a class="sourceLine" id="cb142-3" data-line-number="3">fit_<span class="dv">2</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">2</span>), <span class="dt">data =</span> sim_data)</a>
+<a class="sourceLine" id="cb142-4" data-line-number="4">fit_<span class="dv">9</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">9</span>), <span class="dt">data =</span> sim_data)</a></code></pre></div>
 <p>Note that technically we’re being lazy and using orthogonal polynomials, but the fitted values are the same, so this makes no difference for our purposes.</p>
 <p>Plotting these four trained models, we see that the zero predictor model does very poorly. The first degree model is reasonable, but we can see that the second degree model fits much better. The ninth degree model seem rather wild.</p>
 <p><img src="bvt_files/figure-html/unnamed-chunk-10-1.png" width="864" style="display: block; margin: auto;" /></p>
@@ -535,30 +535,30 @@ Y \mid X \sim N(f(x), \sigma^2)
 <p>Here we see that when <span class="math inline">\(k = 100\)</span> we have a biased model with very low variance. (It’s actually the same as the 0 predictor linear model.) When <span class="math inline">\(k = 5\)</span>, we again have a highly variable model.</p>
 <p>These two sets of plots reinforce our intuition about the bias-variance tradeoff. Complex models (ninth degree polynomial and <span class="math inline">\(k\)</span> = 5) are highly variable, and often unbiased. Simple models (zero predictor linear model and <span class="math inline">\(k = 100\)</span>) are very biased, but have extremely low variance.</p>
 <p>We will now complete a simulation study to understand the relationship between the bias, variance, and mean squared error for the estimates for <span class="math inline">\(f(x)\)</span> given by these four models at the point <span class="math inline">\(x = 0.90\)</span>. We use simulation to complete this task, as performing the analytical calculations would prove to be rather tedious and difficult.</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb144-2" data-line-number="2">n_sims =<span class="st"> </span><span class="dv">250</span></a>
-<a class="sourceLine" id="cb144-3" data-line-number="3">n_models =<span class="st"> </span><span class="dv">4</span></a>
-<a class="sourceLine" id="cb144-4" data-line-number="4">x =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="fl">0.90</span>) <span class="co"># fixed point at which we make predictions</span></a>
-<a class="sourceLine" id="cb144-5" data-line-number="5">predictions =<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow =</span> n_sims, <span class="dt">ncol =</span> n_models)</a></code></pre></div>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" data-line-number="1"><span class="cf">for</span> (sim <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n_sims) {</a>
-<a class="sourceLine" id="cb145-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb145-3" data-line-number="3">  <span class="co"># simulate new, random, training data</span></a>
-<a class="sourceLine" id="cb145-4" data-line-number="4">  <span class="co"># this is the only random portion of the bias, var, and mse calculations</span></a>
-<a class="sourceLine" id="cb145-5" data-line-number="5">  <span class="co"># this allows us to calculate the expectation over D</span></a>
-<a class="sourceLine" id="cb145-6" data-line-number="6">  sim_data =<span class="st"> </span><span class="kw">gen_sim_data</span>(f)</a>
-<a class="sourceLine" id="cb145-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb145-8" data-line-number="8">  <span class="co"># fit models</span></a>
-<a class="sourceLine" id="cb145-9" data-line-number="9">  fit_<span class="dv">0</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,                   <span class="dt">data =</span> sim_data)</a>
-<a class="sourceLine" id="cb145-10" data-line-number="10">  fit_<span class="dv">1</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">1</span>), <span class="dt">data =</span> sim_data)</a>
-<a class="sourceLine" id="cb145-11" data-line-number="11">  fit_<span class="dv">2</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">2</span>), <span class="dt">data =</span> sim_data)</a>
-<a class="sourceLine" id="cb145-12" data-line-number="12">  fit_<span class="dv">9</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">9</span>), <span class="dt">data =</span> sim_data)</a>
-<a class="sourceLine" id="cb145-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb145-14" data-line-number="14">  <span class="co"># get predictions</span></a>
-<a class="sourceLine" id="cb145-15" data-line-number="15">  predictions[sim, <span class="dv">1</span>] =<span class="st"> </span><span class="kw">predict</span>(fit_<span class="dv">0</span>, x)</a>
-<a class="sourceLine" id="cb145-16" data-line-number="16">  predictions[sim, <span class="dv">2</span>] =<span class="st"> </span><span class="kw">predict</span>(fit_<span class="dv">1</span>, x)</a>
-<a class="sourceLine" id="cb145-17" data-line-number="17">  predictions[sim, <span class="dv">3</span>] =<span class="st"> </span><span class="kw">predict</span>(fit_<span class="dv">2</span>, x)</a>
-<a class="sourceLine" id="cb145-18" data-line-number="18">  predictions[sim, <span class="dv">4</span>] =<span class="st"> </span><span class="kw">predict</span>(fit_<span class="dv">9</span>, x)</a>
-<a class="sourceLine" id="cb145-19" data-line-number="19">}</a></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb143-2" data-line-number="2">n_sims =<span class="st"> </span><span class="dv">250</span></a>
+<a class="sourceLine" id="cb143-3" data-line-number="3">n_models =<span class="st"> </span><span class="dv">4</span></a>
+<a class="sourceLine" id="cb143-4" data-line-number="4">x =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="fl">0.90</span>) <span class="co"># fixed point at which we make predictions</span></a>
+<a class="sourceLine" id="cb143-5" data-line-number="5">predictions =<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow =</span> n_sims, <span class="dt">ncol =</span> n_models)</a></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" data-line-number="1"><span class="cf">for</span> (sim <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n_sims) {</a>
+<a class="sourceLine" id="cb144-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb144-3" data-line-number="3">  <span class="co"># simulate new, random, training data</span></a>
+<a class="sourceLine" id="cb144-4" data-line-number="4">  <span class="co"># this is the only random portion of the bias, var, and mse calculations</span></a>
+<a class="sourceLine" id="cb144-5" data-line-number="5">  <span class="co"># this allows us to calculate the expectation over D</span></a>
+<a class="sourceLine" id="cb144-6" data-line-number="6">  sim_data =<span class="st"> </span><span class="kw">gen_sim_data</span>(f)</a>
+<a class="sourceLine" id="cb144-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb144-8" data-line-number="8">  <span class="co"># fit models</span></a>
+<a class="sourceLine" id="cb144-9" data-line-number="9">  fit_<span class="dv">0</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,                   <span class="dt">data =</span> sim_data)</a>
+<a class="sourceLine" id="cb144-10" data-line-number="10">  fit_<span class="dv">1</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">1</span>), <span class="dt">data =</span> sim_data)</a>
+<a class="sourceLine" id="cb144-11" data-line-number="11">  fit_<span class="dv">2</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">2</span>), <span class="dt">data =</span> sim_data)</a>
+<a class="sourceLine" id="cb144-12" data-line-number="12">  fit_<span class="dv">9</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">9</span>), <span class="dt">data =</span> sim_data)</a>
+<a class="sourceLine" id="cb144-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb144-14" data-line-number="14">  <span class="co"># get predictions</span></a>
+<a class="sourceLine" id="cb144-15" data-line-number="15">  predictions[sim, <span class="dv">1</span>] =<span class="st"> </span><span class="kw">predict</span>(fit_<span class="dv">0</span>, x)</a>
+<a class="sourceLine" id="cb144-16" data-line-number="16">  predictions[sim, <span class="dv">2</span>] =<span class="st"> </span><span class="kw">predict</span>(fit_<span class="dv">1</span>, x)</a>
+<a class="sourceLine" id="cb144-17" data-line-number="17">  predictions[sim, <span class="dv">3</span>] =<span class="st"> </span><span class="kw">predict</span>(fit_<span class="dv">2</span>, x)</a>
+<a class="sourceLine" id="cb144-18" data-line-number="18">  predictions[sim, <span class="dv">4</span>] =<span class="st"> </span><span class="kw">predict</span>(fit_<span class="dv">9</span>, x)</a>
+<a class="sourceLine" id="cb144-19" data-line-number="19">}</a></code></pre></div>
 <p>Note that this is one of many ways we could have accomplished this task using <code>R</code>. For example we could have used a combination of <code>replicate()</code> and <code>*apply()</code> functions. Alternatively, we could have used a <a href="https://www.tidyverse.org/"><code>tidyverse</code></a> approach, which likely would have used some combination of <a href="http://dplyr.tidyverse.org/"><code>dplyr</code></a>, <a href="http://tidyr.tidyverse.org/"><code>tidyr</code></a>, and <a href="http://purrr.tidyverse.org/"><code>purrr</code></a>.</p>
 <p>Our approach, which would be considered a <code>base</code> <code>R</code> approach, was chosen to make it as clear as possible what is being done. The <code>tidyverse</code> approach is rapidly gaining popularity in the <code>R</code> community, but might make it more difficult to see what is happening here, unless you are already familiar with that approach.</p>
 <p>Also of note, while it may seem like the output stored in <code>predictions</code> would meet the definition of <a href="http://vita.had.co.nz/papers/tidy-data.html">tidy data</a> given by <a href="http://hadley.nz/">Hadley Wickham</a> since each row represents a simulation, it actually falls slightly short. For our data to be tidy, a row should store the simulation number, the model, and the resulting prediction. We’ve actually already aggregated one level above this. Our observational unit is a simulation (with four predictions), but for tidy data, it should be a single prediction. This may be revised by the author later when there are <a href="https://twitter.com/hspter/status/748260288143589377">more examples of how to do this from the <code>R</code> community</a>.</p>
@@ -582,29 +582,29 @@ Y \mid X \sim N(f(x), \sigma^2)
 \]</span></p>
 <p>where <span class="math inline">\(\hat{f}_k^{[i]}(0.90)\)</span> is the estimate of <span class="math inline">\(f(0.90)\)</span> using the <span class="math inline">\(i\)</span>-th from the polynomial degree <span class="math inline">\(k\)</span> model.</p>
 <p>We also write an accompanying <code>R</code> function.</p>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" data-line-number="1">get_mse =<span class="st"> </span><span class="cf">function</span>(truth, estimate) {</a>
-<a class="sourceLine" id="cb146-2" data-line-number="2">  <span class="kw">mean</span>((estimate <span class="op">-</span><span class="st"> </span>truth) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb146-3" data-line-number="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" data-line-number="1">get_mse =<span class="st"> </span><span class="cf">function</span>(truth, estimate) {</a>
+<a class="sourceLine" id="cb145-2" data-line-number="2">  <span class="kw">mean</span>((estimate <span class="op">-</span><span class="st"> </span>truth) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb145-3" data-line-number="3">}</a></code></pre></div>
 <p>Similarly, for the bias of our predictions we use,</p>
 <p><span class="math display">\[
 \widehat{\text{bias}} \left(\hat{f}(0.90) \right)  = \frac{1}{n_{\texttt{sims}}}\sum_{i = 1}^{n_{\texttt{sims}}} \left(\hat{f}_k^{[i]}(0.90) \right) - f(0.90)
 \]</span></p>
 <p>And again, we write an accompanying <code>R</code> function.</p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb147-1" data-line-number="1">get_bias =<span class="st"> </span><span class="cf">function</span>(estimate, truth) {</a>
-<a class="sourceLine" id="cb147-2" data-line-number="2">  <span class="kw">mean</span>(estimate) <span class="op">-</span><span class="st"> </span>truth</a>
-<a class="sourceLine" id="cb147-3" data-line-number="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" data-line-number="1">get_bias =<span class="st"> </span><span class="cf">function</span>(estimate, truth) {</a>
+<a class="sourceLine" id="cb146-2" data-line-number="2">  <span class="kw">mean</span>(estimate) <span class="op">-</span><span class="st"> </span>truth</a>
+<a class="sourceLine" id="cb146-3" data-line-number="3">}</a></code></pre></div>
 <p>Lastly, for the variance of our predictions we have</p>
 <p><span class="math display">\[
 \widehat{\text{var}} \left(\hat{f}(0.90) \right) = \frac{1}{n_{\texttt{sims}}}\sum_{i = 1}^{n_{\texttt{sims}}} \left(\hat{f}_k^{[i]}(0.90) - \frac{1}{n_{\texttt{sims}}}\sum_{i = 1}^{n_{\texttt{sims}}}\hat{f}_k^{[i]}(0.90) \right)^2 
 \]</span></p>
 <p>While there is already <code>R</code> function for variance, the following is more appropriate in this situation.</p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" data-line-number="1">get_var =<span class="st"> </span><span class="cf">function</span>(estimate) {</a>
-<a class="sourceLine" id="cb148-2" data-line-number="2">  <span class="kw">mean</span>((estimate <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(estimate)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb148-3" data-line-number="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb147-1" data-line-number="1">get_var =<span class="st"> </span><span class="cf">function</span>(estimate) {</a>
+<a class="sourceLine" id="cb147-2" data-line-number="2">  <span class="kw">mean</span>((estimate <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(estimate)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb147-3" data-line-number="3">}</a></code></pre></div>
 <p>To quickly obtain these results for each of the four models, we utilize the <code>apply()</code> function.</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" data-line-number="1">bias =<span class="st"> </span><span class="kw">apply</span>(predictions, <span class="dv">2</span>, get_bias, <span class="dt">truth =</span> <span class="kw">f</span>(<span class="dt">x =</span> <span class="fl">0.90</span>))</a>
-<a class="sourceLine" id="cb149-2" data-line-number="2">variance =<span class="st"> </span><span class="kw">apply</span>(predictions, <span class="dv">2</span>, get_var)</a>
-<a class="sourceLine" id="cb149-3" data-line-number="3">mse =<span class="st"> </span><span class="kw">apply</span>(predictions, <span class="dv">2</span>, get_mse, <span class="dt">truth =</span> <span class="kw">f</span>(<span class="dt">x =</span> <span class="fl">0.90</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" data-line-number="1">bias =<span class="st"> </span><span class="kw">apply</span>(predictions, <span class="dv">2</span>, get_bias, <span class="dt">truth =</span> <span class="kw">f</span>(<span class="dt">x =</span> <span class="fl">0.90</span>))</a>
+<a class="sourceLine" id="cb148-2" data-line-number="2">variance =<span class="st"> </span><span class="kw">apply</span>(predictions, <span class="dv">2</span>, get_var)</a>
+<a class="sourceLine" id="cb148-3" data-line-number="3">mse =<span class="st"> </span><span class="kw">apply</span>(predictions, <span class="dv">2</span>, get_mse, <span class="dt">truth =</span> <span class="kw">f</span>(<span class="dt">x =</span> <span class="fl">0.90</span>))</a></code></pre></div>
 <p>We summarize these results in the following table.</p>
 <table>
 <thead>
@@ -650,11 +650,11 @@ Y \mid X \sim N(f(x), \sigma^2)
 <li>The mean squared error, which is a function of the bias and variance, decreases, then increases. This is a result of the bias-variance tradeoff. We can decrease bias, by increasing variance. Or, we can decrease variance by increasing bias. By striking the correct balance, we can find a good mean squared error!</li>
 </ul>
 <p>We can check for these trends with the <code>diff()</code> function in <code>R</code>.</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" data-line-number="1"><span class="kw">all</span>(<span class="kw">diff</span>(bias <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" data-line-number="1"><span class="kw">all</span>(<span class="kw">diff</span>(bias <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" data-line-number="1"><span class="kw">all</span>(<span class="kw">diff</span>(variance) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" data-line-number="1"><span class="kw">all</span>(<span class="kw">diff</span>(variance) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" data-line-number="1"><span class="kw">diff</span>(mse) <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span> </a></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" data-line-number="1"><span class="kw">diff</span>(mse) <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span> </a></code></pre></div>
 <pre><code>##     1     2     9 
 ##  TRUE  TRUE FALSE</code></pre>
 <p>The models with polynomial degrees 2 and 9 are both essentially unbiased. We see some bias here as a result of using simulation. If we increased the number of simulations, we would see both biases go down. Since they are both unbiased, the model with degree 2 outperforms the model with degree 9 due to its smaller variance.</p>
@@ -671,11 +671,11 @@ Y \mid X \sim N(f(x), \sigma^2)
 \mathbb{E}\left[\hat{f}_9(x)\right] = \beta_0 + \beta_1 x + \beta_2 x^2
 \]</span></p>
 <p>Now we can finally verify the bias-variance decomposition.</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" data-line-number="1">bias <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>variance <span class="op">==</span><span class="st"> </span>mse</a></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" data-line-number="1">bias <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>variance <span class="op">==</span><span class="st"> </span>mse</a></code></pre></div>
 <pre><code>##     0     1     2     9 
 ## FALSE FALSE FALSE  TRUE</code></pre>
 <p>But wait, this says it isn’t true, except for the degree 9 model? It turns out, this is simply a computational issue. If we allow for some very small error tolerance, we see that the bias-variance decomposition is indeed true for predictions from these for models.</p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" data-line-number="1"><span class="kw">all.equal</span>(bias <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>variance, mse)</a></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" data-line-number="1"><span class="kw">all.equal</span>(bias <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>variance, mse)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>See <code>?all.equal()</code> for details.</p>
 <p>So far, we’ve focused our efforts on looking at the mean squared error of estimating <span class="math inline">\(f(0.90)\)</span> using <span class="math inline">\(\hat{f}(0.90)\)</span>. We could also look at the expected prediction error of using <span class="math inline">\(\hat{f}(X)\)</span> when <span class="math inline">\(X = 0.90\)</span> to estimate <span class="math inline">\(Y\)</span>.</p>
@@ -684,12 +684,12 @@ Y \mid X \sim N(f(x), \sigma^2)
 \mathbb{E}_{Y \mid X, \mathcal{D}} \left[  \left(Y - \hat{f}_k(X) \right)^2 \mid X = 0.90 \right]
 \]</span></p>
 <p>We can estimate this quantity for each of the four models using the simulation study we already performed.</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" data-line-number="1">get_epe =<span class="st"> </span><span class="cf">function</span>(realized, estimate) {</a>
-<a class="sourceLine" id="cb160-2" data-line-number="2">  <span class="kw">mean</span>((realized <span class="op">-</span><span class="st"> </span>estimate) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb160-3" data-line-number="3">}</a></code></pre></div>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" data-line-number="1">y =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(predictions), <span class="dt">mean =</span> <span class="kw">f</span>(<span class="dt">x =</span> <span class="fl">0.9</span>), <span class="dt">sd =</span> <span class="fl">0.3</span>)</a>
-<a class="sourceLine" id="cb161-2" data-line-number="2">epe =<span class="st"> </span><span class="kw">apply</span>(predictions, <span class="dv">2</span>, get_epe, <span class="dt">realized =</span> y)</a>
-<a class="sourceLine" id="cb161-3" data-line-number="3">epe</a></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" data-line-number="1">get_epe =<span class="st"> </span><span class="cf">function</span>(realized, estimate) {</a>
+<a class="sourceLine" id="cb159-2" data-line-number="2">  <span class="kw">mean</span>((realized <span class="op">-</span><span class="st"> </span>estimate) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb159-3" data-line-number="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" data-line-number="1">y =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(predictions), <span class="dt">mean =</span> <span class="kw">f</span>(<span class="dt">x =</span> <span class="fl">0.9</span>), <span class="dt">sd =</span> <span class="fl">0.3</span>)</a>
+<a class="sourceLine" id="cb160-2" data-line-number="2">epe =<span class="st"> </span><span class="kw">apply</span>(predictions, <span class="dv">2</span>, get_epe, <span class="dt">realized =</span> y)</a>
+<a class="sourceLine" id="cb160-3" data-line-number="3">epe</a></code></pre></div>
 <pre><code>##         0         1         2         9 
 ## 0.3180470 0.1104055 0.1095955 0.1205570</code></pre>
 <p>What about the unconditional expected prediction error. That is, for any <span class="math inline">\(X\)</span>, not just <span class="math inline">\(0.90\)</span>. Specifically, the expected prediction error of estimating <span class="math inline">\(Y\)</span> using <span class="math inline">\(\hat{f}(X)\)</span>. The following (new) simulation study provides an estimate of</p>
@@ -697,20 +697,20 @@ Y \mid X \sim N(f(x), \sigma^2)
 \text{EPE}\left(Y, \hat{f}_k(X)\right) = \mathbb{E}_{X, Y, \mathcal{D}} \left[  \left( Y - \hat{f}_k(X) \right)^2 \right]
 \]</span></p>
 <p>for the quadratic model, that is <span class="math inline">\(k = 2\)</span> as we have defined <span class="math inline">\(k\)</span>.</p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb163-2" data-line-number="2">n_sims =<span class="st"> </span><span class="dv">1000</span></a>
-<a class="sourceLine" id="cb163-3" data-line-number="3">X =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> n_sims, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb163-4" data-line-number="4">Y =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> n_sims, <span class="dt">mean =</span> <span class="kw">f</span>(X), <span class="dt">sd =</span> <span class="fl">0.3</span>)</a>
-<a class="sourceLine" id="cb163-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb163-6" data-line-number="6">f_hat_X =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">length</span>(X))</a>
-<a class="sourceLine" id="cb163-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb163-8" data-line-number="8"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(X)) {</a>
-<a class="sourceLine" id="cb163-9" data-line-number="9">  sim_data =<span class="st"> </span><span class="kw">gen_sim_data</span>(f)</a>
-<a class="sourceLine" id="cb163-10" data-line-number="10">  fit_<span class="dv">2</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">2</span>), <span class="dt">data =</span> sim_data)</a>
-<a class="sourceLine" id="cb163-11" data-line-number="11">  f_hat_X[i] =<span class="st"> </span><span class="kw">predict</span>(fit_<span class="dv">2</span>, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">x =</span> X[i]))</a>
-<a class="sourceLine" id="cb163-12" data-line-number="12">}</a>
-<a class="sourceLine" id="cb163-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb163-14" data-line-number="14"><span class="kw">mean</span>((Y <span class="op">-</span><span class="st"> </span>f_hat_X) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb162-2" data-line-number="2">n_sims =<span class="st"> </span><span class="dv">1000</span></a>
+<a class="sourceLine" id="cb162-3" data-line-number="3">X =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> n_sims, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb162-4" data-line-number="4">Y =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> n_sims, <span class="dt">mean =</span> <span class="kw">f</span>(X), <span class="dt">sd =</span> <span class="fl">0.3</span>)</a>
+<a class="sourceLine" id="cb162-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb162-6" data-line-number="6">f_hat_X =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">length</span>(X))</a>
+<a class="sourceLine" id="cb162-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb162-8" data-line-number="8"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(X)) {</a>
+<a class="sourceLine" id="cb162-9" data-line-number="9">  sim_data =<span class="st"> </span><span class="kw">gen_sim_data</span>(f)</a>
+<a class="sourceLine" id="cb162-10" data-line-number="10">  fit_<span class="dv">2</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">2</span>), <span class="dt">data =</span> sim_data)</a>
+<a class="sourceLine" id="cb162-11" data-line-number="11">  f_hat_X[i] =<span class="st"> </span><span class="kw">predict</span>(fit_<span class="dv">2</span>, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">x =</span> X[i]))</a>
+<a class="sourceLine" id="cb162-12" data-line-number="12">}</a>
+<a class="sourceLine" id="cb162-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb162-14" data-line-number="14"><span class="kw">mean</span>((Y <span class="op">-</span><span class="st"> </span>f_hat_X) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## [1] 0.09997319</code></pre>
 <p>Note that in practice, we should use many more simulations in this study.</p>
 </div>
