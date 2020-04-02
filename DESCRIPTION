@@ -1,7 +1,7 @@
 Package: bsl
 Title: Basics of Statistical Learning
 Version: 0.0.2
-Authors@R: c(person("David", "Dalpiaz" , "dalpiaz2@illinois.edu", c("aut", "cre")))
+Authors@R: c(person("David", "Dalpiaz", "dalpiaz2@illinois.edu", c("aut", "cre")))
 Depends: R (>= 3.6.2)
 URL: https://github.com/daviddalpiaz/bsl
 Imports: 
