@@ -24,7 +24,7 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2020-04-02" />
+<meta name="date" content="2020-04-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -699,7 +699,7 @@ y
 \hat{\mu}_k(x) = \frac{1}{k} \sum_{ \{i \ : \ x_i \in \mathcal{N}_k(x, \mathcal{D}) \} } y_i
 \]</span></p>
 <p>as our estimate of the regression function at <span class="math inline">\(x\)</span>. While this looks complicated, it is actually very simple. Here, we are using an average of the <span class="math inline">\(y_i\)</span> values of for the <span class="math inline">\(k\)</span> nearest neighbors to <span class="math inline">\(x\)</span>.</p>
-<p>The <span class="math inline">\(k\)</span> “nearest” neighbors are the <span class="math inline">\(k\)</span> data points <span class="math inline">\((x_i, y_i)\)</span> that have <span class="math inline">\(x_i\)</span> values that are nearest to <span class="math inline">\(x\)</span>. We can define “nearest” using any distance we like, but unless otherwise noted, we are referring to euclidean distance. (The usual distance when you hear distance.) We are using the notation <span class="math inline">\(\{i \ : \ x_i \in \mathcal{N}_k(x, \mathcal{D}) \}\)</span> to define the observations that have <span class="math inline">\(x_i\)</span> values that are nearest to the value <span class="math inline">\(x\)</span> in a dataset <span class="math inline">\(\mathcal{D}\)</span>, in other words, the <span class="math inline">\(k\)</span> nearest neighbors.</p>
+<p>The <span class="math inline">\(k\)</span> “nearest” neighbors are the <span class="math inline">\(k\)</span> data points <span class="math inline">\((x_i, y_i)\)</span> that have <span class="math inline">\(x_i\)</span> values that are nearest to <span class="math inline">\(x\)</span>. We can define “nearest” using any distance we like, but unless otherwise noted, we are referring to euclidean distance. (The usual distance when you hear distance.) We are using the notation <span class="math inline">\(\{i \ : \ x_i \in \mathcal{N}_k(x, \mathcal{D}) \}\)</span> to define the <span class="math inline">\(k\)</span> observations that have <span class="math inline">\(x_i\)</span> values that are nearest to the value <span class="math inline">\(x\)</span> in a dataset <span class="math inline">\(\mathcal{D}\)</span>, in other words, the <span class="math inline">\(k\)</span> nearest neighbors.</p>
 <p>The plots below begin to illustrate this idea.</p>
 <p><img src="nonparametric-regression_files/figure-html/unnamed-chunk-8-1.png" width="864" style="display: block; margin: auto;" /></p>
 <ul>
@@ -708,7 +708,7 @@ y
 <li>In the right plot, to estimate the mean of <span class="math inline">\(Y\)</span> at <span class="math inline">\(x = 0.75\)</span> we use the nine nearest neighbors, which are highlighted with green. Our estimate is the average of the <span class="math inline">\(y_i\)</span> values of these nine points indicated by the black x.</li>
 </ul>
 <p>You might begin to notice a bit of an issue here. We have to do a new calculation each time we want to estimate the regression function at a different value of <span class="math inline">\(x\)</span>! For this reason, k-nearest neighbors is often said to be “fast to train” and “slow to predict.” Training, is instant. You just memorize the data! Prediction involves finding the distance between the <span class="math inline">\(x\)</span> considered and all <span class="math inline">\(x_i\)</span> in the data! (For this reason, KNN is often not used in practice, but it is very useful learning tool.)</p>
-<p>So, how then, do we choose the value of the <strong>tuning</strong> parameter <span class="math inline">\(k\)</span>? We validate!</p>
+<p>So, how then, do we choose the value of the <strong>tuning</strong> parameter <span class="math inline">\(k\)</span>? We <em><strong>validate</strong></em>!</p>
 <p>First, let’s take a look at what happens with this data if we consider three different values of <span class="math inline">\(k\)</span>.</p>
 <p><img src="nonparametric-regression_files/figure-html/unnamed-chunk-10-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>For each plot, the black dashed curve is the true mean function.</p>
@@ -725,19 +725,23 @@ y
 <p>While the middle plot with <span class="math inline">\(k = 5\)</span> is not “perfect” it seems to roughly capture the “motion” of the true regression function. We can begin to see that if we generated new data, this estimated regression function would perform better than the other two.</p>
 <p>But remember, in practice, we won’t know the true regression function, so we will need to determine how our model performs using only the available data!</p>
 <p>This <span class="math inline">\(k\)</span>, the number of neighbors, is an example of a <strong>tuning parameter</strong>. Instead of being learned from the data, like model parameters such as the <span class="math inline">\(\beta\)</span> coefficients in linear regression, a tuning parameter tells us <em>how</em> to learn from data. It is user-specified. To determine the value of <span class="math inline">\(k\)</span> that should be used, many models are fit to the estimation data, then evaluated on the validation. Using the information from the validation data, a value of <span class="math inline">\(k\)</span> is chosen. (More on this in a bit.)</p>
-<p>This tuning parameter <span class="math inline">\(k\)</span> also defines the <strong>flexibility</strong> of the model. In KNN, a small value of <span class="math inline">\(k\)</span> is a flexible model, while a large value of <span class="math inline">\(k\)</span> is inflexible. (Many text use the term complex instead of flexible. We feel this is confusing as complex is often associated with difficult. KNN with <span class="math inline">\(k = 1\)</span> is actually a very simple model, but it is very flexible.)</p>
+<ul>
+<li><strong>Model parameters</strong> are “learned” using the same data that was used to fit the model</li>
+<li><strong>Tuning paremeters</strong> are “chosen” using data not used to fit the model</li>
+</ul>
+<p>This tuning parameter <span class="math inline">\(k\)</span> also defines the <strong>flexibility</strong> of the model. In KNN, a small value of <span class="math inline">\(k\)</span> is a flexible model, while a large value of <span class="math inline">\(k\)</span> is inflexible. (Many texts use the term complex instead of flexible. We feel this is confusing as complex is often associated with difficult. KNN with <span class="math inline">\(k = 1\)</span> is actually a very simple model to understand, but it is very flexible as defined here.)</p>
 <p>Before moving to an example of tuning a KNN model, we will first introduce decision trees.</p>
 </div>
 <div id="decision-trees" class="section level2">
 <h2><span class="header-section-number">3.4</span> Decision Trees</h2>
-<p>Decision trees are similar to k-nearest neighbors but instead of looking for neighbors, decision trees create neighborhoods. We won’t explore the full details of trees, but just start to understand the basic concepts, as well as learn to fit them in R.</p>
+<p><strong>Decision trees</strong> are similar to k-nearest neighbors but instead of looking for neighbors, decision trees create neighborhoods. We won’t explore the full details of trees, but just start to understand the basic concepts, as well as learn to fit them in R.</p>
 <p>Neighborhoods are created via recursive binary partitions. In simpler terms, pick a feature and a possible cutoff value. Data that have a value less than the cutoff for the selected feature are in one neighborhood (the left) and data that have a value greater than the cutoff are in another (the right). Within these two neighborhoods, repeat this procedure until a stopping rule is satisfied. (More on that in a moment.) To make a prediction, check which neighborhood a new piece of data would belong to and predict the average of the <span class="math inline">\(y_i\)</span> values of data in that neighborhood.</p>
 <p>With the data above, which has a single feature <span class="math inline">\(x\)</span>, consider three possible cutoffs: -0.5, 0.0, and 0.75.</p>
 <p><img src="nonparametric-regression_files/figure-html/unnamed-chunk-12-1.png" width="864" style="display: block; margin: auto;" /></p>
 <p>For each plot, the black vertical line defines the neighborhoods. The green horizontal lines are the average of the <span class="math inline">\(y_i\)</span> values for the points in the left neighborhood. The red horizontal lines are the average of the <span class="math inline">\(y_i\)</span> values for the points in the right neighborhood.</p>
 <p>What makes a cutoff good? Large differences in the average <span class="math inline">\(y_i\)</span> between the two neighborhoods. More formally we want to find a cutoff value that minimizes</p>
 <p><span class="math display">\[
-\sum_{i \in N_L}(y_i - \hat{\mu}_{N_L}) ^ 2 + \sum_{i \in N_R}(y_i - \hat{\mu}_{N_R}) ^ 2
+\sum_{i \in N_L} \left( y_i - \hat{\mu}_{N_L} \right) ^ 2 + \sum_{i \in N_R} \left(y_i - \hat{\mu}_{N_R} \right) ^ 2
 \]</span></p>
 <p>where</p>
 <ul>
@@ -815,7 +819,7 @@ Right SSE
 <p>In the plot above, the true regression function is the dashed black curve, and the solid orange curve is the estimated regression function using a decision tree. We see that there are two splits, which we can visualize as a tree.</p>
 <p><img src="nonparametric-regression_files/figure-html/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>The above “tree” shows the splits that were made. It informs us of the variable used, the cutoff value, and some summary of the resulting neighborhood. In “tree” terminology the resulting neighborhoods are “terminal nodes” of the tree. In contrast, “internal nodes” are neighborhoods that are created, but then further split.</p>
-<p>The “root node” or neighborhood before any splitting is at the top of the plot. We see that this node represents 100% of the data. The other number, 0.21, is the mean of the response variable, in this case, <span class="math inline">\(y_i\)</span>.</p>
+<p>The “root node” is the neighborhood contains all observations, before any splitting, and can be seen at the top of the image above. We see that this node represents 100% of the data. The other number, 0.21, is the mean of the response variable, in this case, <span class="math inline">\(y_i\)</span>.</p>
 <p>Looking at a terminal node, for example the bottom left node, we see that 23% of the data is in this node. The average value of the <span class="math inline">\(y_i\)</span> in this node is -1, which can be seen in the plot above.</p>
 <p>We also see that the first split is based on the <span class="math inline">\(x\)</span> variable, and a cutoff of <span class="math inline">\(x = -0.52\)</span>. (Note that because there is only one variable here, all splits are based on <span class="math inline">\(x\)</span>, but in the future, we will have multiple features that can be split and neighborhoods will no longer be one-dimensional. However, this is hard to plot.)</p>
 <p>Let’s build a bigger, more flexible tree.</p>
@@ -826,13 +830,13 @@ Right SSE
 <li><code>cp</code> or the “complexity parameter” as it is called. (Flexibility parameter would be a better name.) This parameter determines which splits are considered. A split must improve the performance of the tree by more than <code>cp</code> in order to be considered. When we get to R, we will see that the default value is 0.1.</li>
 <li><code>minsplit</code>, the minimum number of observations in a node (neighborhood) in order to split again.</li>
 </ul>
-<p>There are actually many more possible tuning parameters for trees, possibly differing depending on who wrote the code you’re using. We will limit discussion to these two. Note that they effect each other, and they effect other parameters which we are not discussing. The main takeaway should be how they effect model flexibility.</p>
+<p>There are actually many more possible tuning parameters for trees, possibly differing depending on who wrote the code you’re using. We will limit discussion to these two. (The <code>rpart</code> function in R would allow us to use others, but we will always just leave their values as the default values.) Note that they effect each other, and they effect other parameters which we are not discussing. The main takeaway should be how they effect model flexibility.</p>
 <p>First let’s look at what happens for a fixed <code>minsplit</code> by variable <code>cp</code>.</p>
 <p><img src="nonparametric-regression_files/figure-html/unnamed-chunk-22-1.png" width="1152" style="display: block; margin: auto;" /></p>
-<p>We see that as <code>cp</code> <em>decreases</em>, model flexibility <strong>increases</strong>.</p>
+<p>We see that as <code>cp</code> <em>decreases</em>, model flexibility <strong>increases</strong>. We see more splits, because the increase in performance needed to accept a split is smaller as <code>cp</code> is reduced.</p>
 <p>Now the reverse, fix <code>cp</code> and vary <code>minsplit</code>.</p>
 <p><img src="nonparametric-regression_files/figure-html/unnamed-chunk-24-1.png" width="1152" style="display: block; margin: auto;" /></p>
-<p>We see that as <code>minsplit</code> <em>decreases</em>, model flexibility <strong>increases</strong>.</p>
+<p>We see that as <code>minsplit</code> <em>decreases</em>, model flexibility <strong>increases</strong>. By allow splits of neighborhoods with fewer observations, we obtain more splits, which results in a more flexible model.</p>
 <hr />
 </div>
 <div id="example-credit-card-data-1" class="section level2">
@@ -904,7 +908,7 @@ Right SSE
 <div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" data-line-number="1"><span class="kw">predict</span>(crdt_knn_<span class="dv">10</span>, crdt_val[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, ])</a></code></pre></div>
 <pre><code>## [1] 337.7857 356.0000 295.7692 360.8182 306.8000</code></pre>
 <p>This uses the 10-NN (10 nearest neighbors) model to make predictions (estimate the regression function) given the first five observations of the validation data. (<strong>Note:</strong> We did not name the second argument to <code>predict()</code>. Again, you’ve been warned.)</p>
-<p>Now that we know we already know how to use the <code>predict()</code> function, let’s calculate the validation RMSE for each of these models.</p>
+<p>Now that we know how to use the <code>predict()</code> function, let’s calculate the validation RMSE for each of these models.</p>
 <div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" data-line-number="1">knn_mod_list =<span class="st"> </span><span class="kw">list</span>(</a>
 <a class="sourceLine" id="cb117-2" data-line-number="2">  <span class="dt">crdt_knn_01 =</span> <span class="kw">knnreg</span>(Rating <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Gender <span class="op">+</span><span class="st"> </span>Student, <span class="dt">data =</span> crdt_est, <span class="dt">k =</span> <span class="dv">1</span>),</a>
 <a class="sourceLine" id="cb117-3" data-line-number="3">  <span class="dt">crdt_knn_10 =</span> <span class="kw">knnreg</span>(Rating <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Gender <span class="op">+</span><span class="st"> </span>Student, <span class="dt">data =</span> crdt_est, <span class="dt">k =</span> <span class="dv">10</span>),</a>
@@ -920,7 +924,7 @@ Right SSE
 <p>So, of these three values of <span class="math inline">\(k\)</span>, the model with <span class="math inline">\(k = 25\)</span> achieves the lowest validation RMSE.</p>
 <p>This process, fitting a number of models with different values of the <em>tuning parameter</em>, in this case <span class="math inline">\(k\)</span>, and then finding the “best” tuning parameter value based on performance on the validation data is called <strong>tuning</strong>. In practice, we would likely consider more values of <span class="math inline">\(k\)</span>, but this should illustrate the point.</p>
 <p>In the next chapters, we will discuss the details of model flexibility and model tuning, and how these concepts are tied together. However, even though we will present some theory behind this relationship, in practice, <strong>you must tune and validate your models</strong>. There is no theory that will inform you ahead of tuning and validation which model will be the best. By teaching you <em>how</em> to fit KNN models in R and how to calculate validation RMSE, you already have all the tools you need to find a good model.</p>
-<p>Let’s turn to decision trees which we will fit with the <code>rpart()</code> function from the <code>rpart</code> package. Use <code>?rpart</code> and <code>?rpart.control</code> for documentation and details.</p>
+<p>Let’s turn to decision trees which we will fit with the <code>rpart()</code> function from the <code>rpart</code> package. Use <code>?rpart</code> and <code>?rpart.control</code> for documentation and details. In particular, <code>?rpart.control</code> will detail the many tuning parameters of this implementation of decision tree models in R.</p>
 <p>We’ll start by using default tuning parameters.</p>
 <div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb122-1" data-line-number="1">crdt_tree =<span class="st"> </span><span class="kw">rpart</span>(Rating <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Gender <span class="op">+</span><span class="st"> </span>Student, <span class="dt">data =</span> crdt_est)</a></code></pre></div>
 <div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" data-line-number="1">crdt_tree</a></code></pre></div>
