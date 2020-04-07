@@ -250,7 +250,11 @@ This model is also flawed, but for a different reason. (Later we will say this m
 
 Let's take a look at this visually.
 
+::: {.wide}
+
 <img src="linear-regression_files/figure-html/unnamed-chunk-6-1.png" width="1152" style="display: block; margin: auto;" />
+
+:::
 
 Here we see the three models fit to the data above. The dashed black curve is the true mean function, that is the true mean of $Y$ given $x$, and the solid colored curves are the estimated mean functions. 
 
