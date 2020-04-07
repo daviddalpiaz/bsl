@@ -228,6 +228,8 @@ poly_mod_9 = lm(y ~ poly(x, degree = 9), data = sim_slr_data)
 
 Let's take a look at this visually.
 
+::: {.wide}
+
 ```{r, fig.height = 4, fig.width = 12, echo = FALSE}
 par(mfrow = c(1, 3))
 
@@ -252,6 +254,8 @@ curve(predict(poly_mod_9, tibble(x = x)),
       col = "limegreen", lwd = 2, lty = 1, add = TRUE, n = 10000)
 grid()
 ```
+
+:::
 
 Here we see the three models fit to the data above. The dashed black curve is the true mean function, that is the true mean of $Y$ given $x$, and the solid colored curves are the estimated mean functions. 
 
