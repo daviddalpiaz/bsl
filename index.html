@@ -24,7 +24,7 @@
 <meta name="author" content="David Dalpiaz" />
 
 
-<meta name="date" content="2020-04-03" />
+<meta name="date" content="2020-04-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,6 +51,13 @@
 
 
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+
+<!-- To automatically render math in text elements, include the auto-render extension: -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
 
 
 <style type="text/css">
@@ -135,10 +142,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Start Here</a><ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i>Caveat Emptor</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i>Who?</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i>License</a></li>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#caveat-emptor"><i class="fa fa-check"></i><b>0.1</b> Caveat Emptor</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i><b>0.2</b> Who?</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.3</b> Acknowledgements</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.4</b> License</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="machine-learning-overview.html"><a href="machine-learning-overview.html"><i class="fa fa-check"></i><b>1</b> Machine Learning Overview</a><ul>
 <li class="chapter" data-level="1.1" data-path="machine-learning-overview.html"><a href="machine-learning-overview.html#reading"><i class="fa fa-check"></i><b>1.1</b> Reading</a></li>
@@ -354,7 +361,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Basics of Statistical Learning</h1>
 <p class="author"><em><a href="https://daviddalpiaz.com/">David Dalpiaz</a></em></p>
-<p class="date"><em>2020-04-03</em></p>
+<p class="date"><em>2020-04-07</em></p>
 </div>
 <div id="start-here" class="section level1 unnumbered">
 <h1>Start Here</h1>
@@ -362,8 +369,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <hr />
 <p>Welcome to Basics of Statistical Learning! What a boring title! The title was chosen to mirror the <a href="https://illinois.edu/">University of Illinois</a> course <a href="https://stat432.org/">STAT 432 - Basics of Statistical Learning</a>. That title was chosen to meet certain University course naming conventions, hence the boring title. A more appropriate title would be “Machine Learning from the Perspective of a Statistician who uses R,” which is more descriptive, but still a boring title. Anyway, this “book” will often be referred to as <strong>BSL</strong>.</p>
 <hr />
-<div id="caveat-emptor" class="section level2 unnumbered">
-<h2>Caveat Emptor</h2>
+<div id="caveat-emptor" class="section level2">
+<h2><span class="header-section-number">0.1</span> Caveat Emptor</h2>
 <p><strong>This “book” is under active development.</strong> Literally every element of the book is subject to change, at any moment. This text, BSL, is the successor to <a href="https://daviddalpiaz.github.io/r4sl/">R4SL</a>, an unfinished work that began as a supplement to <a href="https://faculty.marshall.usc.edu/gareth-james/ISL/">Introduction to Statistical Learning</a>, but was never finished. (In some sense, this book is just a fresh start due to the author wanting to change the presentation of the material. The author is seriously worried that he will encounter the <a href="https://en.wikipedia.org/wiki/Second-system_effect">second-system effect.</a>)</p>
 <p>Because this book is written with a course in mind, that is actively being taught, often out of convenience the text will speak directly to the students of that course. Thus, be aware that any reference to a “course” are a reference to <a href="www.stat432.org">STAT 432 @ UIUC</a>.</p>
 <!-- A [**PDF** version](bsl.pdf) is maintained for use offline, however, given the pace of development, this should only be used if absolutely necessary. During development formatting in the PDF version will largely be ignored. -->
@@ -371,14 +378,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>While development is taking place, you may see “TODO” scattered throughout the text. These are mostly notes for internal use, but give the reader some idea of what development is still to come. For additional details on the development process, please see the <a href="https://github.com/daviddalpiaz/bsl/blob/master/README.md">README</a> file on GitHub as well as the <a href="https://github.com/daviddalpiaz/bsl/issues">Issues</a> page.</p>
 <hr />
 </div>
-<div id="who" class="section level2 unnumbered">
-<h2>Who?</h2>
+<div id="who" class="section level2">
+<h2><span class="header-section-number">0.2</span> Who?</h2>
 <p>This book is targeted at advanced undergraduate or first year MS students in Statistics who have <em>no prior machine learning experience</em>. While both will be discussed in great detail, previous experience with both statistical modeling and R are assumed.</p>
 <p>In other words, this books is for students in STAT 432.</p>
 <hr />
 </div>
-<div id="acknowledgements" class="section level2 unnumbered">
-<h2>Acknowledgements</h2>
+<div id="acknowledgements" class="section level2">
+<h2><span class="header-section-number">0.3</span> Acknowledgements</h2>
 <p>The following is a (likely incomplete) list of helpful contributors. This book was also influenced by the helpful <a href="https://daviddalpiaz.github.io/r4sl/index.html#acknowledgements">contributors to R4SL</a>.</p>
 <ul>
 <li><a href="https://www.linkedin.com/in/jae-ho-lee-32052710b/">Jae-Ho Lee</a> - STAT 432, Fall 2019</li>
@@ -394,8 +401,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- TODO: Standing on the shoulder of giants. High level acknowledgements. -->
 <hr />
 </div>
-<div id="license" class="section level2 unnumbered">
-<h2>License</h2>
+<div id="license" class="section level2">
+<h2><span class="header-section-number">0.4</span> License</h2>
 <div class="figure">
 <img src="img/cc.png" alt="CC NC SA" />
 <p class="caption">CC NC SA</p>
@@ -457,7 +464,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
+    var src = "";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))

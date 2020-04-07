@@ -1,12 +1,18 @@
 --- 
 title: "Basics of Statistical Learning"
 author: "[David Dalpiaz](https://daviddalpiaz.com/)"
-date: "2020-04-03"
+date: "2020-04-07"
 github-repo: daviddalpiaz/bsl
 url: 'https\://statisticallearning.org/'
-knit: "bookdown::render_book"
 site: bookdown::bookdown_site
+output:
+  bookdown::gitbook:
+    pandoc_args: [--katex]
+    mathjax: NULL
+    includes:
+      in_header: katex.html
 documentclass: book
+math: true
 ---
 
 
@@ -23,7 +29,7 @@ Welcome to Basics of Statistical Learning! What a boring title! The title was ch
 
 ***
 
-## Caveat Emptor {-}
+## Caveat Emptor
 
 **This "book" is under active development.** Literally every element of the book is subject to change, at any moment. This text, BSL, is the successor to [R4SL](https://daviddalpiaz.github.io/r4sl/), an unfinished work that began as a supplement to [Introduction to Statistical Learning](https://faculty.marshall.usc.edu/gareth-james/ISL/), but was never finished. (In some sense, this book is just a fresh start due to the author wanting to change the presentation of the material. The author is seriously worried that he will encounter the [second-system effect.](https://en.wikipedia.org/wiki/Second-system_effect))
 
@@ -37,7 +43,7 @@ While development is taking place, you may see "TODO" scattered throughout the t
 
 ***
 
-## Who? {-}
+## Who?
 
 This book is targeted at advanced undergraduate or first year MS students in Statistics who have *no prior machine learning experience*. While both will be discussed in great detail, previous experience with both statistical modeling and R are assumed.
 
@@ -45,7 +51,7 @@ In other words, this books is for students in STAT 432.
 
 ***
 
-## Acknowledgements {-}
+## Acknowledgements
 
 The following is a (likely incomplete) list of helpful contributors. This book was also influenced by the helpful [contributors to R4SL](https://daviddalpiaz.github.io/r4sl/index.html#acknowledgements).
 
@@ -64,11 +70,10 @@ Looking for ways to contribute?
 
 ***
 
-## License {-}
+## License
 
 ![CC NC SA](img/cc.png) 
 
 This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 ***
-

@@ -42,3 +42,11 @@ pre code {
 .book .book-body .page-wrapper .page-inner section.normal code {
   padding: .1em;
 }
+
+.header-section-number {
+  color: #a7a7a7;
+}
+
+.book .book-body .page-wrapper .page-inner section.normal h1, .book .book-body .page-wrapper .page-inner section.normal h2, .book .book-body .page-wrapper .page-inner section.normal h3, .book .book-body .page-wrapper .page-inner section.normal h4, .book .book-body .page-wrapper .page-inner section.normal h5, .book .book-body .page-wrapper .page-inner section.normal h6 {
+  font-variant: small-caps;
+}
