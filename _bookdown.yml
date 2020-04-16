@@ -25,7 +25,6 @@ rmd_files: [
   "dimension-reduction.Rmd",
   "ensemble-methods.Rmd",
   "regularization.Rmd",
-  "backlog.Rmd",
   "additional-reading.Rmd",
   "ten-rules.Rmd",
   "computing.Rmd",
