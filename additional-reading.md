@@ -1,3 +1,5 @@
+# (APPENDIX) Appendix {-} 
+
 # Additional Reading
 
 
@@ -58,11 +60,5 @@
 
 - [Machine Learning verus Statistics, A Glossary](https://statweb.stanford.edu/~tibs/stat315a/glossary.pdf)
   - Rob Tibshirani
-
-***
-
-## Source
-
-- `R` Markdown: [`additional-reading.Rmd`](additional-reading.Rmd)
 
 ***
