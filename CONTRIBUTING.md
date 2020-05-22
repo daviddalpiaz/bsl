@@ -20,8 +20,6 @@ contributing a change, you will be asked the following:
 You are welcome to send this information along with any pull requests or typo
 corrections.
 
-***
-
 ## Code of Conduct
 
 Please note we have a code of conduct, please follow it in all your interactions
