@@ -1,6 +1,6 @@
 bookdown::gitbook:
   css: style.css
-  split_by: chapter
+  split_by: rmd
 #  df_print: paged
   config:
     fontsettings:
@@ -13,11 +13,14 @@ bookdown::gitbook:
         <li><a href="./">Basics of Statistical Learning</a></li>
       after: |
         <li><a href="https://daviddalpiaz.org" target="blank">&copy; 2020 David Dalpiaz</a></li>
-        <li><a href="https://spring-2020.stat432.org" target="blank">[STAT 432] Spring 2020</a></li>
 #    download: [pdf]
     download: no
     edit: https://github.com/daviddalpiaz/bsl/edit/master/%s
-    sharing: null
+    sharing:
+      github: yes
+      facebook: no
+      twitter: no
+      all: no
 # bookdown::pdf_book:
 #   # includes:
 #   #   in_header: preamble.tex
