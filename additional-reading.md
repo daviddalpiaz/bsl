@@ -53,6 +53,7 @@
 - [Peekaboo: Don't cite the No Free Lunch Theorem](https://peekaboo-vision.blogspot.com/2019/07/dont-cite-no-free-lunch-theorem.html)
 - [aleatoric: Overfitting: A Guided Tour](https://www.alexpghayes.com/blog/overfitting-a-guided-tour/)
 - [Math for Machines: Optimal Boundaries](https://mathformachines.com/posts/decision/)
+- [Variance Explained: What's the difference between data science, machine learning, and artificial intelligence?](http://varianceexplained.org/r/ds-ml-ai/)
 
 ***
 

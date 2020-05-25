@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Bias–Variance Tradeoff | Basics of Statistical Learning</title>
+  <meta name="description" content="Chapter 4 Bias–Variance Tradeoff | Basics of Statistical Learning" />
+  <meta name="generator" content="bookdown 0.19.1 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Bias–Variance Tradeoff | Basics of Statistical Learning" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://statisticallearning.org/" />
+  
+  
+  <meta name="github-repo" content="daviddalpiaz/bsl" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Bias–Variance Tradeoff | Basics of Statistical Learning" />
+  
+  
+  
+
+<meta name="author" content="David Dalpiaz" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="nonparametric-regression.html"/>
+<link rel="next" href="regression-overview.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+
+<!-- To automatically render math in text elements, include the auto-render extension: -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Basics of Statistical Learning</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Start Here</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i><b>0.1</b> Who?</a><ul>
+<li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#readers"><i class="fa fa-check"></i><b>0.1.1</b> Readers</a></li>
+<li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#author"><i class="fa fa-check"></i><b>0.1.2</b> Author</a></li>
+<li class="chapter" data-level="0.1.3" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.1.3</b> Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#what"><i class="fa fa-check"></i><b>0.2</b> What?</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#why"><i class="fa fa-check"></i><b>0.3</b> Why?</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#where"><i class="fa fa-check"></i><b>0.4</b> Where?</a></li>
+<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#when"><i class="fa fa-check"></i><b>0.5</b> When?</a></li>
+<li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#how"><i class="fa fa-check"></i><b>0.6</b> How?</a><ul>
+<li class="chapter" data-level="0.6.1" data-path="index.html"><a href="index.html#build-tools"><i class="fa fa-check"></i><b>0.6.1</b> Build Tools</a></li>
+<li class="chapter" data-level="0.6.2" data-path="index.html"><a href="index.html#active-development"><i class="fa fa-check"></i><b>0.6.2</b> Active Development</a></li>
+<li class="chapter" data-level="0.6.3" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.6.3</b> License</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="ml-overview.html"><a href="ml-overview.html"><i class="fa fa-check"></i><b>1</b> Machine Learning Overview</a><ul>
+<li class="chapter" data-level="1.1" data-path="ml-overview.html"><a href="ml-overview.html#reading"><i class="fa fa-check"></i><b>1.1</b> Reading</a></li>
+<li class="chapter" data-level="1.2" data-path="ml-overview.html"><a href="ml-overview.html#what-is-machine-learning"><i class="fa fa-check"></i><b>1.2</b> What is Machine Learning?</a></li>
+<li class="chapter" data-level="1.3" data-path="ml-overview.html"><a href="ml-overview.html#machine-learning-tasks"><i class="fa fa-check"></i><b>1.3</b> Machine Learning Tasks</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="ml-overview.html"><a href="ml-overview.html#supervised-learning"><i class="fa fa-check"></i><b>1.3.1</b> Supervised Learning</a></li>
+<li class="chapter" data-level="1.3.2" data-path="ml-overview.html"><a href="ml-overview.html#unsupervised-learning"><i class="fa fa-check"></i><b>1.3.2</b> Unsupervised Learning</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="ml-overview.html"><a href="ml-overview.html#open-questions"><i class="fa fa-check"></i><b>1.4</b> Open Questions</a></li>
+<li class="chapter" data-level="1.5" data-path="ml-overview.html"><a href="ml-overview.html#source"><i class="fa fa-check"></i><b>1.5</b> Source</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>2</b> Linear Regression</a><ul>
+<li class="chapter" data-level="2.1" data-path="linear-regression.html"><a href="linear-regression.html#reading-1"><i class="fa fa-check"></i><b>2.1</b> Reading</a></li>
+<li class="chapter" data-level="2.2" data-path="linear-regression.html"><a href="linear-regression.html#explanation-versus-prediction"><i class="fa fa-check"></i><b>2.2</b> Explanation versus Prediction</a></li>
+<li class="chapter" data-level="2.3" data-path="linear-regression.html"><a href="linear-regression.html#setup"><i class="fa fa-check"></i><b>2.3</b> Setup</a></li>
+<li class="chapter" data-level="2.4" data-path="linear-regression.html"><a href="linear-regression.html#mathematical-setup"><i class="fa fa-check"></i><b>2.4</b> Mathematical Setup</a></li>
+<li class="chapter" data-level="2.5" data-path="linear-regression.html"><a href="linear-regression.html#linear-regression-models"><i class="fa fa-check"></i><b>2.5</b> Linear Regression Models</a></li>
+<li class="chapter" data-level="2.6" data-path="linear-regression.html"><a href="linear-regression.html#using-lm"><i class="fa fa-check"></i><b>2.6</b> Using <code>lm()</code></a></li>
+<li class="chapter" data-level="2.7" data-path="linear-regression.html"><a href="linear-regression.html#the-predict-function"><i class="fa fa-check"></i><b>2.7</b> The <code>predict()</code> Function</a></li>
+<li class="chapter" data-level="2.8" data-path="linear-regression.html"><a href="linear-regression.html#data-splitting"><i class="fa fa-check"></i><b>2.8</b> Data Splitting</a></li>
+<li class="chapter" data-level="2.9" data-path="linear-regression.html"><a href="linear-regression.html#regression-metrics"><i class="fa fa-check"></i><b>2.9</b> Regression Metrics</a><ul>
+<li class="chapter" data-level="2.9.1" data-path="linear-regression.html"><a href="linear-regression.html#graphical-evaluation"><i class="fa fa-check"></i><b>2.9.1</b> Graphical Evaluation</a></li>
+</ul></li>
+<li class="chapter" data-level="2.10" data-path="linear-regression.html"><a href="linear-regression.html#example-simple-simulated-data"><i class="fa fa-check"></i><b>2.10</b> Example: “Simple” Simulated Data</a></li>
+<li class="chapter" data-level="2.11" data-path="linear-regression.html"><a href="linear-regression.html#example-diamonds-data"><i class="fa fa-check"></i><b>2.11</b> Example: Diamonds Data</a></li>
+<li class="chapter" data-level="2.12" data-path="linear-regression.html"><a href="linear-regression.html#example-credit-card-data"><i class="fa fa-check"></i><b>2.12</b> Example: Credit Card Data</a></li>
+<li class="chapter" data-level="2.13" data-path="linear-regression.html"><a href="linear-regression.html#source-1"><i class="fa fa-check"></i><b>2.13</b> Source</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html"><i class="fa fa-check"></i><b>3</b> Nonparametric Regression</a><ul>
+<li class="chapter" data-level="3.1" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#reading-2"><i class="fa fa-check"></i><b>3.1</b> Reading</a></li>
+<li class="chapter" data-level="3.2" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#mathematical-setup-1"><i class="fa fa-check"></i><b>3.2</b> Mathematical Setup</a></li>
+<li class="chapter" data-level="3.3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>3.3</b> k-Nearest Neighbors</a></li>
+<li class="chapter" data-level="3.4" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#decision-trees"><i class="fa fa-check"></i><b>3.4</b> Decision Trees</a></li>
+<li class="chapter" data-level="3.5" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#example-credit-card-data-1"><i class="fa fa-check"></i><b>3.5</b> Example: Credit Card Data</a></li>
+<li class="chapter" data-level="3.6" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#source-2"><i class="fa fa-check"></i><b>3.6</b> Source</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="bvt.html"><a href="bvt.html"><i class="fa fa-check"></i><b>4</b> Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="4.1" data-path="bvt.html"><a href="bvt.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>4.1</b> Reducible and Irreducible Error</a></li>
+<li class="chapter" data-level="4.2" data-path="bvt.html"><a href="bvt.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>4.2</b> Bias-Variance Decomposition</a></li>
+<li class="chapter" data-level="4.3" data-path="bvt.html"><a href="bvt.html#simulation"><i class="fa fa-check"></i><b>4.3</b> Simulation</a></li>
+<li class="chapter" data-level="4.4" data-path="bvt.html"><a href="bvt.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>4.4</b> Estimating Expected Prediction Error</a></li>
+<li class="chapter" data-level="4.5" data-path="bvt.html"><a href="bvt.html#source-3"><i class="fa fa-check"></i><b>4.5</b> Source</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Regression Overview</a><ul>
+<li class="chapter" data-level="5.1" data-path="regression-overview.html"><a href="regression-overview.html#goal"><i class="fa fa-check"></i><b>5.1</b> Goal</a></li>
+<li class="chapter" data-level="5.2" data-path="regression-overview.html"><a href="regression-overview.html#strategy"><i class="fa fa-check"></i><b>5.2</b> Strategy</a></li>
+<li class="chapter" data-level="5.3" data-path="regression-overview.html"><a href="regression-overview.html#models"><i class="fa fa-check"></i><b>5.3</b> Models</a></li>
+<li class="chapter" data-level="5.4" data-path="regression-overview.html"><a href="regression-overview.html#model-flexibility"><i class="fa fa-check"></i><b>5.4</b> Model Flexibility</a></li>
+<li class="chapter" data-level="5.5" data-path="regression-overview.html"><a href="regression-overview.html#overfitting"><i class="fa fa-check"></i><b>5.5</b> Overfitting</a></li>
+<li class="chapter" data-level="5.6" data-path="regression-overview.html"><a href="regression-overview.html#bias-variance-tradeoff"><i class="fa fa-check"></i><b>5.6</b> Bias-Variance Tradeoff</a></li>
+<li class="chapter" data-level="5.7" data-path="regression-overview.html"><a href="regression-overview.html#source-4"><i class="fa fa-check"></i><b>5.7</b> Source</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>6</b> Classification</a><ul>
+<li class="chapter" data-level="6.1" data-path="classification.html"><a href="classification.html#reading-3"><i class="fa fa-check"></i><b>6.1</b> Reading</a></li>
+<li class="chapter" data-level="6.2" data-path="classification.html"><a href="classification.html#classification-metrics"><i class="fa fa-check"></i><b>6.2</b> Classification Metrics</a></li>
+<li class="chapter" data-level="6.3" data-path="classification.html"><a href="classification.html#source-5"><i class="fa fa-check"></i><b>6.3</b> Source</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html"><i class="fa fa-check"></i><b>7</b> Nonparametric Classification</a><ul>
+<li class="chapter" data-level="7.1" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html#reading-4"><i class="fa fa-check"></i><b>7.1</b> Reading</a></li>
+<li class="chapter" data-level="7.2" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html#source-6"><i class="fa fa-check"></i><b>7.2</b> Source</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>8</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="8.1" data-path="logistic-regression.html"><a href="logistic-regression.html#reading-5"><i class="fa fa-check"></i><b>8.1</b> Reading</a></li>
+<li class="chapter" data-level="8.2" data-path="logistic-regression.html"><a href="logistic-regression.html#source-7"><i class="fa fa-check"></i><b>8.2</b> Source</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>9</b> Binary Classification</a><ul>
+<li class="chapter" data-level="9.1" data-path="binary-classification.html"><a href="binary-classification.html#reading-6"><i class="fa fa-check"></i><b>9.1</b> Reading</a></li>
+<li class="chapter" data-level="9.2" data-path="binary-classification.html"><a href="binary-classification.html#source-8"><i class="fa fa-check"></i><b>9.2</b> Source</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="generative.html"><a href="generative.html"><i class="fa fa-check"></i><b>10</b> Generative Models</a><ul>
+<li class="chapter" data-level="10.1" data-path="generative.html"><a href="generative.html#reading-7"><i class="fa fa-check"></i><b>10.1</b> Reading</a></li>
+<li class="chapter" data-level="10.2" data-path="generative.html"><a href="generative.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>10.2</b> Linear Discriminant Analysis</a></li>
+<li class="chapter" data-level="10.3" data-path="generative.html"><a href="generative.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>10.3</b> Quadratic Discriminant Analysis</a></li>
+<li class="chapter" data-level="10.4" data-path="generative.html"><a href="generative.html#naive-bayes"><i class="fa fa-check"></i><b>10.4</b> Naive Bayes</a></li>
+<li class="chapter" data-level="10.5" data-path="generative.html"><a href="generative.html#discrete-inputs"><i class="fa fa-check"></i><b>10.5</b> Discrete Inputs</a></li>
+<li class="chapter" data-level="10.6" data-path="generative.html"><a href="generative.html#source-9"><i class="fa fa-check"></i><b>10.6</b> Source</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="supervised-i.html"><a href="supervised-i.html"><i class="fa fa-check"></i><b>11</b> Supervised Learning Overview I</a><ul>
+<li class="chapter" data-level="11.1" data-path="supervised-i.html"><a href="supervised-i.html#reading-8"><i class="fa fa-check"></i><b>11.1</b> Reading</a></li>
+<li class="chapter" data-level="11.2" data-path="supervised-i.html"><a href="supervised-i.html#source-10"><i class="fa fa-check"></i><b>11.2</b> Source</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>12</b> Simulation</a><ul>
+<li class="chapter" data-level="12.1" data-path="simulation.html"><a href="simulation.html#reading-9"><i class="fa fa-check"></i><b>12.1</b> Reading</a></li>
+<li class="chapter" data-level="12.2" data-path="simulation.html"><a href="simulation.html#source-11"><i class="fa fa-check"></i><b>12.2</b> Source</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="bootstrap.html"><a href="bootstrap.html"><i class="fa fa-check"></i><b>13</b> Bootstrap Resampling</a><ul>
+<li class="chapter" data-level="13.1" data-path="bootstrap.html"><a href="bootstrap.html#reading-10"><i class="fa fa-check"></i><b>13.1</b> Reading</a></li>
+<li class="chapter" data-level="13.2" data-path="bootstrap.html"><a href="bootstrap.html#source-12"><i class="fa fa-check"></i><b>13.2</b> Source</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="cross-validation.html"><a href="cross-validation.html"><i class="fa fa-check"></i><b>14</b> Cross-Validation</a><ul>
+<li class="chapter" data-level="14.1" data-path="cross-validation.html"><a href="cross-validation.html#reading-11"><i class="fa fa-check"></i><b>14.1</b> Reading</a></li>
+<li class="chapter" data-level="14.2" data-path="cross-validation.html"><a href="cross-validation.html#source-13"><i class="fa fa-check"></i><b>14.2</b> Source</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="supervised-ii.html"><a href="supervised-ii.html"><i class="fa fa-check"></i><b>15</b> Supervised Learning Overview II</a><ul>
+<li class="chapter" data-level="15.1" data-path="supervised-ii.html"><a href="supervised-ii.html#classification-2"><i class="fa fa-check"></i><b>15.1</b> Classification</a><ul>
+<li class="chapter" data-level="15.1.1" data-path="supervised-ii.html"><a href="supervised-ii.html#tuning"><i class="fa fa-check"></i><b>15.1.1</b> Tuning</a></li>
+</ul></li>
+<li class="chapter" data-level="15.2" data-path="supervised-ii.html"><a href="supervised-ii.html#regression-1"><i class="fa fa-check"></i><b>15.2</b> Regression</a><ul>
+<li class="chapter" data-level="15.2.1" data-path="supervised-ii.html"><a href="supervised-ii.html#methods"><i class="fa fa-check"></i><b>15.2.1</b> Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="supervised-ii.html"><a href="supervised-ii.html#external-links"><i class="fa fa-check"></i><b>15.3</b> External Links</a></li>
+<li class="chapter" data-level="15.4" data-path="supervised-ii.html"><a href="supervised-ii.html#rmarkdown"><i class="fa fa-check"></i><b>15.4</b> <code>rmarkdown</code></a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>16</b> Regularization</a><ul>
+<li class="chapter" data-level="16.1" data-path="regularization.html"><a href="regularization.html#reading-12"><i class="fa fa-check"></i><b>16.1</b> Reading</a></li>
+<li class="chapter" data-level="16.2" data-path="regularization.html"><a href="regularization.html#source-14"><i class="fa fa-check"></i><b>16.2</b> Source</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="dimension-reduction.html"><a href="dimension-reduction.html"><i class="fa fa-check"></i><b>17</b> Dimension Reduction</a><ul>
+<li class="chapter" data-level="17.1" data-path="dimension-reduction.html"><a href="dimension-reduction.html#reading-13"><i class="fa fa-check"></i><b>17.1</b> Reading</a></li>
+<li class="chapter" data-level="17.2" data-path="dimension-reduction.html"><a href="dimension-reduction.html#source-15"><i class="fa fa-check"></i><b>17.2</b> Source</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>18</b> Ensemble Methods</a><ul>
+<li class="chapter" data-level="18.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#reading-14"><i class="fa fa-check"></i><b>18.1</b> Reading</a></li>
+<li class="chapter" data-level="18.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#source-16"><i class="fa fa-check"></i><b>18.2</b> Source</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="additional-reading.html"><a href="additional-reading.html"><i class="fa fa-check"></i><b>A</b> Additional Reading</a><ul>
+<li class="chapter" data-level="A.1" data-path="additional-reading.html"><a href="additional-reading.html#books"><i class="fa fa-check"></i><b>A.1</b> Books</a></li>
+<li class="chapter" data-level="A.2" data-path="additional-reading.html"><a href="additional-reading.html#papers"><i class="fa fa-check"></i><b>A.2</b> Papers</a></li>
+<li class="chapter" data-level="A.3" data-path="additional-reading.html"><a href="additional-reading.html#blog-posts"><i class="fa fa-check"></i><b>A.3</b> Blog Posts</a></li>
+<li class="chapter" data-level="A.4" data-path="additional-reading.html"><a href="additional-reading.html#miscellaneous"><i class="fa fa-check"></i><b>A.4</b> Miscellaneous</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="ten-rules.html"><a href="ten-rules.html"><i class="fa fa-check"></i><b>B</b> Ten Simple Rules for Success in STAT 432</a><ul>
+<li class="chapter" data-level="B.1" data-path="ten-rules.html"><a href="ten-rules.html#rule-1-there-are-no-rules"><i class="fa fa-check"></i><b>B.1</b> Rule 1: There Are No Rules</a></li>
+<li class="chapter" data-level="B.2" data-path="ten-rules.html"><a href="ten-rules.html#rule-2-read-the-syllabus"><i class="fa fa-check"></i><b>B.2</b> Rule 2: Read the Syllabus</a></li>
+<li class="chapter" data-level="B.3" data-path="ten-rules.html"><a href="ten-rules.html#rule-3-previous-learning-is-not-gospel"><i class="fa fa-check"></i><b>B.3</b> Rule 3: Previous Learning is Not Gospel</a></li>
+<li class="chapter" data-level="B.4" data-path="ten-rules.html"><a href="ten-rules.html#rule-4-all-statements-are-true"><i class="fa fa-check"></i><b>B.4</b> Rule 4: All Statements Are True</a></li>
+<li class="chapter" data-level="B.5" data-path="ten-rules.html"><a href="ten-rules.html#rule-5-dont-miss-the-forest-for-the-trees"><i class="fa fa-check"></i><b>B.5</b> Rule 5: Don’t Miss The Forest For The Trees</a></li>
+<li class="chapter" data-level="B.6" data-path="ten-rules.html"><a href="ten-rules.html#rule-6-you-will-struggle"><i class="fa fa-check"></i><b>B.6</b> Rule 6: You Will Struggle</a></li>
+<li class="chapter" data-level="B.7" data-path="ten-rules.html"><a href="ten-rules.html#rule-7-keep-it-simple"><i class="fa fa-check"></i><b>B.7</b> Rule 7: Keep It Simple</a></li>
+<li class="chapter" data-level="B.8" data-path="ten-rules.html"><a href="ten-rules.html#rule-8-rtfm"><i class="fa fa-check"></i><b>B.8</b> Rule 8: RTFM</a></li>
+<li class="chapter" data-level="B.9" data-path="ten-rules.html"><a href="ten-rules.html#rule-9-there-are-no-stupid-questions"><i class="fa fa-check"></i><b>B.9</b> Rule 9: There Are No Stupid Questions</a></li>
+<li class="chapter" data-level="B.10" data-path="ten-rules.html"><a href="ten-rules.html#rule-10-learn-by-doing"><i class="fa fa-check"></i><b>B.10</b> Rule 10: Learn By Doing</a></li>
+<li class="chapter" data-level="B.11" data-path="ten-rules.html"><a href="ten-rules.html#conclusion"><i class="fa fa-check"></i><b>B.11</b> Conclusion</a></li>
+<li class="chapter" data-level="B.12" data-path="ten-rules.html"><a href="ten-rules.html#source-17"><i class="fa fa-check"></i><b>B.12</b> Source</a></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="computing.html"><a href="computing.html"><i class="fa fa-check"></i><b>C</b> Computing</a><ul>
+<li class="chapter" data-level="C.1" data-path="computing.html"><a href="computing.html#reading-15"><i class="fa fa-check"></i><b>C.1</b> Reading</a></li>
+<li class="chapter" data-level="C.2" data-path="computing.html"><a href="computing.html#additional-resources"><i class="fa fa-check"></i><b>C.2</b> Additional Resources</a><ul>
+<li class="chapter" data-level="C.2.1" data-path="computing.html"><a href="computing.html#r"><i class="fa fa-check"></i><b>C.2.1</b> R</a></li>
+<li class="chapter" data-level="C.2.2" data-path="computing.html"><a href="computing.html#rstudio"><i class="fa fa-check"></i><b>C.2.2</b> RStudio</a></li>
+<li class="chapter" data-level="C.2.3" data-path="computing.html"><a href="computing.html#r-markdown"><i class="fa fa-check"></i><b>C.2.3</b> R Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="C.3" data-path="computing.html"><a href="computing.html#stat-432-idioms"><i class="fa fa-check"></i><b>C.3</b> STAT 432 Idioms</a><ul>
+<li class="chapter" data-level="C.3.1" data-path="computing.html"><a href="computing.html#dont-restore-old-workspaces"><i class="fa fa-check"></i><b>C.3.1</b> Don’t Restore Old Workspaces</a></li>
+<li class="chapter" data-level="C.3.2" data-path="computing.html"><a href="computing.html#r-versions"><i class="fa fa-check"></i><b>C.3.2</b> R Versions</a></li>
+<li class="chapter" data-level="C.3.3" data-path="computing.html"><a href="computing.html#code-style"><i class="fa fa-check"></i><b>C.3.3</b> Code Style</a></li>
+<li class="chapter" data-level="C.3.4" data-path="computing.html"><a href="computing.html#reference-style"><i class="fa fa-check"></i><b>C.3.4</b> Reference Style</a></li>
+<li class="chapter" data-level="C.3.5" data-path="computing.html"><a href="computing.html#stat-432-r-style-overrides"><i class="fa fa-check"></i><b>C.3.5</b> STAT 432 R Style Overrides</a></li>
+<li class="chapter" data-level="C.3.6" data-path="computing.html"><a href="computing.html#stat-432-r-markdown-style"><i class="fa fa-check"></i><b>C.3.6</b> STAT 432 R Markdown Style</a></li>
+<li class="chapter" data-level="C.3.7" data-path="computing.html"><a href="computing.html#style-heuristics"><i class="fa fa-check"></i><b>C.3.7</b> Style Heuristics</a></li>
+<li class="chapter" data-level="C.3.8" data-path="computing.html"><a href="computing.html#objects-and-functions"><i class="fa fa-check"></i><b>C.3.8</b> Objects and Functions</a></li>
+<li class="chapter" data-level="C.3.9" data-path="computing.html"><a href="computing.html#print-versus-return"><i class="fa fa-check"></i><b>C.3.9</b> Print versus Return</a></li>
+<li class="chapter" data-level="C.3.10" data-path="computing.html"><a href="computing.html#help"><i class="fa fa-check"></i><b>C.3.10</b> Help</a></li>
+<li class="chapter" data-level="C.3.11" data-path="computing.html"><a href="computing.html#keyboard-shortcuts"><i class="fa fa-check"></i><b>C.3.11</b> Keyboard Shortcuts</a></li>
+<li class="chapter" data-level="C.3.12" data-path="computing.html"><a href="computing.html#common-issues"><i class="fa fa-check"></i><b>C.3.12</b> Common Issues</a></li>
+</ul></li>
+<li class="chapter" data-level="C.4" data-path="computing.html"><a href="computing.html#source-18"><i class="fa fa-check"></i><b>C.4</b> Source</a></li>
+</ul></li>
+<li class="chapter" data-level="D" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>D</b> Probability</a><ul>
+<li class="chapter" data-level="D.1" data-path="probability.html"><a href="probability.html#reading-16"><i class="fa fa-check"></i><b>D.1</b> Reading</a></li>
+<li class="chapter" data-level="D.2" data-path="probability.html"><a href="probability.html#probability-models"><i class="fa fa-check"></i><b>D.2</b> Probability Models</a></li>
+<li class="chapter" data-level="D.3" data-path="probability.html"><a href="probability.html#probability-axioms"><i class="fa fa-check"></i><b>D.3</b> Probability Axioms</a></li>
+<li class="chapter" data-level="D.4" data-path="probability.html"><a href="probability.html#probability-rules"><i class="fa fa-check"></i><b>D.4</b> Probability Rules</a></li>
+<li class="chapter" data-level="D.5" data-path="probability.html"><a href="probability.html#random-variables"><i class="fa fa-check"></i><b>D.5</b> Random Variables</a><ul>
+<li class="chapter" data-level="D.5.1" data-path="probability.html"><a href="probability.html#distributions"><i class="fa fa-check"></i><b>D.5.1</b> Distributions</a></li>
+<li class="chapter" data-level="D.5.2" data-path="probability.html"><a href="probability.html#discrete-random-variables"><i class="fa fa-check"></i><b>D.5.2</b> Discrete Random Variables</a></li>
+<li class="chapter" data-level="D.5.3" data-path="probability.html"><a href="probability.html#continuous-random-variables"><i class="fa fa-check"></i><b>D.5.3</b> Continuous Random Variables</a></li>
+<li class="chapter" data-level="D.5.4" data-path="probability.html"><a href="probability.html#distributions-in-r"><i class="fa fa-check"></i><b>D.5.4</b> Distributions in R</a></li>
+<li class="chapter" data-level="D.5.5" data-path="probability.html"><a href="probability.html#several-random-variables"><i class="fa fa-check"></i><b>D.5.5</b> Several Random Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="D.6" data-path="probability.html"><a href="probability.html#expectations"><i class="fa fa-check"></i><b>D.6</b> Expectations</a></li>
+<li class="chapter" data-level="D.7" data-path="probability.html"><a href="probability.html#likelihood"><i class="fa fa-check"></i><b>D.7</b> Likelihood</a></li>
+<li class="chapter" data-level="D.8" data-path="probability.html"><a href="probability.html#references"><i class="fa fa-check"></i><b>D.8</b> References</a><ul>
+<li class="chapter" data-level="D.8.1" data-path="probability.html"><a href="probability.html#videos"><i class="fa fa-check"></i><b>D.8.1</b> Videos</a></li>
+</ul></li>
+<li class="chapter" data-level="D.9" data-path="probability.html"><a href="probability.html#source-19"><i class="fa fa-check"></i><b>D.9</b> Source</a></li>
+</ul></li>
+<li class="chapter" data-level="E" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>E</b> Statistics</a><ul>
+<li class="chapter" data-level="E.1" data-path="statistics.html"><a href="statistics.html#reading-17"><i class="fa fa-check"></i><b>E.1</b> Reading</a></li>
+<li class="chapter" data-level="E.2" data-path="statistics.html"><a href="statistics.html#statistics-1"><i class="fa fa-check"></i><b>E.2</b> Statistics</a></li>
+<li class="chapter" data-level="E.3" data-path="statistics.html"><a href="statistics.html#estimators"><i class="fa fa-check"></i><b>E.3</b> Estimators</a><ul>
+<li class="chapter" data-level="E.3.1" data-path="statistics.html"><a href="statistics.html#properties"><i class="fa fa-check"></i><b>E.3.1</b> Properties</a></li>
+<li class="chapter" data-level="E.3.2" data-path="statistics.html"><a href="statistics.html#example-mse-of-an-estimator"><i class="fa fa-check"></i><b>E.3.2</b> Example: MSE of an Estimator</a></li>
+<li class="chapter" data-level="E.3.3" data-path="statistics.html"><a href="statistics.html#estimation-methods"><i class="fa fa-check"></i><b>E.3.3</b> Estimation Methods</a></li>
+<li class="chapter" data-level="E.3.4" data-path="statistics.html"><a href="statistics.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>E.3.4</b> Maximum Likelihood Estimation</a></li>
+<li class="chapter" data-level="E.3.5" data-path="statistics.html"><a href="statistics.html#method-of-moments"><i class="fa fa-check"></i><b>E.3.5</b> Method of Moments</a></li>
+<li class="chapter" data-level="E.3.6" data-path="statistics.html"><a href="statistics.html#empirical-distribution-function"><i class="fa fa-check"></i><b>E.3.6</b> Empirical Distribution Function</a></li>
+</ul></li>
+<li class="chapter" data-level="E.4" data-path="statistics.html"><a href="statistics.html#source-20"><i class="fa fa-check"></i><b>E.4</b> Source</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://daviddalpiaz.org" target="blank">&copy; 2020 David Dalpiaz</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Basics of Statistical Learning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="biasvariance-tradeoff" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Bias–Variance Tradeoff</h1>
+<hr />
+<p>This chapter will begin to dig into some theoretical details of estimating the true regression function. Don’t fret if this presentation seems overwhelming. Next chapter we will review some general concepts about regression before moving on to classification.</p>
+<ul>
+<li>TODO: Proofread for technical and notational correctness.</li>
+</ul>
+<hr />
+<p>Consider the general regression setup where we are given a random pair <span class="math inline">\((X, Y) \in \mathbb{R}^p \times \mathbb{R}\)</span>. We would like to “predict” <span class="math inline">\(Y\)</span> with some function of <span class="math inline">\(X\)</span>, say, <span class="math inline">\(f(X)\)</span>.</p>
+<p>To clarify what we mean by “predict,” we specify that we would like <span class="math inline">\(f(X)\)</span> to be “close” to <span class="math inline">\(Y\)</span>. To further clarify what we mean by “close,” we define the <strong>squared error loss</strong> of estimating <span class="math inline">\(Y\)</span> using <span class="math inline">\(f(X)\)</span>.</p>
+<p><span class="math display">\[
+L(Y, f(X)) \triangleq (Y - f(X)) ^ 2
+\]</span></p>
+<p>Now we can clarify the goal of regression, which is to minimize the above loss, on average. We call this the <strong>risk</strong> of estimating <span class="math inline">\(Y\)</span> using <span class="math inline">\(f(X)\)</span>.</p>
+<p><span class="math display">\[
+R(Y, f(X)) \triangleq \mathbb{E}[L(Y, f(X))] = \mathbb{E}_{X, Y}[(Y - f(X)) ^ 2]
+\]</span></p>
+<p>Before attempting to minimize the risk, we first re-write the risk after conditioning on <span class="math inline">\(X\)</span>.</p>
+<p><span class="math display">\[
+\mathbb{E}_{X, Y} \left[ (Y - f(X)) ^ 2 \right] = \mathbb{E}_{X} \mathbb{E}_{Y \mid X} \left[ ( Y - f(X) ) ^ 2 \mid X = x \right]
+\]</span></p>
+<p>Minimizing the right-hand side is much easier, as it simply amounts to minimizing the inner expectation with respect to <span class="math inline">\(Y \mid X\)</span>, essentially minimizing the risk pointwise, for each <span class="math inline">\(x\)</span>.</p>
+<p>It turns out, that the risk is minimized by setting <span class="math inline">\(f(x)\)</span> to be equal the conditional mean of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X\)</span>,</p>
+<p><span class="math display">\[
+f(x) = \mathbb{E}(Y \mid X = x)
+\]</span></p>
+<p>which we call the <strong>regression function</strong>. (Note that in this chapter, we will refer to <span class="math inline">\(f(x)\)</span> as the regression function instead of <span class="math inline">\(\mu(x)\)</span> for unimportant and arbitrary reasons.)</p>
+<p>Note that the choice of squared error loss is somewhat arbitrary. Suppose instead we chose absolute error loss.</p>
+<p><span class="math display">\[
+L(Y, f(X)) \triangleq | Y - f(X) | 
+\]</span></p>
+<p>The risk would then be minimized setting <span class="math inline">\(f(x)\)</span> equal to the conditional median.</p>
+<p><span class="math display">\[
+f(x) = \text{median}(Y \mid X = x)
+\]</span></p>
+<p>Despite this possibility, our preference will still be for squared error loss. The reasons for this are numerous, including: historical, ease of optimization, and protecting against large deviations.</p>
+<p>Now, given data <span class="math inline">\(\mathcal{D} = (x_i, y_i) \in \mathbb{R}^p \times \mathbb{R}\)</span>, our goal becomes finding some <span class="math inline">\(\hat{f}\)</span> that is a good estimate of the regression function <span class="math inline">\(f\)</span>. We’ll see that this amounts to minimizing what we call the reducible error.</p>
+<div id="reducible-and-irreducible-error" class="section level2">
+<h2><span class="header-section-number">4.1</span> Reducible and Irreducible Error</h2>
+<p>Suppose that we obtain some <span class="math inline">\(\hat{f}\)</span>, how well does it estimate <span class="math inline">\(f\)</span>? We define the <strong>expected prediction error</strong> of predicting <span class="math inline">\(Y\)</span> using <span class="math inline">\(\hat{f}(X)\)</span>. A good <span class="math inline">\(\hat{f}\)</span> will have a low expected prediction error.</p>
+<p><span class="math display">\[
+\text{EPE}\left(Y, \hat{f}(X)\right) \triangleq \mathbb{E}_{X, Y, \mathcal{D}} \left[  \left( Y - \hat{f}(X) \right)^2 \right]
+\]</span></p>
+<p>This expectation is over <span class="math inline">\(X\)</span>, <span class="math inline">\(Y\)</span>, and also <span class="math inline">\(\mathcal{D}\)</span>. The estimate <span class="math inline">\(\hat{f}\)</span> is actually random depending on the sampled data <span class="math inline">\(\mathcal{D}\)</span>. We could actually write <span class="math inline">\(\hat{f}(X, \mathcal{D})\)</span> to make this dependence explicit, but our notation will become cumbersome enough as it is.</p>
+<p>Like before, we’ll condition on <span class="math inline">\(X\)</span>. This results in the expected prediction error of predicting <span class="math inline">\(Y\)</span> using <span class="math inline">\(\hat{f}(X)\)</span> when <span class="math inline">\(X = x\)</span>.</p>
+<p><span class="math display">\[
+\text{EPE}\left(Y, \hat{f}(x)\right) = 
+\mathbb{E}_{Y \mid X, \mathcal{D}} \left[  \left(Y - \hat{f}(X) \right)^2 \mid X = x \right] = 
+\underbrace{\mathbb{E}_{\mathcal{D}} \left[  \left(f(x) - \hat{f}(x) \right)^2 \right]}_\textrm{reducible error} + 
+\underbrace{\mathbb{V}_{Y \mid X} \left[ Y \mid X = x \right]}_\textrm{irreducible error}
+\]</span></p>
+<p>A number of things to note here:</p>
+<ul>
+<li>The expected prediction error is for a random <span class="math inline">\(Y\)</span> given a fixed <span class="math inline">\(x\)</span> and a random <span class="math inline">\(\hat{f}\)</span>. As such, the expectation is over <span class="math inline">\(Y \mid X\)</span> and <span class="math inline">\(\mathcal{D}\)</span>. Our estimated function <span class="math inline">\(\hat{f}\)</span> is random depending on the sampled data, <span class="math inline">\(\mathcal{D}\)</span>, which is used to perform the estimation.</li>
+<li>The expected prediction error of predicting <span class="math inline">\(Y\)</span> using <span class="math inline">\(\hat{f}(X)\)</span> when <span class="math inline">\(X = x\)</span> has been decomposed into two errors:
+<ul>
+<li>The <strong>reducible error</strong>, which is the expected squared error loss of estimation <span class="math inline">\(f(x)\)</span> using <span class="math inline">\(\hat{f}(x)\)</span> at a fixed point <span class="math inline">\(x\)</span>. The only thing that is random here is <span class="math inline">\(\mathcal{D}\)</span>, the data used to obtain <span class="math inline">\(\hat{f}\)</span>. (Both <span class="math inline">\(f\)</span> and <span class="math inline">\(x\)</span> are fixed.) We’ll often call this reducible error the <strong>mean squared error</strong> of estimating <span class="math inline">\(f(x)\)</span> using <span class="math inline">\(\hat{f}\)</span> at a fixed point <span class="math inline">\(x\)</span>. <span class="math display">\[
+\text{MSE}\left(f(x), \hat{f}(x)\right) \triangleq 
+\mathbb{E}_{\mathcal{D}} \left[  \left(f(x) - \hat{f}(x) \right)^2 \right]\]</span></li>
+<li>The <strong>irreducible error</strong>. This is simply the variance of <span class="math inline">\(Y\)</span> given that <span class="math inline">\(X = x\)</span>, essentially noise that we do not want to learn. This is also called the <strong>Bayes error</strong>.</li>
+</ul></li>
+</ul>
+<p>As the name suggests, the reducible error is the error that we have some control over. But how do we control this error?</p>
+</div>
+<div id="bias-variance-decomposition" class="section level2">
+<h2><span class="header-section-number">4.2</span> Bias-Variance Decomposition</h2>
+<p>After decomposing the expected prediction error into reducible and irreducible error, we can further decompose the reducible error.</p>
+<p>Recall the definition of the <strong>bias</strong> of an estimator.</p>
+<p><span class="math display">\[
+\text{bias}(\hat{\theta}) \triangleq \mathbb{E}\left[\hat{\theta}\right] - \theta
+\]</span></p>
+<p>Also recall the definition of the <strong>variance</strong> of an estimator.</p>
+<p><span class="math display">\[
+\mathbb{V}(\hat{\theta}) = \text{var}(\hat{\theta}) \triangleq \mathbb{E}\left [ ( \hat{\theta} -\mathbb{E}\left[\hat{\theta}\right] )^2 \right]
+\]</span></p>
+<p>Using this, we further decompose the reducible error (mean squared error) into bias squared and variance.</p>
+<p><span class="math display">\[
+\text{MSE}\left(f(x), \hat{f}(x)\right) = 
+\mathbb{E}_{\mathcal{D}} \left[  \left(f(x) - \hat{f}(x) \right)^2 \right] = 
+\underbrace{\left(f(x) - \mathbb{E} \left[ \hat{f}(x) \right]  \right)^2}_{\text{bias}^2 \left(\hat{f}(x) \right)} +
+\underbrace{\mathbb{E} \left[ \left( \hat{f}(x) - \mathbb{E} \left[ \hat{f}(x) \right] \right)^2 \right]}_{\text{var} \left(\hat{f}(x) \right)}
+\]</span></p>
+<p>This is actually a common fact in estimation theory, but we have stated it here specifically for estimation of some regression function <span class="math inline">\(f\)</span> using <span class="math inline">\(\hat{f}\)</span> at some point <span class="math inline">\(x\)</span>.</p>
+<p><span class="math display">\[
+\text{MSE}\left(f(x), \hat{f}(x)\right) = \text{bias}^2 \left(\hat{f}(x) \right) + \text{var} \left(\hat{f}(x) \right)
+\]</span></p>
+<p>In a perfect world, we would be able to find some <span class="math inline">\(\hat{f}\)</span> which is <strong>unbiased</strong>, that is <span class="math inline">\(\text{bias}\left(\hat{f}(x) \right) = 0\)</span>, which also has low variance. In practice, this isn’t always possible.</p>
+<p>It turns out, there is a <strong>bias-variance tradeoff</strong>. That is, often, the more bias in our estimation, the lesser the variance. Similarly, less variance is often accompanied by more bias. Complex models tend to be unbiased, but highly variable. Simple models are often extremely biased, but have low variance.</p>
+<p>In the context of regression, models are biased when:</p>
+<ul>
+<li>Parametric: The form of the model <a href="https://en.wikipedia.org/wiki/Omitted-variable_bias">does not incorporate all the necessary variables</a>, or the form of the relationship is too simple. For example, a parametric model assumes a linear relationship, but the true relationship is quadratic.</li>
+<li>Non-parametric: The model provides too much smoothing.</li>
+</ul>
+<p>In the context of regression, models are variable when:</p>
+<ul>
+<li>Parametric: The form of the model incorporates too many variables, or the form of the relationship is too complex. For example, a parametric model assumes a cubic relationship, but the true relationship is linear.</li>
+<li>Non-parametric: The model does not provide enough smoothing. It is very, “wiggly.”</li>
+</ul>
+<p>So for us, to select a model that appropriately balances the tradeoff between bias and variance, and thus minimizes the reducible error, we need to select a model of the appropriate complexity for the data.</p>
+<p>Recall that when fitting models, we’ve seen that train RMSE decreases as model complexity is increasing. (Technically it is non-increasing.) For test RMSE, we expect to see a U-shaped curve. Importantly, test RMSE decreases, until a certain complexity, then begins to increase.</p>
+<p>Now we can understand why this is happening. The expected test RMSE is essentially the expected prediction error, which we now known decomposes into (squared) bias, variance, and the irreducible Bayes error. The following plots show three examples of this.</p>
+<p><img src="bvt_files/figure-html/unnamed-chunk-2-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>The three plots show three examples of the bias-variance tradeoff. In the left panel, the variance influences the expected prediction error more than the bias. In the right panel, the opposite is true. The middle panel is somewhat neutral. In all cases, the difference between the Bayes error (the horizontal dashed grey line) and the expected prediction error (the solid black curve) is exactly the mean squared error, which is the sum of the squared bias (blue curve) and variance (orange curve). The vertical line indicates the complexity that minimizes the prediction error.</p>
+<p>To summarize, if we assume that irreducible error can be written as</p>
+<p><span class="math display">\[
+\mathbb{V}[Y \mid X = x] = \sigma ^ 2
+\]</span></p>
+<p>then we can write the full decomposition of the expected prediction error of predicting <span class="math inline">\(Y\)</span> using <span class="math inline">\(\hat{f}\)</span> when <span class="math inline">\(X = x\)</span> as</p>
+<p><span class="math display">\[
+\text{EPE}\left(Y, \hat{f}(x)\right) =  
+\underbrace{\text{bias}^2\left(\hat{f}(x)\right) + \text{var}\left(\hat{f}(x)\right)}_\textrm{reducible error} + \sigma^2.
+\]</span></p>
+<p>As model complexity increases, bias decreases, while variance increases. By understanding the tradeoff between bias and variance, we can manipulate model complexity to find a model that well predict well on unseen observations.</p>
+<p><img src="bvt_files/figure-html/unnamed-chunk-3-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="simulation" class="section level2">
+<h2><span class="header-section-number">4.3</span> Simulation</h2>
+<p>We will illustrate these decompositions, most importantly the bias-variance tradeoff, through simulation. Suppose we would like to train a model to learn the true regression function function <span class="math inline">\(f(x) = x^2\)</span>.</p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" data-line-number="1">f =<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb138-2" data-line-number="2">  x <span class="op">^</span><span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb138-3" data-line-number="3">}</a></code></pre></div>
+<p>More specifically, we’d like to predict an observation, <span class="math inline">\(Y\)</span>, given that <span class="math inline">\(X = x\)</span> by using <span class="math inline">\(\hat{f}(x)\)</span> where</p>
+<p><span class="math display">\[
+\mathbb{E}[Y \mid X = x] = f(x) = x^2
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\mathbb{V}[Y \mid X = x] = \sigma ^ 2.
+\]</span></p>
+<p>Alternatively, we could write this as</p>
+<p><span class="math display">\[
+Y = f(X) + \epsilon
+\]</span></p>
+<p>where <span class="math inline">\(\mathbb{E}[\epsilon] = 0\)</span> and <span class="math inline">\(\mathbb{V}[\epsilon] = \sigma ^ 2\)</span>. In this formulation, we call <span class="math inline">\(f(X)\)</span> the <strong>signal</strong> and <span class="math inline">\(\epsilon\)</span> the <strong>noise</strong>.</p>
+<p>To carry out a concrete simulation example, we need to fully specify the data generating process. We do so with the following <code>R</code> code.</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" data-line-number="1">gen_sim_data =<span class="st"> </span><span class="cf">function</span>(f, <span class="dt">sample_size =</span> <span class="dv">100</span>) {</a>
+<a class="sourceLine" id="cb139-2" data-line-number="2">  x =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb139-3" data-line-number="3">  y =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">mean =</span> <span class="kw">f</span>(x), <span class="dt">sd =</span> <span class="fl">0.3</span>)</a>
+<a class="sourceLine" id="cb139-4" data-line-number="4">  <span class="kw">data.frame</span>(x, y)</a>
+<a class="sourceLine" id="cb139-5" data-line-number="5">}</a></code></pre></div>
+<p>Also note that if you prefer to think of this situation using the <span class="math inline">\(Y = f(X) + \epsilon\)</span> formulation, the following code represents the same data generating process.</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb140-1" data-line-number="1">gen_sim_data =<span class="st"> </span><span class="cf">function</span>(f, <span class="dt">sample_size =</span> <span class="dv">100</span>) {</a>
+<a class="sourceLine" id="cb140-2" data-line-number="2">  x =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> sample_size, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb140-3" data-line-number="3">  eps =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="fl">0.75</span>)</a>
+<a class="sourceLine" id="cb140-4" data-line-number="4">  y =<span class="st"> </span><span class="kw">f</span>(x) <span class="op">+</span><span class="st"> </span>eps</a>
+<a class="sourceLine" id="cb140-5" data-line-number="5">  <span class="kw">data.frame</span>(x, y)</a>
+<a class="sourceLine" id="cb140-6" data-line-number="6">}</a></code></pre></div>
+<p>To completely specify the data generating process, we have made more model assumptions than simply <span class="math inline">\(\mathbb{E}[Y \mid X = x] = x^2\)</span> and <span class="math inline">\(\mathbb{V}[Y \mid X = x] = \sigma ^ 2\)</span>. In particular,</p>
+<ul>
+<li>The <span class="math inline">\(x_i\)</span> in <span class="math inline">\(\mathcal{D}\)</span> are sampled from a uniform distribution over <span class="math inline">\([0, 1]\)</span>.</li>
+<li>The <span class="math inline">\(x_i\)</span> and <span class="math inline">\(\epsilon\)</span> are independent.</li>
+<li>The <span class="math inline">\(y_i\)</span> in <span class="math inline">\(\mathcal{D}\)</span> are sampled from the conditional normal distribution.</li>
+</ul>
+<p><span class="math display">\[
+Y \mid X \sim N(f(x), \sigma^2)
+\]</span></p>
+<p>Using this setup, we will generate datasets, <span class="math inline">\(\mathcal{D}\)</span>, with a sample size <span class="math inline">\(n = 100\)</span> and fit four models.</p>
+<p><span class="math display">\[
+\begin{aligned}
+\texttt{predict(fit0, x)} &amp;= \hat{f}_0(x) = \hat{\beta}_0\\
+\texttt{predict(fit1, x)} &amp;= \hat{f}_1(x) = \hat{\beta}_0 + \hat{\beta}_1 x \\
+\texttt{predict(fit2, x)} &amp;= \hat{f}_2(x) = \hat{\beta}_0 + \hat{\beta}_1 x + \hat{\beta}_2 x^2 \\
+\texttt{predict(fit9, x)} &amp;= \hat{f}_9(x) = \hat{\beta}_0 + \hat{\beta}_1 x + \hat{\beta}_2 x^2 + \ldots + \hat{\beta}_9 x^9
+\end{aligned}
+\]</span></p>
+<p>To get a sense of the data and these four models, we generate one simulated dataset, and fit the four models.</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb141-2" data-line-number="2">sim_data =<span class="st"> </span><span class="kw">gen_sim_data</span>(f)</a></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" data-line-number="1">fit_<span class="dv">0</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,                   <span class="dt">data =</span> sim_data)</a>
+<a class="sourceLine" id="cb142-2" data-line-number="2">fit_<span class="dv">1</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">1</span>), <span class="dt">data =</span> sim_data)</a>
+<a class="sourceLine" id="cb142-3" data-line-number="3">fit_<span class="dv">2</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">2</span>), <span class="dt">data =</span> sim_data)</a>
+<a class="sourceLine" id="cb142-4" data-line-number="4">fit_<span class="dv">9</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">9</span>), <span class="dt">data =</span> sim_data)</a></code></pre></div>
+<p>Note that technically we’re being lazy and using orthogonal polynomials, but the fitted values are the same, so this makes no difference for our purposes.</p>
+<p>Plotting these four trained models, we see that the zero predictor model does very poorly. The first degree model is reasonable, but we can see that the second degree model fits much better. The ninth degree model seem rather wild.</p>
+<p><img src="bvt_files/figure-html/unnamed-chunk-10-1.png" width="864" style="display: block; margin: auto;" /></p>
+<p>The following three plots were created using three additional simulated datasets. The zero predictor and ninth degree polynomial were fit to each.</p>
+<p><img src="bvt_files/figure-html/unnamed-chunk-11-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>This plot should make clear the difference between the bias and variance of these two models. The zero predictor model is clearly wrong, that is, biased, but nearly the same for each of the datasets, since it has very low variance.</p>
+<p>While the ninth degree model doesn’t appear to be correct for any of these three simulations, we’ll see that on average it is, and thus is performing unbiased estimation. These plots do however clearly illustrate that the ninth degree polynomial is extremely variable. Each dataset results in a very different fitted model. Correct on average isn’t the only goal we’re after, since in practice, we’ll only have a single dataset. This is why we’d also like our models to exhibit low variance.</p>
+<p>We could have also fit <span class="math inline">\(k\)</span>-nearest neighbors models to these three datasets.</p>
+<p><img src="bvt_files/figure-html/unnamed-chunk-12-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>Here we see that when <span class="math inline">\(k = 100\)</span> we have a biased model with very low variance. (It’s actually the same as the 0 predictor linear model.) When <span class="math inline">\(k = 5\)</span>, we again have a highly variable model.</p>
+<p>These two sets of plots reinforce our intuition about the bias-variance tradeoff. Complex models (ninth degree polynomial and <span class="math inline">\(k\)</span> = 5) are highly variable, and often unbiased. Simple models (zero predictor linear model and <span class="math inline">\(k = 100\)</span>) are very biased, but have extremely low variance.</p>
+<p>We will now complete a simulation study to understand the relationship between the bias, variance, and mean squared error for the estimates for <span class="math inline">\(f(x)\)</span> given by these four models at the point <span class="math inline">\(x = 0.90\)</span>. We use simulation to complete this task, as performing the analytical calculations would prove to be rather tedious and difficult.</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb143-2" data-line-number="2">n_sims =<span class="st"> </span><span class="dv">250</span></a>
+<a class="sourceLine" id="cb143-3" data-line-number="3">n_models =<span class="st"> </span><span class="dv">4</span></a>
+<a class="sourceLine" id="cb143-4" data-line-number="4">x =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="fl">0.90</span>) <span class="co"># fixed point at which we make predictions</span></a>
+<a class="sourceLine" id="cb143-5" data-line-number="5">predictions =<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow =</span> n_sims, <span class="dt">ncol =</span> n_models)</a></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" data-line-number="1"><span class="cf">for</span> (sim <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n_sims) {</a>
+<a class="sourceLine" id="cb144-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb144-3" data-line-number="3">  <span class="co"># simulate new, random, training data</span></a>
+<a class="sourceLine" id="cb144-4" data-line-number="4">  <span class="co"># this is the only random portion of the bias, var, and mse calculations</span></a>
+<a class="sourceLine" id="cb144-5" data-line-number="5">  <span class="co"># this allows us to calculate the expectation over D</span></a>
+<a class="sourceLine" id="cb144-6" data-line-number="6">  sim_data =<span class="st"> </span><span class="kw">gen_sim_data</span>(f)</a>
+<a class="sourceLine" id="cb144-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb144-8" data-line-number="8">  <span class="co"># fit models</span></a>
+<a class="sourceLine" id="cb144-9" data-line-number="9">  fit_<span class="dv">0</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,                   <span class="dt">data =</span> sim_data)</a>
+<a class="sourceLine" id="cb144-10" data-line-number="10">  fit_<span class="dv">1</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">1</span>), <span class="dt">data =</span> sim_data)</a>
+<a class="sourceLine" id="cb144-11" data-line-number="11">  fit_<span class="dv">2</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">2</span>), <span class="dt">data =</span> sim_data)</a>
+<a class="sourceLine" id="cb144-12" data-line-number="12">  fit_<span class="dv">9</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">9</span>), <span class="dt">data =</span> sim_data)</a>
+<a class="sourceLine" id="cb144-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb144-14" data-line-number="14">  <span class="co"># get predictions</span></a>
+<a class="sourceLine" id="cb144-15" data-line-number="15">  predictions[sim, <span class="dv">1</span>] =<span class="st"> </span><span class="kw">predict</span>(fit_<span class="dv">0</span>, x)</a>
+<a class="sourceLine" id="cb144-16" data-line-number="16">  predictions[sim, <span class="dv">2</span>] =<span class="st"> </span><span class="kw">predict</span>(fit_<span class="dv">1</span>, x)</a>
+<a class="sourceLine" id="cb144-17" data-line-number="17">  predictions[sim, <span class="dv">3</span>] =<span class="st"> </span><span class="kw">predict</span>(fit_<span class="dv">2</span>, x)</a>
+<a class="sourceLine" id="cb144-18" data-line-number="18">  predictions[sim, <span class="dv">4</span>] =<span class="st"> </span><span class="kw">predict</span>(fit_<span class="dv">9</span>, x)</a>
+<a class="sourceLine" id="cb144-19" data-line-number="19">}</a></code></pre></div>
+<p>Note that this is one of many ways we could have accomplished this task using <code>R</code>. For example we could have used a combination of <code>replicate()</code> and <code>*apply()</code> functions. Alternatively, we could have used a <a href="https://www.tidyverse.org/"><code>tidyverse</code></a> approach, which likely would have used some combination of <a href="http://dplyr.tidyverse.org/"><code>dplyr</code></a>, <a href="http://tidyr.tidyverse.org/"><code>tidyr</code></a>, and <a href="http://purrr.tidyverse.org/"><code>purrr</code></a>.</p>
+<p>Our approach, which would be considered a <code>base</code> <code>R</code> approach, was chosen to make it as clear as possible what is being done. The <code>tidyverse</code> approach is rapidly gaining popularity in the <code>R</code> community, but might make it more difficult to see what is happening here, unless you are already familiar with that approach.</p>
+<p>Also of note, while it may seem like the output stored in <code>predictions</code> would meet the definition of <a href="http://vita.had.co.nz/papers/tidy-data.html">tidy data</a> given by <a href="http://hadley.nz/">Hadley Wickham</a> since each row represents a simulation, it actually falls slightly short. For our data to be tidy, a row should store the simulation number, the model, and the resulting prediction. We’ve actually already aggregated one level above this. Our observational unit is a simulation (with four predictions), but for tidy data, it should be a single prediction. This may be revised by the author later when there are <a href="https://twitter.com/hspter/status/748260288143589377">more examples of how to do this from the <code>R</code> community</a>.</p>
+<p><img src="bvt_files/figure-html/unnamed-chunk-16-1.png" width="864" style="display: block; margin: auto;" /></p>
+<p>The above plot shows the predictions for each of the 250 simulations of each of the four models of different polynomial degrees. The truth, <span class="math inline">\(f(x = 0.90) = (0.9)^2 = 0.81\)</span>, is given by the solid black horizontal line.</p>
+<p>Two things are immediately clear:</p>
+<ul>
+<li>As complexity <em>increases</em>, <strong>bias decreases</strong>. (The mean of a model’s predictions is closer to the truth.)</li>
+<li>As complexity <em>increases</em>, <strong>variance increases</strong>. (The variance about the mean of a model’s predictions increases.)</li>
+</ul>
+<p>The goal of this simulation study is to show that the following holds true for each of the four models.</p>
+<p><span class="math display">\[
+\text{MSE}\left(f(0.90), \hat{f}_k(0.90)\right) = 
+\underbrace{\left(\mathbb{E} \left[ \hat{f}_k(0.90) \right] - f(0.90) \right)^2}_{\text{bias}^2 \left(\hat{f}_k(0.90) \right)} +
+\underbrace{\mathbb{E} \left[ \left( \hat{f}_k(0.90) - \mathbb{E} \left[ \hat{f}_k(0.90) \right] \right)^2 \right]}_{\text{var} \left(\hat{f}_k(0.90) \right)}
+\]</span></p>
+<p>We’ll use the empirical results of our simulations to estimate these quantities. (Yes, we’re using estimation to justify facts about estimation.) Note that we’ve actually used a rather small number of simulations. In practice we should use more, but for the sake of computation time, we’ve performed just enough simulations to obtain the desired results. (Since we’re estimating estimation, the bigger the sample size, the better.)</p>
+<p>To estimate the mean squared error of our predictions, we’ll use</p>
+<p><span class="math display">\[
+\widehat{\text{MSE}}\left(f(0.90), \hat{f}_k(0.90)\right) = \frac{1}{n_{\texttt{sims}}}\sum_{i = 1}^{n_{\texttt{sims}}} \left(f(0.90) - \hat{f}_k^{[i]}(0.90) \right)^2
+\]</span></p>
+<p>where <span class="math inline">\(\hat{f}_k^{[i]}(0.90)\)</span> is the estimate of <span class="math inline">\(f(0.90)\)</span> using the <span class="math inline">\(i\)</span>-th from the polynomial degree <span class="math inline">\(k\)</span> model.</p>
+<p>We also write an accompanying <code>R</code> function.</p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" data-line-number="1">get_mse =<span class="st"> </span><span class="cf">function</span>(truth, estimate) {</a>
+<a class="sourceLine" id="cb145-2" data-line-number="2">  <span class="kw">mean</span>((estimate <span class="op">-</span><span class="st"> </span>truth) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb145-3" data-line-number="3">}</a></code></pre></div>
+<p>Similarly, for the bias of our predictions we use,</p>
+<p><span class="math display">\[
+\widehat{\text{bias}} \left(\hat{f}(0.90) \right)  = \frac{1}{n_{\texttt{sims}}}\sum_{i = 1}^{n_{\texttt{sims}}} \left(\hat{f}_k^{[i]}(0.90) \right) - f(0.90)
+\]</span></p>
+<p>And again, we write an accompanying <code>R</code> function.</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" data-line-number="1">get_bias =<span class="st"> </span><span class="cf">function</span>(estimate, truth) {</a>
+<a class="sourceLine" id="cb146-2" data-line-number="2">  <span class="kw">mean</span>(estimate) <span class="op">-</span><span class="st"> </span>truth</a>
+<a class="sourceLine" id="cb146-3" data-line-number="3">}</a></code></pre></div>
+<p>Lastly, for the variance of our predictions we have</p>
+<p><span class="math display">\[
+\widehat{\text{var}} \left(\hat{f}(0.90) \right) = \frac{1}{n_{\texttt{sims}}}\sum_{i = 1}^{n_{\texttt{sims}}} \left(\hat{f}_k^{[i]}(0.90) - \frac{1}{n_{\texttt{sims}}}\sum_{i = 1}^{n_{\texttt{sims}}}\hat{f}_k^{[i]}(0.90) \right)^2 
+\]</span></p>
+<p>While there is already <code>R</code> function for variance, the following is more appropriate in this situation.</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb147-1" data-line-number="1">get_var =<span class="st"> </span><span class="cf">function</span>(estimate) {</a>
+<a class="sourceLine" id="cb147-2" data-line-number="2">  <span class="kw">mean</span>((estimate <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(estimate)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb147-3" data-line-number="3">}</a></code></pre></div>
+<p>To quickly obtain these results for each of the four models, we utilize the <code>apply()</code> function.</p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" data-line-number="1">bias =<span class="st"> </span><span class="kw">apply</span>(predictions, <span class="dv">2</span>, get_bias, <span class="dt">truth =</span> <span class="kw">f</span>(<span class="dt">x =</span> <span class="fl">0.90</span>))</a>
+<a class="sourceLine" id="cb148-2" data-line-number="2">variance =<span class="st"> </span><span class="kw">apply</span>(predictions, <span class="dv">2</span>, get_var)</a>
+<a class="sourceLine" id="cb148-3" data-line-number="3">mse =<span class="st"> </span><span class="kw">apply</span>(predictions, <span class="dv">2</span>, get_mse, <span class="dt">truth =</span> <span class="kw">f</span>(<span class="dt">x =</span> <span class="fl">0.90</span>))</a></code></pre></div>
+<p>We summarize these results in the following table.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Degree</th>
+<th align="left">Mean Squared Error</th>
+<th align="left">Bias Squared</th>
+<th align="left">Variance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">0</td>
+<td align="left">0.22643</td>
+<td align="left">0.22476</td>
+<td align="left">0.00167</td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="left">0.00829</td>
+<td align="left">0.00508</td>
+<td align="left">0.00322</td>
+</tr>
+<tr class="odd">
+<td align="left">2</td>
+<td align="left">0.00387</td>
+<td align="left">0.00005</td>
+<td align="left">0.00381</td>
+</tr>
+<tr class="even">
+<td align="left">9</td>
+<td align="left">0.01019</td>
+<td align="left">0.00002</td>
+<td align="left">0.01017</td>
+</tr>
+</tbody>
+</table>
+<p>A number of things to notice here:</p>
+<ul>
+<li>We use squared bias in this table. Since bias can be positive or negative, squared bias is more useful for observing the trend as complexity increases.</li>
+<li>The squared bias trend which we see here is <strong>decreasing</strong> as complexity increases, which we expect to see in general.</li>
+<li>The exact opposite is true of variance. As model complexity increases, variance <strong>increases</strong>.</li>
+<li>The mean squared error, which is a function of the bias and variance, decreases, then increases. This is a result of the bias-variance tradeoff. We can decrease bias, by increasing variance. Or, we can decrease variance by increasing bias. By striking the correct balance, we can find a good mean squared error!</li>
+</ul>
+<p>We can check for these trends with the <code>diff()</code> function in <code>R</code>.</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" data-line-number="1"><span class="kw">all</span>(<span class="kw">diff</span>(bias <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>)</a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" data-line-number="1"><span class="kw">all</span>(<span class="kw">diff</span>(variance) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" data-line-number="1"><span class="kw">diff</span>(mse) <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span> </a></code></pre></div>
+<pre><code>##     1     2     9 
+##  TRUE  TRUE FALSE</code></pre>
+<p>The models with polynomial degrees 2 and 9 are both essentially unbiased. We see some bias here as a result of using simulation. If we increased the number of simulations, we would see both biases go down. Since they are both unbiased, the model with degree 2 outperforms the model with degree 9 due to its smaller variance.</p>
+<p>Models with degree 0 and 1 are biased because they assume the wrong form of the regression function. While the degree 9 model does this as well, it does include all the necessary polynomial degrees.</p>
+<p><span class="math display">\[
+\hat{f}_9(x) = \hat{\beta}_0 + \hat{\beta}_1 x + \hat{\beta}_2 x^2 + \ldots + \hat{\beta}_9 x^9
+\]</span></p>
+<p>Then, since least squares estimation is unbiased, importantly,</p>
+<p><span class="math display">\[
+\mathbb{E}\left[\hat{\beta}_d\right] = \beta_d = 0
+\]</span></p>
+<p>for <span class="math inline">\(d = 3, 4, \ldots 9\)</span>, we have</p>
+<p><span class="math display">\[
+\mathbb{E}\left[\hat{f}_9(x)\right] = \beta_0 + \beta_1 x + \beta_2 x^2
+\]</span></p>
+<p>Now we can finally verify the bias-variance decomposition.</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" data-line-number="1">bias <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>variance <span class="op">==</span><span class="st"> </span>mse</a></code></pre></div>
+<pre><code>##     0     1     2     9 
+## FALSE FALSE FALSE  TRUE</code></pre>
+<p>But wait, this says it isn’t true, except for the degree 9 model? It turns out, this is simply a computational issue. If we allow for some very small error tolerance, we see that the bias-variance decomposition is indeed true for predictions from these for models.</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" data-line-number="1"><span class="kw">all.equal</span>(bias <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>variance, mse)</a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>See <code>?all.equal()</code> for details.</p>
+<p>So far, we’ve focused our efforts on looking at the mean squared error of estimating <span class="math inline">\(f(0.90)\)</span> using <span class="math inline">\(\hat{f}(0.90)\)</span>. We could also look at the expected prediction error of using <span class="math inline">\(\hat{f}(X)\)</span> when <span class="math inline">\(X = 0.90\)</span> to estimate <span class="math inline">\(Y\)</span>.</p>
+<p><span class="math display">\[
+\text{EPE}\left(Y, \hat{f}_k(0.90)\right) = 
+\mathbb{E}_{Y \mid X, \mathcal{D}} \left[  \left(Y - \hat{f}_k(X) \right)^2 \mid X = 0.90 \right]
+\]</span></p>
+<p>We can estimate this quantity for each of the four models using the simulation study we already performed.</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" data-line-number="1">get_epe =<span class="st"> </span><span class="cf">function</span>(realized, estimate) {</a>
+<a class="sourceLine" id="cb159-2" data-line-number="2">  <span class="kw">mean</span>((realized <span class="op">-</span><span class="st"> </span>estimate) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb159-3" data-line-number="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" data-line-number="1">y =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(predictions), <span class="dt">mean =</span> <span class="kw">f</span>(<span class="dt">x =</span> <span class="fl">0.9</span>), <span class="dt">sd =</span> <span class="fl">0.3</span>)</a>
+<a class="sourceLine" id="cb160-2" data-line-number="2">epe =<span class="st"> </span><span class="kw">apply</span>(predictions, <span class="dv">2</span>, get_epe, <span class="dt">realized =</span> y)</a>
+<a class="sourceLine" id="cb160-3" data-line-number="3">epe</a></code></pre></div>
+<pre><code>##         0         1         2         9 
+## 0.3180470 0.1104055 0.1095955 0.1205570</code></pre>
+<p>What about the unconditional expected prediction error. That is, for any <span class="math inline">\(X\)</span>, not just <span class="math inline">\(0.90\)</span>. Specifically, the expected prediction error of estimating <span class="math inline">\(Y\)</span> using <span class="math inline">\(\hat{f}(X)\)</span>. The following (new) simulation study provides an estimate of</p>
+<p><span class="math display">\[
+\text{EPE}\left(Y, \hat{f}_k(X)\right) = \mathbb{E}_{X, Y, \mathcal{D}} \left[  \left( Y - \hat{f}_k(X) \right)^2 \right]
+\]</span></p>
+<p>for the quadratic model, that is <span class="math inline">\(k = 2\)</span> as we have defined <span class="math inline">\(k\)</span>.</p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb162-2" data-line-number="2">n_sims =<span class="st"> </span><span class="dv">1000</span></a>
+<a class="sourceLine" id="cb162-3" data-line-number="3">X =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> n_sims, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb162-4" data-line-number="4">Y =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> n_sims, <span class="dt">mean =</span> <span class="kw">f</span>(X), <span class="dt">sd =</span> <span class="fl">0.3</span>)</a>
+<a class="sourceLine" id="cb162-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb162-6" data-line-number="6">f_hat_X =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">length</span>(X))</a>
+<a class="sourceLine" id="cb162-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb162-8" data-line-number="8"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(X)) {</a>
+<a class="sourceLine" id="cb162-9" data-line-number="9">  sim_data =<span class="st"> </span><span class="kw">gen_sim_data</span>(f)</a>
+<a class="sourceLine" id="cb162-10" data-line-number="10">  fit_<span class="dv">2</span> =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dt">degree =</span> <span class="dv">2</span>), <span class="dt">data =</span> sim_data)</a>
+<a class="sourceLine" id="cb162-11" data-line-number="11">  f_hat_X[i] =<span class="st"> </span><span class="kw">predict</span>(fit_<span class="dv">2</span>, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">x =</span> X[i]))</a>
+<a class="sourceLine" id="cb162-12" data-line-number="12">}</a>
+<a class="sourceLine" id="cb162-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb162-14" data-line-number="14"><span class="kw">mean</span>((Y <span class="op">-</span><span class="st"> </span>f_hat_X) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</a></code></pre></div>
+<pre><code>## [1] 0.09997319</code></pre>
+<p>Note that in practice, we should use many more simulations in this study.</p>
+</div>
+<div id="estimating-expected-prediction-error" class="section level2">
+<h2><span class="header-section-number">4.4</span> Estimating Expected Prediction Error</h2>
+<p>While previously, we only decomposed the expected prediction error conditionally, a similar argument holds unconditionally.</p>
+<p>Assuming</p>
+<p><span class="math display">\[
+\mathbb{V}[Y \mid X = x] = \sigma ^ 2.
+\]</span></p>
+<p>we have</p>
+<p><span class="math display">\[
+\text{EPE}\left(Y, \hat{f}(X)\right) = 
+\mathbb{E}_{X, Y, \mathcal{D}} \left[  (Y - \hat{f}(X))^2 \right] = 
+\underbrace{\mathbb{E}_{X} \left[\text{bias}^2\left(\hat{f}(X)\right)\right] + \mathbb{E}_{X} \left[\text{var}\left(\hat{f}(X)\right)\right]}_\textrm{reducible error} + \sigma^2
+\]</span></p>
+<p>Lastly, we note that if</p>
+<p><span class="math display">\[
+\mathcal{D} = \mathcal{D}_{\texttt{trn}} \cup \mathcal{D}_{\texttt{tst}} = (x_i, y_i) \in \mathbb{R}^p \times \mathbb{R}, \ i = 1, 2, \ldots n
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+\mathcal{D}_{\texttt{trn}} = (x_i, y_i) \in \mathbb{R}^p \times \mathbb{R}, \ i \in \texttt{trn}
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\mathcal{D}_{\texttt{tst}} = (x_i, y_i) \in \mathbb{R}^p \times \mathbb{R}, \ i \in \texttt{tst}
+\]</span></p>
+<p>Then, if we use <span class="math inline">\(\mathcal{D}_{\texttt{trn}}\)</span> to fit (train) a model, we can use the test mean squared error</p>
+<p><span class="math display">\[
+\sum_{i \in \texttt{tst}}\left(y_i - \hat{f}(x_i)\right) ^ 2
+\]</span></p>
+<p>as an estimate of</p>
+<p><span class="math display">\[
+\mathbb{E}_{X, Y, \mathcal{D}} \left[  (Y - \hat{f}(X))^2 \right]
+\]</span></p>
+<p>the expected prediction error. (In practice we prefer RMSE to MSE for comparing models and reporting because of the units.)</p>
+<p>How good is this estimate? Well, if <span class="math inline">\(\mathcal{D}\)</span> is a random sample from <span class="math inline">\((X, Y)\)</span>, and <span class="math inline">\(\texttt{tst}\)</span> are randomly sampled observations randomly sampled from <span class="math inline">\(i = 1, 2, \ldots, n\)</span>, then it is a reasonable estimate. However, it is rather variable due to the randomness of selecting the observations for the test set. How variable? It turns out, pretty variable. While it’s a justified estimate, eventually we’ll introduce cross-validation as a procedure better suited to performing this estimation to select a model.</p>
+<hr />
+</div>
+<div id="source-3" class="section level2">
+<h2><span class="header-section-number">4.5</span> Source</h2>
+<ul>
+<li><code>R</code> Markdown: <a href="bvt.Rmd"><code>bvt.Rmd</code></a></li>
+</ul>
+<hr />
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="nonparametric-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="regression-overview.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/daviddalpiaz/bsl/edit/master/bvt.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

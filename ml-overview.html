@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>D Probability | Basics of Statistical Learning</title>
-  <meta name="description" content="D Probability | Basics of Statistical Learning" />
+  <title>Chapter 1 Machine Learning Overview | Basics of Statistical Learning</title>
+  <meta name="description" content="Chapter 1 Machine Learning Overview | Basics of Statistical Learning" />
   <meta name="generator" content="bookdown 0.19.1 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="D Probability | Basics of Statistical Learning" />
+  <meta property="og:title" content="Chapter 1 Machine Learning Overview | Basics of Statistical Learning" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://statisticallearning.org/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="daviddalpiaz/bsl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="D Probability | Basics of Statistical Learning" />
+  <meta name="twitter:title" content="Chapter 1 Machine Learning Overview | Basics of Statistical Learning" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="computing.html"/>
-<link rel="next" href="statistics.html"/>
+<link rel="prev" href="index.html"/>
+<link rel="next" href="linear-regression.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -367,291 +367,735 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="probability" class="section level1">
-<h1><span class="header-section-number">D</span> Probability</h1>
+<div id="machine-learning-overview" class="section level1">
+<h1><span class="header-section-number">Chapter 1</span> Machine Learning Overview</h1>
 <hr />
-<p>STAT 432 is not a course about probability. STAT 432 is a course that uses probability.</p>
-<p>We give a very brief review of some necessary probability concepts. As the treatment is less than complete, a list of references is given at the end of the chapter. For example, we ignore the usual recap of basic set theory and omit proofs and examples. Reading the information below will likely be unsatisfying. Instead, we suggest that you skip it, engage with the relevant quizzes, then return as needed for reference.</p>
+<p>STAT 432 is a course about machine learning? Let’s try to define machine learning.</p>
 <hr />
-<div id="reading-16" class="section level2">
-<h2><span class="header-section-number">D.1</span> Reading</h2>
+<div id="reading" class="section level2">
+<h2><span class="header-section-number">1.1</span> Reading</h2>
 <ul>
-<li><strong>Required:</strong> <a href="http://www.stat.umn.edu/geyer/old/5101/rlook.html">Probability Distributions in R</a></li>
-<li><strong>Reference:</strong> <a href="http://stat400.org">STAT 400 @ UIUC: Notes and Homework</a></li>
-<li><strong>Reference:</strong> <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010/video-lectures/">MIT 6.041: Video Lectures</a></li>
-<li><strong>Reference:</strong> <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010/lecture-notes/">MIT 6.041: Lecture Notes</a></li>
-<li><strong>Reference:</strong> <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010/readings/">MIT 6.041: Readings</a></li>
-<li><strong>Reference:</strong> <a href="https://online.stat.psu.edu/stat414/node/287/">STAT 414 @ PSU: Notes</a></li>
-</ul>
-<hr />
-</div>
-<div id="probability-models" class="section level2">
-<h2><span class="header-section-number">D.2</span> Probability Models</h2>
-<p>When discussing probability models, we speak of random <strong>experiments</strong> that produce one of a number of possible <strong>outcomes</strong>.</p>
-<p>A <strong>probability model</strong> that describes the uncertainty of an experiment consists of two elements:</p>
+<li><strong>Required:</strong> <a href="https://faculty.marshall.usc.edu/gareth-james/ISL/ISLR%20Seventh%20Printing.pdf">ISL Chapter 1</a></li>
+<li><strong>Required:</strong> <a href="https://faculty.marshall.usc.edu/gareth-james/ISL/ISLR%20Seventh%20Printing.pdf">ISL Chapter 2</a>
 <ul>
-<li>The <strong>sample space</strong>, often denoted as <span class="math inline">\(\Omega\)</span>, which is a set that contains all possible outcomes.</li>
-<li>A <strong>probability function</strong> that assigns to an event <span class="math inline">\(A\)</span> a nonnegative number, <span class="math inline">\(P[A]\)</span>, that represents how likely it is that event <span class="math inline">\(A\)</span> occurs as a result of the experiment.</li>
-</ul>
-<p>We call <span class="math inline">\(P[A]\)</span> the <strong>probability</strong> of event <span class="math inline">\(A\)</span>. An <strong>event</strong> <span class="math inline">\(A\)</span> could be any subset of the sample space, not necessarily a single possible outcome. The probability law must follow a number of rules, which are the result of a set of axioms that we introduce now.</p>
-<hr />
-</div>
-<div id="probability-axioms" class="section level2">
-<h2><span class="header-section-number">D.3</span> Probability Axioms</h2>
-<p>Given a sample space <span class="math inline">\(\Omega\)</span> for a particular experiment, the <strong>probability function</strong> associated with the experiment must satisfy the following axioms.</p>
-<ol style="list-style-type: decimal">
-<li><em>Nonnegativity</em>: <span class="math inline">\(P[A] \geq 0\)</span> for any event <span class="math inline">\(A \subset \Omega\)</span>.</li>
-<li><em>Normalization</em>: <span class="math inline">\(P[\Omega] = 1\)</span>. That is, the probability of the entire space is 1.</li>
-<li><em>Additivity</em>: For mutually exclusive events <span class="math inline">\(E_1, E_2, \ldots\)</span></li>
-</ol>
-<p><span class="math display">\[
-P\left[\bigcup_{i = 1}^{\infty} E_i\right] = \sum_{i = 1}^{\infty} P[E_i]
-\]</span></p>
-<p>Using these axioms, many additional probability rules can easily be derived.</p>
-<hr />
-</div>
-<div id="probability-rules" class="section level2">
-<h2><span class="header-section-number">D.4</span> Probability Rules</h2>
-<p>Given an event <span class="math inline">\(A\)</span>, and its complement, <span class="math inline">\(A^c\)</span>, that is, the outcomes in <span class="math inline">\(\Omega\)</span> which are not in <span class="math inline">\(A\)</span>, we have the <strong>complement rule</strong>:</p>
-<p><span class="math display">\[
-P[A^c] = 1 - P[A]
-\]</span></p>
-<p>In general, for two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, we have the <strong>addition rule</strong>:</p>
-<p><span class="math display">\[
-P[A \cup B] = P[A] + P[B] - P[A \cap B]
-\]</span></p>
-<p>If <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are also <em>disjoint</em>, then we have:</p>
-<p><span class="math display">\[
-P[A \cup B] = P[A] + P[B]
-\]</span></p>
-<p>If we have <span class="math inline">\(n\)</span> mutually exclusive events, <span class="math inline">\(E_1, E_2, \ldots E_n\)</span>, then we have:</p>
-<p><span class="math display">\[
-P\left[\textstyle\bigcup_{i = 1}^{n} E_i\right] = \sum_{i = 1}^{n} P[E_i]
-\]</span></p>
-<p>Often, we would like to understand the probability of an event <span class="math inline">\(A\)</span>, given some information about the outcome of event <span class="math inline">\(B\)</span>. In that case, we have the <strong>conditional probability rule</strong> provided <span class="math inline">\(P[B] &gt; 0\)</span>.</p>
-<p><span class="math display">\[
-P[A \mid B] = \frac{P[A \cap B]}{P[B]}
-\]</span></p>
-<p>Rearranging the conditional probability rule, we obtain the <strong>multiplication rule</strong>:</p>
-<p><span class="math display">\[
-P[A \cap B] = P[B] \cdot P[A \mid B] \cdot 
-\]</span></p>
-<p>For a number of events <span class="math inline">\(E_1, E_2, \ldots E_n\)</span>, the multiplication rule can be expanded into the <strong>chain rule</strong>:</p>
-<p><span class="math display">\[
-P\left[\textstyle\bigcap_{i = 1}^{n} E_i\right] = P[E_1] \cdot P[E_2 \mid E_1] \cdot P[E_3 \mid E_1 \cap E_2] \cdots P\left[E_n \mid \textstyle\bigcap_{i = 1}^{n - 1} E_i\right] 
-\]</span></p>
-<p>Define a <strong>partition</strong> of a sample space <span class="math inline">\(\Omega\)</span> to be a set of disjoint events <span class="math inline">\(A_1, A_2, \ldots, A_n\)</span> whose union is the sample space <span class="math inline">\(\Omega\)</span>. That is</p>
-<p><span class="math display">\[
-A_i \cap A_j = \emptyset
-\]</span></p>
-<p>for all <span class="math inline">\(i \neq j\)</span>, and</p>
-<p><span class="math display">\[
-\bigcup_{i = 1}^{n} A_i = \Omega.
-\]</span></p>
-<p>Now, let <span class="math inline">\(A_1, A_2, \ldots, A_n\)</span> form a partition of the sample space where <span class="math inline">\(P[A_i] &gt; 0\)</span> for all <span class="math inline">\(i\)</span>. Then for any event <span class="math inline">\(B\)</span> with <span class="math inline">\(P[B] &gt; 0\)</span> we have <strong>Bayes’ Theorem</strong>:</p>
-<p><span class="math display">\[
-P[A_i | B] = \frac{P[A_i]P[B | A_i]}{P[B]} = \frac{P[A_i]P[B | A_i]}{\sum_{i = 1}^{n}P[A_i]P[B | A_i]}
-\]</span></p>
-<p>The denominator of the latter equality is often called the <strong>law of total probability</strong>:</p>
-<p><span class="math display">\[
-P[B] = \sum_{i = 1}^{n}P[A_i]P[B | A_i]
-\]</span></p>
-<p>Note: When working with <a href="https://en.m.wikipedia.org/wiki/Bayes&#39;_theorem">Bayes’ Theorem</a> it is often useful to draw a <a href="https://en.m.wikipedia.org/wiki/Tree_diagram_(probability_theory)">tree diagram</a>.</p>
-<p>Two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are said to be <strong>independent</strong> if they satisfy</p>
-<p><span class="math display">\[
-P[A \cap B] = P[A] \cdot P[B]
-\]</span></p>
-<p>This becomes the new multiplication rule for independent events.</p>
-<p>A collection of events <span class="math inline">\(E_1, E_2, \ldots E_n\)</span> is said to be independent if</p>
-<p><span class="math display">\[
-P\left[\bigcap_{i \in S} E_i \right] = \prod_{i \in S}P[E_i]
-\]</span></p>
-<p>for every subset <span class="math inline">\(S\)</span> of <span class="math inline">\(\{1, 2, \ldots n\}\)</span>.</p>
-<p>If this is the case, then the chain rule is greatly simplified to:</p>
-<p><span class="math display">\[
-P\left[\textstyle\bigcap_{i = 1}^{n} E_i\right] = \prod_{i=1}^{n}P[E_i]
-\]</span></p>
-<hr />
-</div>
-<div id="random-variables" class="section level2">
-<h2><span class="header-section-number">D.5</span> Random Variables</h2>
-<p>A <strong>random variable</strong> is simply a <em>function</em> which maps outcomes in the sample space to real numbers.</p>
-<div id="distributions" class="section level3">
-<h3><span class="header-section-number">D.5.1</span> Distributions</h3>
-<p>We often talk about the <strong>distribution</strong> of a random variable, which can be thought of as:</p>
-<p><span class="math display">\[
-\text{distribution} = \text{list of possible} \textbf{ values} + \text{associated} \textbf{ probabilities}
-\]</span></p>
-<p>This is not a strict mathematical definition, but is useful for conveying the idea.</p>
-<p>If the possible values of a random variables are <em>discrete</em>, it is called a <em>discrete random variable</em>. If the possible values of a random variables are <em>continuous</em>, it is called a <em>continuous random variable</em>.</p>
-</div>
-<div id="discrete-random-variables" class="section level3">
-<h3><span class="header-section-number">D.5.2</span> Discrete Random Variables</h3>
-<p>The distribution of a discrete random variable <span class="math inline">\(X\)</span> is most often specified by a list of possible values and a probability <strong>mass</strong> function, <span class="math inline">\(p(x)\)</span>. The mass function directly gives probabilities, that is,</p>
-<p><span class="math display">\[
-p(x) = p_X(x) = P[X = x].
-\]</span></p>
-<p>Note we almost always drop the subscript from the more correct <span class="math inline">\(p_X(x)\)</span> and simply refer to <span class="math inline">\(p(x)\)</span>. The relevant random variable is discerned from context</p>
-<p>The most common example of a discrete random variable is a <strong>binomial</strong> random variable. The mass function of a binomial random variable <span class="math inline">\(X\)</span>, is given by</p>
-<p><span class="math display">\[
-p(x | n, p) = {n \choose x} p^x(1 - p)^{n - x}, \ \ \ x = 0, 1, \ldots, n, \ n \in \mathbb{N}, \ 0 &lt; p &lt; 1.
-\]</span></p>
-<p>This line conveys a large amount of information.</p>
-<ul>
-<li>The function <span class="math inline">\(p(x | n, p)\)</span> is the mass function. It is a function of <span class="math inline">\(x\)</span>, the possible values of the random variable <span class="math inline">\(X\)</span>. It is conditional on the <strong>parameters</strong> <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span>. Different values of these parameters specify different binomial distributions.</li>
-<li><span class="math inline">\(x = 0, 1, \ldots, n\)</span> indicates the <strong>sample space</strong>, that is, the possible values of the random variable.</li>
-<li><span class="math inline">\(n \in \mathbb{N}\)</span> and <span class="math inline">\(0 &lt; p &lt; 1\)</span> specify the <strong>parameter spaces</strong>. These are the possible values of the parameters that give a valid binomial distribution.</li>
-</ul>
-<p>Often all of this information is simply encoded by writing</p>
-<p><span class="math display">\[
-X \sim \text{bin}(n, p).
-\]</span></p>
-</div>
-<div id="continuous-random-variables" class="section level3">
-<h3><span class="header-section-number">D.5.3</span> Continuous Random Variables</h3>
-<p>The distribution of a continuous random variable <span class="math inline">\(X\)</span> is most often specified by a set of possible values and a probability <strong>density</strong> function, <span class="math inline">\(f(x)\)</span>. (A cumulative density or moment generating function would also suffice.)</p>
-<p>The probability of the event <span class="math inline">\(a &lt; X &lt; b\)</span> is calculated as</p>
-<p><span class="math display">\[
-P[a &lt; X &lt; b] = \int_{a}^{b} f(x)dx.
-\]</span></p>
-<p>Note that densities are <strong>not</strong> probabilities.</p>
-<p>The most common example of a continuous random variable is a <strong>normal</strong> random variable. The density of a normal random variable <span class="math inline">\(X\)</span>, is given by</p>
-<p><span class="math display">\[
-f(x | \mu, \sigma^2) = \frac{1}{\sigma\sqrt{2\pi}} \cdot \exp\left[\frac{-1}{2} \left(\frac{x - \mu}{\sigma}\right)^2 \right],  \ \ \ -\infty &lt; x &lt; \infty, \ -\infty &lt; \mu &lt; \infty, \ \sigma &gt; 0.
-\]</span></p>
-<ul>
-<li>The function <span class="math inline">\(f(x | \mu, \sigma^2)\)</span> is the density function. It is a function of <span class="math inline">\(x\)</span>, the possible values of the random variable <span class="math inline">\(X\)</span>. It is conditional on the <strong>parameters</strong> <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>. Different values of these parameters specify different normal distributions.</li>
-<li><span class="math inline">\(-\infty &lt; x &lt; \infty\)</span> indicates the sample space. In this case, the random variable may take any value on the real line.</li>
-<li><span class="math inline">\(-\infty &lt; \mu &lt; \infty\)</span> and <span class="math inline">\(\sigma &gt; 0\)</span> specify the parameter space. These are the possible values of the parameters that give a valid normal distribution.</li>
-</ul>
-<p>Often all of this information is simply encoded by writing</p>
-<p><span class="math display">\[
-X \sim N(\mu, \sigma^2)
-\]</span></p>
-</div>
-<div id="distributions-in-r" class="section level3">
-<h3><span class="header-section-number">D.5.4</span> Distributions in R</h3>
-<p>R is an excellent, if not best, tool for performing probability distribution calculations. For a large number of distributions, it has four built in functions:</p>
-<ul>
-<li><code>d*(x, ...)</code> returns the PDF at <span class="math inline">\(x\)</span> (for continuous distributions) or the PMG at <span class="math inline">\(x\)</span> (for discrete distributions)</li>
-<li><code>p*(q, ...)</code> returns the CDF at quantile <span class="math inline">\(q\)</span>, that is <span class="math inline">\(P[X \leq q]\)</span></li>
-<li><code>q*(p, ...)</code> returns <span class="math inline">\(c\)</span> such that <span class="math inline">\(P[x \leq c] = p\)</span></li>
-<li><code>r*(n, ...)</code> returns <span class="math inline">\(n\)</span> randomly generated observations</li>
-</ul>
-<p>The <code>*</code> can be any of the <a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Distributions.html">disributions built in to R</a>. The <code>...</code> represents additional arguments, including the parameters of the various distributions.</p>
-</div>
-<div id="several-random-variables" class="section level3">
-<h3><span class="header-section-number">D.5.5</span> Several Random Variables</h3>
-<p>Consider two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. We say they are independent if</p>
-<p><span class="math display">\[
-f(x, y) = f(x) \cdot f(y)
-\]</span></p>
-<p>for all <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>. Here <span class="math inline">\(f(x, y)\)</span> is the <strong>joint</strong> density (mass) function of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. We call <span class="math inline">\(f(x)\)</span> the <strong>marginal</strong> density (mass) function of <span class="math inline">\(X\)</span>. Then <span class="math inline">\(f(y)\)</span> the marginal density (mass) function of <span class="math inline">\(Y\)</span>. The joint density (mass) function <span class="math inline">\(f(x, y)\)</span> together with the possible <span class="math inline">\((x, y)\)</span> values specify the joint distribution of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</p>
-<p>Similar notions exist for more than two variables.</p>
-<hr />
-</div>
-</div>
-<div id="expectations" class="section level2">
-<h2><span class="header-section-number">D.6</span> Expectations</h2>
-<p>For discrete random variables, we define the <strong>expectation</strong> of the function of a random variable <span class="math inline">\(X\)</span> as follows.</p>
-<p><span class="math display">\[
-\mathbb{E}[g(X)] \triangleq \sum_{x} g(x)p(x)
-\]</span></p>
-<p>For continuous random variables we have a similar definition.</p>
-<p><span class="math display">\[
-\mathbb{E}[g(X)] \triangleq \int g(x)f(x) dx
-\]</span></p>
-<p>For specific functions <span class="math inline">\(g\)</span>, expectations are given names.</p>
-<p>The <strong>mean</strong> of a random variable <span class="math inline">\(X\)</span> is given by</p>
-<p><span class="math display">\[
-\mu_{X} = \text{mean}[X] \triangleq \mathbb{E}[X].
-\]</span></p>
-<p>So for a discrete random variable, we would have</p>
-<p><span class="math display">\[
-\text{mean}[X] = \sum_{x} x \cdot p(x)
-\]</span></p>
-<p>For a continuous random variable we would simply replace the sum by an integral.</p>
-<p>The <strong>variance</strong> of a random variable <span class="math inline">\(X\)</span> is given by</p>
-<p><span class="math display">\[
-\sigma^2_{X} = \text{var}[X] \triangleq \mathbb{E}[(X - \mathbb{E}[X])^2] = \mathbb{E}[X^2] - (\mathbb{E}[X])^2.
-\]</span></p>
-<p>The <strong>standard deviation</strong> of a random variable <span class="math inline">\(X\)</span> is given by</p>
-<p><span class="math display">\[
-\sigma_{X} = \text{sd}[X] \triangleq \sqrt{\sigma^2_{X}} = \sqrt{\text{var}[X]}.
-\]</span></p>
-<p>The <strong>covariance</strong> of random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is given by</p>
-<p><span class="math display">\[
-\text{cov}[X, Y] \triangleq \mathbb{E}[(X - \mathbb{E}[X])(Y - \mathbb{E}[Y])] = \mathbb{E}[XY] - \mathbb{E}[X] \cdot \mathbb{E}[Y].
-\]</span></p>
-<hr />
-</div>
-<div id="likelihood" class="section level2">
-<h2><span class="header-section-number">D.7</span> Likelihood</h2>
-<p>Consider <span class="math inline">\(n\)</span> iid random variables <span class="math inline">\(X_1, X_2, \ldots X_n\)</span>. We can then write their <strong>likelihood</strong> as</p>
-<p><span class="math display">\[
-\mathcal{L}(\theta \mid x_1, x_2, \ldots x_n) \triangleq f(x_1, x_2, \ldots, x_n; \theta) = \prod_{i = 1}^n f(x_i; \theta)
-\]</span></p>
-<p>where <span class="math inline">\(f(x_1, x_2, \ldots, x_n; \theta)\)</span> is the joint density (or mass) of <span class="math inline">\(X_1, X_2, \ldots X_n\)</span> and <span class="math inline">\(f(x_i; \theta)\)</span> is the density (or mass) function of random variable <span class="math inline">\(X_i\)</span> evaluated at <span class="math inline">\(x_i\)</span> with parameter <span class="math inline">\(\theta\)</span>. (Note: The last equality above only holds for iid random variables.)</p>
-<p>Whereas a probability or density is a function of a possible observed value given a particular parameter value, a likelihood is the opposite. It is a function of a possible parameter values given observed data. Likelihoods are calculated when the data (the <span class="math inline">\(x_i\)</span>) are known and the parameters (<span class="math inline">\(\theta\)</span>) are unknown. That is, a likelihood and a joint density will “look” the same, that is contain the same symbols. The meaning of these symbols change depending on what is known. If the data is known, and the parameters is unknown, you have a likelihood. If the parameters are known, and the data are unknown, you have a joint density. The definition above is an acknowledgement of this. The likelihood is defined to be the joint density when the data are known but the parameter(s) is unknown.</p>
-<p>Maximizing a likelihood is a common technique for fitting a model to data, however, most often we maximum the log-likelihood, as the likelihood and log-likelihood obtain their maximum at the same point.</p>
-<p><span class="math display">\[
-\log \mathcal{L}(\theta \mid x_1, x_2, \ldots x_n) = \sum_{i = 1}^{n} \log f(x_i; \theta)
-\]</span></p>
-<p>As an example, suppose that the data vector <code>x_data</code> contains observations from a random sample <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> that is assumed to be sampled from a Poisson distribution with (unknown) parameter <span class="math inline">\(\lambda\)</span>.</p>
-<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb358-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb358-2" data-line-number="2">x_data =<span class="st"> </span><span class="kw">rpois</span>(<span class="dt">n =</span> <span class="dv">25</span>, <span class="dt">lambda =</span> <span class="dv">6</span>) <span class="co"># generating data (assume this is not known)</span></a>
-<a class="sourceLine" id="cb358-3" data-line-number="3"><span class="kw">head</span>(x_data) <span class="co"># check data</span></a></code></pre></div>
-<pre><code>## [1]  9 10  5  8  7  6</code></pre>
-<p>We can use R to calculate the likelihood for various possible values of <span class="math inline">\(\lambda\)</span> given this data.</p>
-<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb360-1" data-line-number="1"><span class="co"># calculate the likelihood when lambda = 5</span></a>
-<a class="sourceLine" id="cb360-2" data-line-number="2"><span class="kw">prod</span>(<span class="kw">dpois</span>(<span class="dt">x =</span> x_data, <span class="dt">lambda =</span> <span class="dv">5</span>)) </a></code></pre></div>
-<pre><code>## [1] 2.609375e-30</code></pre>
-<p>The above code takes advantage of the vectorized nature of the <code>dpois()</code> function. Often, especially for computational reasons, we prefer to directly obtain the log-likelihood.</p>
-<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb362-1" data-line-number="1"><span class="co"># calculate the log-likelihood when lambda = 5</span></a>
-<a class="sourceLine" id="cb362-2" data-line-number="2"><span class="kw">sum</span>(<span class="kw">log</span>(<span class="kw">dpois</span>(<span class="dt">x =</span> x_data, <span class="dt">lambda =</span> <span class="dv">5</span>))) </a></code></pre></div>
-<pre><code>## [1] -68.11844</code></pre>
-<p>To understand why this is necessary, repeat the above, but with a much larger sample size. Also note that the <code>d*()</code> functions in R have an option to return logged values.</p>
-<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb364-1" data-line-number="1"><span class="co"># calculate the log-likelihood when lambda = 5</span></a>
-<a class="sourceLine" id="cb364-2" data-line-number="2"><span class="kw">sum</span>(<span class="kw">dpois</span>(<span class="dt">x =</span> x_data, <span class="dt">lambda =</span> <span class="dv">5</span>, <span class="dt">log =</span> <span class="ot">TRUE</span>)) </a></code></pre></div>
-<pre><code>## [1] -68.11844</code></pre>
-<hr />
-</div>
-<div id="references" class="section level2">
-<h2><span class="header-section-number">D.8</span> References</h2>
-<p>Any of the following are either dedicated to, or contain a good coverage of the details of the topics above.</p>
-<ul>
-<li>Probability Texts
-<ul>
-<li><a href="http://athenasc.com/probbook.html">Introduction to Probability</a> by Dimitri P. Bertsekas and John N. Tsitsiklis</li>
-<li><a href="https://www.pearsonhighered.com/program/Ross-First-Course-in-Probability-A-9th-Edition/PGM110742.html">A First Course in Probability</a> by Sheldon Ross</li>
+<li>This chapter is dense because it is an overview of the entire book. Do not expect to completely understand this chapter during a first read. We will spend the rest of the semester elaborating on these concepts. However, seeing them at the beginning will be helpful.</li>
 </ul></li>
-<li>Machine Learning Texts with Probability Focus
-<ul>
-<li><a href="http://www.springer.com/us/book/9781441996336">Probability for Statistics and Machine Learning</a> by Anirban DasGupta</li>
-<li><a href="https://mitpress.mit.edu/books/machine-learning-0">Machine Learning: A Probabilistic Perspective</a> by Kevin P. Murphy</li>
-</ul></li>
-<li>Statistics Texts with Introduction to Probability
-<ul>
-<li><a href="https://www.pearsonhighered.com/program/Hogg-Probability-and-Statistical-Inference-9th-Edition/PGM91556.html">Probability and Statistical Inference</a> by Robert V. Hogg, Elliot Tanis, and Dale Zimmerman</li>
-<li><a href="https://www.pearsonhighered.com/program/Hogg-Introduction-to-Mathematical-Statistics-7th-Edition/PGM49624.html">Introduction to Mathematical Statistics</a> by Robert V. Hogg, Joseph McKean, and Allen T. Craig</li>
-</ul></li>
-</ul>
-<div id="videos" class="section level3">
-<h3><span class="header-section-number">D.8.1</span> Videos</h3>
-<p>The YouTube channel <a href="https://www.youtube.com/user/mathematicalmonk">mathematicalmonk</a> has a great <a href="https://www.youtube.com/playlist?list=PL17567A1A3F5DB5E4">Probability Primer playlist</a> containing lectures on many fundamental probability concepts. Some of the more important concepts are covered in the following videos:</p>
-<ul>
-<li><a href="https://www.youtube.com/watch?v=5BWk5qe5EJ8&amp;index=11&amp;list=PL17567A1A3F5DB5E4">Conditional Probability</a></li>
-<li><a href="https://www.youtube.com/watch?v=KK9jvGl9FY0&amp;index=12&amp;list=PL17567A1A3F5DB5E4">Independence</a></li>
-<li><a href="https://www.youtube.com/watch?v=RMS-WglZP-c&amp;index=13&amp;list=PL17567A1A3F5DB5E4">More Independence</a></li>
-<li><a href="https://www.youtube.com/watch?v=cM1BqBv11U8&amp;index=14&amp;list=PL17567A1A3F5DB5E4">Bayes Rule</a></li>
+<li><strong>Recommended:</strong> <a href="http://varianceexplained.org/r/ds-ml-ai/">Variance Explained: What’s the difference between data science, machine learning, and artificial intelligence?</a></li>
 </ul>
 <hr />
 </div>
-</div>
-<div id="source-19" class="section level2">
-<h2><span class="header-section-number">D.9</span> Source</h2>
+<div id="what-is-machine-learning" class="section level2">
+<h2><span class="header-section-number">1.2</span> What is Machine Learning?</h2>
+<p>Machine learning (ML) is about <strong>learning <em>functions</em> from <em>data</em></strong>. That’s it. Really. Pretty boring, right?</p>
+<p>To quickly address some buzzwords that come up when discussing machine learning:</p>
 <ul>
-<li><code>R</code> Markdown: <a href="probability.Rmd"><code>probability.Rmd</code></a></li>
+<li><strong>Deep learning</strong> is just a subset of machine learning.</li>
+<li><strong>Artificial Intelligence</strong> (AI) overlaps machine learning but has much loftier goals. In general, if someone claims to be using AI, they are not. (They’re probably using function learning! For example, we will learn logistic regression in this course. People in marketing might call that AI! Someone who understands ML will simply call it function learning. Don’t buy the hype! We don’t need to call simple methods AI to make them effective.)</li>
+<li>Machine learning is not <strong>data science</strong>. Data science sometimes uses machine learning.</li>
+<li>Does <strong>big data</strong> exist? If it does, I would bet a lot of money that you haven’t seen it, and probably won’t see it that often.</li>
+<li><strong>Analytics</strong> is just a fancy word for doing data analysis. Machine learning can be used in analyses! When it is, it is often called “Predictive Analytics.”</li>
+</ul>
+<p>What makes machine learning interesting are the uses of these functions. We could develop functions that have applications in a wide variety of fields.</p>
+<p>In <strong>medicine</strong>, we could develop a function that helps detect skin cancer.</p>
+<ul>
+<li>Input: Pixels from an image of mole</li>
+<li>Output: A probability of skin cancer</li>
+</ul>
+<p>In <strong>sport analytics</strong>, we could develop a function that helps determine player salary.</p>
+<ul>
+<li>Input: Lifetime statistics of an NBA player</li>
+<li>Output: An estimate of player’s salary</li>
+</ul>
+<p>In <strong>meteorology</strong>, we could develop a function to predict the weather.</p>
+<ul>
+<li>Input: Historic weather data in Champaign, IL</li>
+<li>Output: A probability of rain tomorrow in Champaign, IL</li>
+</ul>
+<p>In <strong>political science</strong> we could develop a function that predicts the mood of the president.</p>
+<ul>
+<li>Input: The text of a tweet from President Donald Trump</li>
+<li>Output: A prediction of Donald’s mood (happy, sad, angry, etc)</li>
+</ul>
+<p>In <strong>urban planning</strong> we could develop a function that predicts the rental prices of Airbnbs.</p>
+<ul>
+<li>Input: The attributes of the location for rent</li>
+<li>Output: An estimate of the rent of the property</li>
+</ul>
+<p>How do we learn these functions? By looking at many previous examples, that is, data! Again, we will learn functions from data. That’s what we’re here to do.</p>
+<hr />
+</div>
+<div id="machine-learning-tasks" class="section level2">
+<h2><span class="header-section-number">1.3</span> Machine Learning Tasks</h2>
+<p>When doing machine learning, we will classify our <em>tasks</em> into one of two categories, <strong>supervised</strong> or <strong>unsupervised</strong> learning. (There are technically other tasks such as reinforcement learning and semi-supervised learning, but they are outside the scope of this text. To understand these advanced tasks, you should first learn the basics!) Within these two broad categories of ML tasks, we will define some specifics.</p>
+<div id="supervised-learning" class="section level3">
+<h3><span class="header-section-number">1.3.1</span> Supervised Learning</h3>
+<p>In supervised learning, we want to “predict” a specific <em>response variable</em>. (The response variable might also be called the target or outcome variable.) In the following examples, this is the <code>y</code> variable. Supervised learning tasks are called <strong>regression</strong> if the response variable is <em>numeric</em>. If a supervised learning tasks has a <em>categorical</em> response, it is called <strong>classification</strong>.</p>
+<div id="regression" class="section level4">
+<h4><span class="header-section-number">1.3.1.1</span> Regression</h4>
+<p>In the regression task, we want to predict <strong>numeric</strong> response variables. The predictor variables, which we will call the feature variables, or simply <strong>features</strong> can be either <em>categorical</em> or <em>numeric</em>.</p>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+x1
+</th>
+<th style="text-align:right;">
+x2
+</th>
+<th style="text-align:right;">
+x3
+</th>
+<th style="text-align:right;">
+y
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+-0.66
+</td>
+<td style="text-align:right;">
+0.48
+</td>
+<td style="text-align:right;">
+14.09
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+1.55
+</td>
+<td style="text-align:right;">
+0.97
+</td>
+<td style="text-align:right;">
+2.92
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+-1.19
+</td>
+<td style="text-align:right;">
+-0.81
+</td>
+<td style="text-align:right;">
+15.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+9.29
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:right;">
+-1.09
+</td>
+<td style="text-align:right;">
+-0.16
+</td>
+<td style="text-align:right;">
+17.57
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:right;">
+1.61
+</td>
+<td style="text-align:right;">
+1.94
+</td>
+<td style="text-align:right;">
+2.12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:right;">
+0.04
+</td>
+<td style="text-align:right;">
+1.72
+</td>
+<td style="text-align:right;">
+8.92
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+1.31
+</td>
+<td style="text-align:right;">
+0.36
+</td>
+<td style="text-align:right;">
+4.40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+0.98
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+4.40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+0.88
+</td>
+<td style="text-align:right;">
+-0.39
+</td>
+<td style="text-align:right;">
+4.52
+</td>
+</tr>
+</tbody>
+</table>
+<p>With the data above, our goal would be to learn a function that takes as input values of the three features (<code>x1</code>, <code>x2</code>, and <code>x3</code>) and returns a prediction (best guess) for the true (but usually unknown) value of the response <code>y</code>. For example, we could obtain some “new” data that does not contain the response.</p>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+x1
+</th>
+<th style="text-align:right;">
+x2
+</th>
+<th style="text-align:right;">
+x3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:right;">
+-0.85
+</td>
+<td style="text-align:right;">
+-2.41
+</td>
+</tr>
+</tbody>
+</table>
+<p>We would then pass this data to our function, which would return a prediction of the value of <code>y</code>. Stated mathematically, our prediction will often be an estimate the conditional mean of <span class="math inline">\(Y\)</span>, given values of the <span class="math inline">\(\boldsymbol{X}\)</span> variables.</p>
+<p><span class="math display">\[
+\mu(\boldsymbol{x}) = \mathbb{E}[Y \mid \boldsymbol{X} = \boldsymbol{x}]
+\]</span></p>
+<p>In other words, we want to learn this function, <span class="math inline">\(\mu(\boldsymbol{x})\)</span>. Much more on this later. (You can safely ignore this for now.)</p>
+</div>
+<div id="classification" class="section level4">
+<h4><span class="header-section-number">1.3.1.2</span> Classification</h4>
+<p>Classification is similar to regression, except it considers <strong>categorical</strong> response variables.</p>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+x1
+</th>
+<th style="text-align:right;">
+x2
+</th>
+<th style="text-align:right;">
+x3
+</th>
+<th style="text-align:left;">
+y
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Q
+</td>
+<td style="text-align:right;">
+0.46
+</td>
+<td style="text-align:right;">
+5.42
+</td>
+<td style="text-align:left;">
+B
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Q
+</td>
+<td style="text-align:right;">
+0.72
+</td>
+<td style="text-align:right;">
+0.83
+</td>
+<td style="text-align:left;">
+C
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Q
+</td>
+<td style="text-align:right;">
+0.93
+</td>
+<td style="text-align:right;">
+5.93
+</td>
+<td style="text-align:left;">
+B
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Q
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+5.68
+</td>
+<td style="text-align:left;">
+A
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P
+</td>
+<td style="text-align:right;">
+0.46
+</td>
+<td style="text-align:right;">
+0.49
+</td>
+<td style="text-align:left;">
+B
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P
+</td>
+<td style="text-align:right;">
+0.94
+</td>
+<td style="text-align:right;">
+3.09
+</td>
+<td style="text-align:left;">
+B
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P
+</td>
+<td style="text-align:right;">
+0.98
+</td>
+<td style="text-align:right;">
+2.34
+</td>
+<td style="text-align:left;">
+C
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P
+</td>
+<td style="text-align:right;">
+0.12
+</td>
+<td style="text-align:right;">
+5.43
+</td>
+<td style="text-align:left;">
+C
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Q
+</td>
+<td style="text-align:right;">
+0.47
+</td>
+<td style="text-align:right;">
+2.68
+</td>
+<td style="text-align:left;">
+B
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P
+</td>
+<td style="text-align:right;">
+0.56
+</td>
+<td style="text-align:right;">
+5.02
+</td>
+<td style="text-align:left;">
+B
+</td>
+</tr>
+</tbody>
+</table>
+<p>As before we want to learn a function from this data using the same inputs, except this time, we want it to output one of <code>A</code>, <code>B</code>, or <code>C</code> for predictions of the <code>y</code> variable. Again, consider some new data:</p>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+x1
+</th>
+<th style="text-align:right;">
+x2
+</th>
+<th style="text-align:right;">
+x3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+P
+</td>
+<td style="text-align:right;">
+0.96
+</td>
+<td style="text-align:right;">
+5.33
+</td>
+</tr>
+</tbody>
+</table>
+<p>While ultimately we would like our function to return one of <code>A</code>, <code>B</code>, or <code>C</code>, what we actually would like is an intermediate return of probabilities that <code>y</code> is <code>A</code>, <code>B</code>, or <code>C</code>. In other words, we are attempting to estimate the conditional probability that <span class="math inline">\(Y\)</span> is each of the possible categories, given values of the <span class="math inline">\(\boldsymbol{X}\)</span> values.</p>
+<p><span class="math display">\[
+p_k(\boldsymbol{x}) = P\left[ Y = k \mid \boldsymbol{X} = \boldsymbol{x} \right]
+\]</span></p>
+<p>We want to learn this function, <span class="math inline">\(p_k(\boldsymbol{x})\)</span>. Much more on this later. (You can safely ignore this for now.)</p>
+</div>
+</div>
+<div id="unsupervised-learning" class="section level3">
+<h3><span class="header-section-number">1.3.2</span> Unsupervised Learning</h3>
+<p>Unsupervised learning is a very broad task that is rather difficult to define. Essentially, it is learning without a response variable. To get a better idea about what unsupervised learning is, consider some specific tasks.</p>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+x1
+</th>
+<th style="text-align:right;">
+x2
+</th>
+<th style="text-align:right;">
+x3
+</th>
+<th style="text-align:right;">
+x4
+</th>
+<th style="text-align:right;">
+x5
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+2.74
+</td>
+<td style="text-align:right;">
+0.46
+</td>
+<td style="text-align:right;">
+5.42
+</td>
+<td style="text-align:right;">
+4.43
+</td>
+<td style="text-align:right;">
+2.28
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2.81
+</td>
+<td style="text-align:right;">
+0.72
+</td>
+<td style="text-align:right;">
+0.83
+</td>
+<td style="text-align:right;">
+4.87
+</td>
+<td style="text-align:right;">
+2.61
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+0.86
+</td>
+<td style="text-align:right;">
+0.93
+</td>
+<td style="text-align:right;">
+5.93
+</td>
+<td style="text-align:right;">
+2.33
+</td>
+<td style="text-align:right;">
+0.22
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2.49
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+5.68
+</td>
+<td style="text-align:right;">
+4.11
+</td>
+<td style="text-align:right;">
+5.84
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1.93
+</td>
+<td style="text-align:right;">
+0.46
+</td>
+<td style="text-align:right;">
+0.49
+</td>
+<td style="text-align:right;">
+0.02
+</td>
+<td style="text-align:right;">
+2.59
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-8.44
+</td>
+<td style="text-align:right;">
+-9.06
+</td>
+<td style="text-align:right;">
+-6.91
+</td>
+<td style="text-align:right;">
+-5.00
+</td>
+<td style="text-align:right;">
+-4.25
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-7.79
+</td>
+<td style="text-align:right;">
+-9.02
+</td>
+<td style="text-align:right;">
+-7.66
+</td>
+<td style="text-align:right;">
+-9.96
+</td>
+<td style="text-align:right;">
+-4.67
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-9.60
+</td>
+<td style="text-align:right;">
+-9.88
+</td>
+<td style="text-align:right;">
+-4.57
+</td>
+<td style="text-align:right;">
+-8.75
+</td>
+<td style="text-align:right;">
+-6.16
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-8.03
+</td>
+<td style="text-align:right;">
+-9.53
+</td>
+<td style="text-align:right;">
+-7.32
+</td>
+<td style="text-align:right;">
+-4.56
+</td>
+<td style="text-align:right;">
+-4.17
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-7.88
+</td>
+<td style="text-align:right;">
+-9.44
+</td>
+<td style="text-align:right;">
+-4.98
+</td>
+<td style="text-align:right;">
+-6.33
+</td>
+<td style="text-align:right;">
+-6.29
+</td>
+</tr>
+</tbody>
+</table>
+<div id="clustering" class="section level4">
+<h4><span class="header-section-number">1.3.2.1</span> Clustering</h4>
+<p>Clustering is essentially the task of <strong>grouping</strong> the observations of a dataset. In the above data, can you see an obvious grouping? (Hint: Compare the first five observations to the second five observations.) In general, we try to group observations that are similar.</p>
+</div>
+<div id="density-estimation" class="section level4">
+<h4><span class="header-section-number">1.3.2.2</span> Density Estimation</h4>
+<p>Density estimation tries to do exactly what the name implies, estimate the density. In this case, the joint density of <span class="math inline">\(X_1, X_2, X_3, X_4, X_5\)</span>. In other words, we would like to learn the <strong>function</strong> that generated this data. (You could take the position that this is the <strong>only</strong> machine learning tasks, and all other tasks are subset of this task. We’ll hold off on explaining this for a while.)</p>
+</div>
+<div id="outlier-detection" class="section level4">
+<h4><span class="header-section-number">1.3.2.3</span> Outlier Detection</h4>
+<p>Consider some new data:</p>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+x1
+</th>
+<th style="text-align:right;">
+x2
+</th>
+<th style="text-align:right;">
+x3
+</th>
+<th style="text-align:right;">
+x4
+</th>
+<th style="text-align:right;">
+x5
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+67
+</td>
+<td style="text-align:right;">
+66.68
+</td>
+<td style="text-align:right;">
+66.26
+</td>
+<td style="text-align:right;">
+69.49
+</td>
+<td style="text-align:right;">
+70
+</td>
+</tr>
+</tbody>
+</table>
+<p>Was this data generated by the same process as the data above? If no, we would call it an outlier.</p>
+<hr />
+</div>
+</div>
+</div>
+<div id="open-questions" class="section level2">
+<h2><span class="header-section-number">1.4</span> Open Questions</h2>
+<p>The two previous sections were probably more confusing than helpful. But of course, because we haven’t started learning yet! Hopefully, you are currently pondering one very specific question:</p>
+<ul>
+<li><em>How</em> do we <strong>learn</strong> functions from data?</li>
+</ul>
+<p>That’s what this text will be about! We will spend a lot of time on this question. It is what us statisticians call fitting a model. On some level the answer is: look at a bunch of old data before predicting on new data.</p>
+<p>While we will dedicate a large amount of time to answering this question, sometimes, some of the details might go unanswered. Since this is an introductory text, we can only go so far. However, as long as we answer another question, this will be OK.</p>
+<ul>
+<li><em>How</em> do we <strong>evaluate</strong> how well learned functions work?</li>
+</ul>
+<p>This text places a high priority on being able to <strong>do</strong> machine learning, specifically do machine learning in R. You can actually do a lot of machine learning without fully understanding how the learning is taking place. That makes the <em>evaluation</em> of ML models extremely important.</p>
+</div>
+<div id="source" class="section level2">
+<h2><span class="header-section-number">1.5</span> Source</h2>
+<ul>
+<li><code>R</code> Markdown: <a href="ml-overview.Rmd"><code>ml-overview.Rmd</code></a></li>
 </ul>
 <hr />
 
@@ -662,8 +1106,8 @@ f(x, y) = f(x) \cdot f(y)
           </div>
         </div>
       </div>
-<a href="computing.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="statistics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="linear-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -694,7 +1138,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/daviddalpiaz/bsl/edit/master/probability.Rmd",
+"link": "https://github.com/daviddalpiaz/bsl/edit/master/ml-overview.Rmd",
 "text": "Edit"
 },
 "history": {

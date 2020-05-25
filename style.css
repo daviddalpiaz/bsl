@@ -52,6 +52,18 @@ pre code {
   font-size: 12px;
 }
 
+.book .book-body .page-wrapper .page-inner section.normal .title {
+  text-align: center;
+  font-size: 80px;
+  line-height: 80px;
+}
+
+.book .book-body .page-wrapper .page-inner section.normal .author {
+  text-align: center;
+  font-size: 50px;
+  line-height: 50px;
+}
+
 /*
 
 .book .book-body .page-wrapper .page-inner section.normal h1, .book .book-body .page-wrapper .page-inner section.normal h2, .book .book-body .page-wrapper .page-inner section.normal h3, .book .book-body .page-wrapper .page-inner section.normal h4, .book .book-body .page-wrapper .page-inner section.normal h5, .book .book-body .page-wrapper .page-inner section.normal h6 {
