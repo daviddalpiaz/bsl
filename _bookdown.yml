@@ -29,5 +29,6 @@ rmd_files: [
   "ten-rules.Rmd",
   "computing.Rmd",
   "probability.Rmd",
-  "statistics.Rmd"
+  "statistics.Rmd",
+  "references.Rmd"
 ]
