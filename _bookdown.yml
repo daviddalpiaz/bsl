@@ -32,3 +32,5 @@ rmd_files: [
   "statistics.Rmd",
   "references.Rmd"
 ]
+
+before_chapter_script: "_common.R"
