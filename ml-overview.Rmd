@@ -1,48 +1,31 @@
 # Machine Learning Overview
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = TRUE, fig.align = "center", cache = TRUE, autodep = TRUE)
-```
-
 ```{r packages, include = FALSE}
 library("tidyverse")
 library("knitr")
 library("kableExtra")
 ```
 
-***
-
 STAT 432 is a course about machine learning? Let's try to define machine learning.
-
-***
-
-## Reading
-
-- **Required:** [ISL Chapter 1](https://faculty.marshall.usc.edu/gareth-james/ISL/ISLR%20Seventh%20Printing.pdf)
-- **Required:** [ISL Chapter 2](https://faculty.marshall.usc.edu/gareth-james/ISL/ISLR%20Seventh%20Printing.pdf)
-  - This chapter is dense because it is an overview of the entire book. Do not expect to completely understand this chapter during a first read. We will spend the rest of the semester elaborating on these concepts. However, seeing them at the beginning will be helpful.
-- **Recommended:** [Variance Explained: What's the difference between data science, machine learning, and artificial intelligence?](http://varianceexplained.org/r/ds-ml-ai/)
-
-***
 
 ## What is Machine Learning?
 
-Machine learning (ML) is about **learning _functions_ from _data_**. That's it. Really. Pretty boring, right?
+Machine learning (ML) is about **learning _functions_ from _data_**.^[This is a purposefully narrow view of machine learning. Obviously there's a lot more to ML, but the author believes this statement will help readers understand that the methods learned in this text are simply tools that must be evaluated as a part of a larger analysis.] That's it. Really. Pretty boring, right?^[An alternative title of this book could be: *ML is boring but useful*.]
 
 To quickly address some buzzwords that come up when discussing machine learning:
 
-- **Deep learning** is just a subset of machine learning.
-- **Artificial Intelligence** (AI) overlaps machine learning but has much loftier goals. In general, if someone claims to be using AI, they are not. (They're probably using function learning! For example, we will learn logistic regression in this course. People in marketing might call that AI! Someone who understands ML will simply call it function learning. Don't buy the hype! We don't need to call simple methods AI to make them effective.)
+- **Deep learning** is a subset of machine learning.
+- **Artificial Intelligence** (AI) overlaps machine learning but has much loftier goals. In general, if someone claims to be using AI, they are not. They're probably using function learning! For example, we will learn logistic regression in this course. People in marketing might call that AI! Someone who understands ML will simply call it function learning. Don't buy the hype! We don't need to call simple methods AI to make them effective.^[There are certainly people who do legitamtely work on AI, but the strong statement is made here to try to downplay the hype.]
 - Machine learning is not **data science**. Data science sometimes uses machine learning.
 - Does **big data** exist? If it does, I would bet a lot of money that you haven't seen it, and probably won't see it that often.
 - **Analytics** is just a fancy word for doing data analysis. Machine learning can be used in analyses! When it is, it is often called "Predictive Analytics."
 
-What makes machine learning interesting are the uses of these functions. We could develop functions that have applications in a wide variety of fields.
+What makes machine learning interesting are the uses of these learned functions. We could develop functions that have applications in a wide variety of fields.
 
 In **medicine**, we could develop a function that helps detect skin cancer.
 
 - Input: Pixels from an image of mole
-- Output: A probability of skin cancer
+- Output: A probability that the mole is cancerous
 
 In **sport analytics**, we could develop a function that helps determine player salary.
 
@@ -66,11 +49,9 @@ In **urban planning** we could develop a function that predicts the rental price
 
 How do we learn these functions? By looking at many previous examples, that is, data! Again, we will learn functions from data. That's what we're here to do.
 
-***
-
 ## Machine Learning Tasks
 
-When doing machine learning, we will classify our *tasks* into one of two categories, **supervised** or **unsupervised** learning. (There are technically other tasks such as reinforcement learning and semi-supervised learning, but they are outside the scope of this text. To understand these advanced tasks, you should first learn the basics!) Within these two broad categories of ML tasks, we will define some specifics.
+When doing machine learning, we will classify our *tasks* into one of two categories, **supervised** or **unsupervised** learning.^[There are technically other tasks such as reinforcement learning and semi-supervised learning, but they are outside the scope of this text. To understand these advanced tasks, you should first learn the basics!] Within these two broad categories of ML tasks, we will define some specifics.
 
 ```{r, echo = FALSE}
 gen_sup_reg = function(sample_size = 10) {
@@ -80,7 +61,9 @@ gen_sup_reg = function(sample_size = 10) {
   y = round(-5 * x2 + 10 + round(rnorm(n = sample_size), 2), 2)
   tibble(x1, x2, x3, y)
 }
+```
 
+```{r, echo = FALSE}
 gen_sup_class = function(sample_size = 10) {
   x1 = sample(c("Q", "P"), size = sample_size, replace = TRUE)
   x2 = round(runif(n = sample_size), 2)
@@ -88,7 +71,9 @@ gen_sup_class = function(sample_size = 10) {
   y = sample(c("A", "B", "C"), size = sample_size, replace = TRUE)
   tibble(x1, x2, x3, y)
 }
+```
 
+```{r, echo = FALSE}
 gen_unsup = function() {
   modify = c(0, 0, 0, 0, 0, 10, 10, 10, 10, 10)
   x1 = round(3 * runif(n = 10), 2) - modify
@@ -104,9 +89,11 @@ gen_unsup = function() {
 
 In supervised learning, we want to "predict" a specific *response variable*. (The response variable might also be called the target or outcome variable.) In the following examples, this is the `y` variable. Supervised learning tasks are called **regression** if the response variable is *numeric*. If a supervised learning tasks has a *categorical* response, it is called **classification**.
 
+<!-- TODO: add an appendix chapter about tabular data? -->
+
 #### Regression
 
-In the regression task, we want to predict **numeric** response variables. The predictor variables, which we will call the feature variables, or simply **features** can be either *categorical* or *numeric*.
+In the regression task, we want to predict **numeric** response variables. The non-response variables, which we will call the feature variables, or simply **features** can be either *categorical* or *numeric*.^[These variables are often called "predictor" variables, but we find this nomenclature to be needlessly confusing.]
 
 ```{r, echo = FALSE}
 set.seed(42)
@@ -124,13 +111,13 @@ gen_sup_reg(sample_size = 1)[, -4] %>%
   kable_styling(full_width = FALSE)
 ```
 
-We would then pass this data to our function, which would return a prediction of the value of `y`. Stated mathematically, our prediction will often be an estimate the conditional mean of $Y$, given values of the $\boldsymbol{X}$ variables. 
+We would then pass this data to our function, which would return a prediction of the value of `y`. Stated mathematically, our prediction will often be an estimate of the conditional mean of $Y$, given values of the $\boldsymbol{X}$ variables. 
 
 $$
 \mu(\boldsymbol{x}) = \mathbb{E}[Y \mid \boldsymbol{X} = \boldsymbol{x}]
 $$
 
-In other words, we want to learn this function, $\mu(\boldsymbol{x})$. Much more on this later. (You can safely ignore this for now.)
+In other words, we want to learn this function, $\mu(\boldsymbol{x})$. Much more on this later.^[For now, just understand that we are able to make a "best guess" for a new observation.]
 
 #### Classification
 
@@ -157,7 +144,7 @@ $$
 p_k(\boldsymbol{x}) = P\left[ Y = k \mid \boldsymbol{X} = \boldsymbol{x} \right]
 $$
 
-We want to learn this function, $p_k(\boldsymbol{x})$. Much more on this later. (You can safely ignore this for now.)
+We want to learn this function, $p_k(\boldsymbol{x})$. Much more on this later.
 
 ### Unsupervised Learning
 
@@ -176,7 +163,7 @@ Clustering is essentially the task of **grouping** the observations of a dataset
 
 #### Density Estimation
 
-Density estimation tries to do exactly what the name implies, estimate the density. In this case, the joint density of $X_1, X_2, X_3, X_4, X_5$. In other words, we would like to learn the **function** that generated this data. (You could take the position that this is the **only** machine learning tasks, and all other tasks are subset of this task. We'll hold off on explaining this for a while.)
+Density estimation tries to do exactly what the name implies, estimate the density. In this case, the joint density of $X_1, X_2, X_3, X_4, X_5$. In other words, we would like to learn the **function** that generated this data.^[You could take the position that this is the **only** machine learning task, and all other tasks are subset of this task. We'll hold off on explaining this for a while.]
 
 #### Outlier Detection
 
@@ -188,9 +175,7 @@ Consider some new data:
   kable_styling(full_width = FALSE)
 ```
 
-Was this data generated by the same process as the data above? If no, we would call it an outlier.
-
-***
+Was this data generated by the same process as the data above? If we don't believe so, we would call it an outlier.
 
 ## Open Questions
 
@@ -210,4 +195,4 @@ This text places a high priority on being able to **do** machine learning, speci
 
 - `R` Markdown: [`ml-overview.Rmd`](ml-overview.Rmd)
 
-***
+<!-- - TODO: models = functions (in this context). algorithms (learners) learn models. models make predictions. (algorithms take in data and spit out models models take in data and spit out predictions/classifications/probabilities) -->
