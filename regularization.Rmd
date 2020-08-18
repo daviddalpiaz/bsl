@@ -8,21 +8,162 @@ knitr::opts_chunk$set(echo = TRUE, fig.align = "center", cache = TRUE, autodep =
 
 In this chapter...
 
-***
+- add regularization to linear and logistic regression (linear models againg!)
 
-## Reading
+fit SLR no intercept model with "constraint," showing how this limits model "flexibility"
 
-- **Required:** ???
+- show datasets that can and cannot be well learned
+- contrast flexibility with rigidity
+
+three types of regularization (start with whichever is the deafult)
+
+- best subset selection!!!
+- ridge 
+- lasso
+- elastic-net
+
+learn two new R functions
+
+- glmnet
+- cv.glmnet
+
+learn how and why regularization works
+
+- geometry
+- simulation studies
+    - dense vs sparse
+    - indep vs corr
+    - look at old ipad notes
+
+misc 
+
+- FIT + PENALTY
+  - how (negative) log-lik can be used as a measure of "fit"
+  - actual lambda value is meaningless because of scale of RSS and log-lik
+  - how are models fit to begin with (MLE, show that RSS is just this...)
+- model selection vs variable (feature) selection
+- pictures
+- a note about scaling (where else is this a "problem"?)
+- package for extra nice plotting
+- gather all relevant links
+- `as.matrix()` vs `model.matrix()`
+- https://bradleyboehmke.github.io/HOML/regularized-regression.html
+- compare with traditional "variable selection" methods
+    - "variable selection" vs "model selection"
+        - validated whole procedures
+- consider using footnotes
+- hand draw a picture for the beginning of each chapter that illustrates the "main idea"?
+  - use "ML notecars" for possible inspiration (but include less detail?)
+- bigger "chapters" at first, then smaller, more specific chapters?
+- misspelled arguments are passed to `...`, not the correctly spelled arugment
+- how this function internally does validation then full train data fits
+- 1-SE rule
+- look at last year's notes on iPad
+- a chapter on GLMs before moving to regularization?
+  - negative log-likelihood!
+- multiclass logistic?
+  - can this be doen with glm instead of nnet? (don't think so)
+- figure out a bib
+- a map of all STAT 432 concepts???
+
+- https://web.stanford.edu/~hastie/StatLearnSparsity_files/SLS.pdf
+- https://web.stanford.edu/~hastie/glmnet/glmnet_alpha.html
+
+book chapter theme
+
+- do
+- understand
+- create???
 
 ***
 
 ```{r packages, message = FALSE, warning = FALSE}
 library("tidyverse")
+library("glmnet")
+library("broom")
 ```
 
 ***
 
-TBD
+```{r}
+hitters = na.omit(as_tibble(ISLR::Hitters))
+```
+
+```{r}
+set.seed(42)
+hit_trn_idx = sample(nrow(hitters), size = 0.8 * nrow(hitters))
+hit_trn = hitters[hit_trn_idx, ]
+hit_tst = hitters[-hit_trn_idx, ]
+```
+
+```{r}
+hit_trn
+```
+
+```{r}
+hit_trn_y = hit_trn$Salary
+hit_trn_x = model.matrix(Salary ~ . + 0, data = hit_trn)
+
+hit_tst_y = hit_tst$Salary
+hit_tst_x = model.matrix(Salary ~ . + 0, data = hit_tst)
+```
+
+- TODO: consider the `nlambda` argument
+
+```{r}
+plot(glmnet(x = hit_trn_x, y = hit_trn_y, alpha = 1), xvar = "lambda")
+grid()
+```
+
+TODO: some information about the important default values: standardize, nlambda, family, intercept, etc
+
+- https://cran.r-project.org/web/packages/glmnet/vignettes/glmnet.pdf
+- https://cran.r-project.org/web/packages/glmnetUtils/vignettes/intro.html
+
+TODO: fit + penalty (= penalized loss?) see `?glmnet` documentation for "details" (also maybe check vingette?)
+
+```{r}
+asdf = cv.glmnet(x = hit_trn_x, y = hit_trn_y, nlambda = 500)
+asdf$lambda
+```
+
+```{r}
+plot(asdf)
+```
+
+- an example with a really nice U-shaped plot? needing to use more lambdas? sometimes you just can't get the U!
+
+```{r}
+# nlambda (or other glmnet args) to cv.glmnet?
+```
+
+TODO: first use glmnet (to get args set) then add cv. to the front
+
+```{r}
+glance(asdf)
+```
+
+```{r}
+asdf$cvm # here, m = "measure"!!! don't get into the weeds about deviance, just note how it relates to RSS
+```
+
+
+- `tidy.glmnet`
+- `glance.cv.glmnet()`
+- `glance.glmnet()`
+- `tidy.cv.glmnet()`
+
+TODO: write a "chapter" about how this work (different function depending on object passed)
+
+NOTE: use README for technical details about book, then self document conent in the book
+
+
+
+***
+
+## Additional Reading
+
+- **Required:** ???
 
 ***
 
@@ -31,3 +172,778 @@ TBD
 - `R` Markdown: [`regularization.Rmd`](regularization.Rmd)
 
 ***
+
+## Old FA19 Regularization
+
+***
+
+## STAT 432 Materials
+
+- ISL Readings: Sections 6.1 - 6.4
+
+***
+
+```{r resampling_opts, include = FALSE}
+knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
+```
+
+```{r, message = FALSE, warning = FALSE}
+library("tidyverse")
+library("glmnet")
+library("broom")
+library("kableExtra")
+```
+
+## Reducing Variance with Added Bias
+
+```{r}
+gen_simple_data = function(sample_size = 25) {
+  x = runif(n = sample_size)
+  y = 0 + 5 * x + rnorm(n = sample_size)
+  data.frame(x, y)
+}
+```
+
+```{r}
+set.seed(42)
+simple_data = gen_simple_data()
+```
+
+```{r}
+# fit least squares
+beta_ls = lm(y ~ 0 + x, data = simple_data)
+
+# fit a biased model
+# restrict beta-hat to be at most 5
+beta_05 = lm(y ~ 0 + x, data = simple_data)
+beta_05$coefficients = min(beta_05$coefficients, 5)
+
+# fit a biased model
+# restrict beta-hat to be at most 4
+beta_04 = lm(y ~ 0 + x, data = simple_data)
+beta_04$coefficients = min(beta_04$coefficients, 4)
+```
+
+```{r}
+map_dbl(list(beta_ls, beta_05, beta_04), coef)
+```
+
+```{r, fig.height = 6, fig.width = 10, echo = FALSE}
+plot(simple_data, pch = 20, col = "darkgrey",
+     xlim = c(0, 1), ylim = c(0, 7))
+grid()
+
+abline(0, 5, lwd = 4)
+abline(beta_ls, col = "firebrick",  lwd = 3, lty = 2)
+abline(beta_05, col = "dodgerblue", lwd = 3, lty = 3)
+abline(beta_04, col = "limegreen",  lwd = 3, lty = 4)
+
+# TODO: add legend
+```
+
+```{r}
+# maybe write a function for each
+# should switch this to make each model fit to the same data
+set.seed(42)
+beta_estimates = list(
+  beta_ls = replicate(n = 5000, coef(lm(y ~ 0 + x, data = gen_simple_data()))["x"]),
+  beta_05 = replicate(n = 5000, min(coef(lm(y ~ 0 + x, data = gen_simple_data()))["x"], 5)),
+  beta_04 = replicate(n = 5000, min(coef(lm(y ~ 0 + x, data = gen_simple_data()))["x"], 4))
+)
+```
+
+```{r, echo = FALSE}
+tibble(
+  Model = c("Least Squares", "Biased to 5", "Biased to 4"),
+  Bias = map_dbl(beta_estimates, ~ {mean(.x) - 5}),
+  Variance = map_dbl(beta_estimates, var),
+  MSE = Bias ^ 2 + Variance
+) %>% 
+  kable(digits = 3) %>% 
+  kable_styling("striped", full_width = FALSE)
+```
+
+## scaling matters?
+
+```{r}
+another_dgp = function(sample_size = 25) {
+  x = runif(n = sample_size)
+  y = -2 + 5 * x + rnorm(n = sample_size)
+  tibble(x, y)
+}
+```
+
+
+```{r}
+data_for_scaling = another_dgp()
+predict(lm(y ~ x, data = data_for_scaling))
+coef(lm(y ~ x, data = data_for_scaling))
+
+data_for_scaling$x = scale(data_for_scaling$x)
+predict(lm(y ~ x, data = data_for_scaling))
+coef(lm(y ~ x, data = data_for_scaling))
+```
+
+## Constraints in Two Dimensions
+
+```{r}
+gen_linear_data = function() {
+  x1 = rnorm(100)
+  x2 = rnorm(100)
+  y = 0 + -5 * x1 + 5 * x2 + rnorm(100)
+  tibble(x1 = x1, x2 = x2, y = y)
+}
+```
+
+```{r}
+data = gen_linear_data()
+beta = expand.grid(beta_1 = seq(-10, 10, 0.1),
+                   beta_2 = seq(-10, 10, 0.1))
+beta_error = rep(0, dim(beta)[1])
+for (i in 1:dim(beta)[1]) {
+  beta_error[i] = with(data, sum((y - (beta$beta_1[i] * x1 + beta$beta_2[i] * x2)) ^ 2 ))
+}
+```
+
+```{r}
+# TODO: make this into a function
+# TODO: add ridge constraint
+contour(x = seq(-10, 10, 0.1), 
+        y = seq(-10, 10, 0.1), 
+        z = matrix(beta_error, 
+                   nrow = length(seq(-10, 10, 0.1)),
+                   ncol = length(seq(-10, 10, 0.1))),
+        nlevels = 50,
+        col = "darkgrey"
+)
+
+abline(h = 0)
+abline(v = 0)
+a = 4
+segments(0, a, a, 0, col = "dodgerblue", lwd = 2)
+segments(0, -a, a, 0, col = "dodgerblue", lwd = 2)
+segments(-a, 0, 0, a, col = "dodgerblue", lwd = 2)
+segments(-a, 0, 0, -a, col = "dodgerblue", lwd = 2)
+points(beta[which.min(beta_error), ], col = "darkorange", pch = 20, cex = 2)
+```
+
+## High Dimensional Data
+
+```{r}
+gen_wide_data = function(sample_size = 100, sig_betas = 5, p = 200) {
+  
+  if (p <= sample_size) {
+    warning("You're not generating wide data, despite the name of the function.")
+  }
+  
+  if (sig_betas > p) {
+    stop("Cannot have more significant variables than variables!")
+  }
+  
+  x = map_dfc(1:p, ~ rnorm(n = sample_size))
+  x = x %>% rename_all( ~ str_replace(., "V", "x"))
+  sig_x = x[, 1:sig_betas]
+  beta = rep(3, times = sig_betas)
+  y = as.matrix(sig_x) %*% beta + rnorm(n = sample_size)
+  bind_cols(y = y, x)
+}
+```
+
+```{r}
+some_wide_data = gen_wide_data()
+```
+
+```{r}
+some_wide_data
+```
+
+
+## Ridge Regression
+
+$$
+\sum_{i=1}^{n} \left( y_i - \beta_0 - \sum_{j=1}^{p} \beta_j x_{ij}    \right) ^ 2 + \lambda \sum_{j=1}^{p} \beta_j^2 .
+$$
+
+```{r}
+set.seed(42)
+data_for_ridge = gen_wide_data(sample_size = 100, sig_betas = 5, p = 200)
+```
+
+```{r}
+x_ridge = data_for_ridge %>% select(-y) %>% as.matrix()
+y_ridge = data_for_ridge %>% pull(y)
+```
+
+```{r}
+mod_ridge = glmnet(x = x_ridge, y = y_ridge, alpha = 0)
+```
+
+```{r, fig.height = 6, fig.width = 8}
+plot(mod_ridge, xvar = "lambda", label = TRUE)
+grid()
+```
+
+```{r}
+as_tibble(predict(mod_ridge, x_ridge[1:5, ]))
+```
+
+```{r}
+set.seed(42)
+mod_ridge = cv.glmnet(x = x_ridge, y = y_ridge, alpha = 0, nfolds = 5)
+```
+
+```{r}
+glance(mod_ridge)
+```
+
+```{r}
+plot(mod_ridge)
+```
+
+
+```{r}
+tidy(mod_ridge)
+```
+
+## Lasso
+
+
+
+
+
+
+
+
+
+
+## boston is boring
+
+```{r}
+bstn = MASS::Boston
+
+bstn$chas = factor(bstn$chas) # why did we do this???
+bstn$rad = factor(bstn$rad)
+
+levels(bstn$chas)
+levels(bstn$rad)
+```
+
+```{r}
+lm(medv ~ ., data = bstn)
+```
+
+```{r}
+head(as_tibble(model.matrix(lm(medv ~ ., data = bstn))))
+```
+
+```{r}
+bstn_x = model.matrix(lm(medv ~ ., data = bstn))
+bstn_y = bstn$medv
+```
+
+```{r}
+coef(lm.fit(x = bstn_x, y = bstn_y))
+```
+
+```{r}
+bstn_x = model.matrix(lm(medv ~ ., data = bstn))[, -1]
+bstn_y = bstn$medv
+```
+
+```{r, fig.height = 4, fig.width = 8}
+par(mfrow = c(1, 2))
+plot(glmnet(x = bstn_x, y = bstn_y, alpha = 0), xvar = "lambda")
+grid()
+plot(glmnet(x = bstn_x, y = bstn_y, alpha = 1), xvar = "lambda")
+grid()
+```
+
+```{r, fig.height = 4, fig.width = 8}
+par(mfrow = c(1, 2))
+plot(cv.glmnet(x = bstn_x, y = bstn_y, alpha = 0))
+plot(cv.glmnet(x = bstn_x, y = bstn_y, alpha = 1))
+```
+
+```{r}
+bstn_ridge = cv.glmnet(x = bstn_x, y = bstn_y, alpha = 0)
+bstn_lasso = cv.glmnet(x = bstn_x, y = bstn_y, alpha = 1)
+```
+
+```{r}
+library("broom")
+```
+
+```{r}
+tidy(bstn_lasso)
+glance(bstn_lasso)
+# TODO: pull out rows of tidy with the values from glance
+```
+
+
+```{r}
+predict(bstn_lasso, newx = bstn_x[1:10,], type = "link")
+```
+
+```{r}
+predict(bstn_lasso, newx = bstn_x[1:10,], type = "response")
+```
+
+```{r}
+predict(bstn_lasso, type = "coefficients", s = c("lambda.1se", "lambda.min"))
+```
+
+```{r}
+predict(bstn_lasso, type = "nonzero")
+```
+
+
+## some more simulation
+
+```{r}
+# diag(100)
+```
+
+
+```{r}
+p = 100
+A = matrix(runif(p ^ 2) * 2 - 1, ncol = p)
+Sigma = t(A) %*% A
+sample_size = 500
+X = MASS::mvrnorm(n = sample_size, mu = rep(0, p), Sigma = Sigma)
+beta = ifelse(sample(c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1), size = p, replace = TRUE), runif(n = p, -1, 1), 0) * 2
+y = X %*% beta + rnorm(n = sample_size, sd = 4)
+fit = glmnet::cv.glmnet(x = X, y = y, alpha = 1)
+sqrt(min(fit$cvm))
+```
+
+```{r}
+plot(fit, xlim = c(-6, 1), ylim = c(15, 20))
+```
+
+
+```{r}
+# type.measure = "class"
+```
+
+
+
+- TODO: Least Absolute Shrinkage and Selection Operator
+- TODO: https://statisticaloddsandends.wordpress.com/2018/11/15/a-deep-dive-into-glmnet-standardize/
+- TODO: https://www.jaredlander.com/2018/02/using-coefplot-with-glmnet/
+- TODO: statistical learning with sparsity book
+
+##  Old R4SL Regularization
+
+**Chapter Status:** Currently this chapter is very sparse. It essentially only expands upon an example discussed in ISL, thus only illustrates usage of the methods. Mathematical and conceptual details of the methods will be added later. Also, more comments on using `glmnet` with `caret` will be discussed.
+
+```{r reg_opts, include = FALSE}
+knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
+```
+
+We will use the `Hitters` dataset from the `ISLR` package to explore two shrinkage methods: **ridge regression** and **lasso**. These are otherwise known as **penalized regression** methods.
+
+```{r}
+data(Hitters, package = "ISLR")
+```
+
+This dataset has some missing data in the response `Salaray`. We use the `na.omit()` function the clean the dataset.
+
+```{r}
+sum(is.na(Hitters))
+sum(is.na(Hitters$Salary))
+Hitters = na.omit(Hitters)
+sum(is.na(Hitters))
+```
+
+The predictors variables are offensive and defensive statistics for a number of baseball players.
+
+```{r}
+names(Hitters)
+```
+
+We use the `glmnet()` and `cv.glmnet()` functions from the `glmnet` package to fit penalized regressions.
+
+```{r, message = FALSE, warning = FALSE}
+library(glmnet)
+```
+
+Unfortunately, the `glmnet` function does not allow the use of model formulas, so we setup the data for ease of use with `glmnet`. Eventually we will use `train()` from `caret` which does allow for fitting penalized regression with the formula syntax, but to explore some of the details, we first work with the functions from `glmnet` directly.
+
+```{r}
+X = model.matrix(Salary ~ ., Hitters)[, -1]
+y = Hitters$Salary
+```
+
+First, we fit an ordinary linear regression, and note the size of the predictors' coefficients, and predictors' coefficients squared. (The two penalties we will use.)
+
+```{r}
+fit = lm(Salary ~ ., Hitters)
+coef(fit)
+sum(abs(coef(fit)[-1]))
+sum(coef(fit)[-1] ^ 2)
+```
+
+
+## Ridge Regression
+
+We first illustrate **ridge regression**, which can be fit using `glmnet()` with `alpha = 0` and seeks to minimize
+
+$$
+\sum_{i=1}^{n} \left( y_i - \beta_0 - \sum_{j=1}^{p} \beta_j x_{ij}    \right) ^ 2 + \lambda \sum_{j=1}^{p} \beta_j^2 .
+$$
+
+Notice that the intercept is **not** penalized. Also, note that that ridge regression is **not** scale invariant like the usual unpenalized regression. Thankfully, `glmnet()` takes care of this internally. It automatically standardizes predictors for fitting, then reports fitted coefficient using the original scale.
+
+The two plots illustrate how much the coefficients are penalized for different values of $\lambda$. Notice none of the coefficients are forced to be zero.
+
+```{r ridge, fig.height = 4, fig.width = 8}
+par(mfrow = c(1, 2))
+fit_ridge = glmnet(X, y, alpha = 0)
+plot(fit_ridge)
+plot(fit_ridge, xvar = "lambda", label = TRUE)
+```
+
+We use cross-validation to select a good $\lambda$ value. The `cv.glmnet()`function uses 10 folds by default. The plot illustrates the MSE for the $\lambda$s considered. Two lines are drawn. The first is the $\lambda$ that gives the smallest MSE. The second is the $\lambda$ that gives an MSE within one standard error of the smallest.
+
+```{r}
+fit_ridge_cv = cv.glmnet(X, y, alpha = 0)
+plot(fit_ridge_cv)
+```
+
+The `cv.glmnet()` function returns several details of the fit for both $\lambda$ values in the plot. Notice the penalty terms are smaller than the full linear regression. (As we would expect.)
+
+```{r}
+# fitted coefficients, using 1-SE rule lambda, default behavior
+coef(fit_ridge_cv)
+```
+
+```{r}
+# fitted coefficients, using minimum lambda
+coef(fit_ridge_cv, s = "lambda.min")
+```
+
+```{r}
+# penalty term using minimum lambda
+sum(coef(fit_ridge_cv, s = "lambda.min")[-1] ^ 2)
+```
+
+```{r}
+# fitted coefficients, using 1-SE rule lambda
+coef(fit_ridge_cv, s = "lambda.1se")
+```
+
+```{r}
+# penalty term using 1-SE rule lambda
+sum(coef(fit_ridge_cv, s = "lambda.1se")[-1] ^ 2)
+```
+
+```{r, eval = FALSE}
+# predict using minimum lambda
+predict(fit_ridge_cv, X, s = "lambda.min")
+```
+
+```{r, eval = FALSE}
+# predict using 1-SE rule lambda, default behavior
+predict(fit_ridge_cv, X)
+```
+
+```{r}
+# calcualte "train error"
+mean((y - predict(fit_ridge_cv, X)) ^ 2)
+```
+
+```{r}
+# CV-RMSEs
+sqrt(fit_ridge_cv$cvm)
+```
+
+```{r}
+# CV-RMSE using minimum lambda
+sqrt(fit_ridge_cv$cvm[fit_ridge_cv$lambda == fit_ridge_cv$lambda.min])
+```
+
+```{r}
+# CV-RMSE using 1-SE rule lambda
+sqrt(fit_ridge_cv$cvm[fit_ridge_cv$lambda == fit_ridge_cv$lambda.1se]) 
+```
+
+
+## Lasso
+
+We now illustrate **lasso**, which can be fit using `glmnet()` with `alpha = 1` and seeks to minimize
+
+$$
+\sum_{i=1}^{n} \left( y_i - \beta_0 - \sum_{j=1}^{p} \beta_j x_{ij}    \right) ^ 2 + \lambda \sum_{j=1}^{p} |\beta_j| .
+$$
+
+Like ridge, lasso is not scale invariant.
+
+The two plots illustrate how much the coefficients are penalized for different values of $\lambda$. Notice some of the coefficients are forced to be zero.
+
+```{r lasso, fig.height = 4, fig.width = 8}
+par(mfrow = c(1, 2))
+fit_lasso = glmnet(X, y, alpha = 1)
+plot(fit_lasso)
+plot(fit_lasso, xvar = "lambda", label = TRUE)
+```
+
+Again, to actually pick a $\lambda$, we will use cross-validation. The plot is similar to the ridge plot. Notice along the top is the number of features in the model. (Which changed in this plot.)
+
+```{r}
+fit_lasso_cv = cv.glmnet(X, y, alpha = 1)
+plot(fit_lasso_cv)
+```
+
+`cv.glmnet()` returns several details of the fit for both $\lambda$ values in the plot. Notice the penalty terms are again smaller than the full linear regression. (As we would expect.) Some coefficients are 0.
+
+```{r}
+# fitted coefficients, using 1-SE rule lambda, default behavior
+coef(fit_lasso_cv)
+```
+
+```{r}
+# fitted coefficients, using minimum lambda
+coef(fit_lasso_cv, s = "lambda.min")
+```
+
+```{r}
+# penalty term using minimum lambda
+sum(coef(fit_lasso_cv, s = "lambda.min")[-1] ^ 2)
+```
+
+```{r}
+# fitted coefficients, using 1-SE rule lambda
+coef(fit_lasso_cv, s = "lambda.1se")
+```
+
+```{r}
+# penalty term using 1-SE rule lambda
+sum(coef(fit_lasso_cv, s = "lambda.1se")[-1] ^ 2)
+```
+
+```{r, eval = FALSE}
+# predict using minimum lambda
+predict(fit_lasso_cv, X, s = "lambda.min")
+```
+
+```{r, eval = FALSE}
+# predict using 1-SE rule lambda, default behavior
+predict(fit_lasso_cv, X)
+```
+
+```{r}
+# calcualte "train error"
+mean((y - predict(fit_lasso_cv, X)) ^ 2)
+```
+
+```{r}
+# CV-RMSEs
+sqrt(fit_lasso_cv$cvm)
+```
+
+```{r}
+# CV-RMSE using minimum lambda
+sqrt(fit_lasso_cv$cvm[fit_lasso_cv$lambda == fit_lasso_cv$lambda.min])
+```
+
+```{r}
+# CV-RMSE using 1-SE rule lambda
+sqrt(fit_lasso_cv$cvm[fit_lasso_cv$lambda == fit_lasso_cv$lambda.1se]) 
+```
+
+
+## `broom`
+
+Sometimes, the output from `glmnet()` can be overwhelming. The `broom` package can help with that.
+
+```{r, message = FALSE, warning = FALSE}
+library(broom)
+# the output from the commented line would be immense
+# fit_lasso_cv
+tidy(fit_lasso_cv)
+# the two lambda values of interest
+glance(fit_lasso_cv) 
+```
+
+
+## Simulated Data, $p > n$
+
+Aside from simply shrinking coefficients (ridge) and setting some coefficients to 0 (lasso), penalized regression also has the advantage of being able to handle the $p > n$ case.
+
+```{r}
+set.seed(1234)
+n = 1000
+p = 5500
+X = replicate(p, rnorm(n = n))
+beta = c(1, 1, 1, rep(0, 5497))
+z = X %*% beta
+prob = exp(z) / (1 + exp(z))
+y = as.factor(rbinom(length(z), size = 1, prob = prob))
+```
+
+We first simulate a classification example where $p > n$.
+
+```{r}
+# glm(y ~ X, family = "binomial")
+# will not converge
+```
+
+We then use a lasso penalty to fit penalized logistic regression. This minimizes
+
+$$
+\sum_{i=1}^{n} L\left(y_i, \beta_0 + \sum_{j=1}^{p} \beta_j x_{ij}\right) + \lambda \sum_{j=1}^{p} |\beta_j|
+$$
+
+where $L$ is the appropriate *negative* **log**-likelihood.
+
+```{r}
+library(glmnet)
+fit_cv = cv.glmnet(X, y, family = "binomial", alpha = 1)
+plot(fit_cv)
+```
+
+```{r}
+head(coef(fit_cv), n = 10)
+```
+
+```{r}
+fit_cv$nzero
+```
+
+Notice, only the first three predictors generated are truly significant, and that is exactly what the suggested model finds.
+
+```{r}
+fit_1se = glmnet(X, y, family = "binomial", lambda = fit_cv$lambda.1se)
+which(as.vector(as.matrix(fit_1se$beta)) != 0)
+```
+
+We can also see in the following plots, the three features entering the model well ahead of the irrelevant features.
+
+```{r, fig.height = 4, fig.width = 8}
+par(mfrow = c(1, 2))
+plot(glmnet(X, y, family = "binomial"))
+plot(glmnet(X, y, family = "binomial"), xvar = "lambda")
+```
+
+We can extract the two relevant $\lambda$ values.
+
+```{r}
+fit_cv$lambda.min
+fit_cv$lambda.1se
+```
+
+Since `cv.glmnet()` does not calculate prediction accuracy for classification, we take the $\lambda$ values and create a grid for `caret` to search in order to obtain prediction accuracy with `train()`. We set $\alpha = 1$ in this grid, as `glmnet` can actually tune over the $\alpha = 1$ parameter. (More on that later.)
+
+Note that we have to force `y` to be a factor, so that `train()` recognizes we want to have a binomial response. The `train()` function in `caret` use the type of variable in `y` to determine if you want to use `family = "binomial"` or `family = "gaussian"`.
+
+```{r, message = FALSE, warning = FALSE}
+library(caret)
+cv_5 = trainControl(method = "cv", number = 5)
+lasso_grid = expand.grid(alpha = 1, 
+                         lambda = c(fit_cv$lambda.min, fit_cv$lambda.1se))
+lasso_grid
+```
+
+```{r}
+sim_data = data.frame(y, X)
+fit_lasso = train(
+  y ~ ., data = sim_data,
+  method = "glmnet",
+  trControl = cv_5,
+  tuneGrid = lasso_grid
+)
+fit_lasso$results
+```
+
+The interaction between the `glmnet` and `caret` packages is sometimes frustrating, but for obtaining results for particular values of $\lambda$, we see it can be easily used. More on this next chapter.
+
+
+## External Links
+
+- [`glmnet` Web Vingette](https://web.stanford.edu/~hastie/glmnet/glmnet_alpha.html) - Details from the package developers. (Is this old and out-of-date? But still useful?)
+
+
+## `rmarkdown`
+
+The `rmarkdown` file for this chapter can be found [**here**](24-regularization.Rmd). The file was created using `R` version `r paste0(version$major, "." ,version$minor)`. The following packages (and their dependencies) were loaded when knitting this file:
+
+```{r, echo = FALSE}
+names(sessionInfo()$otherPkgs)
+```
+
+## from scratch.r
+
+```{r, eval = FALSE}
+# add test-train splitting of data
+
+# only do this in the book????
+
+library("glmnet")
+
+make_new_var = function(x, mu = 0, sigma = 0.6) {
+  (x + rnorm(n = length(x), mean = mu, sd = sigma)) * sample(c(1, 1), size = 1)
+}
+
+sample_size = 500
+p = 1000
+mu = rep(0, p)
+
+# cov_mat = rWishart(1, p, diag(1, nrow = p, ncol = p))[, , 1]
+# x = MASS::mvrnorm(n = sample_size, mu = mu, Sigma = cov_mat)
+
+x_1 = runif(n = sample_size, min = -1, max = 1)
+x_list = purrr::map(1:p, ~ make_new_var(x = x_1))
+x = as.matrix(do.call(cbind.data.frame, x_list))
+
+
+# beta = rep(0.001, p)
+beta = sample(x = c(0, 0.2), replace = TRUE, size = p, prob = c(0.80, 0.20))
+y = 5 + x %*% beta + rnorm(n = sample_size)
+z = list(x = x, y = y)
+
+
+
+fit_lasso = cv.glmnet(x = z$x, y = z$y, alpha = 1) # lasso
+fit_ridge = cv.glmnet(x = z$x, y = z$y, alpha = 0) # ridge
+# fit_ordin = cv.glmnet(x = z$x, y = z$y, alpha = 0, lambda = c(999, 0))
+
+fit_lasso
+fit_ridge
+# fit_ordin
+
+plot(fit_lasso)
+plot(fit_ridge)
+
+hist(cor(x)[upper.tri(cor(x))])
+
+cor(asdf[[1]], asdf[[5]])
+cor(zzz[1, ], zzz[5, ])
+
+
+cor_mat = matrix(runif(p * p), ncol = p)
+cor_mat = (cor_mat * lower.tri(cor_mat)) + t(cor_mat * lower.tri(cor_mat))
+diag(cor_mat) = 1
+
+# asdf = Matrix::nearPD(cor_mat)
+
+stdevs = round(rexp(n = p, rate = 0.25), 2)
+cov_mat = cor2cov(V = cor_mat, sd = stdevs)
+
+# with diag(p)
+# > summary(as.numeric(cor(x)))
+# Min.    1st Qu.     Median       Mean    3rd Qu.       Max. 
+# -0.2080438 -0.0303084 -0.0001621  0.0008833  0.0302504  1.0000000 
+
+# with random wishart
+# > summary(as.numeric(cor(x)))
+# Min.    1st Qu.     Median       Mean    3rd Qu.       Max. 
+# -0.2820794 -0.0369705  0.0001681  0.0010356  0.0372237  1.0000000 
+
+p = 100
+hist(cov2cor(rWishart(1, p, diag(1, nrow = p, ncol = p))[, , 1]))
+
+A = matrix(runif(p ^ 2) * 2 - 1, ncol = p)
+hist(cov2cor(A + t(A)))
+```
+
+

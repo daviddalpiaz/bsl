@@ -5,20 +5,14 @@ knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
 ```
 
 ```{r, message = FALSE, warning = FALSE}
-library(readr)
-library(tibble)
-library(dplyr)
-library(purrr)
-library(ggplot2)
+library(tidyverse)
 library(ggridges)
 library(lubridate)
 library(randomForest)
 library(rpart)
 library(rpart.plot)
-library(cluster)
 library(caret)
 library(factoextra)
-library(rsample)
 library(janitor)
 library(rvest)
 library(dendextend)
@@ -128,6 +122,7 @@ show_digit(mnist_trn_x[5, ],  main = "An Example Nine")
 ```{r}
 set.seed(42)
 mnist_rf = randomForest(x = mnist_trn_x, y = mnist_trn_y, ntree = 100)
+mnist_rf = nnet::multinom(x = mnist_trn_x, y = mnist_trn_y, ntree = 100)
 ```
 
 ## Model Evaluation

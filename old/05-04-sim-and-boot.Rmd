@@ -1,21 +1,9 @@
 # Simulation and Bootstrap
 
-***
-
-## STAT 432 Materials
-
-- [**Slides** | Bootstrap](https://fall-2019.stat432.org/slides/bootstrap.pdf)
-
-***
-
-```{r resampling_opts, include = FALSE}
-knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center")
-```
-
-**Note:** In the future this should become two chapters, and be greatly expanded. Perhaps introduce simulation, ECDF, and plug-in-principle very early.
+## Monte Carlo Simulation
 
 ```{r}
-library(microbenchmark)
+library("microbenchmark")
 ```
 
 ```{r}
@@ -25,15 +13,15 @@ data = rexp(n = 100, rate = 0.5)
 ```
 
 ```{r}
-# quantities of interest
+# parameters of interest
 1 / 0.5 # mean
-qexp(0.5, rate = 0.5)
+qexp(0.5, rate = 0.5) # median
 pexp(8, rate = 0.5, lower.tail = FALSE) # probability P[X > 8]
 ```
 
 ```{r}
-# estimates using sampled data
-mean(data) # boring
+# estimates using sample data
+mean(data)
 median(data)
 mean(data > 8)
 ```
@@ -97,7 +85,7 @@ simulated_medians = replicate(n = 10000, median(rexp(n = 100, rate = 0.5)))
 ```
 
 ```{r}
-# use EDCD and plug-in principle to learn about distribution and make estimates
+# use EDF and plug-in principle to learn about distribution and make estimates
 mean(simulated_medians)
 sd(simulated_medians)
 quantile(simulated_medians, probs = c(0.025, 0.975))
@@ -124,7 +112,7 @@ simulated_probs = replicate(n = 10000, mean(rexp(n = 100, rate = 0.5) > 8))
 ```
 
 ```{r}
-# use EDCD and plug-in principle to learn about distribution and make estimates
+# use EDF and plug-in principle to learn about distribution and make estimates
 mean(simulated_probs)
 sd(simulated_probs)
 quantile(simulated_probs, probs = c(0.025, 0.975))
@@ -244,21 +232,17 @@ true_median = qexp(0.5, rate = 0.5) # median
 ```{r}
 check_if_in_interval = function() {
   data = rexp(n = 100, rate = 0.5)
-  replicated_medians = replicate(n = 2000, median(sample(data, replace = TRUE)))
+  replicated_medians = replicate(n = 1000, median(sample(data, replace = TRUE)))
   interval = quantile(replicated_medians, probs = c(0.025, 0.975))
   interval[1] < true_median & true_median < interval[2]
 }
 ```
 
 ```{r}
-median_in_out = replicate(n = 200, check_if_in_interval())
+median_in_out = replicate(n = 500, check_if_in_interval())
 mean(median_in_out)
 ```
 
 ```{r}
 microbenchmark(check_if_in_interval())
 ```
-
-## Misc Notes
-
-- TODO: https://statistics.stanford.edu/sites/g/files/sbiybj6031/f/BIO%2083.pdf
