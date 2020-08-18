@@ -2,13 +2,9 @@
 
 
 
-***
-
 STAT 432 is not a course about probability. STAT 432 is a course that uses probability.
 
 We give a very brief review of some necessary probability concepts. As the treatment is less than complete, a list of references is given at the end of the chapter. For example, we ignore the usual recap of basic set theory and omit proofs and examples. Reading the information below will likely be unsatisfying. Instead, we suggest that you skip it, engage with the relevant quizzes, then return as needed for reference.
-
-***
 
 ## Reading
 
@@ -18,8 +14,6 @@ We give a very brief review of some necessary probability concepts. As the treat
 - **Reference:** [MIT 6.041: Lecture Notes](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010/lecture-notes/)
 - **Reference:** [MIT 6.041: Readings](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010/readings/)
 - **Reference:** [STAT 414 @ PSU: Notes](https://online.stat.psu.edu/stat414/node/287/)
-
-***
 
 ## Probability Models
 
@@ -31,8 +25,6 @@ A **probability model** that describes the uncertainty of an experiment consists
 -  A **probability function** that assigns to an event $A$ a nonnegative number, $P[A]$, that represents how likely it is that event $A$ occurs as a result of the experiment.
 
 We call $P[A]$ the **probability** of event $A$. An **event** $A$ could be any subset of the sample space, not necessarily a single possible outcome. The probability law must follow a number of rules, which are the result of a set of axioms that we introduce now.
-
-***
 
 ## Probability Axioms
 
@@ -47,8 +39,6 @@ P\left[\bigcup_{i = 1}^{\infty} E_i\right] = \sum_{i = 1}^{\infty} P[E_i]
 $$
 
 Using these axioms, many additional probability rules can easily be derived.
-
-***
 
 ## Probability Rules
 
@@ -141,8 +131,6 @@ If this is the case, then the chain rule is greatly simplified to:
 $$
 P\left[\textstyle\bigcap_{i = 1}^{n} E_i\right] = \prod_{i=1}^{n}P[E_i]
 $$
-
-***
 
 ## Random Variables
 
@@ -238,8 +226,6 @@ $$
 for all $x$ and $y$. Here $f(x, y)$ is the **joint** density (mass) function of $X$ and $Y$. We call $f(x)$ the **marginal** density (mass) function of $X$. Then $f(y)$ the marginal density (mass) function of $Y$. The joint density (mass) function $f(x, y)$ together with the possible $(x, y)$ values specify the joint distribution of $X$ and $Y$.
 
 Similar notions exist for more than two variables.
-
-***
 
 ## Expectations
 
@@ -358,8 +344,6 @@ sum(dpois(x = x_data, lambda = 5, log = TRUE))
 ## [1] -68.11844
 ```
 
-***
-
 ## References
 
 Any of the following are either dedicated to, or contain a good coverage of the details of the topics above.
@@ -382,11 +366,3 @@ The YouTube channel [mathematicalmonk](https://www.youtube.com/user/mathematical
 - [Independence](https://www.youtube.com/watch?v=KK9jvGl9FY0&index=12&list=PL17567A1A3F5DB5E4)
 - [More Independence](https://www.youtube.com/watch?v=RMS-WglZP-c&index=13&list=PL17567A1A3F5DB5E4)
 - [Bayes Rule](https://www.youtube.com/watch?v=cM1BqBv11U8&index=14&list=PL17567A1A3F5DB5E4)
-
-***
-
-## Source
-
-- `R` Markdown: [`probability.Rmd`](probability.Rmd)
-
-***

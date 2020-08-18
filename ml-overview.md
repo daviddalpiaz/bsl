@@ -2,7 +2,17 @@
 
 
 
-STAT 432 is a course about machine learning? Let's try to define machine learning.
+This is a book about machine learning, so let's try to define machine learning in this chapter.
+
+Specifically, we'll discuss:
+
+- What is **machine learning**?
+- The difference between **supervised learning** and **unsupervised learning**.
+- The difference between **classification** and **regression**.
+
+**Source:** [`ml-overview.Rmd`](ml-overview.Rmd)
+
+<!-- - TODO: models = functions (in this context). algorithms (learners) learn models. models make predictions. (algorithms take in data and spit out models models take in data and spit out predictions/classifications/probabilities) -->
 
 ## What is Machine Learning?
 
@@ -405,9 +415,3 @@ While we will dedicate a large amount of time to answering this question, someti
 - *How* do we **evaluate** how well learned functions work?
 
 This text places a high priority on being able to **do** machine learning, specifically do machine learning in R. You can actually do a lot of machine learning without fully understanding how the learning is taking place. That makes the *evaluation* of ML models extremely important.
-
-## Source
-
-- `R` Markdown: [`ml-overview.Rmd`](ml-overview.Rmd)
-
-<!-- - TODO: models = functions (in this context). algorithms (learners) learn models. models make predictions. (algorithms take in data and spit out models models take in data and spit out predictions/classifications/probabilities) -->

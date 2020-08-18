@@ -4,8 +4,6 @@
 
 
 
-***
-
 ## Books
 
 - [An Introduction to Statistical Learning](https://faculty.marshall.usc.edu/gareth-james/ISL/)
@@ -35,8 +33,6 @@
 - [Grokking Deep Learning](https://www.manning.com/books/grokking-deep-learning)
   - Andrew W. Trask
 
-***
-
 ## Papers
 
 - [Do we Need Hundreds of Classifiers to Solve Real World Classification Problems?](http://jmlr.csail.mit.edu/papers/volume15/delgado14a/delgado14a.pdf)
@@ -46,7 +42,6 @@
 - [50 Years of Data Science](https://www.tandfonline.com/doi/full/10.1080/10618600.2017.1384734)
   - David Donoho
 
-***
 
 ## Blog Posts
 
@@ -55,11 +50,8 @@
 - [Math for Machines: Optimal Boundaries](https://mathformachines.com/posts/decision/)
 - [Variance Explained: What's the difference between data science, machine learning, and artificial intelligence?](http://varianceexplained.org/r/ds-ml-ai/)
 
-***
 
 ## Miscellaneous 
 
 - [Machine Learning verus Statistics, A Glossary](https://statweb.stanford.edu/~tibs/stat315a/glossary.pdf)
   - Rob Tibshirani
-
-***

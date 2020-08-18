@@ -2,24 +2,16 @@
 
 
 
-***
-
 STAT 432 is a course about statistics, in particular, some specific statistics. To discuss the statistics of interest in STAT 432, we will need some general concepts about statistics.
 
 <!-- - TODO: Where we are going, estimating conditional means and distributions. -->
 <!-- - TODO: estimation = learning. "learning from data." what are we learning about? often parameters. -->
-
-**Note:** This section has been published while being nearly empty to provide easy access to a few definitions needed for Quiz 01. Additional information was added ahead of Quiz 02, but it is still very sparse as it is difficult to summarize all of statistics in one chapter. In reality we just need to state a few definitions here and then move on to the next chapter, where the fun begins.
-
-***
 
 ## Reading
 
 - **Reference:** [STAT 400 @ UIUC: Notes and Homework](http://stat400.org)
 - **Reference:** [STAT 3202 @ OSU: Fitting a Probability Model](https://daviddalpiaz.github.io/stat3202-sp19/notes/fitting.html)
 - **Reference:** [STAT 415 @ PSU: Notes](https://online.stat.psu.edu/stat414/node/213/)
-
-***
 
 ## Statistics
 
@@ -320,11 +312,3 @@ grid()
 <img src="statistics_files/figure-html/unnamed-chunk-3-1.png" width="576" style="display: block; margin: auto;" />
 
 We have purposefully used a "small" sample size here so that the EDF is visibly a step function. Modify the code above to increase the sample size. You should notice that the three functions converge as the sample size increases.
-
-***
-
-## Source
-
-- `R` Markdown: [`statistics.Rmd`](statistics.Rmd)
-
-***

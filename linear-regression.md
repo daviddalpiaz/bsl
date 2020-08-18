@@ -2,29 +2,25 @@
 
 
 
-
-
-***
-
 This chapter will discuss **linear regression** models, but for a very specific purpose: using linear regression models to make **predictions**.
 
 Specifically, we will discuss:
 
-- The regression function and estimating conditional means.
-- Using the `lm()` and `predict()` functions in R.
-- Data splits to evaluate model performance for machine learning tasks.
+- The **regression function** and estimating **conditional means**.
+- Using the **`lm()`** and **`predict()`** functions in R.
+- Data **splits** to evaluate model performance for machine learning tasks.
 
-***
+**Source:** [`linear-regression.Rmd`](linear-regression.Rmd)
 
-## Reading
+<!-- *** -->
 
-- **Required:** [ISL Chapter 3](https://faculty.marshall.usc.edu/gareth-james/ISL/ISLR%20Seventh%20Printing.pdf)
-  - Skip section 3.6 which is dedicated to R.
-  - Consider this reading a review of previous regression knowledge. The information provided in this chapter of BSL will be the relevant material for STAT 432, but it is still worthwhile to read ISL. However note that this chapter of ISL overemphasizes inference, diagnostics, and at times hints too closely to causal claims for novice readers. (We're not saying the authors are guilty of making the "correlation is not causation error," instead, we've found that we need to be extremely clear about this issue with students in STAT 432.)
-- **Reference:** [STAT 420 @ UIUC: Notes](http://stat420.org)
-  - In particular [Chapter 10](https://daviddalpiaz.github.io/appliedstats/model-building.html) which discusses model building will be relevant. The section on explanation versus prediction is extremely relevant, although note that it contains some differences in definitions, especially concerning test data. That said, the general ideas are important.
+<!-- ## Reading -->
 
-***
+<!-- - **Required:** [ISL Chapter 3](https://faculty.marshall.usc.edu/gareth-james/ISL/ISLR%20Seventh%20Printing.pdf) -->
+<!--   - Skip section 3.6 which is dedicated to R. -->
+<!--   - Consider this reading a review of previous regression knowledge. The information provided in this chapter of BSL will be the relevant material for STAT 432, but it is still worthwhile to read ISL. However note that this chapter of ISL overemphasizes inference, diagnostics, and at times hints too closely to causal claims for novice readers. (We're not saying the authors are guilty of making the "correlation is not causation error," instead, we've found that we need to be extremely clear about this issue with students in STAT 432.) -->
+<!-- - **Reference:** [STAT 420 @ UIUC: Notes](http://stat420.org) -->
+<!--   - In particular [Chapter 10](https://daviddalpiaz.github.io/appliedstats/model-building.html) which discusses model building will be relevant. The section on explanation versus prediction is extremely relevant, although note that it contains some differences in definitions, especially concerning test data. That said, the general ideas are important. -->
 
 ## Explanation versus Prediction
 
@@ -35,7 +31,7 @@ Suppose (although it is likely untrue) that there is a strong correlation betwee
 - Suppose you are a car insurance company. This is great news! You can now more accurately predict the number of accidents of your policy holders if you know whether or not they wear a wrist watch. For the sake of understanding how much your company will need to pay out in a year, you don't care what *causes* accidents, you just want to be able to **predict** (estimate) the number of accidents.
 - Suppose you are a car driver. As a driver, you want to stay safe. That is, you want to do things that decrease accidents. In this framing, you care about things that **cause** accidents, not things that *predict* accidents. In other words, this correlation information should **not** lead to you throwing away your wrist watch.
 
-*Disclaimer:* Extremely high correlation should not simply be ignored. For example, there is a very high correlation between smoking and lung cancer. (Fun fact: [RA Fisher](https://en.wikipedia.org/wiki/Ronald_Fisher), the most famous statistician, did not believe that smoking caused cancer. It's actually a part of a larger [fasinating story](https://rss.onlinelibrary.wiley.com/doi/full/10.1111/j.1740-9713.2014.00765.x).) However, this strong correlation is not proof that smoking causes lung cancer. Instead, additional study is needed to rule out confounders, establish mechanistic relationships, and more.
+*Disclaimer:* Extremely high correlation should not simply be ignored. For example, there is a very high correlation between smoking and lung cancer.^[Fun fact: [RA Fisher](https://en.wikipedia.org/wiki/Ronald_Fisher), the most famous statistician, did not believe that smoking caused cancer. It's actually a part of a larger [fasinating story](https://rss.onlinelibrary.wiley.com/doi/full/10.1111/j.1740-9713.2014.00765.x).] However, this strong correlation is not proof that smoking causes lung cancer. Instead, additional study is needed to rule out confounders, establish mechanistic relationships, and more.
 
 ## Setup
 
@@ -1382,11 +1378,3 @@ The predicted versus actual plot almost looks too good to be true! Wow! (Oh, wai
 In summary, if this data were real, we might have an interesting result!
 
 Do note, that both this example and the previous should not be considered **data analyses**, but instead, examples that reinforce how to use the validation and test sets. As part of a true analysis, we will need to be much more careful about some of our decision. More on this later! Up next: nonparametric regression methods.
-
-***
-
-## Source
-
-- `R` Markdown: [`linear-regression.Rmd`](linear-regression.Rmd)
-
-***

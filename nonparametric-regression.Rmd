@@ -1,9 +1,5 @@
 # Nonparametric Regression
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = TRUE, fig.align = "center", cache = TRUE, autodep = TRUE)
-```
-
 ```{r packages, include = FALSE}
 library("tidyverse")
 library("caret")
@@ -12,8 +8,6 @@ library("rpart.plot")
 library("knitr")
 library("kableExtra")
 ```
-
-***
 
 In this chapter, we will continue to explore models for making **predictions**, but now we will introduce **nonparametric models** that will contrast the **parametric models** that we have used previously.
 
@@ -29,14 +23,6 @@ We will also hint at, but delay one more chapter discussion of:
 
 - What is **model flexibility**? What are **tuning parameters**? (What are model parameters?) 
 - What is **overfitting**? How do we avoid it?
-
-***
-
-## Reading
-
-- Currently no additional reading for this chapter.
-
-***
 
 ## Mathematical Setup
 
@@ -452,8 +438,6 @@ grid()
 
 We see that as `minsplit` *decreases*, model flexibility **increases**. By allow splits of neighborhoods with fewer observations, we obtain more splits, which results in a more flexible model.
 
-***
-
 ## Example: Credit Card Data
 
 Let's return to the credit card data from the previous chapter. While last time we used the data to inform a bit of analysis, this time we will simply use the dataset to illustrate some concepts.
@@ -668,10 +652,6 @@ predict(crdt_tree_all, crdt_val[1:5, ])
 
 What does this code do? It estimates the mean `Rating` given the feature information (the "x" values) from the first five observations from the validation data using a decision tree model with default tuning parameters. Hopefully a theme is emerging.
 
-***
-
 ## Source
 
 - `R` Markdown: [`nonparametric-regression.Rmd`](nonparametric-regression.Rmd)
-
-***
