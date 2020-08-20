@@ -292,8 +292,6 @@ pnorm(q = k, mean = 6, sd = 2.6)
 
 Note that technically `sd(x)` does not return the MLE of $\sigma$ since it uses the unbiased estimator with a denominator of $n - 1$ instead of $n$, but we're being lazy for the sake of some cleaner code.
 
-<!-- - TODO: Create plot of results of above. Like this: https://en.wikipedia.org/wiki/Empirical_distribution_function#/media/File:ECDF-100.png -->
-
 
 ```r
 plot(ecdf(y), 
