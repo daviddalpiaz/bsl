@@ -91,7 +91,7 @@ This will save you a lot of headache in STAT 432 and the future.
 
 ### R Versions
 
-You should always use the most up-to-date version of R and RStudio. You **must** use at least R versions 3.6.2.
+You should always use the most up-to-date version of R and RStudio. You **must** use at least R version 4.0.2.
 
 Importantly, R versions after 3.6.0 have slightly different random number generation. Although, even with the most recent version, sometimes R keeps the old random number generation. To check that you are on the most recent random number generation, run:
 
