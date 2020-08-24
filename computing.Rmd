@@ -105,7 +105,7 @@ If your output matches the output above, you're all set. If not, run:
 RNGversion(getRversion())
 ```
 
-Then re-run `RNGkind()` and everything should match up and you should be go to go!
+Then re-run `RNGkind()` and everything should match up and you should be good to go!
 
 ### Packages
 
