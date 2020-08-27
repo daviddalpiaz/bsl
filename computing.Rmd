@@ -233,7 +233,7 @@ Some of the previous section applies here as well, but additionally, some more s
 
 ### Style Heuristics
 
-Now that we've overwhelmed you with information about style, will leave you with the real advice. The most important thing to consider when evaluating the style of your code is **consistency**.
+Now that we've overwhelmed you with information about style, we will leave you with the real advice. The most important thing to consider when evaluating the style of your code is **consistency**.
 
 In order, you should be consistent:
 
