@@ -957,11 +957,11 @@ head(dmnd_trn, n = 10)
 
 Our goal here will be to build a model to predict the `price` of a diamond given it's characteristics. Let's create a few EDA plots.
 
-```{r, fig.height = 12, fig.width = 12, echo = FALSE, warning = FALSE, message = FALSE}
+```{r diamonds-pairs-1, fig.height = 12, fig.width = 12, echo = FALSE, warning = FALSE, message = FALSE}
 GGally::ggpairs(dmnd_trn[, c(2, 3, 4, 10)], progress = FALSE)
 ```
 
-```{r, fig.height = 12, fig.width = 12, echo = FALSE, warning = FALSE, message = FALSE}
+```{r diamonds-pairs-2, fig.height = 12, fig.width = 12, echo = FALSE, warning = FALSE, message = FALSE}
 GGally::ggpairs(dmnd_trn[, -c(2, 3, 4)], progress = FALSE)
 ```
 
@@ -1070,7 +1070,7 @@ To get a better "look" at the data, consider running the following:
 
 We also create a pairs plot.
 
-```{r, fig.height = 12, fig.width = 12, echo = FALSE, warning = FALSE, message = FALSE}
+```{r credit-pairs, fig.height = 12, fig.width = 12, echo = FALSE, warning = FALSE, message = FALSE}
 GGally::ggpairs(crdt_trn, progress = FALSE)
 ```
 
