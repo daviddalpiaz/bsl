@@ -1,9 +1,14 @@
 # Machine Learning Overview
 
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center", cache = TRUE, autodep = TRUE)
+```
+
 ```{r packages, include = FALSE}
-library("tidyverse")
-library("knitr")
-library("kableExtra")
+library(magrittr)
+library(tibble)
+library(knitr)
+library(kableExtra)
 ```
 
 This is a book about machine learning, so let's try to define machine learning in this chapter.

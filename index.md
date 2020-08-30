@@ -1,7 +1,7 @@
 ---
 title: "Basics of Statistical Learning"
 author: "[David Dalpiaz](https://daviddalpiaz.org/)"
-# date: "2020-08-27"
+# date: "2020-08-30"
 github-repo: daviddalpiaz/bsl
 url: 'https\://statisticallearning.org/'
 site: bookdown::bookdown_site
@@ -94,7 +94,7 @@ The text can be accessed from <https://statisticallearning.org/>.
 
 ## When?
 
-This book was last updated on: 2020-08-27.^[The author has no idea what else to write in this section, but the last updated date seems like useful information.]
+This book was last updated on: 2020-08-30.^[The author has no idea what else to write in this section, but the last updated date seems like useful information.]
 
 ## How?
 
@@ -110,11 +110,31 @@ Users that are familiar with these tools, most importantly GitHub, are encourage
 
 **This "book" is under active development.** Literally every element of the book is subject to change, at any moment. This text, BSL, is the successor to [R4SL](https://daviddalpiaz.github.io/r4sl/), an unfinished work that began as a supplement to [Introduction to Statistical Learning](https://faculty.marshall.usc.edu/gareth-james/ISL/), but was never finished. (In some sense, this book is just a fresh start due to the author wanting to change the presentation of the material. The author is seriously worried that he will encounter the second-system effect.^[Wikipedia: [Second-System Effect](https://en.wikipedia.org/wiki/Second-system_effect)]
 
-<!-- Because this book is written with a course in mind, that is actively being taught, often out of convenience the text will speak directly to the students of that course. Thus, be aware that any reference to a "course" are a reference to [STAT 432 @ UIUC](www.stat432.org). -->
+Because this book is written with a course in mind, that is actively being taught, often out of convenience the text will speak directly to the students of that course. Thus, be aware that any references to a "course" are a reference to [STAT 432 @ UIUC](www.stat432.org).
 
 Since this book is under active development you may encounter errors ranging from typos, to broken code, to poorly explained topics. If you do, please let us know! Better yet, fix the issue yourself!^[Yihui Xie: [You Do Not Need to Tell Me I Have A Typo in My Documentation](https://yihui.name/en/2013/06/fix-typo-in-documentation/)] If you are familiar with R Markdown and GitHub, [pull requests are highly encouraged!](https://github.com/daviddalpiaz/bsl). This process is partially automated by the edit button in the top-left corner of the html version. If your suggestion or fix becomes part of the book, you will be added to the acknowledgments in this chapter this chapter. We’ll also link to your GitHub account, or personal website upon request. If you're not familiar with version control systems feel free to email the author, `dalpiaz2 AT illinois DOT edu`.^[But also consider using this opportunity to learn a bit about version control!] See additional details in the Acknowledgments section above.
 
 While development is taking place, you may see "TODO" items scattered throughout the text. These are mostly notes for internal use, but give the reader some idea of what development is still to come.
+
+### Packages
+
+The following will install all R packages needed to follow along with the text.
+
+
+```r
+install.packages(
+  "tidyverse",
+  "kableExtra",
+  "GGally",
+  "ISLR",
+  "klaR",
+  "rpart",
+  "rpart.plot",
+  "caret",
+  "ellipse",
+  "gbm"
+)
+```
 
 ### License
 

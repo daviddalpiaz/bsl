@@ -64,6 +64,7 @@ In addition to the above readings, the following resources are more specific or 
 #### Markdown
 
 - [Daring Fireball - Markdown: Basics](https://daringfireball.net/projects/markdown/basics)
+- [Markdown Guide](https://www.markdownguide.org/)
 - [GitHub - Mastering Markdown](https://guides.github.com/features/mastering-markdown/)
 - [CommonMark](https://commonmark.org/)
 
@@ -347,7 +348,7 @@ View(summary(cars_mod)) # RStudio only
 
 To get documentation about a function in R, simply put a question mark in front of the function name and RStudio will display the documentation, for example:
 
-```{r}
+```{r, eval = FALSE}
 ?log
 ?sin
 ?paste

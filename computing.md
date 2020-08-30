@@ -62,6 +62,7 @@ In addition to the above readings, the following resources are more specific or 
 #### Markdown
 
 - [Daring Fireball - Markdown: Basics](https://daringfireball.net/projects/markdown/basics)
+- [Markdown Guide](https://www.markdownguide.org/)
 - [GitHub - Mastering Markdown](https://guides.github.com/features/mastering-markdown/)
 - [CommonMark](https://commonmark.org/)
 

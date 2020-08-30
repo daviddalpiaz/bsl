@@ -9,6 +9,7 @@ when
 how
 build-tools
 active-development
+packages
 license
 machine-learning-overview
 what-is-machine-learning
@@ -22,8 +23,9 @@ density-estimation
 outlier-detection
 open-questions
 linear-regression
+r-setup-and-source
 explanation-versus-prediction
-setup
+task-setup
 mathematical-setup
 linear-regression-models
 using-lm
@@ -34,6 +36,7 @@ graphical-evaluation
 example-simple-simulated-data
 example-diamonds-data
 example-credit-card-data
+session-info
 additional-reading
 books
 papers
@@ -49,7 +52,7 @@ markdown
 stat-432-idioms
 dont-restore-old-workspaces
 r-versions
-packages
+packages-1
 code-style
 reference-style
 stat-432-r-style-overrides

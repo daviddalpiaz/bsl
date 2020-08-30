@@ -2,53 +2,58 @@
 
 
 
-This chapter will discuss **linear regression** models, but for a very specific purpose: using linear regression models to make **predictions**.
+This chapter will discuss **linear regression** models, but for a very specific purpose: using linear regression models to make **predictions**. Viewed this way, linear regression will be our first example of a supervised learning algorithm.
 
 Specifically, we will discuss:
 
 - The **regression function** and estimating **conditional means**.
 - Using the **`lm()`** and **`predict()`** functions in R.
-- Data **splits** to evaluate model performance for machine learning tasks.
+- Data **splits** used in evaluation of model performance for machine learning tasks.
+- **Metrics** for evaluating models used for the regression task.
 
-**Source:** [`linear-regression.Rmd`](linear-regression.Rmd)
+This chapter will be the most action packed as we will establish a framework that will be recycled throughout the rest of the text.
 
-<!-- *** -->
+## R Setup and Source
 
-<!-- ## Reading -->
 
-<!-- - **Required:** [ISL Chapter 3](https://faculty.marshall.usc.edu/gareth-james/ISL/ISLR%20Seventh%20Printing.pdf) -->
-<!--   - Skip section 3.6 which is dedicated to R. -->
-<!--   - Consider this reading a review of previous regression knowledge. The information provided in this chapter of BSL will be the relevant material for STAT 432, but it is still worthwhile to read ISL. However note that this chapter of ISL overemphasizes inference, diagnostics, and at times hints too closely to causal claims for novice readers. (We're not saying the authors are guilty of making the "correlation is not causation error," instead, we've found that we need to be extremely clear about this issue with students in STAT 432.) -->
-<!-- - **Reference:** [STAT 420 @ UIUC: Notes](http://stat420.org) -->
-<!--   - In particular [Chapter 10](https://daviddalpiaz.github.io/appliedstats/model-building.html) which discusses model building will be relevant. The section on explanation versus prediction is extremely relevant, although note that it contains some differences in definitions, especially concerning test data. That said, the general ideas are important. -->
+```r
+library(tibble)     # data frame printing
+library(dplyr)      # data manipulating
+library(knitr)      # creating tables
+library(kableExtra) # styling tables
+```
+
+Additionally, objects from `ggplot2`, `GGally`, and `ISLR` are accessed. For full package details, including packages loaded via dependencies, see the session information at the end of this chapter. Recall that the [Welcome](index.html) chapter contains directions for installing all necessary packages for following along with the text. The R Markdown source is provided as some code, mostly for creating plots, has been suppressed from the rendered document that you are currently reading.
+
+- **Source:** [`linear-regression.Rmd`](linear-regression.Rmd)
 
 ## Explanation versus Prediction
 
-Before we even begin to discuss regression, we make a bold announcement: **STAT 432 is not a course about inference.** It is very possible that there will be **zero** causal claims in this book. While it would certainly be nice (but extremely difficult) to uncover causal relationships, our focus will be on predictive relationships.
+Before we even begin to discuss regression, we make a strong declaration: **this is not a text about general statistical inference.**  We will focus our efforts on a narrow sub-goal of inference: making **predictions**. We will only make a passing attempt to explain why our models make the predictions they do and it is very possible that there will be *zero* causal claims in this book. While it would certainly be nice (but extremely difficult) to uncover explanations for predictions or causal relationships, our focus will be on finding predictive relationships and checking their performance so as not to clutter the presentation.
 
-Suppose (although it is likely untrue) that there is a strong correlation between wearing a wrist watch, and car accidents. Depending on your frame of reference, you should view this information in very different ways.
+Suppose (although it is likely untrue) that there is a strong correlation between wearing a wrist watch and car accidents. That is, we can see in some data that car drivers who wear wrist watches get into more traffic accidents. Also, assume that it is the case that wrist watches actually do not **cause** accidents, which seems like a reasonable assumption. There is only a correlation, but this is the result of confounding variables.^[Hint: If you're wearing a wrist watch, you probably have the need to be at certain locations at certain times. That is, you're probably more likely to be in a hurry!] Depending on your frame of reference, you should view this information in very different ways.
 
-- Suppose you are a car insurance company. This is great news! You can now more accurately predict the number of accidents of your policy holders if you know whether or not they wear a wrist watch. For the sake of understanding how much your company will need to pay out in a year, you don't care what *causes* accidents, you just want to be able to **predict** (estimate) the number of accidents.
+- Suppose you are a car insurance company. This is great news! You can now more accurately predict the number of accidents of your policy holders if you know whether or not your policy holders wear a wrist watch. For the sake of understanding how much your company will need to pay out in a year, you don't care what *causes* accidents, you just want to be able to **predict** (estimate) the number of accidents.
 - Suppose you are a car driver. As a driver, you want to stay safe. That is, you want to do things that decrease accidents. In this framing, you care about things that **cause** accidents, not things that *predict* accidents. In other words, this correlation information should **not** lead to you throwing away your wrist watch.
 
 *Disclaimer:* Extremely high correlation should not simply be ignored. For example, there is a very high correlation between smoking and lung cancer.^[Fun fact: [RA Fisher](https://en.wikipedia.org/wiki/Ronald_Fisher), the most famous statistician, did not believe that smoking caused cancer. It's actually a part of a larger [fasinating story](https://rss.onlinelibrary.wiley.com/doi/full/10.1111/j.1740-9713.2014.00765.x).] However, this strong correlation is not proof that smoking causes lung cancer. Instead, additional study is needed to rule out confounders, establish mechanistic relationships, and more.
 
-## Setup
+## Task Setup
 
-We now introduce the **regression** task. Regression is a subset of a broader machine learning tasks called *supervised learning*, which also include *classification*. (We will return later to discuss supervised learning in general after getting through some specifics of regression and classification.)
+We now introduce the **regression** task. Regression is a subset of a broader machine learning tasks called *supervised learning*, which also include *classification*.^[We will return later to discuss supervised learning in general after getting through some specifics of regression and classification.]
 
 Stated simply, the regression tasks seeks to estimate (predict) a **numeric** quantity. For example:
 
-- Estimating the **salary** of a baseball player.
-- Estimating the **price** of a home for sale.
-- Estimating the **credit score** of a bank customer, 
-- Estimating the number of **downloads** of a podcast.
+- Estimating the **salary** of a baseball player given statistics about their previous year's performance.
+- Estimating the **price** of a home for sale given the attributes of the home such as square footage, location, and number of bathrooms.
+- Estimating the **credit score** of a bank customer, given demographic information and recent transaction history.
+- Estimating the number of **downloads** of a podcast episode given its length, genre, and time of day released.
 
-Each of these quantities is some numeric value. The goal of regression is to estimate (predict) these quantities when they are unknown through the use of additional, possibly correlated quantities, for example the offensive and defensive statistics of a baseball player, or the location and attributes of a home.
+Each of these quantities is some numeric value. The goal of the regression task is to estimate (predict) these quantities when they are unknown through the use of additional, possibly correlated quantities, for example the offensive and defensive statistics of a baseball player, or the location and attributes of a home.
 
 ## Mathematical Setup
 
-To get a better grasp of what regression is, we move to defining the task mathematically. Consider a random variable $Y$ which represents a **response** (or outcome or target) variable, and $p$ **feature** variables $\boldsymbol{X} = (X_1, X_2, \ldots, X_p)$. Features are also called covariates or predictors. (We find the "predictors" nomenclature to be problematic when discussing prediction tasks.)
+To get a better grasp of what regression is, we move to defining the task mathematically. Consider a random variable $Y$ which represents a **response** (or outcome or target) variable, and $p$ **feature** variables $\boldsymbol{X} = (X_1, X_2, \ldots, X_p)$.^[Features are also called covariates or predictors but we find the "predictors" nomenclature to be problematic when discussing prediction tasks. We will attempt to consistently use "features."]
 
 In the most common regression setup, we assume that the response variable $Y$ is some function of the features, plus some random noise.
 
@@ -57,7 +62,7 @@ Y = f(\boldsymbol{X}) + \epsilon
 $$
 
 - We call $f(\boldsymbol{X})$ the **signal**. This $f$ is the function that we would like to *learn*.
-- We call $\epsilon$ the **noise**. We do not want to learn this which we risk if we overfit. (More on this later.)
+- We call $\epsilon$ the **noise**. We do not want to learn this, which we risk doing if we overfit. (More on this later.)
 
 So our goal will be to find some $f$ such that $f(\boldsymbol{X})$ is close to $Y$. But how do we define close? There are many ways but we will start with, and most often consider, squared error loss. Specifically, we define a loss function, 
 
@@ -85,7 +90,7 @@ $$
 \mu(\boldsymbol{x}) \triangleq \mathbb{E}[Y \mid \boldsymbol{X} = \boldsymbol{x}]
 $$
 
-which we call the **regression function**. (This is not a learned function, this is the function we would like to learn in order to minimize the squared error loss on average. $f$ is any function, $\mu$ is the function that would minimize squared error loss on average if we knew if, but will instead need to learn it form the data.
+which we call the **regression function**.^[Note that using a different loss function will result in a different regression function. For example, if we used absolute loss, we would then have a regression function that is the conditional median. This particular regression function is related to [Quantile Regression.](https://en.wikipedia.org/wiki/Quantile_regression). Perhaps more on this later.] This is not a "learned" function. This is the function we would like to learn in order to minimize the squared error loss on average. $f$ is any function, $\mu$ is the function that would minimize squared error loss on average if we knew it, but we will need to learn it form the data.
 
 Note that $\boldsymbol{x}$ represents (potential) realized values of the random variables $\boldsymbol{X}$.
 
@@ -97,7 +102,7 @@ We can now state the goal of the regression task: we want to **estimate** the **
 
 ## Linear Regression Models
 
-What do linear regression models **do**? They estimate the conditional mean of $Y$ given $\boldsymbol{X}$! (How convenient.)
+What do linear regression models **do**? They estimate the conditional mean of $Y$ given $\boldsymbol{X}$!^[That's convenient isn't it?]
 
 Consider the following probability model
 
@@ -121,7 +126,7 @@ $$
 
 What do linear models do? More specifically than before, linear regression models estimate the conditional mean of $Y$ given $\boldsymbol{X}$ by assuming this conditional mean is a **linear combination of the feature variables**. 
 
-Suppose for a moment that we did not know the above **true** probability model, or even the more specifically the regression function. Instead, all we had was some data, $(x_i, y_i)$ for $i = 1, 2, \ldots, n$.
+Suppose for a moment that we did not know the above **true** probability model, or even more specifically the regression function. Instead, all we had was some data, $(x_i, y_i)$ for $i = 1, 2, \ldots, n$.
 
 
 
@@ -224,7 +229,7 @@ which is then an estimate of $\mu(x)$.
 
 While in this case, it will almost certainly not be the case that $\hat{\beta}_0 = 1$ or $\hat{\beta}_1 = -2$ or $\hat{\beta}_2 = -3$ or $\hat{\beta}_3 = 5$, which are the true values of the $\beta$ coefficients, they are at least reasonable estimates.
 
-As a bit of an aside, note that in this case, it is sort of ambiguous as to whether there is one feature, $x$, which is seen in the data, or three features $x$, $x^2$, and $x^3$, which are seen in the model. The truth is sort of in the middle. The data has a single feature, but through feature engineering, we have created two additional features for fitting the model. Note that when using R, **you do not need to modify the data to do this**, instead you should use R's formula syntax to specify this feature engineering when fitting the model. More on this when we discuss the `lm()` function in R. (We introduce this somewhat confusing notion early so we can emphasize that linear models are about linear combinations of features, not necessarily linear relationships. Although, linear models are very good at learning linear relationships.)
+As a bit of an aside, note that in this case, it is sort of ambiguous as to whether there is one feature, $x$, which is seen in the data, or three features $x$, $x^2$, and $x^3$, which are seen in the model. The truth is sort of in the middle. The data has a single feature, but through feature engineering, we have created two additional features for fitting the model. Note that when using R, **you do not need to modify the data to do this**, instead you should use R's formula syntax to specify this feature engineering when fitting the model. More on this when we discuss the `lm()` function in R. We introduce this somewhat confusing notion early so we can emphasize that linear models are about linear combinations of features, not necessarily linear relationships. Although, linear models are very good at learning linear relationships.
 
 Suppose instead we had assumed that 
 
@@ -246,11 +251,7 @@ This model is also flawed, but for a different reason. (Later we will say this m
 
 Let's take a look at this visually.
 
-::: {.wide}
-
 <img src="linear-regression_files/figure-html/unnamed-chunk-6-1.png" width="1152" style="display: block; margin: auto;" />
-
-:::
 
 Here we see the three models fit to the data above. The dashed black curve is the true mean function, that is the true mean of $Y$ given $x$, and the solid colored curves are the estimated mean functions. 
 
@@ -265,14 +266,14 @@ From the presentation here, it's probably clear that the latter is actually what
 
 <img src="linear-regression_files/figure-html/unnamed-chunk-8-1.png" width="1152" style="display: block; margin: auto;" />
 
-These plots match the plots above, except newly simulated data is shown. (The regression functions were still estimated with the previous data.) Note that the degree 3 polynomial matches the data about the same as before. The degree 9 polynomial now correctly predicts none of the new data and makes some **huge** errors.
+These plots match the plots above, except newly simulated data is shown. (The regression functions were still estimated with the original data.) Note that the degree 3 polynomial matches the data about the same as before. The degree 9 polynomial now correctly predicts none of the new data and makes some **huge** errors.
 
 We will define these concepts more generally later, but for now we note that:
 
 - The Degree 9 Polynomial is **overfitting**. It performs well on the data used to fit the model, but poorly on new data.
 - The Degree 1 Polynomial is **underfitting**. It performs poorly on the data used to fit the model and poorly on new data.
 
-There's a bit of a problem though! In practice, we don't know the true mean function, and we don't have the magical ability to simulate new data! Yikes! After we discuss a bit about how to fit these models in R, we'll return to this issue. (Spoiler: Don't fit the model to all the available data. Pretend the data you didn't use is "new" when you evaluate models.)
+There's a bit of a problem though! In practice, we don't know the true mean function, and we don't have the magical ability to simulate new data! Yikes! After we discuss a bit about how to fit these models in R, we'll return to this issue.^[Spoiler: Don't fit the model to all the available data. Pretend the data you didn't use is "new" when you evaluate models.]
 
 ## Using `lm()`
 
@@ -321,7 +322,7 @@ head(sim_mlr_data)
 ## 6  4.60 0.52   0.8   0.89 A      0.78  0.69
 ```
 
-Note that we see only numeric (`dbl` or `int`) and factor (`fctr`) variables. For now, we will require that data contains only these types, and in particular, we will coerce any categorical variables to be factors. (More on this later.)
+Note that we see only numeric (`dbl` or `int`) and factor (`fctr`) variables. For now, we will require that data contains only these types, and in particular, we will coerce any categorical variables to be factors.
 
 Mathematically, this data was generated from the probability model
 
@@ -381,7 +382,7 @@ coef(mod_1)
 ##   3.7834423   0.9530758
 ```
 
-Nothing too interesting here about fitting Model 1. We see that the `coef()` function returns estimate of the $\beta_0$ and $\beta_1$ parameters defined above.
+Nothing too interesting here about fitting Model 1. We see that the `coef()` function returns estimates of the $\beta_0$ and $\beta_1$ parameters defined above.
 
 
 ```r
@@ -454,14 +455,9 @@ lm(y ~ (x1 + x2) ^ 2, data = sim_mlr_data)
 ##      4.1800       0.3353      -0.8259       1.3130
 ```
 
-This created an interaction term! That means the `^` operator has different uses depending on the context. In specifying a formula, it has a particular use, in this case specifying an interaction term, and all lower order terms. However, inside of `I()` it will be used for exponentiation. For details, use `?I` and `?formula`. These are complex R topics, but it will help to start to learn them. For some additional reading on R's formula syntax, the following two blog posts by Max Kuhn are good reads:
+This created an interaction term! That means the `^` operator has different uses depending on the context. In specifying a formula, it has a particular use, in this case specifying an interaction term, and all lower order terms. However, inside of `I()` it will be used for exponentiation. For details, use `?I` and `?formula`. These are complex R topics, but it will help to start to learn them.^[For some additional reading on R's formula syntax, the following two blog posts by Max Kuhn are good reads: [The R Formula Method: The **Good** Parts](https://rviews.rstudio.com/2017/02/01/the-r-formula-method-the-good-parts/) and [The R Formula Method: The **Bad** Parts ](https://rviews.rstudio.com/2017/03/01/the-r-formula-method-the-bad-parts/).]
 
-- [The R Formula Method: The **Good** Parts](https://rviews.rstudio.com/2017/02/01/the-r-formula-method-the-good-parts/)
-- [The R Formula Method: The **Bad** Parts ](https://rviews.rstudio.com/2017/03/01/the-r-formula-method-the-bad-parts/)
-
-For the first half of this book, we will always keep the data mostly untouched, and rely heavily on the use of R's formula syntax.
-
-If you are ever interested in what's happening under the hood when you use the formula syntax, and you recall the linear algebra necessary to perform linear regression, the `model.matrix()` function will be useful.
+For the first half of this book, we will always keep the data mostly untouched, and rely heavily on the use of R's formula syntax. If you are ever interested in what's happening under the hood when you use the formula syntax, and you recall the linear algebra necessary to perform linear regression, the `model.matrix()` function will be useful.
 
 
 ```r
@@ -477,6 +473,25 @@ head(model.matrix(mod_4))
 ## 5           1 0.64 0.01999867 0.001728   0   0
 ## 6           1 0.52 0.71735609 0.704969   0   0
 ```
+
+
+```r
+X = model.matrix(mod_4)
+y = sim_mlr_data$y
+solve((t(X) %*% X)) %*% t(X) %*% y
+```
+
+```
+##                   [,1]
+## (Intercept)  2.3435702
+## x1           0.8176247
+## I(sin(x2))   0.9159963
+## I(x3^3)      3.0446314
+## x4B          3.0369950
+## x4C         -1.9421931
+```
+
+
 
 Back to talking about `mod_4`. Recall that we had assumed that
 
@@ -513,12 +528,12 @@ coef(mod_4)
 ##   2.3435702   0.8176247   0.9159963   3.0446314   3.0369950  -1.9421931
 ```
 
-- $\hat{\beta}_0 = 2.34$
-- $\hat{\beta}_1 = 0.82$
-- $\hat{\beta}_2 = 0.92$
-- $\hat{\beta}_3 = 3.04$
-- $\hat{\beta}_{4B} = 3.04$
-- $\hat{\beta}_{4C} = -1.94$
+- $\hat{\beta}_0 = 2.344$
+- $\hat{\beta}_1 = 0.818$
+- $\hat{\beta}_2 = 0.916$
+- $\hat{\beta}_3 = 3.045$
+- $\hat{\beta}_{4B} = 3.037$
+- $\hat{\beta}_{4C} = -1.942$
 - $\hat{\beta}_5 = 0$ (We **assumed** $x_5$ is not used in the true mean function.)
 - $\hat{\beta}_6 = 0$ (We **assumed** $x_6$ is not used in the true mean function.)
 
@@ -530,7 +545,7 @@ $$
 
 Perfect? No. Pretty good? Maybe. However, in reality, this is not a check that we can perform! We still need an evaluation strategy that doesn't depend on knowing the true model!
 
-Note that the other models are "bad" in this case because they are either missing features (`mod_1` and `mod_2`) or the are both missing features and contain unnecessary features `(mod_3`). 
+Note that the other models are "bad" in this case because they are either missing features (`mod_1` and `mod_2`) or they are both missing features and contain unnecessary features (`mod_3`). 
 
 ## The `predict()` Function
 
@@ -642,21 +657,21 @@ A warning: **Do not _name_ the second argument to the predict function.** This w
 
 ## Data Splitting
 
-(Note: Many readers will have possibly seen some machine learning previously. **For now, please pretend that you have never heard of or seen cross-validation**. Cross-validation will clutter the initial introduction of many concepts. We will return to and formalize it later.)
+Note: Many readers will have possibly seen some machine learning previously. **For now, please pretend that you have never heard of or seen cross-validation**. Cross-validation will clutter the initial introduction of many concepts. We will return to and formalize it later.
 
-OK. So now we can fit models, and make predictions (create estimates of the conditional mean of $Y$ given values of the features), how do we evaluate how well our models perform, **without** knowing the true model!
+OK. So now we can fit models, and make predictions (create estimates of the conditional mean of $Y$ given values of the features), how do we evaluate how well our models perform, **without** knowing the true model?
 
-First, let's state a somewhat specific goal. We would like to train models that **generalize** well, that is, perform well on "new" or "unseen" data that was **not** used to train the model.
+First, let's state a somewhat specific goal. We would like to train models that **generalize** well, that is, perform well on "new" or "unseen" data that was **not** used to train the model.^[However, we will be assuming that this data is generated using the same process as the original data. It is important to keep this in mind in practice.]
 
 To accomplish this goal, we'll just "create" a dataset that isn't used to train the model! To create it, we will just split it off. (We'll actually do so twice.)
 
-First, denote the *entire* available data as $\mathcal{D}$.
+First, denote the *entire* available data as $\mathcal{D}$ which contains $n$ observations of the response variable $y$ and $p$ feature variables $\boldsymbol{x}_i = (x_{1i}, x_{2i}, \ldots, x_{pi})$.
 
 $$
-\mathcal{D} = \{ (x_i, y_i) \in \mathbb{R}^p \times \mathbb{R}, \ i = 1, 2, \ldots n \}
+\mathcal{D} = \{ (\boldsymbol{x}_i, y_i) \in \mathbb{R}^p \times \mathbb{R}, \ i = 1, 2, \ldots n \}
 $$
 
-We first split this data into a **train** and **test** set. We will discuss these two dataset ad nauseam, but let's set two rules right now.
+We first split this data into a **train** and **test** set. We will discuss these two datasets ad nauseam, but let's set two rules right now.^[We're ignoring some nuance by adhering to these rules, but unless you have a very good reason to break them, it's best to follow them.]
 
 - You can do **whatever** you would like with the training data.
   - However, it is best used to train, evaluate, and select models.
@@ -674,7 +689,7 @@ $$
 
 As a general guiding heuristic, use 80% of the data for training, 20% for testing.
 
-In addition to the train-test split, we will further split the train data into **estimation** and **validation** sets. These are somewhat confusing terms, developed for STAT 432, but hear us out.
+In addition to the train-test split, we will further split the train data into **estimation** and **validation** sets. These are somewhat confusing terms, developed for STAT 432, but hear us out.^[The hope is that these terms will make the transition to using cross-validation much easier.]
 
 To perform this split, we will *randomly* select some observations (from the train set) for the estimation (`est`) set, the remainder will be used for the validation (`val`) set.
 
@@ -682,7 +697,7 @@ $$
 \mathcal{D}_{\texttt{trn}} = \mathcal{D}_{\texttt{est}} \cup \mathcal{D}_{\texttt{val}}
 $$
 
-Again, use 80% of the data for estimation, 20% for validation.
+Again, use 80% of the data for estimation, 20% for validation.^[There is a trade-off here. More data for estimation gives better estimates. More data for validation gives a better sense of errors on new data.]
 
 The need for this second split might not become super clear until later on, but the general idea is this:
 
@@ -691,13 +706,15 @@ The need for this second split might not become super clear until later on, but 
 - After evaluating and picking a single model, re-fit this model to the entire **training** dataset.
 - Provide an estimate of how well this model performs using the **test** data.
 
+At this point it will likely be unclear why we cannot use the same data set for selecting a model, and evaluating its performance, but we aren't ready for that discussion yet. For now, just follow the rules while you think about why we're worried about this.
+
 Now that we have data for estimation, and validation, we need some **metrics** for evaluating these models.
 
 ## Regression Metrics
 
 If our goal is to "predict" then we want small errors. In general there are two types of errors we consider:
 
-- Squared Errors: $(y_i - \hat{\mu}(\boldsymbol{x}_i)) ^2$
+- Squared Errors: $\left(y_i - \hat{\mu}(\boldsymbol{x}_i)\right) ^2$
 - Absolute Errors: $|y_i - \hat{\mu}(\boldsymbol{x}_i)|$
 
 In both cases, we will want to consider the average errors made. We define two metrics.
@@ -721,19 +738,19 @@ For both, smaller is better. (Less error on average.) In both, we note both the 
 
 Depending on the data used for these different sets, we "define" different metrics. For example, for RMSE, we have:
 
-**Train RMSE**: Evaluate a model fit to estimation data, using estimation data.
+**Train RMSE**: Evaluate a model fit to estimation data, using estimation data. Note that this metric is only used for illustrative or diagnostic purposes. Do not use this metric to select a model or evaluate its performance.
 
 $$
 \text{RMSE}_{\texttt{trn}} = \text{rmse}\left(\hat{f}_{\texttt{est}}, \mathcal{D}_{\texttt{est}}\right) = \sqrt{\frac{1}{n_{\texttt{est}}}\displaystyle\sum_{i \in {\texttt{est}}}^{}\left(y_i - \hat{f}_{\texttt{est}}({x}_i)\right)^2}
 $$
 
-**Validation RMSE**: Evaluate a model fit to estimation data, using validation data.
+**Validation RMSE**: Evaluate a model fit to estimation data, using validation data. This metric will often be used to select a model.
 
 $$
 \text{RMSE}_{\texttt{val}} = \text{rmse}\left(\hat{f}_{\texttt{est}}, \mathcal{D}_{\texttt{val}}\right) = \sqrt{\frac{1}{n_{\texttt{val}}}\displaystyle\sum_{i \in {\texttt{val}}}^{}\left(y_i - \hat{f}_{\texttt{est}}({x}_i)\right)^2}
 $$
 
-**Test RMSE**: Evaluate a model fit to training data, using test data.
+**Test RMSE**: Evaluate a model fit to training data, using test data. This metric will be used to quantify the error of a chosen model.
 
 $$
 \text{RMSE}_{\texttt{tst}} = \text{rmse}\left(\hat{f}_{\texttt{trn}}, \mathcal{D}_{\texttt{tst}}\right) = \sqrt{\frac{1}{n_{\texttt{tst}}}\displaystyle\sum_{i \in {\texttt{tst}}}^{}\left(y_i - \hat{f}_{\texttt{trn}}({x}_i)\right)^2}
@@ -802,7 +819,7 @@ calc_rmse(actual = mlr_val$y,
 ## [1] 0.5452852
 ```
 
-Here we see that `mod_4_est` achieves a lower validation error, so we move forward with this model. We then refit to the full train data, then evaluate on test.
+Here we see that `mod_4_est` achieves a lower validation error, so we move forward with this model.^[We note that there isn't actually a huge difference between these two, an idea we will return to later.] We then refit to the full train data, then evaluate on test.
 
 
 ```r
@@ -820,7 +837,7 @@ calc_rmse(actual = mlr_tst$y,
 ## [1] 0.538057
 ```
 
-We ignore the validation metrics. (We already used them for selecting a model.) This test RMSE is our estimate of how well our selected model will perform on unseen data, on average (in a squared error sense). 
+We ignore the validation metrics. (We already used them for selecting a model.) This test RMSE is our estimate of how well our selected model will perform on unseen data, on average, in a squared error sense. 
 
 Note that for selecting a model there is no difference between MSE and RMSE, but for the sake of understanding, RMSE has preferential units, the same units as the response variables. (Whereas MSE has units squared.) We will always report RMSE.
 
@@ -843,9 +860,9 @@ abline(a = 0, b = 1, lwd = 2)
 grid()
 ```
 
-<img src="linear-regression_files/figure-html/unnamed-chunk-34-1.png" width="576" style="display: block; margin: auto;" />
+<img src="linear-regression_files/figure-html/unnamed-chunk-36-1.png" width="576" style="display: block; margin: auto;" />
 
-The closer to the line the better. Also, the less of a pattern the better. In other words, this plot will help diagnose if our model is making similar sized errors for all predictions, or if there are systematic differences. It can also help identify large errors. Sometimes, errors can be on average small, but include some huge errors. In some settings, this may be extremely undiserable.
+The closer to the line the better. Also, the less of a pattern the better. In other words, this plot will help diagnose if our model is making similar sized errors for all predictions, or if there are systematic differences. It can also help identify large errors. Sometimes, errors can be on average small, but include some huge errors. In some settings, this may be extremely undesirable.
 
 This might get you thinking about "checking the assumptions" of a linear model. Assessing things like: normality, constant variance, etc. Note that while these are nice things to have, we aren't really concerned with these things. If we care how well our model *predicts*, then we will directly evaluate how well it predicts. Least squares is least squares. It minimizes errors. It doesn't care about model assumptions.
 
@@ -857,6 +874,7 @@ Let's return to our initial dataset with a single feature $x$. This time we'll g
 
 
 ```r
+# define regression function
 cubic_mean = function(x) {
   1 - 2 * x - 3 * x ^ 2 + 5 * x ^ 3
 }
@@ -864,6 +882,7 @@ cubic_mean = function(x) {
 
 
 ```r
+# define full data generating process
 gen_slr_data = function(sample_size = 100, mu) {
   x = runif(n = sample_size, min = -1, max = 1)
   y = mu(x) + rnorm(n = sample_size)
@@ -873,6 +892,7 @@ gen_slr_data = function(sample_size = 100, mu) {
 
 
 ```r
+# simulate entire dataset
 set.seed(3)
 sim_slr_data = gen_slr_data(sample_size = 100, mu = cubic_mean)
 ```
@@ -951,33 +971,9 @@ poly_mod_est_list[[3]]
 ##               6.7638
 ```
 
-But let's back up. That code was terrible to write. Too much repeated code. Consider the following code
+But let's back up. That code was terrible to write. Too much repeated code.^[[Wikipedia: Don't Repeat Yourself](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)]
 
-
-```r
-poly_mod_est_list = map(1:9, ~ lm(y ~ poly(x, degree = .x), data = slr_est))
-```
-
-This accomplishes the same task, but is much cleaner! 
-
-
-```r
-poly_mod_est_list[[3]]
-```
-
-```
-## 
-## Call:
-## lm(formula = y ~ poly(x, degree = .x), data = slr_est)
-## 
-## Coefficients:
-##           (Intercept)  poly(x, degree = .x)1  poly(x, degree = .x)2  
-##               -0.2058                 5.3030                -7.4306  
-## poly(x, degree = .x)3  
-##                6.7638
-```
-
-Here we are using the `map()` function from the `purrr` package. The `~` here is used to create a function in place. We'll consider another way to make it a bit clearer, that is, without writing the function within `map()`.
+First, we see that we are repeatedly fitting models where the only differences is the degree of the polynomial. Let's write a function that takes as input the degree of the polynomial, and then fits the model with a polynomial of that degree, to the estimation data.^[This function could be made more general if also supplied an argument for data, but we're keeping things simple for now.]
 
 
 ```r
@@ -986,12 +982,14 @@ fit_poly_mod_to_est_data = function(d) {
 }
 ```
 
+Now, we just need to go about the business of "repeating" this process for `d` from `1` to `9`. Your first instinct might be a `for` loop, but fight that instinct.
+
 
 ```r
-poly_mod_est_list = map(1:9, fit_poly_mod_to_est_data)
+poly_mod_est_list = lapply(1:9, fit_poly_mod_to_est_data)
 ```
 
-Again, the same thing.
+This accomplishes the same task, but is much cleaner! 
 
 
 ```r
@@ -1010,22 +1008,25 @@ poly_mod_est_list[[3]]
 ##               6.7638
 ```
 
-We'll continue to use this `map()` function throughout. We'll explain more and more as we go. Note that the `map()` function returns a list. The following makes predictions for each of the models, once using the estimation data, once using validation.
+We'll use the various `*apply()` functions throughout this text. A bit more on them later. We also may quickly introduce an alternative system, which is the use of the `map()` function (and its associated functions) from the `purrr` package.
 
 
 ```r
-poly_mod_est_pred = map(poly_mod_est_list, predict, slr_est)
-poly_mod_val_pred = map(poly_mod_est_list, predict, slr_val)
+# make predictions on the estimation data with each model
+poly_mod_est_pred = lapply(poly_mod_est_list, predict, slr_est)
+
+# make predictions on the validation data with each model
+poly_mod_val_pred = lapply(poly_mod_est_list, predict, slr_val)
 ```
 
-If instead we wanted to return a numeric vector, we would use, `map_dbl()`. Let's use this to calculate train and validation RMSE.
+If instead we wanted to return a numeric vector, we would use, `sapply()`. Let's use this to calculate train and validation RMSE.
 
 
 ```r
 # calculate train RMSE
-slr_est_rmse = map_dbl(poly_mod_est_pred, calc_rmse, actual = slr_est$y) 
+slr_est_rmse = sapply(poly_mod_est_pred, calc_rmse, actual = slr_est$y) 
 # calculate validation RMSE
-slr_val_rmse = map_dbl(poly_mod_val_pred, calc_rmse, actual = slr_val$y) 
+slr_val_rmse = sapply(poly_mod_val_pred, calc_rmse, actual = slr_val$y) 
 ```
 
 
@@ -1038,8 +1039,6 @@ slr_est_rmse
 ## [8] 0.9120942 0.9117093
 ```
 
-Note that training error goes down as degree goes up. More on this next chapter.
-
 
 ```r
 slr_val_rmse
@@ -1050,6 +1049,10 @@ slr_val_rmse
 ## [8] 1.0953461 1.0968283
 ```
 
+<img src="linear-regression_files/figure-html/unnamed-chunk-52-1.png" width="672" style="display: block; margin: auto;" />
+
+Note that training error goes down^[More specifically, it never increases.] as degree goes up. Validation error goes down, then starts creeping up. This is a pattern that we'll keep an eye out for. Later, we will explain this phenomenon. 
+
 
 ```r
 which.min(slr_val_rmse)
@@ -1059,7 +1062,7 @@ which.min(slr_val_rmse)
 ## [1] 3
 ```
 
-The model with polynomial degree 3 has the lowest validation error, so we move forward with this model. We re-fit to the full train dataset, then evaluate on the test set one last time.
+The model with polynomial degree 3 has the lowest validation error^[This shouldn't be too surprising given the way the data was generated!], so we move forward with this model. We re-fit to the full train dataset, then evaluate on the test set one last time.
 
 
 ```r
@@ -1090,7 +1093,7 @@ For this example, we use (a subset of) the `diamonds` data from the `ggplot2` pa
 ```r
 # load (subset of) data
 set.seed(42)
-dmnd = ggplot2::diamonds[sample(nrow(diamonds), size = 5000), ]
+dmnd = ggplot2::diamonds[sample(nrow(ggplot2::diamonds), size = 5000), ]
 ```
 
 
@@ -1145,9 +1148,9 @@ head(dmnd_trn, n = 10)
 
 Our goal here will be to build a model to predict the `price` of a diamond given it's characteristics. Let's create a few EDA plots.
 
-<img src="linear-regression_files/figure-html/unnamed-chunk-60-1.png" width="1152" style="display: block; margin: auto;" />
-
 <img src="linear-regression_files/figure-html/unnamed-chunk-61-1.png" width="1152" style="display: block; margin: auto;" />
+
+<img src="linear-regression_files/figure-html/unnamed-chunk-62-1.png" width="1152" style="display: block; margin: auto;" />
 
 Note that these plots do **not** contain the test data. If they did, we would be using the test data to influence model building and selection, a big no-no.
 
@@ -1155,32 +1158,25 @@ Let's consider four possible models, each of which we fit to the estimation data
 
 
 ```r
-dmnd_mod_1_est = lm(price ~ carat, data = dmnd_est)
-dmnd_mod_2_est = lm(price ~ carat + x + y + z, data = dmnd_est)
-dmnd_mod_3_est = lm(price ~ poly(carat, degree = 2) + x + y + z, data = dmnd_est)
-dmnd_mod_4_est = lm(price ~ poly(carat, degree = 2) + . - carat, data = dmnd_est)
+dmnd_mod_list = list(
+  dmnd_mod_1_est = lm(price ~ carat, data = dmnd_est),
+  dmnd_mod_2_est = lm(price ~ carat + x + y + z, data = dmnd_est),
+  dmnd_mod_3_est = lm(price ~ poly(carat, degree = 2) + x + y + z, data = dmnd_est),
+  dmnd_mod_4_est = lm(price ~ poly(carat, degree = 2) + . - carat, data = dmnd_est)
+)
 ```
 
 Now, let's calculate the validation RMSE of each.
 
 
 ```r
-dmnd_mod_list = list(
-  dmnd_mod_1_est,
-  dmnd_mod_2_est,
-  dmnd_mod_3_est,
-  dmnd_mod_4_est
-)
-```
-
-
-```r
-dmnd_mod_val_pred = map(dmnd_mod_list, predict, dmnd_val)
-map_dbl(dmnd_mod_val_pred, calc_rmse, actual = dmnd_val$price) 
+dmnd_mod_val_pred = lapply(dmnd_mod_list, predict, dmnd_val)
+sapply(dmnd_mod_val_pred, calc_rmse, actual = dmnd_val$price) 
 ```
 
 ```
-## [1] 1583.558 1517.080 1634.396 1350.659
+## dmnd_mod_1_est dmnd_mod_2_est dmnd_mod_3_est dmnd_mod_4_est 
+##       1583.558       1517.080       1634.396       1350.659
 ```
 
 It looks like model `dmnd_mod_4_est` achieves the lowest validation error. We re-fit this model, then report the test RMSE.
@@ -1219,13 +1215,14 @@ Some things to consider:
 
 - Could you use the predicted versus actual plot to assist in selecting a model with the validation data?
 - Note that the model we have chosen is not necessarily the "best" model. It is simply the model with the lowest validation RMSE. This is currently a very simplistic analysis.
+- Does this plot suggest any issues with this model? (Hint: Note the range of predicted values.)
 - Can you improve this model? Would a log transform of price help?
 
 ***
 
 ## Example: Credit Card Data
 
-Suppose you work for a small local bank, perhaps a credit union, that has a credit card product offering. For years, you relied on credit agencies to provide a rating of your customer's credit, however, this costs your bank money. One day, you realize that it might be possible to reverse engineer your customers' (and thus potential customers) credit rating based on the credit ratings that you have already purchased, as well as the demographic and credit card information that you already have, such as age, education level, credit limit, etc. (We make no comment on the legality or ethics of this idea. Consider these before using at your own risk.)
+Suppose you work for a small local bank, perhaps a credit union, that has a credit card product offering. For years, you relied on credit agencies to provide a rating of your customer's credit, however, this costs your bank money. One day, you realize that it might be possible to reverse engineer your customers' (and thus potential customers) credit rating based on the credit ratings that you have already purchased, as well as the demographic and credit card information that you already have, such as age, education level, credit limit, etc.^[We make no comment on the legality or ethics of this idea. Consider these before using at your own risk.]
 
 So long as you can estimate customers' credit ratings with a reasonable error, you could stop buying the ratings from an outside agency. Effectively, you will have created your own rating.
 
@@ -1299,7 +1296,7 @@ We also create a pairs plot.
 
 <img src="linear-regression_files/figure-html/unnamed-chunk-72-1.png" width="1152" style="display: block; margin: auto;" />
 
-We immediately notice three variables that have a strong correlation with `Rating`: `Income`, `Limit`, and `Balance`. Based on this, we evaluate five candidate models.
+We immediately notice three variables that have a strong correlation with `Rating`: `Income`, `Limit`, and `Balance`. Based on this, we evaluate five candidate models.^[You might be wondering, aren't there about a million different candidate models we could consider if we included things like engineered variables and interactions? Yup! Because of this, we'll look at some variable selection techniques, as well as some algorithms that avoid this issue to a certain extent.]
 
 
 ```r
@@ -1314,8 +1311,8 @@ crdt_mod_list = list(
 
 
 ```r
-crdt_mod_val_pred = map(crdt_mod_list, predict, crdt_val)
-map_dbl(crdt_mod_val_pred, calc_rmse, actual = crdt_val$Rating) 
+crdt_mod_val_pred = lapply(crdt_mod_list, predict, crdt_val)
+sapply(crdt_mod_val_pred, calc_rmse, actual = crdt_val$Rating) 
 ```
 
 ```
@@ -1362,7 +1359,6 @@ plot(
   x = crdt_tst$Rating,
   y = predict(final_credit_model, crdt_tst),
   pch = 20, col = "darkgrey",
-  # xlim = c(0, 25000), ylim = c(0, 25000),
   main = "Credit: Predicted vs Actual, Test Data",
   xlab = "Actual",
   ylab = "Predicted"
@@ -1373,8 +1369,72 @@ grid()
 
 <img src="linear-regression_files/figure-html/unnamed-chunk-77-1.png" width="576" style="display: block; margin: auto;" />
 
-The predicted versus actual plot almost looks too good to be true! Wow! (Oh, wait. This was simulated data...)
+The predicted versus actual plot almost looks too good to be true! Wow!^[Perhaps not surprising since this data was simulated.] In summary, if this data were real, we might have an interesting result!
 
-In summary, if this data were real, we might have an interesting result!
+Do note, that both this example and the previous should not be considered **data analyses**, but instead, examples that reinforce how to use the validation and test sets. As part of a true analysis, we will need to be much more careful about many of our decision. After putting down some additional foundation, we'll more towards these ideas in this text~
 
-Do note, that both this example and the previous should not be considered **data analyses**, but instead, examples that reinforce how to use the validation and test sets. As part of a true analysis, we will need to be much more careful about some of our decision. More on this later! Up next: nonparametric regression methods.
+## Session Info
+
+
+```r
+xfun::session_info()
+```
+
+```
+## R version 4.0.0 (2020-04-24)
+## Platform: x86_64-pc-linux-gnu (64-bit)
+## Running under: Ubuntu 16.04.6 LTS
+## 
+## Locale:
+##   LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+##   LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+##   LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+##   LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+##   LC_ADDRESS=C               LC_TELEPHONE=C            
+##   LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+## 
+## Package version:
+##   askpass_1.1        assertthat_0.2.1   backports_1.1.9   
+##   base64enc_0.1.3    BH_1.72.0.3        blob_1.2.1        
+##   bookdown_0.20.3    broom_0.7.0        callr_3.4.3       
+##   cellranger_1.1.0   cli_2.0.2          clipr_0.7.0       
+##   codetools_0.2-16   colorspace_1.4-1   compiler_4.0.0    
+##   cpp11_0.2.1        crayon_1.3.4       curl_4.3          
+##   DBI_1.1.0          dbplyr_1.4.4       desc_1.2.0        
+##   digest_0.6.25      dplyr_1.0.2        ellipsis_0.3.1    
+##   evaluate_0.14      fansi_0.4.1        farver_2.0.3      
+##   forcats_0.5.0      fs_1.5.0           generics_0.0.2    
+##   GGally_2.0.0       ggplot2_3.3.2      glue_1.4.2        
+##   graphics_4.0.0     grDevices_4.0.0    grid_4.0.0        
+##   gtable_0.3.0       haven_2.3.1        highr_0.8         
+##   hms_0.5.3          htmltools_0.5.0    httr_1.4.2        
+##   isoband_0.2.2      jsonlite_1.7.0     kableExtra_1.2.1  
+##   knitr_1.29         labeling_0.3       lattice_0.20.41   
+##   lifecycle_0.2.0    lubridate_1.7.9    magrittr_1.5      
+##   markdown_1.1       MASS_7.3.51.5      Matrix_1.2.18     
+##   methods_4.0.0      mgcv_1.8.31        mime_0.9          
+##   modelr_0.1.8       munsell_0.5.0      nlme_3.1.147      
+##   openssl_1.4.2      pillar_1.4.6       pkgbuild_1.1.0    
+##   pkgconfig_2.0.3    pkgload_1.1.0      plyr_1.8.6        
+##   praise_1.0.0       prettyunits_1.1.1  processx_3.4.3    
+##   progress_1.2.2     ps_1.3.4           purrr_0.3.4       
+##   R6_2.4.1           RColorBrewer_1.1-2 Rcpp_1.0.5        
+##   readr_1.3.1        readxl_1.3.1       rematch_1.0.1     
+##   reprex_0.3.0       reshape_0.8.8      rlang_0.4.7       
+##   rmarkdown_2.3      rprojroot_1.3.2    rstudioapi_0.11   
+##   rvest_0.3.6        scales_1.1.1       selectr_0.4.2     
+##   splines_4.0.0      stats_4.0.0        stringi_1.4.6     
+##   stringr_1.4.0      sys_3.4            testthat_2.3.2    
+##   tibble_3.0.3       tidyr_1.1.2        tidyselect_1.1.0  
+##   tidyverse_1.3.0    tinytex_0.25       tools_4.0.0       
+##   utf8_1.1.4         utils_4.0.0        vctrs_0.3.4       
+##   viridisLite_0.3.0  webshot_0.5.2      whisker_0.4       
+##   withr_2.2.0        xfun_0.16          xml2_1.3.2        
+##   yaml_2.2.1
+```
+
+- TODO: Open Questions
+
+- how do we go about assuming a model? with only a couple variables, there is so much to consider, interactions, etc.
+    1. other methods don't require we make these decision.
+    2. variable selection techniques
