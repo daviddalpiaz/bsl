@@ -67,6 +67,7 @@ pre code {
 
 .book .book-body .page-wrapper .page-inner section.normal h1 {
   border-bottom: 1px solid #eaecef;
+  font-size: 3em;
 }
 
 .book .book-body .page-wrapper .page-inner section.normal h2 {
