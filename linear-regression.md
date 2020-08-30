@@ -90,7 +90,7 @@ $$
 \mu(\boldsymbol{x}) \triangleq \mathbb{E}[Y \mid \boldsymbol{X} = \boldsymbol{x}]
 $$
 
-which we call the **regression function**.^[Note that using a different loss function will result in a different regression function. For example, if we used absolute loss, we would then have a regression function that is the conditional median. This particular regression function is related to [Quantile Regression.](https://en.wikipedia.org/wiki/Quantile_regression). Perhaps more on this later.] This is not a "learned" function. This is the function we would like to learn in order to minimize the squared error loss on average. $f$ is any function, $\mu$ is the function that would minimize squared error loss on average if we knew it, but we will need to learn it form the data.
+which we call the **regression function**.^[Note that using a different loss function will result in a different regression function. For example, if we used absolute loss, we would then have a regression function that is the conditional median. This particular regression function is related to [Quantile Regression](https://en.wikipedia.org/wiki/Quantile_regression). Perhaps more on this later.] This is not a "learned" function. This is the function we would like to learn in order to minimize the squared error loss on average. $f$ is any function, $\mu$ is the function that would minimize squared error loss on average if we knew it, but we will need to learn it form the data.
 
 Note that $\boldsymbol{x}$ represents (potential) realized values of the random variables $\boldsymbol{X}$.
 
