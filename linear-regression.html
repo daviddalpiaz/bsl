@@ -998,8 +998,8 @@ X_6 = 0.6]
 ##  9 0.570 Ideal     H     VS1      61.7  54    5.33  5.36  3.3   1554
 ## 10 0.34  Ideal     H     VS2      62.5  54    4.54  4.49  2.82   689</code></pre>
 <p>Our goal here will be to build a model to predict the <code>price</code> of a diamond given it’s characteristics. Let’s create a few EDA plots.</p>
-<p><img src="linear-regression_files/figure-html/unnamed-chunk-61-1.png" width="1152" style="display: block; margin: auto;" /></p>
-<p><img src="linear-regression_files/figure-html/unnamed-chunk-62-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="linear-regression_files/figure-html/diamonds-pairs-1-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="linear-regression_files/figure-html/diamonds-pairs-2-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>Note that these plots do <strong>not</strong> contain the test data. If they did, we would be using the test data to influence model building and selection, a big no-no.</p>
 <p>Let’s consider four possible models, each of which we fit to the estimation data.</p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1">dmnd_mod_list =<span class="st"> </span><span class="kw">list</span>(</a>
@@ -1030,7 +1030,7 @@ X_6 = 0.6]
 <a class="sourceLine" id="cb83-9" data-line-number="9">)</a>
 <a class="sourceLine" id="cb83-10" data-line-number="10"><span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb83-11" data-line-number="11"><span class="kw">grid</span>()</a></code></pre></div>
-<p><img src="linear-regression_files/figure-html/unnamed-chunk-66-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="linear-regression_files/figure-html/unnamed-chunk-64-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Some things to consider:</p>
 <ul>
 <li>Could you use the predicted versus actual plot to assist in selecting a model with the validation data?</li>
@@ -1085,7 +1085,7 @@ X_6 = 0.6]
 <li><code>View(crdt_trn)</code></li>
 </ul>
 <p>We also create a pairs plot.</p>
-<p><img src="linear-regression_files/figure-html/unnamed-chunk-72-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="linear-regression_files/figure-html/credit-pairs-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>We immediately notice three variables that have a strong correlation with <code>Rating</code>: <code>Income</code>, <code>Limit</code>, and <code>Balance</code>. Based on this, we evaluate five candidate models.<a href="#fn49" class="footnote-ref" id="fnref49"><sup>49</sup></a></p>
 <div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1">crdt_mod_list =<span class="st"> </span><span class="kw">list</span>(</a>
 <a class="sourceLine" id="cb90-2" data-line-number="2">  <span class="dt">crdt_mod_0_est =</span> <span class="kw">lm</span>(Rating <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> crdt_est),</a>
@@ -1118,7 +1118,7 @@ X_6 = 0.6]
 <a class="sourceLine" id="cb99-8" data-line-number="8">)</a>
 <a class="sourceLine" id="cb99-9" data-line-number="9"><span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb99-10" data-line-number="10"><span class="kw">grid</span>()</a></code></pre></div>
-<p><img src="linear-regression_files/figure-html/unnamed-chunk-77-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="linear-regression_files/figure-html/unnamed-chunk-74-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>The predicted versus actual plot almost looks too good to be true! Wow!<a href="#fn50" class="footnote-ref" id="fnref50"><sup>50</sup></a> In summary, if this data were real, we might have an interesting result!</p>
 <p>Do note, that both this example and the previous should not be considered <strong>data analyses</strong>, but instead, examples that reinforce how to use the validation and test sets. As part of a true analysis, we will need to be much more careful about many of our decision. After putting down some additional foundation, we’ll more towards these ideas in this text~</p>
 </div>
@@ -1152,29 +1152,29 @@ X_6 = 0.6]
 ##   graphics_4.0.0     grDevices_4.0.0    grid_4.0.0        
 ##   gtable_0.3.0       haven_2.3.1        highr_0.8         
 ##   hms_0.5.3          htmltools_0.5.0    httr_1.4.2        
-##   isoband_0.2.2      jsonlite_1.7.0     kableExtra_1.2.1  
-##   knitr_1.29         labeling_0.3       lattice_0.20.41   
-##   lifecycle_0.2.0    lubridate_1.7.9    magrittr_1.5      
-##   markdown_1.1       MASS_7.3.51.5      Matrix_1.2.18     
-##   methods_4.0.0      mgcv_1.8.31        mime_0.9          
-##   modelr_0.1.8       munsell_0.5.0      nlme_3.1.147      
-##   openssl_1.4.2      pillar_1.4.6       pkgbuild_1.1.0    
-##   pkgconfig_2.0.3    pkgload_1.1.0      plyr_1.8.6        
-##   praise_1.0.0       prettyunits_1.1.1  processx_3.4.3    
-##   progress_1.2.2     ps_1.3.4           purrr_0.3.4       
-##   R6_2.4.1           RColorBrewer_1.1-2 Rcpp_1.0.5        
-##   readr_1.3.1        readxl_1.3.1       rematch_1.0.1     
-##   reprex_0.3.0       reshape_0.8.8      rlang_0.4.7       
-##   rmarkdown_2.3      rprojroot_1.3.2    rstudioapi_0.11   
-##   rvest_0.3.6        scales_1.1.1       selectr_0.4.2     
-##   splines_4.0.0      stats_4.0.0        stringi_1.4.6     
-##   stringr_1.4.0      sys_3.4            testthat_2.3.2    
-##   tibble_3.0.3       tidyr_1.1.2        tidyselect_1.1.0  
-##   tidyverse_1.3.0    tinytex_0.25       tools_4.0.0       
-##   utf8_1.1.4         utils_4.0.0        vctrs_0.3.4       
-##   viridisLite_0.3.0  webshot_0.5.2      whisker_0.4       
-##   withr_2.2.0        xfun_0.16          xml2_1.3.2        
-##   yaml_2.2.1</code></pre>
+##   ISLR_1.2           isoband_0.2.2      jsonlite_1.7.0    
+##   kableExtra_1.2.1   knitr_1.29         labeling_0.3      
+##   lattice_0.20.41    lifecycle_0.2.0    lubridate_1.7.9   
+##   magrittr_1.5       markdown_1.1       MASS_7.3.51.5     
+##   Matrix_1.2.18      methods_4.0.0      mgcv_1.8.31       
+##   mime_0.9           modelr_0.1.8       munsell_0.5.0     
+##   nlme_3.1.147       openssl_1.4.2      pillar_1.4.6      
+##   pkgbuild_1.1.0     pkgconfig_2.0.3    pkgload_1.1.0     
+##   plyr_1.8.6         praise_1.0.0       prettyunits_1.1.1 
+##   processx_3.4.3     progress_1.2.2     ps_1.3.4          
+##   purrr_0.3.4        R6_2.4.1           RColorBrewer_1.1-2
+##   Rcpp_1.0.5         readr_1.3.1        readxl_1.3.1      
+##   rematch_1.0.1      reprex_0.3.0       reshape_0.8.8     
+##   rlang_0.4.7        rmarkdown_2.3      rprojroot_1.3.2   
+##   rstudioapi_0.11    rvest_0.3.6        scales_1.1.1      
+##   selectr_0.4.2      splines_4.0.0      stats_4.0.0       
+##   stringi_1.4.6      stringr_1.4.0      sys_3.4           
+##   testthat_2.3.2     tibble_3.0.3       tidyr_1.1.2       
+##   tidyselect_1.1.0   tidyverse_1.3.0    tinytex_0.25      
+##   tools_4.0.0        utf8_1.1.4         utils_4.0.0       
+##   vctrs_0.3.4        viridisLite_0.3.0  webshot_0.5.2     
+##   whisker_0.4        withr_2.2.0        xfun_0.16         
+##   xml2_1.3.2         yaml_2.2.1</code></pre>
 <ul>
 <li><p>TODO: Open Questions</p></li>
 <li>how do we go about assuming a model? with only a couple variables, there is so much to consider, interactions, etc.

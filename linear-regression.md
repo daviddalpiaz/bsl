@@ -1148,9 +1148,9 @@ head(dmnd_trn, n = 10)
 
 Our goal here will be to build a model to predict the `price` of a diamond given it's characteristics. Let's create a few EDA plots.
 
-<img src="linear-regression_files/figure-html/unnamed-chunk-61-1.png" width="1152" style="display: block; margin: auto;" />
+<img src="linear-regression_files/figure-html/diamonds-pairs-1-1.png" width="1152" style="display: block; margin: auto;" />
 
-<img src="linear-regression_files/figure-html/unnamed-chunk-62-1.png" width="1152" style="display: block; margin: auto;" />
+<img src="linear-regression_files/figure-html/diamonds-pairs-2-1.png" width="1152" style="display: block; margin: auto;" />
 
 Note that these plots do **not** contain the test data. If they did, we would be using the test data to influence model building and selection, a big no-no.
 
@@ -1209,7 +1209,7 @@ abline(a = 0, b = 1, lwd = 2)
 grid()
 ```
 
-<img src="linear-regression_files/figure-html/unnamed-chunk-66-1.png" width="576" style="display: block; margin: auto;" />
+<img src="linear-regression_files/figure-html/unnamed-chunk-64-1.png" width="576" style="display: block; margin: auto;" />
 
 Some things to consider:
 
@@ -1294,7 +1294,7 @@ To get a better "look" at the data, consider running the following:
 
 We also create a pairs plot.
 
-<img src="linear-regression_files/figure-html/unnamed-chunk-72-1.png" width="1152" style="display: block; margin: auto;" />
+<img src="linear-regression_files/figure-html/credit-pairs-1.png" width="1152" style="display: block; margin: auto;" />
 
 We immediately notice three variables that have a strong correlation with `Rating`: `Income`, `Limit`, and `Balance`. Based on this, we evaluate five candidate models.^[You might be wondering, aren't there about a million different candidate models we could consider if we included things like engineered variables and interactions? Yup! Because of this, we'll look at some variable selection techniques, as well as some algorithms that avoid this issue to a certain extent.]
 
@@ -1367,7 +1367,7 @@ abline(a = 0, b = 1, lwd = 2)
 grid()
 ```
 
-<img src="linear-regression_files/figure-html/unnamed-chunk-77-1.png" width="576" style="display: block; margin: auto;" />
+<img src="linear-regression_files/figure-html/unnamed-chunk-74-1.png" width="576" style="display: block; margin: auto;" />
 
 The predicted versus actual plot almost looks too good to be true! Wow!^[Perhaps not surprising since this data was simulated.] In summary, if this data were real, we might have an interesting result!
 
@@ -1408,29 +1408,29 @@ xfun::session_info()
 ##   graphics_4.0.0     grDevices_4.0.0    grid_4.0.0        
 ##   gtable_0.3.0       haven_2.3.1        highr_0.8         
 ##   hms_0.5.3          htmltools_0.5.0    httr_1.4.2        
-##   isoband_0.2.2      jsonlite_1.7.0     kableExtra_1.2.1  
-##   knitr_1.29         labeling_0.3       lattice_0.20.41   
-##   lifecycle_0.2.0    lubridate_1.7.9    magrittr_1.5      
-##   markdown_1.1       MASS_7.3.51.5      Matrix_1.2.18     
-##   methods_4.0.0      mgcv_1.8.31        mime_0.9          
-##   modelr_0.1.8       munsell_0.5.0      nlme_3.1.147      
-##   openssl_1.4.2      pillar_1.4.6       pkgbuild_1.1.0    
-##   pkgconfig_2.0.3    pkgload_1.1.0      plyr_1.8.6        
-##   praise_1.0.0       prettyunits_1.1.1  processx_3.4.3    
-##   progress_1.2.2     ps_1.3.4           purrr_0.3.4       
-##   R6_2.4.1           RColorBrewer_1.1-2 Rcpp_1.0.5        
-##   readr_1.3.1        readxl_1.3.1       rematch_1.0.1     
-##   reprex_0.3.0       reshape_0.8.8      rlang_0.4.7       
-##   rmarkdown_2.3      rprojroot_1.3.2    rstudioapi_0.11   
-##   rvest_0.3.6        scales_1.1.1       selectr_0.4.2     
-##   splines_4.0.0      stats_4.0.0        stringi_1.4.6     
-##   stringr_1.4.0      sys_3.4            testthat_2.3.2    
-##   tibble_3.0.3       tidyr_1.1.2        tidyselect_1.1.0  
-##   tidyverse_1.3.0    tinytex_0.25       tools_4.0.0       
-##   utf8_1.1.4         utils_4.0.0        vctrs_0.3.4       
-##   viridisLite_0.3.0  webshot_0.5.2      whisker_0.4       
-##   withr_2.2.0        xfun_0.16          xml2_1.3.2        
-##   yaml_2.2.1
+##   ISLR_1.2           isoband_0.2.2      jsonlite_1.7.0    
+##   kableExtra_1.2.1   knitr_1.29         labeling_0.3      
+##   lattice_0.20.41    lifecycle_0.2.0    lubridate_1.7.9   
+##   magrittr_1.5       markdown_1.1       MASS_7.3.51.5     
+##   Matrix_1.2.18      methods_4.0.0      mgcv_1.8.31       
+##   mime_0.9           modelr_0.1.8       munsell_0.5.0     
+##   nlme_3.1.147       openssl_1.4.2      pillar_1.4.6      
+##   pkgbuild_1.1.0     pkgconfig_2.0.3    pkgload_1.1.0     
+##   plyr_1.8.6         praise_1.0.0       prettyunits_1.1.1 
+##   processx_3.4.3     progress_1.2.2     ps_1.3.4          
+##   purrr_0.3.4        R6_2.4.1           RColorBrewer_1.1-2
+##   Rcpp_1.0.5         readr_1.3.1        readxl_1.3.1      
+##   rematch_1.0.1      reprex_0.3.0       reshape_0.8.8     
+##   rlang_0.4.7        rmarkdown_2.3      rprojroot_1.3.2   
+##   rstudioapi_0.11    rvest_0.3.6        scales_1.1.1      
+##   selectr_0.4.2      splines_4.0.0      stats_4.0.0       
+##   stringi_1.4.6      stringr_1.4.0      sys_3.4           
+##   testthat_2.3.2     tibble_3.0.3       tidyr_1.1.2       
+##   tidyselect_1.1.0   tidyverse_1.3.0    tinytex_0.25      
+##   tools_4.0.0        utf8_1.1.4         utils_4.0.0       
+##   vctrs_0.3.4        viridisLite_0.3.0  webshot_0.5.2     
+##   whisker_0.4        withr_2.2.0        xfun_0.16         
+##   xml2_1.3.2         yaml_2.2.1
 ```
 
 - TODO: Open Questions
