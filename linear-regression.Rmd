@@ -19,7 +19,7 @@ This chapter will be the most action packed as we will establish a framework tha
 
 ```{r packages, warning = FALSE, message = FALSE, cache = FALSE}
 library(tibble)     # data frame printing
-library(dplyr)      # data manipulating
+library(dplyr)      # data manipulation
 library(knitr)      # creating tables
 library(kableExtra) # styling tables
 ```
@@ -580,7 +580,7 @@ First, let's state a somewhat specific goal. We would like to train models that 
 
 To accomplish this goal, we'll just "create" a dataset that isn't used to train the model! To create it, we will just split it off. (We'll actually do so twice.)
 
-First, denote the *entire* available data as $\mathcal{D}$ which contains $n$ observations of the response variable $y$ and $p$ feature variables $\boldsymbol{x}_i = (x_{1i}, x_{2i}, \ldots, x_{pi})$.
+First, denote the *entire* available data as $\mathcal{D}$ which contains $n$ observations of the response variable $y$ and $p$ feature variables $\boldsymbol{x}_i = (x_{i1}, x_{i2}, \ldots, x_{ip})$.
 
 $$
 \mathcal{D} = \{ (\boldsymbol{x}_i, y_i) \in \mathbb{R}^p \times \mathbb{R}, \ i = 1, 2, \ldots n \}

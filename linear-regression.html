@@ -269,7 +269,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="r-setup-and-source" class="section level2">
 <h2><span class="header-section-number">2.1</span> R Setup and Source</h2>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(tibble)     <span class="co"># data frame printing</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">library</span>(dplyr)      <span class="co"># data manipulating</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">library</span>(dplyr)      <span class="co"># data manipulation</span></a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">library</span>(knitr)      <span class="co"># creating tables</span></a>
 <a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw">library</span>(kableExtra) <span class="co"># styling tables</span></a></code></pre></div>
 <p>Additionally, objects from <code>ggplot2</code>, <code>GGally</code>, and <code>ISLR</code> are accessed. For full package details, including packages loaded via dependencies, see the session information at the end of this chapter. Recall that the <a href="index.html">Welcome</a> chapter contains directions for installing all necessary packages for following along with the text. The R Markdown source is provided as some code, mostly for creating plots, has been suppressed from the rendered document that you are currently reading.</p>
@@ -724,7 +724,7 @@ X_6 = 0.6]
 <p>OK. So now we can fit models, and make predictions (create estimates of the conditional mean of <span class="math inline">\(Y\)</span> given values of the features), how do we evaluate how well our models perform, <strong>without</strong> knowing the true model?</p>
 <p>First, let’s state a somewhat specific goal. We would like to train models that <strong>generalize</strong> well, that is, perform well on “new” or “unseen” data that was <strong>not</strong> used to train the model.<a href="#fn39" class="footnote-ref" id="fnref39"><sup>39</sup></a></p>
 <p>To accomplish this goal, we’ll just “create” a dataset that isn’t used to train the model! To create it, we will just split it off. (We’ll actually do so twice.)</p>
-<p>First, denote the <em>entire</em> available data as <span class="math inline">\(\mathcal{D}\)</span> which contains <span class="math inline">\(n\)</span> observations of the response variable <span class="math inline">\(y\)</span> and <span class="math inline">\(p\)</span> feature variables <span class="math inline">\(\boldsymbol{x}_i = (x_{1i}, x_{2i}, \ldots, x_{pi})\)</span>.</p>
+<p>First, denote the <em>entire</em> available data as <span class="math inline">\(\mathcal{D}\)</span> which contains <span class="math inline">\(n\)</span> observations of the response variable <span class="math inline">\(y\)</span> and <span class="math inline">\(p\)</span> feature variables <span class="math inline">\(\boldsymbol{x}_i = (x_{i1}, x_{i2}, \ldots, x_{ip})\)</span>.</p>
 <p><span class="math display">\[
 \mathcal{D} = \{ (\boldsymbol{x}_i, y_i) \in \mathbb{R}^p \times \mathbb{R}, \ i = 1, 2, \ldots n \}
 \]</span></p>
