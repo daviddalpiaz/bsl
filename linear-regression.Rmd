@@ -1129,9 +1129,3 @@ Do note, that both this example and the previous should not be considered **data
 ```{r}
 xfun::session_info()
 ```
-
-- TODO: Open Questions
-
-- how do we go about assuming a model? with only a couple variables, there is so much to consider, interactions, etc.
-    1. other methods don't require we make these decision.
-    2. variable selection techniques
