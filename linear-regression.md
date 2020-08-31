@@ -1432,9 +1432,3 @@ xfun::session_info()
 ##   whisker_0.4        withr_2.2.0        xfun_0.16         
 ##   xml2_1.3.2         yaml_2.2.1
 ```
-
-- TODO: Open Questions
-
-- how do we go about assuming a model? with only a couple variables, there is so much to consider, interactions, etc.
-    1. other methods don't require we make these decision.
-    2. variable selection techniques
