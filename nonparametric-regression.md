@@ -2,10 +2,6 @@
 
 
 
-
-
-***
-
 In this chapter, we will continue to explore models for making **predictions**, but now we will introduce **nonparametric models** that will contrast the **parametric models** that we have used previously.
 
 Specifically, we will discuss:
@@ -13,21 +9,33 @@ Specifically, we will discuss:
 - How to use **k-nearest neighbors** for regression through the use of the `knnreg()` function from the `caret` package
 - How to use **decision trees** for regression through the use of the `rpart()` function from the `rpart` package.
 - How "making predictions" can be thought of as **estimating the regression function**, that is, the conditional mean of the response given values of the features.
-- What is the difference between **parametric** and **nonparametric** methods?
-- How do these nonparametric methods deal with **categorical variables** and **interactions**.
+- The difference between **parametric** and **nonparametric** methods.
+- The difference between **model parameters** and **tuning parameters** methods.
+- How these nonparametric methods deal with **categorical variables** and **interactions**.
 
-We will also hint at, but delay one more chapter discussion of:
+We will also hint at, but delay for one more chapter a detailed discussion of:
 
-- What is **model flexibility**? What are **tuning parameters**? (What are model parameters?) 
-- What is **overfitting**? How do we avoid it?
+- What is **model flexibility**?
+- What is **overfitting** and how do we avoid it?
 
-***
+## R Setup and Source
 
-## Reading
 
-- Currently no additional reading for this chapter.
+```r
+library(tibble)     # data frame printing
+library(dplyr)      # data manipulation
 
-***
+library(caret)      # fitting knn
+library(rpart)      # fitting trees
+library(rpart.plot) # plotting trees
+
+library(knitr)      # creating tables
+library(kableExtra) # styling tables
+```
+
+Additionally, objects from `ISLR` are accessed. Recall that the [Welcome](index.html) chapter contains directions for installing all necessary packages for following along with the text. The R Markdown source is provided as some code, mostly for creating plots, has been suppressed from the rendered document that you are currently reading.
+
+- **R Markdown Source:** [`nonparametric-regression.Rmd`](nonparametric-regression.Rmd)
 
 ## Mathematical Setup
 
@@ -204,7 +212,7 @@ Let's also return to pretending that we do not actually know this information, b
 </tbody>
 </table>
 
-(We simulated a bit more data than last time to make the "pattern" clearer to recognize.)
+We simulated a bit more data than last time to make the "pattern" clearer to recognize.
 
 <img src="nonparametric-regression_files/figure-html/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;" />
 
@@ -243,7 +251,7 @@ Enter **nonparametric** models. We will consider two examples: **k-nearest neigh
 
 ## k-Nearest Neighbors
 
-We'll start with **k-nearest neighbors** which is possibly a more intuitive procedure than linear models.
+We'll start with **k-nearest neighbors** which is possibly a more intuitive procedure than linear models.^[We chose to start with linear regression because most students in STAT 432 should already be familiar.]
 
 If our goal is to estimate the mean function,
 
@@ -254,20 +262,20 @@ $$
 the most natural approach would be to use
 
 $$
-\text{average}(\{ y_i : x_i = x \})
+\text{average}(\{ y_i : x_i = x \}).
 $$
 
-that is, to estimate the conditional mean at $x$, average the $y_i$ values for each data point where $x_i = x$.
+That is, to estimate the conditional mean at $x$, average the $y_i$ values for each data point where $x_i = x$.
 
 While this sounds nice, it has an obvious flaw. For most values of $x$ there will not be any $x_i$ in the data where $x_i = x$!
 
 So what's the next best thing? Pick values of $x_i$ that are "close" to $x$.
 
 $$
-\text{average}( \{ y_i : x_i \text{ equal to (or very close to) x} \} )
+\text{average}( \{ y_i : x_i \text{ equal to (or very close to) x} \} ).
 $$
 
-This is the main idea behind many nonparametric approaches.
+This is the main idea behind many nonparametric approaches. The details often just amount to very specifically defining what "close" means.
 
 In the case of k-nearest neighbors we use
 
@@ -277,7 +285,7 @@ $$
 
 as our estimate of the regression function at $x$. While this looks complicated, it is actually very simple. Here, we are using an average of the $y_i$ values of for the $k$ nearest neighbors to $x$. 
 
-The $k$ "nearest" neighbors are the $k$ data points $(x_i, y_i)$ that have $x_i$ values that are nearest to $x$. We can define "nearest" using any distance we like, but unless otherwise noted, we are referring to euclidean distance. (The usual distance when you hear distance.) We are using the notation $\{i \ : \ x_i \in \mathcal{N}_k(x, \mathcal{D}) \}$ to define the $k$ observations that have $x_i$ values that are nearest to the value $x$ in a dataset $\mathcal{D}$, in other words, the $k$ nearest neighbors.
+The $k$ "nearest" neighbors are the $k$ data points $(x_i, y_i)$ that have $x_i$ values that are nearest to $x$. We can define "nearest" using any distance we like, but unless otherwise noted, we are referring to euclidean distance.^[The usual distance when you hear distance. That is, unless you drive a [taxicab](https://en.wikipedia.org/wiki/Taxicab_geometry).] We are using the notation $\{i \ : \ x_i \in \mathcal{N}_k(x, \mathcal{D}) \}$ to define the $k$ observations that have $x_i$ values that are nearest to the value $x$ in a dataset $\mathcal{D}$, in other words, the $k$ nearest neighbors.
 
 
 
@@ -289,7 +297,7 @@ The plots below begin to illustrate this idea.
 - In the middle plot, to estimate the mean of $Y$ at $x = 0$ we use the five nearest neighbors, which are highlighted with green. Our estimate is the average of the $y_i$ values of these five points indicated by the black x.
 - In the right plot, to estimate the mean of $Y$ at $x = 0.75$ we use the nine nearest neighbors, which are highlighted with green. Our estimate is the average of the $y_i$ values of these nine points indicated by the black x.
 
-You might begin to notice a bit of an issue here. We have to do a new calculation each time we want to estimate the regression function at a different value of $x$! For this reason, k-nearest neighbors is often said to be "fast to train" and "slow to predict." Training, is instant. You just memorize the data! Prediction involves finding the distance between the $x$ considered and all $x_i$ in the data! (For this reason, KNN is often not used in practice, but it is very useful learning tool.)
+You might begin to notice a bit of an issue here. We have to do a new calculation each time we want to estimate the regression function at a different value of $x$! For this reason, k-nearest neighbors is often said to be "fast to train" and "slow to predict." Training, is instant. You just memorize the data! Prediction involves finding the distance between the $x$ considered and all $x_i$ in the data!^[For this reason, KNN is often not used in practice, but it is very useful learning tool.]
 
 So, how then, do we choose the value of the **tuning** parameter $k$? We _**validate**_!
 
@@ -316,10 +324,10 @@ But remember, in practice, we won't know the true regression function, so we wil
 
 This $k$, the number of neighbors, is an example of a **tuning parameter**. Instead of being learned from the data, like model parameters such as the $\beta$ coefficients in linear regression, a tuning parameter tells us *how* to learn from data. It is user-specified. To determine the value of $k$ that should be used, many models are fit to the estimation data, then evaluated on the validation. Using the information from the validation data, a value of $k$ is chosen. (More on this in a bit.)
 
-- **Model parameters** are "learned" using the same data that was used to fit the model
-- **Tuning paremeters** are "chosen" using data not used to fit the model
+- **Model parameters** are "learned" using the same data that was used to fit the model.
+- **Tuning parameters** are "chosen" using data not used to fit the model.
 
-This tuning parameter $k$ also defines the **flexibility** of the model. In KNN, a small value of $k$ is a flexible model, while a large value of $k$ is inflexible. (Many texts use the term complex instead of flexible. We feel this is confusing as complex is often associated with difficult. KNN with $k = 1$ is actually a very simple model to understand, but it is very flexible as defined here.)
+This tuning parameter $k$ also defines the **flexibility** of the model. In KNN, a small value of $k$ is a flexible model, while a large value of $k$ is inflexible.^[Many texts use the term complex instead of flexible. We feel this is confusing as complex is often associated with difficult. KNN with $k = 1$ is actually a very simple model to understand, but it is very flexible as defined here.]
 
 Before moving to an example of tuning a KNN model, we will first introduce decision trees.
 
@@ -327,7 +335,7 @@ Before moving to an example of tuning a KNN model, we will first introduce decis
 
 **Decision trees** are similar to k-nearest neighbors but instead of looking for neighbors, decision trees create neighborhoods. We won't explore the full details of trees, but just start to understand the basic concepts, as well as learn to fit them in R.
 
-Neighborhoods are created via recursive binary partitions. In simpler terms, pick a feature and a possible cutoff value. Data that have a value less than the cutoff for the selected feature are in one neighborhood (the left) and data that have a value greater than the cutoff are in another (the right). Within these two neighborhoods, repeat this procedure until a stopping rule is satisfied. (More on that in a moment.) To make a prediction, check which neighborhood a new piece of data would belong to and predict the average of the $y_i$ values of data in that neighborhood.
+Neighborhoods are created via recursive binary partitions. In simpler terms, pick a feature and a possible cutoff value. Data that have a value less than the cutoff for the selected feature are in one neighborhood (the left) and data that have a value greater than the cutoff are in another (the right). Within these two neighborhoods, repeat this procedure until a stopping rule is satisfied. To make a prediction, check which neighborhood a new piece of data would belong to and predict the average of the $y_i$ values of data in that neighborhood.
 
 With the data above, which has a single feature $x$, consider three possible cutoffs: -0.5, 0.0, and 0.75.
 
@@ -385,7 +393,7 @@ This quantity is the sum of two sum of squared errors, one for the left neighbor
 </tbody>
 </table>
 
-The table above summarizes the results of the three potential splits. We see that (of the splits considered, which are not exhaustive) the split based on a cutoff of $x = -0.50$ creates the best partitioning of the space.
+The table above summarizes the results of the three potential splits. We see that (of the splits considered, which are not exhaustive^[To exhaust all possible splits of a variable, we would need to consider the midpoint between each of the order statistics of the variable. To exhaust all possible splits, we would need to do this for each of the feature variables.]) the split based on a cutoff of $x = -0.50$ creates the best partitioning of the space.
 
 Now let's consider building a full tree.
 
@@ -397,13 +405,13 @@ In the plot above, the true regression function is the dashed black curve, and t
 
 <img src="nonparametric-regression_files/figure-html/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" />
 
-The above "tree" shows the splits that were made. It informs us of the variable used, the cutoff value, and some summary of the resulting neighborhood. In "tree" terminology the resulting neighborhoods are "terminal nodes" of the tree. In contrast, "internal nodes" are neighborhoods that are created, but then further split.
+The above "tree"^[It's really an upside tree isn't it?] shows the splits that were made. It informs us of the variable used, the cutoff value, and some summary of the resulting neighborhood. In "tree" terminology the resulting neighborhoods are "terminal nodes" of the tree. In contrast, "internal nodes" are neighborhoods that are created, but then further split.
 
 The "root node" is the neighborhood contains all observations, before any splitting, and can be seen at the top of the image above. We see that this node represents 100% of the data. The other number, 0.21, is the mean of the response variable, in this case, $y_i$.
 
 Looking at a terminal node, for example the bottom left node, we see that 23% of the data is in this node. The average value of the $y_i$ in this node is -1, which can be seen in the plot above.
 
-We also see that the first split is based on the $x$ variable, and a cutoff of $x = -0.52$. (Note that because there is only one variable here, all splits are based on $x$, but in the future, we will have multiple features that can be split and neighborhoods will no longer be one-dimensional. However, this is hard to plot.)
+We also see that the first split is based on the $x$ variable, and a cutoff of $x = -0.52$. Note that because there is only one variable here, all splits are based on $x$, but in the future, we will have multiple features that can be split and neighborhoods will no longer be one-dimensional. However, this is hard to plot.
 
 Let's build a bigger, more flexible tree.
 
@@ -415,10 +423,10 @@ Let's build a bigger, more flexible tree.
 
 There are two tuning parameters at play here which we will call by their names in R which we will see soon:
 
-- `cp` or the "complexity parameter" as it is called. (Flexibility parameter would be a better name.) This parameter determines which splits are considered. A split must improve the performance of the tree by more than `cp` in order to be considered. When we get to R, we will see that the default value is 0.1.
-- `minsplit`, the minimum number of observations in a node (neighborhood) in order to split again.
+- `cp` or the "complexity parameter" as it is called.^[Flexibility parameter would be a better name.] This parameter determines which splits are accepted. A split must improve the performance of the tree by more than `cp` in order to be used. When we get to R, we will see that the default value is 0.1.
+- `minsplit`, the minimum number of observations in a node (neighborhood) in order to consider splitting within a neighborhood.
 
-There are actually many more possible tuning parameters for trees, possibly differing depending on who wrote the code you're using. We will limit discussion to these two. (The `rpart` function in R would allow us to use others, but we will always just leave their values as the default values.) Note that they effect each other, and they effect other parameters which we are not discussing. The main takeaway should be how they effect model flexibility.
+There are actually many more possible tuning parameters for trees, possibly differing depending on who wrote the code you're using. We will limit discussion to these two.^[The `rpart` function in R would allow us to use others, but we will always just leave their values as the default values.] Note that they effect each other, and they effect other parameters which we are not discussing. The main takeaway should be how they effect model flexibility.
 
 First let's look at what happens for a fixed `minsplit` by variable `cp`.
 
@@ -434,9 +442,7 @@ Now the reverse, fix `cp` and vary `minsplit`.
 
 <img src="nonparametric-regression_files/figure-html/unnamed-chunk-24-1.png" width="1152" style="display: block; margin: auto;" />
 
-We see that as `minsplit` *decreases*, model flexibility **increases**. By allow splits of neighborhoods with fewer observations, we obtain more splits, which results in a more flexible model.
-
-***
+We see that as `minsplit` *decreases*, model flexibility **increases**. By allowing splits of neighborhoods with fewer observations, we obtain more splits, which results in a more flexible model.
 
 ## Example: Credit Card Data
 
@@ -502,9 +508,9 @@ head(crdt_trn, n = 10)
 ## # … with 1 more variable: Rating <int>
 ```
 
-Recall that we would like to predict the `Rating` variable. This time, let's try to use only demographic information as predictors. In particular, let's focus on `Age` (numeric), `Gender` (categorical), and `Student` (categorical).
+Recall that we would like to predict the `Rating` variable. This time, let's try to use only demographic information as predictors.^[There is a question of whether or not we *should* use these variables. For example, should men and women be given different ratings when all other variables are the same? Using the `Gender` variable allows for this to happen. Also, you might think, just don't use the `Gender` variable. Unfortunately, it's not that easy. There is an increasingly popular field of study centered around these ideas called [machine learning **fairness**](https://en.wikipedia.org/wiki/Fairness_(machine_learning)).] In particular, let's focus on `Age` (numeric), `Gender` (categorical), and `Student` (categorical).
 
-Let's fit KNN models with these features, and various values of $k$. To do so, we use the `knnreg()` function from the `caret` package. (There are many other KNN functions in R. However, the operation and syntax of `knnreg()` better matches other functions we will use in this course.) Use `?knnreg` for documentation and details.
+Let's fit KNN models with these features, and various values of $k$. To do so, we use the `knnreg()` function from the `caret` package.^[There are many other KNN functions in R. However, the operation and syntax of `knnreg()` better matches other functions we will use in this course.] Use `?knnreg` for documentation and details.
 
 
 ```r
@@ -534,7 +540,7 @@ head(crdt_knn_10$learn$X)
 ## 6  71            0          0
 ```
 
-Once these dummy variables have been created, we have a numeric $X$ matrix, which makes distance calculations easy. For example, the distance between the 4th and 5th observation here is 29.02.
+Once these dummy variables have been created, we have a numeric $X$ matrix, which makes distance calculations easy.^[Wait. Doesn't this sort of create an arbitrary distance between the categories? Why $0$ and $1$ and not $-42$ and $51$? Good question. This hints at the notion of pre-processing. We're going to hold off on this for now, but, often when performing k-nearest neighbors, you should try scaling all of the features to have mean $0$ and variance $1$.] For example, the distance between the 3rd and 4th observation here is 29.017.
 
 
 ```r
@@ -552,14 +558,14 @@ dist(head(crdt_knn_10$learn$X))
 
 
 ```r
-sqrt(sum((crdt_knn_10$learn$X[4, ] - crdt_knn_10$learn$X[5, ]) ^ 2))
+sqrt(sum((crdt_knn_10$learn$X[3, ] - crdt_knn_10$learn$X[4, ]) ^ 2))
 ```
 
 ```
-## [1] 29.03446
+## [1] 29.01724
 ```
 
-(What about interactions? Basically, you'd have to create them the same way as you do for linear models. We only mention this to contrast with trees in a bit.)
+What about interactions? Basically, you'd have to create them the same way as you do for linear models. We only mention this to contrast with trees in a bit.
 
 OK, so of these three models, which one performs best? (Where for now, "best" is obtaining the lowest validation RMSE.)
 
@@ -574,7 +580,7 @@ predict(crdt_knn_10, crdt_val[1:5, ])
 ## [1] 337.7857 356.0000 295.7692 360.8182 306.8000
 ```
 
-This uses the 10-NN (10 nearest neighbors) model to make predictions (estimate the regression function) given the first five observations of the validation data. (**Note:** We did not name the second argument to `predict()`. Again, you've been warned.)
+This uses the 10-NN (10 nearest neighbors) model to make predictions (estimate the regression function) given the first five observations of the validation data. **Note:** We did not name the second argument to `predict()`. Again, you've been warned.
 
 Now that we know how to use the `predict()` function, let's calculate the validation RMSE for each of these models.
 
@@ -589,7 +595,7 @@ knn_mod_list = list(
 
 
 ```r
-knn_val_pred = map(knn_mod_list, predict, crdt_val)
+knn_val_pred = lapply(knn_mod_list, predict, crdt_val)
 ```
 
 
@@ -601,7 +607,7 @@ calc_rmse = function(actual, predicted) {
 
 
 ```r
-map_dbl(knn_val_pred, calc_rmse, crdt_val$Rating)
+sapply(knn_val_pred, calc_rmse, crdt_val$Rating)
 ```
 
 ```
@@ -613,7 +619,7 @@ So, of these three values of $k$, the model with $k = 25$ achieves the lowest va
 
 This process, fitting a number of models with different values of the *tuning parameter*, in this case $k$, and then finding the "best" tuning parameter value based on performance on the validation data is called **tuning**. In practice, we would likely consider more values of $k$, but this should illustrate the point.
 
-In the next chapters, we will discuss the details of model flexibility and model tuning, and how these concepts are tied together. However, even though we will present some theory behind this relationship, in practice, **you must tune and validate your models**. There is no theory that will inform you ahead of tuning and validation which model will be the best. By teaching you *how* to fit KNN models in R and how to calculate validation RMSE, you already have all the tools you need to find a good model.
+In the next chapter, we will discuss the details of model flexibility and model tuning, and how these concepts are tied together. However, even though we will present some theory behind this relationship, in practice, **you must tune and validate your models**. There is no theory that will inform you ahead of tuning and validation which model will be the best. By teaching you *how* to fit KNN models in R and how to calculate validation RMSE, you already have all a set of tools you can use to find a good model.
 
 Let's turn to decision trees which we will fit with the `rpart()` function from the `rpart` package. Use `?rpart` and `?rpart.control` for documentation and details. In particular, `?rpart.control` will detail the many tuning parameters of this implementation of decision tree models in R.
 
@@ -659,9 +665,9 @@ rpart.plot(crdt_tree)
 
 <img src="nonparametric-regression_files/figure-html/unnamed-chunk-41-1.png" width="672" style="display: block; margin: auto;" />
 
-At each split, the variable used to split is listed together with a condition. (If the condition is true for a data point, send it to the left neighborhood.) Although the `Gender` variable was used, we only see splits based on `Age` and `Student`. (This hints at the relative importance of these variables for prediction. More on this much later.)
+At each split, the variable used to split is listed together with a condition. If the condition is true for a data point, send it to the left neighborhood. Although the `Gender` available for creating splits, we only see splits based on `Age` and `Student`. This hints at the relative importance of these variables for prediction. More on this much later.
 
-Categorical variables are split based on potential categories! This is **excellent**. This means that trees naturally handle categorical features without needing to convert to numeric under the hood. We see a split that puts students into one neighborhood, and non-students into another.
+Categorical variables are split based on potential categories! This is *excellent*. This means that trees naturally handle categorical features without needing to convert to numeric under the hood. We see a split that puts students into one neighborhood, and non-students into another.
 
 Notice that the splits happen in order. So for example, the third terminal node (with an average rating of 298) is based on splits of:
 
@@ -678,7 +684,7 @@ To recap:
 - Trees automatically handle categorical features.
 - Trees naturally incorporate interaction.
 
-Now let's fit another tree that is more flexible by relaxing some tuning parameters. (By default, `cp = 0.1` and `minsplit = 20`.)
+Now let's fit another tree that is more flexible by relaxing some tuning parameters. Recall that by default, `cp = 0.1` and `minsplit = 20`.
 
 
 ```r
@@ -693,7 +699,7 @@ rpart.plot(crdt_tree_big)
 
 <img src="nonparametric-regression_files/figure-html/unnamed-chunk-43-1.png" width="672" style="display: block; margin: auto;" />
 
-To make the tree even bigger, we could reduce `minsplit`, but in practice we mostly consider the `cp` parameter. (We will occasionally modify the `minsplit` parameter on quizzes.) Since `minsplit` has been kept the same, but `cp` was reduced, we see the same splits as the smaller tree, but many additional splits.
+To make the tree even bigger, we could reduce `minsplit`, but in practice we mostly consider the `cp` parameter.^[If you are taking STAT 432, we will occasionally modify the `minsplit` parameter on quizzes.] Since `minsplit` has been kept the same, but `cp` was reduced, we see the same splits as the smaller tree, but many additional splits.
 
 Now let's fit a bunch of trees, with different values of `cp`, for tuning.
 
@@ -709,12 +715,12 @@ tree_mod_list = list(
 
 
 ```r
-tree_val_pred = map(tree_mod_list, predict, crdt_val)
+tree_val_pred = lapply(tree_mod_list, predict, crdt_val)
 ```
 
 
 ```r
-map_dbl(tree_val_pred, calc_rmse, crdt_val$Rating)
+sapply(tree_val_pred, calc_rmse, crdt_val$Rating)
 ```
 
 ```
@@ -738,7 +744,7 @@ rpart.plot(crdt_tree_all)
 
 <img src="nonparametric-regression_files/figure-html/unnamed-chunk-48-1.png" width="672" style="display: block; margin: auto;" />
 
-Notice that this model **only** splits based on `Limit` despite using all features. (This should be a big hint about which variables are useful for prediction.)
+Notice that this model **only** splits based on `Limit` despite using all features. This should be a big hint about which variables are useful for prediction.
 
 
 ```r
@@ -767,11 +773,3 @@ predict(crdt_tree_all, crdt_val[1:5, ])
 ```
 
 What does this code do? It estimates the mean `Rating` given the feature information (the "x" values) from the first five observations from the validation data using a decision tree model with default tuning parameters. Hopefully a theme is emerging.
-
-***
-
-## Source
-
-- `R` Markdown: [`nonparametric-regression.Rmd`](nonparametric-regression.Rmd)
-
-***

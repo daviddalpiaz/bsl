@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="ml-overview.html"/>
-<link rel="next" href="additional-reading.html"/>
+<link rel="next" href="nonparametric-regression.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,6 +50,7 @@
 
 
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -173,7 +174,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.10" data-path="linear-regression.html"><a href="linear-regression.html#example-simple-simulated-data"><i class="fa fa-check"></i><b>2.10</b> Example: “Simple” Simulated Data</a></li>
 <li class="chapter" data-level="2.11" data-path="linear-regression.html"><a href="linear-regression.html#example-diamonds-data"><i class="fa fa-check"></i><b>2.11</b> Example: Diamonds Data</a></li>
 <li class="chapter" data-level="2.12" data-path="linear-regression.html"><a href="linear-regression.html#example-credit-card-data"><i class="fa fa-check"></i><b>2.12</b> Example: Credit Card Data</a></li>
-<li class="chapter" data-level="2.13" data-path="linear-regression.html"><a href="linear-regression.html#session-info"><i class="fa fa-check"></i><b>2.13</b> Session Info</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html"><i class="fa fa-check"></i><b>3</b> Nonparametric Regression</a><ul>
+<li class="chapter" data-level="3.1" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#r-setup-and-source-1"><i class="fa fa-check"></i><b>3.1</b> R Setup and Source</a></li>
+<li class="chapter" data-level="3.2" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#mathematical-setup-1"><i class="fa fa-check"></i><b>3.2</b> Mathematical Setup</a></li>
+<li class="chapter" data-level="3.3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>3.3</b> k-Nearest Neighbors</a></li>
+<li class="chapter" data-level="3.4" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#decision-trees"><i class="fa fa-check"></i><b>3.4</b> Decision Trees</a></li>
+<li class="chapter" data-level="3.5" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#example-credit-card-data-1"><i class="fa fa-check"></i><b>3.5</b> Example: Credit Card Data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html"><i class="fa fa-check"></i><b>4</b> The Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="4.1" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#r-setup-and-source-2"><i class="fa fa-check"></i><b>4.1</b> R Setup and Source</a></li>
+<li class="chapter" data-level="4.2" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#the-regression-setup"><i class="fa fa-check"></i><b>4.2</b> The Regression Setup</a></li>
+<li class="chapter" data-level="4.3" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>4.3</b> Reducible and Irreducible Error</a></li>
+<li class="chapter" data-level="4.4" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>4.4</b> Bias-Variance Decomposition</a></li>
+<li class="chapter" data-level="4.5" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#using-simulation-to-estimate-bias-and-variance"><i class="fa fa-check"></i><b>4.5</b> Using Simulation to Estimate Bias and Variance</a></li>
+<li class="chapter" data-level="4.6" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>4.6</b> Estimating Expected Prediction Error</a></li>
+<li class="chapter" data-level="4.7" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#model-flexibility"><i class="fa fa-check"></i><b>4.7</b> Model Flexibility</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#linear-models"><i class="fa fa-check"></i><b>4.7.1</b> Linear Models</a></li>
+<li class="chapter" data-level="4.7.2" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#k-nearest-neighbors-1"><i class="fa fa-check"></i><b>4.7.2</b> k-Nearest Neighbors</a></li>
+<li class="chapter" data-level="4.7.3" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#decision-trees-1"><i class="fa fa-check"></i><b>4.7.3</b> Decision Trees</a></li>
+</ul></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="additional-reading.html"><a href="additional-reading.html"><i class="fa fa-check"></i><b>A</b> Additional Reading</a><ul>
@@ -218,7 +238,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="C.6" data-path="probability.html"><a href="probability.html#expectations"><i class="fa fa-check"></i><b>C.6</b> Expectations</a></li>
 <li class="chapter" data-level="C.7" data-path="probability.html"><a href="probability.html#likelihood"><i class="fa fa-check"></i><b>C.7</b> Likelihood</a></li>
-<li class="chapter" data-level="C.8" data-path="probability.html"><a href="probability.html#references"><i class="fa fa-check"></i><b>C.8</b> References</a><ul>
+<li class="chapter" data-level="C.8" data-path="probability.html"><a href="probability.html#additional-references"><i class="fa fa-check"></i><b>C.8</b> Additional References</a><ul>
 <li class="chapter" data-level="C.8.1" data-path="probability.html"><a href="probability.html#videos"><i class="fa fa-check"></i><b>C.8.1</b> Videos</a></li>
 </ul></li>
 </ul></li>
@@ -270,11 +290,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">2.1</span> R Setup and Source</h2>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(tibble)     <span class="co"># data frame printing</span></a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">library</span>(dplyr)      <span class="co"># data manipulation</span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">library</span>(knitr)      <span class="co"># creating tables</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw">library</span>(kableExtra) <span class="co"># styling tables</span></a></code></pre></div>
-<p>Additionally, objects from <code>ggplot2</code>, <code>GGally</code>, and <code>ISLR</code> are accessed. For full package details, including packages loaded via dependencies, see the session information at the end of this chapter. Recall that the <a href="index.html">Welcome</a> chapter contains directions for installing all necessary packages for following along with the text. The R Markdown source is provided as some code, mostly for creating plots, has been suppressed from the rendered document that you are currently reading.</p>
+<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw">library</span>(knitr)      <span class="co"># creating tables</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw">library</span>(kableExtra) <span class="co"># styling tables</span></a></code></pre></div>
+<p>Additionally, objects from <code>ggplot2</code>, <code>GGally</code>, and <code>ISLR</code> are accessed. Recall that the <a href="index.html">Welcome</a> chapter contains directions for installing all necessary packages for following along with the text. The R Markdown source is provided as some code, mostly for creating plots, has been suppressed from the rendered document that you are currently reading.</p>
 <ul>
-<li><strong>Source:</strong> <a href="linear-regression.Rmd"><code>linear-regression.Rmd</code></a></li>
+<li><strong>R Markdown Source:</strong> <a href="linear-regression.Rmd"><code>linear-regression.Rmd</code></a></li>
 </ul>
 </div>
 <div id="explanation-versus-prediction" class="section level2">
@@ -1120,67 +1141,16 @@ X_6 = 0.6]
 <a class="sourceLine" id="cb99-10" data-line-number="10"><span class="kw">grid</span>()</a></code></pre></div>
 <p><img src="linear-regression_files/figure-html/unnamed-chunk-74-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>The predicted versus actual plot almost looks too good to be true! Wow!<a href="#fn50" class="footnote-ref" id="fnref50"><sup>50</sup></a> In summary, if this data were real, we might have an interesting result!</p>
-<p>Do note, that both this example and the previous should not be considered <strong>data analyses</strong>, but instead, examples that reinforce how to use the validation and test sets. As part of a true analysis, we will need to be much more careful about many of our decision. After putting down some additional foundation, we’ll more towards these ideas in this text~</p>
-</div>
-<div id="session-info" class="section level2">
-<h2><span class="header-section-number">2.13</span> Session Info</h2>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" data-line-number="1">xfun<span class="op">::</span><span class="kw">session_info</span>()</a></code></pre></div>
-<pre><code>## R version 4.0.0 (2020-04-24)
-## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 16.04.6 LTS
-## 
-## Locale:
-##   LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
-##   LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
-##   LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
-##   LC_PAPER=en_US.UTF-8       LC_NAME=C                 
-##   LC_ADDRESS=C               LC_TELEPHONE=C            
-##   LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
-## 
-## Package version:
-##   askpass_1.1        assertthat_0.2.1   backports_1.1.9   
-##   base64enc_0.1.3    BH_1.72.0.3        blob_1.2.1        
-##   bookdown_0.20.3    broom_0.7.0        callr_3.4.3       
-##   cellranger_1.1.0   cli_2.0.2          clipr_0.7.0       
-##   codetools_0.2-16   colorspace_1.4-1   compiler_4.0.0    
-##   cpp11_0.2.1        crayon_1.3.4       curl_4.3          
-##   DBI_1.1.0          dbplyr_1.4.4       desc_1.2.0        
-##   digest_0.6.25      dplyr_1.0.2        ellipsis_0.3.1    
-##   evaluate_0.14      fansi_0.4.1        farver_2.0.3      
-##   forcats_0.5.0      fs_1.5.0           generics_0.0.2    
-##   GGally_2.0.0       ggplot2_3.3.2      glue_1.4.2        
-##   graphics_4.0.0     grDevices_4.0.0    grid_4.0.0        
-##   gtable_0.3.0       haven_2.3.1        highr_0.8         
-##   hms_0.5.3          htmltools_0.5.0    httr_1.4.2        
-##   ISLR_1.2           isoband_0.2.2      jsonlite_1.7.0    
-##   kableExtra_1.2.1   knitr_1.29         labeling_0.3      
-##   lattice_0.20.41    lifecycle_0.2.0    lubridate_1.7.9   
-##   magrittr_1.5       markdown_1.1       MASS_7.3.51.5     
-##   Matrix_1.2.18      methods_4.0.0      mgcv_1.8.31       
-##   mime_0.9           modelr_0.1.8       munsell_0.5.0     
-##   nlme_3.1.147       openssl_1.4.2      pillar_1.4.6      
-##   pkgbuild_1.1.0     pkgconfig_2.0.3    pkgload_1.1.0     
-##   plyr_1.8.6         praise_1.0.0       prettyunits_1.1.1 
-##   processx_3.4.3     progress_1.2.2     ps_1.3.4          
-##   purrr_0.3.4        R6_2.4.1           RColorBrewer_1.1-2
-##   Rcpp_1.0.5         readr_1.3.1        readxl_1.3.1      
-##   rematch_1.0.1      reprex_0.3.0       reshape_0.8.8     
-##   rlang_0.4.7        rmarkdown_2.3      rprojroot_1.3.2   
-##   rstudioapi_0.11    rvest_0.3.6        scales_1.1.1      
-##   selectr_0.4.2      splines_4.0.0      stats_4.0.0       
-##   stringi_1.4.6      stringr_1.4.0      sys_3.4           
-##   testthat_2.3.2     tibble_3.0.3       tidyr_1.1.2       
-##   tidyselect_1.1.0   tidyverse_1.3.0    tinytex_0.25      
-##   tools_4.0.0        utf8_1.1.4         utils_4.0.0       
-##   vctrs_0.3.4        viridisLite_0.3.0  webshot_0.5.2     
-##   whisker_0.4        withr_2.2.0        xfun_0.16         
-##   xml2_1.3.2         yaml_2.2.1</code></pre>
+<p>Do note, that both this example and the previous should not be considered <strong>data analyses</strong>, but instead, examples that reinforce how to use the validation and test sets. As part of a true analysis, we will need to be much more careful about many of our decision. After putting down some additional foundation, we’ll move towards these ideas in this text.</p>
+<p>One possible critique of what we’ve done here: It’s possible we should not have used the <code>Limit</code> variable. Why? Because (and we’re guessing here, as this is not real data) it’s possible that we would have to acquire this information along with the <code>Rating</code> information. Let’s assume this is true. We need to first make a distinction between <strong>train time</strong> and <strong>test time</strong>.</p>
+<ul>
+<li><strong>Train time:</strong> The portion of the ML process where you are creating models. (Anything you do before make predictions on truly new data.)</li>
+<li><strong>Test time:</strong> The portion of the ML process where you are making predictions in the real world.</li>
+</ul>
+<p>The issue here is that the models you create during training should only include features which you will have access to at test time. Otherwise, you won’t actually be able to make a prediction!</p>
 
 </div>
 </div>
-
-
-
 <div class="footnotes">
 <hr />
 <ol start="31">
@@ -1212,7 +1182,7 @@ X_6 = 0.6]
         </div>
       </div>
 <a href="ml-overview.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="additional-reading.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="nonparametric-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

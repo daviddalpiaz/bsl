@@ -344,7 +344,7 @@ sum(dpois(x = x_data, lambda = 5, log = TRUE))
 ## [1] -68.11844
 ```
 
-## References
+## Additional References
 
 Any of the following are either dedicated to, or contain a good coverage of the details of the topics above.
 

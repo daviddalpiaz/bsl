@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="linear-regression.html"/>
+<link rel="prev" href="bias-variance-tradeoff.html"/>
 <link rel="next" href="computing.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -50,6 +50,7 @@
 
 
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -173,7 +174,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.10" data-path="linear-regression.html"><a href="linear-regression.html#example-simple-simulated-data"><i class="fa fa-check"></i><b>2.10</b> Example: “Simple” Simulated Data</a></li>
 <li class="chapter" data-level="2.11" data-path="linear-regression.html"><a href="linear-regression.html#example-diamonds-data"><i class="fa fa-check"></i><b>2.11</b> Example: Diamonds Data</a></li>
 <li class="chapter" data-level="2.12" data-path="linear-regression.html"><a href="linear-regression.html#example-credit-card-data"><i class="fa fa-check"></i><b>2.12</b> Example: Credit Card Data</a></li>
-<li class="chapter" data-level="2.13" data-path="linear-regression.html"><a href="linear-regression.html#session-info"><i class="fa fa-check"></i><b>2.13</b> Session Info</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html"><i class="fa fa-check"></i><b>3</b> Nonparametric Regression</a><ul>
+<li class="chapter" data-level="3.1" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#r-setup-and-source-1"><i class="fa fa-check"></i><b>3.1</b> R Setup and Source</a></li>
+<li class="chapter" data-level="3.2" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#mathematical-setup-1"><i class="fa fa-check"></i><b>3.2</b> Mathematical Setup</a></li>
+<li class="chapter" data-level="3.3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>3.3</b> k-Nearest Neighbors</a></li>
+<li class="chapter" data-level="3.4" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#decision-trees"><i class="fa fa-check"></i><b>3.4</b> Decision Trees</a></li>
+<li class="chapter" data-level="3.5" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#example-credit-card-data-1"><i class="fa fa-check"></i><b>3.5</b> Example: Credit Card Data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html"><i class="fa fa-check"></i><b>4</b> The Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="4.1" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#r-setup-and-source-2"><i class="fa fa-check"></i><b>4.1</b> R Setup and Source</a></li>
+<li class="chapter" data-level="4.2" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#the-regression-setup"><i class="fa fa-check"></i><b>4.2</b> The Regression Setup</a></li>
+<li class="chapter" data-level="4.3" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>4.3</b> Reducible and Irreducible Error</a></li>
+<li class="chapter" data-level="4.4" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>4.4</b> Bias-Variance Decomposition</a></li>
+<li class="chapter" data-level="4.5" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#using-simulation-to-estimate-bias-and-variance"><i class="fa fa-check"></i><b>4.5</b> Using Simulation to Estimate Bias and Variance</a></li>
+<li class="chapter" data-level="4.6" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>4.6</b> Estimating Expected Prediction Error</a></li>
+<li class="chapter" data-level="4.7" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#model-flexibility"><i class="fa fa-check"></i><b>4.7</b> Model Flexibility</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#linear-models"><i class="fa fa-check"></i><b>4.7.1</b> Linear Models</a></li>
+<li class="chapter" data-level="4.7.2" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#k-nearest-neighbors-1"><i class="fa fa-check"></i><b>4.7.2</b> k-Nearest Neighbors</a></li>
+<li class="chapter" data-level="4.7.3" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#decision-trees-1"><i class="fa fa-check"></i><b>4.7.3</b> Decision Trees</a></li>
+</ul></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="additional-reading.html"><a href="additional-reading.html"><i class="fa fa-check"></i><b>A</b> Additional Reading</a><ul>
@@ -218,7 +238,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="C.6" data-path="probability.html"><a href="probability.html#expectations"><i class="fa fa-check"></i><b>C.6</b> Expectations</a></li>
 <li class="chapter" data-level="C.7" data-path="probability.html"><a href="probability.html#likelihood"><i class="fa fa-check"></i><b>C.7</b> Likelihood</a></li>
-<li class="chapter" data-level="C.8" data-path="probability.html"><a href="probability.html#references"><i class="fa fa-check"></i><b>C.8</b> References</a><ul>
+<li class="chapter" data-level="C.8" data-path="probability.html"><a href="probability.html#additional-references"><i class="fa fa-check"></i><b>C.8</b> Additional References</a><ul>
 <li class="chapter" data-level="C.8.1" data-path="probability.html"><a href="probability.html#videos"><i class="fa fa-check"></i><b>C.8.1</b> Videos</a></li>
 </ul></li>
 </ul></li>
@@ -356,7 +376,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="linear-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="bias-variance-tradeoff.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="computing.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

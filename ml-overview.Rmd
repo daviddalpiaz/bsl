@@ -19,7 +19,7 @@ Specifically, we'll discuss:
 - The difference between **supervised learning** and **unsupervised learning**.
 - The difference between **classification** and **regression**.
 
-**Source:** [`ml-overview.Rmd`](ml-overview.Rmd)
+<!-- **Source:** [`ml-overview.Rmd`](ml-overview.Rmd) -->
 
 <!-- - TODO: models = functions (in this context). algorithms (learners) learn models. models make predictions. (algorithms take in data and spit out models models take in data and spit out predictions/classifications/probabilities) -->
 
