@@ -326,7 +326,7 @@ To understand why this is necessary, repeat the above, but with a much larger sa
 sum(dpois(x = x_data, lambda = 5, log = TRUE)) 
 ```
 
-## References
+## Additional References
 
 Any of the following are either dedicated to, or contain a good coverage of the details of the topics above.
 
