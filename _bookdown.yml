@@ -2,7 +2,7 @@ book_filename: "bsl"
 chapter_name: "Chapter "
 repo: https://github.com/daviddalpiaz/bsl
 new_session: yes
-delete_merged_file: true # set to false to debug the book md
+delete_merged_file: true
 
 rmd_files: [
   "index.Rmd",
@@ -10,7 +10,7 @@ rmd_files: [
   "linear-regression.Rmd",
   "nonparametric-regression.Rmd",
   "bias-variance-tradeoff.Rmd",
-  # "regression-overview.Rmd",
+  "regression-overview.Rmd",
   # "classification.Rmd",
   # "nonparametric-classification.Rmd",
   # "logistic-regression.Rmd",
@@ -31,5 +31,3 @@ rmd_files: [
   "statistics.Rmd",
   "references.Rmd"
 ]
-
-# before_chapter_script: "_common.R"
