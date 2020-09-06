@@ -19,10 +19,6 @@ Specifically, we'll discuss:
 - The difference between **supervised learning** and **unsupervised learning**.
 - The difference between **classification** and **regression**.
 
-<!-- **Source:** [`ml-overview.Rmd`](ml-overview.Rmd) -->
-
-<!-- - TODO: models = functions (in this context). algorithms (learners) learn models. models make predictions. (algorithms take in data and spit out models models take in data and spit out predictions/classifications/probabilities) -->
-
 ## What is Machine Learning?
 
 Machine learning (ML) is about **learning _functions_ from _data_**.^[This is a purposefully narrow view of machine learning. Obviously there's a lot more to ML, but the author believes this statement will help readers understand that the methods learned in this text are simply tools that must be evaluated as a part of a larger analysis.] That's it. Really. Pretty boring, right?^[An alternative title of this book could be: *ML is boring but useful*.]
