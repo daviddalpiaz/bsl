@@ -33,11 +33,13 @@ pre code {
 
 .book .book-body .page-wrapper .page-inner section.normal pre {
   box-shadow: 1px 1px 3px 1px #cccccc;
+  background-color: #ebf0fa;
 }
 
 .book .book-body .page-wrapper .page-inner section.normal pre.sourceCode {
   border: 1px outset #999999;
   box-shadow: none;
+  background-color: #f2f2f2;
 }
 
 .book .book-body .page-wrapper .page-inner section.normal code {
