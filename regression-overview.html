@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Regression Overview | Basics of Statistical Learning</title>
   <meta name="description" content="Chapter 5 Regression Overview | Basics of Statistical Learning" />
-  <meta name="generator" content="bookdown 0.20.2 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20.3 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Regression Overview | Basics of Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="bvt.html"/>
-<link rel="next" href="classification.html"/>
+<link rel="prev" href="bias-variance-tradeoff.html"/>
+<link rel="next" href="additional-reading.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,6 +50,7 @@
 
 
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -146,7 +147,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#how"><i class="fa fa-check"></i><b>0.6</b> How?</a><ul>
 <li class="chapter" data-level="0.6.1" data-path="index.html"><a href="index.html#build-tools"><i class="fa fa-check"></i><b>0.6.1</b> Build Tools</a></li>
 <li class="chapter" data-level="0.6.2" data-path="index.html"><a href="index.html#active-development"><i class="fa fa-check"></i><b>0.6.2</b> Active Development</a></li>
-<li class="chapter" data-level="0.6.3" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.6.3</b> License</a></li>
+<li class="chapter" data-level="0.6.3" data-path="index.html"><a href="index.html#packages"><i class="fa fa-check"></i><b>0.6.3</b> Packages</a></li>
+<li class="chapter" data-level="0.6.4" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.6.4</b> License</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="ml-overview.html"><a href="ml-overview.html"><i class="fa fa-check"></i><b>1</b> Machine Learning Overview</a><ul>
@@ -156,12 +158,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2.2" data-path="ml-overview.html"><a href="ml-overview.html#unsupervised-learning"><i class="fa fa-check"></i><b>1.2.2</b> Unsupervised Learning</a></li>
 </ul></li>
 <li class="chapter" data-level="1.3" data-path="ml-overview.html"><a href="ml-overview.html#open-questions"><i class="fa fa-check"></i><b>1.3</b> Open Questions</a></li>
-<li class="chapter" data-level="1.4" data-path="ml-overview.html"><a href="ml-overview.html#source"><i class="fa fa-check"></i><b>1.4</b> Source</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>2</b> Linear Regression</a><ul>
-<li class="chapter" data-level="2.1" data-path="linear-regression.html"><a href="linear-regression.html#reading"><i class="fa fa-check"></i><b>2.1</b> Reading</a></li>
+<li class="chapter" data-level="2.1" data-path="linear-regression.html"><a href="linear-regression.html#r-setup-and-source"><i class="fa fa-check"></i><b>2.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="2.2" data-path="linear-regression.html"><a href="linear-regression.html#explanation-versus-prediction"><i class="fa fa-check"></i><b>2.2</b> Explanation versus Prediction</a></li>
-<li class="chapter" data-level="2.3" data-path="linear-regression.html"><a href="linear-regression.html#setup"><i class="fa fa-check"></i><b>2.3</b> Setup</a></li>
+<li class="chapter" data-level="2.3" data-path="linear-regression.html"><a href="linear-regression.html#task-setup"><i class="fa fa-check"></i><b>2.3</b> Task Setup</a></li>
 <li class="chapter" data-level="2.4" data-path="linear-regression.html"><a href="linear-regression.html#mathematical-setup"><i class="fa fa-check"></i><b>2.4</b> Mathematical Setup</a></li>
 <li class="chapter" data-level="2.5" data-path="linear-regression.html"><a href="linear-regression.html#linear-regression-models"><i class="fa fa-check"></i><b>2.5</b> Linear Regression Models</a></li>
 <li class="chapter" data-level="2.6" data-path="linear-regression.html"><a href="linear-regression.html#using-lm"><i class="fa fa-check"></i><b>2.6</b> Using <code>lm()</code></a></li>
@@ -173,94 +174,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.10" data-path="linear-regression.html"><a href="linear-regression.html#example-simple-simulated-data"><i class="fa fa-check"></i><b>2.10</b> Example: “Simple” Simulated Data</a></li>
 <li class="chapter" data-level="2.11" data-path="linear-regression.html"><a href="linear-regression.html#example-diamonds-data"><i class="fa fa-check"></i><b>2.11</b> Example: Diamonds Data</a></li>
 <li class="chapter" data-level="2.12" data-path="linear-regression.html"><a href="linear-regression.html#example-credit-card-data"><i class="fa fa-check"></i><b>2.12</b> Example: Credit Card Data</a></li>
-<li class="chapter" data-level="2.13" data-path="linear-regression.html"><a href="linear-regression.html#source-1"><i class="fa fa-check"></i><b>2.13</b> Source</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html"><i class="fa fa-check"></i><b>3</b> Nonparametric Regression</a><ul>
-<li class="chapter" data-level="3.1" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#reading-1"><i class="fa fa-check"></i><b>3.1</b> Reading</a></li>
+<li class="chapter" data-level="3.1" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#r-setup-and-source-1"><i class="fa fa-check"></i><b>3.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="3.2" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#mathematical-setup-1"><i class="fa fa-check"></i><b>3.2</b> Mathematical Setup</a></li>
 <li class="chapter" data-level="3.3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>3.3</b> k-Nearest Neighbors</a></li>
 <li class="chapter" data-level="3.4" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#decision-trees"><i class="fa fa-check"></i><b>3.4</b> Decision Trees</a></li>
 <li class="chapter" data-level="3.5" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#example-credit-card-data-1"><i class="fa fa-check"></i><b>3.5</b> Example: Credit Card Data</a></li>
-<li class="chapter" data-level="3.6" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#source-2"><i class="fa fa-check"></i><b>3.6</b> Source</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="bvt.html"><a href="bvt.html"><i class="fa fa-check"></i><b>4</b> Bias–Variance Tradeoff</a><ul>
-<li class="chapter" data-level="4.1" data-path="bvt.html"><a href="bvt.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>4.1</b> Reducible and Irreducible Error</a></li>
-<li class="chapter" data-level="4.2" data-path="bvt.html"><a href="bvt.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>4.2</b> Bias-Variance Decomposition</a></li>
-<li class="chapter" data-level="4.3" data-path="bvt.html"><a href="bvt.html#simulation"><i class="fa fa-check"></i><b>4.3</b> Simulation</a></li>
-<li class="chapter" data-level="4.4" data-path="bvt.html"><a href="bvt.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>4.4</b> Estimating Expected Prediction Error</a></li>
-<li class="chapter" data-level="4.5" data-path="bvt.html"><a href="bvt.html#source-3"><i class="fa fa-check"></i><b>4.5</b> Source</a></li>
+<li class="chapter" data-level="4" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html"><i class="fa fa-check"></i><b>4</b> The Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="4.1" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#r-setup-and-source-2"><i class="fa fa-check"></i><b>4.1</b> R Setup and Source</a></li>
+<li class="chapter" data-level="4.2" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#the-regression-setup"><i class="fa fa-check"></i><b>4.2</b> The Regression Setup</a></li>
+<li class="chapter" data-level="4.3" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>4.3</b> Reducible and Irreducible Error</a></li>
+<li class="chapter" data-level="4.4" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>4.4</b> Bias-Variance Decomposition</a></li>
+<li class="chapter" data-level="4.5" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#using-simulation-to-estimate-bias-and-variance"><i class="fa fa-check"></i><b>4.5</b> Using Simulation to Estimate Bias and Variance</a></li>
+<li class="chapter" data-level="4.6" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>4.6</b> Estimating Expected Prediction Error</a></li>
+<li class="chapter" data-level="4.7" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#model-flexibility"><i class="fa fa-check"></i><b>4.7</b> Model Flexibility</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#linear-models"><i class="fa fa-check"></i><b>4.7.1</b> Linear Models</a></li>
+<li class="chapter" data-level="4.7.2" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#k-nearest-neighbors-1"><i class="fa fa-check"></i><b>4.7.2</b> k-Nearest Neighbors</a></li>
+<li class="chapter" data-level="4.7.3" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#decision-trees-1"><i class="fa fa-check"></i><b>4.7.3</b> Decision Trees</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Regression Overview</a><ul>
-<li class="chapter" data-level="5.1" data-path="regression-overview.html"><a href="regression-overview.html#goal"><i class="fa fa-check"></i><b>5.1</b> Goal</a></li>
-<li class="chapter" data-level="5.2" data-path="regression-overview.html"><a href="regression-overview.html#strategy"><i class="fa fa-check"></i><b>5.2</b> Strategy</a></li>
-<li class="chapter" data-level="5.3" data-path="regression-overview.html"><a href="regression-overview.html#models"><i class="fa fa-check"></i><b>5.3</b> Models</a></li>
-<li class="chapter" data-level="5.4" data-path="regression-overview.html"><a href="regression-overview.html#model-flexibility"><i class="fa fa-check"></i><b>5.4</b> Model Flexibility</a></li>
+<li class="chapter" data-level="5.1" data-path="regression-overview.html"><a href="regression-overview.html#the-goal"><i class="fa fa-check"></i><b>5.1</b> The Goal</a></li>
+<li class="chapter" data-level="5.2" data-path="regression-overview.html"><a href="regression-overview.html#general-strategy"><i class="fa fa-check"></i><b>5.2</b> General Strategy</a></li>
+<li class="chapter" data-level="5.3" data-path="regression-overview.html"><a href="regression-overview.html#aglorithms"><i class="fa fa-check"></i><b>5.3</b> Aglorithms</a></li>
+<li class="chapter" data-level="5.4" data-path="regression-overview.html"><a href="regression-overview.html#model-flexibility-1"><i class="fa fa-check"></i><b>5.4</b> Model Flexibility</a></li>
 <li class="chapter" data-level="5.5" data-path="regression-overview.html"><a href="regression-overview.html#overfitting"><i class="fa fa-check"></i><b>5.5</b> Overfitting</a></li>
 <li class="chapter" data-level="5.6" data-path="regression-overview.html"><a href="regression-overview.html#bias-variance-tradeoff"><i class="fa fa-check"></i><b>5.6</b> Bias-Variance Tradeoff</a></li>
-<li class="chapter" data-level="5.7" data-path="regression-overview.html"><a href="regression-overview.html#source-4"><i class="fa fa-check"></i><b>5.7</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>6</b> Classification</a><ul>
-<li class="chapter" data-level="6.1" data-path="classification.html"><a href="classification.html#reading-2"><i class="fa fa-check"></i><b>6.1</b> Reading</a></li>
-<li class="chapter" data-level="6.2" data-path="classification.html"><a href="classification.html#classification-metrics"><i class="fa fa-check"></i><b>6.2</b> Classification Metrics</a></li>
-<li class="chapter" data-level="6.3" data-path="classification.html"><a href="classification.html#source-5"><i class="fa fa-check"></i><b>6.3</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html"><i class="fa fa-check"></i><b>7</b> Nonparametric Classification</a><ul>
-<li class="chapter" data-level="7.1" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html#reading-3"><i class="fa fa-check"></i><b>7.1</b> Reading</a></li>
-<li class="chapter" data-level="7.2" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html#source-6"><i class="fa fa-check"></i><b>7.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>8</b> Logistic Regression</a><ul>
-<li class="chapter" data-level="8.1" data-path="logistic-regression.html"><a href="logistic-regression.html#reading-4"><i class="fa fa-check"></i><b>8.1</b> Reading</a></li>
-<li class="chapter" data-level="8.2" data-path="logistic-regression.html"><a href="logistic-regression.html#source-7"><i class="fa fa-check"></i><b>8.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>9</b> Binary Classification</a><ul>
-<li class="chapter" data-level="9.1" data-path="binary-classification.html"><a href="binary-classification.html#reading-5"><i class="fa fa-check"></i><b>9.1</b> Reading</a></li>
-<li class="chapter" data-level="9.2" data-path="binary-classification.html"><a href="binary-classification.html#source-8"><i class="fa fa-check"></i><b>9.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="generative.html"><a href="generative.html"><i class="fa fa-check"></i><b>10</b> Generative Models</a><ul>
-<li class="chapter" data-level="10.1" data-path="generative.html"><a href="generative.html#reading-6"><i class="fa fa-check"></i><b>10.1</b> Reading</a></li>
-<li class="chapter" data-level="10.2" data-path="generative.html"><a href="generative.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>10.2</b> Linear Discriminant Analysis</a></li>
-<li class="chapter" data-level="10.3" data-path="generative.html"><a href="generative.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>10.3</b> Quadratic Discriminant Analysis</a></li>
-<li class="chapter" data-level="10.4" data-path="generative.html"><a href="generative.html#naive-bayes"><i class="fa fa-check"></i><b>10.4</b> Naive Bayes</a></li>
-<li class="chapter" data-level="10.5" data-path="generative.html"><a href="generative.html#discrete-inputs"><i class="fa fa-check"></i><b>10.5</b> Discrete Inputs</a></li>
-<li class="chapter" data-level="10.6" data-path="generative.html"><a href="generative.html#source-9"><i class="fa fa-check"></i><b>10.6</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="supervised-i.html"><a href="supervised-i.html"><i class="fa fa-check"></i><b>11</b> Supervised Learning Overview I</a><ul>
-<li class="chapter" data-level="11.1" data-path="supervised-i.html"><a href="supervised-i.html#reading-7"><i class="fa fa-check"></i><b>11.1</b> Reading</a></li>
-<li class="chapter" data-level="11.2" data-path="supervised-i.html"><a href="supervised-i.html#source-10"><i class="fa fa-check"></i><b>11.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="12" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>12</b> Simulation</a><ul>
-<li class="chapter" data-level="12.1" data-path="simulation.html"><a href="simulation.html#reading-8"><i class="fa fa-check"></i><b>12.1</b> Reading</a></li>
-<li class="chapter" data-level="12.2" data-path="simulation.html"><a href="simulation.html#source-11"><i class="fa fa-check"></i><b>12.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="13" data-path="bootstrap.html"><a href="bootstrap.html"><i class="fa fa-check"></i><b>13</b> Bootstrap Resampling</a><ul>
-<li class="chapter" data-level="13.1" data-path="bootstrap.html"><a href="bootstrap.html#reading-9"><i class="fa fa-check"></i><b>13.1</b> Reading</a></li>
-<li class="chapter" data-level="13.2" data-path="bootstrap.html"><a href="bootstrap.html#source-12"><i class="fa fa-check"></i><b>13.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="14" data-path="cross-validation.html"><a href="cross-validation.html"><i class="fa fa-check"></i><b>14</b> Cross-Validation</a><ul>
-<li class="chapter" data-level="14.1" data-path="cross-validation.html"><a href="cross-validation.html#reading-10"><i class="fa fa-check"></i><b>14.1</b> Reading</a></li>
-<li class="chapter" data-level="14.2" data-path="cross-validation.html"><a href="cross-validation.html#source-13"><i class="fa fa-check"></i><b>14.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="15" data-path="supervised-ii.html"><a href="supervised-ii.html"><i class="fa fa-check"></i><b>15</b> Supervised Learning Overview II</a><ul>
-<li class="chapter" data-level="15.1" data-path="supervised-ii.html"><a href="supervised-ii.html#classification-2"><i class="fa fa-check"></i><b>15.1</b> Classification</a><ul>
-<li class="chapter" data-level="15.1.1" data-path="supervised-ii.html"><a href="supervised-ii.html#tuning"><i class="fa fa-check"></i><b>15.1.1</b> Tuning</a></li>
-</ul></li>
-<li class="chapter" data-level="15.2" data-path="supervised-ii.html"><a href="supervised-ii.html#regression-1"><i class="fa fa-check"></i><b>15.2</b> Regression</a><ul>
-<li class="chapter" data-level="15.2.1" data-path="supervised-ii.html"><a href="supervised-ii.html#methods"><i class="fa fa-check"></i><b>15.2.1</b> Methods</a></li>
-</ul></li>
-<li class="chapter" data-level="15.3" data-path="supervised-ii.html"><a href="supervised-ii.html#external-links"><i class="fa fa-check"></i><b>15.3</b> External Links</a></li>
-<li class="chapter" data-level="15.4" data-path="supervised-ii.html"><a href="supervised-ii.html#rmarkdown"><i class="fa fa-check"></i><b>15.4</b> <code>rmarkdown</code></a></li>
-</ul></li>
-<li class="chapter" data-level="16" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>16</b> Regularization</a><ul>
-<li class="chapter" data-level="16.1" data-path="regularization.html"><a href="regularization.html#reading-11"><i class="fa fa-check"></i><b>16.1</b> Reading</a></li>
-<li class="chapter" data-level="16.2" data-path="regularization.html"><a href="regularization.html#source-14"><i class="fa fa-check"></i><b>16.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="17" data-path="dimension-reduction.html"><a href="dimension-reduction.html"><i class="fa fa-check"></i><b>17</b> Dimension Reduction</a><ul>
-<li class="chapter" data-level="17.1" data-path="dimension-reduction.html"><a href="dimension-reduction.html#reading-12"><i class="fa fa-check"></i><b>17.1</b> Reading</a></li>
-<li class="chapter" data-level="17.2" data-path="dimension-reduction.html"><a href="dimension-reduction.html#source-15"><i class="fa fa-check"></i><b>17.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="18" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>18</b> Ensemble Methods</a><ul>
-<li class="chapter" data-level="18.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#reading-13"><i class="fa fa-check"></i><b>18.1</b> Reading</a></li>
-<li class="chapter" data-level="18.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#source-16"><i class="fa fa-check"></i><b>18.2</b> Source</a></li>
+<li class="chapter" data-level="5.7" data-path="regression-overview.html"><a href="regression-overview.html#no-free-lunch"><i class="fa fa-check"></i><b>5.7</b> No Free Lunch</a></li>
+<li class="chapter" data-level="5.8" data-path="regression-overview.html"><a href="regression-overview.html#curse-of-dimensionality"><i class="fa fa-check"></i><b>5.8</b> Curse of Dimensionality</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="additional-reading.html"><a href="additional-reading.html"><i class="fa fa-check"></i><b>A</b> Additional Reading</a><ul>
@@ -269,74 +212,57 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="A.3" data-path="additional-reading.html"><a href="additional-reading.html#blog-posts"><i class="fa fa-check"></i><b>A.3</b> Blog Posts</a></li>
 <li class="chapter" data-level="A.4" data-path="additional-reading.html"><a href="additional-reading.html#miscellaneous"><i class="fa fa-check"></i><b>A.4</b> Miscellaneous</a></li>
 </ul></li>
-<li class="chapter" data-level="B" data-path="ten-rules.html"><a href="ten-rules.html"><i class="fa fa-check"></i><b>B</b> Ten Simple Rules for Success in STAT 432</a><ul>
-<li class="chapter" data-level="B.1" data-path="ten-rules.html"><a href="ten-rules.html#rule-1-there-are-no-rules"><i class="fa fa-check"></i><b>B.1</b> Rule 1: There Are No Rules</a></li>
-<li class="chapter" data-level="B.2" data-path="ten-rules.html"><a href="ten-rules.html#rule-2-read-the-syllabus"><i class="fa fa-check"></i><b>B.2</b> Rule 2: Read the Syllabus</a></li>
-<li class="chapter" data-level="B.3" data-path="ten-rules.html"><a href="ten-rules.html#rule-3-previous-learning-is-not-gospel"><i class="fa fa-check"></i><b>B.3</b> Rule 3: Previous Learning is Not Gospel</a></li>
-<li class="chapter" data-level="B.4" data-path="ten-rules.html"><a href="ten-rules.html#rule-4-all-statements-are-true"><i class="fa fa-check"></i><b>B.4</b> Rule 4: All Statements Are True</a></li>
-<li class="chapter" data-level="B.5" data-path="ten-rules.html"><a href="ten-rules.html#rule-5-dont-miss-the-forest-for-the-trees"><i class="fa fa-check"></i><b>B.5</b> Rule 5: Don’t Miss The Forest For The Trees</a></li>
-<li class="chapter" data-level="B.6" data-path="ten-rules.html"><a href="ten-rules.html#rule-6-you-will-struggle"><i class="fa fa-check"></i><b>B.6</b> Rule 6: You Will Struggle</a></li>
-<li class="chapter" data-level="B.7" data-path="ten-rules.html"><a href="ten-rules.html#rule-7-keep-it-simple"><i class="fa fa-check"></i><b>B.7</b> Rule 7: Keep It Simple</a></li>
-<li class="chapter" data-level="B.8" data-path="ten-rules.html"><a href="ten-rules.html#rule-8-rtfm"><i class="fa fa-check"></i><b>B.8</b> Rule 8: RTFM</a></li>
-<li class="chapter" data-level="B.9" data-path="ten-rules.html"><a href="ten-rules.html#rule-9-there-are-no-stupid-questions"><i class="fa fa-check"></i><b>B.9</b> Rule 9: There Are No Stupid Questions</a></li>
-<li class="chapter" data-level="B.10" data-path="ten-rules.html"><a href="ten-rules.html#rule-10-learn-by-doing"><i class="fa fa-check"></i><b>B.10</b> Rule 10: Learn By Doing</a></li>
-<li class="chapter" data-level="B.11" data-path="ten-rules.html"><a href="ten-rules.html#conclusion"><i class="fa fa-check"></i><b>B.11</b> Conclusion</a></li>
-<li class="chapter" data-level="B.12" data-path="ten-rules.html"><a href="ten-rules.html#source-17"><i class="fa fa-check"></i><b>B.12</b> Source</a></li>
+<li class="chapter" data-level="B" data-path="computing.html"><a href="computing.html"><i class="fa fa-check"></i><b>B</b> Computing</a><ul>
+<li class="chapter" data-level="B.1" data-path="computing.html"><a href="computing.html#reading"><i class="fa fa-check"></i><b>B.1</b> Reading</a></li>
+<li class="chapter" data-level="B.2" data-path="computing.html"><a href="computing.html#additional-resources"><i class="fa fa-check"></i><b>B.2</b> Additional Resources</a><ul>
+<li class="chapter" data-level="B.2.1" data-path="computing.html"><a href="computing.html#r"><i class="fa fa-check"></i><b>B.2.1</b> R</a></li>
+<li class="chapter" data-level="B.2.2" data-path="computing.html"><a href="computing.html#rstudio"><i class="fa fa-check"></i><b>B.2.2</b> RStudio</a></li>
+<li class="chapter" data-level="B.2.3" data-path="computing.html"><a href="computing.html#r-markdown"><i class="fa fa-check"></i><b>B.2.3</b> R Markdown</a></li>
 </ul></li>
-<li class="chapter" data-level="C" data-path="computing.html"><a href="computing.html"><i class="fa fa-check"></i><b>C</b> Computing</a><ul>
-<li class="chapter" data-level="C.1" data-path="computing.html"><a href="computing.html#reading-14"><i class="fa fa-check"></i><b>C.1</b> Reading</a></li>
-<li class="chapter" data-level="C.2" data-path="computing.html"><a href="computing.html#additional-resources"><i class="fa fa-check"></i><b>C.2</b> Additional Resources</a><ul>
-<li class="chapter" data-level="C.2.1" data-path="computing.html"><a href="computing.html#r"><i class="fa fa-check"></i><b>C.2.1</b> R</a></li>
-<li class="chapter" data-level="C.2.2" data-path="computing.html"><a href="computing.html#rstudio"><i class="fa fa-check"></i><b>C.2.2</b> RStudio</a></li>
-<li class="chapter" data-level="C.2.3" data-path="computing.html"><a href="computing.html#r-markdown"><i class="fa fa-check"></i><b>C.2.3</b> R Markdown</a></li>
+<li class="chapter" data-level="B.3" data-path="computing.html"><a href="computing.html#stat-432-idioms"><i class="fa fa-check"></i><b>B.3</b> STAT 432 Idioms</a><ul>
+<li class="chapter" data-level="B.3.1" data-path="computing.html"><a href="computing.html#dont-restore-old-workspaces"><i class="fa fa-check"></i><b>B.3.1</b> Don’t Restore Old Workspaces</a></li>
+<li class="chapter" data-level="B.3.2" data-path="computing.html"><a href="computing.html#r-versions"><i class="fa fa-check"></i><b>B.3.2</b> R Versions</a></li>
+<li class="chapter" data-level="B.3.3" data-path="computing.html"><a href="computing.html#packages-1"><i class="fa fa-check"></i><b>B.3.3</b> Packages</a></li>
+<li class="chapter" data-level="B.3.4" data-path="computing.html"><a href="computing.html#code-style"><i class="fa fa-check"></i><b>B.3.4</b> Code Style</a></li>
+<li class="chapter" data-level="B.3.5" data-path="computing.html"><a href="computing.html#reference-style"><i class="fa fa-check"></i><b>B.3.5</b> Reference Style</a></li>
+<li class="chapter" data-level="B.3.6" data-path="computing.html"><a href="computing.html#stat-432-r-style-overrides"><i class="fa fa-check"></i><b>B.3.6</b> STAT 432 R Style Overrides</a></li>
+<li class="chapter" data-level="B.3.7" data-path="computing.html"><a href="computing.html#stat-432-r-markdown-style"><i class="fa fa-check"></i><b>B.3.7</b> STAT 432 R Markdown Style</a></li>
+<li class="chapter" data-level="B.3.8" data-path="computing.html"><a href="computing.html#style-heuristics"><i class="fa fa-check"></i><b>B.3.8</b> Style Heuristics</a></li>
+<li class="chapter" data-level="B.3.9" data-path="computing.html"><a href="computing.html#objects-and-functions"><i class="fa fa-check"></i><b>B.3.9</b> Objects and Functions</a></li>
+<li class="chapter" data-level="B.3.10" data-path="computing.html"><a href="computing.html#print-versus-return"><i class="fa fa-check"></i><b>B.3.10</b> Print versus Return</a></li>
+<li class="chapter" data-level="B.3.11" data-path="computing.html"><a href="computing.html#help"><i class="fa fa-check"></i><b>B.3.11</b> Help</a></li>
+<li class="chapter" data-level="B.3.12" data-path="computing.html"><a href="computing.html#keyboard-shortcuts"><i class="fa fa-check"></i><b>B.3.12</b> Keyboard Shortcuts</a></li>
 </ul></li>
-<li class="chapter" data-level="C.3" data-path="computing.html"><a href="computing.html#stat-432-idioms"><i class="fa fa-check"></i><b>C.3</b> STAT 432 Idioms</a><ul>
-<li class="chapter" data-level="C.3.1" data-path="computing.html"><a href="computing.html#dont-restore-old-workspaces"><i class="fa fa-check"></i><b>C.3.1</b> Don’t Restore Old Workspaces</a></li>
-<li class="chapter" data-level="C.3.2" data-path="computing.html"><a href="computing.html#r-versions"><i class="fa fa-check"></i><b>C.3.2</b> R Versions</a></li>
-<li class="chapter" data-level="C.3.3" data-path="computing.html"><a href="computing.html#code-style"><i class="fa fa-check"></i><b>C.3.3</b> Code Style</a></li>
-<li class="chapter" data-level="C.3.4" data-path="computing.html"><a href="computing.html#reference-style"><i class="fa fa-check"></i><b>C.3.4</b> Reference Style</a></li>
-<li class="chapter" data-level="C.3.5" data-path="computing.html"><a href="computing.html#stat-432-r-style-overrides"><i class="fa fa-check"></i><b>C.3.5</b> STAT 432 R Style Overrides</a></li>
-<li class="chapter" data-level="C.3.6" data-path="computing.html"><a href="computing.html#stat-432-r-markdown-style"><i class="fa fa-check"></i><b>C.3.6</b> STAT 432 R Markdown Style</a></li>
-<li class="chapter" data-level="C.3.7" data-path="computing.html"><a href="computing.html#style-heuristics"><i class="fa fa-check"></i><b>C.3.7</b> Style Heuristics</a></li>
-<li class="chapter" data-level="C.3.8" data-path="computing.html"><a href="computing.html#objects-and-functions"><i class="fa fa-check"></i><b>C.3.8</b> Objects and Functions</a></li>
-<li class="chapter" data-level="C.3.9" data-path="computing.html"><a href="computing.html#print-versus-return"><i class="fa fa-check"></i><b>C.3.9</b> Print versus Return</a></li>
-<li class="chapter" data-level="C.3.10" data-path="computing.html"><a href="computing.html#help"><i class="fa fa-check"></i><b>C.3.10</b> Help</a></li>
-<li class="chapter" data-level="C.3.11" data-path="computing.html"><a href="computing.html#keyboard-shortcuts"><i class="fa fa-check"></i><b>C.3.11</b> Keyboard Shortcuts</a></li>
-<li class="chapter" data-level="C.3.12" data-path="computing.html"><a href="computing.html#common-issues"><i class="fa fa-check"></i><b>C.3.12</b> Common Issues</a></li>
 </ul></li>
-<li class="chapter" data-level="C.4" data-path="computing.html"><a href="computing.html#source-18"><i class="fa fa-check"></i><b>C.4</b> Source</a></li>
+<li class="chapter" data-level="C" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>C</b> Probability</a><ul>
+<li class="chapter" data-level="C.1" data-path="probability.html"><a href="probability.html#reading-1"><i class="fa fa-check"></i><b>C.1</b> Reading</a></li>
+<li class="chapter" data-level="C.2" data-path="probability.html"><a href="probability.html#probability-models"><i class="fa fa-check"></i><b>C.2</b> Probability Models</a></li>
+<li class="chapter" data-level="C.3" data-path="probability.html"><a href="probability.html#probability-axioms"><i class="fa fa-check"></i><b>C.3</b> Probability Axioms</a></li>
+<li class="chapter" data-level="C.4" data-path="probability.html"><a href="probability.html#probability-rules"><i class="fa fa-check"></i><b>C.4</b> Probability Rules</a></li>
+<li class="chapter" data-level="C.5" data-path="probability.html"><a href="probability.html#random-variables"><i class="fa fa-check"></i><b>C.5</b> Random Variables</a><ul>
+<li class="chapter" data-level="C.5.1" data-path="probability.html"><a href="probability.html#distributions"><i class="fa fa-check"></i><b>C.5.1</b> Distributions</a></li>
+<li class="chapter" data-level="C.5.2" data-path="probability.html"><a href="probability.html#discrete-random-variables"><i class="fa fa-check"></i><b>C.5.2</b> Discrete Random Variables</a></li>
+<li class="chapter" data-level="C.5.3" data-path="probability.html"><a href="probability.html#continuous-random-variables"><i class="fa fa-check"></i><b>C.5.3</b> Continuous Random Variables</a></li>
+<li class="chapter" data-level="C.5.4" data-path="probability.html"><a href="probability.html#distributions-in-r"><i class="fa fa-check"></i><b>C.5.4</b> Distributions in R</a></li>
+<li class="chapter" data-level="C.5.5" data-path="probability.html"><a href="probability.html#several-random-variables"><i class="fa fa-check"></i><b>C.5.5</b> Several Random Variables</a></li>
 </ul></li>
-<li class="chapter" data-level="D" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>D</b> Probability</a><ul>
-<li class="chapter" data-level="D.1" data-path="probability.html"><a href="probability.html#reading-15"><i class="fa fa-check"></i><b>D.1</b> Reading</a></li>
-<li class="chapter" data-level="D.2" data-path="probability.html"><a href="probability.html#probability-models"><i class="fa fa-check"></i><b>D.2</b> Probability Models</a></li>
-<li class="chapter" data-level="D.3" data-path="probability.html"><a href="probability.html#probability-axioms"><i class="fa fa-check"></i><b>D.3</b> Probability Axioms</a></li>
-<li class="chapter" data-level="D.4" data-path="probability.html"><a href="probability.html#probability-rules"><i class="fa fa-check"></i><b>D.4</b> Probability Rules</a></li>
-<li class="chapter" data-level="D.5" data-path="probability.html"><a href="probability.html#random-variables"><i class="fa fa-check"></i><b>D.5</b> Random Variables</a><ul>
-<li class="chapter" data-level="D.5.1" data-path="probability.html"><a href="probability.html#distributions"><i class="fa fa-check"></i><b>D.5.1</b> Distributions</a></li>
-<li class="chapter" data-level="D.5.2" data-path="probability.html"><a href="probability.html#discrete-random-variables"><i class="fa fa-check"></i><b>D.5.2</b> Discrete Random Variables</a></li>
-<li class="chapter" data-level="D.5.3" data-path="probability.html"><a href="probability.html#continuous-random-variables"><i class="fa fa-check"></i><b>D.5.3</b> Continuous Random Variables</a></li>
-<li class="chapter" data-level="D.5.4" data-path="probability.html"><a href="probability.html#distributions-in-r"><i class="fa fa-check"></i><b>D.5.4</b> Distributions in R</a></li>
-<li class="chapter" data-level="D.5.5" data-path="probability.html"><a href="probability.html#several-random-variables"><i class="fa fa-check"></i><b>D.5.5</b> Several Random Variables</a></li>
+<li class="chapter" data-level="C.6" data-path="probability.html"><a href="probability.html#expectations"><i class="fa fa-check"></i><b>C.6</b> Expectations</a></li>
+<li class="chapter" data-level="C.7" data-path="probability.html"><a href="probability.html#likelihood"><i class="fa fa-check"></i><b>C.7</b> Likelihood</a></li>
+<li class="chapter" data-level="C.8" data-path="probability.html"><a href="probability.html#additional-references"><i class="fa fa-check"></i><b>C.8</b> Additional References</a><ul>
+<li class="chapter" data-level="C.8.1" data-path="probability.html"><a href="probability.html#videos"><i class="fa fa-check"></i><b>C.8.1</b> Videos</a></li>
 </ul></li>
-<li class="chapter" data-level="D.6" data-path="probability.html"><a href="probability.html#expectations"><i class="fa fa-check"></i><b>D.6</b> Expectations</a></li>
-<li class="chapter" data-level="D.7" data-path="probability.html"><a href="probability.html#likelihood"><i class="fa fa-check"></i><b>D.7</b> Likelihood</a></li>
-<li class="chapter" data-level="D.8" data-path="probability.html"><a href="probability.html#references"><i class="fa fa-check"></i><b>D.8</b> References</a><ul>
-<li class="chapter" data-level="D.8.1" data-path="probability.html"><a href="probability.html#videos"><i class="fa fa-check"></i><b>D.8.1</b> Videos</a></li>
 </ul></li>
-<li class="chapter" data-level="D.9" data-path="probability.html"><a href="probability.html#source-19"><i class="fa fa-check"></i><b>D.9</b> Source</a></li>
+<li class="chapter" data-level="D" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>D</b> Statistics</a><ul>
+<li class="chapter" data-level="D.1" data-path="statistics.html"><a href="statistics.html#reading-2"><i class="fa fa-check"></i><b>D.1</b> Reading</a></li>
+<li class="chapter" data-level="D.2" data-path="statistics.html"><a href="statistics.html#statistics-1"><i class="fa fa-check"></i><b>D.2</b> Statistics</a></li>
+<li class="chapter" data-level="D.3" data-path="statistics.html"><a href="statistics.html#estimators"><i class="fa fa-check"></i><b>D.3</b> Estimators</a><ul>
+<li class="chapter" data-level="D.3.1" data-path="statistics.html"><a href="statistics.html#properties"><i class="fa fa-check"></i><b>D.3.1</b> Properties</a></li>
+<li class="chapter" data-level="D.3.2" data-path="statistics.html"><a href="statistics.html#example-mse-of-an-estimator"><i class="fa fa-check"></i><b>D.3.2</b> Example: MSE of an Estimator</a></li>
+<li class="chapter" data-level="D.3.3" data-path="statistics.html"><a href="statistics.html#estimation-methods"><i class="fa fa-check"></i><b>D.3.3</b> Estimation Methods</a></li>
+<li class="chapter" data-level="D.3.4" data-path="statistics.html"><a href="statistics.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>D.3.4</b> Maximum Likelihood Estimation</a></li>
+<li class="chapter" data-level="D.3.5" data-path="statistics.html"><a href="statistics.html#method-of-moments"><i class="fa fa-check"></i><b>D.3.5</b> Method of Moments</a></li>
+<li class="chapter" data-level="D.3.6" data-path="statistics.html"><a href="statistics.html#empirical-distribution-function"><i class="fa fa-check"></i><b>D.3.6</b> Empirical Distribution Function</a></li>
 </ul></li>
-<li class="chapter" data-level="E" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>E</b> Statistics</a><ul>
-<li class="chapter" data-level="E.1" data-path="statistics.html"><a href="statistics.html#reading-16"><i class="fa fa-check"></i><b>E.1</b> Reading</a></li>
-<li class="chapter" data-level="E.2" data-path="statistics.html"><a href="statistics.html#statistics-1"><i class="fa fa-check"></i><b>E.2</b> Statistics</a></li>
-<li class="chapter" data-level="E.3" data-path="statistics.html"><a href="statistics.html#estimators"><i class="fa fa-check"></i><b>E.3</b> Estimators</a><ul>
-<li class="chapter" data-level="E.3.1" data-path="statistics.html"><a href="statistics.html#properties"><i class="fa fa-check"></i><b>E.3.1</b> Properties</a></li>
-<li class="chapter" data-level="E.3.2" data-path="statistics.html"><a href="statistics.html#example-mse-of-an-estimator"><i class="fa fa-check"></i><b>E.3.2</b> Example: MSE of an Estimator</a></li>
-<li class="chapter" data-level="E.3.3" data-path="statistics.html"><a href="statistics.html#estimation-methods"><i class="fa fa-check"></i><b>E.3.3</b> Estimation Methods</a></li>
-<li class="chapter" data-level="E.3.4" data-path="statistics.html"><a href="statistics.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>E.3.4</b> Maximum Likelihood Estimation</a></li>
-<li class="chapter" data-level="E.3.5" data-path="statistics.html"><a href="statistics.html#method-of-moments"><i class="fa fa-check"></i><b>E.3.5</b> Method of Moments</a></li>
-<li class="chapter" data-level="E.3.6" data-path="statistics.html"><a href="statistics.html#empirical-distribution-function"><i class="fa fa-check"></i><b>E.3.6</b> Empirical Distribution Function</a></li>
-</ul></li>
-<li class="chapter" data-level="E.4" data-path="statistics.html"><a href="statistics.html#source-20"><i class="fa fa-check"></i><b>E.4</b> Source</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -361,28 +287,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="regression-overview" class="section level1">
 <h1><span class="header-section-number">Chapter 5</span> Regression Overview</h1>
-<hr />
 <p>This chapter will provide an overview of the <strong>regression</strong> concepts that we have learned thus far. It will also serve to outline the general concepts of <strong>supervised learning</strong> which will also apply to our next task, <em>classification.</em></p>
-<p>The information here may eventually be merged into the previous chapter, but for now it is separated for clarify. (Also, much of this information already appears there.)</p>
-<hr />
-<div id="goal" class="section level2">
-<h2><span class="header-section-number">5.1</span> Goal</h2>
+<p>Specifically, we’ll discuss:</p>
+<ul>
+<li>A review of the key concepts introduced thus far.</li>
+<li><strong>Overfitting</strong>, <strong>underfitting</strong> and how to identify when they occur.</li>
+<li>The <strong>no free lunch</strong> concept as it applies to machine learning.</li>
+<li>The <strong>curse of dimensionality</strong> and how it influences modeling decision we make.</li>
+</ul>
+<div id="the-goal" class="section level2">
+<h2><span class="header-section-number">5.1</span> The Goal</h2>
 <p>What is the goal of regression models in the context of machine learning? We can discuss it in two ways:</p>
 <ul>
-<li>Make <strong>predictions</strong> on <em>unseen data</em>.</li>
+<li>Make <strong>predictions</strong> on <em>unseen data</em>.<a href="#fn69" class="footnote-ref" id="fnref69"><sup>69</sup></a></li>
 <li>Estimate the <strong>regression function</strong>, which under squared error loss is the <em>conditional mean</em> of <span class="math inline">\(Y\)</span>, the response, given <span class="math inline">\(X\)</span>, the features.</li>
 </ul>
-<p>These goal are essentially the same. We want to fit a model that “generalizes” well, that is, works well on unseen data. To do this, we want to use a model of appropriate <strong>flexibility</strong> so as not to <strong>overfit</strong> to the train data. In other words, we want to train a models that learns the <strong>signal</strong>, the regression function, and not the <strong>noise</strong>, the random variation in the training data.</p>
+<p>These goal are essentially the same. We want to fit a model that “generalizes” well, that is, works well on new data that was not used to fit the model. To do this, we want to use a model of appropriate <strong>flexibility</strong> so as not to <strong>overfit</strong> to the training data. In other words, we want to train a model that learns the <strong>signal</strong>, the regression function, and not the <strong>noise</strong>, the random variation in the training data.</p>
 <p>In previous chapters we have formalized this goal a bit more mathematically, but for a general recap, we stick to more casual language.</p>
-<hr />
 </div>
-<div id="strategy" class="section level2">
-<h2><span class="header-section-number">5.2</span> Strategy</h2>
+<div id="general-strategy" class="section level2">
+<h2><span class="header-section-number">5.2</span> General Strategy</h2>
 <p>How do we find and train models that generalize well to unseen data? We generally follow these steps.</p>
 <ol style="list-style-type: decimal">
 <li><em>Split</em> the data in to <strong>training data</strong> and <strong>testing data</strong>.
 <ul>
-<li>Within the training data, we will do whatever we would.</li>
+<li>Within the training data, we will do whatever we want.</li>
 <li>The testing data will never be used to make any decision that lead to the selection of a model.</li>
 <li>We often use 80% of the available data for training.</li>
 </ul></li>
@@ -390,9 +319,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>We often use 80% of the available data for estimation.</li>
 </ul></li>
-<li><em>Decide</em> on a set of <strong>candidate models</strong>.<br />
-</li>
-<li><em>Fit</em> (train) each candidate model to the <strong>estimation data</strong>.</li>
+<li><em>Decide</em> on a set of <strong>candidate models</strong>.
+<ul>
+<li>For parametric models: We assume a form of the model up to but not including the model parameters.</li>
+<li>For nonparametric models: We pick feature variables to be used and possible values of any tuning parameters.</li>
+</ul></li>
+<li><em>Fit</em> (train) each candidate model on the <strong>estimation data</strong>.</li>
 <li><em>Evaluate</em> all candidate models fit to the estimation data based on their performance on the <strong>validation data</strong>.
 <ul>
 <li>Performance here is based on the ability of the model to predict on the validation data which was <strong>not</strong> used to train the models.</li>
@@ -402,37 +334,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><em>Estimate</em> model performance using the <strong>test data</strong>.</li>
 </ol>
 <p>Note that we are using the <strong>validation data</strong> to <em>select</em> a model, while the <strong>test data</strong> is used to <em>estimate model performance</em>.</p>
-<hr />
 </div>
-<div id="models" class="section level2">
-<h2><span class="header-section-number">5.3</span> Models</h2>
-<p>While there are many, many models that can be used for regression, we have focused on three <strong>families</strong> of models. We saw how each can be used to estimate the regression function. Importantly, each model family can be made more or less flexible to accommodate different datasets in order to find a model that predicts well.</p>
-<div id="linear-models" class="section level4">
+<div id="aglorithms" class="section level2">
+<h2><span class="header-section-number">5.3</span> Aglorithms</h2>
+<p>While there are many, many models that can be used for regression, we have focused on three <strong>“families”</strong> of models. We saw how each can be used to estimate the regression function. Importantly, each model family can be made more or less flexible to accommodate different datasets in order to find a model that predicts well.</p>
+<p>We are possibly being a little loose with the way we use the term “model” here. It might be more helpful to think in terms of <strong>algorithms</strong>.</p>
+<p>A supervised machine learning algorithm for regression takes as input:</p>
+<ul>
+<li>A <strong>dataset</strong>.</li>
+<li>Additional information such as tuning parameter values or the form of a parametric modeling technique.</li>
+</ul>
+<p>A supervised machine learning algorithm for regression outputs:</p>
+<ul>
+<li>A fitted model. In particular, a fitted model that can be used to estimate the regression <strong>function</strong> which is used to make predictions.</li>
+</ul>
+<p>So, to oversimplify: Algorithms take as input data and output a model. That model takes as input new data and outputs predictions!</p>
+<div id="linear-models-1" class="section level4">
 <h4><span class="header-section-number">5.3.0.1</span> Linear Models</h4>
 <p><strong>Linear models</strong> are a family of <strong>parametric</strong> models which assume that the regression function is a linear combination of the features. For example, with a single feature <span class="math inline">\(x\)</span>, we could assume</p>
 <p><span class="math display">\[
 \mu(x) = \beta_0 + \beta_1 x + \beta_2 x^2 + \beta_3 x^3 + \ldots + \beta_9 x^9
 \]</span></p>
-<p>Here, the <span class="math inline">\(\beta\)</span> coefficients are <em>model parameters</em> that are learned from the data via least squares or maximum likelihood. (Additionally, we could assume a conditional normal distribution with a constant variance, which would require estimating the <span class="math inline">\(\sigma\)</span> parameters. This is not necessary to estimate the mean.)</p>
+<p>Here, the <span class="math inline">\(\beta\)</span> coefficients are <em>model parameters</em> that are learned from the data via least squares or maximum likelihood.<a href="#fn70" class="footnote-ref" id="fnref70"><sup>70</sup></a></p>
 </div>
-<div id="k-nearest-neighbors-1" class="section level4">
+<div id="k-nearest-neighbors-2" class="section level4">
 <h4><span class="header-section-number">5.3.0.2</span> k-Nearest Neighbors</h4>
-<p><strong>k-Nearest Neighbors</strong> models are a family of <strong>nonparametric models</strong> with a single <em>tuning parameter</em>, <span class="math inline">\(k\)</span>, the number of neighbors to use when estimating the regression function. We can also control which features are used when measuring distances.</p>
+<p><strong>k-Nearest Neighbors</strong> models are a family of <strong>nonparametric models</strong> with a single <em>tuning parameter</em>, <span class="math inline">\(k\)</span>, the number of neighbors to use when estimating the regression function. We can also control which features are used when calculating distances, and how distance is measured.</p>
 </div>
-<div id="decision-trees-1" class="section level4">
+<div id="decision-trees-2" class="section level4">
 <h4><span class="header-section-number">5.3.0.3</span> Decision Trees</h4>
 <p><strong>Decision Tree</strong> models are a family of <strong>nonparametric models</strong> with a number of <em>tuning parameters</em>, but most notably, <code>cp</code>, the “complexity parameter” which indirectly controls the number of splits used to create neighborhoods of observations. We can also control which features are used when considering splits.</p>
 <hr />
 </div>
 </div>
-<div id="model-flexibility" class="section level2">
+<div id="model-flexibility-1" class="section level2">
 <h2><span class="header-section-number">5.4</span> Model Flexibility</h2>
-<p>While we may not have explicitly stated this relationship, the plot below shows how train and validation “error” change as a function of model flexibility.</p>
+<p>The plot below shows how train and validation “error” change as a function of model flexibility.</p>
 <p><img src="regression-overview_files/figure-html/unnamed-chunk-1-1.png" width="960" style="display: block; margin: auto;" /></p>
 <p>The “error” in this plot could be any reasonable error metric used, for example, RMSE. While here we are specifically discussing estimation and validation error, we more generally are discussing an error metric calculated on the same data used to train the model (estimation) and an error metric calculated on data <strong>not</strong> used to train the model, for example the validation data.</p>
-<p>The “line” and “curve” seen above are highly idealized, that is, you won’t see nice linear and quadratic trends in practice. However, you will see that <em>training error</em> <strong>decreases</strong> as <em>model flexibility</em> <strong>increases</strong>. (This is essentially one of the few use cases for actually calculating training error, to verify this relationship as a sanity check.) On the other hand, often we will see that <em>validation error</em> first <strong>decreases</strong>, then <strong>increases</strong> as <em>model flexibility</em> <strong>increases</strong>. (Sometimes you might see only an increase or decrease which would suggest you need to also try additional models with more or less flexibility.) While the validation “curve” is idealized as a “curve” that decrease then increases, in practice, it might be a bit more “wiggly” just due to the random nature of the validation split.</p>
+<p>The “line” and “curve” seen above are highly idealized, that is, you won’t see nice linear and quadratic trends in practice. However, you will see that <em>training error</em> <strong>decreases</strong> as <em>model flexibility</em> <strong>increases</strong>.<a href="#fn71" class="footnote-ref" id="fnref71"><sup>71</sup></a> On the other hand, often we will see that <em>validation error</em> first <strong>decreases</strong>, then <strong>increases</strong> as <em>model flexibility</em> <strong>increases</strong>.<a href="#fn72" class="footnote-ref" id="fnref72"><sup>72</sup></a> While the validation “curve” is idealized as a “smooth curve” that decreases then increases, in practice, it might be a bit more “jagged” just due to the random nature of the validation split.</p>
 <p>How can we modify the flexibility of the models we have considered?</p>
-<div id="linear-models-1" class="section level4">
+<div id="linear-models-2" class="section level4">
 <h4><span class="header-section-number">5.4.0.1</span> Linear Models</h4>
 <p>To increase the flexibility of linear models, add additional transformed features or simply add features.</p>
 <p>For example a model that assumes a quadratic mean function</p>
@@ -453,14 +395,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \mu_2(x) = \beta_0 + \beta_1 x
 \]</span></p>
 </div>
-<div id="k-nearest-neighbors-2" class="section level4">
+<div id="k-nearest-neighbors-3" class="section level4">
 <h4><span class="header-section-number">5.4.0.2</span> k-Nearest Neighbors</h4>
-<p>Given a set of feature variables, as <span class="math inline">\(k\)</span> increases, model flexibility <strong>decreases.</strong> (Note that adding and removing features does have an effect on model flexibility, generally adding flexibility with additional features, there are situations where adding features will decrease training error.)</p>
+<p>Given a set of feature variables, as <span class="math inline">\(k\)</span> increases, model flexibility <strong>decreases.</strong><a href="#fn73" class="footnote-ref" id="fnref73"><sup>73</sup></a></p>
 </div>
 <div id="decision" class="section level4">
 <h4><span class="header-section-number">5.4.0.3</span> Decision</h4>
-<p>Given a set of feature variables, as <code>cp</code> increases, model flexibility <strong>decreases.</strong> (Note that adding and removing features does have an effect on model flexibility, generally adding flexibility with additional features, there are situations where adding features will decrease training error.)</p>
-<hr />
+<p>Given a set of feature variables, as <code>cp</code> increases, model flexibility <strong>decreases.</strong><a href="#fn74" class="footnote-ref" id="fnref74"><sup>74</sup></a></p>
 </div>
 </div>
 <div id="overfitting" class="section level2">
@@ -472,18 +413,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display">\[
 \mu(x) = \sin(x)
 \]</span></p>
-<p>with points simulated about this mean according to a standard normal. (That is, the noise is standard normal.)</p>
+<p>with points simulated about this mean according to a standard normal. That is, the noise is standard normal.</p>
 <p>We see that the model with <span class="math inline">\(k = 1\)</span> has fit far too well to the training data. The estimated mean function, seen in green, goes through each training point. That is, there is no training error. This model is <strong>too flexible</strong> and is <strong>overfitting</strong>. We have learned <strong>both</strong> the signal and the noise, thus this model will predict poorly on new data.</p>
 <p>The model with <span class="math inline">\(k = 25\)</span> has fits the training data poorly. The estimated mean function, seen in red, does not match the true mean function well. The points are far from the estimated mean function. his model is <strong>too inflexible</strong> and is <strong>underfitting</strong>. It has learned neither the signal not the noise.</p>
 <p>The model with <span class="math inline">\(k = 5\)</span> seems like a reasonable in-between. Doesn’t seem to be chasing noise. Seems to reasonably approximate the true mean function.</p>
 <p>How do we assess over and underfitting in practice, when we don’t know the true mean function? We have to look at train and validation errors.</p>
 <ul>
-<li>Model that are probably <strong>underfitting</strong>: “Large” Train RMSE and a Validation RMSE larger than the smallest. The less flexible, the more probable the underfitting.</li>
-<li>Model that are probably <strong>overfitting</strong>: “Small” Train RMSE and a Validation RMSE larger than the smallest. The more flexible, the more probable the overfitting.</li>
+<li>Models that are probably <strong>underfitting</strong>: “Large” Train RMSE and a Validation RMSE larger than the smallest. The less flexible, the more probable the underfitting.</li>
+<li>Models that are probably <strong>overfitting</strong>: “Small” Train RMSE and a Validation RMSE larger than the smallest. The more flexible, the more probable the overfitting.</li>
 </ul>
 <p><img src="regression-overview_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto;" /></p>
 <p>The further a model is to the <em>left</em> of this plot, the greater the chance it is <strong>underfit</strong>. The further a model is to the <em>right</em> of this plot, the greater the chance it is <strong>overfit</strong>.</p>
-<hr />
 </div>
 <div id="bias-variance-tradeoff" class="section level2">
 <h2><span class="header-section-number">5.6</span> Bias-Variance Tradeoff</h2>
@@ -495,24 +435,50 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>And together, the MSE is equal to the bias squared plus the variance.</p>
 <p>However, the rate at which the variance increases can be and generally is different than the rate at which the bias deceases. This is why we must validate our models. Essentially, by modifying the model complexity and validating the results, we are trying to find the right balance between bias and variance.</p>
-<hr />
 </div>
-<div id="source-4" class="section level2">
-<h2><span class="header-section-number">5.7</span> Source</h2>
-<ul>
-<li><code>R</code> Markdown: <a href="regression-overview.Rmd"><code>regression-overview.Rmd</code></a></li>
-</ul>
-<hr />
+<div id="no-free-lunch" class="section level2">
+<h2><span class="header-section-number">5.7</span> No Free Lunch</h2>
+<p>The <strong>no free lunch</strong> concept has some very specific formulations, but we will introduce the general idea as it is often applied in supervised learning:</p>
+<blockquote>
+<p>No algorithm will outperform all other algorithms over all possible datasets.</p>
+</blockquote>
+<p>So in theory: We cannot simply find one algorithm that we know will always be the best.</p>
+<p>In practice: We must validate our models! While for a particular dataset, without going through the validation process we cannot know ahead of time what algorithm will perform best, later in this text when we get to more practical applications, we will nudge you towards some methods more than others.</p>
+<!-- - TODO: Find references about NFL, in particular the one about how everyone cites it incorrectly -->
+</div>
+<div id="curse-of-dimensionality" class="section level2">
+<h2><span class="header-section-number">5.8</span> Curse of Dimensionality</h2>
+<p>One topic that we have avoided is the issue of high dimensional problems, that is, data that contains a large number of features. Moving into very high dimensions brings an issue which is often called the <strong>curse of dimensionality</strong>.<a href="#fn75" class="footnote-ref" id="fnref75"><sup>75</sup></a> Stated very simply:</p>
+<blockquote>
+<p>In high dimensions any particular datapoint has no “close” neighbors.<a href="#fn76" class="footnote-ref" id="fnref76"><sup>76</sup></a></p>
+</blockquote>
+<p>Why might that be a problem? Well, because most nonparametric methods rely on using observations that are “close” to each other. “Nearest neighbors” is literally in the name of k-nearest neighbors! Parametric methods may be less effected, especially when we assume a form of the model that is close to correct, but later we will see methods that are better equipped to handle this issue.</p>
 
 </div>
+</div>
+
+
+
+<div class="footnotes">
+<hr />
+<ol start="69">
+<li id="fn69"><p>Remember, we are looking for predictive relationships. We are not necessarily attempting to explain this relationship and we are certainly not going to attempt to make statements about causality.<a href="regression-overview.html#fnref69" class="footnote-back">↩</a></p></li>
+<li id="fn70"><p>Additionally, we could assume a conditional normal distribution with a constant variance, which would require estimating the <span class="math inline">\(\sigma\)</span> parameters. This is not necessary to estimate the mean.<a href="regression-overview.html#fnref70" class="footnote-back">↩</a></p></li>
+<li id="fn71"><p>Again, this is essentially one of the few use cases for actually calculating training error, to verify this relationship as a sanity check.<a href="regression-overview.html#fnref71" class="footnote-back">↩</a></p></li>
+<li id="fn72"><p>Sometimes you might see only an increase or decrease which would suggest you need to also try additional models with more or less flexibility.<a href="regression-overview.html#fnref72" class="footnote-back">↩</a></p></li>
+<li id="fn73"><p>Note that adding and removing features does have an effect on model flexibility, generally adding flexibility with additional features, but there are situations where adding features will increase training error.<a href="regression-overview.html#fnref73" class="footnote-back">↩</a></p></li>
+<li id="fn74"><p>Note that adding and removing features does have an effect on model flexibility, generally adding flexibility with additional features.<a href="regression-overview.html#fnref74" class="footnote-back">↩</a></p></li>
+<li id="fn75"><p>Wikipedia: <a href="https://en.wikipedia.org/wiki/Curse_of_dimensionality">Curse of Dimensionality</a><a href="regression-overview.html#fnref75" class="footnote-back">↩</a></p></li>
+<li id="fn76"><p>In low dimensions, say <span class="math inline">\(p = 1\)</span> all points live on a line, so in some sense they’re already close together. In “high” dimensions, say for examples <span class="math inline">\(p = 20\)</span>, there just a lot more “space,” so observations are much less likely to live “close” to each other. Note that in practice what is considered a “high” dimensional problem is based on the relationship between <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span>. With a big enough samples size, we can deal with large <span class="math inline">\(p\)</span>.<a href="regression-overview.html#fnref76" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="bvt.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="classification.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="bias-variance-tradeoff.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="additional-reading.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
