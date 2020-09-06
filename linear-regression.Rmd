@@ -17,16 +17,17 @@ This chapter will be the most action packed as we will establish a framework tha
 
 ## R Setup and Source
 
-```{r packages, warning = FALSE, message = FALSE, cache = FALSE}
+```{r packages, warning = FALSE, message = FALSE}
 library(tibble)     # data frame printing
 library(dplyr)      # data manipulation
+
 library(knitr)      # creating tables
 library(kableExtra) # styling tables
 ```
 
-Additionally, objects from `ggplot2`, `GGally`, and `ISLR` are accessed. For full package details, including packages loaded via dependencies, see the session information at the end of this chapter. Recall that the [Welcome](index.html) chapter contains directions for installing all necessary packages for following along with the text. The R Markdown source is provided as some code, mostly for creating plots, has been suppressed from the rendered document that you are currently reading.
+Additionally, objects from `ggplot2`, `GGally`, and `ISLR` are accessed. Recall that the [Welcome](index.html) chapter contains directions for installing all necessary packages for following along with the text. The R Markdown source is provided as some code, mostly for creating plots, has been suppressed from the rendered document that you are currently reading.
 
-- **Source:** [`linear-regression.Rmd`](linear-regression.Rmd)
+- **R Markdown Source:** [`linear-regression.Rmd`](linear-regression.Rmd)
 
 ## Explanation versus Prediction
 
@@ -1122,10 +1123,11 @@ grid()
 
 The predicted versus actual plot almost looks too good to be true! Wow!^[Perhaps not surprising since this data was simulated.] In summary, if this data were real, we might have an interesting result!
 
-Do note, that both this example and the previous should not be considered **data analyses**, but instead, examples that reinforce how to use the validation and test sets. As part of a true analysis, we will need to be much more careful about many of our decision. After putting down some additional foundation, we'll more towards these ideas in this text~
+Do note, that both this example and the previous should not be considered **data analyses**, but instead, examples that reinforce how to use the validation and test sets. As part of a true analysis, we will need to be much more careful about many of our decision. After putting down some additional foundation, we'll move towards these ideas in this text.
 
-## Session Info
+One possible critique of what we've done here: It's possible we should not have used the `Limit` variable. Why? Because (and we're guessing here, as this is not real data) it's possible that we would have to acquire this information along with the `Rating` information. Let's assume this is true. We need to first make a distinction between **train time** and **test time**.
 
-```{r}
-xfun::session_info()
-```
+- **Train time:** The portion of the ML process where you are creating models. (Anything you do before make predictions on truly new data.)
+- **Test time:** The portion of the ML process where you are making predictions in the real world.
+
+The issue here is that the models you create during training should only include features which you will have access to at test time. Otherwise, you won't actually be able to make a prediction!
