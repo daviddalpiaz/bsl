@@ -112,20 +112,20 @@ Then re-run `RNGkind()` and everything should match up and you should be good to
 
 Be sure to keep your packages up-to-date. To do so:
 
-- Restart RStudio
-- Click the "Packages" tab
-- Click "Update"
-- Click "Select All"
-- Click "Install Updates"
+- Restart R. In RStudio, use `Session > Restart R`. (Restarting RStudio will accomplish this if you aren't restoring your workspace.)
+- Click the "Packages" tab.
+- Click "Update".
+- Click "Select All".
+- Click "Install Updates".
 
 At this point, you may be asked: "Do you want to restart R prior to installing?" Select "Yes." If asked again, Select "No."
 
-During the update you may be asked "Do you want to install from sources the packages which need compilation? (Yes/no/cancel)" Type `no` and press enter. (Do the same if you encounter this when installing packages.)
+During the update you may be asked "Do you want to install from sources the packages which need compilation? (Yes/no/cancel)" Type `no` and press enter. Do the same if you encounter this when installing packages.^[You'll technically note be as up to date with this selection, but this won't be an issue.]
 
 Errors often rise when installing packages. Two common tips to overcome these:
 
 - Simply retry the installation.
-- If you see the name of another package in an error message, try installing that package, then retry installing the original package.
+- If you see the name of another package in an error message, try installing that package, then retry installing the original package. You may need to repeat this process.
 
 ### Code Style
 
