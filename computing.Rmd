@@ -125,7 +125,7 @@ During the update you may be asked "Do you want to install from sources the pack
 Errors often rise when installing packages. Two common tips to overcome these:
 
 - Simply retry the installation.
-- If you see the name of another package in an error message, try installing that package, then retry installing the original package.
+- If you see the name of another package in an error message, try installing that package, then retry installing the original package. You may need to repeat this process.
 
 ### Code Style
 
