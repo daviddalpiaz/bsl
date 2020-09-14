@@ -76,4 +76,153 @@ Coming soon! By end of day on Monday! Check the videos for now!
 
 <!-- ``` -->
 
+<!-- ```{r} -->
+<!-- # load packages -->
+<!-- library(tibble) -->
+<!-- library(ggplot2) -->
+<!-- library(rpart) -->
+<!-- library(rpart.plot) -->
+<!-- library(caret) -->
+<!-- library(palmerpenguins) -->
+<!-- library(mlbench) -->
+
+<!-- # set seed -->
+<!-- set.seed(42) -->
+
+<!-- # generate data -->
+<!-- sim_data = as_tibble(mlbench.2dnormals(n = 1000, cl = 3, sd = 1.3)) -->
+
+<!-- # tst-trn split data -->
+<!-- trn_idx = sample(nrow(sim_data), size = 0.8 * nrow(sim_data)) -->
+<!-- trn = sim_data[trn_idx, ] -->
+<!-- tst = sim_data[-trn_idx, ] -->
+
+<!-- # est-val split data -->
+<!-- est_idx = sample(nrow(trn), size = 0.8 * nrow(trn)) -->
+<!-- est = trn[est_idx, ] -->
+<!-- val = trn[-est_idx, ] -->
+
+<!-- # check data -->
+<!-- trn -->
+
+<!-- # visualize data -->
+
+<!-- p1 = ggplot(data = trn, aes(x = x.1)) + -->
+<!--   geom_density(aes(fill = classes), alpha = 0.5) +  -->
+<!--   scale_fill_manual(values=c("grey", 2, 3)) -->
+
+<!-- p2 = ggplot(data = trn, aes(x = x.2)) + -->
+<!--   geom_density(aes(fill = classes), alpha = 0.5) +  -->
+<!--   scale_fill_manual(values=c("grey", 2, 3)) -->
+
+<!-- p3 = ggplot(data = trn, aes(x = x.1)) + -->
+<!--   geom_histogram(aes(fill = classes), alpha = 0.7, position = "identity") +  -->
+<!--   scale_fill_manual(values=c("grey", 2, 3)) -->
+
+<!-- p4 = ggplot(data = trn, aes(x = x.2)) + -->
+<!--   geom_histogram(aes(fill = classes), alpha = 0.7, position = "identity") +  -->
+<!--   scale_fill_manual(values=c("grey", 2, 3)) -->
+
+<!-- gridExtra::grid.arrange(p1, p2, p3, p4) -->
+
+<!-- plot(x.2 ~ x.1, data = trn, col = classes, pch = 20, cex = 1.5) -->
+<!-- grid() -->
+
+<!-- # fit knn model -->
+<!-- mod_knn = knn3(classes ~ ., data = trn, k = 10) -->
+
+<!-- # make "predictions" with knn model -->
+<!-- new_obs = data.frame(x.1 = 2, x.2 = -2) -->
+<!-- predict(mod_knn, new_obs, type = "prob") -->
+<!-- predict(mod_knn, new_obs, type = "class") -->
+
+<!-- # fit tree model -->
+<!-- mod_tree = rpart(classes ~ ., data = trn, minsplit = 5) -->
+
+<!-- # make "predictions" with knn model -->
+<!-- new_obs = data.frame(x.1 = 3, x.2 = 3) -->
+<!-- predict(mod_tree, new_obs, type = "prob") -->
+<!-- predict(mod_tree, new_obs, type = "class") -->
+
+<!-- # visualize tree results -->
+<!-- par(mfrow = c(1, 2)) -->
+<!-- plot(x.2 ~ x.1, data = trn, col = classes, pch = 20, cex = 1.5) -->
+<!-- grid() -->
+<!-- rpart.plot(mod_tree, type = 2, box.palette = list("Grays", "Reds", "Greens")) -->
+
+<!-- # reset plotting -->
+<!-- dev.off() -->
+
+<!-- # helper function to calculate misclassification -->
+<!-- calc_misclass = function(actual, predicted) { -->
+<!--   mean(actual != predicted) -->
+<!-- } -->
+
+<!-- # calculate test metric -->
+<!-- mod_knn = knn3(classes ~ ., data = trn, k = 10) -->
+<!-- calc_misclass( -->
+<!--   actual = tst$classes, -->
+<!--   predicted = predict(mod_knn, tst, type = "class") -->
+<!-- ) -->
+
+<!-- mean(tst$classes != predict(mod_knn, tst, type = "class")) -->
+
+<!-- # tune knn model ############################################################### -->
+
+<!-- # set seed -->
+<!-- set.seed(42) -->
+
+<!-- # k values to consider -->
+<!-- k_val = seq(1, 101, by = 2) -->
+
+<!-- # function to fit knn to est for various k -->
+<!-- fit_knn_to_est = function(k) { -->
+<!--   knn3(classes ~ ., data = est, k = k) -->
+<!-- } -->
+
+<!-- # fit models -->
+<!-- knn_mods = lapply(k_val, fit_knn_to_est) -->
+
+<!-- # make predictions -->
+<!-- knn_preds = lapply(knn_mods, predict, val, type = "class") -->
+
+<!-- # calculate misclass -->
+<!-- knn_misclass = sapply(knn_preds, calc_misclass, actual = val$classes) -->
+
+<!-- # plot results -->
+<!-- plot(k_val, knn_misclass, pch = 20, type = "b") -->
+<!-- grid() -->
+
+<!-- k_val[which.min(knn_misclass)] -->
+
+<!-- # trees and penguins ########################################################### -->
+
+<!-- # check data -->
+<!-- penguins -->
+
+<!-- # visualize data -->
+<!-- par(mfrow = c(1, 2)) -->
+<!-- plot(body_mass_g ~ flipper_length_mm, data = penguins,  -->
+<!--      col = species, pch = 20, cex = 1.5) -->
+<!-- grid() -->
+<!-- plot(bill_length_mm ~ flipper_length_mm, data = penguins,  -->
+<!--      col = species, pch = 20, cex = 1.5) -->
+<!-- grid() -->
+
+<!-- # reset plotting -->
+<!-- dev.off() -->
+
+<!-- # fit tree and visualize -->
+<!-- peng_mod = rpart(species ~ . - year, data = penguins) -->
+<!-- rpart.plot(peng_mod, type = 2, box.palette = list("Grays", "Reds", "Greens")) -->
+
+<!-- # fit bigger tree and visualize -->
+<!-- peng_mod_big = rpart(species ~ . - year, data = penguins, minsplit = 2, cp = 0) -->
+<!-- rpart.plot(peng_mod_big, type = 2, box.palette = list("Grays", "Reds", "Greens")) -->
+
+
+<!-- ``` -->
+
+
+
 
