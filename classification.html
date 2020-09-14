@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 Classification | Basics of Statistical Learning</title>
   <meta name="description" content="Chapter 6 Classification | Basics of Statistical Learning" />
-  <meta name="generator" content="bookdown 0.20.2 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20.6 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 Classification | Basics of Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -50,6 +50,7 @@
 
 
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -146,7 +147,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#how"><i class="fa fa-check"></i><b>0.6</b> How?</a><ul>
 <li class="chapter" data-level="0.6.1" data-path="index.html"><a href="index.html#build-tools"><i class="fa fa-check"></i><b>0.6.1</b> Build Tools</a></li>
 <li class="chapter" data-level="0.6.2" data-path="index.html"><a href="index.html#active-development"><i class="fa fa-check"></i><b>0.6.2</b> Active Development</a></li>
-<li class="chapter" data-level="0.6.3" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.6.3</b> License</a></li>
+<li class="chapter" data-level="0.6.3" data-path="index.html"><a href="index.html#packages"><i class="fa fa-check"></i><b>0.6.3</b> Packages</a></li>
+<li class="chapter" data-level="0.6.4" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.6.4</b> License</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="ml-overview.html"><a href="ml-overview.html"><i class="fa fa-check"></i><b>1</b> Machine Learning Overview</a><ul>
@@ -156,12 +158,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2.2" data-path="ml-overview.html"><a href="ml-overview.html#unsupervised-learning"><i class="fa fa-check"></i><b>1.2.2</b> Unsupervised Learning</a></li>
 </ul></li>
 <li class="chapter" data-level="1.3" data-path="ml-overview.html"><a href="ml-overview.html#open-questions"><i class="fa fa-check"></i><b>1.3</b> Open Questions</a></li>
-<li class="chapter" data-level="1.4" data-path="ml-overview.html"><a href="ml-overview.html#source"><i class="fa fa-check"></i><b>1.4</b> Source</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>2</b> Linear Regression</a><ul>
-<li class="chapter" data-level="2.1" data-path="linear-regression.html"><a href="linear-regression.html#reading"><i class="fa fa-check"></i><b>2.1</b> Reading</a></li>
+<li class="chapter" data-level="2.1" data-path="linear-regression.html"><a href="linear-regression.html#r-setup-and-source"><i class="fa fa-check"></i><b>2.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="2.2" data-path="linear-regression.html"><a href="linear-regression.html#explanation-versus-prediction"><i class="fa fa-check"></i><b>2.2</b> Explanation versus Prediction</a></li>
-<li class="chapter" data-level="2.3" data-path="linear-regression.html"><a href="linear-regression.html#setup"><i class="fa fa-check"></i><b>2.3</b> Setup</a></li>
+<li class="chapter" data-level="2.3" data-path="linear-regression.html"><a href="linear-regression.html#task-setup"><i class="fa fa-check"></i><b>2.3</b> Task Setup</a></li>
 <li class="chapter" data-level="2.4" data-path="linear-regression.html"><a href="linear-regression.html#mathematical-setup"><i class="fa fa-check"></i><b>2.4</b> Mathematical Setup</a></li>
 <li class="chapter" data-level="2.5" data-path="linear-regression.html"><a href="linear-regression.html#linear-regression-models"><i class="fa fa-check"></i><b>2.5</b> Linear Regression Models</a></li>
 <li class="chapter" data-level="2.6" data-path="linear-regression.html"><a href="linear-regression.html#using-lm"><i class="fa fa-check"></i><b>2.6</b> Using <code>lm()</code></a></li>
@@ -173,95 +174,57 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.10" data-path="linear-regression.html"><a href="linear-regression.html#example-simple-simulated-data"><i class="fa fa-check"></i><b>2.10</b> Example: “Simple” Simulated Data</a></li>
 <li class="chapter" data-level="2.11" data-path="linear-regression.html"><a href="linear-regression.html#example-diamonds-data"><i class="fa fa-check"></i><b>2.11</b> Example: Diamonds Data</a></li>
 <li class="chapter" data-level="2.12" data-path="linear-regression.html"><a href="linear-regression.html#example-credit-card-data"><i class="fa fa-check"></i><b>2.12</b> Example: Credit Card Data</a></li>
-<li class="chapter" data-level="2.13" data-path="linear-regression.html"><a href="linear-regression.html#source-1"><i class="fa fa-check"></i><b>2.13</b> Source</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html"><i class="fa fa-check"></i><b>3</b> Nonparametric Regression</a><ul>
-<li class="chapter" data-level="3.1" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#reading-1"><i class="fa fa-check"></i><b>3.1</b> Reading</a></li>
+<li class="chapter" data-level="3.1" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#r-setup-and-source-1"><i class="fa fa-check"></i><b>3.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="3.2" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#mathematical-setup-1"><i class="fa fa-check"></i><b>3.2</b> Mathematical Setup</a></li>
 <li class="chapter" data-level="3.3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>3.3</b> k-Nearest Neighbors</a></li>
 <li class="chapter" data-level="3.4" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#decision-trees"><i class="fa fa-check"></i><b>3.4</b> Decision Trees</a></li>
 <li class="chapter" data-level="3.5" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#example-credit-card-data-1"><i class="fa fa-check"></i><b>3.5</b> Example: Credit Card Data</a></li>
-<li class="chapter" data-level="3.6" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#source-2"><i class="fa fa-check"></i><b>3.6</b> Source</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="bvt.html"><a href="bvt.html"><i class="fa fa-check"></i><b>4</b> Bias–Variance Tradeoff</a><ul>
-<li class="chapter" data-level="4.1" data-path="bvt.html"><a href="bvt.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>4.1</b> Reducible and Irreducible Error</a></li>
-<li class="chapter" data-level="4.2" data-path="bvt.html"><a href="bvt.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>4.2</b> Bias-Variance Decomposition</a></li>
-<li class="chapter" data-level="4.3" data-path="bvt.html"><a href="bvt.html#simulation"><i class="fa fa-check"></i><b>4.3</b> Simulation</a></li>
-<li class="chapter" data-level="4.4" data-path="bvt.html"><a href="bvt.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>4.4</b> Estimating Expected Prediction Error</a></li>
-<li class="chapter" data-level="4.5" data-path="bvt.html"><a href="bvt.html#source-3"><i class="fa fa-check"></i><b>4.5</b> Source</a></li>
+<li class="chapter" data-level="4" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html"><i class="fa fa-check"></i><b>4</b> The Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="4.1" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#r-setup-and-source-2"><i class="fa fa-check"></i><b>4.1</b> R Setup and Source</a></li>
+<li class="chapter" data-level="4.2" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#the-regression-setup"><i class="fa fa-check"></i><b>4.2</b> The Regression Setup</a></li>
+<li class="chapter" data-level="4.3" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>4.3</b> Reducible and Irreducible Error</a></li>
+<li class="chapter" data-level="4.4" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>4.4</b> Bias-Variance Decomposition</a></li>
+<li class="chapter" data-level="4.5" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#using-simulation-to-estimate-bias-and-variance"><i class="fa fa-check"></i><b>4.5</b> Using Simulation to Estimate Bias and Variance</a></li>
+<li class="chapter" data-level="4.6" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>4.6</b> Estimating Expected Prediction Error</a></li>
+<li class="chapter" data-level="4.7" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#model-flexibility"><i class="fa fa-check"></i><b>4.7</b> Model Flexibility</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#linear-models"><i class="fa fa-check"></i><b>4.7.1</b> Linear Models</a></li>
+<li class="chapter" data-level="4.7.2" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#k-nearest-neighbors-1"><i class="fa fa-check"></i><b>4.7.2</b> k-Nearest Neighbors</a></li>
+<li class="chapter" data-level="4.7.3" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#decision-trees-1"><i class="fa fa-check"></i><b>4.7.3</b> Decision Trees</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Regression Overview</a><ul>
-<li class="chapter" data-level="5.1" data-path="regression-overview.html"><a href="regression-overview.html#goal"><i class="fa fa-check"></i><b>5.1</b> Goal</a></li>
-<li class="chapter" data-level="5.2" data-path="regression-overview.html"><a href="regression-overview.html#strategy"><i class="fa fa-check"></i><b>5.2</b> Strategy</a></li>
-<li class="chapter" data-level="5.3" data-path="regression-overview.html"><a href="regression-overview.html#models"><i class="fa fa-check"></i><b>5.3</b> Models</a></li>
-<li class="chapter" data-level="5.4" data-path="regression-overview.html"><a href="regression-overview.html#model-flexibility"><i class="fa fa-check"></i><b>5.4</b> Model Flexibility</a></li>
+<li class="chapter" data-level="5.1" data-path="regression-overview.html"><a href="regression-overview.html#the-goal"><i class="fa fa-check"></i><b>5.1</b> The Goal</a></li>
+<li class="chapter" data-level="5.2" data-path="regression-overview.html"><a href="regression-overview.html#general-strategy"><i class="fa fa-check"></i><b>5.2</b> General Strategy</a></li>
+<li class="chapter" data-level="5.3" data-path="regression-overview.html"><a href="regression-overview.html#aglorithms"><i class="fa fa-check"></i><b>5.3</b> Aglorithms</a></li>
+<li class="chapter" data-level="5.4" data-path="regression-overview.html"><a href="regression-overview.html#model-flexibility-1"><i class="fa fa-check"></i><b>5.4</b> Model Flexibility</a></li>
 <li class="chapter" data-level="5.5" data-path="regression-overview.html"><a href="regression-overview.html#overfitting"><i class="fa fa-check"></i><b>5.5</b> Overfitting</a></li>
 <li class="chapter" data-level="5.6" data-path="regression-overview.html"><a href="regression-overview.html#bias-variance-tradeoff"><i class="fa fa-check"></i><b>5.6</b> Bias-Variance Tradeoff</a></li>
-<li class="chapter" data-level="5.7" data-path="regression-overview.html"><a href="regression-overview.html#source-4"><i class="fa fa-check"></i><b>5.7</b> Source</a></li>
+<li class="chapter" data-level="5.7" data-path="regression-overview.html"><a href="regression-overview.html#no-free-lunch"><i class="fa fa-check"></i><b>5.7</b> No Free Lunch</a></li>
+<li class="chapter" data-level="5.8" data-path="regression-overview.html"><a href="regression-overview.html#curse-of-dimensionality"><i class="fa fa-check"></i><b>5.8</b> Curse of Dimensionality</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>6</b> Classification</a><ul>
-<li class="chapter" data-level="6.1" data-path="classification.html"><a href="classification.html#reading-2"><i class="fa fa-check"></i><b>6.1</b> Reading</a></li>
+<li class="chapter" data-level="6.1" data-path="classification.html"><a href="classification.html#reading"><i class="fa fa-check"></i><b>6.1</b> Reading</a></li>
 <li class="chapter" data-level="6.2" data-path="classification.html"><a href="classification.html#classification-metrics"><i class="fa fa-check"></i><b>6.2</b> Classification Metrics</a></li>
-<li class="chapter" data-level="6.3" data-path="classification.html"><a href="classification.html#source-5"><i class="fa fa-check"></i><b>6.3</b> Source</a></li>
+<li class="chapter" data-level="6.3" data-path="classification.html"><a href="classification.html#source"><i class="fa fa-check"></i><b>6.3</b> Source</a></li>
+<li class="chapter" data-level="6.4" data-path="classification.html"><a href="classification.html#stat-432-materials"><i class="fa fa-check"></i><b>6.4</b> STAT 432 Materials</a></li>
+<li class="chapter" data-level="6.5" data-path="classification.html"><a href="classification.html#bayes-classifier"><i class="fa fa-check"></i><b>6.5</b> Bayes Classifier</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="classification.html"><a href="classification.html#bayes-error-rate"><i class="fa fa-check"></i><b>6.5.1</b> Bayes Error Rate</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html"><i class="fa fa-check"></i><b>7</b> Nonparametric Classification</a><ul>
-<li class="chapter" data-level="7.1" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html#reading-3"><i class="fa fa-check"></i><b>7.1</b> Reading</a></li>
-<li class="chapter" data-level="7.2" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html#source-6"><i class="fa fa-check"></i><b>7.2</b> Source</a></li>
+<li class="chapter" data-level="6.6" data-path="classification.html"><a href="classification.html#building-a-classifier"><i class="fa fa-check"></i><b>6.6</b> Building a Classifier</a></li>
+<li class="chapter" data-level="6.7" data-path="classification.html"><a href="classification.html#modeling"><i class="fa fa-check"></i><b>6.7</b> Modeling</a><ul>
+<li class="chapter" data-level="6.7.1" data-path="classification.html"><a href="classification.html#linear-models-3"><i class="fa fa-check"></i><b>6.7.1</b> Linear Models</a></li>
+<li class="chapter" data-level="6.7.2" data-path="classification.html"><a href="classification.html#k-nearest-neighbors-4"><i class="fa fa-check"></i><b>6.7.2</b> k-Nearest Neighbors</a></li>
+<li class="chapter" data-level="6.7.3" data-path="classification.html"><a href="classification.html#decision-trees-3"><i class="fa fa-check"></i><b>6.7.3</b> Decision Trees</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>8</b> Logistic Regression</a><ul>
-<li class="chapter" data-level="8.1" data-path="logistic-regression.html"><a href="logistic-regression.html#reading-4"><i class="fa fa-check"></i><b>8.1</b> Reading</a></li>
-<li class="chapter" data-level="8.2" data-path="logistic-regression.html"><a href="logistic-regression.html#source-7"><i class="fa fa-check"></i><b>8.2</b> Source</a></li>
+<li class="chapter" data-level="6.8" data-path="classification.html"><a href="classification.html#data-setup"><i class="fa fa-check"></i><b>6.8</b> Data Setup</a></li>
+<li class="chapter" data-level="6.9" data-path="classification.html"><a href="classification.html#mathematical-setup-2"><i class="fa fa-check"></i><b>6.9</b> Mathematical Setup</a></li>
+<li class="chapter" data-level="6.10" data-path="classification.html"><a href="classification.html#example"><i class="fa fa-check"></i><b>6.10</b> Example</a></li>
+<li class="chapter" data-level="6.11" data-path="classification.html"><a href="classification.html#misc-todo-stuff"><i class="fa fa-check"></i><b>6.11</b> MISC TODO STUFF</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>9</b> Binary Classification</a><ul>
-<li class="chapter" data-level="9.1" data-path="binary-classification.html"><a href="binary-classification.html#reading-5"><i class="fa fa-check"></i><b>9.1</b> Reading</a></li>
-<li class="chapter" data-level="9.2" data-path="binary-classification.html"><a href="binary-classification.html#source-8"><i class="fa fa-check"></i><b>9.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="generative.html"><a href="generative.html"><i class="fa fa-check"></i><b>10</b> Generative Models</a><ul>
-<li class="chapter" data-level="10.1" data-path="generative.html"><a href="generative.html#reading-6"><i class="fa fa-check"></i><b>10.1</b> Reading</a></li>
-<li class="chapter" data-level="10.2" data-path="generative.html"><a href="generative.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>10.2</b> Linear Discriminant Analysis</a></li>
-<li class="chapter" data-level="10.3" data-path="generative.html"><a href="generative.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>10.3</b> Quadratic Discriminant Analysis</a></li>
-<li class="chapter" data-level="10.4" data-path="generative.html"><a href="generative.html#naive-bayes"><i class="fa fa-check"></i><b>10.4</b> Naive Bayes</a></li>
-<li class="chapter" data-level="10.5" data-path="generative.html"><a href="generative.html#discrete-inputs"><i class="fa fa-check"></i><b>10.5</b> Discrete Inputs</a></li>
-<li class="chapter" data-level="10.6" data-path="generative.html"><a href="generative.html#source-9"><i class="fa fa-check"></i><b>10.6</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="supervised-i.html"><a href="supervised-i.html"><i class="fa fa-check"></i><b>11</b> Supervised Learning Overview I</a><ul>
-<li class="chapter" data-level="11.1" data-path="supervised-i.html"><a href="supervised-i.html#reading-7"><i class="fa fa-check"></i><b>11.1</b> Reading</a></li>
-<li class="chapter" data-level="11.2" data-path="supervised-i.html"><a href="supervised-i.html#source-10"><i class="fa fa-check"></i><b>11.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="12" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>12</b> Simulation</a><ul>
-<li class="chapter" data-level="12.1" data-path="simulation.html"><a href="simulation.html#reading-8"><i class="fa fa-check"></i><b>12.1</b> Reading</a></li>
-<li class="chapter" data-level="12.2" data-path="simulation.html"><a href="simulation.html#source-11"><i class="fa fa-check"></i><b>12.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="13" data-path="bootstrap.html"><a href="bootstrap.html"><i class="fa fa-check"></i><b>13</b> Bootstrap Resampling</a><ul>
-<li class="chapter" data-level="13.1" data-path="bootstrap.html"><a href="bootstrap.html#reading-9"><i class="fa fa-check"></i><b>13.1</b> Reading</a></li>
-<li class="chapter" data-level="13.2" data-path="bootstrap.html"><a href="bootstrap.html#source-12"><i class="fa fa-check"></i><b>13.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="14" data-path="cross-validation.html"><a href="cross-validation.html"><i class="fa fa-check"></i><b>14</b> Cross-Validation</a><ul>
-<li class="chapter" data-level="14.1" data-path="cross-validation.html"><a href="cross-validation.html#reading-10"><i class="fa fa-check"></i><b>14.1</b> Reading</a></li>
-<li class="chapter" data-level="14.2" data-path="cross-validation.html"><a href="cross-validation.html#source-13"><i class="fa fa-check"></i><b>14.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="15" data-path="supervised-ii.html"><a href="supervised-ii.html"><i class="fa fa-check"></i><b>15</b> Supervised Learning Overview II</a><ul>
-<li class="chapter" data-level="15.1" data-path="supervised-ii.html"><a href="supervised-ii.html#classification-2"><i class="fa fa-check"></i><b>15.1</b> Classification</a><ul>
-<li class="chapter" data-level="15.1.1" data-path="supervised-ii.html"><a href="supervised-ii.html#tuning"><i class="fa fa-check"></i><b>15.1.1</b> Tuning</a></li>
-</ul></li>
-<li class="chapter" data-level="15.2" data-path="supervised-ii.html"><a href="supervised-ii.html#regression-1"><i class="fa fa-check"></i><b>15.2</b> Regression</a><ul>
-<li class="chapter" data-level="15.2.1" data-path="supervised-ii.html"><a href="supervised-ii.html#methods"><i class="fa fa-check"></i><b>15.2.1</b> Methods</a></li>
-</ul></li>
-<li class="chapter" data-level="15.3" data-path="supervised-ii.html"><a href="supervised-ii.html#external-links"><i class="fa fa-check"></i><b>15.3</b> External Links</a></li>
-<li class="chapter" data-level="15.4" data-path="supervised-ii.html"><a href="supervised-ii.html#rmarkdown"><i class="fa fa-check"></i><b>15.4</b> <code>rmarkdown</code></a></li>
-</ul></li>
-<li class="chapter" data-level="16" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>16</b> Regularization</a><ul>
-<li class="chapter" data-level="16.1" data-path="regularization.html"><a href="regularization.html#reading-11"><i class="fa fa-check"></i><b>16.1</b> Reading</a></li>
-<li class="chapter" data-level="16.2" data-path="regularization.html"><a href="regularization.html#source-14"><i class="fa fa-check"></i><b>16.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="17" data-path="dimension-reduction.html"><a href="dimension-reduction.html"><i class="fa fa-check"></i><b>17</b> Dimension Reduction</a><ul>
-<li class="chapter" data-level="17.1" data-path="dimension-reduction.html"><a href="dimension-reduction.html#reading-12"><i class="fa fa-check"></i><b>17.1</b> Reading</a></li>
-<li class="chapter" data-level="17.2" data-path="dimension-reduction.html"><a href="dimension-reduction.html#source-15"><i class="fa fa-check"></i><b>17.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="18" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>18</b> Ensemble Methods</a><ul>
-<li class="chapter" data-level="18.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#reading-13"><i class="fa fa-check"></i><b>18.1</b> Reading</a></li>
-<li class="chapter" data-level="18.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#source-16"><i class="fa fa-check"></i><b>18.2</b> Source</a></li>
-</ul></li>
+<li class="chapter" data-level="7" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html"><i class="fa fa-check"></i><b>7</b> Nonparametric Classification</a></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="additional-reading.html"><a href="additional-reading.html"><i class="fa fa-check"></i><b>A</b> Additional Reading</a><ul>
 <li class="chapter" data-level="A.1" data-path="additional-reading.html"><a href="additional-reading.html#books"><i class="fa fa-check"></i><b>A.1</b> Books</a></li>
@@ -269,74 +232,57 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="A.3" data-path="additional-reading.html"><a href="additional-reading.html#blog-posts"><i class="fa fa-check"></i><b>A.3</b> Blog Posts</a></li>
 <li class="chapter" data-level="A.4" data-path="additional-reading.html"><a href="additional-reading.html#miscellaneous"><i class="fa fa-check"></i><b>A.4</b> Miscellaneous</a></li>
 </ul></li>
-<li class="chapter" data-level="B" data-path="ten-rules.html"><a href="ten-rules.html"><i class="fa fa-check"></i><b>B</b> Ten Simple Rules for Success in STAT 432</a><ul>
-<li class="chapter" data-level="B.1" data-path="ten-rules.html"><a href="ten-rules.html#rule-1-there-are-no-rules"><i class="fa fa-check"></i><b>B.1</b> Rule 1: There Are No Rules</a></li>
-<li class="chapter" data-level="B.2" data-path="ten-rules.html"><a href="ten-rules.html#rule-2-read-the-syllabus"><i class="fa fa-check"></i><b>B.2</b> Rule 2: Read the Syllabus</a></li>
-<li class="chapter" data-level="B.3" data-path="ten-rules.html"><a href="ten-rules.html#rule-3-previous-learning-is-not-gospel"><i class="fa fa-check"></i><b>B.3</b> Rule 3: Previous Learning is Not Gospel</a></li>
-<li class="chapter" data-level="B.4" data-path="ten-rules.html"><a href="ten-rules.html#rule-4-all-statements-are-true"><i class="fa fa-check"></i><b>B.4</b> Rule 4: All Statements Are True</a></li>
-<li class="chapter" data-level="B.5" data-path="ten-rules.html"><a href="ten-rules.html#rule-5-dont-miss-the-forest-for-the-trees"><i class="fa fa-check"></i><b>B.5</b> Rule 5: Don’t Miss The Forest For The Trees</a></li>
-<li class="chapter" data-level="B.6" data-path="ten-rules.html"><a href="ten-rules.html#rule-6-you-will-struggle"><i class="fa fa-check"></i><b>B.6</b> Rule 6: You Will Struggle</a></li>
-<li class="chapter" data-level="B.7" data-path="ten-rules.html"><a href="ten-rules.html#rule-7-keep-it-simple"><i class="fa fa-check"></i><b>B.7</b> Rule 7: Keep It Simple</a></li>
-<li class="chapter" data-level="B.8" data-path="ten-rules.html"><a href="ten-rules.html#rule-8-rtfm"><i class="fa fa-check"></i><b>B.8</b> Rule 8: RTFM</a></li>
-<li class="chapter" data-level="B.9" data-path="ten-rules.html"><a href="ten-rules.html#rule-9-there-are-no-stupid-questions"><i class="fa fa-check"></i><b>B.9</b> Rule 9: There Are No Stupid Questions</a></li>
-<li class="chapter" data-level="B.10" data-path="ten-rules.html"><a href="ten-rules.html#rule-10-learn-by-doing"><i class="fa fa-check"></i><b>B.10</b> Rule 10: Learn By Doing</a></li>
-<li class="chapter" data-level="B.11" data-path="ten-rules.html"><a href="ten-rules.html#conclusion"><i class="fa fa-check"></i><b>B.11</b> Conclusion</a></li>
-<li class="chapter" data-level="B.12" data-path="ten-rules.html"><a href="ten-rules.html#source-17"><i class="fa fa-check"></i><b>B.12</b> Source</a></li>
+<li class="chapter" data-level="B" data-path="computing.html"><a href="computing.html"><i class="fa fa-check"></i><b>B</b> Computing</a><ul>
+<li class="chapter" data-level="B.1" data-path="computing.html"><a href="computing.html#reading-1"><i class="fa fa-check"></i><b>B.1</b> Reading</a></li>
+<li class="chapter" data-level="B.2" data-path="computing.html"><a href="computing.html#additional-resources"><i class="fa fa-check"></i><b>B.2</b> Additional Resources</a><ul>
+<li class="chapter" data-level="B.2.1" data-path="computing.html"><a href="computing.html#r"><i class="fa fa-check"></i><b>B.2.1</b> R</a></li>
+<li class="chapter" data-level="B.2.2" data-path="computing.html"><a href="computing.html#rstudio"><i class="fa fa-check"></i><b>B.2.2</b> RStudio</a></li>
+<li class="chapter" data-level="B.2.3" data-path="computing.html"><a href="computing.html#r-markdown"><i class="fa fa-check"></i><b>B.2.3</b> R Markdown</a></li>
 </ul></li>
-<li class="chapter" data-level="C" data-path="computing.html"><a href="computing.html"><i class="fa fa-check"></i><b>C</b> Computing</a><ul>
-<li class="chapter" data-level="C.1" data-path="computing.html"><a href="computing.html#reading-14"><i class="fa fa-check"></i><b>C.1</b> Reading</a></li>
-<li class="chapter" data-level="C.2" data-path="computing.html"><a href="computing.html#additional-resources"><i class="fa fa-check"></i><b>C.2</b> Additional Resources</a><ul>
-<li class="chapter" data-level="C.2.1" data-path="computing.html"><a href="computing.html#r"><i class="fa fa-check"></i><b>C.2.1</b> R</a></li>
-<li class="chapter" data-level="C.2.2" data-path="computing.html"><a href="computing.html#rstudio"><i class="fa fa-check"></i><b>C.2.2</b> RStudio</a></li>
-<li class="chapter" data-level="C.2.3" data-path="computing.html"><a href="computing.html#r-markdown"><i class="fa fa-check"></i><b>C.2.3</b> R Markdown</a></li>
+<li class="chapter" data-level="B.3" data-path="computing.html"><a href="computing.html#stat-432-idioms"><i class="fa fa-check"></i><b>B.3</b> STAT 432 Idioms</a><ul>
+<li class="chapter" data-level="B.3.1" data-path="computing.html"><a href="computing.html#dont-restore-old-workspaces"><i class="fa fa-check"></i><b>B.3.1</b> Don’t Restore Old Workspaces</a></li>
+<li class="chapter" data-level="B.3.2" data-path="computing.html"><a href="computing.html#r-versions"><i class="fa fa-check"></i><b>B.3.2</b> R Versions</a></li>
+<li class="chapter" data-level="B.3.3" data-path="computing.html"><a href="computing.html#packages-1"><i class="fa fa-check"></i><b>B.3.3</b> Packages</a></li>
+<li class="chapter" data-level="B.3.4" data-path="computing.html"><a href="computing.html#code-style"><i class="fa fa-check"></i><b>B.3.4</b> Code Style</a></li>
+<li class="chapter" data-level="B.3.5" data-path="computing.html"><a href="computing.html#reference-style"><i class="fa fa-check"></i><b>B.3.5</b> Reference Style</a></li>
+<li class="chapter" data-level="B.3.6" data-path="computing.html"><a href="computing.html#stat-432-r-style-overrides"><i class="fa fa-check"></i><b>B.3.6</b> STAT 432 R Style Overrides</a></li>
+<li class="chapter" data-level="B.3.7" data-path="computing.html"><a href="computing.html#stat-432-r-markdown-style"><i class="fa fa-check"></i><b>B.3.7</b> STAT 432 R Markdown Style</a></li>
+<li class="chapter" data-level="B.3.8" data-path="computing.html"><a href="computing.html#style-heuristics"><i class="fa fa-check"></i><b>B.3.8</b> Style Heuristics</a></li>
+<li class="chapter" data-level="B.3.9" data-path="computing.html"><a href="computing.html#objects-and-functions"><i class="fa fa-check"></i><b>B.3.9</b> Objects and Functions</a></li>
+<li class="chapter" data-level="B.3.10" data-path="computing.html"><a href="computing.html#print-versus-return"><i class="fa fa-check"></i><b>B.3.10</b> Print versus Return</a></li>
+<li class="chapter" data-level="B.3.11" data-path="computing.html"><a href="computing.html#help"><i class="fa fa-check"></i><b>B.3.11</b> Help</a></li>
+<li class="chapter" data-level="B.3.12" data-path="computing.html"><a href="computing.html#keyboard-shortcuts"><i class="fa fa-check"></i><b>B.3.12</b> Keyboard Shortcuts</a></li>
 </ul></li>
-<li class="chapter" data-level="C.3" data-path="computing.html"><a href="computing.html#stat-432-idioms"><i class="fa fa-check"></i><b>C.3</b> STAT 432 Idioms</a><ul>
-<li class="chapter" data-level="C.3.1" data-path="computing.html"><a href="computing.html#dont-restore-old-workspaces"><i class="fa fa-check"></i><b>C.3.1</b> Don’t Restore Old Workspaces</a></li>
-<li class="chapter" data-level="C.3.2" data-path="computing.html"><a href="computing.html#r-versions"><i class="fa fa-check"></i><b>C.3.2</b> R Versions</a></li>
-<li class="chapter" data-level="C.3.3" data-path="computing.html"><a href="computing.html#code-style"><i class="fa fa-check"></i><b>C.3.3</b> Code Style</a></li>
-<li class="chapter" data-level="C.3.4" data-path="computing.html"><a href="computing.html#reference-style"><i class="fa fa-check"></i><b>C.3.4</b> Reference Style</a></li>
-<li class="chapter" data-level="C.3.5" data-path="computing.html"><a href="computing.html#stat-432-r-style-overrides"><i class="fa fa-check"></i><b>C.3.5</b> STAT 432 R Style Overrides</a></li>
-<li class="chapter" data-level="C.3.6" data-path="computing.html"><a href="computing.html#stat-432-r-markdown-style"><i class="fa fa-check"></i><b>C.3.6</b> STAT 432 R Markdown Style</a></li>
-<li class="chapter" data-level="C.3.7" data-path="computing.html"><a href="computing.html#style-heuristics"><i class="fa fa-check"></i><b>C.3.7</b> Style Heuristics</a></li>
-<li class="chapter" data-level="C.3.8" data-path="computing.html"><a href="computing.html#objects-and-functions"><i class="fa fa-check"></i><b>C.3.8</b> Objects and Functions</a></li>
-<li class="chapter" data-level="C.3.9" data-path="computing.html"><a href="computing.html#print-versus-return"><i class="fa fa-check"></i><b>C.3.9</b> Print versus Return</a></li>
-<li class="chapter" data-level="C.3.10" data-path="computing.html"><a href="computing.html#help"><i class="fa fa-check"></i><b>C.3.10</b> Help</a></li>
-<li class="chapter" data-level="C.3.11" data-path="computing.html"><a href="computing.html#keyboard-shortcuts"><i class="fa fa-check"></i><b>C.3.11</b> Keyboard Shortcuts</a></li>
-<li class="chapter" data-level="C.3.12" data-path="computing.html"><a href="computing.html#common-issues"><i class="fa fa-check"></i><b>C.3.12</b> Common Issues</a></li>
 </ul></li>
-<li class="chapter" data-level="C.4" data-path="computing.html"><a href="computing.html#source-18"><i class="fa fa-check"></i><b>C.4</b> Source</a></li>
+<li class="chapter" data-level="C" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>C</b> Probability</a><ul>
+<li class="chapter" data-level="C.1" data-path="probability.html"><a href="probability.html#reading-2"><i class="fa fa-check"></i><b>C.1</b> Reading</a></li>
+<li class="chapter" data-level="C.2" data-path="probability.html"><a href="probability.html#probability-models"><i class="fa fa-check"></i><b>C.2</b> Probability Models</a></li>
+<li class="chapter" data-level="C.3" data-path="probability.html"><a href="probability.html#probability-axioms"><i class="fa fa-check"></i><b>C.3</b> Probability Axioms</a></li>
+<li class="chapter" data-level="C.4" data-path="probability.html"><a href="probability.html#probability-rules"><i class="fa fa-check"></i><b>C.4</b> Probability Rules</a></li>
+<li class="chapter" data-level="C.5" data-path="probability.html"><a href="probability.html#random-variables"><i class="fa fa-check"></i><b>C.5</b> Random Variables</a><ul>
+<li class="chapter" data-level="C.5.1" data-path="probability.html"><a href="probability.html#distributions"><i class="fa fa-check"></i><b>C.5.1</b> Distributions</a></li>
+<li class="chapter" data-level="C.5.2" data-path="probability.html"><a href="probability.html#discrete-random-variables"><i class="fa fa-check"></i><b>C.5.2</b> Discrete Random Variables</a></li>
+<li class="chapter" data-level="C.5.3" data-path="probability.html"><a href="probability.html#continuous-random-variables"><i class="fa fa-check"></i><b>C.5.3</b> Continuous Random Variables</a></li>
+<li class="chapter" data-level="C.5.4" data-path="probability.html"><a href="probability.html#distributions-in-r"><i class="fa fa-check"></i><b>C.5.4</b> Distributions in R</a></li>
+<li class="chapter" data-level="C.5.5" data-path="probability.html"><a href="probability.html#several-random-variables"><i class="fa fa-check"></i><b>C.5.5</b> Several Random Variables</a></li>
 </ul></li>
-<li class="chapter" data-level="D" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>D</b> Probability</a><ul>
-<li class="chapter" data-level="D.1" data-path="probability.html"><a href="probability.html#reading-15"><i class="fa fa-check"></i><b>D.1</b> Reading</a></li>
-<li class="chapter" data-level="D.2" data-path="probability.html"><a href="probability.html#probability-models"><i class="fa fa-check"></i><b>D.2</b> Probability Models</a></li>
-<li class="chapter" data-level="D.3" data-path="probability.html"><a href="probability.html#probability-axioms"><i class="fa fa-check"></i><b>D.3</b> Probability Axioms</a></li>
-<li class="chapter" data-level="D.4" data-path="probability.html"><a href="probability.html#probability-rules"><i class="fa fa-check"></i><b>D.4</b> Probability Rules</a></li>
-<li class="chapter" data-level="D.5" data-path="probability.html"><a href="probability.html#random-variables"><i class="fa fa-check"></i><b>D.5</b> Random Variables</a><ul>
-<li class="chapter" data-level="D.5.1" data-path="probability.html"><a href="probability.html#distributions"><i class="fa fa-check"></i><b>D.5.1</b> Distributions</a></li>
-<li class="chapter" data-level="D.5.2" data-path="probability.html"><a href="probability.html#discrete-random-variables"><i class="fa fa-check"></i><b>D.5.2</b> Discrete Random Variables</a></li>
-<li class="chapter" data-level="D.5.3" data-path="probability.html"><a href="probability.html#continuous-random-variables"><i class="fa fa-check"></i><b>D.5.3</b> Continuous Random Variables</a></li>
-<li class="chapter" data-level="D.5.4" data-path="probability.html"><a href="probability.html#distributions-in-r"><i class="fa fa-check"></i><b>D.5.4</b> Distributions in R</a></li>
-<li class="chapter" data-level="D.5.5" data-path="probability.html"><a href="probability.html#several-random-variables"><i class="fa fa-check"></i><b>D.5.5</b> Several Random Variables</a></li>
+<li class="chapter" data-level="C.6" data-path="probability.html"><a href="probability.html#expectations"><i class="fa fa-check"></i><b>C.6</b> Expectations</a></li>
+<li class="chapter" data-level="C.7" data-path="probability.html"><a href="probability.html#likelihood"><i class="fa fa-check"></i><b>C.7</b> Likelihood</a></li>
+<li class="chapter" data-level="C.8" data-path="probability.html"><a href="probability.html#additional-references"><i class="fa fa-check"></i><b>C.8</b> Additional References</a><ul>
+<li class="chapter" data-level="C.8.1" data-path="probability.html"><a href="probability.html#videos"><i class="fa fa-check"></i><b>C.8.1</b> Videos</a></li>
 </ul></li>
-<li class="chapter" data-level="D.6" data-path="probability.html"><a href="probability.html#expectations"><i class="fa fa-check"></i><b>D.6</b> Expectations</a></li>
-<li class="chapter" data-level="D.7" data-path="probability.html"><a href="probability.html#likelihood"><i class="fa fa-check"></i><b>D.7</b> Likelihood</a></li>
-<li class="chapter" data-level="D.8" data-path="probability.html"><a href="probability.html#references"><i class="fa fa-check"></i><b>D.8</b> References</a><ul>
-<li class="chapter" data-level="D.8.1" data-path="probability.html"><a href="probability.html#videos"><i class="fa fa-check"></i><b>D.8.1</b> Videos</a></li>
 </ul></li>
-<li class="chapter" data-level="D.9" data-path="probability.html"><a href="probability.html#source-19"><i class="fa fa-check"></i><b>D.9</b> Source</a></li>
+<li class="chapter" data-level="D" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>D</b> Statistics</a><ul>
+<li class="chapter" data-level="D.1" data-path="statistics.html"><a href="statistics.html#reading-3"><i class="fa fa-check"></i><b>D.1</b> Reading</a></li>
+<li class="chapter" data-level="D.2" data-path="statistics.html"><a href="statistics.html#statistics-1"><i class="fa fa-check"></i><b>D.2</b> Statistics</a></li>
+<li class="chapter" data-level="D.3" data-path="statistics.html"><a href="statistics.html#estimators"><i class="fa fa-check"></i><b>D.3</b> Estimators</a><ul>
+<li class="chapter" data-level="D.3.1" data-path="statistics.html"><a href="statistics.html#properties"><i class="fa fa-check"></i><b>D.3.1</b> Properties</a></li>
+<li class="chapter" data-level="D.3.2" data-path="statistics.html"><a href="statistics.html#example-mse-of-an-estimator"><i class="fa fa-check"></i><b>D.3.2</b> Example: MSE of an Estimator</a></li>
+<li class="chapter" data-level="D.3.3" data-path="statistics.html"><a href="statistics.html#estimation-methods"><i class="fa fa-check"></i><b>D.3.3</b> Estimation Methods</a></li>
+<li class="chapter" data-level="D.3.4" data-path="statistics.html"><a href="statistics.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>D.3.4</b> Maximum Likelihood Estimation</a></li>
+<li class="chapter" data-level="D.3.5" data-path="statistics.html"><a href="statistics.html#method-of-moments"><i class="fa fa-check"></i><b>D.3.5</b> Method of Moments</a></li>
+<li class="chapter" data-level="D.3.6" data-path="statistics.html"><a href="statistics.html#empirical-distribution-function"><i class="fa fa-check"></i><b>D.3.6</b> Empirical Distribution Function</a></li>
 </ul></li>
-<li class="chapter" data-level="E" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>E</b> Statistics</a><ul>
-<li class="chapter" data-level="E.1" data-path="statistics.html"><a href="statistics.html#reading-16"><i class="fa fa-check"></i><b>E.1</b> Reading</a></li>
-<li class="chapter" data-level="E.2" data-path="statistics.html"><a href="statistics.html#statistics-1"><i class="fa fa-check"></i><b>E.2</b> Statistics</a></li>
-<li class="chapter" data-level="E.3" data-path="statistics.html"><a href="statistics.html#estimators"><i class="fa fa-check"></i><b>E.3</b> Estimators</a><ul>
-<li class="chapter" data-level="E.3.1" data-path="statistics.html"><a href="statistics.html#properties"><i class="fa fa-check"></i><b>E.3.1</b> Properties</a></li>
-<li class="chapter" data-level="E.3.2" data-path="statistics.html"><a href="statistics.html#example-mse-of-an-estimator"><i class="fa fa-check"></i><b>E.3.2</b> Example: MSE of an Estimator</a></li>
-<li class="chapter" data-level="E.3.3" data-path="statistics.html"><a href="statistics.html#estimation-methods"><i class="fa fa-check"></i><b>E.3.3</b> Estimation Methods</a></li>
-<li class="chapter" data-level="E.3.4" data-path="statistics.html"><a href="statistics.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>E.3.4</b> Maximum Likelihood Estimation</a></li>
-<li class="chapter" data-level="E.3.5" data-path="statistics.html"><a href="statistics.html#method-of-moments"><i class="fa fa-check"></i><b>E.3.5</b> Method of Moments</a></li>
-<li class="chapter" data-level="E.3.6" data-path="statistics.html"><a href="statistics.html#empirical-distribution-function"><i class="fa fa-check"></i><b>E.3.6</b> Empirical Distribution Function</a></li>
-</ul></li>
-<li class="chapter" data-level="E.4" data-path="statistics.html"><a href="statistics.html#source-20"><i class="fa fa-check"></i><b>E.4</b> Source</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -361,11 +307,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="classification-1" class="section level1">
 <h1><span class="header-section-number">Chapter 6</span> Classification</h1>
+<p>Coming soon! By end of day on Monday! Check the videos for now!</p>
+<!-- ```{r setup, include = FALSE} -->
+<!-- knitr::opts_chunk$set(echo = TRUE, fig.align = "center", cache = TRUE, autodep = TRUE) -->
+<!-- ``` -->
+<!-- This chapter continues our discussion of **supervised learning** by introducing the **classification** tasks. Linear regression, we will focus on the conditional distribution of the response. -->
+<!-- Specifically, we will discuss: -->
+<!-- - The **Bayes classifier** and **Bayes error**. -->
+<!-- - Estimating **conditional probabilities**. -->
+<!-- - Two simple **metrics** for the classification task. -->
+<!-- ## R Setup and Source -->
+<!-- ```{r packages, warning = FALSE, message = FALSE} -->
+<!-- library(tibble)     # data frame printing -->
+<!-- library(dplyr)      # data manipulation -->
+<!-- library(knitr)      # creating tables -->
+<!-- library(kableExtra) # styling tables -->
+<!-- ``` -->
+<!-- Additionally, objects from `ggplot2`, `GGally`, and `ISLR` are accessed. Recall that the [Welcome](index.html) chapter contains directions for installing all necessary packages for following along with the text. The R Markdown source is provided as some code, mostly for creating plots, has been suppressed from the rendered document that you are currently reading. -->
+<!-- - **R Markdown Source:** [`linear-regression.Rmd`](linear-regression.Rmd) -->
+<!----------------------------------------------------------------------------->
 <hr />
 <p>In this chapter we will introduce <strong>classification</strong>. The main difference between classification and regression is the type of variable used as the response. In regression, we used a numeric response. In classification, we use a <strong>categorical</strong> response.</p>
 <p>This chapter is not all of classification. We will spend many additional chapters uncovering details of classification.</p>
 <hr />
-<div id="reading-2" class="section level2">
+<div id="reading" class="section level2">
 <h2><span class="header-section-number">6.1</span> Reading</h2>
 <p>We’re going to try something odd this week No reading! (At least for now. This is sort of the opposite of last week.) Instead, watch the video posted to the course website. Our goal is to show you that almost everything you learned in regression immediately transfers to performing classification. This video simply defines a few new terms and tasks. It might prove frustrating at first, but hopefully you will quickly realize the pattern. (If not, we’ll explain in greater detail over the next week chapters and weeks.)</p>
 <hr />
@@ -373,21 +338,331 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="classification-metrics" class="section level2">
 <h2><span class="header-section-number">6.2</span> Classification Metrics</h2>
 <p><strong>Misclassification</strong> Rate</p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" data-line-number="1">calc_misclass =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</a>
-<a class="sourceLine" id="cb164-2" data-line-number="2">  <span class="kw">mean</span>(actual <span class="op">!=</span><span class="st"> </span>predicted)</a>
-<a class="sourceLine" id="cb164-3" data-line-number="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" data-line-number="1">calc_misclass =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</a>
+<a class="sourceLine" id="cb179-2" data-line-number="2">  <span class="kw">mean</span>(actual <span class="op">!=</span><span class="st"> </span>predicted)</a>
+<a class="sourceLine" id="cb179-3" data-line-number="3">}</a></code></pre></div>
 <p><strong>Accuracy</strong></p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" data-line-number="1">calc_accuracy =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</a>
-<a class="sourceLine" id="cb165-2" data-line-number="2">  <span class="kw">mean</span>(actual <span class="op">==</span><span class="st"> </span>predicted)</a>
-<a class="sourceLine" id="cb165-3" data-line-number="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" data-line-number="1">calc_accuracy =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</a>
+<a class="sourceLine" id="cb180-2" data-line-number="2">  <span class="kw">mean</span>(actual <span class="op">==</span><span class="st"> </span>predicted)</a>
+<a class="sourceLine" id="cb180-3" data-line-number="3">}</a></code></pre></div>
 <hr />
 </div>
-<div id="source-5" class="section level2">
+<div id="source" class="section level2">
 <h2><span class="header-section-number">6.3</span> Source</h2>
 <ul>
 <li><code>R</code> Markdown: <a href="classification.Rmd"><code>classification.Rmd</code></a></li>
 </ul>
 <hr />
+<hr />
+</div>
+<div id="stat-432-materials" class="section level2">
+<h2><span class="header-section-number">6.4</span> STAT 432 Materials</h2>
+<ul>
+<li><a href="https://fall-2019.stat432.org/slides/classification.pdf"><strong>Slides</strong> | Classification: Introduction</a></li>
+<li><a href="https://fall-2019.stat432.org/misc/some-class-code-for-class.R"><strong>Code</strong> | Some Classification Code</a></li>
+<li><a href="https://fall-2019.stat432.org/slides/binary-classification.pdf"><strong>Slides</strong> | Classification: Binary Classification</a></li>
+<li><a href="https://fall-2019.stat432.org/misc/some-binary-class-code-for-class.R"><strong>Code</strong> | Some Binary Classification Code</a></li>
+<li><a href="https://fall-2019.stat432.org/slides/nonparametric-classification.pdf"><strong>Slides</strong> | Classification: Nonparametric Classification</a></li>
+<li><a href="https://daviddalpiaz.github.io/appliedstats/logistic-regression.html"><strong>Reading</strong> | STAT 420: Logistic Regression</a></li>
+<li><a href="https://fall-2019.stat432.org/slides/logistic-regression.pdf"><strong>Slides</strong> | Classification: Logistic Regression</a></li>
+</ul>
+<hr />
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" data-line-number="1"><span class="kw">library</span>(<span class="st">&quot;dplyr&quot;</span>)</a>
+<a class="sourceLine" id="cb181-2" data-line-number="2"><span class="kw">library</span>(<span class="st">&quot;knitr&quot;</span>)</a>
+<a class="sourceLine" id="cb181-3" data-line-number="3"><span class="kw">library</span>(<span class="st">&quot;kableExtra&quot;</span>)</a>
+<a class="sourceLine" id="cb181-4" data-line-number="4"><span class="kw">library</span>(<span class="st">&quot;tibble&quot;</span>)</a>
+<a class="sourceLine" id="cb181-5" data-line-number="5"><span class="kw">library</span>(<span class="st">&quot;caret&quot;</span>)</a>
+<a class="sourceLine" id="cb181-6" data-line-number="6"><span class="kw">library</span>(<span class="st">&quot;rpart&quot;</span>)</a>
+<a class="sourceLine" id="cb181-7" data-line-number="7"><span class="kw">library</span>(<span class="st">&quot;nnet&quot;</span>)</a></code></pre></div>
+</div>
+<div id="bayes-classifier" class="section level2">
+<h2><span class="header-section-number">6.5</span> Bayes Classifier</h2>
+<ul>
+<li>TODO: Not the same as naïve Bayes classifier</li>
+</ul>
+<p><span class="math display">\[
+p_k(x) = P\left[ Y = k \mid X = x \right]
+\]</span></p>
+<p><span class="math display">\[
+C^B(x) = \underset{k \in \{1, 2, \ldots K\}}{\text{argmax}} P\left[ Y = k \mid X = x \right]
+\]</span></p>
+<hr />
+<div id="bayes-error-rate" class="section level3">
+<h3><span class="header-section-number">6.5.1</span> Bayes Error Rate</h3>
+<p><span class="math display">\[
+1 - \mathbb{E}_X\left[ \underset{k}{\text{max}} \ P[Y = k \mid X = x] \right]
+\]</span></p>
+</div>
+</div>
+<div id="building-a-classifier" class="section level2">
+<h2><span class="header-section-number">6.6</span> Building a Classifier</h2>
+<p><span class="math display">\[
+\hat{p}_k(x) = \hat{P}\left[ Y = k \mid X = x \right]
+\]</span></p>
+<p><span class="math display">\[
+\hat{C}(x) = \underset{k \in \{1, 2, \ldots K\}}{\text{argmax}} \hat{p}_k(x)
+\]</span></p>
+<ul>
+<li>TODO: first estimation conditional distribution, then classify to label with highest probability</li>
+</ul>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" data-line-number="1">gen_data =<span class="st"> </span><span class="cf">function</span>(<span class="dt">n =</span> <span class="dv">100</span>) {</a>
+<a class="sourceLine" id="cb182-2" data-line-number="2">  x =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.4</span>, <span class="fl">0.6</span>), <span class="dt">size =</span> n, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb182-3" data-line-number="3">  y =<span class="st"> </span><span class="kw">ifelse</span>(<span class="dt">test =</span> {x <span class="op">==</span><span class="st"> </span><span class="dv">0</span>},</a>
+<a class="sourceLine" id="cb182-4" data-line-number="4">             <span class="dt">yes =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>), <span class="dt">size =</span> n, <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.25</span>, <span class="fl">0.50</span>, <span class="fl">0.25</span>), <span class="dt">replace =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb182-5" data-line-number="5">             <span class="dt">no =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>), <span class="dt">size =</span> n, <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">0.4</span>) <span class="op">/</span><span class="st"> </span><span class="fl">0.6</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb182-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb182-7" data-line-number="7">  <span class="kw">tibble</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> <span class="kw">factor</span>(y))</a>
+<a class="sourceLine" id="cb182-8" data-line-number="8">}</a>
+<a class="sourceLine" id="cb182-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb182-10" data-line-number="10">test_cases =<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb182-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb182-12" data-line-number="12"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb182-13" data-line-number="13">some_data =<span class="st"> </span><span class="kw">gen_data</span>()</a>
+<a class="sourceLine" id="cb182-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb182-15" data-line-number="15"><span class="kw">predict</span>(<span class="kw">knn3</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data), test_cases)</a></code></pre></div>
+<pre><code>##              A          B         C
+## [1,] 0.2608696 0.39130435 0.3478261
+## [2,] 0.1481481 0.07407407 0.7777778</code></pre>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" data-line-number="1"><span class="kw">predict</span>(<span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data), test_cases)</a></code></pre></div>
+<pre><code>##           A          B         C
+## 1 0.2608696 0.39130435 0.3478261
+## 2 0.1481481 0.07407407 0.7777778</code></pre>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" data-line-number="1"><span class="kw">predict</span>(<span class="kw">multinom</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> some_data, <span class="dt">trace =</span> <span class="ot">FALSE</span>), test_cases, <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>)</a></code></pre></div>
+<pre><code>##           A          B         C
+## 1 0.2608699 0.39130496 0.3478251
+## 2 0.1481478 0.07407414 0.7777781</code></pre>
+</div>
+<div id="modeling" class="section level2">
+<h2><span class="header-section-number">6.7</span> Modeling</h2>
+<div id="linear-models-3" class="section level3">
+<h3><span class="header-section-number">6.7.1</span> Linear Models</h3>
+<ul>
+<li>TODO: use <code>nnet::multinom</code>
+<ul>
+<li>in place of <code>glm()</code>? always?</li>
+</ul></li>
+</ul>
+</div>
+<div id="k-nearest-neighbors-4" class="section level3">
+<h3><span class="header-section-number">6.7.2</span> k-Nearest Neighbors</h3>
+<ul>
+<li>TODO: use <code>caret::knn3()</code></li>
+</ul>
+</div>
+<div id="decision-trees-3" class="section level3">
+<h3><span class="header-section-number">6.7.3</span> Decision Trees</h3>
+<ul>
+<li>TODO: use <code>rpart::rpart()</code></li>
+</ul>
+</div>
+</div>
+<div id="data-setup" class="section level2">
+<h2><span class="header-section-number">6.8</span> Data Setup</h2>
+</div>
+<div id="mathematical-setup-2" class="section level2">
+<h2><span class="header-section-number">6.9</span> Mathematical Setup</h2>
+</div>
+<div id="example" class="section level2">
+<h2><span class="header-section-number">6.10</span> Example</h2>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb188-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb188-2" data-line-number="2">joint_probs =<span class="st"> </span><span class="kw">round</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span> <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>), <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb188-3" data-line-number="3">joint_probs =<span class="st"> </span><span class="kw">sample</span>(joint_probs)</a>
+<a class="sourceLine" id="cb188-4" data-line-number="4">joint_dist =<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">data  =</span> joint_probs, <span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">ncol =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb188-5" data-line-number="5"><span class="kw">colnames</span>(joint_dist) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;$X = 1$&quot;</span>, <span class="st">&quot;$X = 2$&quot;</span>, <span class="st">&quot;$X = 3$&quot;</span>, <span class="st">&quot;$X = 4$&quot;</span>)</a>
+<a class="sourceLine" id="cb188-6" data-line-number="6"><span class="kw">rownames</span>(joint_dist) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;$Y = A$&quot;</span>, <span class="st">&quot;$Y = B$&quot;</span>, <span class="st">&quot;$Y = C$&quot;</span>)</a>
+<a class="sourceLine" id="cb188-7" data-line-number="7">joint_dist <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb188-8" data-line-number="8"><span class="st">  </span><span class="kw">kable</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb188-9" data-line-number="9"><span class="st">  </span><span class="kw">kable_styling</span>(<span class="st">&quot;striped&quot;</span>, <span class="dt">full_width =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb188-10" data-line-number="10"><span class="st">  </span><span class="kw">column_spec</span>(<span class="dt">column =</span> <span class="dv">1</span>, <span class="dt">bold =</span> <span class="ot">TRUE</span>, <span class="dt">background =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">border_right =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(X = 1\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(X = 2\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(X = 3\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(X = 4\)</span>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;background-color: white !important;border-right:1px solid;">
+<span class="math inline">\(Y = A\)</span>
+</td>
+<td style="text-align:right;">
+0.12
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+<td style="text-align:right;">
+0.04
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;background-color: white !important;border-right:1px solid;">
+<span class="math inline">\(Y = B\)</span>
+</td>
+<td style="text-align:right;">
+0.05
+</td>
+<td style="text-align:right;">
+0.03
+</td>
+<td style="text-align:right;">
+0.10
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;background-color: white !important;border-right:1px solid;">
+<span class="math inline">\(Y = C\)</span>
+</td>
+<td style="text-align:right;">
+0.09
+</td>
+<td style="text-align:right;">
+0.06
+</td>
+<td style="text-align:right;">
+0.08
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" data-line-number="1"><span class="co"># marginal distribution of Y</span></a>
+<a class="sourceLine" id="cb189-2" data-line-number="2"><span class="kw">t</span>(<span class="kw">colSums</span>(joint_dist)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">kable</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">kable_styling</span>(<span class="dt">full_width =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+<span class="math inline">\(X = 1\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(X = 2\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(X = 3\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(X = 4\)</span>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+0.22
+</td>
+<td style="text-align:right;">
+0.42
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" data-line-number="1"><span class="co"># marginal distribution of X</span></a>
+<a class="sourceLine" id="cb190-2" data-line-number="2"><span class="kw">t</span>(<span class="kw">rowSums</span>(joint_dist)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">kable</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">kable_styling</span>(<span class="dt">full_width =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+<span class="math inline">\(Y = A\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(Y = B\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(Y = C\)</span>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+0.31
+</td>
+<td style="text-align:right;">
+0.33
+</td>
+<td style="text-align:right;">
+0.36
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="misc-todo-stuff" class="section level2">
+<h2><span class="header-section-number">6.11</span> MISC TODO STUFF</h2>
+<ul>
+<li>TODO: <a href="https://topepo.github.io/caret/visualizations.html" class="uri">https://topepo.github.io/caret/visualizations.html</a></li>
+<li>TODO: <a href="https://en.wikipedia.org/wiki/Confusion_matrix" class="uri">https://en.wikipedia.org/wiki/Confusion_matrix</a></li>
+<li>TODO: <a href="https://en.wikipedia.org/wiki/Matthews_correlation_coefficient" class="uri">https://en.wikipedia.org/wiki/Matthews_correlation_coefficient</a></li>
+<li>TODO: <a href="https://people.inf.elte.hu/kiss/11dwhdm/roc.pdf" class="uri">https://people.inf.elte.hu/kiss/11dwhdm/roc.pdf</a></li>
+<li>TODO: <a href="https://www.cs.cmu.edu/~tom/mlbook/NBayesLogReg.pdf" class="uri">https://www.cs.cmu.edu/~tom/mlbook/NBayesLogReg.pdf</a></li>
+<li>TODO: <a href="http://www.oranlooney.com/post/viz-tsne/" class="uri">http://www.oranlooney.com/post/viz-tsne/</a></li>
+<li>TODO: <a href="https://web.expasy.org/pROC/" class="uri">https://web.expasy.org/pROC/</a></li>
+<li>TODO: <a href="https://bmcbioinformatics.biomedcentral.com/track/pdf/10.1186/1471-2105-12-77" class="uri">https://bmcbioinformatics.biomedcentral.com/track/pdf/10.1186/1471-2105-12-77</a></li>
+<li>TODO: <a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic" class="uri">https://en.wikipedia.org/wiki/Receiver_operating_characteristic</a></li>
+<li>TODO: <a href="https://papers.nips.cc/paper/2020-on-discriminative-vs-generative-classifiers-a-comparison-of-logistic-regression-and-naive-bayes.pdf" class="uri">https://papers.nips.cc/paper/2020-on-discriminative-vs-generative-classifiers-a-comparison-of-logistic-regression-and-naive-bayes.pdf</a></li>
+<li><a href="https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.141.751&amp;rep=rep1&amp;type=pdf" class="uri">https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.141.751&amp;rep=rep1&amp;type=pdf</a></li>
+<li><a href="https://www.cs.ubc.ca/~murphyk/Teaching/CS340-Fall06/lectures/naiveBayes.pdf" class="uri">https://www.cs.ubc.ca/~murphyk/Teaching/CS340-Fall06/lectures/naiveBayes.pdf</a></li>
+<li><a href="http://www.stat.cmu.edu/~ryantibs/statml/lectures/linearclassification.pdf" class="uri">http://www.stat.cmu.edu/~ryantibs/statml/lectures/linearclassification.pdf</a></li>
+<li><a href="https://www.cs.cmu.edu/~tom/mlbook/NBayesLogReg.pdf" class="uri">https://www.cs.cmu.edu/~tom/mlbook/NBayesLogReg.pdf</a></li>
+</ul>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" data-line-number="1">sim_2d_logistic =<span class="st"> </span><span class="cf">function</span>(beta_<span class="dv">0</span>, beta_<span class="dv">1</span>, beta_<span class="dv">2</span>, n) {</a>
+<a class="sourceLine" id="cb191-2" data-line-number="2">  </a>
+<a class="sourceLine" id="cb191-3" data-line-number="3">  <span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb191-4" data-line-number="4">  </a>
+<a class="sourceLine" id="cb191-5" data-line-number="5">  prob_plane =<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">expand.grid</span>(<span class="dt">x1 =</span> <span class="dv">-220</span><span class="op">:</span><span class="dv">220</span> <span class="op">/</span><span class="st"> </span><span class="dv">100</span>, </a>
+<a class="sourceLine" id="cb191-6" data-line-number="6">                                     <span class="dt">x2 =</span> <span class="dv">-220</span><span class="op">:</span><span class="dv">220</span> <span class="op">/</span><span class="st"> </span><span class="dv">100</span>))</a>
+<a class="sourceLine" id="cb191-7" data-line-number="7">  prob_plane<span class="op">$</span>p =<span class="st"> </span><span class="kw">with</span>(prob_plane, </a>
+<a class="sourceLine" id="cb191-8" data-line-number="8">                      boot<span class="op">::</span><span class="kw">inv.logit</span>(beta_<span class="dv">0</span> <span class="op">+</span><span class="st"> </span>beta_<span class="dv">1</span> <span class="op">*</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span>beta_<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x2))</a>
+<a class="sourceLine" id="cb191-9" data-line-number="9">  </a>
+<a class="sourceLine" id="cb191-10" data-line-number="10">  do_to_db =<span class="st"> </span><span class="kw">colorRampPalette</span>(<span class="kw">c</span>(<span class="st">&#39;darkorange&#39;</span>, <span class="st">&quot;white&quot;</span>, <span class="st">&#39;dodgerblue&#39;</span>))</a>
+<a class="sourceLine" id="cb191-11" data-line-number="11">  </a>
+<a class="sourceLine" id="cb191-12" data-line-number="12">  <span class="kw">plot</span>(x2 <span class="op">~</span><span class="st"> </span>x1, <span class="dt">data =</span> prob_plane, </a>
+<a class="sourceLine" id="cb191-13" data-line-number="13">       <span class="dt">col =</span> <span class="kw">do_to_db</span>(<span class="dv">100</span>)[<span class="kw">as.numeric</span>(<span class="kw">cut</span>(prob_plane<span class="op">$</span>p, </a>
+<a class="sourceLine" id="cb191-14" data-line-number="14">                                          <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">length.out =</span> <span class="dv">101</span>)))],</a>
+<a class="sourceLine" id="cb191-15" data-line-number="15">       <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>), <span class="dt">pch =</span> <span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb191-16" data-line-number="16">  <span class="kw">abline</span>(<span class="op">-</span>beta_<span class="dv">0</span> <span class="op">/</span><span class="st"> </span>beta_<span class="dv">2</span>, <span class="op">-</span>beta_<span class="dv">1</span> <span class="op">/</span><span class="st"> </span>beta_<span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb191-17" data-line-number="17">  </a>
+<a class="sourceLine" id="cb191-18" data-line-number="18">  x1 =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> n, <span class="dv">-2</span>, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb191-19" data-line-number="19">  x2 =<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> n, <span class="dv">-2</span>, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb191-20" data-line-number="20">  y =<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> n, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> boot<span class="op">::</span><span class="kw">inv.logit</span>(beta_<span class="dv">0</span> <span class="op">+</span><span class="st"> </span>beta_<span class="dv">1</span> <span class="op">*</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span>beta_<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x2))</a>
+<a class="sourceLine" id="cb191-21" data-line-number="21">  y =<span class="st"> </span><span class="kw">ifelse</span>(y <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;dodgerblue&quot;</span>, <span class="st">&quot;orange&quot;</span>)</a>
+<a class="sourceLine" id="cb191-22" data-line-number="22">  asdf =<span class="st"> </span><span class="kw">tibble</span>(x1, x2, y)</a>
+<a class="sourceLine" id="cb191-23" data-line-number="23">  </a>
+<a class="sourceLine" id="cb191-24" data-line-number="24">  <span class="kw">plot</span>(x2 <span class="op">~</span><span class="st"> </span>x1, <span class="dt">data =</span> asdf, <span class="dt">col =</span> y, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>), <span class="dt">pch =</span> <span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb191-25" data-line-number="25">  <span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb191-26" data-line-number="26">  <span class="kw">abline</span>(<span class="op">-</span>beta_<span class="dv">0</span> <span class="op">/</span><span class="st"> </span>beta_<span class="dv">2</span>, <span class="op">-</span>beta_<span class="dv">1</span> <span class="op">/</span><span class="st"> </span>beta_<span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb191-27" data-line-number="27">  </a>
+<a class="sourceLine" id="cb191-28" data-line-number="28">}</a>
+<a class="sourceLine" id="cb191-29" data-line-number="29"></a>
+<a class="sourceLine" id="cb191-30" data-line-number="30"><span class="kw">sim_2d_logistic</span>(<span class="dt">beta_0 =</span> <span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.5</span>, <span class="dt">beta_1 =</span> <span class="dv">2</span><span class="op">*</span><span class="st"> </span><span class="fl">0.7</span>, <span class="dt">beta_2 =</span> <span class="dv">2</span><span class="op">*</span><span class="st"> </span><span class="fl">0.5</span>, <span class="dt">n =</span> <span class="dv">100</span>)</a></code></pre></div>
+<p><img src="classification_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>
