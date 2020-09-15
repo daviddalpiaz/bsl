@@ -511,21 +511,21 @@ f(x, y) = f(x) \cdot f(y)
 \log \mathcal{L}(\theta \mid x_1, x_2, \ldots x_n) = \sum_{i = 1}^{n} \log f(x_i; \theta)
 \]</span></p>
 <p>As an example, suppose that the data vector <code>x_data</code> contains observations from a random sample <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> that is assumed to be sampled from a Poisson distribution with (unknown) parameter <span class="math inline">\(\lambda\)</span>.</p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb218-2" data-line-number="2">x_data =<span class="st"> </span><span class="kw">rpois</span>(<span class="dt">n =</span> <span class="dv">25</span>, <span class="dt">lambda =</span> <span class="dv">6</span>) <span class="co"># generating data (assume this is not known)</span></a>
-<a class="sourceLine" id="cb218-3" data-line-number="3"><span class="kw">head</span>(x_data) <span class="co"># check data</span></a></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb219-2" data-line-number="2">x_data =<span class="st"> </span><span class="kw">rpois</span>(<span class="dt">n =</span> <span class="dv">25</span>, <span class="dt">lambda =</span> <span class="dv">6</span>) <span class="co"># generating data (assume this is not known)</span></a>
+<a class="sourceLine" id="cb219-3" data-line-number="3"><span class="kw">head</span>(x_data) <span class="co"># check data</span></a></code></pre></div>
 <pre><code>## [1]  9 10  5  8  7  6</code></pre>
 <p>We can use R to calculate the likelihood for various possible values of <span class="math inline">\(\lambda\)</span> given this data.</p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" data-line-number="1"><span class="co"># calculate the likelihood when lambda = 5</span></a>
-<a class="sourceLine" id="cb220-2" data-line-number="2"><span class="kw">prod</span>(<span class="kw">dpois</span>(<span class="dt">x =</span> x_data, <span class="dt">lambda =</span> <span class="dv">5</span>)) </a></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" data-line-number="1"><span class="co"># calculate the likelihood when lambda = 5</span></a>
+<a class="sourceLine" id="cb221-2" data-line-number="2"><span class="kw">prod</span>(<span class="kw">dpois</span>(<span class="dt">x =</span> x_data, <span class="dt">lambda =</span> <span class="dv">5</span>)) </a></code></pre></div>
 <pre><code>## [1] 2.609375e-30</code></pre>
 <p>The above code takes advantage of the vectorized nature of the <code>dpois()</code> function. Often, especially for computational reasons, we prefer to directly obtain the log-likelihood.</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb222-1" data-line-number="1"><span class="co"># calculate the log-likelihood when lambda = 5</span></a>
-<a class="sourceLine" id="cb222-2" data-line-number="2"><span class="kw">sum</span>(<span class="kw">log</span>(<span class="kw">dpois</span>(<span class="dt">x =</span> x_data, <span class="dt">lambda =</span> <span class="dv">5</span>))) </a></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" data-line-number="1"><span class="co"># calculate the log-likelihood when lambda = 5</span></a>
+<a class="sourceLine" id="cb223-2" data-line-number="2"><span class="kw">sum</span>(<span class="kw">log</span>(<span class="kw">dpois</span>(<span class="dt">x =</span> x_data, <span class="dt">lambda =</span> <span class="dv">5</span>))) </a></code></pre></div>
 <pre><code>## [1] -68.11844</code></pre>
 <p>To understand why this is necessary, repeat the above, but with a much larger sample size. Also note that the <code>d*()</code> functions in R have an option to return logged values.</p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb224-1" data-line-number="1"><span class="co"># calculate the log-likelihood when lambda = 5</span></a>
-<a class="sourceLine" id="cb224-2" data-line-number="2"><span class="kw">sum</span>(<span class="kw">dpois</span>(<span class="dt">x =</span> x_data, <span class="dt">lambda =</span> <span class="dv">5</span>, <span class="dt">log =</span> <span class="ot">TRUE</span>)) </a></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb225-1" data-line-number="1"><span class="co"># calculate the log-likelihood when lambda = 5</span></a>
+<a class="sourceLine" id="cb225-2" data-line-number="2"><span class="kw">sum</span>(<span class="kw">dpois</span>(<span class="dt">x =</span> x_data, <span class="dt">lambda =</span> <span class="dv">5</span>, <span class="dt">log =</span> <span class="ot">TRUE</span>)) </a></code></pre></div>
 <pre><code>## [1] -68.11844</code></pre>
 </div>
 <div id="additional-references" class="section level2">

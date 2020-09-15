@@ -289,7 +289,152 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="nonparametric-classification" class="section level1">
 <h1><span class="header-section-number">Chapter 7</span> Nonparametric Classification</h1>
-<p>Coming soon! By end of day on Monday! Check the videos for now!</p>
+<p>Full book chapter still delayed! Keeping with writing every week is getting tough. Below are the notes and code from the video.</p>
+<ul>
+<li><a href="files/nonparametric-classification.pdf"><strong>Notes:</strong> Nonparametric Classification</a></li>
+</ul>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" data-line-number="1"><span class="co"># load packages</span></a>
+<a class="sourceLine" id="cb179-2" data-line-number="2"><span class="kw">library</span>(tibble)</a>
+<a class="sourceLine" id="cb179-3" data-line-number="3"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb179-4" data-line-number="4"><span class="kw">library</span>(rpart)</a>
+<a class="sourceLine" id="cb179-5" data-line-number="5"><span class="kw">library</span>(rpart.plot)</a>
+<a class="sourceLine" id="cb179-6" data-line-number="6"><span class="kw">library</span>(caret)</a>
+<a class="sourceLine" id="cb179-7" data-line-number="7"><span class="kw">library</span>(palmerpenguins)</a>
+<a class="sourceLine" id="cb179-8" data-line-number="8"><span class="kw">library</span>(mlbench)</a>
+<a class="sourceLine" id="cb179-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb179-10" data-line-number="10"><span class="co"># set seed</span></a>
+<a class="sourceLine" id="cb179-11" data-line-number="11"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb179-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb179-13" data-line-number="13"><span class="co"># generate data</span></a>
+<a class="sourceLine" id="cb179-14" data-line-number="14">sim_data =<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">mlbench.2dnormals</span>(<span class="dt">n =</span> <span class="dv">1000</span>, <span class="dt">cl =</span> <span class="dv">3</span>, <span class="dt">sd =</span> <span class="fl">1.3</span>))</a>
+<a class="sourceLine" id="cb179-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb179-16" data-line-number="16"><span class="co"># tst-trn split data</span></a>
+<a class="sourceLine" id="cb179-17" data-line-number="17">trn_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(sim_data), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(sim_data))</a>
+<a class="sourceLine" id="cb179-18" data-line-number="18">trn =<span class="st"> </span>sim_data[trn_idx, ]</a>
+<a class="sourceLine" id="cb179-19" data-line-number="19">tst =<span class="st"> </span>sim_data[<span class="op">-</span>trn_idx, ]</a>
+<a class="sourceLine" id="cb179-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb179-21" data-line-number="21"><span class="co"># est-val split data</span></a>
+<a class="sourceLine" id="cb179-22" data-line-number="22">est_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(trn), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(trn))</a>
+<a class="sourceLine" id="cb179-23" data-line-number="23">est =<span class="st"> </span>trn[est_idx, ]</a>
+<a class="sourceLine" id="cb179-24" data-line-number="24">val =<span class="st"> </span>trn[<span class="op">-</span>est_idx, ]</a>
+<a class="sourceLine" id="cb179-25" data-line-number="25"></a>
+<a class="sourceLine" id="cb179-26" data-line-number="26"><span class="co"># check data</span></a>
+<a class="sourceLine" id="cb179-27" data-line-number="27">trn</a>
+<a class="sourceLine" id="cb179-28" data-line-number="28"></a>
+<a class="sourceLine" id="cb179-29" data-line-number="29"><span class="co"># visualize data</span></a>
+<a class="sourceLine" id="cb179-30" data-line-number="30"></a>
+<a class="sourceLine" id="cb179-31" data-line-number="31">p1 =<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> trn, <span class="kw">aes</span>(<span class="dt">x =</span> x<span class="fl">.1</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb179-32" data-line-number="32"><span class="st">  </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> classes), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb179-33" data-line-number="33"><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="dv">2</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb179-34" data-line-number="34"></a>
+<a class="sourceLine" id="cb179-35" data-line-number="35">p2 =<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> trn, <span class="kw">aes</span>(<span class="dt">x =</span> x<span class="fl">.2</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb179-36" data-line-number="36"><span class="st">  </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> classes), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb179-37" data-line-number="37"><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="dv">2</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb179-38" data-line-number="38"></a>
+<a class="sourceLine" id="cb179-39" data-line-number="39">p3 =<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> trn, <span class="kw">aes</span>(<span class="dt">x =</span> x<span class="fl">.1</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb179-40" data-line-number="40"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> classes), <span class="dt">alpha =</span> <span class="fl">0.7</span>, <span class="dt">position =</span> <span class="st">&quot;identity&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb179-41" data-line-number="41"><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="dv">2</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb179-42" data-line-number="42"></a>
+<a class="sourceLine" id="cb179-43" data-line-number="43">p4 =<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> trn, <span class="kw">aes</span>(<span class="dt">x =</span> x<span class="fl">.2</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb179-44" data-line-number="44"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> classes), <span class="dt">alpha =</span> <span class="fl">0.7</span>, <span class="dt">position =</span> <span class="st">&quot;identity&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb179-45" data-line-number="45"><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="dv">2</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb179-46" data-line-number="46"></a>
+<a class="sourceLine" id="cb179-47" data-line-number="47">gridExtra<span class="op">::</span><span class="kw">grid.arrange</span>(p1, p2, p3, p4)</a>
+<a class="sourceLine" id="cb179-48" data-line-number="48"></a>
+<a class="sourceLine" id="cb179-49" data-line-number="49"><span class="kw">plot</span>(x<span class="fl">.2</span> <span class="op">~</span><span class="st"> </span>x<span class="fl">.1</span>, <span class="dt">data =</span> trn, <span class="dt">col =</span> classes, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)</a>
+<a class="sourceLine" id="cb179-50" data-line-number="50"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb179-51" data-line-number="51"></a>
+<a class="sourceLine" id="cb179-52" data-line-number="52"><span class="co"># fit knn model</span></a>
+<a class="sourceLine" id="cb179-53" data-line-number="53">mod_knn =<span class="st"> </span><span class="kw">knn3</span>(classes <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> trn, <span class="dt">k =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb179-54" data-line-number="54"></a>
+<a class="sourceLine" id="cb179-55" data-line-number="55"><span class="co"># make &quot;predictions&quot; with knn model</span></a>
+<a class="sourceLine" id="cb179-56" data-line-number="56">new_obs =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x.1 =</span> <span class="dv">2</span>, <span class="dt">x.2 =</span> <span class="dv">-2</span>)</a>
+<a class="sourceLine" id="cb179-57" data-line-number="57"><span class="kw">predict</span>(mod_knn, new_obs, <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>)</a>
+<a class="sourceLine" id="cb179-58" data-line-number="58"><span class="kw">predict</span>(mod_knn, new_obs, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</a>
+<a class="sourceLine" id="cb179-59" data-line-number="59"></a>
+<a class="sourceLine" id="cb179-60" data-line-number="60"><span class="co"># fit tree model</span></a>
+<a class="sourceLine" id="cb179-61" data-line-number="61">mod_tree =<span class="st"> </span><span class="kw">rpart</span>(classes <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> trn, <span class="dt">minsplit =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb179-62" data-line-number="62"></a>
+<a class="sourceLine" id="cb179-63" data-line-number="63"><span class="co"># make &quot;predictions&quot; with knn model</span></a>
+<a class="sourceLine" id="cb179-64" data-line-number="64">new_obs =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x.1 =</span> <span class="dv">3</span>, <span class="dt">x.2 =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb179-65" data-line-number="65"><span class="kw">predict</span>(mod_tree, new_obs, <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>)</a>
+<a class="sourceLine" id="cb179-66" data-line-number="66"><span class="kw">predict</span>(mod_tree, new_obs, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</a>
+<a class="sourceLine" id="cb179-67" data-line-number="67"></a>
+<a class="sourceLine" id="cb179-68" data-line-number="68"><span class="co"># visualize tree results</span></a>
+<a class="sourceLine" id="cb179-69" data-line-number="69"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb179-70" data-line-number="70"><span class="kw">plot</span>(x<span class="fl">.2</span> <span class="op">~</span><span class="st"> </span>x<span class="fl">.1</span>, <span class="dt">data =</span> trn, <span class="dt">col =</span> classes, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)</a>
+<a class="sourceLine" id="cb179-71" data-line-number="71"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb179-72" data-line-number="72"><span class="kw">rpart.plot</span>(mod_tree, <span class="dt">type =</span> <span class="dv">2</span>, <span class="dt">box.palette =</span> <span class="kw">list</span>(<span class="st">&quot;Grays&quot;</span>, <span class="st">&quot;Reds&quot;</span>, <span class="st">&quot;Greens&quot;</span>))</a>
+<a class="sourceLine" id="cb179-73" data-line-number="73"></a>
+<a class="sourceLine" id="cb179-74" data-line-number="74"><span class="co"># reset plotting</span></a>
+<a class="sourceLine" id="cb179-75" data-line-number="75"><span class="kw">dev.off</span>()</a>
+<a class="sourceLine" id="cb179-76" data-line-number="76"></a>
+<a class="sourceLine" id="cb179-77" data-line-number="77"><span class="co"># helper function to calculate misclassification</span></a>
+<a class="sourceLine" id="cb179-78" data-line-number="78">calc_misclass =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</a>
+<a class="sourceLine" id="cb179-79" data-line-number="79">  <span class="kw">mean</span>(actual <span class="op">!=</span><span class="st"> </span>predicted)</a>
+<a class="sourceLine" id="cb179-80" data-line-number="80">}</a>
+<a class="sourceLine" id="cb179-81" data-line-number="81"></a>
+<a class="sourceLine" id="cb179-82" data-line-number="82"><span class="co"># calculate test metric</span></a>
+<a class="sourceLine" id="cb179-83" data-line-number="83">mod_knn =<span class="st"> </span><span class="kw">knn3</span>(classes <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> trn, <span class="dt">k =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb179-84" data-line-number="84"><span class="kw">calc_misclass</span>(</a>
+<a class="sourceLine" id="cb179-85" data-line-number="85">  <span class="dt">actual =</span> tst<span class="op">$</span>classes,</a>
+<a class="sourceLine" id="cb179-86" data-line-number="86">  <span class="dt">predicted =</span> <span class="kw">predict</span>(mod_knn, tst, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</a>
+<a class="sourceLine" id="cb179-87" data-line-number="87">)</a>
+<a class="sourceLine" id="cb179-88" data-line-number="88"></a>
+<a class="sourceLine" id="cb179-89" data-line-number="89"><span class="kw">mean</span>(tst<span class="op">$</span>classes <span class="op">!=</span><span class="st"> </span><span class="kw">predict</span>(mod_knn, tst, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>))</a>
+<a class="sourceLine" id="cb179-90" data-line-number="90"></a>
+<a class="sourceLine" id="cb179-91" data-line-number="91"><span class="co"># tune knn model ###############################################################</span></a>
+<a class="sourceLine" id="cb179-92" data-line-number="92"></a>
+<a class="sourceLine" id="cb179-93" data-line-number="93"><span class="co"># set seed</span></a>
+<a class="sourceLine" id="cb179-94" data-line-number="94"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb179-95" data-line-number="95"></a>
+<a class="sourceLine" id="cb179-96" data-line-number="96"><span class="co"># k values to consider</span></a>
+<a class="sourceLine" id="cb179-97" data-line-number="97">k_val =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">101</span>, <span class="dt">by =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb179-98" data-line-number="98"></a>
+<a class="sourceLine" id="cb179-99" data-line-number="99"><span class="co"># function to fit knn to est for various k</span></a>
+<a class="sourceLine" id="cb179-100" data-line-number="100">fit_knn_to_est =<span class="st"> </span><span class="cf">function</span>(k) {</a>
+<a class="sourceLine" id="cb179-101" data-line-number="101">  <span class="kw">knn3</span>(classes <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> est, <span class="dt">k =</span> k)</a>
+<a class="sourceLine" id="cb179-102" data-line-number="102">}</a>
+<a class="sourceLine" id="cb179-103" data-line-number="103"></a>
+<a class="sourceLine" id="cb179-104" data-line-number="104"><span class="co"># fit models</span></a>
+<a class="sourceLine" id="cb179-105" data-line-number="105">knn_mods =<span class="st"> </span><span class="kw">lapply</span>(k_val, fit_knn_to_est)</a>
+<a class="sourceLine" id="cb179-106" data-line-number="106"></a>
+<a class="sourceLine" id="cb179-107" data-line-number="107"><span class="co"># make predictions</span></a>
+<a class="sourceLine" id="cb179-108" data-line-number="108">knn_preds =<span class="st"> </span><span class="kw">lapply</span>(knn_mods, predict, val, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</a>
+<a class="sourceLine" id="cb179-109" data-line-number="109"></a>
+<a class="sourceLine" id="cb179-110" data-line-number="110"><span class="co"># calculate misclass</span></a>
+<a class="sourceLine" id="cb179-111" data-line-number="111">knn_misclass =<span class="st"> </span><span class="kw">sapply</span>(knn_preds, calc_misclass, <span class="dt">actual =</span> val<span class="op">$</span>classes)</a>
+<a class="sourceLine" id="cb179-112" data-line-number="112"></a>
+<a class="sourceLine" id="cb179-113" data-line-number="113"><span class="co"># plot results</span></a>
+<a class="sourceLine" id="cb179-114" data-line-number="114"><span class="kw">plot</span>(k_val, knn_misclass, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>)</a>
+<a class="sourceLine" id="cb179-115" data-line-number="115"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb179-116" data-line-number="116"></a>
+<a class="sourceLine" id="cb179-117" data-line-number="117">k_val[<span class="kw">which.min</span>(knn_misclass)]</a>
+<a class="sourceLine" id="cb179-118" data-line-number="118"></a>
+<a class="sourceLine" id="cb179-119" data-line-number="119"><span class="co"># trees and penguins ###########################################################</span></a>
+<a class="sourceLine" id="cb179-120" data-line-number="120"></a>
+<a class="sourceLine" id="cb179-121" data-line-number="121"><span class="co"># check data</span></a>
+<a class="sourceLine" id="cb179-122" data-line-number="122">penguins</a>
+<a class="sourceLine" id="cb179-123" data-line-number="123"></a>
+<a class="sourceLine" id="cb179-124" data-line-number="124"><span class="co"># visualize data</span></a>
+<a class="sourceLine" id="cb179-125" data-line-number="125"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb179-126" data-line-number="126"><span class="kw">plot</span>(body_mass_g <span class="op">~</span><span class="st"> </span>flipper_length_mm, <span class="dt">data =</span> penguins,</a>
+<a class="sourceLine" id="cb179-127" data-line-number="127">     <span class="dt">col =</span> species, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)</a>
+<a class="sourceLine" id="cb179-128" data-line-number="128"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb179-129" data-line-number="129"><span class="kw">plot</span>(bill_length_mm <span class="op">~</span><span class="st"> </span>flipper_length_mm, <span class="dt">data =</span> penguins,</a>
+<a class="sourceLine" id="cb179-130" data-line-number="130">     <span class="dt">col =</span> species, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)</a>
+<a class="sourceLine" id="cb179-131" data-line-number="131"><span class="kw">grid</span>()</a>
+<a class="sourceLine" id="cb179-132" data-line-number="132"></a>
+<a class="sourceLine" id="cb179-133" data-line-number="133"><span class="co"># reset plotting</span></a>
+<a class="sourceLine" id="cb179-134" data-line-number="134"><span class="kw">dev.off</span>()</a>
+<a class="sourceLine" id="cb179-135" data-line-number="135"></a>
+<a class="sourceLine" id="cb179-136" data-line-number="136"><span class="co"># fit tree and visualize</span></a>
+<a class="sourceLine" id="cb179-137" data-line-number="137">peng_mod =<span class="st"> </span><span class="kw">rpart</span>(species <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>year, <span class="dt">data =</span> penguins)</a>
+<a class="sourceLine" id="cb179-138" data-line-number="138"><span class="kw">rpart.plot</span>(peng_mod, <span class="dt">type =</span> <span class="dv">2</span>, <span class="dt">box.palette =</span> <span class="kw">list</span>(<span class="st">&quot;Grays&quot;</span>, <span class="st">&quot;Reds&quot;</span>, <span class="st">&quot;Greens&quot;</span>))</a>
+<a class="sourceLine" id="cb179-139" data-line-number="139"></a>
+<a class="sourceLine" id="cb179-140" data-line-number="140"><span class="co"># fit bigger tree and visualize</span></a>
+<a class="sourceLine" id="cb179-141" data-line-number="141">peng_mod_big =<span class="st"> </span><span class="kw">rpart</span>(species <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>year, <span class="dt">data =</span> penguins, <span class="dt">minsplit =</span> <span class="dv">2</span>, <span class="dt">cp =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb179-142" data-line-number="142"><span class="kw">rpart.plot</span>(peng_mod_big, <span class="dt">type =</span> <span class="dv">2</span>, <span class="dt">box.palette =</span> <span class="kw">list</span>(<span class="st">&quot;Grays&quot;</span>, <span class="st">&quot;Reds&quot;</span>, <span class="st">&quot;Greens&quot;</span>))</a></code></pre></div>
 <!-- ```{r setup, include = FALSE} -->
 <!-- knitr::opts_chunk$set(echo = TRUE, fig.align = "center", cache = TRUE, autodep = TRUE) -->
 <!-- ``` -->
@@ -339,114 +484,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- ```{r} -->
 <!-- GGally::ggpairs(penguins, mapping = aes(color = species),  -->
 <!--         columns = names(penguins)[-1]) -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- # load packages -->
-<!-- library(tibble) -->
-<!-- library(ggplot2) -->
-<!-- library(rpart) -->
-<!-- library(rpart.plot) -->
-<!-- library(caret) -->
-<!-- library(palmerpenguins) -->
-<!-- library(mlbench) -->
-<!-- # set seed -->
-<!-- set.seed(42) -->
-<!-- # generate data -->
-<!-- sim_data = as_tibble(mlbench.2dnormals(n = 1000, cl = 3, sd = 1.3)) -->
-<!-- # tst-trn split data -->
-<!-- trn_idx = sample(nrow(sim_data), size = 0.8 * nrow(sim_data)) -->
-<!-- trn = sim_data[trn_idx, ] -->
-<!-- tst = sim_data[-trn_idx, ] -->
-<!-- # est-val split data -->
-<!-- est_idx = sample(nrow(trn), size = 0.8 * nrow(trn)) -->
-<!-- est = trn[est_idx, ] -->
-<!-- val = trn[-est_idx, ] -->
-<!-- # check data -->
-<!-- trn -->
-<!-- # visualize data -->
-<!-- p1 = ggplot(data = trn, aes(x = x.1)) + -->
-<!--   geom_density(aes(fill = classes), alpha = 0.5) +  -->
-<!--   scale_fill_manual(values=c("grey", 2, 3)) -->
-<!-- p2 = ggplot(data = trn, aes(x = x.2)) + -->
-<!--   geom_density(aes(fill = classes), alpha = 0.5) +  -->
-<!--   scale_fill_manual(values=c("grey", 2, 3)) -->
-<!-- p3 = ggplot(data = trn, aes(x = x.1)) + -->
-<!--   geom_histogram(aes(fill = classes), alpha = 0.7, position = "identity") +  -->
-<!--   scale_fill_manual(values=c("grey", 2, 3)) -->
-<!-- p4 = ggplot(data = trn, aes(x = x.2)) + -->
-<!--   geom_histogram(aes(fill = classes), alpha = 0.7, position = "identity") +  -->
-<!--   scale_fill_manual(values=c("grey", 2, 3)) -->
-<!-- gridExtra::grid.arrange(p1, p2, p3, p4) -->
-<!-- plot(x.2 ~ x.1, data = trn, col = classes, pch = 20, cex = 1.5) -->
-<!-- grid() -->
-<!-- # fit knn model -->
-<!-- mod_knn = knn3(classes ~ ., data = trn, k = 10) -->
-<!-- # make "predictions" with knn model -->
-<!-- new_obs = data.frame(x.1 = 2, x.2 = -2) -->
-<!-- predict(mod_knn, new_obs, type = "prob") -->
-<!-- predict(mod_knn, new_obs, type = "class") -->
-<!-- # fit tree model -->
-<!-- mod_tree = rpart(classes ~ ., data = trn, minsplit = 5) -->
-<!-- # make "predictions" with knn model -->
-<!-- new_obs = data.frame(x.1 = 3, x.2 = 3) -->
-<!-- predict(mod_tree, new_obs, type = "prob") -->
-<!-- predict(mod_tree, new_obs, type = "class") -->
-<!-- # visualize tree results -->
-<!-- par(mfrow = c(1, 2)) -->
-<!-- plot(x.2 ~ x.1, data = trn, col = classes, pch = 20, cex = 1.5) -->
-<!-- grid() -->
-<!-- rpart.plot(mod_tree, type = 2, box.palette = list("Grays", "Reds", "Greens")) -->
-<!-- # reset plotting -->
-<!-- dev.off() -->
-<!-- # helper function to calculate misclassification -->
-<!-- calc_misclass = function(actual, predicted) { -->
-<!--   mean(actual != predicted) -->
-<!-- } -->
-<!-- # calculate test metric -->
-<!-- mod_knn = knn3(classes ~ ., data = trn, k = 10) -->
-<!-- calc_misclass( -->
-<!--   actual = tst$classes, -->
-<!--   predicted = predict(mod_knn, tst, type = "class") -->
-<!-- ) -->
-<!-- mean(tst$classes != predict(mod_knn, tst, type = "class")) -->
-<!-- # tune knn model ############################################################### -->
-<!-- # set seed -->
-<!-- set.seed(42) -->
-<!-- # k values to consider -->
-<!-- k_val = seq(1, 101, by = 2) -->
-<!-- # function to fit knn to est for various k -->
-<!-- fit_knn_to_est = function(k) { -->
-<!--   knn3(classes ~ ., data = est, k = k) -->
-<!-- } -->
-<!-- # fit models -->
-<!-- knn_mods = lapply(k_val, fit_knn_to_est) -->
-<!-- # make predictions -->
-<!-- knn_preds = lapply(knn_mods, predict, val, type = "class") -->
-<!-- # calculate misclass -->
-<!-- knn_misclass = sapply(knn_preds, calc_misclass, actual = val$classes) -->
-<!-- # plot results -->
-<!-- plot(k_val, knn_misclass, pch = 20, type = "b") -->
-<!-- grid() -->
-<!-- k_val[which.min(knn_misclass)] -->
-<!-- # trees and penguins ########################################################### -->
-<!-- # check data -->
-<!-- penguins -->
-<!-- # visualize data -->
-<!-- par(mfrow = c(1, 2)) -->
-<!-- plot(body_mass_g ~ flipper_length_mm, data = penguins,  -->
-<!--      col = species, pch = 20, cex = 1.5) -->
-<!-- grid() -->
-<!-- plot(bill_length_mm ~ flipper_length_mm, data = penguins,  -->
-<!--      col = species, pch = 20, cex = 1.5) -->
-<!-- grid() -->
-<!-- # reset plotting -->
-<!-- dev.off() -->
-<!-- # fit tree and visualize -->
-<!-- peng_mod = rpart(species ~ . - year, data = penguins) -->
-<!-- rpart.plot(peng_mod, type = 2, box.palette = list("Grays", "Reds", "Greens")) -->
-<!-- # fit bigger tree and visualize -->
-<!-- peng_mod_big = rpart(species ~ . - year, data = penguins, minsplit = 2, cp = 0) -->
-<!-- rpart.plot(peng_mod_big, type = 2, box.palette = list("Grays", "Reds", "Greens")) -->
 <!-- ``` -->
 
 </div>
