@@ -70,6 +70,8 @@ no-free-lunch
 curse-of-dimensionality
 classification-1
 nonparametric-classification
+logistic-regression
+binary-classification
 additional-reading
 books
 papers
