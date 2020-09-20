@@ -8,6 +8,8 @@ Full book chapter still delayed! Keeping with writing every week is getting toug
 
 - [**Notes:** Classification](files/classification.pdf)
 
+<!-- TODO: add confusion matrix, and plot? -->
+
 <!-- This chapter continues our discussion of **supervised learning** by introducing the **classification** tasks. Like regression, we will focus on the conditional distribution of the response. -->
 
 <!-- Specifically, we will discuss: -->
