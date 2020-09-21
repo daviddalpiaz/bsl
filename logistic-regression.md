@@ -1,6 +1,176 @@
 # Logistic Regression
 
-This is currently a placeholder.
+Full book chapter still delayed! Keeping up with writing every week is getting tough. Below are the notes from the video.
+
+- [**Notes:** Logistic Regression](files/logistic-regression.pdf)
+
+
+```r
+# load packages
+library(tibble)
+library(mlbench)
+
+# single feature variable ######################################################
+
+sim_logistic_data = function(sample_size = 25, beta_0 = -2, beta_1 = 3, factor = TRUE) {
+  x = rnorm(n = sample_size)
+  eta = beta_0 + beta_1 * x
+  p = 1 / (1 + exp(-eta))
+  y = rbinom(n = sample_size, size = 1, prob = p)
+  if (factor) {
+    y = factor(y)
+  }
+  tibble::tibble(x, y)
+}
+
+# simulate data for logistic regression
+set.seed(3)
+sim_data_factor = sim_logistic_data()
+sim_data_factor
+levels(sim_data_factor$y)
+
+# simulate data for linear regression
+set.seed(3)
+sim_data_numeric = sim_logistic_data(factor = FALSE)
+sim_data_numeric
+
+# initial plot
+plot(y ~ x, data = sim_data_numeric,
+     pch = 19, ylab = "Estimated Probability",
+     main = "Ordinary vs Logistic Regression",
+     ylim = c(-0.2, 1.2), cex = 1.5)
+grid()
+abline(h = 0, lty = 3)
+abline(h = 1, lty = 3)
+
+# E[Y | X = x] = 1 * P(Y = 1 | X = x) + 0 * P(Y = 0 | X = x) = P(Y = 1 | X = x)
+# ordinary linear regression
+fit_lm  = lm(y ~ x, data = sim_data_numeric)
+fit_lm  = glm(y ~ x, data = sim_data_numeric)
+
+# logistic regression
+fit_glm = glm(y ~ x, data = sim_data_numeric, family = binomial)
+fit_glm = glm(y ~ x, data = sim_data_numeric, family = binomial(link = "logit"))
+
+# plot results
+plot(y ~ x, data = sim_data_numeric,
+     pch = 19, ylab = "Estimated Probability",
+     main = "Ordinary vs Logistic Regression",
+     ylim = c(-0.2, 1.2), cex = 1.5)
+grid()
+abline(h = 0, lty = 3)
+abline(h = 1, lty = 3)
+abline(fit_lm, col = "darkorange")
+curve(predict(fit_glm, data.frame(x), type = "response"),
+      add = TRUE, col = "dodgerblue", lty = 2)
+legend("topleft", c("Ordinary", "Logistic", "Data"), lty = c(1, 2, 0),
+       pch = c(NA, NA, 20), lwd = 2, col = c("darkorange", "dodgerblue", "black"))
+abline(h = 0.5, lty = 2)
+# abline(v = -coef(fit_glm)[1] / coef(fit_glm)[2], col = "dodgerblue", lty = 2)
+# abline(v = (0.5 - coef(fit_lm)[1]) / coef(fit_lm)[2], col = "darkorange")
+
+# two feature variables, blobs #################################################
+
+# simulate data
+set.seed(42)
+blob_trn = as_tibble(mlbench.2dnormals(n = 100))
+blob_tst = as_tibble(mlbench.2dnormals(n = 1000))
+
+# check data
+blob_trn
+levels(blob_trn$classes)
+
+# check balance
+table(blob_trn$classes)
+
+# initial plot
+plot(x.2 ~ x.1, data = blob_trn, col = blob_trn$classes, pch = 19)
+grid()
+
+# points where we will predict
+xy_vals = expand.grid(
+  x.1 = seq(from = -3.5, to = 3.5, by = 0.05),
+  x.2 = seq(from = -3.5, to = 3.5, by = 0.05)
+)
+head(xy_vals)
+
+# fit model, bad
+mod = glm(classes ~ ., data = blob_trn, family = binomial)
+pred_xy = ifelse(predict(mod, xy_vals, type = "response") > 0.5, "lightpink", "lightgrey")
+pred_xy = ifelse(predict(mod, xy_vals) > 0, "lightpink", "lightgrey")
+
+# check predictions on plot
+plot(x.2 ~ x.1, data = xy_vals, col = pred_xy,
+     xlim = c(-3, 3), ylim = c(-3, 3), pch = 15)
+points(x.2 ~ x.1, data = blob_trn, col = blob_trn$classes, pch = 19)
+
+# 0 = beta_0 + beta_1 x.1 + beta_2 x.2
+# x.2 = -(beta_0 + beta_1 x.1) / beta_2
+
+# add analytic decision boundary
+plot(x.2 ~ x.1, data = xy_vals, col = pred_xy,
+     xlim = c(-3, 3), ylim = c(-3, 3), pch = 15)
+points(x.2 ~ x.1, data = blob_trn, col = blob_trn$classes, pch = 19)
+abline(
+  a = -coef(mod)[1] / coef(mod)[3],
+  b = -coef(mod)[2] / coef(mod)[3],
+  lwd = 5, col = "white")
+
+# check performance, miclassification
+pred = factor(ifelse(predict(mod, blob_tst) > 0.0, "2", "1"))
+mean(blob_tst$classes != pred)
+
+## two variables, circle #######################################################
+
+# simulate data
+set.seed(42)
+circle_trn = as_tibble(mlbench.circle(n = 250))
+circle_tst = as_tibble(mlbench.circle(n = 1000))
+
+# check data
+circle_trn
+
+# check balance
+table(circle_trn$classes)
+
+# initial plot
+plot(x.2 ~ x.1, data = circle_trn, col = circle_trn$classes, pch = 19)
+grid()
+
+# points where we will predict
+xy_vals = expand.grid(
+  x.1 = seq(from = -1.1, to = 1.1, by = 0.01),
+  x.2 = seq(from = -1.1, to = 1.1, by = 0.01)
+)
+head(xy_vals)
+
+# fit model, bad
+mod_bad = glm(classes ~ ., data = circle_trn, family = binomial)
+pred_bad_xy = ifelse(predict(mod_bad, xy_vals, type = "response") > 0.5, "lightpink", "lightgrey")
+
+# check predictions on plot
+plot(x.2 ~ x.1, data = xy_vals, col = pred_bad_xy,
+     xlim = c(-1, 1), ylim = c(-1, 1), pch = 15)
+points(x.2 ~ x.1, data = circle_trn, col = circle_trn$classes, pch = 19)
+
+# check performance, accuracy
+pred_bad = factor(ifelse(predict(mod_bad, circle_tst) > 0.0, "2", "1"))
+mean(circle_tst$classes == pred_bad)
+
+# fit model, good
+mod_good = glm(classes ~ poly(x.1, 2) + poly(x.2, 2) + x.1:x.2, data = circle_trn, family = binomial)
+pred_good_xy = ifelse(predict(mod_good, xy_vals, type = "response") > 0.5, "lightpink", "lightgrey")
+
+# check predictions on plot
+plot(x.2 ~ x.1, data = xy_vals, col = pred_good_xy,
+     xlim = c(-1, 1), ylim = c(-1, 1), pch = 15)
+points(x.2 ~ x.1, data = circle_trn, col = circle_trn$classes, pch = 19)
+
+# check performance, accuracy
+pred_good = factor(ifelse(predict(mod_good, circle_tst) > 0.5, "2", "1"))
+mean(circle_tst$classes == pred_good)
+```
+
 
 <!-- ```{r setup, include = FALSE} -->
 <!-- knitr::opts_chunk$set(echo = TRUE, fig.align = "center", cache = TRUE, autodep = TRUE) -->

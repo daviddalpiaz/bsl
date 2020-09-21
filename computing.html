@@ -399,10 +399,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">B.3.2</span> R Versions</h3>
 <p>You should always use the most up-to-date version of R and RStudio. You <strong>must</strong> use at least R version 4.0.2.</p>
 <p>Importantly, R versions after 3.6.0 have slightly different random number generation. Although, even with the most recent version, sometimes R keeps the old random number generation. To check that you are on the most recent random number generation, run:</p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" data-line-number="1"><span class="kw">RNGkind</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" data-line-number="1"><span class="kw">RNGkind</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;Mersenne-Twister&quot; &quot;Inversion&quot;        &quot;Rejection&quot;</code></pre>
 <p>If your output matches the output above, you’re all set. If not, run:</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" data-line-number="1"><span class="kw">RNGversion</span>(<span class="kw">getRversion</span>())</a></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" data-line-number="1"><span class="kw">RNGversion</span>(<span class="kw">getRversion</span>())</a></code></pre></div>
 <p>Then re-run <code>RNGkind()</code> and everything should match up and you should be good to go!</p>
 </div>
 <div id="packages-1" class="section level3">
@@ -434,36 +434,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>While computers will complain about bad code, does anyone really care about wasting their time? (OK, sure, computer scientists might.) If we give them bad code, they try to run it, fail, then complain. However, they’re soulless machines, they can handle it.</p>
 <p>Humans on the other hand have a finite amount of time on this earth. Even if we solve aging, we still have to deal with the <a href="https://en.m.wikipedia.org/wiki/Heat_death_of_the_universe">heat death of the universe</a>. Thus, while wasting a computer’s time is no big deal, wasting a human’s time is, frankly, immoral. What does this have to do with R programming? Humans are going to read your R code. One of those humans is likely to be you, but future you. To make this reading possible and efficient, you need to develop <strong>style</strong>.</p>
 <p>Here is some code that a computer can read, but a human will struggle to read:</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">1337</span>);mu=<span class="dv">10</span>;sample_size=<span class="dv">50</span>;samples=<span class="dv">100000</span>;x_bars=<span class="kw">rep</span>(<span class="dv">0</span>, samples);</a>
-<a class="sourceLine" id="cb183-2" data-line-number="2"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>samples){x_bars[i]=<span class="kw">mean</span>(<span class="kw">rpois</span>(sample_size,<span class="dt">lambda =</span> mu))}</a>
-<a class="sourceLine" id="cb183-3" data-line-number="3">x_bar_hist=<span class="kw">hist</span>(x_bars,<span class="dt">breaks=</span><span class="dv">50</span>,<span class="dt">main=</span><span class="st">&quot;Histogram of Sample Means&quot;</span>,</a>
-<a class="sourceLine" id="cb183-4" data-line-number="4"><span class="dt">xlab=</span><span class="st">&quot;Sample Means&quot;</span>,<span class="dt">col=</span><span class="st">&quot;darkorange&quot;</span>,<span class="dt">border =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">1337</span>);mu=<span class="dv">10</span>;sample_size=<span class="dv">50</span>;samples=<span class="dv">100000</span>;x_bars=<span class="kw">rep</span>(<span class="dv">0</span>, samples);</a>
+<a class="sourceLine" id="cb185-2" data-line-number="2"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>samples){x_bars[i]=<span class="kw">mean</span>(<span class="kw">rpois</span>(sample_size,<span class="dt">lambda =</span> mu))}</a>
+<a class="sourceLine" id="cb185-3" data-line-number="3">x_bar_hist=<span class="kw">hist</span>(x_bars,<span class="dt">breaks=</span><span class="dv">50</span>,<span class="dt">main=</span><span class="st">&quot;Histogram of Sample Means&quot;</span>,</a>
+<a class="sourceLine" id="cb185-4" data-line-number="4"><span class="dt">xlab=</span><span class="st">&quot;Sample Means&quot;</span>,<span class="dt">col=</span><span class="st">&quot;darkorange&quot;</span>,<span class="dt">border =</span> <span class="st">&quot;dodgerblue&quot;</span>)</a></code></pre></div>
 <p>Now, written again, but readable by a human:</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" data-line-number="1"><span class="co"># set seed for reproducibility</span></a>
-<a class="sourceLine" id="cb184-2" data-line-number="2"><span class="kw">set.seed</span>(<span class="dv">1337</span>)</a>
-<a class="sourceLine" id="cb184-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb184-4" data-line-number="4"><span class="co"># setup simulation parameters</span></a>
-<a class="sourceLine" id="cb184-5" data-line-number="5">mu =<span class="st"> </span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb184-6" data-line-number="6">sample_size =<span class="st"> </span><span class="dv">50</span></a>
-<a class="sourceLine" id="cb184-7" data-line-number="7">samples =<span class="st"> </span><span class="dv">100000</span></a>
-<a class="sourceLine" id="cb184-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb184-9" data-line-number="9"><span class="co"># create vector to store simulation results</span></a>
-<a class="sourceLine" id="cb184-10" data-line-number="10">x_bars =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, samples)</a>
-<a class="sourceLine" id="cb184-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb184-12" data-line-number="12"><span class="co"># run simulation</span></a>
-<a class="sourceLine" id="cb184-13" data-line-number="13"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>samples) {</a>
-<a class="sourceLine" id="cb184-14" data-line-number="14">  x_bars[i] =<span class="st"> </span><span class="kw">mean</span>(<span class="kw">rpois</span>(sample_size, <span class="dt">lambda =</span> mu))</a>
-<a class="sourceLine" id="cb184-15" data-line-number="15">}</a>
-<a class="sourceLine" id="cb184-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb184-17" data-line-number="17"><span class="co"># plot results</span></a>
-<a class="sourceLine" id="cb184-18" data-line-number="18">x_bar_hist =<span class="st"> </span><span class="kw">hist</span>(</a>
-<a class="sourceLine" id="cb184-19" data-line-number="19">  x_bars,</a>
-<a class="sourceLine" id="cb184-20" data-line-number="20">  <span class="dt">breaks =</span> <span class="dv">50</span>,</a>
-<a class="sourceLine" id="cb184-21" data-line-number="21">  <span class="dt">main =</span> <span class="st">&quot;Histogram of Sample Means&quot;</span>,</a>
-<a class="sourceLine" id="cb184-22" data-line-number="22">  <span class="dt">xlab =</span> <span class="st">&quot;Sample Means&quot;</span>,</a>
-<a class="sourceLine" id="cb184-23" data-line-number="23">  <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>,</a>
-<a class="sourceLine" id="cb184-24" data-line-number="24">  <span class="dt">border =</span> <span class="st">&quot;dodgerblue&quot;</span></a>
-<a class="sourceLine" id="cb184-25" data-line-number="25">)</a></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" data-line-number="1"><span class="co"># set seed for reproducibility</span></a>
+<a class="sourceLine" id="cb186-2" data-line-number="2"><span class="kw">set.seed</span>(<span class="dv">1337</span>)</a>
+<a class="sourceLine" id="cb186-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb186-4" data-line-number="4"><span class="co"># setup simulation parameters</span></a>
+<a class="sourceLine" id="cb186-5" data-line-number="5">mu =<span class="st"> </span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb186-6" data-line-number="6">sample_size =<span class="st"> </span><span class="dv">50</span></a>
+<a class="sourceLine" id="cb186-7" data-line-number="7">samples =<span class="st"> </span><span class="dv">100000</span></a>
+<a class="sourceLine" id="cb186-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb186-9" data-line-number="9"><span class="co"># create vector to store simulation results</span></a>
+<a class="sourceLine" id="cb186-10" data-line-number="10">x_bars =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, samples)</a>
+<a class="sourceLine" id="cb186-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb186-12" data-line-number="12"><span class="co"># run simulation</span></a>
+<a class="sourceLine" id="cb186-13" data-line-number="13"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>samples) {</a>
+<a class="sourceLine" id="cb186-14" data-line-number="14">  x_bars[i] =<span class="st"> </span><span class="kw">mean</span>(<span class="kw">rpois</span>(sample_size, <span class="dt">lambda =</span> mu))</a>
+<a class="sourceLine" id="cb186-15" data-line-number="15">}</a>
+<a class="sourceLine" id="cb186-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb186-17" data-line-number="17"><span class="co"># plot results</span></a>
+<a class="sourceLine" id="cb186-18" data-line-number="18">x_bar_hist =<span class="st"> </span><span class="kw">hist</span>(</a>
+<a class="sourceLine" id="cb186-19" data-line-number="19">  x_bars,</a>
+<a class="sourceLine" id="cb186-20" data-line-number="20">  <span class="dt">breaks =</span> <span class="dv">50</span>,</a>
+<a class="sourceLine" id="cb186-21" data-line-number="21">  <span class="dt">main =</span> <span class="st">&quot;Histogram of Sample Means&quot;</span>,</a>
+<a class="sourceLine" id="cb186-22" data-line-number="22">  <span class="dt">xlab =</span> <span class="st">&quot;Sample Means&quot;</span>,</a>
+<a class="sourceLine" id="cb186-23" data-line-number="23">  <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>,</a>
+<a class="sourceLine" id="cb186-24" data-line-number="24">  <span class="dt">border =</span> <span class="st">&quot;dodgerblue&quot;</span></a>
+<a class="sourceLine" id="cb186-25" data-line-number="25">)</a></code></pre></div>
 <p>To the computer, these are the same. To a human, one makes you want to pull your hair out, the other you can glance at and have a pretty good idea about what is going on.</p>
 <p>Style is subjective, but we’ll define some guiding principles, and a few rules.</p>
 </div>
@@ -490,14 +490,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li>Never use <code>T</code> or <code>F</code>, only <code>TRUE</code> or <code>FALSE</code>. While this should never happen, take a look at this terrifying example.</li>
 </ul>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" data-line-number="1"><span class="ot">FALSE</span> <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span> <span class="co"># checking for equality</span></a></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" data-line-number="1"><span class="ot">FALSE</span> <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span> <span class="co"># checking for equality</span></a></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" data-line-number="1">F <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span> <span class="co"># checking for equality</span></a></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" data-line-number="1">F <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span> <span class="co"># checking for equality</span></a></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" data-line-number="1">F =<span class="st">  </span><span class="ot">TRUE</span> <span class="co"># A VERY BAD ASSIGNMENT! DO NOT DO THIS!</span></a>
-<a class="sourceLine" id="cb189-2" data-line-number="2">F <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span> <span class="co"># checking for equality, with a wild result!</span></a></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" data-line-number="1">F =<span class="st">  </span><span class="ot">TRUE</span> <span class="co"># A VERY BAD ASSIGNMENT! DO NOT DO THIS!</span></a>
+<a class="sourceLine" id="cb191-2" data-line-number="2">F <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span> <span class="co"># checking for equality, with a wild result!</span></a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" data-line-number="1"><span class="co"># TRUE = FALSE # This won&#39;t run, which is good!</span></a></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" data-line-number="1"><span class="co"># TRUE = FALSE # This won&#39;t run, which is good!</span></a></code></pre></div>
 <ul>
 <li>Do not use <code>;</code>. This is mostly a readability issue.</li>
 <li>Do not use <code>attach()</code>. Without going into the details, you will save yourself a lot of headache someday if you follow this advice.</li>
@@ -561,9 +561,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">B.3.10</span> Print versus Return</h3>
 <p>One of the more confusing aspects of R is the difference between what is returned when running a function, and what is printed when running a function (interactively) as a user.</p>
 <p>Consider fitting the following linear model.</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" data-line-number="1">cars_mod =<span class="st"> </span><span class="kw">lm</span>(dist <span class="op">~</span><span class="st"> </span>speed, <span class="dt">data =</span> cars)</a></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" data-line-number="1">cars_mod =<span class="st"> </span><span class="kw">lm</span>(dist <span class="op">~</span><span class="st"> </span>speed, <span class="dt">data =</span> cars)</a></code></pre></div>
 <p>You might think that you can simply type <code>cars_mod</code> to see what was returned by <code>lm()</code>.</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" data-line-number="1">cars_mod</a></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" data-line-number="1">cars_mod</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = dist ~ speed, data = cars)
@@ -572,7 +572,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## (Intercept)        speed  
 ##     -17.579        3.932</code></pre>
 <p>However, this is <strong>not</strong> what was <em>returned</em>. This is what was <em>printed</em>. To better understand what was returned, we use the `str() function.</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" data-line-number="1"><span class="kw">str</span>(cars_mod)</a></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" data-line-number="1"><span class="kw">str</span>(cars_mod)</a></code></pre></div>
 <pre><code>## List of 12
 ##  $ coefficients : Named num [1:2] -17.58 3.93
 ##   ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;(Intercept)&quot; &quot;speed&quot;
@@ -631,26 +631,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   .. .. .. ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;dist&quot; &quot;speed&quot;
 ##  - attr(*, &quot;class&quot;)= chr &quot;lm&quot;</code></pre>
 <p>This is a huge mess, but most importantly, at the top we are told that <code>cars_mod</code> is a <strong>list</strong>. (It’s technically a object of class <code>&quot;lm&quot;</code>, but it functions like a list.)</p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" data-line-number="1"><span class="kw">class</span>(cars_mod)</a></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" data-line-number="1"><span class="kw">class</span>(cars_mod)</a></code></pre></div>
 <pre><code>## [1] &quot;lm&quot;</code></pre>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" data-line-number="1"><span class="kw">is.list</span>(cars_mod)</a></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" data-line-number="1"><span class="kw">is.list</span>(cars_mod)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>Thus to access certain information returned by <code>lm()</code> we need to access <code>cars_mod</code> as a list.</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" data-line-number="1">cars_mod<span class="op">$</span>coefficients</a></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" data-line-number="1">cars_mod<span class="op">$</span>coefficients</a></code></pre></div>
 <pre><code>## (Intercept)       speed 
 ##  -17.579095    3.932409</code></pre>
 <p>Note that what is returned here is a vector, so we could pull out a particular value using vector syntax.</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" data-line-number="1">cars_mod<span class="op">$</span>coefficients[<span class="st">&quot;speed&quot;</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" data-line-number="1">cars_mod<span class="op">$</span>coefficients[<span class="st">&quot;speed&quot;</span>]</a></code></pre></div>
 <pre><code>##    speed 
 ## 3.932409</code></pre>
 <p>Since <code>lm()</code> truly returns an object of type <code>&quot;lm&quot;</code> we can pass <code>cars_mods</code> to some generic functions, and then specific versions for objects of type <code>&quot;lm&quot;</code> will be used.</p>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" data-line-number="1"><span class="kw">coef</span>(cars_mod)</a></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" data-line-number="1"><span class="kw">coef</span>(cars_mod)</a></code></pre></div>
 <pre><code>## (Intercept)       speed 
 ##  -17.579095    3.932409</code></pre>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" data-line-number="1"><span class="kw">predict</span>(cars_mod, <span class="kw">data.frame</span>(<span class="dt">speed =</span> <span class="dv">5</span><span class="op">:</span><span class="dv">10</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" data-line-number="1"><span class="kw">predict</span>(cars_mod, <span class="kw">data.frame</span>(<span class="dt">speed =</span> <span class="dv">5</span><span class="op">:</span><span class="dv">10</span>))</a></code></pre></div>
 <pre><code>##         1         2         3         4         5         6 
 ##  2.082949  6.015358  9.947766 13.880175 17.812584 21.744993</code></pre>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" data-line-number="1"><span class="kw">summary</span>(cars_mod)</a></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" data-line-number="1"><span class="kw">summary</span>(cars_mod)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = dist ~ speed, data = cars)
@@ -670,24 +670,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Multiple R-squared:  0.6511, Adjusted R-squared:  0.6438 
 ## F-statistic: 89.57 on 1 and 48 DF,  p-value: 1.49e-12</code></pre>
 <p>Hey, wait, what is returned by <code>summary()</code>?</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" data-line-number="1"><span class="kw">class</span>(<span class="kw">summary</span>(cars_mod))</a></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" data-line-number="1"><span class="kw">class</span>(<span class="kw">summary</span>(cars_mod))</a></code></pre></div>
 <pre><code>## [1] &quot;summary.lm&quot;</code></pre>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" data-line-number="1"><span class="kw">is.list</span>(<span class="kw">summary</span>(cars_mod))</a></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" data-line-number="1"><span class="kw">is.list</span>(<span class="kw">summary</span>(cars_mod))</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>The <code>summary()</code> function returns an object of type <code>&quot;summary.lm&quot;</code> which functions as a list!</p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" data-line-number="1"><span class="kw">summary</span>(cars_mod)<span class="op">$</span>fstatistic</a></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" data-line-number="1"><span class="kw">summary</span>(cars_mod)<span class="op">$</span>fstatistic</a></code></pre></div>
 <pre><code>##    value    numdf    dendf 
 ## 89.56711  1.00000 48.00000</code></pre>
 <p>You can also use the <code>View()</code> function, which is specific to RStudio, to view the structure of any object.</p>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" data-line-number="1"><span class="kw">View</span>(<span class="kw">summary</span>(cars_mod)) <span class="co"># RStudio only</span></a></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" data-line-number="1"><span class="kw">View</span>(<span class="kw">summary</span>(cars_mod)) <span class="co"># RStudio only</span></a></code></pre></div>
 </div>
 <div id="help" class="section level3">
 <h3><span class="header-section-number">B.3.11</span> Help</h3>
 <p>To get documentation about a function in R, simply put a question mark in front of the function name and RStudio will display the documentation, for example:</p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" data-line-number="1">?log</a>
-<a class="sourceLine" id="cb218-2" data-line-number="2">?sin</a>
-<a class="sourceLine" id="cb218-3" data-line-number="3">?paste</a>
-<a class="sourceLine" id="cb218-4" data-line-number="4">?lm</a></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" data-line-number="1">?log</a>
+<a class="sourceLine" id="cb220-2" data-line-number="2">?sin</a>
+<a class="sourceLine" id="cb220-3" data-line-number="3">?paste</a>
+<a class="sourceLine" id="cb220-4" data-line-number="4">?lm</a></code></pre></div>
 <p>Frequently one of the most difficult things to do when learning R is asking for help. First, you need to decide to ask for help, then you need to know how to ask for help. Your very first line of defense should be to Google your error message or a short description of your issue. (The ability to solve problems using this method is quickly becoming an extremely valuable skill.) If that fails, and it eventually will, you should ask for help. There are a number of things you should include when emailing an instructor, or posting to a help website such as Stack Exchange.</p>
 <ul>
 <li>Describe what you <strong>expect</strong> the code to do.</li>

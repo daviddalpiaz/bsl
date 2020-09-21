@@ -1,7 +1,7 @@
 ---
 title: "Basics of Statistical Learning"
 author: "[David Dalpiaz](https://daviddalpiaz.org/)"
-# date: "2020-09-20"
+# date: "2020-09-21"
 github-repo: daviddalpiaz/bsl
 url: 'https\://statisticallearning.org/'
 site: bookdown::bookdown_site
@@ -94,7 +94,7 @@ The text can be accessed from <https://statisticallearning.org/>.
 
 ## When?
 
-This book was last updated on: 2020-09-20.^[The author has no idea what else to write in this section, but the last updated date seems like useful information.]
+This book was last updated on: 2020-09-21.^[The author has no idea what else to write in this section, but the last updated date seems like useful information.]
 
 ## How?
 

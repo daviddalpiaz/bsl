@@ -2,7 +2,7 @@
 
 
 
-Full book chapter still delayed! Keeping with writing every week is getting tough. Below are the notes from the video.
+Full book chapter still delayed! Keeping up with writing every week is getting tough. Below are the notes from the video.
 
 - [**Notes:** Classification](files/classification.pdf)
 

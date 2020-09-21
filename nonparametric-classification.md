@@ -1,6 +1,6 @@
 # Nonparametric Classification
 
-Full book chapter still delayed! Keeping with writing every week is getting tough. Below are the notes and code from the video.
+Full book chapter still delayed! Keeping up with writing every week is getting tough. Below are the notes and code from the video.
 
 - [**Notes:** Nonparametric Classification](files/nonparametric-classification.pdf)
 
