@@ -18,5 +18,5 @@ Imports:
   gbm.
   cvms
 Remotes: 
-  rstudio/bookdown
+  rstudio/bookdown,
   coatless/ucidata
