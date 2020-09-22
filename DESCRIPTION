@@ -16,7 +16,8 @@ Imports:
   caret,
   ellipse,
   gbm,
-  cvms
+  cvms,
+  ucidata
 Remotes:
   coatless/ucidata,
   rstudio/bookdown
