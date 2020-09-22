@@ -72,6 +72,7 @@ classification-1
 nonparametric-classification
 logistic-regression
 binary-classification
+r-setup-and-source-3
 additional-reading
 books
 papers

@@ -131,8 +131,11 @@ install.packages(
   "rpart.plot",
   "caret",
   "ellipse",
-  "gbm"
+  "gbm",
+  "cvms"
 )
+
+remotes::install_github("coatless/ucidata")
 ```
 
 ### License

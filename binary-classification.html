@@ -208,7 +208,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>6</b> Classification</a></li>
 <li class="chapter" data-level="7" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html"><i class="fa fa-check"></i><b>7</b> Nonparametric Classification</a></li>
 <li class="chapter" data-level="8" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>8</b> Logistic Regression</a></li>
-<li class="chapter" data-level="9" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>9</b> Binary Classification</a></li>
+<li class="chapter" data-level="9" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>9</b> Binary Classification</a><ul>
+<li class="chapter" data-level="9.1" data-path="binary-classification.html"><a href="binary-classification.html#r-setup-and-source-3"><i class="fa fa-check"></i><b>9.1</b> R Setup and Source</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="additional-reading.html"><a href="additional-reading.html"><i class="fa fa-check"></i><b>A</b> Additional Reading</a><ul>
 <li class="chapter" data-level="A.1" data-path="additional-reading.html"><a href="additional-reading.html#books"><i class="fa fa-check"></i><b>A.1</b> Books</a></li>
@@ -291,175 +293,196 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="binary-classification" class="section level1">
 <h1><span class="header-section-number">Chapter 9</span> Binary Classification</h1>
-<p>Full book chapter still delayed! Keeping up with writing every week is getting tough. Below are the notes from the video.</p>
+<p>This chapter will introduce no new modeling techniques, but instead will focus on evaluating models for <strong>binary classification.</strong></p>
+<p>Specifically, we will discuss:</p>
+<ul>
+<li>Using different <strong>probability cutoffs</strong> to create different classifiers with the same model.</li>
+<li>Using a <strong>confusion matrix</strong> to summarize the results of a binary classifier.</li>
+<li>Various metrics for binary classification, including but not limited to: <strong>sensitivity</strong>, <strong>specificity</strong>, and <strong>prevalence</strong>.</li>
+<li>Using the <code>evaluate()</code> function from the <code>cvsm</code> package for efficient calculation of metrics.</li>
+</ul>
+<p>This chapter is currently <strong>under construction</strong>. While it is being developed, the following links to the STAT 432 course notes.</p>
 <ul>
 <li><a href="files/binary-classification.pdf"><strong>Notes:</strong> Binary Classification</a></li>
 </ul>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" data-line-number="1"><span class="co"># binary classification ########################################################</span></a>
-<a class="sourceLine" id="cb181-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb181-3" data-line-number="3"><span class="co"># install package if necessary</span></a>
-<a class="sourceLine" id="cb181-4" data-line-number="4"><span class="co"># install.packages(&quot;devtools&quot;)</span></a>
-<a class="sourceLine" id="cb181-5" data-line-number="5"><span class="co"># devtools::install_github(&quot;coatless/ucidata&quot;)</span></a>
-<a class="sourceLine" id="cb181-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb181-7" data-line-number="7"><span class="co"># load packages</span></a>
-<a class="sourceLine" id="cb181-8" data-line-number="8"><span class="kw">library</span>(ucidata)</a>
-<a class="sourceLine" id="cb181-9" data-line-number="9"><span class="kw">library</span>(tibble)</a>
-<a class="sourceLine" id="cb181-10" data-line-number="10"><span class="kw">library</span>(rpart)</a>
-<a class="sourceLine" id="cb181-11" data-line-number="11"><span class="kw">library</span>(rpart.plot)</a>
-<a class="sourceLine" id="cb181-12" data-line-number="12"><span class="kw">library</span>(caret)</a>
-<a class="sourceLine" id="cb181-13" data-line-number="13"><span class="kw">library</span>(cvms)</a>
-<a class="sourceLine" id="cb181-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb181-15" data-line-number="15"><span class="co"># load data</span></a>
-<a class="sourceLine" id="cb181-16" data-line-number="16">bc =<span class="st"> </span><span class="kw">na.omit</span>(tibble<span class="op">::</span><span class="kw">as_tibble</span>(bcw_original))</a>
-<a class="sourceLine" id="cb181-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb181-18" data-line-number="18"><span class="co"># data prep</span></a>
-<a class="sourceLine" id="cb181-19" data-line-number="19">bc =<span class="st"> </span>bc <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb181-20" data-line-number="20"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">class =</span> <span class="kw">factor</span>(class, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;benign&quot;</span>, <span class="st">&quot;malignant&quot;</span>))) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb181-21" data-line-number="21"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span>sample_code_number)</a>
-<a class="sourceLine" id="cb181-22" data-line-number="22"></a>
-<a class="sourceLine" id="cb181-23" data-line-number="23"><span class="co"># test-train split</span></a>
-<a class="sourceLine" id="cb181-24" data-line-number="24">bc_trn_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(bc), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(bc))</a>
-<a class="sourceLine" id="cb181-25" data-line-number="25">bc_trn =<span class="st"> </span>bc[bc_trn_idx, ]</a>
-<a class="sourceLine" id="cb181-26" data-line-number="26">bc_tst =<span class="st"> </span>bc[<span class="op">-</span>bc_trn_idx, ]</a>
-<a class="sourceLine" id="cb181-27" data-line-number="27"></a>
-<a class="sourceLine" id="cb181-28" data-line-number="28"><span class="co"># estimation-validation split</span></a>
-<a class="sourceLine" id="cb181-29" data-line-number="29">bc_est_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(bc_trn), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(bc_trn))</a>
-<a class="sourceLine" id="cb181-30" data-line-number="30">bc_est =<span class="st"> </span>bc_trn[bc_est_idx, ]</a>
-<a class="sourceLine" id="cb181-31" data-line-number="31">bc_val =<span class="st"> </span>bc_trn[<span class="op">-</span>bc_est_idx, ]</a>
-<a class="sourceLine" id="cb181-32" data-line-number="32"></a>
-<a class="sourceLine" id="cb181-33" data-line-number="33"><span class="co"># check data</span></a>
-<a class="sourceLine" id="cb181-34" data-line-number="34"><span class="kw">head</span>(bc_trn)</a>
-<a class="sourceLine" id="cb181-35" data-line-number="35"><span class="kw">levels</span>(bc_trn<span class="op">$</span>class)</a>
-<a class="sourceLine" id="cb181-36" data-line-number="36"></a>
-<a class="sourceLine" id="cb181-37" data-line-number="37"><span class="co"># fit models</span></a>
-<a class="sourceLine" id="cb181-38" data-line-number="38">mod_knn  =<span class="st"> </span><span class="kw">knn3</span>(class <span class="op">~</span><span class="st"> </span>clump_thickness <span class="op">+</span><span class="st"> </span>mitoses, bc_est)</a>
-<a class="sourceLine" id="cb181-39" data-line-number="39">mod_tree =<span class="st"> </span><span class="kw">rpart</span>(class <span class="op">~</span><span class="st"> </span>clump_thickness <span class="op">+</span><span class="st"> </span>mitoses, bc_est)</a>
-<a class="sourceLine" id="cb181-40" data-line-number="40">mod_glm  =<span class="st"> </span><span class="kw">glm</span>(class <span class="op">~</span><span class="st"> </span>clump_thickness <span class="op">+</span><span class="st"> </span>mitoses, bc_est, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</a>
-<a class="sourceLine" id="cb181-41" data-line-number="41"></a>
-<a class="sourceLine" id="cb181-42" data-line-number="42"><span class="co"># get predicted probabilities for &quot;positive&quot; class</span></a>
-<a class="sourceLine" id="cb181-43" data-line-number="43"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb181-44" data-line-number="44">prob_knn  =<span class="st"> </span><span class="kw">predict</span>(mod_knn, bc_val)[, <span class="st">&quot;malignant&quot;</span>]</a>
-<a class="sourceLine" id="cb181-45" data-line-number="45">prob_tree =<span class="st"> </span><span class="kw">predict</span>(mod_tree, bc_val)[, <span class="st">&quot;malignant&quot;</span>]</a>
-<a class="sourceLine" id="cb181-46" data-line-number="46">prob_glm  =<span class="st"> </span><span class="kw">predict</span>(mod_glm, bc_val, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</a>
-<a class="sourceLine" id="cb181-47" data-line-number="47"></a>
-<a class="sourceLine" id="cb181-48" data-line-number="48"><span class="co"># create tibble of results for knn</span></a>
-<a class="sourceLine" id="cb181-49" data-line-number="49">results =<span class="st"> </span><span class="kw">tibble</span>(</a>
-<a class="sourceLine" id="cb181-50" data-line-number="50">  <span class="dt">actual   =</span> bc_val<span class="op">$</span>class,</a>
-<a class="sourceLine" id="cb181-51" data-line-number="51">  <span class="dt">prob_knn  =</span> prob_knn,</a>
-<a class="sourceLine" id="cb181-52" data-line-number="52">  <span class="dt">prob_tree =</span> prob_tree,</a>
-<a class="sourceLine" id="cb181-53" data-line-number="53">  <span class="dt">prob_glm  =</span> prob_glm</a>
-<a class="sourceLine" id="cb181-54" data-line-number="54">)</a>
-<a class="sourceLine" id="cb181-55" data-line-number="55"></a>
-<a class="sourceLine" id="cb181-56" data-line-number="56"><span class="co"># evaluate knn with various metrics</span></a>
-<a class="sourceLine" id="cb181-57" data-line-number="57">knn_eval =<span class="st"> </span><span class="kw">evaluate</span>(</a>
-<a class="sourceLine" id="cb181-58" data-line-number="58">  <span class="dt">data =</span> results,</a>
-<a class="sourceLine" id="cb181-59" data-line-number="59">  <span class="dt">target_col =</span> <span class="st">&quot;actual&quot;</span>,</a>
-<a class="sourceLine" id="cb181-60" data-line-number="60">  <span class="dt">prediction_cols =</span> <span class="st">&quot;prob_knn&quot;</span>,</a>
-<a class="sourceLine" id="cb181-61" data-line-number="61">  <span class="dt">positive =</span> <span class="st">&quot;malignant&quot;</span>,</a>
-<a class="sourceLine" id="cb181-62" data-line-number="62">  <span class="dt">type =</span> <span class="st">&quot;binomial&quot;</span>,</a>
-<a class="sourceLine" id="cb181-63" data-line-number="63">  <span class="dt">metrics =</span> <span class="kw">list</span>(<span class="st">&quot;Accuracy&quot;</span> =<span class="st"> </span><span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb181-64" data-line-number="64">  <span class="dt">cutoff =</span> <span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb181-65" data-line-number="65"></a>
-<a class="sourceLine" id="cb181-66" data-line-number="66"><span class="co"># view results of evaluation</span></a>
-<a class="sourceLine" id="cb181-67" data-line-number="67">knn_eval</a>
-<a class="sourceLine" id="cb181-68" data-line-number="68"></a>
-<a class="sourceLine" id="cb181-69" data-line-number="69"><span class="co"># plot confusion matrix</span></a>
-<a class="sourceLine" id="cb181-70" data-line-number="70"><span class="kw">plot_confusion_matrix</span>(knn_eval<span class="op">$</span><span class="st">`</span><span class="dt">Confusion Matrix</span><span class="st">`</span>[[<span class="dv">1</span>]])</a>
-<a class="sourceLine" id="cb181-71" data-line-number="71"></a>
-<a class="sourceLine" id="cb181-72" data-line-number="72"><span class="co"># manually create confusion matrix</span></a>
-<a class="sourceLine" id="cb181-73" data-line-number="73">conf_mat =<span class="st"> </span><span class="kw">table</span>(</a>
-<a class="sourceLine" id="cb181-74" data-line-number="74">  <span class="dt">predicted =</span> <span class="kw">predict</span>(mod_knn, bc_val, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>),</a>
-<a class="sourceLine" id="cb181-75" data-line-number="75">  <span class="dt">actual =</span> bc_val<span class="op">$</span>class</a>
-<a class="sourceLine" id="cb181-76" data-line-number="76">)</a>
-<a class="sourceLine" id="cb181-77" data-line-number="77"></a>
-<a class="sourceLine" id="cb181-78" data-line-number="78"><span class="co"># plot confusion matrix</span></a>
-<a class="sourceLine" id="cb181-79" data-line-number="79"><span class="kw">plot_confusion_matrix</span>(</a>
-<a class="sourceLine" id="cb181-80" data-line-number="80">  <span class="dt">conf_matrix =</span> <span class="kw">as_tibble</span>(conf_mat),</a>
-<a class="sourceLine" id="cb181-81" data-line-number="81">  <span class="dt">targets_col =</span> <span class="st">&quot;actual&quot;</span>,</a>
-<a class="sourceLine" id="cb181-82" data-line-number="82">  <span class="dt">predictions_col =</span> <span class="st">&quot;predicted&quot;</span>,</a>
-<a class="sourceLine" id="cb181-83" data-line-number="83">  <span class="dt">counts_col =</span> <span class="st">&quot;n&quot;</span></a>
-<a class="sourceLine" id="cb181-84" data-line-number="84">)</a>
-<a class="sourceLine" id="cb181-85" data-line-number="85"></a>
-<a class="sourceLine" id="cb181-86" data-line-number="86"><span class="co"># calculate sensitivity &quot;by hand&quot; for logistic regression</span></a>
-<a class="sourceLine" id="cb181-87" data-line-number="87">pred_glm =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">ifelse</span>(prob_glm <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>, <span class="st">&quot;malignant&quot;</span>, <span class="st">&quot;benign&quot;</span>))</a>
-<a class="sourceLine" id="cb181-88" data-line-number="88"><span class="kw">sum</span>(pred_glm <span class="op">==</span><span class="st"> &quot;malignant&quot;</span> <span class="op">&amp;</span><span class="st"> </span>bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;malignant&quot;</span>) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;malignant&quot;</span>)</a>
-<a class="sourceLine" id="cb181-89" data-line-number="89"></a>
-<a class="sourceLine" id="cb181-90" data-line-number="90"><span class="co"># check with &quot;automatic&quot; procedure</span></a>
-<a class="sourceLine" id="cb181-91" data-line-number="91"></a>
-<a class="sourceLine" id="cb181-92" data-line-number="92"><span class="co"># create tibble of results for glm</span></a>
-<a class="sourceLine" id="cb181-93" data-line-number="93">glm_results =<span class="st"> </span><span class="kw">tibble</span>(</a>
-<a class="sourceLine" id="cb181-94" data-line-number="94">  <span class="dt">actual   =</span> bc_val<span class="op">$</span>class,</a>
-<a class="sourceLine" id="cb181-95" data-line-number="95">  <span class="dt">prob_pos =</span> prob_glm</a>
-<a class="sourceLine" id="cb181-96" data-line-number="96">)</a>
-<a class="sourceLine" id="cb181-97" data-line-number="97"></a>
-<a class="sourceLine" id="cb181-98" data-line-number="98"><span class="co"># evaluate glm with various metrics</span></a>
-<a class="sourceLine" id="cb181-99" data-line-number="99">glm_eval =<span class="st"> </span><span class="kw">evaluate</span>(</a>
-<a class="sourceLine" id="cb181-100" data-line-number="100">  <span class="dt">data =</span> results,</a>
-<a class="sourceLine" id="cb181-101" data-line-number="101">  <span class="dt">target_col =</span> <span class="st">&quot;actual&quot;</span>,</a>
-<a class="sourceLine" id="cb181-102" data-line-number="102">  <span class="dt">prediction_cols =</span> <span class="st">&quot;prob_glm&quot;</span>,</a>
-<a class="sourceLine" id="cb181-103" data-line-number="103">  <span class="dt">positive =</span> <span class="st">&quot;malignant&quot;</span>,</a>
-<a class="sourceLine" id="cb181-104" data-line-number="104">  <span class="dt">type =</span> <span class="st">&quot;binomial&quot;</span>,</a>
-<a class="sourceLine" id="cb181-105" data-line-number="105">  <span class="dt">metrics =</span> <span class="kw">list</span>(<span class="st">&quot;Accuracy&quot;</span> =<span class="st"> </span><span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb181-106" data-line-number="106">  <span class="dt">cutoff =</span> <span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb181-107" data-line-number="107"></a>
-<a class="sourceLine" id="cb181-108" data-line-number="108"><span class="co"># view results of evaluation</span></a>
-<a class="sourceLine" id="cb181-109" data-line-number="109">glm_eval</a>
-<a class="sourceLine" id="cb181-110" data-line-number="110">glm_eval<span class="op">$</span>Sensitivity</a>
-<a class="sourceLine" id="cb181-111" data-line-number="111"></a>
-<a class="sourceLine" id="cb181-112" data-line-number="112"><span class="co"># multi-class classification ###################################################</span></a>
-<a class="sourceLine" id="cb181-113" data-line-number="113"></a>
-<a class="sourceLine" id="cb181-114" data-line-number="114"><span class="co"># load additional packages</span></a>
-<a class="sourceLine" id="cb181-115" data-line-number="115"><span class="kw">library</span>(palmerpenguins)</a>
-<a class="sourceLine" id="cb181-116" data-line-number="116"></a>
-<a class="sourceLine" id="cb181-117" data-line-number="117"><span class="co"># remove missing data</span></a>
-<a class="sourceLine" id="cb181-118" data-line-number="118">peng =<span class="st"> </span><span class="kw">na.omit</span>(penguins)</a>
-<a class="sourceLine" id="cb181-119" data-line-number="119"></a>
-<a class="sourceLine" id="cb181-120" data-line-number="120"><span class="co"># test-train split</span></a>
-<a class="sourceLine" id="cb181-121" data-line-number="121">peng_trn_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(peng), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(peng))</a>
-<a class="sourceLine" id="cb181-122" data-line-number="122">peng_trn =<span class="st"> </span>peng[peng_trn_idx, ]</a>
-<a class="sourceLine" id="cb181-123" data-line-number="123">peng_tst =<span class="st"> </span>peng[<span class="op">-</span>peng_trn_idx, ]</a>
-<a class="sourceLine" id="cb181-124" data-line-number="124"></a>
-<a class="sourceLine" id="cb181-125" data-line-number="125"><span class="co"># check data</span></a>
-<a class="sourceLine" id="cb181-126" data-line-number="126">peng_trn</a>
-<a class="sourceLine" id="cb181-127" data-line-number="127"></a>
-<a class="sourceLine" id="cb181-128" data-line-number="128"><span class="co"># fit model</span></a>
-<a class="sourceLine" id="cb181-129" data-line-number="129">mod_tree =<span class="st"> </span><span class="kw">rpart</span>(species <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>year, <span class="dt">data =</span> peng_trn)</a>
-<a class="sourceLine" id="cb181-130" data-line-number="130"></a>
-<a class="sourceLine" id="cb181-131" data-line-number="131"><span class="co"># manually create confusion matrix</span></a>
-<a class="sourceLine" id="cb181-132" data-line-number="132">conf_mat =<span class="st"> </span><span class="kw">table</span>(</a>
-<a class="sourceLine" id="cb181-133" data-line-number="133">  <span class="dt">predicted =</span> <span class="kw">predict</span>(mod_tree, peng_tst, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>),</a>
-<a class="sourceLine" id="cb181-134" data-line-number="134">  <span class="dt">actual =</span> peng_tst<span class="op">$</span>species</a>
-<a class="sourceLine" id="cb181-135" data-line-number="135">)</a>
-<a class="sourceLine" id="cb181-136" data-line-number="136"></a>
-<a class="sourceLine" id="cb181-137" data-line-number="137"><span class="co"># plot confusion matrix</span></a>
-<a class="sourceLine" id="cb181-138" data-line-number="138"><span class="kw">plot_confusion_matrix</span>(</a>
-<a class="sourceLine" id="cb181-139" data-line-number="139">  <span class="dt">conf_matrix =</span> <span class="kw">as_tibble</span>(conf_mat),</a>
-<a class="sourceLine" id="cb181-140" data-line-number="140">  <span class="dt">targets_col =</span> <span class="st">&quot;actual&quot;</span>,</a>
-<a class="sourceLine" id="cb181-141" data-line-number="141">  <span class="dt">predictions_col =</span> <span class="st">&quot;predicted&quot;</span>,</a>
-<a class="sourceLine" id="cb181-142" data-line-number="142">  <span class="dt">counts_col =</span> <span class="st">&quot;n&quot;</span></a>
-<a class="sourceLine" id="cb181-143" data-line-number="143">)</a>
-<a class="sourceLine" id="cb181-144" data-line-number="144"></a>
-<a class="sourceLine" id="cb181-145" data-line-number="145"><span class="co"># summarize results on test data</span></a>
-<a class="sourceLine" id="cb181-146" data-line-number="146">peng_results =<span class="st"> </span><span class="kw">tibble</span>(</a>
-<a class="sourceLine" id="cb181-147" data-line-number="147">  <span class="dt">actual    =</span> peng_tst<span class="op">$</span>species,</a>
-<a class="sourceLine" id="cb181-148" data-line-number="148">  <span class="dt">Adelie    =</span> <span class="kw">predict</span>(mod_tree, peng_tst)[, <span class="st">&quot;Adelie&quot;</span>],</a>
-<a class="sourceLine" id="cb181-149" data-line-number="149">  <span class="dt">Chinstrap =</span> <span class="kw">predict</span>(mod_tree, peng_tst)[, <span class="st">&quot;Chinstrap&quot;</span>],</a>
-<a class="sourceLine" id="cb181-150" data-line-number="150">  <span class="dt">Gentoo    =</span> <span class="kw">predict</span>(mod_tree, peng_tst)[, <span class="st">&quot;Gentoo&quot;</span>]</a>
-<a class="sourceLine" id="cb181-151" data-line-number="151">)</a>
-<a class="sourceLine" id="cb181-152" data-line-number="152"></a>
-<a class="sourceLine" id="cb181-153" data-line-number="153"><span class="co"># evaluate metrics on test data</span></a>
-<a class="sourceLine" id="cb181-154" data-line-number="154">peng_eval =<span class="st"> </span><span class="kw">evaluate</span>(</a>
-<a class="sourceLine" id="cb181-155" data-line-number="155">  <span class="dt">data =</span> peng_results,</a>
-<a class="sourceLine" id="cb181-156" data-line-number="156">  <span class="dt">target_col =</span> <span class="st">&quot;actual&quot;</span>,</a>
-<a class="sourceLine" id="cb181-157" data-line-number="157">  <span class="dt">prediction_cols =</span> <span class="kw">c</span>(<span class="st">&quot;Adelie&quot;</span>, <span class="st">&quot;Chinstrap&quot;</span>, <span class="st">&quot;Gentoo&quot;</span>),</a>
-<a class="sourceLine" id="cb181-158" data-line-number="158">  <span class="dt">type =</span> <span class="st">&quot;multinomial&quot;</span>,</a>
-<a class="sourceLine" id="cb181-159" data-line-number="159">  <span class="dt">metrics =</span> <span class="kw">list</span>(<span class="st">&quot;Accuracy&quot;</span> =<span class="st"> </span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb181-160" data-line-number="160">)</a>
-<a class="sourceLine" id="cb181-161" data-line-number="161"></a>
-<a class="sourceLine" id="cb181-162" data-line-number="162"><span class="co"># view evaluation</span></a>
-<a class="sourceLine" id="cb181-163" data-line-number="163">peng_eval<span class="op">$</span><span class="st">`</span><span class="dt">Class Level Results</span><span class="st">`</span></a>
-<a class="sourceLine" id="cb181-164" data-line-number="164">peng_eval<span class="op">$</span>Predictions</a>
-<a class="sourceLine" id="cb181-165" data-line-number="165"><span class="kw">plot_confusion_matrix</span>(peng_eval<span class="op">$</span><span class="st">`</span><span class="dt">Confusion Matrix</span><span class="st">`</span>[[<span class="dv">1</span>]])</a></code></pre></div>
+<div id="r-setup-and-source-3" class="section level2">
+<h2><span class="header-section-number">9.1</span> R Setup and Source</h2>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" data-line-number="1"><span class="kw">library</span>(ucidata)    <span class="co"># access to data</span></a>
+<a class="sourceLine" id="cb181-2" data-line-number="2"><span class="kw">library</span>(tibble)     <span class="co"># data frame printing</span></a>
+<a class="sourceLine" id="cb181-3" data-line-number="3"><span class="kw">library</span>(dplyr)      <span class="co"># data manipulation</span></a>
+<a class="sourceLine" id="cb181-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb181-5" data-line-number="5"><span class="kw">library</span>(caret)      <span class="co"># fitting knn</span></a>
+<a class="sourceLine" id="cb181-6" data-line-number="6"><span class="kw">library</span>(rpart)      <span class="co"># fitting trees</span></a>
+<a class="sourceLine" id="cb181-7" data-line-number="7"><span class="kw">library</span>(cvms)       <span class="co"># calculating metrics</span></a></code></pre></div>
+<p>Recall that the <a href="index.html">Welcome</a> chapter contains directions for installing all necessary packages for following along with the text. The R Markdown source is provided as some code, mostly for creating plots, has been suppressed from the rendered document that you are currently reading.</p>
+<ul>
+<li><strong>R Markdown Source:</strong> <a href="binary-classification.Rmd"><code>binary-classification.Rmd</code></a></li>
+</ul>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" data-line-number="1"><span class="co"># binary classification ########################################################</span></a>
+<a class="sourceLine" id="cb182-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb182-3" data-line-number="3"><span class="co"># install package if necessary</span></a>
+<a class="sourceLine" id="cb182-4" data-line-number="4"><span class="co"># install.packages(&quot;devtools&quot;)</span></a>
+<a class="sourceLine" id="cb182-5" data-line-number="5"><span class="co"># devtools::install_github(&quot;coatless/ucidata&quot;)</span></a>
+<a class="sourceLine" id="cb182-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb182-7" data-line-number="7"><span class="co"># load packages</span></a>
+<a class="sourceLine" id="cb182-8" data-line-number="8"><span class="kw">library</span>(ucidata)</a>
+<a class="sourceLine" id="cb182-9" data-line-number="9"><span class="kw">library</span>(tibble)</a>
+<a class="sourceLine" id="cb182-10" data-line-number="10"><span class="kw">library</span>(rpart)</a>
+<a class="sourceLine" id="cb182-11" data-line-number="11"><span class="kw">library</span>(rpart.plot)</a>
+<a class="sourceLine" id="cb182-12" data-line-number="12"><span class="kw">library</span>(caret)</a>
+<a class="sourceLine" id="cb182-13" data-line-number="13"><span class="kw">library</span>(cvms)</a>
+<a class="sourceLine" id="cb182-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb182-15" data-line-number="15"><span class="co"># load data</span></a>
+<a class="sourceLine" id="cb182-16" data-line-number="16">bc =<span class="st"> </span><span class="kw">na.omit</span>(tibble<span class="op">::</span><span class="kw">as_tibble</span>(bcw_original))</a>
+<a class="sourceLine" id="cb182-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb182-18" data-line-number="18"><span class="co"># data prep</span></a>
+<a class="sourceLine" id="cb182-19" data-line-number="19">bc =<span class="st"> </span>bc <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb182-20" data-line-number="20"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">class =</span> <span class="kw">factor</span>(class, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;benign&quot;</span>, <span class="st">&quot;malignant&quot;</span>))) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb182-21" data-line-number="21"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span>sample_code_number)</a>
+<a class="sourceLine" id="cb182-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb182-23" data-line-number="23"><span class="co"># test-train split</span></a>
+<a class="sourceLine" id="cb182-24" data-line-number="24">bc_trn_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(bc), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(bc))</a>
+<a class="sourceLine" id="cb182-25" data-line-number="25">bc_trn =<span class="st"> </span>bc[bc_trn_idx, ]</a>
+<a class="sourceLine" id="cb182-26" data-line-number="26">bc_tst =<span class="st"> </span>bc[<span class="op">-</span>bc_trn_idx, ]</a>
+<a class="sourceLine" id="cb182-27" data-line-number="27"></a>
+<a class="sourceLine" id="cb182-28" data-line-number="28"><span class="co"># estimation-validation split</span></a>
+<a class="sourceLine" id="cb182-29" data-line-number="29">bc_est_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(bc_trn), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(bc_trn))</a>
+<a class="sourceLine" id="cb182-30" data-line-number="30">bc_est =<span class="st"> </span>bc_trn[bc_est_idx, ]</a>
+<a class="sourceLine" id="cb182-31" data-line-number="31">bc_val =<span class="st"> </span>bc_trn[<span class="op">-</span>bc_est_idx, ]</a>
+<a class="sourceLine" id="cb182-32" data-line-number="32"></a>
+<a class="sourceLine" id="cb182-33" data-line-number="33"><span class="co"># check data</span></a>
+<a class="sourceLine" id="cb182-34" data-line-number="34"><span class="kw">head</span>(bc_trn)</a>
+<a class="sourceLine" id="cb182-35" data-line-number="35"><span class="kw">levels</span>(bc_trn<span class="op">$</span>class)</a>
+<a class="sourceLine" id="cb182-36" data-line-number="36"></a>
+<a class="sourceLine" id="cb182-37" data-line-number="37"><span class="co"># fit models</span></a>
+<a class="sourceLine" id="cb182-38" data-line-number="38">mod_knn  =<span class="st"> </span><span class="kw">knn3</span>(class <span class="op">~</span><span class="st"> </span>clump_thickness <span class="op">+</span><span class="st"> </span>mitoses, bc_est)</a>
+<a class="sourceLine" id="cb182-39" data-line-number="39">mod_tree =<span class="st"> </span><span class="kw">rpart</span>(class <span class="op">~</span><span class="st"> </span>clump_thickness <span class="op">+</span><span class="st"> </span>mitoses, bc_est)</a>
+<a class="sourceLine" id="cb182-40" data-line-number="40">mod_glm  =<span class="st"> </span><span class="kw">glm</span>(class <span class="op">~</span><span class="st"> </span>clump_thickness <span class="op">+</span><span class="st"> </span>mitoses, bc_est, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</a>
+<a class="sourceLine" id="cb182-41" data-line-number="41"></a>
+<a class="sourceLine" id="cb182-42" data-line-number="42"><span class="co"># get predicted probabilities for &quot;positive&quot; class</span></a>
+<a class="sourceLine" id="cb182-43" data-line-number="43"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb182-44" data-line-number="44">prob_knn  =<span class="st"> </span><span class="kw">predict</span>(mod_knn, bc_val)[, <span class="st">&quot;malignant&quot;</span>]</a>
+<a class="sourceLine" id="cb182-45" data-line-number="45">prob_tree =<span class="st"> </span><span class="kw">predict</span>(mod_tree, bc_val)[, <span class="st">&quot;malignant&quot;</span>]</a>
+<a class="sourceLine" id="cb182-46" data-line-number="46">prob_glm  =<span class="st"> </span><span class="kw">predict</span>(mod_glm, bc_val, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</a>
+<a class="sourceLine" id="cb182-47" data-line-number="47"></a>
+<a class="sourceLine" id="cb182-48" data-line-number="48"><span class="co"># create tibble of results for knn</span></a>
+<a class="sourceLine" id="cb182-49" data-line-number="49">results =<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb182-50" data-line-number="50">  <span class="dt">actual   =</span> bc_val<span class="op">$</span>class,</a>
+<a class="sourceLine" id="cb182-51" data-line-number="51">  <span class="dt">prob_knn  =</span> prob_knn,</a>
+<a class="sourceLine" id="cb182-52" data-line-number="52">  <span class="dt">prob_tree =</span> prob_tree,</a>
+<a class="sourceLine" id="cb182-53" data-line-number="53">  <span class="dt">prob_glm  =</span> prob_glm</a>
+<a class="sourceLine" id="cb182-54" data-line-number="54">)</a>
+<a class="sourceLine" id="cb182-55" data-line-number="55"></a>
+<a class="sourceLine" id="cb182-56" data-line-number="56"><span class="co"># evaluate knn with various metrics</span></a>
+<a class="sourceLine" id="cb182-57" data-line-number="57">knn_eval =<span class="st"> </span><span class="kw">evaluate</span>(</a>
+<a class="sourceLine" id="cb182-58" data-line-number="58">  <span class="dt">data =</span> results,</a>
+<a class="sourceLine" id="cb182-59" data-line-number="59">  <span class="dt">target_col =</span> <span class="st">&quot;actual&quot;</span>,</a>
+<a class="sourceLine" id="cb182-60" data-line-number="60">  <span class="dt">prediction_cols =</span> <span class="st">&quot;prob_knn&quot;</span>,</a>
+<a class="sourceLine" id="cb182-61" data-line-number="61">  <span class="dt">positive =</span> <span class="st">&quot;malignant&quot;</span>,</a>
+<a class="sourceLine" id="cb182-62" data-line-number="62">  <span class="dt">type =</span> <span class="st">&quot;binomial&quot;</span>,</a>
+<a class="sourceLine" id="cb182-63" data-line-number="63">  <span class="dt">metrics =</span> <span class="kw">list</span>(<span class="st">&quot;Accuracy&quot;</span> =<span class="st"> </span><span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb182-64" data-line-number="64">  <span class="dt">cutoff =</span> <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb182-65" data-line-number="65"></a>
+<a class="sourceLine" id="cb182-66" data-line-number="66"><span class="co"># view results of evaluation</span></a>
+<a class="sourceLine" id="cb182-67" data-line-number="67">knn_eval</a>
+<a class="sourceLine" id="cb182-68" data-line-number="68"></a>
+<a class="sourceLine" id="cb182-69" data-line-number="69"><span class="co"># plot confusion matrix</span></a>
+<a class="sourceLine" id="cb182-70" data-line-number="70"><span class="kw">plot_confusion_matrix</span>(knn_eval<span class="op">$</span><span class="st">`</span><span class="dt">Confusion Matrix</span><span class="st">`</span>[[<span class="dv">1</span>]])</a>
+<a class="sourceLine" id="cb182-71" data-line-number="71"></a>
+<a class="sourceLine" id="cb182-72" data-line-number="72"><span class="co"># manually create confusion matrix</span></a>
+<a class="sourceLine" id="cb182-73" data-line-number="73">conf_mat =<span class="st"> </span><span class="kw">table</span>(</a>
+<a class="sourceLine" id="cb182-74" data-line-number="74">  <span class="dt">predicted =</span> <span class="kw">predict</span>(mod_knn, bc_val, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>),</a>
+<a class="sourceLine" id="cb182-75" data-line-number="75">  <span class="dt">actual =</span> bc_val<span class="op">$</span>class</a>
+<a class="sourceLine" id="cb182-76" data-line-number="76">)</a>
+<a class="sourceLine" id="cb182-77" data-line-number="77"></a>
+<a class="sourceLine" id="cb182-78" data-line-number="78"><span class="co"># plot confusion matrix</span></a>
+<a class="sourceLine" id="cb182-79" data-line-number="79"><span class="kw">plot_confusion_matrix</span>(</a>
+<a class="sourceLine" id="cb182-80" data-line-number="80">  <span class="dt">conf_matrix =</span> <span class="kw">as_tibble</span>(conf_mat),</a>
+<a class="sourceLine" id="cb182-81" data-line-number="81">  <span class="dt">targets_col =</span> <span class="st">&quot;actual&quot;</span>,</a>
+<a class="sourceLine" id="cb182-82" data-line-number="82">  <span class="dt">predictions_col =</span> <span class="st">&quot;predicted&quot;</span>,</a>
+<a class="sourceLine" id="cb182-83" data-line-number="83">  <span class="dt">counts_col =</span> <span class="st">&quot;n&quot;</span></a>
+<a class="sourceLine" id="cb182-84" data-line-number="84">)</a>
+<a class="sourceLine" id="cb182-85" data-line-number="85"></a>
+<a class="sourceLine" id="cb182-86" data-line-number="86"><span class="co"># calculate sensitivity &quot;by hand&quot; for logistic regression</span></a>
+<a class="sourceLine" id="cb182-87" data-line-number="87">pred_glm =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">ifelse</span>(prob_glm <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>, <span class="st">&quot;malignant&quot;</span>, <span class="st">&quot;benign&quot;</span>))</a>
+<a class="sourceLine" id="cb182-88" data-line-number="88"><span class="kw">sum</span>(pred_glm <span class="op">==</span><span class="st"> &quot;malignant&quot;</span> <span class="op">&amp;</span><span class="st"> </span>bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;malignant&quot;</span>) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;malignant&quot;</span>)</a>
+<a class="sourceLine" id="cb182-89" data-line-number="89"></a>
+<a class="sourceLine" id="cb182-90" data-line-number="90"><span class="co"># check with &quot;automatic&quot; procedure</span></a>
+<a class="sourceLine" id="cb182-91" data-line-number="91"></a>
+<a class="sourceLine" id="cb182-92" data-line-number="92"><span class="co"># create tibble of results for glm</span></a>
+<a class="sourceLine" id="cb182-93" data-line-number="93">glm_results =<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb182-94" data-line-number="94">  <span class="dt">actual   =</span> bc_val<span class="op">$</span>class,</a>
+<a class="sourceLine" id="cb182-95" data-line-number="95">  <span class="dt">prob_pos =</span> prob_glm</a>
+<a class="sourceLine" id="cb182-96" data-line-number="96">)</a>
+<a class="sourceLine" id="cb182-97" data-line-number="97"></a>
+<a class="sourceLine" id="cb182-98" data-line-number="98"><span class="co"># evaluate glm with various metrics</span></a>
+<a class="sourceLine" id="cb182-99" data-line-number="99">glm_eval =<span class="st"> </span><span class="kw">evaluate</span>(</a>
+<a class="sourceLine" id="cb182-100" data-line-number="100">  <span class="dt">data =</span> results,</a>
+<a class="sourceLine" id="cb182-101" data-line-number="101">  <span class="dt">target_col =</span> <span class="st">&quot;actual&quot;</span>,</a>
+<a class="sourceLine" id="cb182-102" data-line-number="102">  <span class="dt">prediction_cols =</span> <span class="st">&quot;prob_glm&quot;</span>,</a>
+<a class="sourceLine" id="cb182-103" data-line-number="103">  <span class="dt">positive =</span> <span class="st">&quot;malignant&quot;</span>,</a>
+<a class="sourceLine" id="cb182-104" data-line-number="104">  <span class="dt">type =</span> <span class="st">&quot;binomial&quot;</span>,</a>
+<a class="sourceLine" id="cb182-105" data-line-number="105">  <span class="dt">metrics =</span> <span class="kw">list</span>(<span class="st">&quot;Accuracy&quot;</span> =<span class="st"> </span><span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb182-106" data-line-number="106">  <span class="dt">cutoff =</span> <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb182-107" data-line-number="107"></a>
+<a class="sourceLine" id="cb182-108" data-line-number="108"><span class="co"># view results of evaluation</span></a>
+<a class="sourceLine" id="cb182-109" data-line-number="109">glm_eval</a>
+<a class="sourceLine" id="cb182-110" data-line-number="110">glm_eval<span class="op">$</span>Sensitivity</a>
+<a class="sourceLine" id="cb182-111" data-line-number="111"></a>
+<a class="sourceLine" id="cb182-112" data-line-number="112"><span class="co"># multi-class classification ###################################################</span></a>
+<a class="sourceLine" id="cb182-113" data-line-number="113"></a>
+<a class="sourceLine" id="cb182-114" data-line-number="114"><span class="co"># load additional packages</span></a>
+<a class="sourceLine" id="cb182-115" data-line-number="115"><span class="kw">library</span>(palmerpenguins)</a>
+<a class="sourceLine" id="cb182-116" data-line-number="116"></a>
+<a class="sourceLine" id="cb182-117" data-line-number="117"><span class="co"># remove missing data</span></a>
+<a class="sourceLine" id="cb182-118" data-line-number="118">peng =<span class="st"> </span><span class="kw">na.omit</span>(penguins)</a>
+<a class="sourceLine" id="cb182-119" data-line-number="119"></a>
+<a class="sourceLine" id="cb182-120" data-line-number="120"><span class="co"># test-train split</span></a>
+<a class="sourceLine" id="cb182-121" data-line-number="121">peng_trn_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(peng), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(peng))</a>
+<a class="sourceLine" id="cb182-122" data-line-number="122">peng_trn =<span class="st"> </span>peng[peng_trn_idx, ]</a>
+<a class="sourceLine" id="cb182-123" data-line-number="123">peng_tst =<span class="st"> </span>peng[<span class="op">-</span>peng_trn_idx, ]</a>
+<a class="sourceLine" id="cb182-124" data-line-number="124"></a>
+<a class="sourceLine" id="cb182-125" data-line-number="125"><span class="co"># check data</span></a>
+<a class="sourceLine" id="cb182-126" data-line-number="126">peng_trn</a>
+<a class="sourceLine" id="cb182-127" data-line-number="127"></a>
+<a class="sourceLine" id="cb182-128" data-line-number="128"><span class="co"># fit model</span></a>
+<a class="sourceLine" id="cb182-129" data-line-number="129">mod_tree =<span class="st"> </span><span class="kw">rpart</span>(species <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>year, <span class="dt">data =</span> peng_trn)</a>
+<a class="sourceLine" id="cb182-130" data-line-number="130"></a>
+<a class="sourceLine" id="cb182-131" data-line-number="131"><span class="co"># manually create confusion matrix</span></a>
+<a class="sourceLine" id="cb182-132" data-line-number="132">conf_mat =<span class="st"> </span><span class="kw">table</span>(</a>
+<a class="sourceLine" id="cb182-133" data-line-number="133">  <span class="dt">predicted =</span> <span class="kw">predict</span>(mod_tree, peng_tst, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>),</a>
+<a class="sourceLine" id="cb182-134" data-line-number="134">  <span class="dt">actual =</span> peng_tst<span class="op">$</span>species</a>
+<a class="sourceLine" id="cb182-135" data-line-number="135">)</a>
+<a class="sourceLine" id="cb182-136" data-line-number="136"></a>
+<a class="sourceLine" id="cb182-137" data-line-number="137"><span class="co"># plot confusion matrix</span></a>
+<a class="sourceLine" id="cb182-138" data-line-number="138"><span class="kw">plot_confusion_matrix</span>(</a>
+<a class="sourceLine" id="cb182-139" data-line-number="139">  <span class="dt">conf_matrix =</span> <span class="kw">as_tibble</span>(conf_mat),</a>
+<a class="sourceLine" id="cb182-140" data-line-number="140">  <span class="dt">targets_col =</span> <span class="st">&quot;actual&quot;</span>,</a>
+<a class="sourceLine" id="cb182-141" data-line-number="141">  <span class="dt">predictions_col =</span> <span class="st">&quot;predicted&quot;</span>,</a>
+<a class="sourceLine" id="cb182-142" data-line-number="142">  <span class="dt">counts_col =</span> <span class="st">&quot;n&quot;</span></a>
+<a class="sourceLine" id="cb182-143" data-line-number="143">)</a>
+<a class="sourceLine" id="cb182-144" data-line-number="144"></a>
+<a class="sourceLine" id="cb182-145" data-line-number="145"><span class="co"># summarize results on test data</span></a>
+<a class="sourceLine" id="cb182-146" data-line-number="146">peng_results =<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb182-147" data-line-number="147">  <span class="dt">actual    =</span> peng_tst<span class="op">$</span>species,</a>
+<a class="sourceLine" id="cb182-148" data-line-number="148">  <span class="dt">Adelie    =</span> <span class="kw">predict</span>(mod_tree, peng_tst)[, <span class="st">&quot;Adelie&quot;</span>],</a>
+<a class="sourceLine" id="cb182-149" data-line-number="149">  <span class="dt">Chinstrap =</span> <span class="kw">predict</span>(mod_tree, peng_tst)[, <span class="st">&quot;Chinstrap&quot;</span>],</a>
+<a class="sourceLine" id="cb182-150" data-line-number="150">  <span class="dt">Gentoo    =</span> <span class="kw">predict</span>(mod_tree, peng_tst)[, <span class="st">&quot;Gentoo&quot;</span>]</a>
+<a class="sourceLine" id="cb182-151" data-line-number="151">)</a>
+<a class="sourceLine" id="cb182-152" data-line-number="152"></a>
+<a class="sourceLine" id="cb182-153" data-line-number="153"><span class="co"># evaluate metrics on test data</span></a>
+<a class="sourceLine" id="cb182-154" data-line-number="154">peng_eval =<span class="st"> </span><span class="kw">evaluate</span>(</a>
+<a class="sourceLine" id="cb182-155" data-line-number="155">  <span class="dt">data =</span> peng_results,</a>
+<a class="sourceLine" id="cb182-156" data-line-number="156">  <span class="dt">target_col =</span> <span class="st">&quot;actual&quot;</span>,</a>
+<a class="sourceLine" id="cb182-157" data-line-number="157">  <span class="dt">prediction_cols =</span> <span class="kw">c</span>(<span class="st">&quot;Adelie&quot;</span>, <span class="st">&quot;Chinstrap&quot;</span>, <span class="st">&quot;Gentoo&quot;</span>),</a>
+<a class="sourceLine" id="cb182-158" data-line-number="158">  <span class="dt">type =</span> <span class="st">&quot;multinomial&quot;</span>,</a>
+<a class="sourceLine" id="cb182-159" data-line-number="159">  <span class="dt">metrics =</span> <span class="kw">list</span>(<span class="st">&quot;Accuracy&quot;</span> =<span class="st"> </span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb182-160" data-line-number="160">)</a>
+<a class="sourceLine" id="cb182-161" data-line-number="161"></a>
+<a class="sourceLine" id="cb182-162" data-line-number="162"><span class="co"># view evaluation</span></a>
+<a class="sourceLine" id="cb182-163" data-line-number="163">peng_eval<span class="op">$</span><span class="st">`</span><span class="dt">Class Level Results</span><span class="st">`</span></a>
+<a class="sourceLine" id="cb182-164" data-line-number="164">peng_eval<span class="op">$</span>Predictions</a>
+<a class="sourceLine" id="cb182-165" data-line-number="165"><span class="kw">plot_confusion_matrix</span>(peng_eval<span class="op">$</span><span class="st">`</span><span class="dt">Confusion Matrix</span><span class="st">`</span>[[<span class="dv">1</span>]])</a></code></pre></div>
 <!-- ```{r setup, include = FALSE} -->
 <!-- knitr::opts_chunk$set(echo = TRUE, fig.align = "center", cache = TRUE, autodep = TRUE) -->
 <!-- ``` -->
@@ -482,6 +505,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- - `R` Markdown: [`binary-classification.Rmd`](binary-classification.Rmd) -->
 <!-- *** -->
 
+</div>
 </div>
 
 

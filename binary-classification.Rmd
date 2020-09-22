@@ -1,8 +1,37 @@
 # Binary Classification
 
-Full book chapter still delayed! Keeping up with writing every week is getting tough. Below are the notes from the video.
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center", cache = TRUE, autodep = TRUE)
+```
+
+This chapter will introduce no new modeling techniques, but instead will focus on evaluating models for **binary classification.**
+
+Specifically, we will discuss:
+
+- Using different **probability cutoffs** to create different classifiers with the same model.
+- Using a **confusion matrix** to summarize the results of a binary classifier.
+- Various metrics for binary classification, including but not limited to: **sensitivity**, **specificity**, and **prevalence**.
+- Using the `evaluate()` function from the `cvsm` package for efficient calculation of metrics.
+
+This chapter is currently **under construction**. While it is being developed, the following links to the STAT 432 course notes.
 
 - [**Notes:** Binary Classification](files/binary-classification.pdf)
+
+## R Setup and Source
+
+```{r packages, warning = FALSE, message = FALSE}
+library(ucidata)    # access to data
+library(tibble)     # data frame printing
+library(dplyr)      # data manipulation
+
+library(caret)      # fitting knn
+library(rpart)      # fitting trees
+library(cvms)       # calculating metrics
+```
+
+Recall that the [Welcome](index.html) chapter contains directions for installing all necessary packages for following along with the text. The R Markdown source is provided as some code, mostly for creating plots, has been suppressed from the rendered document that you are currently reading.
+
+- **R Markdown Source:** [`binary-classification.Rmd`](binary-classification.Rmd)
 
 ```{r, eval = FALSE}
 # binary classification ########################################################
