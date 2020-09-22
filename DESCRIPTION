@@ -15,7 +15,7 @@ Imports:
   rpart.plot,
   caret,
   ellipse,
-  gbm.
+  gbm,
   cvms
 Remotes: 
   rstudio/bookdown,
