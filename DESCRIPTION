@@ -17,6 +17,6 @@ Imports:
   ellipse,
   gbm,
   cvms
-Remotes: 
-  rstudio/bookdown,
-  coatless/ucidata
+Remotes:
+  coatless/ucidata,
+  rstudio/bookdown
