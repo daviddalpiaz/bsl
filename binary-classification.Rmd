@@ -402,5 +402,7 @@ Here we see the general pattern. We can sacrifice some accuracy for more sensiti
 
 ## R Packages and Function
 
+Use these at your own risk.
+
 - `cvms::evalaute()`
 - `caret::confusionMatrix()`
