@@ -73,6 +73,11 @@ nonparametric-classification
 logistic-regression
 binary-classification
 r-setup-and-source-3
+breast-cancer-data
+confusion-matrix
+binary-classification-metrics
+probability-cutoff
+r-packages-and-function
 additional-reading
 books
 papers

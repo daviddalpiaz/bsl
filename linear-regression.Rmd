@@ -15,6 +15,10 @@ Specifically, we will discuss:
 
 This chapter will be the most action packed as we will establish a framework that will be recycled throughout the rest of the text.
 
+This chapter is currently **under construction**. While it is being developed, the following links to the STAT 432 course notes.
+
+- [**Notes:** Linear Regression](files/linear-regression.pdf)
+
 ## R Setup and Source
 
 ```{r packages, warning = FALSE, message = FALSE}

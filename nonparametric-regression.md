@@ -18,6 +18,10 @@ We will also hint at, but delay for one more chapter a detailed discussion of:
 - What is **model flexibility**?
 - What is **overfitting** and how do we avoid it?
 
+This chapter is currently **under construction**. While it is being developed, the following links to the STAT 432 course notes.
+
+- [**Notes:** Nonparametric Regression](files/nonparametric.pdf)
+
 ## R Setup and Source
 
 
