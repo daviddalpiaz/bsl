@@ -18,6 +18,10 @@ Specifically, we'll discuss:
 - The **no free lunch** concept as it applies to machine learning.
 - The **curse of dimensionality** and how it influences modeling decision we make.
 
+This chapter is currently **under construction**. While it is being developed, the following links to the STAT 432 course notes.
+
+- [**Notes:** Supervised - Regression](files/supervised.pdf)
+
 ## The Goal
 
 What is the goal of regression models in the context of machine learning? We can discuss it in two ways:
