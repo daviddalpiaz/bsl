@@ -134,7 +134,8 @@ install.packages(
     "caret",
     "ellipse",
     "gbm",
-    "cvms"
+    "cvms",
+    "palmerpenguins"
   )
 )
 

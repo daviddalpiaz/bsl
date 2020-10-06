@@ -4,27 +4,38 @@
 knitr::opts_chunk$set(echo = TRUE, fig.align = "center", cache = TRUE, autodep = TRUE)
 ```
 
+In this chapter, we continue our discussion of classification methods. We introduce three new methods, each a **generative** method. 
+
+Specifically, we will discuss:
+
+- How **generative** methods are different than **discriminative** methods like logistic regression.
+- How generative methods model the joint probability, $p(\boldsymbol{x}, y)$, often by assuming some distribution for the conditional distribution of $\boldsymbol{X}$ given $Y$, $f(\boldsymbol{x} \mid y)$. 
+- How to use Bayes theorem to classify according to $p(y \mid \boldsymbol{x})$ as compared to discriminative methods such as logistic regression directly model this conditional directly.
+
+Two potential additional readigns:
+
+- [Ng and Jordan, 2002](https://papers.nips.cc/paper/2020-on-discriminative-vs-generative-classifiers-a-comparison-of-logistic-regression-and-naive-bayes.pdf).
+- [ISL Chapter 4, Sections 4](https://faculty.marshall.usc.edu/gareth-james/ISL/ISLR%20Seventh%20Printing.pdf)
+
 ***
 
-In this chapter, we continue our discussion of classification methods. We introduce three new methods, each a **generative** method. This in comparison to logistic regression, which is a **discriminative** method.
+## R Setup and Source
 
-Generative methods model the joint probability, $p(\boldsymbol{x}, y)$, often by assuming some distribution for the conditional distribution of $\boldsymbol{X}$ given $Y$, $f(\boldsymbol{x} \mid y)$. Bayes theorem is then applied to classify according to $p(y \mid \boldsymbol{x})$. Discriminative methods such as logistic regression directly model this conditional, $p(y \mid \boldsymbol{x})$. A detailed discussion and analysis can be found in [Ng and Jordan, 2002](https://papers.nips.cc/paper/2020-on-discriminative-vs-generative-classifiers-a-comparison-of-logistic-regression-and-naive-bayes.pdf).
+```{r packages, warning = FALSE, message = FALSE}
+library(palmerpenguins) # access to data
+library(tibble)         # data frame printing
 
-***
+library(MASS)           # fitting lda and qda
+library(klaR)           # fitting naive bayes
 
-## Reading
+library(knitr)          # creating tables
+library(kableExtra)     # styling tables
 
-- **Required:** [ISL Chapter 4, Sections 4](https://faculty.marshall.usc.edu/gareth-james/ISL/ISLR%20Seventh%20Printing.pdf)
-
-***
-
-```{r packages, message = FALSE, warning = FALSE}
-library("MASS")
-library("tidyverse")
-library("knitr")
-library("kableExtra")
-library("klaR")
 ```
+
+Recall that the [Welcome](index.html) chapter contains directions for installing all necessary packages for following along with the text. The R Markdown source is provided as some code, mostly for creating plots, has been suppressed from the rendered document that you are currently reading.
+
+- **R Markdown Source:** [`generative.Rmd`](generative.Rmd)
 
 ***
 
@@ -34,7 +45,7 @@ $$
 p_k(\boldsymbol{x}) = P(Y = k \mid \boldsymbol{X} = \boldsymbol{x}) = \frac{\pi_k \cdot f_k(\boldsymbol{x})}{\sum_{g = 1}^{G} \pi_g \cdot f_g(\boldsymbol{x})}
 $$
 
-We call $p_k(\boldsymbol{x})$ the **posterior** probability, which we will estimate then use to create classifications. The $\pi_g$ are called the **prior** probabilities for each possible class $g$. That is, $\pi_g = P(Y = g)$, unconditioned on $\boldsymbol X$. (Here, there are $G$ possible classes, denoted $1, 2, \ldots G$. We use $k$ to refer to a particular class.) The $f_g(x)$ are called the **likelihoods**, which are indexed by $g$ to denote that they are conditional on the classes. The denominator is often referred to as a **normalizing constant**.
+We call $p_k(\boldsymbol{x})$ the **posterior** probability, which we will estimate then use to create classifications. The $\pi_g$ are called the **prior** probabilities for each possible classes $g$. That is, $\pi_g = P(Y = g)$, unconditioned on $\boldsymbol X$. (Here, there are $G$ possible classes, denoted $1, 2, \ldots G$. We use $k$ to refer to a particular class.) The $f_g(x)$ are called the **likelihoods**, which are indexed by $g$ to denote that they are conditional on the classes. The denominator is often referred to as a **normalizing constant**.
 
 The methods will differ by placing different modeling assumptions on the likelihoods, $f_g(\boldsymbol x)$. For each method, the priors could be learned from data or pre-specified.
 
@@ -46,50 +57,74 @@ $$
 
 By substituting the corresponding likelihoods, simplifying, and eliminating unnecessary terms, we could derive the discriminant function for each.
 
-To illustrate these new methods, we return to the iris data, which you may remember has three classes. After a test-train split, we create a number of plots to refresh our memory.
+To illustrate these new methods, we return to the Palmer penguins data, which you may remember has three classes. After a train-test and estimation-validation split, we create a number of plots to refresh our memory. Note that these splits are a bit odd in terms of proprotions. This is for illustrative purposes only.
 
 ```{r}
-set.seed(9)
-iris_idx = sample(nrow(iris), size = trunc(0.50 * nrow(iris)))
-# iris_idx = sample(nrow(iris), size = trunc(0.10 * nrow(iris)))
-iris_trn = iris[iris_idx, ]
-iris_tst = iris[-iris_idx, ]
+peng = na.omit(penguins)
 ```
 
-Note that we have only performed a test-train split, so we are not validating any of these models. Also note that using 50% of the data for training is an arbitrary choice here.
+
+```{r}
+# set seed
+set.seed(2)
+
+# train-test split
+trn_idx = sample(nrow(peng), size = trunc(0.50 * nrow(peng)))
+peng_trn = peng[trn_idx, ]
+peng_tst = peng[-trn_idx, ]
+
+# train-test split
+est_idx = sample(nrow(peng_trn), size = trunc(0.50 * nrow(peng_trn)))
+peng_est = peng_trn[est_idx, ]
+peng_val = peng_trn[-est_idx, ]
+```
 
 ```{r, fig.height = 8, fig.width = 8}
-caret::featurePlot(x = iris_trn[, c("Sepal.Length", "Sepal.Width", 
-                                    "Petal.Length", "Petal.Width")], 
-                   y = iris_trn$Species,
-                   plot = "density", 
-                   scales = list(x = list(relation = "free"), 
-                                 y = list(relation = "free")), 
-                   adjust = 1.5, 
-                   pch = "|", 
-                   layout = c(2, 2), 
-                   auto.key = list(columns = 3))
+caret::featurePlot(
+  x = peng_trn[, c("bill_length_mm",
+                   "bill_depth_mm",
+                   "flipper_length_mm",
+                   "body_mass_g")],
+  y = peng_trn$species,
+  plot = "density",
+  scales = list(
+    x = list(relation = "free"),
+    y = list(relation = "free")
+  ),
+  adjust = 1.5,
+  pch = "|",
+  layout = c(2, 2),
+  auto.key = list(columns = 3)
+)
 ```
 
 ```{r, fig.height=8, fig.width=8}
-caret::featurePlot(x = iris_trn[, c("Sepal.Length", "Sepal.Width", 
-                                    "Petal.Length", "Petal.Width")], 
-                   y = iris_trn$Species,
-                   plot = "ellipse",
-                   auto.key = list(columns = 3))
+caret::featurePlot(
+  x = peng_trn[, c("bill_length_mm",
+                   "bill_depth_mm",
+                   "flipper_length_mm",
+                   "body_mass_g")],
+  y = peng_trn$species,
+  plot = "ellipse",
+  auto.key = list(columns = 3)
+)
 ```
 
 ```{r, fig.height=4, fig.width=7}
-caret::featurePlot(x = iris_trn[, c("Sepal.Length", "Sepal.Width", 
-                                    "Petal.Length", "Petal.Width")], 
-                   y = iris_trn$Species,
-                   plot = "box",
-                   scales = list(y = list(relation = "free"),
-                                 x = list(rot = 90)),
-                   layout = c(4, 1))
+caret::featurePlot(
+  x = peng_trn[, c("bill_length_mm",
+                   "bill_depth_mm",
+                   "flipper_length_mm",
+                   "body_mass_g")],
+  y = peng_trn$species,
+  plot = "box",
+  scales = list(y = list(relation = "free"),
+                x = list(rot = 90)),
+  layout = c(4, 1)
+)
 ```
 
-Especially based on the pairs plot, we see that it should not be too difficult to find a good classifier.
+Especially based on the pairs plot, we see that it should not be too difficult to find a good classifier. Because it is so easy will we create models using only `bill_length_mm` and `flipper_length_mm` so that they will make some errors that we can discuss.
 
 Notice that we use `caret::featurePlot` to access the `featurePlot()` function without loading the entire `caret` package.
 
@@ -109,30 +144,28 @@ $$
 
 Notice that $\boldsymbol\Sigma$ does **not** depend on $k$, that is, we are assuming the same $\Sigma$ for each class. We then use information from all the classes to estimate $\boldsymbol\Sigma$.
 
-To fit an LDA model, we use the `lda()` function from the `MASS` package.
-
 ```{r}
-iris_lda = lda(Species ~ ., data = iris_trn)
-iris_lda
+peng_lda = lda(species ~ bill_length_mm + flipper_length_mm, data = peng_est)
+peng_lda
 ```
 
 Here we see the estimated $\hat{\pi}_k$ and $\hat{\boldsymbol\mu}_k$ for each class.
 
 ```{r}
-is.list(predict(iris_lda, iris_trn))
-names(predict(iris_lda, iris_trn))
-head(predict(iris_lda, iris_trn)$class, n = 10)
-head(predict(iris_lda, iris_trn)$posterior, n = 10)
+is.list(predict(peng_lda, peng_est))
+names(predict(peng_lda, peng_est))
+head(predict(peng_lda, peng_est)$class, n = 10)
+head(predict(peng_lda, peng_est)$posterior, n = 10)
 ```
 
 As we should come to expect, the `predict()` function operates in a new way when called on an `lda` object. By default, it returns an entire list. Within that list `class` stores the classifications and `posterior` contains the estimated probability for each class.
 
 ```{r}
-iris_lda_trn_pred = predict(iris_lda, iris_trn)$class
-iris_lda_tst_pred = predict(iris_lda, iris_tst)$class
+peng_lda_est_pred = predict(peng_lda, peng_est)$class
+peng_lda_val_pred = predict(peng_lda, peng_val)$class
 ```
 
-We store the predictions made on the train and test sets.
+We store the predictions made on the estimation and validatino sets.
 
 ```{r}
 calc_misclass = function(actual, predicted) {
@@ -141,36 +174,44 @@ calc_misclass = function(actual, predicted) {
 ```
 
 ```{r}
-calc_misclass(predicted = iris_lda_trn_pred, actual = iris_trn$Species)
-calc_misclass(predicted = iris_lda_tst_pred, actual = iris_tst$Species)
+calc_misclass(predicted = peng_lda_est_pred, actual = peng_est$species)
+calc_misclass(predicted = peng_lda_val_pred, actual = peng_val$species)
 ```
 
-As expected, LDA performs well on both the train and test data. (Note that the "training error" here is calculated on the training data since there is no validation data. This is not how we have usually defined training error.)
+As expected, LDA performs well on both the estimation and validation data.
 
 ```{r}
-table(predicted = iris_lda_tst_pred, actual = iris_tst$Species)
+table(predicted = peng_lda_val_pred, actual = peng_val$species)
 ```
 
-Looking at the test set, we see that we are perfectly predicting both setosa and virginica. The only error is labeling a couple versicolors as a virginica.
+Looking at the validation set, we see that we are perfectly within the Gentoos.
 
 ```{r}
-iris_lda_flat = lda(Species ~ ., data = iris_trn, prior = c(1, 1, 1) / 3)
-iris_lda_flat
+peng_lda_flat = lda(species ~ bill_length_mm + flipper_length_mm, 
+                    data = peng_est, prior = c(1, 1, 1) / 3)
+peng_lda_flat
 ```
 
 Instead of learning (estimating) the proportion of the three species from the data, we could instead specify them ourselves. Here we choose a uniform distributions over the possible species. We would call this a "flat" prior.
 
 ```{r}
-iris_lda_flat_trn_pred = predict(iris_lda_flat, iris_trn)$class
-iris_lda_flat_tst_pred = predict(iris_lda_flat, iris_tst)$class
+peng_lda_flat_est_pred = predict(peng_lda_flat, peng_est)$class
+peng_lda_flat_val_pred = predict(peng_lda_flat, peng_val)$class
 ```
 
 ```{r}
-calc_misclass(predicted = iris_lda_flat_trn_pred, actual = iris_trn$Species)
-calc_misclass(predicted = iris_lda_flat_tst_pred, actual = iris_tst$Species)
+calc_misclass(predicted = peng_lda_flat_est_pred, actual = peng_est$species)
+calc_misclass(predicted = peng_lda_flat_val_pred, actual = peng_val$species)
 ```
 
 This actually gives a better test accuracy! In practice, this could be useful if you have prior knowledge about the future proportions of the response variable.
+
+```{r}
+table(peng_val$species) / length(peng_val$species)
+peng_lda$prior
+```
+
+Looking at the above, we see this makes sense. In the validation data, the proportions of the classes are closer to flat. However, you should not use this information to choose your prior in practice. That would be cheating. If you have other information that suggests you should try this, then go right ahead.
 
 ***
 
@@ -189,33 +230,31 @@ $$
 Notice that now $\boldsymbol\Sigma_k$ **does** depend on $k$, that is, we are allowing a different $\boldsymbol\Sigma_k$ for each class. We only use information from class $k$ to estimate $\Sigma_k$. 
 
 ```{r}
-iris_qda = qda(Species ~ ., data = iris_trn)
-iris_qda
+peng_qda = qda(species ~ bill_length_mm + flipper_length_mm, data = peng_est)
+peng_qda
 ```
 
 Here the output is similar to LDA, again giving the estimated $\hat{\pi}_k$ and $\hat{\boldsymbol\mu}_k$ for each class. Like `lda()`, the `qda()` function is found in the `MASS` package.
 
-Consider trying to fit QDA again, but this time with a smaller training set. (Use the commented line above to obtain a smaller test set.) This will cause an error because there are not enough observations within each class to estimate the large number of parameters in the $\boldsymbol\Sigma_k$ matrices. This is less of a problem with LDA, since all observations, no matter the class, are being use to estimate the shared $\boldsymbol\Sigma$ matrix.
+Consider trying to fit QDA again, but this time with a *very small* estimation set. This will cause an error because there are not enough observations within each class to estimate the large number of parameters in the $\boldsymbol\Sigma_k$ matrices. This is less of a problem with LDA, since all observations, no matter the class, are being use to estimate the shared $\boldsymbol\Sigma$ matrix.
 
 ```{r}
-iris_qda_trn_pred = predict(iris_qda, iris_trn)$class
-iris_qda_tst_pred = predict(iris_qda, iris_tst)$class
+peng_qda_est_pred = predict(peng_qda, peng_est)$class
+peng_qda_val_pred = predict(peng_qda, peng_val)$class
 ```
 
 The `predict()` function operates the same as the `predict()` function for LDA.
 
 ```{r}
-calc_misclass(predicted = iris_qda_trn_pred, actual = iris_trn$Species)
-calc_misclass(predicted = iris_qda_tst_pred, actual = iris_tst$Species)
+calc_misclass(predicted = peng_qda_est_pred, actual = peng_est$species)
+calc_misclass(predicted = peng_qda_val_pred, actual = peng_val$species)
 ```
 
 ```{r}
-table(predicted = iris_qda_tst_pred, actual = iris_tst$Species)
+table(predicted = peng_qda_val_pred, actual = peng_val$species)
 ```
 
-Here we see that QDA has similar performance to LDA. This is somewhat surprising, as we can see from the plots above that the covariance matrix for each class is likely not the same. In this case, we would sort of assume that LDA is too restrictive a model as it assumes the same covariance within each class. (It is likely due to the high seperation of the data that this doesn't make much of a difference. Also, random chance as we're not dealing with a lot of data.)
-
-Since QDA is a more complex model than LDA (it has many more parameters), QDA is more likely to overfit than LDA. (Although, that does not seem to have happened here.)
+Here we see that QDA has similar performance to LDA, but a little worse. This isn't too surprising as based on the plots, the covariance within each of the classes seems similar. QDA may be too flexible here. Since QDA is a more flexible model than LDA (it has many more parameters), QDA is more likely to overfit than LDA.
 
 Also note that, QDA creates quadratic decision boundaries, while LDA creates linear decision boundaries. We could also add quadratic terms to LDA to allow it to create quadratic decision boundaries.
 
@@ -229,7 +268,7 @@ $$
 {\boldsymbol X} \mid Y = k \sim N(\boldsymbol\mu_k, \boldsymbol\Sigma_k)
 $$
 
-Naive Bayes assumes that the features $X_1, X_2, \ldots, X_p$ are independent. This is the "naive" part of naive Bayes. The Bayes part is nothing new. Since $X_1, X_2, \ldots, X_p$ are assumed independent, each $\boldsymbol\Sigma_k$ is diagonal, that is, we assume no correlation between features. Independence implies zero correlation.
+Naive Bayes assumes that the features $X_1, X_2, \ldots, X_p$ are independent given $Y = k$. This is the "naive" part of naive Bayes. The Bayes part is nothing new. Since $X_1, X_2, \ldots, X_p$ are assumed independent, each $\boldsymbol\Sigma_k$ is diagonal, that is, we assume no correlation between features. Independence implies zero correlation.
 
 This will allow us to write the (joint) likelihood as a product of univariate distributions. In this case, the product of univariate normal distributions instead of a (joint) multivariate distribution.
 
@@ -246,73 +285,71 @@ $$
 When $p = 1$, this version of naive Bayes is equivalent to QDA.
 
 ```{r}
-iris_nb = NaiveBayes(Species ~ ., data = iris_trn)
+peng_nb = NaiveBayes(species ~ bill_length_mm + flipper_length_mm, data = peng_est)
 ```
 
 ```{r}
-iris_nb$apriori
+peng_nb$apriori
 ```
 
 ```{r}
-iris_nb$tables
+peng_nb$tables
 ```
 
-Many packages implement naive Bayes. Here we choose to use `NaiveBayes()` from the package `klaR`.
-
-The output from `iris_nb$tables` gives the mean and standard deviation of the normal distribution for each feature in each class. Notice how these mean estimates match those for LDA and QDA above.
+Many packages implement naive Bayes. Here we choose to use `NaiveBayes()` from the package `klaR`. The output from `peng_nb$tables` gives the mean and standard deviation of the normal distribution for each feature in each class. Notice how these mean estimates match those for LDA and QDA above.
 
 ```{r}
-head(predict(iris_nb, iris_trn)$class)
-head(predict(iris_nb, iris_trn)$posterior)
+head(predict(peng_nb, peng_est)$class)
+head(predict(peng_nb, peng_est)$posterior)
 ```
 
 ```{r}
-iris_nb_trn_pred = predict(iris_nb, iris_trn)$class
-iris_nb_tst_pred = predict(iris_nb, iris_tst)$class
+peng_nb_est_pred = predict(peng_nb, peng_est)$class
+peng_nb_val_pred = predict(peng_nb, peng_val)$class
 ```
 
 ```{r}
-calc_misclass(predicted = iris_nb_trn_pred, actual = iris_trn$Species)
-calc_misclass(predicted = iris_nb_tst_pred, actual = iris_tst$Species)
+calc_misclass(predicted = peng_nb_est_pred, actual = peng_est$species)
+calc_misclass(predicted = peng_nb_val_pred, actual = peng_val$species)
 ```
 
 ```{r}
-table(predicted = iris_nb_tst_pred, actual = iris_tst$Species)
+table(predicted = peng_nb_val_pred, actual = peng_val$species)
 ```
 
-Like LDA, naive Bayes is having trouble with virginica. 
+Here we see worse performance again.
 
 ```{r, echo = FALSE}
 classifiers = c("LDA", "LDA, Flat Prior", "QDA", "Naive Bayes")
 
-train_err = c(
-  calc_misclass(predicted = iris_lda_trn_pred,      actual = iris_trn$Species),
-  calc_misclass(predicted = iris_lda_flat_trn_pred, actual = iris_trn$Species),
-  calc_misclass(predicted = iris_qda_trn_pred,      actual = iris_trn$Species),
-  calc_misclass(predicted = iris_nb_trn_pred,       actual = iris_trn$Species)
+est_err = c(
+  calc_misclass(predicted = peng_lda_est_pred,      actual = peng_est$species),
+  calc_misclass(predicted = peng_lda_flat_est_pred, actual = peng_est$species),
+  calc_misclass(predicted = peng_qda_est_pred,      actual = peng_est$species),
+  calc_misclass(predicted = peng_nb_est_pred,       actual = peng_est$species)
 )
 
-test_err = c(
-  calc_misclass(predicted = iris_lda_tst_pred,      actual = iris_tst$Species),
-  calc_misclass(predicted = iris_lda_flat_tst_pred, actual = iris_tst$Species),
-  calc_misclass(predicted = iris_qda_tst_pred,      actual = iris_tst$Species),
-  calc_misclass(predicted = iris_nb_tst_pred,       actual = iris_tst$Species)
+val_err = c(
+  calc_misclass(predicted = peng_lda_val_pred,      actual = peng_val$species),
+  calc_misclass(predicted = peng_lda_flat_val_pred, actual = peng_val$species),
+  calc_misclass(predicted = peng_qda_val_pred,      actual = peng_val$species),
+  calc_misclass(predicted = peng_nb_val_pred,       actual = peng_val$species)
 )
 
 results = data.frame(
   classifiers,
-  train_err,
-  test_err
+  est_err,
+  val_err
 )
 
-colnames(results) = c("Method", "Train Error", "Test Error")
+colnames(results) = c("Method", "Train Error", "Validation Error")
 ```
 
 ```{r, echo = FALSE}
 knitr::kable(results)
 ```
 
-Summarizing the results, we see that Naive Bayes is the worst of LDA, QDA, and NB for this data. So why should we care about naive Bayes?
+Summarizing the results, we see that Naive Bayes is the worst of LDA, QDA, and NB for this data. This isn't surprising as there is clear dependence within the features. So why should we care about naive Bayes?
 
 The strength of Naive Bayes comes from its ability to handle a large number of features, $p$, even with a limited sample size $n$. Even with the naive independence assumption, Naive Bayes works rather well in practice. Also because of this assumption, we can often train naive Bayes where LDA and QDA may be impossible to train because of the large number of parameters relative to the number of observations.
 
@@ -320,42 +357,18 @@ Here naive Bayes doesn't get a chance to show its strength since LDA and QDA alr
 
 ***
 
-## Discrete Inputs
+## Categorical Features
 
-So far, we have assumed that all features are numeric. What happens with categorical features?
-
-```{r}
-# create "new" dataset
-iris_trn_mod = iris_trn
-
-# made Sepal.Width categorical
-iris_trn_mod$Sepal.Width = factor(ifelse(iris_trn$Sepal.Width > 3,
-                                  ifelse(iris_trn$Sepal.Width > 4,
-                                         "Large", "Medium"),
-                                  "Small"))
-
-# check levels of factor
-levels(iris_trn_mod$Sepal.Width)
-```
-
-Here we make a new dataset where `Sepal.Width` is categorical, with levels `Small`, `Medium`, and `Large`. We then try to train classifiers using only the sepal variables.
+So far, we have assumed that all features are numeric. What happens with categorical features? Let's add the `sex` variable which is categorical.
 
 ```{r}
-NaiveBayes(Species ~ Sepal.Length + Sepal.Width, data = iris_trn_mod)$tables
+NaiveBayes(species ~ bill_length_mm + flipper_length_mm + sex, data = peng_est)$tables
 ```
 
 Naive Bayes makes a somewhat obvious and intelligent choice to model the categorical variable as a multinomial. It then estimates the probability parameters of a multinomial distribution.
 
 ```{r}
-lda(Species ~ Sepal.Length + Sepal.Width, data = iris_trn_mod)
+lda(species ~ bill_length_mm + flipper_length_mm + sex, data = peng_est)
 ```
 
-LDA (and QDA) however creates dummy variables, here with `Large` as the reference level, then continues to model them as normally distributed. Not great, but better then not using a categorical variable.
-
-***
-
-## Source
-
-- `R` Markdown: [`generative.Rmd`](generative.Rmd)
-
-***
+LDA (and QDA) however creates dummy variables, here with `male` as the reference level, then continues to model them as normally distributed. Not great, but better then not using a categorical variable.

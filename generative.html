@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 10 Generative Models | Basics of Statistical Learning</title>
   <meta name="description" content="Chapter 10 Generative Models | Basics of Statistical Learning" />
-  <meta name="generator" content="bookdown 0.20.2 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20.6 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 10 Generative Models | Basics of Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="binary-classification.html"/>
-<link rel="next" href="supervised-i.html"/>
+<link rel="next" href="additional-reading.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,7 +49,10 @@
 
 
 
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -146,7 +149,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#how"><i class="fa fa-check"></i><b>0.6</b> How?</a><ul>
 <li class="chapter" data-level="0.6.1" data-path="index.html"><a href="index.html#build-tools"><i class="fa fa-check"></i><b>0.6.1</b> Build Tools</a></li>
 <li class="chapter" data-level="0.6.2" data-path="index.html"><a href="index.html#active-development"><i class="fa fa-check"></i><b>0.6.2</b> Active Development</a></li>
-<li class="chapter" data-level="0.6.3" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.6.3</b> License</a></li>
+<li class="chapter" data-level="0.6.3" data-path="index.html"><a href="index.html#packages"><i class="fa fa-check"></i><b>0.6.3</b> Packages</a></li>
+<li class="chapter" data-level="0.6.4" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.6.4</b> License</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="ml-overview.html"><a href="ml-overview.html"><i class="fa fa-check"></i><b>1</b> Machine Learning Overview</a><ul>
@@ -156,12 +160,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2.2" data-path="ml-overview.html"><a href="ml-overview.html#unsupervised-learning"><i class="fa fa-check"></i><b>1.2.2</b> Unsupervised Learning</a></li>
 </ul></li>
 <li class="chapter" data-level="1.3" data-path="ml-overview.html"><a href="ml-overview.html#open-questions"><i class="fa fa-check"></i><b>1.3</b> Open Questions</a></li>
-<li class="chapter" data-level="1.4" data-path="ml-overview.html"><a href="ml-overview.html#source"><i class="fa fa-check"></i><b>1.4</b> Source</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>2</b> Linear Regression</a><ul>
-<li class="chapter" data-level="2.1" data-path="linear-regression.html"><a href="linear-regression.html#reading"><i class="fa fa-check"></i><b>2.1</b> Reading</a></li>
+<li class="chapter" data-level="2.1" data-path="linear-regression.html"><a href="linear-regression.html#r-setup-and-source"><i class="fa fa-check"></i><b>2.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="2.2" data-path="linear-regression.html"><a href="linear-regression.html#explanation-versus-prediction"><i class="fa fa-check"></i><b>2.2</b> Explanation versus Prediction</a></li>
-<li class="chapter" data-level="2.3" data-path="linear-regression.html"><a href="linear-regression.html#setup"><i class="fa fa-check"></i><b>2.3</b> Setup</a></li>
+<li class="chapter" data-level="2.3" data-path="linear-regression.html"><a href="linear-regression.html#task-setup"><i class="fa fa-check"></i><b>2.3</b> Task Setup</a></li>
 <li class="chapter" data-level="2.4" data-path="linear-regression.html"><a href="linear-regression.html#mathematical-setup"><i class="fa fa-check"></i><b>2.4</b> Mathematical Setup</a></li>
 <li class="chapter" data-level="2.5" data-path="linear-regression.html"><a href="linear-regression.html#linear-regression-models"><i class="fa fa-check"></i><b>2.5</b> Linear Regression Models</a></li>
 <li class="chapter" data-level="2.6" data-path="linear-regression.html"><a href="linear-regression.html#using-lm"><i class="fa fa-check"></i><b>2.6</b> Using <code>lm()</code></a></li>
@@ -173,94 +176,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.10" data-path="linear-regression.html"><a href="linear-regression.html#example-simple-simulated-data"><i class="fa fa-check"></i><b>2.10</b> Example: “Simple” Simulated Data</a></li>
 <li class="chapter" data-level="2.11" data-path="linear-regression.html"><a href="linear-regression.html#example-diamonds-data"><i class="fa fa-check"></i><b>2.11</b> Example: Diamonds Data</a></li>
 <li class="chapter" data-level="2.12" data-path="linear-regression.html"><a href="linear-regression.html#example-credit-card-data"><i class="fa fa-check"></i><b>2.12</b> Example: Credit Card Data</a></li>
-<li class="chapter" data-level="2.13" data-path="linear-regression.html"><a href="linear-regression.html#source-1"><i class="fa fa-check"></i><b>2.13</b> Source</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html"><i class="fa fa-check"></i><b>3</b> Nonparametric Regression</a><ul>
-<li class="chapter" data-level="3.1" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#reading-1"><i class="fa fa-check"></i><b>3.1</b> Reading</a></li>
+<li class="chapter" data-level="3.1" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#r-setup-and-source-1"><i class="fa fa-check"></i><b>3.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="3.2" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#mathematical-setup-1"><i class="fa fa-check"></i><b>3.2</b> Mathematical Setup</a></li>
 <li class="chapter" data-level="3.3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>3.3</b> k-Nearest Neighbors</a></li>
 <li class="chapter" data-level="3.4" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#decision-trees"><i class="fa fa-check"></i><b>3.4</b> Decision Trees</a></li>
 <li class="chapter" data-level="3.5" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#example-credit-card-data-1"><i class="fa fa-check"></i><b>3.5</b> Example: Credit Card Data</a></li>
-<li class="chapter" data-level="3.6" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#source-2"><i class="fa fa-check"></i><b>3.6</b> Source</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="bvt.html"><a href="bvt.html"><i class="fa fa-check"></i><b>4</b> Bias–Variance Tradeoff</a><ul>
-<li class="chapter" data-level="4.1" data-path="bvt.html"><a href="bvt.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>4.1</b> Reducible and Irreducible Error</a></li>
-<li class="chapter" data-level="4.2" data-path="bvt.html"><a href="bvt.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>4.2</b> Bias-Variance Decomposition</a></li>
-<li class="chapter" data-level="4.3" data-path="bvt.html"><a href="bvt.html#simulation"><i class="fa fa-check"></i><b>4.3</b> Simulation</a></li>
-<li class="chapter" data-level="4.4" data-path="bvt.html"><a href="bvt.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>4.4</b> Estimating Expected Prediction Error</a></li>
-<li class="chapter" data-level="4.5" data-path="bvt.html"><a href="bvt.html#source-3"><i class="fa fa-check"></i><b>4.5</b> Source</a></li>
+<li class="chapter" data-level="4" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html"><i class="fa fa-check"></i><b>4</b> The Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="4.1" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#r-setup-and-source-2"><i class="fa fa-check"></i><b>4.1</b> R Setup and Source</a></li>
+<li class="chapter" data-level="4.2" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#the-regression-setup"><i class="fa fa-check"></i><b>4.2</b> The Regression Setup</a></li>
+<li class="chapter" data-level="4.3" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>4.3</b> Reducible and Irreducible Error</a></li>
+<li class="chapter" data-level="4.4" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>4.4</b> Bias-Variance Decomposition</a></li>
+<li class="chapter" data-level="4.5" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#using-simulation-to-estimate-bias-and-variance"><i class="fa fa-check"></i><b>4.5</b> Using Simulation to Estimate Bias and Variance</a></li>
+<li class="chapter" data-level="4.6" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>4.6</b> Estimating Expected Prediction Error</a></li>
+<li class="chapter" data-level="4.7" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#model-flexibility"><i class="fa fa-check"></i><b>4.7</b> Model Flexibility</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#linear-models"><i class="fa fa-check"></i><b>4.7.1</b> Linear Models</a></li>
+<li class="chapter" data-level="4.7.2" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#k-nearest-neighbors-1"><i class="fa fa-check"></i><b>4.7.2</b> k-Nearest Neighbors</a></li>
+<li class="chapter" data-level="4.7.3" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#decision-trees-1"><i class="fa fa-check"></i><b>4.7.3</b> Decision Trees</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Regression Overview</a><ul>
-<li class="chapter" data-level="5.1" data-path="regression-overview.html"><a href="regression-overview.html#goal"><i class="fa fa-check"></i><b>5.1</b> Goal</a></li>
-<li class="chapter" data-level="5.2" data-path="regression-overview.html"><a href="regression-overview.html#strategy"><i class="fa fa-check"></i><b>5.2</b> Strategy</a></li>
-<li class="chapter" data-level="5.3" data-path="regression-overview.html"><a href="regression-overview.html#models"><i class="fa fa-check"></i><b>5.3</b> Models</a></li>
-<li class="chapter" data-level="5.4" data-path="regression-overview.html"><a href="regression-overview.html#model-flexibility"><i class="fa fa-check"></i><b>5.4</b> Model Flexibility</a></li>
+<li class="chapter" data-level="5.1" data-path="regression-overview.html"><a href="regression-overview.html#the-goal"><i class="fa fa-check"></i><b>5.1</b> The Goal</a></li>
+<li class="chapter" data-level="5.2" data-path="regression-overview.html"><a href="regression-overview.html#general-strategy"><i class="fa fa-check"></i><b>5.2</b> General Strategy</a></li>
+<li class="chapter" data-level="5.3" data-path="regression-overview.html"><a href="regression-overview.html#aglorithms"><i class="fa fa-check"></i><b>5.3</b> Aglorithms</a></li>
+<li class="chapter" data-level="5.4" data-path="regression-overview.html"><a href="regression-overview.html#model-flexibility-1"><i class="fa fa-check"></i><b>5.4</b> Model Flexibility</a></li>
 <li class="chapter" data-level="5.5" data-path="regression-overview.html"><a href="regression-overview.html#overfitting"><i class="fa fa-check"></i><b>5.5</b> Overfitting</a></li>
 <li class="chapter" data-level="5.6" data-path="regression-overview.html"><a href="regression-overview.html#bias-variance-tradeoff"><i class="fa fa-check"></i><b>5.6</b> Bias-Variance Tradeoff</a></li>
-<li class="chapter" data-level="5.7" data-path="regression-overview.html"><a href="regression-overview.html#source-4"><i class="fa fa-check"></i><b>5.7</b> Source</a></li>
+<li class="chapter" data-level="5.7" data-path="regression-overview.html"><a href="regression-overview.html#no-free-lunch"><i class="fa fa-check"></i><b>5.7</b> No Free Lunch</a></li>
+<li class="chapter" data-level="5.8" data-path="regression-overview.html"><a href="regression-overview.html#curse-of-dimensionality"><i class="fa fa-check"></i><b>5.8</b> Curse of Dimensionality</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>6</b> Classification</a><ul>
-<li class="chapter" data-level="6.1" data-path="classification.html"><a href="classification.html#reading-2"><i class="fa fa-check"></i><b>6.1</b> Reading</a></li>
-<li class="chapter" data-level="6.2" data-path="classification.html"><a href="classification.html#classification-metrics"><i class="fa fa-check"></i><b>6.2</b> Classification Metrics</a></li>
-<li class="chapter" data-level="6.3" data-path="classification.html"><a href="classification.html#source-5"><i class="fa fa-check"></i><b>6.3</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html"><i class="fa fa-check"></i><b>7</b> Nonparametric Classification</a><ul>
-<li class="chapter" data-level="7.1" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html#reading-3"><i class="fa fa-check"></i><b>7.1</b> Reading</a></li>
-<li class="chapter" data-level="7.2" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html#source-6"><i class="fa fa-check"></i><b>7.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>8</b> Logistic Regression</a><ul>
-<li class="chapter" data-level="8.1" data-path="logistic-regression.html"><a href="logistic-regression.html#reading-4"><i class="fa fa-check"></i><b>8.1</b> Reading</a></li>
-<li class="chapter" data-level="8.2" data-path="logistic-regression.html"><a href="logistic-regression.html#source-7"><i class="fa fa-check"></i><b>8.2</b> Source</a></li>
-</ul></li>
+<li class="chapter" data-level="6" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>6</b> Classification</a></li>
+<li class="chapter" data-level="7" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html"><i class="fa fa-check"></i><b>7</b> Nonparametric Classification</a></li>
+<li class="chapter" data-level="8" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>8</b> Logistic Regression</a></li>
 <li class="chapter" data-level="9" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>9</b> Binary Classification</a><ul>
-<li class="chapter" data-level="9.1" data-path="binary-classification.html"><a href="binary-classification.html#reading-5"><i class="fa fa-check"></i><b>9.1</b> Reading</a></li>
-<li class="chapter" data-level="9.2" data-path="binary-classification.html"><a href="binary-classification.html#source-8"><i class="fa fa-check"></i><b>9.2</b> Source</a></li>
+<li class="chapter" data-level="9.1" data-path="binary-classification.html"><a href="binary-classification.html#r-setup-and-source-3"><i class="fa fa-check"></i><b>9.1</b> R Setup and Source</a></li>
+<li class="chapter" data-level="9.2" data-path="binary-classification.html"><a href="binary-classification.html#breast-cancer-data"><i class="fa fa-check"></i><b>9.2</b> Breast Cancer Data</a></li>
+<li class="chapter" data-level="9.3" data-path="binary-classification.html"><a href="binary-classification.html#confusion-matrix"><i class="fa fa-check"></i><b>9.3</b> Confusion Matrix</a></li>
+<li class="chapter" data-level="9.4" data-path="binary-classification.html"><a href="binary-classification.html#binary-classification-metrics"><i class="fa fa-check"></i><b>9.4</b> Binary Classification Metrics</a></li>
+<li class="chapter" data-level="9.5" data-path="binary-classification.html"><a href="binary-classification.html#probability-cutoff"><i class="fa fa-check"></i><b>9.5</b> Probability Cutoff</a></li>
+<li class="chapter" data-level="9.6" data-path="binary-classification.html"><a href="binary-classification.html#r-packages-and-function"><i class="fa fa-check"></i><b>9.6</b> R Packages and Function</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="generative.html"><a href="generative.html"><i class="fa fa-check"></i><b>10</b> Generative Models</a><ul>
-<li class="chapter" data-level="10.1" data-path="generative.html"><a href="generative.html#reading-6"><i class="fa fa-check"></i><b>10.1</b> Reading</a></li>
+<li class="chapter" data-level="10.1" data-path="generative.html"><a href="generative.html#r-setup-and-source-4"><i class="fa fa-check"></i><b>10.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="10.2" data-path="generative.html"><a href="generative.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>10.2</b> Linear Discriminant Analysis</a></li>
 <li class="chapter" data-level="10.3" data-path="generative.html"><a href="generative.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>10.3</b> Quadratic Discriminant Analysis</a></li>
 <li class="chapter" data-level="10.4" data-path="generative.html"><a href="generative.html#naive-bayes"><i class="fa fa-check"></i><b>10.4</b> Naive Bayes</a></li>
-<li class="chapter" data-level="10.5" data-path="generative.html"><a href="generative.html#discrete-inputs"><i class="fa fa-check"></i><b>10.5</b> Discrete Inputs</a></li>
-<li class="chapter" data-level="10.6" data-path="generative.html"><a href="generative.html#source-9"><i class="fa fa-check"></i><b>10.6</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="supervised-i.html"><a href="supervised-i.html"><i class="fa fa-check"></i><b>11</b> Supervised Learning Overview I</a><ul>
-<li class="chapter" data-level="11.1" data-path="supervised-i.html"><a href="supervised-i.html#reading-7"><i class="fa fa-check"></i><b>11.1</b> Reading</a></li>
-<li class="chapter" data-level="11.2" data-path="supervised-i.html"><a href="supervised-i.html#source-10"><i class="fa fa-check"></i><b>11.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="12" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>12</b> Simulation</a><ul>
-<li class="chapter" data-level="12.1" data-path="simulation.html"><a href="simulation.html#reading-8"><i class="fa fa-check"></i><b>12.1</b> Reading</a></li>
-<li class="chapter" data-level="12.2" data-path="simulation.html"><a href="simulation.html#source-11"><i class="fa fa-check"></i><b>12.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="13" data-path="bootstrap.html"><a href="bootstrap.html"><i class="fa fa-check"></i><b>13</b> Bootstrap Resampling</a><ul>
-<li class="chapter" data-level="13.1" data-path="bootstrap.html"><a href="bootstrap.html#reading-9"><i class="fa fa-check"></i><b>13.1</b> Reading</a></li>
-<li class="chapter" data-level="13.2" data-path="bootstrap.html"><a href="bootstrap.html#source-12"><i class="fa fa-check"></i><b>13.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="14" data-path="cross-validation.html"><a href="cross-validation.html"><i class="fa fa-check"></i><b>14</b> Cross-Validation</a><ul>
-<li class="chapter" data-level="14.1" data-path="cross-validation.html"><a href="cross-validation.html#reading-10"><i class="fa fa-check"></i><b>14.1</b> Reading</a></li>
-<li class="chapter" data-level="14.2" data-path="cross-validation.html"><a href="cross-validation.html#source-13"><i class="fa fa-check"></i><b>14.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="15" data-path="supervised-ii.html"><a href="supervised-ii.html"><i class="fa fa-check"></i><b>15</b> Supervised Learning Overview II</a><ul>
-<li class="chapter" data-level="15.1" data-path="supervised-ii.html"><a href="supervised-ii.html#classification-2"><i class="fa fa-check"></i><b>15.1</b> Classification</a><ul>
-<li class="chapter" data-level="15.1.1" data-path="supervised-ii.html"><a href="supervised-ii.html#tuning"><i class="fa fa-check"></i><b>15.1.1</b> Tuning</a></li>
-</ul></li>
-<li class="chapter" data-level="15.2" data-path="supervised-ii.html"><a href="supervised-ii.html#regression-1"><i class="fa fa-check"></i><b>15.2</b> Regression</a><ul>
-<li class="chapter" data-level="15.2.1" data-path="supervised-ii.html"><a href="supervised-ii.html#methods"><i class="fa fa-check"></i><b>15.2.1</b> Methods</a></li>
-</ul></li>
-<li class="chapter" data-level="15.3" data-path="supervised-ii.html"><a href="supervised-ii.html#external-links"><i class="fa fa-check"></i><b>15.3</b> External Links</a></li>
-<li class="chapter" data-level="15.4" data-path="supervised-ii.html"><a href="supervised-ii.html#rmarkdown"><i class="fa fa-check"></i><b>15.4</b> <code>rmarkdown</code></a></li>
-</ul></li>
-<li class="chapter" data-level="16" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>16</b> Regularization</a><ul>
-<li class="chapter" data-level="16.1" data-path="regularization.html"><a href="regularization.html#reading-11"><i class="fa fa-check"></i><b>16.1</b> Reading</a></li>
-<li class="chapter" data-level="16.2" data-path="regularization.html"><a href="regularization.html#source-14"><i class="fa fa-check"></i><b>16.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="17" data-path="dimension-reduction.html"><a href="dimension-reduction.html"><i class="fa fa-check"></i><b>17</b> Dimension Reduction</a><ul>
-<li class="chapter" data-level="17.1" data-path="dimension-reduction.html"><a href="dimension-reduction.html#reading-12"><i class="fa fa-check"></i><b>17.1</b> Reading</a></li>
-<li class="chapter" data-level="17.2" data-path="dimension-reduction.html"><a href="dimension-reduction.html#source-15"><i class="fa fa-check"></i><b>17.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="18" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>18</b> Ensemble Methods</a><ul>
-<li class="chapter" data-level="18.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#reading-13"><i class="fa fa-check"></i><b>18.1</b> Reading</a></li>
-<li class="chapter" data-level="18.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#source-16"><i class="fa fa-check"></i><b>18.2</b> Source</a></li>
+<li class="chapter" data-level="10.5" data-path="generative.html"><a href="generative.html#categorical-features"><i class="fa fa-check"></i><b>10.5</b> Categorical Features</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="additional-reading.html"><a href="additional-reading.html"><i class="fa fa-check"></i><b>A</b> Additional Reading</a><ul>
@@ -269,74 +232,57 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="A.3" data-path="additional-reading.html"><a href="additional-reading.html#blog-posts"><i class="fa fa-check"></i><b>A.3</b> Blog Posts</a></li>
 <li class="chapter" data-level="A.4" data-path="additional-reading.html"><a href="additional-reading.html#miscellaneous"><i class="fa fa-check"></i><b>A.4</b> Miscellaneous</a></li>
 </ul></li>
-<li class="chapter" data-level="B" data-path="ten-rules.html"><a href="ten-rules.html"><i class="fa fa-check"></i><b>B</b> Ten Simple Rules for Success in STAT 432</a><ul>
-<li class="chapter" data-level="B.1" data-path="ten-rules.html"><a href="ten-rules.html#rule-1-there-are-no-rules"><i class="fa fa-check"></i><b>B.1</b> Rule 1: There Are No Rules</a></li>
-<li class="chapter" data-level="B.2" data-path="ten-rules.html"><a href="ten-rules.html#rule-2-read-the-syllabus"><i class="fa fa-check"></i><b>B.2</b> Rule 2: Read the Syllabus</a></li>
-<li class="chapter" data-level="B.3" data-path="ten-rules.html"><a href="ten-rules.html#rule-3-previous-learning-is-not-gospel"><i class="fa fa-check"></i><b>B.3</b> Rule 3: Previous Learning is Not Gospel</a></li>
-<li class="chapter" data-level="B.4" data-path="ten-rules.html"><a href="ten-rules.html#rule-4-all-statements-are-true"><i class="fa fa-check"></i><b>B.4</b> Rule 4: All Statements Are True</a></li>
-<li class="chapter" data-level="B.5" data-path="ten-rules.html"><a href="ten-rules.html#rule-5-dont-miss-the-forest-for-the-trees"><i class="fa fa-check"></i><b>B.5</b> Rule 5: Don’t Miss The Forest For The Trees</a></li>
-<li class="chapter" data-level="B.6" data-path="ten-rules.html"><a href="ten-rules.html#rule-6-you-will-struggle"><i class="fa fa-check"></i><b>B.6</b> Rule 6: You Will Struggle</a></li>
-<li class="chapter" data-level="B.7" data-path="ten-rules.html"><a href="ten-rules.html#rule-7-keep-it-simple"><i class="fa fa-check"></i><b>B.7</b> Rule 7: Keep It Simple</a></li>
-<li class="chapter" data-level="B.8" data-path="ten-rules.html"><a href="ten-rules.html#rule-8-rtfm"><i class="fa fa-check"></i><b>B.8</b> Rule 8: RTFM</a></li>
-<li class="chapter" data-level="B.9" data-path="ten-rules.html"><a href="ten-rules.html#rule-9-there-are-no-stupid-questions"><i class="fa fa-check"></i><b>B.9</b> Rule 9: There Are No Stupid Questions</a></li>
-<li class="chapter" data-level="B.10" data-path="ten-rules.html"><a href="ten-rules.html#rule-10-learn-by-doing"><i class="fa fa-check"></i><b>B.10</b> Rule 10: Learn By Doing</a></li>
-<li class="chapter" data-level="B.11" data-path="ten-rules.html"><a href="ten-rules.html#conclusion"><i class="fa fa-check"></i><b>B.11</b> Conclusion</a></li>
-<li class="chapter" data-level="B.12" data-path="ten-rules.html"><a href="ten-rules.html#source-17"><i class="fa fa-check"></i><b>B.12</b> Source</a></li>
+<li class="chapter" data-level="B" data-path="computing.html"><a href="computing.html"><i class="fa fa-check"></i><b>B</b> Computing</a><ul>
+<li class="chapter" data-level="B.1" data-path="computing.html"><a href="computing.html#reading"><i class="fa fa-check"></i><b>B.1</b> Reading</a></li>
+<li class="chapter" data-level="B.2" data-path="computing.html"><a href="computing.html#additional-resources"><i class="fa fa-check"></i><b>B.2</b> Additional Resources</a><ul>
+<li class="chapter" data-level="B.2.1" data-path="computing.html"><a href="computing.html#r"><i class="fa fa-check"></i><b>B.2.1</b> R</a></li>
+<li class="chapter" data-level="B.2.2" data-path="computing.html"><a href="computing.html#rstudio"><i class="fa fa-check"></i><b>B.2.2</b> RStudio</a></li>
+<li class="chapter" data-level="B.2.3" data-path="computing.html"><a href="computing.html#r-markdown"><i class="fa fa-check"></i><b>B.2.3</b> R Markdown</a></li>
 </ul></li>
-<li class="chapter" data-level="C" data-path="computing.html"><a href="computing.html"><i class="fa fa-check"></i><b>C</b> Computing</a><ul>
-<li class="chapter" data-level="C.1" data-path="computing.html"><a href="computing.html#reading-14"><i class="fa fa-check"></i><b>C.1</b> Reading</a></li>
-<li class="chapter" data-level="C.2" data-path="computing.html"><a href="computing.html#additional-resources"><i class="fa fa-check"></i><b>C.2</b> Additional Resources</a><ul>
-<li class="chapter" data-level="C.2.1" data-path="computing.html"><a href="computing.html#r"><i class="fa fa-check"></i><b>C.2.1</b> R</a></li>
-<li class="chapter" data-level="C.2.2" data-path="computing.html"><a href="computing.html#rstudio"><i class="fa fa-check"></i><b>C.2.2</b> RStudio</a></li>
-<li class="chapter" data-level="C.2.3" data-path="computing.html"><a href="computing.html#r-markdown"><i class="fa fa-check"></i><b>C.2.3</b> R Markdown</a></li>
+<li class="chapter" data-level="B.3" data-path="computing.html"><a href="computing.html#stat-432-idioms"><i class="fa fa-check"></i><b>B.3</b> STAT 432 Idioms</a><ul>
+<li class="chapter" data-level="B.3.1" data-path="computing.html"><a href="computing.html#dont-restore-old-workspaces"><i class="fa fa-check"></i><b>B.3.1</b> Don’t Restore Old Workspaces</a></li>
+<li class="chapter" data-level="B.3.2" data-path="computing.html"><a href="computing.html#r-versions"><i class="fa fa-check"></i><b>B.3.2</b> R Versions</a></li>
+<li class="chapter" data-level="B.3.3" data-path="computing.html"><a href="computing.html#packages-1"><i class="fa fa-check"></i><b>B.3.3</b> Packages</a></li>
+<li class="chapter" data-level="B.3.4" data-path="computing.html"><a href="computing.html#code-style"><i class="fa fa-check"></i><b>B.3.4</b> Code Style</a></li>
+<li class="chapter" data-level="B.3.5" data-path="computing.html"><a href="computing.html#reference-style"><i class="fa fa-check"></i><b>B.3.5</b> Reference Style</a></li>
+<li class="chapter" data-level="B.3.6" data-path="computing.html"><a href="computing.html#stat-432-r-style-overrides"><i class="fa fa-check"></i><b>B.3.6</b> STAT 432 R Style Overrides</a></li>
+<li class="chapter" data-level="B.3.7" data-path="computing.html"><a href="computing.html#stat-432-r-markdown-style"><i class="fa fa-check"></i><b>B.3.7</b> STAT 432 R Markdown Style</a></li>
+<li class="chapter" data-level="B.3.8" data-path="computing.html"><a href="computing.html#style-heuristics"><i class="fa fa-check"></i><b>B.3.8</b> Style Heuristics</a></li>
+<li class="chapter" data-level="B.3.9" data-path="computing.html"><a href="computing.html#objects-and-functions"><i class="fa fa-check"></i><b>B.3.9</b> Objects and Functions</a></li>
+<li class="chapter" data-level="B.3.10" data-path="computing.html"><a href="computing.html#print-versus-return"><i class="fa fa-check"></i><b>B.3.10</b> Print versus Return</a></li>
+<li class="chapter" data-level="B.3.11" data-path="computing.html"><a href="computing.html#help"><i class="fa fa-check"></i><b>B.3.11</b> Help</a></li>
+<li class="chapter" data-level="B.3.12" data-path="computing.html"><a href="computing.html#keyboard-shortcuts"><i class="fa fa-check"></i><b>B.3.12</b> Keyboard Shortcuts</a></li>
 </ul></li>
-<li class="chapter" data-level="C.3" data-path="computing.html"><a href="computing.html#stat-432-idioms"><i class="fa fa-check"></i><b>C.3</b> STAT 432 Idioms</a><ul>
-<li class="chapter" data-level="C.3.1" data-path="computing.html"><a href="computing.html#dont-restore-old-workspaces"><i class="fa fa-check"></i><b>C.3.1</b> Don’t Restore Old Workspaces</a></li>
-<li class="chapter" data-level="C.3.2" data-path="computing.html"><a href="computing.html#r-versions"><i class="fa fa-check"></i><b>C.3.2</b> R Versions</a></li>
-<li class="chapter" data-level="C.3.3" data-path="computing.html"><a href="computing.html#code-style"><i class="fa fa-check"></i><b>C.3.3</b> Code Style</a></li>
-<li class="chapter" data-level="C.3.4" data-path="computing.html"><a href="computing.html#reference-style"><i class="fa fa-check"></i><b>C.3.4</b> Reference Style</a></li>
-<li class="chapter" data-level="C.3.5" data-path="computing.html"><a href="computing.html#stat-432-r-style-overrides"><i class="fa fa-check"></i><b>C.3.5</b> STAT 432 R Style Overrides</a></li>
-<li class="chapter" data-level="C.3.6" data-path="computing.html"><a href="computing.html#stat-432-r-markdown-style"><i class="fa fa-check"></i><b>C.3.6</b> STAT 432 R Markdown Style</a></li>
-<li class="chapter" data-level="C.3.7" data-path="computing.html"><a href="computing.html#style-heuristics"><i class="fa fa-check"></i><b>C.3.7</b> Style Heuristics</a></li>
-<li class="chapter" data-level="C.3.8" data-path="computing.html"><a href="computing.html#objects-and-functions"><i class="fa fa-check"></i><b>C.3.8</b> Objects and Functions</a></li>
-<li class="chapter" data-level="C.3.9" data-path="computing.html"><a href="computing.html#print-versus-return"><i class="fa fa-check"></i><b>C.3.9</b> Print versus Return</a></li>
-<li class="chapter" data-level="C.3.10" data-path="computing.html"><a href="computing.html#help"><i class="fa fa-check"></i><b>C.3.10</b> Help</a></li>
-<li class="chapter" data-level="C.3.11" data-path="computing.html"><a href="computing.html#keyboard-shortcuts"><i class="fa fa-check"></i><b>C.3.11</b> Keyboard Shortcuts</a></li>
-<li class="chapter" data-level="C.3.12" data-path="computing.html"><a href="computing.html#common-issues"><i class="fa fa-check"></i><b>C.3.12</b> Common Issues</a></li>
 </ul></li>
-<li class="chapter" data-level="C.4" data-path="computing.html"><a href="computing.html#source-18"><i class="fa fa-check"></i><b>C.4</b> Source</a></li>
+<li class="chapter" data-level="C" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>C</b> Probability</a><ul>
+<li class="chapter" data-level="C.1" data-path="probability.html"><a href="probability.html#reading-1"><i class="fa fa-check"></i><b>C.1</b> Reading</a></li>
+<li class="chapter" data-level="C.2" data-path="probability.html"><a href="probability.html#probability-models"><i class="fa fa-check"></i><b>C.2</b> Probability Models</a></li>
+<li class="chapter" data-level="C.3" data-path="probability.html"><a href="probability.html#probability-axioms"><i class="fa fa-check"></i><b>C.3</b> Probability Axioms</a></li>
+<li class="chapter" data-level="C.4" data-path="probability.html"><a href="probability.html#probability-rules"><i class="fa fa-check"></i><b>C.4</b> Probability Rules</a></li>
+<li class="chapter" data-level="C.5" data-path="probability.html"><a href="probability.html#random-variables"><i class="fa fa-check"></i><b>C.5</b> Random Variables</a><ul>
+<li class="chapter" data-level="C.5.1" data-path="probability.html"><a href="probability.html#distributions"><i class="fa fa-check"></i><b>C.5.1</b> Distributions</a></li>
+<li class="chapter" data-level="C.5.2" data-path="probability.html"><a href="probability.html#discrete-random-variables"><i class="fa fa-check"></i><b>C.5.2</b> Discrete Random Variables</a></li>
+<li class="chapter" data-level="C.5.3" data-path="probability.html"><a href="probability.html#continuous-random-variables"><i class="fa fa-check"></i><b>C.5.3</b> Continuous Random Variables</a></li>
+<li class="chapter" data-level="C.5.4" data-path="probability.html"><a href="probability.html#distributions-in-r"><i class="fa fa-check"></i><b>C.5.4</b> Distributions in R</a></li>
+<li class="chapter" data-level="C.5.5" data-path="probability.html"><a href="probability.html#several-random-variables"><i class="fa fa-check"></i><b>C.5.5</b> Several Random Variables</a></li>
 </ul></li>
-<li class="chapter" data-level="D" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>D</b> Probability</a><ul>
-<li class="chapter" data-level="D.1" data-path="probability.html"><a href="probability.html#reading-15"><i class="fa fa-check"></i><b>D.1</b> Reading</a></li>
-<li class="chapter" data-level="D.2" data-path="probability.html"><a href="probability.html#probability-models"><i class="fa fa-check"></i><b>D.2</b> Probability Models</a></li>
-<li class="chapter" data-level="D.3" data-path="probability.html"><a href="probability.html#probability-axioms"><i class="fa fa-check"></i><b>D.3</b> Probability Axioms</a></li>
-<li class="chapter" data-level="D.4" data-path="probability.html"><a href="probability.html#probability-rules"><i class="fa fa-check"></i><b>D.4</b> Probability Rules</a></li>
-<li class="chapter" data-level="D.5" data-path="probability.html"><a href="probability.html#random-variables"><i class="fa fa-check"></i><b>D.5</b> Random Variables</a><ul>
-<li class="chapter" data-level="D.5.1" data-path="probability.html"><a href="probability.html#distributions"><i class="fa fa-check"></i><b>D.5.1</b> Distributions</a></li>
-<li class="chapter" data-level="D.5.2" data-path="probability.html"><a href="probability.html#discrete-random-variables"><i class="fa fa-check"></i><b>D.5.2</b> Discrete Random Variables</a></li>
-<li class="chapter" data-level="D.5.3" data-path="probability.html"><a href="probability.html#continuous-random-variables"><i class="fa fa-check"></i><b>D.5.3</b> Continuous Random Variables</a></li>
-<li class="chapter" data-level="D.5.4" data-path="probability.html"><a href="probability.html#distributions-in-r"><i class="fa fa-check"></i><b>D.5.4</b> Distributions in R</a></li>
-<li class="chapter" data-level="D.5.5" data-path="probability.html"><a href="probability.html#several-random-variables"><i class="fa fa-check"></i><b>D.5.5</b> Several Random Variables</a></li>
+<li class="chapter" data-level="C.6" data-path="probability.html"><a href="probability.html#expectations"><i class="fa fa-check"></i><b>C.6</b> Expectations</a></li>
+<li class="chapter" data-level="C.7" data-path="probability.html"><a href="probability.html#likelihood"><i class="fa fa-check"></i><b>C.7</b> Likelihood</a></li>
+<li class="chapter" data-level="C.8" data-path="probability.html"><a href="probability.html#additional-references"><i class="fa fa-check"></i><b>C.8</b> Additional References</a><ul>
+<li class="chapter" data-level="C.8.1" data-path="probability.html"><a href="probability.html#videos"><i class="fa fa-check"></i><b>C.8.1</b> Videos</a></li>
 </ul></li>
-<li class="chapter" data-level="D.6" data-path="probability.html"><a href="probability.html#expectations"><i class="fa fa-check"></i><b>D.6</b> Expectations</a></li>
-<li class="chapter" data-level="D.7" data-path="probability.html"><a href="probability.html#likelihood"><i class="fa fa-check"></i><b>D.7</b> Likelihood</a></li>
-<li class="chapter" data-level="D.8" data-path="probability.html"><a href="probability.html#references"><i class="fa fa-check"></i><b>D.8</b> References</a><ul>
-<li class="chapter" data-level="D.8.1" data-path="probability.html"><a href="probability.html#videos"><i class="fa fa-check"></i><b>D.8.1</b> Videos</a></li>
 </ul></li>
-<li class="chapter" data-level="D.9" data-path="probability.html"><a href="probability.html#source-19"><i class="fa fa-check"></i><b>D.9</b> Source</a></li>
+<li class="chapter" data-level="D" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>D</b> Statistics</a><ul>
+<li class="chapter" data-level="D.1" data-path="statistics.html"><a href="statistics.html#reading-2"><i class="fa fa-check"></i><b>D.1</b> Reading</a></li>
+<li class="chapter" data-level="D.2" data-path="statistics.html"><a href="statistics.html#statistics-1"><i class="fa fa-check"></i><b>D.2</b> Statistics</a></li>
+<li class="chapter" data-level="D.3" data-path="statistics.html"><a href="statistics.html#estimators"><i class="fa fa-check"></i><b>D.3</b> Estimators</a><ul>
+<li class="chapter" data-level="D.3.1" data-path="statistics.html"><a href="statistics.html#properties"><i class="fa fa-check"></i><b>D.3.1</b> Properties</a></li>
+<li class="chapter" data-level="D.3.2" data-path="statistics.html"><a href="statistics.html#example-mse-of-an-estimator"><i class="fa fa-check"></i><b>D.3.2</b> Example: MSE of an Estimator</a></li>
+<li class="chapter" data-level="D.3.3" data-path="statistics.html"><a href="statistics.html#estimation-methods"><i class="fa fa-check"></i><b>D.3.3</b> Estimation Methods</a></li>
+<li class="chapter" data-level="D.3.4" data-path="statistics.html"><a href="statistics.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>D.3.4</b> Maximum Likelihood Estimation</a></li>
+<li class="chapter" data-level="D.3.5" data-path="statistics.html"><a href="statistics.html#method-of-moments"><i class="fa fa-check"></i><b>D.3.5</b> Method of Moments</a></li>
+<li class="chapter" data-level="D.3.6" data-path="statistics.html"><a href="statistics.html#empirical-distribution-function"><i class="fa fa-check"></i><b>D.3.6</b> Empirical Distribution Function</a></li>
 </ul></li>
-<li class="chapter" data-level="E" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>E</b> Statistics</a><ul>
-<li class="chapter" data-level="E.1" data-path="statistics.html"><a href="statistics.html#reading-16"><i class="fa fa-check"></i><b>E.1</b> Reading</a></li>
-<li class="chapter" data-level="E.2" data-path="statistics.html"><a href="statistics.html#statistics-1"><i class="fa fa-check"></i><b>E.2</b> Statistics</a></li>
-<li class="chapter" data-level="E.3" data-path="statistics.html"><a href="statistics.html#estimators"><i class="fa fa-check"></i><b>E.3</b> Estimators</a><ul>
-<li class="chapter" data-level="E.3.1" data-path="statistics.html"><a href="statistics.html#properties"><i class="fa fa-check"></i><b>E.3.1</b> Properties</a></li>
-<li class="chapter" data-level="E.3.2" data-path="statistics.html"><a href="statistics.html#example-mse-of-an-estimator"><i class="fa fa-check"></i><b>E.3.2</b> Example: MSE of an Estimator</a></li>
-<li class="chapter" data-level="E.3.3" data-path="statistics.html"><a href="statistics.html#estimation-methods"><i class="fa fa-check"></i><b>E.3.3</b> Estimation Methods</a></li>
-<li class="chapter" data-level="E.3.4" data-path="statistics.html"><a href="statistics.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>E.3.4</b> Maximum Likelihood Estimation</a></li>
-<li class="chapter" data-level="E.3.5" data-path="statistics.html"><a href="statistics.html#method-of-moments"><i class="fa fa-check"></i><b>E.3.5</b> Method of Moments</a></li>
-<li class="chapter" data-level="E.3.6" data-path="statistics.html"><a href="statistics.html#empirical-distribution-function"><i class="fa fa-check"></i><b>E.3.6</b> Empirical Distribution Function</a></li>
-</ul></li>
-<li class="chapter" data-level="E.4" data-path="statistics.html"><a href="statistics.html#source-20"><i class="fa fa-check"></i><b>E.4</b> Source</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -361,66 +307,99 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="generative-models" class="section level1">
 <h1><span class="header-section-number">Chapter 10</span> Generative Models</h1>
-<hr />
-<p>In this chapter, we continue our discussion of classification methods. We introduce three new methods, each a <strong>generative</strong> method. This in comparison to logistic regression, which is a <strong>discriminative</strong> method.</p>
-<p>Generative methods model the joint probability, <span class="math inline">\(p(\boldsymbol{x}, y)\)</span>, often by assuming some distribution for the conditional distribution of <span class="math inline">\(\boldsymbol{X}\)</span> given <span class="math inline">\(Y\)</span>, <span class="math inline">\(f(\boldsymbol{x} \mid y)\)</span>. Bayes theorem is then applied to classify according to <span class="math inline">\(p(y \mid \boldsymbol{x})\)</span>. Discriminative methods such as logistic regression directly model this conditional, <span class="math inline">\(p(y \mid \boldsymbol{x})\)</span>. A detailed discussion and analysis can be found in <a href="https://papers.nips.cc/paper/2020-on-discriminative-vs-generative-classifiers-a-comparison-of-logistic-regression-and-naive-bayes.pdf">Ng and Jordan, 2002</a>.</p>
-<hr />
-<div id="reading-6" class="section level2">
-<h2><span class="header-section-number">10.1</span> Reading</h2>
+<p>In this chapter, we continue our discussion of classification methods. We introduce three new methods, each a <strong>generative</strong> method.</p>
+<p>Specifically, we will discuss:</p>
 <ul>
-<li><strong>Required:</strong> <a href="https://faculty.marshall.usc.edu/gareth-james/ISL/ISLR%20Seventh%20Printing.pdf">ISL Chapter 4, Sections 4</a></li>
+<li>How <strong>generative</strong> methods are different than <strong>discriminative</strong> methods like logistic regression.</li>
+<li>How generative methods model the joint probability, <span class="math inline">\(p(\boldsymbol{x}, y)\)</span>, often by assuming some distribution for the conditional distribution of <span class="math inline">\(\boldsymbol{X}\)</span> given <span class="math inline">\(Y\)</span>, <span class="math inline">\(f(\boldsymbol{x} \mid y)\)</span>.</li>
+<li>How to use Bayes theorem to classify according to <span class="math inline">\(p(y \mid \boldsymbol{x})\)</span> as compared to discriminative methods such as logistic regression directly model this conditional directly.</li>
+</ul>
+<p>Two potential additional readigns:</p>
+<ul>
+<li><a href="https://papers.nips.cc/paper/2020-on-discriminative-vs-generative-classifiers-a-comparison-of-logistic-regression-and-naive-bayes.pdf">Ng and Jordan, 2002</a>.</li>
+<li><a href="https://faculty.marshall.usc.edu/gareth-james/ISL/ISLR%20Seventh%20Printing.pdf">ISL Chapter 4, Sections 4</a></li>
 </ul>
 <hr />
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" data-line-number="1"><span class="kw">library</span>(<span class="st">&quot;MASS&quot;</span>)</a>
-<a class="sourceLine" id="cb168-2" data-line-number="2"><span class="kw">library</span>(<span class="st">&quot;tidyverse&quot;</span>)</a>
-<a class="sourceLine" id="cb168-3" data-line-number="3"><span class="kw">library</span>(<span class="st">&quot;knitr&quot;</span>)</a>
-<a class="sourceLine" id="cb168-4" data-line-number="4"><span class="kw">library</span>(<span class="st">&quot;kableExtra&quot;</span>)</a>
-<a class="sourceLine" id="cb168-5" data-line-number="5"><span class="kw">library</span>(<span class="st">&quot;klaR&quot;</span>)</a></code></pre></div>
+<div id="r-setup-and-source-4" class="section level2">
+<h2><span class="header-section-number">10.1</span> R Setup and Source</h2>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb251-1" data-line-number="1"><span class="kw">library</span>(palmerpenguins) <span class="co"># access to data</span></a>
+<a class="sourceLine" id="cb251-2" data-line-number="2"><span class="kw">library</span>(tibble)         <span class="co"># data frame printing</span></a>
+<a class="sourceLine" id="cb251-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb251-4" data-line-number="4"><span class="kw">library</span>(MASS)           <span class="co"># fitting lda and qda</span></a>
+<a class="sourceLine" id="cb251-5" data-line-number="5"><span class="kw">library</span>(klaR)           <span class="co"># fitting naive bayes</span></a>
+<a class="sourceLine" id="cb251-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb251-7" data-line-number="7"><span class="kw">library</span>(knitr)          <span class="co"># creating tables</span></a>
+<a class="sourceLine" id="cb251-8" data-line-number="8"><span class="kw">library</span>(kableExtra)     <span class="co"># styling tables</span></a></code></pre></div>
+<p>Recall that the <a href="index.html">Welcome</a> chapter contains directions for installing all necessary packages for following along with the text. The R Markdown source is provided as some code, mostly for creating plots, has been suppressed from the rendered document that you are currently reading.</p>
+<ul>
+<li><strong>R Markdown Source:</strong> <a href="generative.Rmd"><code>generative.Rmd</code></a></li>
+</ul>
 <hr />
 <p>Each of the methods in this chapter will use Bayes theorem to build a classifier.</p>
 <p><span class="math display">\[
 p_k(\boldsymbol{x}) = P(Y = k \mid \boldsymbol{X} = \boldsymbol{x}) = \frac{\pi_k \cdot f_k(\boldsymbol{x})}{\sum_{g = 1}^{G} \pi_g \cdot f_g(\boldsymbol{x})}
 \]</span></p>
-<p>We call <span class="math inline">\(p_k(\boldsymbol{x})\)</span> the <strong>posterior</strong> probability, which we will estimate then use to create classifications. The <span class="math inline">\(\pi_g\)</span> are called the <strong>prior</strong> probabilities for each possible class <span class="math inline">\(g\)</span>. That is, <span class="math inline">\(\pi_g = P(Y = g)\)</span>, unconditioned on <span class="math inline">\(\boldsymbol X\)</span>. (Here, there are <span class="math inline">\(G\)</span> possible classes, denoted <span class="math inline">\(1, 2, \ldots G\)</span>. We use <span class="math inline">\(k\)</span> to refer to a particular class.) The <span class="math inline">\(f_g(x)\)</span> are called the <strong>likelihoods</strong>, which are indexed by <span class="math inline">\(g\)</span> to denote that they are conditional on the classes. The denominator is often referred to as a <strong>normalizing constant</strong>.</p>
+<p>We call <span class="math inline">\(p_k(\boldsymbol{x})\)</span> the <strong>posterior</strong> probability, which we will estimate then use to create classifications. The <span class="math inline">\(\pi_g\)</span> are called the <strong>prior</strong> probabilities for each possible classes <span class="math inline">\(g\)</span>. That is, <span class="math inline">\(\pi_g = P(Y = g)\)</span>, unconditioned on <span class="math inline">\(\boldsymbol X\)</span>. (Here, there are <span class="math inline">\(G\)</span> possible classes, denoted <span class="math inline">\(1, 2, \ldots G\)</span>. We use <span class="math inline">\(k\)</span> to refer to a particular class.) The <span class="math inline">\(f_g(x)\)</span> are called the <strong>likelihoods</strong>, which are indexed by <span class="math inline">\(g\)</span> to denote that they are conditional on the classes. The denominator is often referred to as a <strong>normalizing constant</strong>.</p>
 <p>The methods will differ by placing different modeling assumptions on the likelihoods, <span class="math inline">\(f_g(\boldsymbol x)\)</span>. For each method, the priors could be learned from data or pre-specified.</p>
 <p>For each method, classifications are made to the class with the highest estimated posterior probability, which is equivalent to the class with the largest</p>
 <p><span class="math display">\[
 \log(\hat{\pi}_k \cdot \hat{f}_k(\boldsymbol{x})).
 \]</span></p>
 <p>By substituting the corresponding likelihoods, simplifying, and eliminating unnecessary terms, we could derive the discriminant function for each.</p>
-<p>To illustrate these new methods, we return to the iris data, which you may remember has three classes. After a test-train split, we create a number of plots to refresh our memory.</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">9</span>)</a>
-<a class="sourceLine" id="cb169-2" data-line-number="2">iris_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(iris), <span class="dt">size =</span> <span class="kw">trunc</span>(<span class="fl">0.50</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(iris)))</a>
-<a class="sourceLine" id="cb169-3" data-line-number="3"><span class="co"># iris_idx = sample(nrow(iris), size = trunc(0.10 * nrow(iris)))</span></a>
-<a class="sourceLine" id="cb169-4" data-line-number="4">iris_trn =<span class="st"> </span>iris[iris_idx, ]</a>
-<a class="sourceLine" id="cb169-5" data-line-number="5">iris_tst =<span class="st"> </span>iris[<span class="op">-</span>iris_idx, ]</a></code></pre></div>
-<p>Note that we have only performed a test-train split, so we are not validating any of these models. Also note that using 50% of the data for training is an arbitrary choice here.</p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" data-line-number="1">caret<span class="op">::</span><span class="kw">featurePlot</span>(<span class="dt">x =</span> iris_trn[, <span class="kw">c</span>(<span class="st">&quot;Sepal.Length&quot;</span>, <span class="st">&quot;Sepal.Width&quot;</span>, </a>
-<a class="sourceLine" id="cb170-2" data-line-number="2">                                    <span class="st">&quot;Petal.Length&quot;</span>, <span class="st">&quot;Petal.Width&quot;</span>)], </a>
-<a class="sourceLine" id="cb170-3" data-line-number="3">                   <span class="dt">y =</span> iris_trn<span class="op">$</span>Species,</a>
-<a class="sourceLine" id="cb170-4" data-line-number="4">                   <span class="dt">plot =</span> <span class="st">&quot;density&quot;</span>, </a>
-<a class="sourceLine" id="cb170-5" data-line-number="5">                   <span class="dt">scales =</span> <span class="kw">list</span>(<span class="dt">x =</span> <span class="kw">list</span>(<span class="dt">relation =</span> <span class="st">&quot;free&quot;</span>), </a>
-<a class="sourceLine" id="cb170-6" data-line-number="6">                                 <span class="dt">y =</span> <span class="kw">list</span>(<span class="dt">relation =</span> <span class="st">&quot;free&quot;</span>)), </a>
-<a class="sourceLine" id="cb170-7" data-line-number="7">                   <span class="dt">adjust =</span> <span class="fl">1.5</span>, </a>
-<a class="sourceLine" id="cb170-8" data-line-number="8">                   <span class="dt">pch =</span> <span class="st">&quot;|&quot;</span>, </a>
-<a class="sourceLine" id="cb170-9" data-line-number="9">                   <span class="dt">layout =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), </a>
-<a class="sourceLine" id="cb170-10" data-line-number="10">                   <span class="dt">auto.key =</span> <span class="kw">list</span>(<span class="dt">columns =</span> <span class="dv">3</span>))</a></code></pre></div>
-<p><img src="generative_files/figure-html/unnamed-chunk-2-1.png" width="768" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" data-line-number="1">caret<span class="op">::</span><span class="kw">featurePlot</span>(<span class="dt">x =</span> iris_trn[, <span class="kw">c</span>(<span class="st">&quot;Sepal.Length&quot;</span>, <span class="st">&quot;Sepal.Width&quot;</span>, </a>
-<a class="sourceLine" id="cb171-2" data-line-number="2">                                    <span class="st">&quot;Petal.Length&quot;</span>, <span class="st">&quot;Petal.Width&quot;</span>)], </a>
-<a class="sourceLine" id="cb171-3" data-line-number="3">                   <span class="dt">y =</span> iris_trn<span class="op">$</span>Species,</a>
-<a class="sourceLine" id="cb171-4" data-line-number="4">                   <span class="dt">plot =</span> <span class="st">&quot;ellipse&quot;</span>,</a>
-<a class="sourceLine" id="cb171-5" data-line-number="5">                   <span class="dt">auto.key =</span> <span class="kw">list</span>(<span class="dt">columns =</span> <span class="dv">3</span>))</a></code></pre></div>
+<p>To illustrate these new methods, we return to the Palmer penguins data, which you may remember has three classes. After a train-test and estimation-validation split, we create a number of plots to refresh our memory. Note that these splits are a bit odd in terms of proprotions. This is for illustrative purposes only.</p>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb252-1" data-line-number="1">peng =<span class="st"> </span><span class="kw">na.omit</span>(penguins)</a></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb253-1" data-line-number="1"><span class="co"># set seed</span></a>
+<a class="sourceLine" id="cb253-2" data-line-number="2"><span class="kw">set.seed</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb253-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb253-4" data-line-number="4"><span class="co"># train-test split</span></a>
+<a class="sourceLine" id="cb253-5" data-line-number="5">trn_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(peng), <span class="dt">size =</span> <span class="kw">trunc</span>(<span class="fl">0.50</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(peng)))</a>
+<a class="sourceLine" id="cb253-6" data-line-number="6">peng_trn =<span class="st"> </span>peng[trn_idx, ]</a>
+<a class="sourceLine" id="cb253-7" data-line-number="7">peng_tst =<span class="st"> </span>peng[<span class="op">-</span>trn_idx, ]</a>
+<a class="sourceLine" id="cb253-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb253-9" data-line-number="9"><span class="co"># train-test split</span></a>
+<a class="sourceLine" id="cb253-10" data-line-number="10">est_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(peng_trn), <span class="dt">size =</span> <span class="kw">trunc</span>(<span class="fl">0.50</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(peng_trn)))</a>
+<a class="sourceLine" id="cb253-11" data-line-number="11">peng_est =<span class="st"> </span>peng_trn[est_idx, ]</a>
+<a class="sourceLine" id="cb253-12" data-line-number="12">peng_val =<span class="st"> </span>peng_trn[<span class="op">-</span>est_idx, ]</a></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb254-1" data-line-number="1">caret<span class="op">::</span><span class="kw">featurePlot</span>(</a>
+<a class="sourceLine" id="cb254-2" data-line-number="2">  <span class="dt">x =</span> peng_trn[, <span class="kw">c</span>(<span class="st">&quot;bill_length_mm&quot;</span>,</a>
+<a class="sourceLine" id="cb254-3" data-line-number="3">                   <span class="st">&quot;bill_depth_mm&quot;</span>,</a>
+<a class="sourceLine" id="cb254-4" data-line-number="4">                   <span class="st">&quot;flipper_length_mm&quot;</span>,</a>
+<a class="sourceLine" id="cb254-5" data-line-number="5">                   <span class="st">&quot;body_mass_g&quot;</span>)],</a>
+<a class="sourceLine" id="cb254-6" data-line-number="6">  <span class="dt">y =</span> peng_trn<span class="op">$</span>species,</a>
+<a class="sourceLine" id="cb254-7" data-line-number="7">  <span class="dt">plot =</span> <span class="st">&quot;density&quot;</span>,</a>
+<a class="sourceLine" id="cb254-8" data-line-number="8">  <span class="dt">scales =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb254-9" data-line-number="9">    <span class="dt">x =</span> <span class="kw">list</span>(<span class="dt">relation =</span> <span class="st">&quot;free&quot;</span>),</a>
+<a class="sourceLine" id="cb254-10" data-line-number="10">    <span class="dt">y =</span> <span class="kw">list</span>(<span class="dt">relation =</span> <span class="st">&quot;free&quot;</span>)</a>
+<a class="sourceLine" id="cb254-11" data-line-number="11">  ),</a>
+<a class="sourceLine" id="cb254-12" data-line-number="12">  <span class="dt">adjust =</span> <span class="fl">1.5</span>,</a>
+<a class="sourceLine" id="cb254-13" data-line-number="13">  <span class="dt">pch =</span> <span class="st">&quot;|&quot;</span>,</a>
+<a class="sourceLine" id="cb254-14" data-line-number="14">  <span class="dt">layout =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb254-15" data-line-number="15">  <span class="dt">auto.key =</span> <span class="kw">list</span>(<span class="dt">columns =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb254-16" data-line-number="16">)</a></code></pre></div>
 <p><img src="generative_files/figure-html/unnamed-chunk-3-1.png" width="768" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" data-line-number="1">caret<span class="op">::</span><span class="kw">featurePlot</span>(<span class="dt">x =</span> iris_trn[, <span class="kw">c</span>(<span class="st">&quot;Sepal.Length&quot;</span>, <span class="st">&quot;Sepal.Width&quot;</span>, </a>
-<a class="sourceLine" id="cb172-2" data-line-number="2">                                    <span class="st">&quot;Petal.Length&quot;</span>, <span class="st">&quot;Petal.Width&quot;</span>)], </a>
-<a class="sourceLine" id="cb172-3" data-line-number="3">                   <span class="dt">y =</span> iris_trn<span class="op">$</span>Species,</a>
-<a class="sourceLine" id="cb172-4" data-line-number="4">                   <span class="dt">plot =</span> <span class="st">&quot;box&quot;</span>,</a>
-<a class="sourceLine" id="cb172-5" data-line-number="5">                   <span class="dt">scales =</span> <span class="kw">list</span>(<span class="dt">y =</span> <span class="kw">list</span>(<span class="dt">relation =</span> <span class="st">&quot;free&quot;</span>),</a>
-<a class="sourceLine" id="cb172-6" data-line-number="6">                                 <span class="dt">x =</span> <span class="kw">list</span>(<span class="dt">rot =</span> <span class="dv">90</span>)),</a>
-<a class="sourceLine" id="cb172-7" data-line-number="7">                   <span class="dt">layout =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">1</span>))</a></code></pre></div>
-<p><img src="generative_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>Especially based on the pairs plot, we see that it should not be too difficult to find a good classifier.</p>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb255-1" data-line-number="1">caret<span class="op">::</span><span class="kw">featurePlot</span>(</a>
+<a class="sourceLine" id="cb255-2" data-line-number="2">  <span class="dt">x =</span> peng_trn[, <span class="kw">c</span>(<span class="st">&quot;bill_length_mm&quot;</span>,</a>
+<a class="sourceLine" id="cb255-3" data-line-number="3">                   <span class="st">&quot;bill_depth_mm&quot;</span>,</a>
+<a class="sourceLine" id="cb255-4" data-line-number="4">                   <span class="st">&quot;flipper_length_mm&quot;</span>,</a>
+<a class="sourceLine" id="cb255-5" data-line-number="5">                   <span class="st">&quot;body_mass_g&quot;</span>)],</a>
+<a class="sourceLine" id="cb255-6" data-line-number="6">  <span class="dt">y =</span> peng_trn<span class="op">$</span>species,</a>
+<a class="sourceLine" id="cb255-7" data-line-number="7">  <span class="dt">plot =</span> <span class="st">&quot;ellipse&quot;</span>,</a>
+<a class="sourceLine" id="cb255-8" data-line-number="8">  <span class="dt">auto.key =</span> <span class="kw">list</span>(<span class="dt">columns =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb255-9" data-line-number="9">)</a></code></pre></div>
+<p><img src="generative_files/figure-html/unnamed-chunk-4-1.png" width="768" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb256-1" data-line-number="1">caret<span class="op">::</span><span class="kw">featurePlot</span>(</a>
+<a class="sourceLine" id="cb256-2" data-line-number="2">  <span class="dt">x =</span> peng_trn[, <span class="kw">c</span>(<span class="st">&quot;bill_length_mm&quot;</span>,</a>
+<a class="sourceLine" id="cb256-3" data-line-number="3">                   <span class="st">&quot;bill_depth_mm&quot;</span>,</a>
+<a class="sourceLine" id="cb256-4" data-line-number="4">                   <span class="st">&quot;flipper_length_mm&quot;</span>,</a>
+<a class="sourceLine" id="cb256-5" data-line-number="5">                   <span class="st">&quot;body_mass_g&quot;</span>)],</a>
+<a class="sourceLine" id="cb256-6" data-line-number="6">  <span class="dt">y =</span> peng_trn<span class="op">$</span>species,</a>
+<a class="sourceLine" id="cb256-7" data-line-number="7">  <span class="dt">plot =</span> <span class="st">&quot;box&quot;</span>,</a>
+<a class="sourceLine" id="cb256-8" data-line-number="8">  <span class="dt">scales =</span> <span class="kw">list</span>(<span class="dt">y =</span> <span class="kw">list</span>(<span class="dt">relation =</span> <span class="st">&quot;free&quot;</span>),</a>
+<a class="sourceLine" id="cb256-9" data-line-number="9">                <span class="dt">x =</span> <span class="kw">list</span>(<span class="dt">rot =</span> <span class="dv">90</span>)),</a>
+<a class="sourceLine" id="cb256-10" data-line-number="10">  <span class="dt">layout =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb256-11" data-line-number="11">)</a></code></pre></div>
+<p><img src="generative_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Especially based on the pairs plot, we see that it should not be too difficult to find a good classifier. Because it is so easy will we create models using only <code>bill_length_mm</code> and <code>flipper_length_mm</code> so that they will make some errors that we can discuss.</p>
 <p>Notice that we use <code>caret::featurePlot</code> to access the <code>featurePlot()</code> function without loading the entire <code>caret</code> package.</p>
 <hr />
 </div>
@@ -434,105 +413,110 @@ p_k(\boldsymbol{x}) = P(Y = k \mid \boldsymbol{X} = \boldsymbol{x}) = \frac{\pi_
 f_k(\boldsymbol{x}) = \frac{1}{(2\pi)^{p/2}|\boldsymbol\Sigma|^{1/2}}\exp\left[-\frac{1}{2}(\boldsymbol x - \boldsymbol\mu_k)^{\prime}\boldsymbol\Sigma^{-1}(\boldsymbol x - \boldsymbol\mu_k)\right]
 \]</span></p>
 <p>Notice that <span class="math inline">\(\boldsymbol\Sigma\)</span> does <strong>not</strong> depend on <span class="math inline">\(k\)</span>, that is, we are assuming the same <span class="math inline">\(\Sigma\)</span> for each class. We then use information from all the classes to estimate <span class="math inline">\(\boldsymbol\Sigma\)</span>.</p>
-<p>To fit an LDA model, we use the <code>lda()</code> function from the <code>MASS</code> package.</p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" data-line-number="1">iris_lda =<span class="st"> </span><span class="kw">lda</span>(Species <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> iris_trn)</a>
-<a class="sourceLine" id="cb173-2" data-line-number="2">iris_lda</a></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb257-1" data-line-number="1">peng_lda =<span class="st"> </span><span class="kw">lda</span>(species <span class="op">~</span><span class="st"> </span>bill_length_mm <span class="op">+</span><span class="st"> </span>flipper_length_mm, <span class="dt">data =</span> peng_est)</a>
+<a class="sourceLine" id="cb257-2" data-line-number="2">peng_lda</a></code></pre></div>
 <pre><code>## Call:
-## lda(Species ~ ., data = iris_trn)
+## lda(species ~ bill_length_mm + flipper_length_mm, data = peng_est)
 ## 
 ## Prior probabilities of groups:
-##     setosa versicolor  virginica 
-##  0.4000000  0.2933333  0.3066667 
+##    Adelie Chinstrap    Gentoo 
+## 0.4457831 0.1566265 0.3975904 
 ## 
 ## Group means:
-##            Sepal.Length Sepal.Width Petal.Length Petal.Width
-## setosa         5.033333    3.490000     1.413333   0.2466667
-## versicolor     6.068182    2.850000     4.372727   1.3636364
-## virginica      6.534783    2.986957     5.452174   2.0217391
+##           bill_length_mm flipper_length_mm
+## Adelie          39.08108          190.0000
+## Chinstrap       48.32308          194.9231
+## Gentoo          46.75152          215.9697
 ## 
 ## Coefficients of linear discriminants:
-##                     LD1        LD2
-## Sepal.Length  0.2941746 -0.4021398
-## Sepal.Width   1.5879728  1.6962530
-## Petal.Length -2.7473811 -0.9385391
-## Petal.Width  -2.3223845  3.1408028
+##                          LD1        LD2
+## bill_length_mm    0.03300363 -0.4289076
+## flipper_length_mm 0.18519532  0.1087346
 ## 
 ## Proportion of trace:
 ##    LD1    LD2 
-## 0.9959 0.0041</code></pre>
+## 0.7984 0.2016</code></pre>
 <p>Here we see the estimated <span class="math inline">\(\hat{\pi}_k\)</span> and <span class="math inline">\(\hat{\boldsymbol\mu}_k\)</span> for each class.</p>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" data-line-number="1"><span class="kw">is.list</span>(<span class="kw">predict</span>(iris_lda, iris_trn))</a></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb259-1" data-line-number="1"><span class="kw">is.list</span>(<span class="kw">predict</span>(peng_lda, peng_est))</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" data-line-number="1"><span class="kw">names</span>(<span class="kw">predict</span>(iris_lda, iris_trn))</a></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb261-1" data-line-number="1"><span class="kw">names</span>(<span class="kw">predict</span>(peng_lda, peng_est))</a></code></pre></div>
 <pre><code>## [1] &quot;class&quot;     &quot;posterior&quot; &quot;x&quot;</code></pre>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">predict</span>(iris_lda, iris_trn)<span class="op">$</span>class, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
-<pre><code>##  [1] versicolor setosa     versicolor versicolor setosa     virginica 
-##  [7] setosa     setosa     setosa     setosa    
-## Levels: setosa versicolor virginica</code></pre>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">predict</span>(iris_lda, iris_trn)<span class="op">$</span>posterior, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
-<pre><code>##           setosa   versicolor    virginica
-## 53  1.061809e-34 9.884510e-01 1.154896e-02
-## 6   1.000000e+00 9.796157e-28 7.784092e-51
-## 59  1.685242e-30 9.998375e-01 1.624818e-04
-## 83  1.971739e-22 9.999997e-01 3.057713e-07
-## 3   1.000000e+00 1.437420e-28 1.155778e-52
-## 140 1.106749e-51 1.917744e-04 9.998082e-01
-## 48  1.000000e+00 4.855435e-27 1.296275e-50
-## 30  1.000000e+00 2.216075e-24 3.964649e-47
-## 44  1.000000e+00 4.020843e-23 1.979000e-44
-## 37  1.000000e+00 3.629736e-32 1.883675e-57</code></pre>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb263-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">predict</span>(peng_lda, peng_est)<span class="op">$</span>class, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
+<pre><code>##  [1] Gentoo    Adelie    Adelie    Adelie    Adelie    Gentoo    Chinstrap
+##  [8] Adelie    Adelie    Gentoo   
+## Levels: Adelie Chinstrap Gentoo</code></pre>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb265-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">predict</span>(peng_lda, peng_est)<span class="op">$</span>posterior, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
+<pre><code>##          Adelie    Chinstrap       Gentoo
+## 1  3.106976e-03 6.281033e-06 9.968867e-01
+## 2  9.988138e-01 1.185724e-03 4.300706e-07
+## 3  9.998919e-01 1.066133e-04 1.517790e-06
+## 4  9.828029e-01 1.719710e-02 5.064431e-10
+## 5  8.222950e-01 2.184971e-03 1.755200e-01
+## 6  7.514839e-05 7.801291e-06 9.999171e-01
+## 7  3.723269e-02 9.627490e-01 1.830132e-05
+## 8  9.966890e-01 8.415898e-06 3.302621e-03
+## 9  9.999794e-01 2.016388e-05 4.025448e-07
+## 10 3.830348e-09 1.184353e-05 9.999882e-01</code></pre>
 <p>As we should come to expect, the <code>predict()</code> function operates in a new way when called on an <code>lda</code> object. By default, it returns an entire list. Within that list <code>class</code> stores the classifications and <code>posterior</code> contains the estimated probability for each class.</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" data-line-number="1">iris_lda_trn_pred =<span class="st"> </span><span class="kw">predict</span>(iris_lda, iris_trn)<span class="op">$</span>class</a>
-<a class="sourceLine" id="cb183-2" data-line-number="2">iris_lda_tst_pred =<span class="st"> </span><span class="kw">predict</span>(iris_lda, iris_tst)<span class="op">$</span>class</a></code></pre></div>
-<p>We store the predictions made on the train and test sets.</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" data-line-number="1">calc_misclass =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</a>
-<a class="sourceLine" id="cb184-2" data-line-number="2">  <span class="kw">mean</span>(actual <span class="op">!=</span><span class="st"> </span>predicted)</a>
-<a class="sourceLine" id="cb184-3" data-line-number="3">}</a></code></pre></div>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" data-line-number="1"><span class="kw">calc_misclass</span>(<span class="dt">predicted =</span> iris_lda_trn_pred, <span class="dt">actual =</span> iris_trn<span class="op">$</span>Species)</a></code></pre></div>
-<pre><code>## [1] 0</code></pre>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" data-line-number="1"><span class="kw">calc_misclass</span>(<span class="dt">predicted =</span> iris_lda_tst_pred, <span class="dt">actual =</span> iris_tst<span class="op">$</span>Species)</a></code></pre></div>
-<pre><code>## [1] 0.02666667</code></pre>
-<p>As expected, LDA performs well on both the train and test data. (Note that the “training error” here is calculated on the training data since there is no validation data. This is not how we have usually defined training error.)</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" data-line-number="1"><span class="kw">table</span>(<span class="dt">predicted =</span> iris_lda_tst_pred, <span class="dt">actual =</span> iris_tst<span class="op">$</span>Species)</a></code></pre></div>
-<pre><code>##             actual
-## predicted    setosa versicolor virginica
-##   setosa         20          0         0
-##   versicolor      0         26         0
-##   virginica       0          2        27</code></pre>
-<p>Looking at the test set, we see that we are perfectly predicting both setosa and virginica. The only error is labeling a couple versicolors as a virginica.</p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" data-line-number="1">iris_lda_flat =<span class="st"> </span><span class="kw">lda</span>(Species <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> iris_trn, <span class="dt">prior =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>) <span class="op">/</span><span class="st"> </span><span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb191-2" data-line-number="2">iris_lda_flat</a></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb267-1" data-line-number="1">peng_lda_est_pred =<span class="st"> </span><span class="kw">predict</span>(peng_lda, peng_est)<span class="op">$</span>class</a>
+<a class="sourceLine" id="cb267-2" data-line-number="2">peng_lda_val_pred =<span class="st"> </span><span class="kw">predict</span>(peng_lda, peng_val)<span class="op">$</span>class</a></code></pre></div>
+<p>We store the predictions made on the estimation and validatino sets.</p>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb268-1" data-line-number="1">calc_misclass =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</a>
+<a class="sourceLine" id="cb268-2" data-line-number="2">  <span class="kw">mean</span>(actual <span class="op">!=</span><span class="st"> </span>predicted)</a>
+<a class="sourceLine" id="cb268-3" data-line-number="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb269-1" data-line-number="1"><span class="kw">calc_misclass</span>(<span class="dt">predicted =</span> peng_lda_est_pred, <span class="dt">actual =</span> peng_est<span class="op">$</span>species)</a></code></pre></div>
+<pre><code>## [1] 0.01204819</code></pre>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb271-1" data-line-number="1"><span class="kw">calc_misclass</span>(<span class="dt">predicted =</span> peng_lda_val_pred, <span class="dt">actual =</span> peng_val<span class="op">$</span>species)</a></code></pre></div>
+<pre><code>## [1] 0.08433735</code></pre>
+<p>As expected, LDA performs well on both the estimation and validation data.</p>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb273-1" data-line-number="1"><span class="kw">table</span>(<span class="dt">predicted =</span> peng_lda_val_pred, <span class="dt">actual =</span> peng_val<span class="op">$</span>species)</a></code></pre></div>
+<pre><code>##            actual
+## predicted   Adelie Chinstrap Gentoo
+##   Adelie        31         2      0
+##   Chinstrap      1        16      0
+##   Gentoo         2         2     29</code></pre>
+<p>Looking at the validation set, we see that we are perfectly within the Gentoos.</p>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb275-1" data-line-number="1">peng_lda_flat =<span class="st"> </span><span class="kw">lda</span>(species <span class="op">~</span><span class="st"> </span>bill_length_mm <span class="op">+</span><span class="st"> </span>flipper_length_mm, </a>
+<a class="sourceLine" id="cb275-2" data-line-number="2">                    <span class="dt">data =</span> peng_est, <span class="dt">prior =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>) <span class="op">/</span><span class="st"> </span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb275-3" data-line-number="3">peng_lda_flat</a></code></pre></div>
 <pre><code>## Call:
-## lda(Species ~ ., data = iris_trn, prior = c(1, 1, 1)/3)
+## lda(species ~ bill_length_mm + flipper_length_mm, data = peng_est, 
+##     prior = c(1, 1, 1)/3)
 ## 
 ## Prior probabilities of groups:
-##     setosa versicolor  virginica 
-##  0.3333333  0.3333333  0.3333333 
+##    Adelie Chinstrap    Gentoo 
+## 0.3333333 0.3333333 0.3333333 
 ## 
 ## Group means:
-##            Sepal.Length Sepal.Width Petal.Length Petal.Width
-## setosa         5.033333    3.490000     1.413333   0.2466667
-## versicolor     6.068182    2.850000     4.372727   1.3636364
-## virginica      6.534783    2.986957     5.452174   2.0217391
+##           bill_length_mm flipper_length_mm
+## Adelie          39.08108          190.0000
+## Chinstrap       48.32308          194.9231
+## Gentoo          46.75152          215.9697
 ## 
 ## Coefficients of linear discriminants:
-##                     LD1        LD2
-## Sepal.Length  0.2950319 -0.4015112
-## Sepal.Width   1.5843501  1.6996372
-## Petal.Length -2.7453724 -0.9443988
-## Petal.Width  -2.3290804  3.1358407
+##                           LD1         LD2
+## bill_length_mm    -0.05945813 -0.42604662
+## flipper_length_mm  0.20416030  0.06662646
 ## 
 ## Proportion of trace:
 ##    LD1    LD2 
-## 0.9951 0.0049</code></pre>
+## 0.6858 0.3142</code></pre>
 <p>Instead of learning (estimating) the proportion of the three species from the data, we could instead specify them ourselves. Here we choose a uniform distributions over the possible species. We would call this a “flat” prior.</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" data-line-number="1">iris_lda_flat_trn_pred =<span class="st"> </span><span class="kw">predict</span>(iris_lda_flat, iris_trn)<span class="op">$</span>class</a>
-<a class="sourceLine" id="cb193-2" data-line-number="2">iris_lda_flat_tst_pred =<span class="st"> </span><span class="kw">predict</span>(iris_lda_flat, iris_tst)<span class="op">$</span>class</a></code></pre></div>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" data-line-number="1"><span class="kw">calc_misclass</span>(<span class="dt">predicted =</span> iris_lda_flat_trn_pred, <span class="dt">actual =</span> iris_trn<span class="op">$</span>Species)</a></code></pre></div>
-<pre><code>## [1] 0.01333333</code></pre>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" data-line-number="1"><span class="kw">calc_misclass</span>(<span class="dt">predicted =</span> iris_lda_flat_tst_pred, <span class="dt">actual =</span> iris_tst<span class="op">$</span>Species)</a></code></pre></div>
-<pre><code>## [1] 0.01333333</code></pre>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb277-1" data-line-number="1">peng_lda_flat_est_pred =<span class="st"> </span><span class="kw">predict</span>(peng_lda_flat, peng_est)<span class="op">$</span>class</a>
+<a class="sourceLine" id="cb277-2" data-line-number="2">peng_lda_flat_val_pred =<span class="st"> </span><span class="kw">predict</span>(peng_lda_flat, peng_val)<span class="op">$</span>class</a></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb278-1" data-line-number="1"><span class="kw">calc_misclass</span>(<span class="dt">predicted =</span> peng_lda_flat_est_pred, <span class="dt">actual =</span> peng_est<span class="op">$</span>species)</a></code></pre></div>
+<pre><code>## [1] 0.01204819</code></pre>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb280-1" data-line-number="1"><span class="kw">calc_misclass</span>(<span class="dt">predicted =</span> peng_lda_flat_val_pred, <span class="dt">actual =</span> peng_val<span class="op">$</span>species)</a></code></pre></div>
+<pre><code>## [1] 0.07228916</code></pre>
 <p>This actually gives a better test accuracy! In practice, this could be useful if you have prior knowledge about the future proportions of the response variable.</p>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb282-1" data-line-number="1"><span class="kw">table</span>(peng_val<span class="op">$</span>species) <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(peng_val<span class="op">$</span>species)</a></code></pre></div>
+<pre><code>## 
+##    Adelie Chinstrap    Gentoo 
+## 0.4096386 0.2409639 0.3493976</code></pre>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb284-1" data-line-number="1">peng_lda<span class="op">$</span>prior</a></code></pre></div>
+<pre><code>##    Adelie Chinstrap    Gentoo 
+## 0.4457831 0.1566265 0.3975904</code></pre>
+<p>Looking at the above, we see this makes sense. In the validation data, the proportions of the classes are closer to flat. However, you should not use this information to choose your prior in practice. That would be cheating. If you have other information that suggests you should try this, then go right ahead.</p>
 <hr />
 </div>
 <div id="quadratic-discriminant-analysis" class="section level2">
@@ -545,37 +529,36 @@ f_k(\boldsymbol{x}) = \frac{1}{(2\pi)^{p/2}|\boldsymbol\Sigma|^{1/2}}\exp\left[-
 f_k(\boldsymbol x) = \frac{1}{(2\pi)^{p/2}|\boldsymbol\Sigma_k|^{1/2}}\exp\left[-\frac{1}{2}(\boldsymbol x - \boldsymbol\mu_k)^{\prime}\boldsymbol\Sigma_{k}^{-1}(\boldsymbol x - \boldsymbol\mu_k)\right]
 \]</span></p>
 <p>Notice that now <span class="math inline">\(\boldsymbol\Sigma_k\)</span> <strong>does</strong> depend on <span class="math inline">\(k\)</span>, that is, we are allowing a different <span class="math inline">\(\boldsymbol\Sigma_k\)</span> for each class. We only use information from class <span class="math inline">\(k\)</span> to estimate <span class="math inline">\(\Sigma_k\)</span>.</p>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" data-line-number="1">iris_qda =<span class="st"> </span><span class="kw">qda</span>(Species <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> iris_trn)</a>
-<a class="sourceLine" id="cb198-2" data-line-number="2">iris_qda</a></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb286-1" data-line-number="1">peng_qda =<span class="st"> </span><span class="kw">qda</span>(species <span class="op">~</span><span class="st"> </span>bill_length_mm <span class="op">+</span><span class="st"> </span>flipper_length_mm, <span class="dt">data =</span> peng_est)</a>
+<a class="sourceLine" id="cb286-2" data-line-number="2">peng_qda</a></code></pre></div>
 <pre><code>## Call:
-## qda(Species ~ ., data = iris_trn)
+## qda(species ~ bill_length_mm + flipper_length_mm, data = peng_est)
 ## 
 ## Prior probabilities of groups:
-##     setosa versicolor  virginica 
-##  0.4000000  0.2933333  0.3066667 
+##    Adelie Chinstrap    Gentoo 
+## 0.4457831 0.1566265 0.3975904 
 ## 
 ## Group means:
-##            Sepal.Length Sepal.Width Petal.Length Petal.Width
-## setosa         5.033333    3.490000     1.413333   0.2466667
-## versicolor     6.068182    2.850000     4.372727   1.3636364
-## virginica      6.534783    2.986957     5.452174   2.0217391</code></pre>
+##           bill_length_mm flipper_length_mm
+## Adelie          39.08108          190.0000
+## Chinstrap       48.32308          194.9231
+## Gentoo          46.75152          215.9697</code></pre>
 <p>Here the output is similar to LDA, again giving the estimated <span class="math inline">\(\hat{\pi}_k\)</span> and <span class="math inline">\(\hat{\boldsymbol\mu}_k\)</span> for each class. Like <code>lda()</code>, the <code>qda()</code> function is found in the <code>MASS</code> package.</p>
-<p>Consider trying to fit QDA again, but this time with a smaller training set. (Use the commented line above to obtain a smaller test set.) This will cause an error because there are not enough observations within each class to estimate the large number of parameters in the <span class="math inline">\(\boldsymbol\Sigma_k\)</span> matrices. This is less of a problem with LDA, since all observations, no matter the class, are being use to estimate the shared <span class="math inline">\(\boldsymbol\Sigma\)</span> matrix.</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" data-line-number="1">iris_qda_trn_pred =<span class="st"> </span><span class="kw">predict</span>(iris_qda, iris_trn)<span class="op">$</span>class</a>
-<a class="sourceLine" id="cb200-2" data-line-number="2">iris_qda_tst_pred =<span class="st"> </span><span class="kw">predict</span>(iris_qda, iris_tst)<span class="op">$</span>class</a></code></pre></div>
+<p>Consider trying to fit QDA again, but this time with a <em>very small</em> estimation set. This will cause an error because there are not enough observations within each class to estimate the large number of parameters in the <span class="math inline">\(\boldsymbol\Sigma_k\)</span> matrices. This is less of a problem with LDA, since all observations, no matter the class, are being use to estimate the shared <span class="math inline">\(\boldsymbol\Sigma\)</span> matrix.</p>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb288-1" data-line-number="1">peng_qda_est_pred =<span class="st"> </span><span class="kw">predict</span>(peng_qda, peng_est)<span class="op">$</span>class</a>
+<a class="sourceLine" id="cb288-2" data-line-number="2">peng_qda_val_pred =<span class="st"> </span><span class="kw">predict</span>(peng_qda, peng_val)<span class="op">$</span>class</a></code></pre></div>
 <p>The <code>predict()</code> function operates the same as the <code>predict()</code> function for LDA.</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" data-line-number="1"><span class="kw">calc_misclass</span>(<span class="dt">predicted =</span> iris_qda_trn_pred, <span class="dt">actual =</span> iris_trn<span class="op">$</span>Species)</a></code></pre></div>
-<pre><code>## [1] 0.01333333</code></pre>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" data-line-number="1"><span class="kw">calc_misclass</span>(<span class="dt">predicted =</span> iris_qda_tst_pred, <span class="dt">actual =</span> iris_tst<span class="op">$</span>Species)</a></code></pre></div>
-<pre><code>## [1] 0.02666667</code></pre>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" data-line-number="1"><span class="kw">table</span>(<span class="dt">predicted =</span> iris_qda_tst_pred, <span class="dt">actual =</span> iris_tst<span class="op">$</span>Species)</a></code></pre></div>
-<pre><code>##             actual
-## predicted    setosa versicolor virginica
-##   setosa         20          0         0
-##   versicolor      0         26         0
-##   virginica       0          2        27</code></pre>
-<p>Here we see that QDA has similar performance to LDA. This is somewhat surprising, as we can see from the plots above that the covariance matrix for each class is likely not the same. In this case, we would sort of assume that LDA is too restrictive a model as it assumes the same covariance within each class. (It is likely due to the high seperation of the data that this doesn’t make much of a difference. Also, random chance as we’re not dealing with a lot of data.)</p>
-<p>Since QDA is a more complex model than LDA (it has many more parameters), QDA is more likely to overfit than LDA. (Although, that does not seem to have happened here.)</p>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb289-1" data-line-number="1"><span class="kw">calc_misclass</span>(<span class="dt">predicted =</span> peng_qda_est_pred, <span class="dt">actual =</span> peng_est<span class="op">$</span>species)</a></code></pre></div>
+<pre><code>## [1] 0.01204819</code></pre>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb291-1" data-line-number="1"><span class="kw">calc_misclass</span>(<span class="dt">predicted =</span> peng_qda_val_pred, <span class="dt">actual =</span> peng_val<span class="op">$</span>species)</a></code></pre></div>
+<pre><code>## [1] 0.09638554</code></pre>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb293-1" data-line-number="1"><span class="kw">table</span>(<span class="dt">predicted =</span> peng_qda_val_pred, <span class="dt">actual =</span> peng_val<span class="op">$</span>species)</a></code></pre></div>
+<pre><code>##            actual
+## predicted   Adelie Chinstrap Gentoo
+##   Adelie        30         1      0
+##   Chinstrap      1        16      0
+##   Gentoo         3         3     29</code></pre>
+<p>Here we see that QDA has similar performance to LDA, but a little worse. This isn’t too surprising as based on the plots, the covariance within each of the classes seems similar. QDA may be too flexible here. Since QDA is a more flexible model than LDA (it has many more parameters), QDA is more likely to overfit than LDA.</p>
 <p>Also note that, QDA creates quadratic decision boundaries, while LDA creates linear decision boundaries. We could also add quadratic terms to LDA to allow it to create quadratic decision boundaries.</p>
 <hr />
 </div>
@@ -585,7 +568,7 @@ f_k(\boldsymbol x) = \frac{1}{(2\pi)^{p/2}|\boldsymbol\Sigma_k|^{1/2}}\exp\left[
 <p><span class="math display">\[
 {\boldsymbol X} \mid Y = k \sim N(\boldsymbol\mu_k, \boldsymbol\Sigma_k)
 \]</span></p>
-<p>Naive Bayes assumes that the features <span class="math inline">\(X_1, X_2, \ldots, X_p\)</span> are independent. This is the “naive” part of naive Bayes. The Bayes part is nothing new. Since <span class="math inline">\(X_1, X_2, \ldots, X_p\)</span> are assumed independent, each <span class="math inline">\(\boldsymbol\Sigma_k\)</span> is diagonal, that is, we assume no correlation between features. Independence implies zero correlation.</p>
+<p>Naive Bayes assumes that the features <span class="math inline">\(X_1, X_2, \ldots, X_p\)</span> are independent given <span class="math inline">\(Y = k\)</span>. This is the “naive” part of naive Bayes. The Bayes part is nothing new. Since <span class="math inline">\(X_1, X_2, \ldots, X_p\)</span> are assumed independent, each <span class="math inline">\(\boldsymbol\Sigma_k\)</span> is diagonal, that is, we assume no correlation between features. Independence implies zero correlation.</p>
 <p>This will allow us to write the (joint) likelihood as a product of univariate distributions. In this case, the product of univariate normal distributions instead of a (joint) multivariate distribution.</p>
 <p><span class="math display">\[
 f_k(\boldsymbol x) = \prod_{j = 1}^{p} f_{kj}(\boldsymbol x_j)
@@ -595,62 +578,50 @@ f_k(\boldsymbol x) = \prod_{j = 1}^{p} f_{kj}(\boldsymbol x_j)
 f_{kj}(\boldsymbol x_j) = \frac{1}{\sigma_{kj}\sqrt{2\pi}}\exp\left[-\frac{1}{2}\left(\frac{x_j - \mu_{kj}}{\sigma_{kj}}\right)^2\right]
 \]</span></p>
 <p>When <span class="math inline">\(p = 1\)</span>, this version of naive Bayes is equivalent to QDA.</p>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" data-line-number="1">iris_nb =<span class="st"> </span><span class="kw">NaiveBayes</span>(Species <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> iris_trn)</a></code></pre></div>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" data-line-number="1">iris_nb<span class="op">$</span>apriori</a></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb295-1" data-line-number="1">peng_nb =<span class="st"> </span><span class="kw">NaiveBayes</span>(species <span class="op">~</span><span class="st"> </span>bill_length_mm <span class="op">+</span><span class="st"> </span>flipper_length_mm, <span class="dt">data =</span> peng_est)</a></code></pre></div>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb296-1" data-line-number="1">peng_nb<span class="op">$</span>apriori</a></code></pre></div>
 <pre><code>## grouping
-##     setosa versicolor  virginica 
-##  0.4000000  0.2933333  0.3066667</code></pre>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" data-line-number="1">iris_nb<span class="op">$</span>tables</a></code></pre></div>
-<pre><code>## $Sepal.Length
-##                [,1]      [,2]
-## setosa     5.033333 0.4113337
-## versicolor 6.068182 0.5454455
-## virginica  6.534783 0.4744458
+##    Adelie Chinstrap    Gentoo 
+## 0.4457831 0.1566265 0.3975904</code></pre>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb298-1" data-line-number="1">peng_nb<span class="op">$</span>tables</a></code></pre></div>
+<pre><code>## $bill_length_mm
+##               [,1]     [,2]
+## Adelie    39.08108 2.560907
+## Chinstrap 48.32308 2.120595
+## Gentoo    46.75152 2.768474
 ## 
-## $Sepal.Width
-##                [,1]      [,2]
-## setosa     3.490000 0.4293941
-## versicolor 2.850000 0.3661251
-## virginica  2.986957 0.2881041
-## 
-## $Petal.Length
-##                [,1]      [,2]
-## setosa     1.413333 0.1696514
-## versicolor 4.372727 0.4014045
-## virginica  5.452174 0.4176444
-## 
-## $Petal.Width
-##                 [,1]      [,2]
-## setosa     0.2466667 0.1074255
-## versicolor 1.3636364 0.1890967
-## virginica  2.0217391 0.3302293</code></pre>
-<p>Many packages implement naive Bayes. Here we choose to use <code>NaiveBayes()</code> from the package <code>klaR</code>.</p>
-<p>The output from <code>iris_nb$tables</code> gives the mean and standard deviation of the normal distribution for each feature in each class. Notice how these mean estimates match those for LDA and QDA above.</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">predict</span>(iris_nb, iris_trn)<span class="op">$</span>class)</a></code></pre></div>
-<pre><code>##         53          6         59         83          3        140 
-## versicolor     setosa versicolor versicolor     setosa  virginica 
-## Levels: setosa versicolor virginica</code></pre>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">predict</span>(iris_nb, iris_trn)<span class="op">$</span>posterior)</a></code></pre></div>
-<pre><code>##            setosa   versicolor    virginica
-## 53  5.055141e-125 5.374900e-01 4.625100e-01
-## 6    1.000000e+00 1.766595e-17 2.305313e-26
-## 59  1.128364e-100 9.819623e-01 1.803765e-02
-## 83   1.309820e-64 9.999750e-01 2.495426e-05
-## 3    1.000000e+00 1.148004e-23 1.144944e-32
-## 140 7.356900e-189 8.546334e-06 9.999915e-01</code></pre>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" data-line-number="1">iris_nb_trn_pred =<span class="st"> </span><span class="kw">predict</span>(iris_nb, iris_trn)<span class="op">$</span>class</a>
-<a class="sourceLine" id="cb216-2" data-line-number="2">iris_nb_tst_pred =<span class="st"> </span><span class="kw">predict</span>(iris_nb, iris_tst)<span class="op">$</span>class</a></code></pre></div>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" data-line-number="1"><span class="kw">calc_misclass</span>(<span class="dt">predicted =</span> iris_nb_trn_pred, <span class="dt">actual =</span> iris_trn<span class="op">$</span>Species)</a></code></pre></div>
-<pre><code>## [1] 0.04</code></pre>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" data-line-number="1"><span class="kw">calc_misclass</span>(<span class="dt">predicted =</span> iris_nb_tst_pred, <span class="dt">actual =</span> iris_tst<span class="op">$</span>Species)</a></code></pre></div>
-<pre><code>## [1] 0.04</code></pre>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" data-line-number="1"><span class="kw">table</span>(<span class="dt">predicted =</span> iris_nb_tst_pred, <span class="dt">actual =</span> iris_tst<span class="op">$</span>Species)</a></code></pre></div>
-<pre><code>##             actual
-## predicted    setosa versicolor virginica
-##   setosa         20          0         0
-##   versicolor      0         26         1
-##   virginica       0          2        26</code></pre>
-<p>Like LDA, naive Bayes is having trouble with virginica.</p>
+## $flipper_length_mm
+##               [,1]     [,2]
+## Adelie    190.0000 4.960959
+## Chinstrap 194.9231 3.729646
+## Gentoo    215.9697 5.849599</code></pre>
+<p>Many packages implement naive Bayes. Here we choose to use <code>NaiveBayes()</code> from the package <code>klaR</code>. The output from <code>peng_nb$tables</code> gives the mean and standard deviation of the normal distribution for each feature in each class. Notice how these mean estimates match those for LDA and QDA above.</p>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb300-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">predict</span>(peng_nb, peng_est)<span class="op">$</span>class)</a></code></pre></div>
+<pre><code>## [1] Gentoo Adelie Adelie Adelie Adelie Gentoo
+## Levels: Adelie Chinstrap Gentoo</code></pre>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb302-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">predict</span>(peng_nb, peng_est)<span class="op">$</span>posterior)</a></code></pre></div>
+<pre><code>##            Adelie    Chinstrap       Gentoo
+## [1,] 1.617414e-03 1.961748e-05 9.983630e-01
+## [2,] 9.999804e-01 1.929359e-05 2.701873e-07
+## [3,] 9.999974e-01 2.282747e-06 2.994029e-07
+## [4,] 9.999981e-01 1.857175e-06 2.992396e-09
+## [5,] 8.417837e-01 1.069401e-02 1.475223e-01
+## [6,] 3.308450e-06 2.470560e-06 9.999942e-01</code></pre>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb304-1" data-line-number="1">peng_nb_est_pred =<span class="st"> </span><span class="kw">predict</span>(peng_nb, peng_est)<span class="op">$</span>class</a>
+<a class="sourceLine" id="cb304-2" data-line-number="2">peng_nb_val_pred =<span class="st"> </span><span class="kw">predict</span>(peng_nb, peng_val)<span class="op">$</span>class</a></code></pre></div>
+<pre><code>## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 46</code></pre>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb306-1" data-line-number="1"><span class="kw">calc_misclass</span>(<span class="dt">predicted =</span> peng_nb_est_pred, <span class="dt">actual =</span> peng_est<span class="op">$</span>species)</a></code></pre></div>
+<pre><code>## [1] 0.01204819</code></pre>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb308-1" data-line-number="1"><span class="kw">calc_misclass</span>(<span class="dt">predicted =</span> peng_nb_val_pred, <span class="dt">actual =</span> peng_val<span class="op">$</span>species)</a></code></pre></div>
+<pre><code>## [1] 0.1325301</code></pre>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb310-1" data-line-number="1"><span class="kw">table</span>(<span class="dt">predicted =</span> peng_nb_val_pred, <span class="dt">actual =</span> peng_val<span class="op">$</span>species)</a></code></pre></div>
+<pre><code>##            actual
+## predicted   Adelie Chinstrap Gentoo
+##   Adelie        31         2      0
+##   Chinstrap      1        12      0
+##   Gentoo         2         6     29</code></pre>
+<p>Here we see worse performance again.</p>
 <table>
 <thead>
 <tr>
@@ -661,7 +632,7 @@ Method
 Train Error
 </th>
 <th style="text-align:right;">
-Test Error
+Validation Error
 </th>
 </tr>
 </thead>
@@ -671,10 +642,10 @@ Test Error
 LDA
 </td>
 <td style="text-align:right;">
-0.0000000
+0.0120482
 </td>
 <td style="text-align:right;">
-0.0266667
+0.0843373
 </td>
 </tr>
 <tr>
@@ -682,10 +653,10 @@ LDA
 LDA, Flat Prior
 </td>
 <td style="text-align:right;">
-0.0133333
+0.0120482
 </td>
 <td style="text-align:right;">
-0.0133333
+0.0722892
 </td>
 </tr>
 <tr>
@@ -693,10 +664,10 @@ LDA, Flat Prior
 QDA
 </td>
 <td style="text-align:right;">
-0.0133333
+0.0120482
 </td>
 <td style="text-align:right;">
-0.0266667
+0.0963855
 </td>
 </tr>
 <tr>
@@ -704,91 +675,79 @@ QDA
 Naive Bayes
 </td>
 <td style="text-align:right;">
-0.0400000
+0.0120482
 </td>
 <td style="text-align:right;">
-0.0400000
+0.1325301
 </td>
 </tr>
 </tbody>
 </table>
-<p>Summarizing the results, we see that Naive Bayes is the worst of LDA, QDA, and NB for this data. So why should we care about naive Bayes?</p>
+<p>Summarizing the results, we see that Naive Bayes is the worst of LDA, QDA, and NB for this data. This isn’t surprising as there is clear dependence within the features. So why should we care about naive Bayes?</p>
 <p>The strength of Naive Bayes comes from its ability to handle a large number of features, <span class="math inline">\(p\)</span>, even with a limited sample size <span class="math inline">\(n\)</span>. Even with the naive independence assumption, Naive Bayes works rather well in practice. Also because of this assumption, we can often train naive Bayes where LDA and QDA may be impossible to train because of the large number of parameters relative to the number of observations.</p>
 <p>Here naive Bayes doesn’t get a chance to show its strength since LDA and QDA already perform well, and the number of features is low. The choice between LDA and QDA is mostly down to a consideration about the amount of complexity needed. (Also note that complexity within these models can also be altered by changing the features used. More features generally means a more flexible model.)</p>
 <hr />
 </div>
-<div id="discrete-inputs" class="section level2">
-<h2><span class="header-section-number">10.5</span> Discrete Inputs</h2>
-<p>So far, we have assumed that all features are numeric. What happens with categorical features?</p>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" data-line-number="1"><span class="co"># create &quot;new&quot; dataset</span></a>
-<a class="sourceLine" id="cb223-2" data-line-number="2">iris_trn_mod =<span class="st"> </span>iris_trn</a>
-<a class="sourceLine" id="cb223-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb223-4" data-line-number="4"><span class="co"># made Sepal.Width categorical</span></a>
-<a class="sourceLine" id="cb223-5" data-line-number="5">iris_trn_mod<span class="op">$</span>Sepal.Width =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">ifelse</span>(iris_trn<span class="op">$</span>Sepal.Width <span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>,</a>
-<a class="sourceLine" id="cb223-6" data-line-number="6">                                  <span class="kw">ifelse</span>(iris_trn<span class="op">$</span>Sepal.Width <span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span>,</a>
-<a class="sourceLine" id="cb223-7" data-line-number="7">                                         <span class="st">&quot;Large&quot;</span>, <span class="st">&quot;Medium&quot;</span>),</a>
-<a class="sourceLine" id="cb223-8" data-line-number="8">                                  <span class="st">&quot;Small&quot;</span>))</a>
-<a class="sourceLine" id="cb223-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb223-10" data-line-number="10"><span class="co"># check levels of factor</span></a>
-<a class="sourceLine" id="cb223-11" data-line-number="11"><span class="kw">levels</span>(iris_trn_mod<span class="op">$</span>Sepal.Width)</a></code></pre></div>
-<pre><code>## [1] &quot;Large&quot;  &quot;Medium&quot; &quot;Small&quot;</code></pre>
-<p>Here we make a new dataset where <code>Sepal.Width</code> is categorical, with levels <code>Small</code>, <code>Medium</code>, and <code>Large</code>. We then try to train classifiers using only the sepal variables.</p>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb225-1" data-line-number="1"><span class="kw">NaiveBayes</span>(Species <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>Sepal.Width, <span class="dt">data =</span> iris_trn_mod)<span class="op">$</span>tables</a></code></pre></div>
-<pre><code>## $Sepal.Length
-##                [,1]      [,2]
-## setosa     5.033333 0.4113337
-## versicolor 6.068182 0.5454455
-## virginica  6.534783 0.4744458
+<div id="categorical-features" class="section level2">
+<h2><span class="header-section-number">10.5</span> Categorical Features</h2>
+<p>So far, we have assumed that all features are numeric. What happens with categorical features? Let’s add the <code>sex</code> variable which is categorical.</p>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb312-1" data-line-number="1"><span class="kw">NaiveBayes</span>(species <span class="op">~</span><span class="st"> </span>bill_length_mm <span class="op">+</span><span class="st"> </span>flipper_length_mm <span class="op">+</span><span class="st"> </span>sex, <span class="dt">data =</span> peng_est)<span class="op">$</span>tables</a></code></pre></div>
+<pre><code>## $bill_length_mm
+##               [,1]     [,2]
+## Adelie    39.08108 2.560907
+## Chinstrap 48.32308 2.120595
+## Gentoo    46.75152 2.768474
 ## 
-## $Sepal.Width
-##             var
-## grouping         Large    Medium     Small
-##   setosa     0.1000000 0.7666667 0.1333333
-##   versicolor 0.0000000 0.3181818 0.6818182
-##   virginica  0.0000000 0.4347826 0.5652174</code></pre>
+## $flipper_length_mm
+##               [,1]     [,2]
+## Adelie    190.0000 4.960959
+## Chinstrap 194.9231 3.729646
+## Gentoo    215.9697 5.849599
+## 
+## $sex
+##            var
+## grouping       female      male
+##   Adelie    0.5405405 0.4594595
+##   Chinstrap 0.4615385 0.5384615
+##   Gentoo    0.5757576 0.4242424</code></pre>
 <p>Naive Bayes makes a somewhat obvious and intelligent choice to model the categorical variable as a multinomial. It then estimates the probability parameters of a multinomial distribution.</p>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb227-1" data-line-number="1"><span class="kw">lda</span>(Species <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>Sepal.Width, <span class="dt">data =</span> iris_trn_mod)</a></code></pre></div>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb314-1" data-line-number="1"><span class="kw">lda</span>(species <span class="op">~</span><span class="st"> </span>bill_length_mm <span class="op">+</span><span class="st"> </span>flipper_length_mm <span class="op">+</span><span class="st"> </span>sex, <span class="dt">data =</span> peng_est)</a></code></pre></div>
 <pre><code>## Call:
-## lda(Species ~ Sepal.Length + Sepal.Width, data = iris_trn_mod)
+## lda(species ~ bill_length_mm + flipper_length_mm + sex, data = peng_est)
 ## 
 ## Prior probabilities of groups:
-##     setosa versicolor  virginica 
-##  0.4000000  0.2933333  0.3066667 
+##    Adelie Chinstrap    Gentoo 
+## 0.4457831 0.1566265 0.3975904 
 ## 
 ## Group means:
-##            Sepal.Length Sepal.WidthMedium Sepal.WidthSmall
-## setosa         5.033333         0.7666667        0.1333333
-## versicolor     6.068182         0.3181818        0.6818182
-## virginica      6.534783         0.4347826        0.5652174
+##           bill_length_mm flipper_length_mm   sexmale
+## Adelie          39.08108          190.0000 0.4594595
+## Chinstrap       48.32308          194.9231 0.5384615
+## Gentoo          46.75152          215.9697 0.4242424
 ## 
 ## Coefficients of linear discriminants:
-##                        LD1        LD2
-## Sepal.Length      2.259576  0.6833882
-## Sepal.WidthMedium 1.531021 -0.5070114
-## Sepal.WidthSmall  3.119457 -2.3385379
+##                          LD1        LD2
+## bill_length_mm     0.2652470 -0.4650328
+## flipper_length_mm  0.1800828  0.1383358
+## sexmale           -1.8987355  0.7946053
 ## 
 ## Proportion of trace:
 ##    LD1    LD2 
-## 0.9879 0.0121</code></pre>
-<p>LDA (and QDA) however creates dummy variables, here with <code>Large</code> as the reference level, then continues to model them as normally distributed. Not great, but better then not using a categorical variable.</p>
-<hr />
-</div>
-<div id="source-9" class="section level2">
-<h2><span class="header-section-number">10.6</span> Source</h2>
-<ul>
-<li><code>R</code> Markdown: <a href="generative.Rmd"><code>generative.Rmd</code></a></li>
-</ul>
-<hr />
+## 0.8527 0.1473</code></pre>
+<p>LDA (and QDA) however creates dummy variables, here with <code>male</code> as the reference level, then continues to model them as normally distributed. Not great, but better then not using a categorical variable.</p>
 
 </div>
 </div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
 <a href="binary-classification.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="supervised-i.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="additional-reading.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

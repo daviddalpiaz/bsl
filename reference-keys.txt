@@ -78,6 +78,12 @@ confusion-matrix
 binary-classification-metrics
 probability-cutoff
 r-packages-and-function
+generative-models
+r-setup-and-source-4
+linear-discriminant-analysis
+quadratic-discriminant-analysis
+naive-bayes
+categorical-features
 additional-reading
 books
 papers
