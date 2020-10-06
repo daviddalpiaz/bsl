@@ -17,7 +17,8 @@ Imports:
   ellipse,
   gbm,
   cvms,
-  ucidata
+  ucidata,
+  palmerpenguins
 Remotes:
   coatless/ucidata,
   rstudio/bookdown
