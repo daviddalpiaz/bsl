@@ -122,17 +122,19 @@ The following will install all R packages needed to follow along with the text.
 
 ```{r, eval = FALSE}
 install.packages(
-  "tidyverse",
-  "kableExtra",
-  "GGally",
-  "ISLR",
-  "klaR",
-  "rpart",
-  "rpart.plot",
-  "caret",
-  "ellipse",
-  "gbm",
-  "cvms"
+  c(
+    "tidyverse",
+    "kableExtra",
+    "GGally",
+    "ISLR",
+    "klaR",
+    "rpart",
+    "rpart.plot",
+    "caret",
+    "ellipse",
+    "gbm",
+    "cvms"
+  )
 )
 
 remotes::install_github("coatless/ucidata")

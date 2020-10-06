@@ -49,6 +49,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -369,7 +371,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="when" class="section level2">
 <h2><span class="header-section-number">0.5</span> When?</h2>
-<p>This book was last updated on: 2020-10-02.<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a></p>
+<p>This book was last updated on: 2020-10-06.<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a></p>
 </div>
 <div id="how" class="section level2">
 <h2><span class="header-section-number">0.6</span> How?</h2>
@@ -390,20 +392,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">0.6.3</span> Packages</h3>
 <p>The following will install all R packages needed to follow along with the text.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>(</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="st">&quot;tidyverse&quot;</span>,</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="st">&quot;kableExtra&quot;</span>,</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">  <span class="st">&quot;GGally&quot;</span>,</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">  <span class="st">&quot;ISLR&quot;</span>,</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">  <span class="st">&quot;klaR&quot;</span>,</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">  <span class="st">&quot;rpart&quot;</span>,</a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">  <span class="st">&quot;rpart.plot&quot;</span>,</a>
-<a class="sourceLine" id="cb1-9" data-line-number="9">  <span class="st">&quot;caret&quot;</span>,</a>
-<a class="sourceLine" id="cb1-10" data-line-number="10">  <span class="st">&quot;ellipse&quot;</span>,</a>
-<a class="sourceLine" id="cb1-11" data-line-number="11">  <span class="st">&quot;gbm&quot;</span>,</a>
-<a class="sourceLine" id="cb1-12" data-line-number="12">  <span class="st">&quot;cvms&quot;</span></a>
-<a class="sourceLine" id="cb1-13" data-line-number="13">)</a>
-<a class="sourceLine" id="cb1-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb1-15" data-line-number="15">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;coatless/ucidata&quot;</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">    <span class="st">&quot;tidyverse&quot;</span>,</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">    <span class="st">&quot;kableExtra&quot;</span>,</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">    <span class="st">&quot;GGally&quot;</span>,</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">    <span class="st">&quot;ISLR&quot;</span>,</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">    <span class="st">&quot;klaR&quot;</span>,</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">    <span class="st">&quot;rpart&quot;</span>,</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">    <span class="st">&quot;rpart.plot&quot;</span>,</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">    <span class="st">&quot;caret&quot;</span>,</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">    <span class="st">&quot;ellipse&quot;</span>,</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">    <span class="st">&quot;gbm&quot;</span>,</a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">    <span class="st">&quot;cvms&quot;</span></a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">  )</a>
+<a class="sourceLine" id="cb1-15" data-line-number="15">)</a>
+<a class="sourceLine" id="cb1-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb1-17" data-line-number="17">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;coatless/ucidata&quot;</span>)</a></code></pre></div>
 </div>
 <div id="license" class="section level3">
 <h3><span class="header-section-number">0.6.4</span> License</h3>
