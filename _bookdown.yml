@@ -15,7 +15,7 @@ rmd_files: [
   "nonparametric-classification.Rmd",
   "logistic-regression.Rmd",
   "binary-classification.Rmd",
-  #  "generative.Rmd",
+   "generative.Rmd",
   #  "supervised-i.Rmd",
   #  "simulation.Rmd",
   #  "bootstrap.Rmd",
