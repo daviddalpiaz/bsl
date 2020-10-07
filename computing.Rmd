@@ -257,10 +257,10 @@ As you continue to sharpen your `R` skills, keep this quotation in mind. Eventua
 
 In STAT 432, the objects that we will encounter will almost always be:
 
-- vectors
-- lists
-- data frames
-- model objects (Mostly lists with a class of the model type.)
+- (atomic) vectors
+- lists (data frames, tibbles)
+- functions
+- model objects (mostly lists with a class of the model type)
 
 If you become proficient at creating, manipulating, and accessing these objects, you will likely have success in STAT 432.
 
