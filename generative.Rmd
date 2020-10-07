@@ -17,6 +17,10 @@ Two potential additional readigns:
 - [Ng and Jordan, 2002](https://papers.nips.cc/paper/2020-on-discriminative-vs-generative-classifiers-a-comparison-of-logistic-regression-and-naive-bayes.pdf).
 - [ISL Chapter 4, Sections 4](https://faculty.marshall.usc.edu/gareth-james/ISL/ISLR%20Seventh%20Printing.pdf)
 
+This chapter is currently **under construction**. While it is being developed, the following links to the STAT 432 course notes.
+
+- [**Notes:** Generative Models](files/generative.pdf)
+
 ***
 
 ## R Setup and Source
