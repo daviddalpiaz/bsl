@@ -3,7 +3,6 @@ bookdown::gitbook:
   split_by: rmd
   # df_print: paged
   config:
-    smart: false
     fontsettings:
       theme: white
       family: sans
