@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 9 Binary Classification | Basics of Statistical Learning</title>
   <meta name="description" content="Chapter 9 Binary Classification | Basics of Statistical Learning" />
-  <meta name="generator" content="bookdown 0.20.6 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20.7 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 9 Binary Classification | Basics of Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -32,6 +32,7 @@
   
 <link rel="prev" href="logistic-regression.html"/>
 <link rel="next" href="generative.html"/>
+<script src="libs/header-attrs-2.4.1/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,6 +50,7 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
@@ -56,27 +58,26 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -85,9 +86,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -136,8 +137,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Basics of Statistical Learning</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a><ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i><b>0.1</b> Who?</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i><b>0.1</b> Who?</a>
+<ul>
 <li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#readers"><i class="fa fa-check"></i><b>0.1.1</b> Readers</a></li>
 <li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#author"><i class="fa fa-check"></i><b>0.1.2</b> Author</a></li>
 <li class="chapter" data-level="0.1.3" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.1.3</b> Acknowledgements</a></li>
@@ -146,22 +149,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#why"><i class="fa fa-check"></i><b>0.3</b> Why?</a></li>
 <li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#where"><i class="fa fa-check"></i><b>0.4</b> Where?</a></li>
 <li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#when"><i class="fa fa-check"></i><b>0.5</b> When?</a></li>
-<li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#how"><i class="fa fa-check"></i><b>0.6</b> How?</a><ul>
+<li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#how"><i class="fa fa-check"></i><b>0.6</b> How?</a>
+<ul>
 <li class="chapter" data-level="0.6.1" data-path="index.html"><a href="index.html#build-tools"><i class="fa fa-check"></i><b>0.6.1</b> Build Tools</a></li>
 <li class="chapter" data-level="0.6.2" data-path="index.html"><a href="index.html#active-development"><i class="fa fa-check"></i><b>0.6.2</b> Active Development</a></li>
 <li class="chapter" data-level="0.6.3" data-path="index.html"><a href="index.html#packages"><i class="fa fa-check"></i><b>0.6.3</b> Packages</a></li>
 <li class="chapter" data-level="0.6.4" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.6.4</b> License</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="ml-overview.html"><a href="ml-overview.html"><i class="fa fa-check"></i><b>1</b> Machine Learning Overview</a><ul>
+<li class="chapter" data-level="1" data-path="ml-overview.html"><a href="ml-overview.html"><i class="fa fa-check"></i><b>1</b> Machine Learning Overview</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="ml-overview.html"><a href="ml-overview.html#what-is-machine-learning"><i class="fa fa-check"></i><b>1.1</b> What is Machine Learning?</a></li>
-<li class="chapter" data-level="1.2" data-path="ml-overview.html"><a href="ml-overview.html#machine-learning-tasks"><i class="fa fa-check"></i><b>1.2</b> Machine Learning Tasks</a><ul>
+<li class="chapter" data-level="1.2" data-path="ml-overview.html"><a href="ml-overview.html#machine-learning-tasks"><i class="fa fa-check"></i><b>1.2</b> Machine Learning Tasks</a>
+<ul>
 <li class="chapter" data-level="1.2.1" data-path="ml-overview.html"><a href="ml-overview.html#supervised-learning"><i class="fa fa-check"></i><b>1.2.1</b> Supervised Learning</a></li>
 <li class="chapter" data-level="1.2.2" data-path="ml-overview.html"><a href="ml-overview.html#unsupervised-learning"><i class="fa fa-check"></i><b>1.2.2</b> Unsupervised Learning</a></li>
 </ul></li>
 <li class="chapter" data-level="1.3" data-path="ml-overview.html"><a href="ml-overview.html#open-questions"><i class="fa fa-check"></i><b>1.3</b> Open Questions</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>2</b> Linear Regression</a><ul>
+<li class="chapter" data-level="2" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>2</b> Linear Regression</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="linear-regression.html"><a href="linear-regression.html#r-setup-and-source"><i class="fa fa-check"></i><b>2.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="2.2" data-path="linear-regression.html"><a href="linear-regression.html#explanation-versus-prediction"><i class="fa fa-check"></i><b>2.2</b> Explanation versus Prediction</a></li>
 <li class="chapter" data-level="2.3" data-path="linear-regression.html"><a href="linear-regression.html#task-setup"><i class="fa fa-check"></i><b>2.3</b> Task Setup</a></li>
@@ -170,34 +177,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.6" data-path="linear-regression.html"><a href="linear-regression.html#using-lm"><i class="fa fa-check"></i><b>2.6</b> Using <code>lm()</code></a></li>
 <li class="chapter" data-level="2.7" data-path="linear-regression.html"><a href="linear-regression.html#the-predict-function"><i class="fa fa-check"></i><b>2.7</b> The <code>predict()</code> Function</a></li>
 <li class="chapter" data-level="2.8" data-path="linear-regression.html"><a href="linear-regression.html#data-splitting"><i class="fa fa-check"></i><b>2.8</b> Data Splitting</a></li>
-<li class="chapter" data-level="2.9" data-path="linear-regression.html"><a href="linear-regression.html#regression-metrics"><i class="fa fa-check"></i><b>2.9</b> Regression Metrics</a><ul>
+<li class="chapter" data-level="2.9" data-path="linear-regression.html"><a href="linear-regression.html#regression-metrics"><i class="fa fa-check"></i><b>2.9</b> Regression Metrics</a>
+<ul>
 <li class="chapter" data-level="2.9.1" data-path="linear-regression.html"><a href="linear-regression.html#graphical-evaluation"><i class="fa fa-check"></i><b>2.9.1</b> Graphical Evaluation</a></li>
 </ul></li>
 <li class="chapter" data-level="2.10" data-path="linear-regression.html"><a href="linear-regression.html#example-simple-simulated-data"><i class="fa fa-check"></i><b>2.10</b> Example: “Simple” Simulated Data</a></li>
 <li class="chapter" data-level="2.11" data-path="linear-regression.html"><a href="linear-regression.html#example-diamonds-data"><i class="fa fa-check"></i><b>2.11</b> Example: Diamonds Data</a></li>
 <li class="chapter" data-level="2.12" data-path="linear-regression.html"><a href="linear-regression.html#example-credit-card-data"><i class="fa fa-check"></i><b>2.12</b> Example: Credit Card Data</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html"><i class="fa fa-check"></i><b>3</b> Nonparametric Regression</a><ul>
+<li class="chapter" data-level="3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html"><i class="fa fa-check"></i><b>3</b> Nonparametric Regression</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#r-setup-and-source-1"><i class="fa fa-check"></i><b>3.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="3.2" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#mathematical-setup-1"><i class="fa fa-check"></i><b>3.2</b> Mathematical Setup</a></li>
 <li class="chapter" data-level="3.3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>3.3</b> k-Nearest Neighbors</a></li>
 <li class="chapter" data-level="3.4" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#decision-trees"><i class="fa fa-check"></i><b>3.4</b> Decision Trees</a></li>
 <li class="chapter" data-level="3.5" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#example-credit-card-data-1"><i class="fa fa-check"></i><b>3.5</b> Example: Credit Card Data</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html"><i class="fa fa-check"></i><b>4</b> The Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="4" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html"><i class="fa fa-check"></i><b>4</b> The Bias–Variance Tradeoff</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#r-setup-and-source-2"><i class="fa fa-check"></i><b>4.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="4.2" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#the-regression-setup"><i class="fa fa-check"></i><b>4.2</b> The Regression Setup</a></li>
 <li class="chapter" data-level="4.3" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>4.3</b> Reducible and Irreducible Error</a></li>
 <li class="chapter" data-level="4.4" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>4.4</b> Bias-Variance Decomposition</a></li>
 <li class="chapter" data-level="4.5" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#using-simulation-to-estimate-bias-and-variance"><i class="fa fa-check"></i><b>4.5</b> Using Simulation to Estimate Bias and Variance</a></li>
 <li class="chapter" data-level="4.6" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>4.6</b> Estimating Expected Prediction Error</a></li>
-<li class="chapter" data-level="4.7" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#model-flexibility"><i class="fa fa-check"></i><b>4.7</b> Model Flexibility</a><ul>
+<li class="chapter" data-level="4.7" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#model-flexibility"><i class="fa fa-check"></i><b>4.7</b> Model Flexibility</a>
+<ul>
 <li class="chapter" data-level="4.7.1" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#linear-models"><i class="fa fa-check"></i><b>4.7.1</b> Linear Models</a></li>
 <li class="chapter" data-level="4.7.2" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#k-nearest-neighbors-1"><i class="fa fa-check"></i><b>4.7.2</b> k-Nearest Neighbors</a></li>
 <li class="chapter" data-level="4.7.3" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#decision-trees-1"><i class="fa fa-check"></i><b>4.7.3</b> Decision Trees</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Regression Overview</a><ul>
+<li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Regression Overview</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="regression-overview.html"><a href="regression-overview.html#the-goal"><i class="fa fa-check"></i><b>5.1</b> The Goal</a></li>
 <li class="chapter" data-level="5.2" data-path="regression-overview.html"><a href="regression-overview.html#general-strategy"><i class="fa fa-check"></i><b>5.2</b> General Strategy</a></li>
 <li class="chapter" data-level="5.3" data-path="regression-overview.html"><a href="regression-overview.html#aglorithms"><i class="fa fa-check"></i><b>5.3</b> Aglorithms</a></li>
@@ -210,7 +222,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>6</b> Classification</a></li>
 <li class="chapter" data-level="7" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html"><i class="fa fa-check"></i><b>7</b> Nonparametric Classification</a></li>
 <li class="chapter" data-level="8" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>8</b> Logistic Regression</a></li>
-<li class="chapter" data-level="9" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>9</b> Binary Classification</a><ul>
+<li class="chapter" data-level="9" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>9</b> Binary Classification</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="binary-classification.html"><a href="binary-classification.html#r-setup-and-source-3"><i class="fa fa-check"></i><b>9.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="9.2" data-path="binary-classification.html"><a href="binary-classification.html#breast-cancer-data"><i class="fa fa-check"></i><b>9.2</b> Breast Cancer Data</a></li>
 <li class="chapter" data-level="9.3" data-path="binary-classification.html"><a href="binary-classification.html#confusion-matrix"><i class="fa fa-check"></i><b>9.3</b> Confusion Matrix</a></li>
@@ -218,7 +231,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.5" data-path="binary-classification.html"><a href="binary-classification.html#probability-cutoff"><i class="fa fa-check"></i><b>9.5</b> Probability Cutoff</a></li>
 <li class="chapter" data-level="9.6" data-path="binary-classification.html"><a href="binary-classification.html#r-packages-and-function"><i class="fa fa-check"></i><b>9.6</b> R Packages and Function</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="generative.html"><a href="generative.html"><i class="fa fa-check"></i><b>10</b> Generative Models</a><ul>
+<li class="chapter" data-level="10" data-path="generative.html"><a href="generative.html"><i class="fa fa-check"></i><b>10</b> Generative Models</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="generative.html"><a href="generative.html#r-setup-and-source-4"><i class="fa fa-check"></i><b>10.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="10.2" data-path="generative.html"><a href="generative.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>10.2</b> Linear Discriminant Analysis</a></li>
 <li class="chapter" data-level="10.3" data-path="generative.html"><a href="generative.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>10.3</b> Quadratic Discriminant Analysis</a></li>
@@ -226,20 +240,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5" data-path="generative.html"><a href="generative.html#categorical-features"><i class="fa fa-check"></i><b>10.5</b> Categorical Features</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="additional-reading.html"><a href="additional-reading.html"><i class="fa fa-check"></i><b>A</b> Additional Reading</a><ul>
+<li class="chapter" data-level="A" data-path="additional-reading.html"><a href="additional-reading.html"><i class="fa fa-check"></i><b>A</b> Additional Reading</a>
+<ul>
 <li class="chapter" data-level="A.1" data-path="additional-reading.html"><a href="additional-reading.html#books"><i class="fa fa-check"></i><b>A.1</b> Books</a></li>
 <li class="chapter" data-level="A.2" data-path="additional-reading.html"><a href="additional-reading.html#papers"><i class="fa fa-check"></i><b>A.2</b> Papers</a></li>
 <li class="chapter" data-level="A.3" data-path="additional-reading.html"><a href="additional-reading.html#blog-posts"><i class="fa fa-check"></i><b>A.3</b> Blog Posts</a></li>
 <li class="chapter" data-level="A.4" data-path="additional-reading.html"><a href="additional-reading.html#miscellaneous"><i class="fa fa-check"></i><b>A.4</b> Miscellaneous</a></li>
 </ul></li>
-<li class="chapter" data-level="B" data-path="computing.html"><a href="computing.html"><i class="fa fa-check"></i><b>B</b> Computing</a><ul>
+<li class="chapter" data-level="B" data-path="computing.html"><a href="computing.html"><i class="fa fa-check"></i><b>B</b> Computing</a>
+<ul>
 <li class="chapter" data-level="B.1" data-path="computing.html"><a href="computing.html#reading"><i class="fa fa-check"></i><b>B.1</b> Reading</a></li>
-<li class="chapter" data-level="B.2" data-path="computing.html"><a href="computing.html#additional-resources"><i class="fa fa-check"></i><b>B.2</b> Additional Resources</a><ul>
+<li class="chapter" data-level="B.2" data-path="computing.html"><a href="computing.html#additional-resources"><i class="fa fa-check"></i><b>B.2</b> Additional Resources</a>
+<ul>
 <li class="chapter" data-level="B.2.1" data-path="computing.html"><a href="computing.html#r"><i class="fa fa-check"></i><b>B.2.1</b> R</a></li>
 <li class="chapter" data-level="B.2.2" data-path="computing.html"><a href="computing.html#rstudio"><i class="fa fa-check"></i><b>B.2.2</b> RStudio</a></li>
 <li class="chapter" data-level="B.2.3" data-path="computing.html"><a href="computing.html#r-markdown"><i class="fa fa-check"></i><b>B.2.3</b> R Markdown</a></li>
 </ul></li>
-<li class="chapter" data-level="B.3" data-path="computing.html"><a href="computing.html#stat-432-idioms"><i class="fa fa-check"></i><b>B.3</b> STAT 432 Idioms</a><ul>
+<li class="chapter" data-level="B.3" data-path="computing.html"><a href="computing.html#stat-432-idioms"><i class="fa fa-check"></i><b>B.3</b> STAT 432 Idioms</a>
+<ul>
 <li class="chapter" data-level="B.3.1" data-path="computing.html"><a href="computing.html#dont-restore-old-workspaces"><i class="fa fa-check"></i><b>B.3.1</b> Don’t Restore Old Workspaces</a></li>
 <li class="chapter" data-level="B.3.2" data-path="computing.html"><a href="computing.html#r-versions"><i class="fa fa-check"></i><b>B.3.2</b> R Versions</a></li>
 <li class="chapter" data-level="B.3.3" data-path="computing.html"><a href="computing.html#packages-1"><i class="fa fa-check"></i><b>B.3.3</b> Packages</a></li>
@@ -254,12 +272,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="B.3.12" data-path="computing.html"><a href="computing.html#keyboard-shortcuts"><i class="fa fa-check"></i><b>B.3.12</b> Keyboard Shortcuts</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="C" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>C</b> Probability</a><ul>
+<li class="chapter" data-level="C" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>C</b> Probability</a>
+<ul>
 <li class="chapter" data-level="C.1" data-path="probability.html"><a href="probability.html#reading-1"><i class="fa fa-check"></i><b>C.1</b> Reading</a></li>
 <li class="chapter" data-level="C.2" data-path="probability.html"><a href="probability.html#probability-models"><i class="fa fa-check"></i><b>C.2</b> Probability Models</a></li>
 <li class="chapter" data-level="C.3" data-path="probability.html"><a href="probability.html#probability-axioms"><i class="fa fa-check"></i><b>C.3</b> Probability Axioms</a></li>
 <li class="chapter" data-level="C.4" data-path="probability.html"><a href="probability.html#probability-rules"><i class="fa fa-check"></i><b>C.4</b> Probability Rules</a></li>
-<li class="chapter" data-level="C.5" data-path="probability.html"><a href="probability.html#random-variables"><i class="fa fa-check"></i><b>C.5</b> Random Variables</a><ul>
+<li class="chapter" data-level="C.5" data-path="probability.html"><a href="probability.html#random-variables"><i class="fa fa-check"></i><b>C.5</b> Random Variables</a>
+<ul>
 <li class="chapter" data-level="C.5.1" data-path="probability.html"><a href="probability.html#distributions"><i class="fa fa-check"></i><b>C.5.1</b> Distributions</a></li>
 <li class="chapter" data-level="C.5.2" data-path="probability.html"><a href="probability.html#discrete-random-variables"><i class="fa fa-check"></i><b>C.5.2</b> Discrete Random Variables</a></li>
 <li class="chapter" data-level="C.5.3" data-path="probability.html"><a href="probability.html#continuous-random-variables"><i class="fa fa-check"></i><b>C.5.3</b> Continuous Random Variables</a></li>
@@ -268,14 +288,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="C.6" data-path="probability.html"><a href="probability.html#expectations"><i class="fa fa-check"></i><b>C.6</b> Expectations</a></li>
 <li class="chapter" data-level="C.7" data-path="probability.html"><a href="probability.html#likelihood"><i class="fa fa-check"></i><b>C.7</b> Likelihood</a></li>
-<li class="chapter" data-level="C.8" data-path="probability.html"><a href="probability.html#additional-references"><i class="fa fa-check"></i><b>C.8</b> Additional References</a><ul>
+<li class="chapter" data-level="C.8" data-path="probability.html"><a href="probability.html#additional-references"><i class="fa fa-check"></i><b>C.8</b> Additional References</a>
+<ul>
 <li class="chapter" data-level="C.8.1" data-path="probability.html"><a href="probability.html#videos"><i class="fa fa-check"></i><b>C.8.1</b> Videos</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="D" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>D</b> Statistics</a><ul>
+<li class="chapter" data-level="D" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>D</b> Statistics</a>
+<ul>
 <li class="chapter" data-level="D.1" data-path="statistics.html"><a href="statistics.html#reading-2"><i class="fa fa-check"></i><b>D.1</b> Reading</a></li>
 <li class="chapter" data-level="D.2" data-path="statistics.html"><a href="statistics.html#statistics-1"><i class="fa fa-check"></i><b>D.2</b> Statistics</a></li>
-<li class="chapter" data-level="D.3" data-path="statistics.html"><a href="statistics.html#estimators"><i class="fa fa-check"></i><b>D.3</b> Estimators</a><ul>
+<li class="chapter" data-level="D.3" data-path="statistics.html"><a href="statistics.html#estimators"><i class="fa fa-check"></i><b>D.3</b> Estimators</a>
+<ul>
 <li class="chapter" data-level="D.3.1" data-path="statistics.html"><a href="statistics.html#properties"><i class="fa fa-check"></i><b>D.3.1</b> Properties</a></li>
 <li class="chapter" data-level="D.3.2" data-path="statistics.html"><a href="statistics.html#example-mse-of-an-estimator"><i class="fa fa-check"></i><b>D.3.2</b> Example: MSE of an Estimator</a></li>
 <li class="chapter" data-level="D.3.3" data-path="statistics.html"><a href="statistics.html#estimation-methods"><i class="fa fa-check"></i><b>D.3.3</b> Estimation Methods</a></li>
@@ -305,7 +328,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="binary-classification" class="section level1">
+<div id="binary-classification" class="section level1" number="9">
 <h1><span class="header-section-number">Chapter 9</span> Binary Classification</h1>
 <p>This chapter will introduce no new modeling techniques, but instead will focus on evaluating models for <strong>binary classification.</strong></p>
 <p>Specifically, we will discuss:</p>
@@ -318,41 +341,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><a href="files/binary-classification.pdf"><strong>Notes:</strong> Binary Classification</a></li>
 </ul>
-<div id="r-setup-and-source-3" class="section level2">
+<div id="r-setup-and-source-3" class="section level2" number="9.1">
 <h2><span class="header-section-number">9.1</span> R Setup and Source</h2>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" data-line-number="1"><span class="kw">library</span>(ucidata)    <span class="co"># access to data</span></a>
-<a class="sourceLine" id="cb181-2" data-line-number="2"><span class="kw">library</span>(tibble)     <span class="co"># data frame printing</span></a>
-<a class="sourceLine" id="cb181-3" data-line-number="3"><span class="kw">library</span>(dplyr)      <span class="co"># data manipulation</span></a>
-<a class="sourceLine" id="cb181-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb181-5" data-line-number="5"><span class="kw">library</span>(caret)      <span class="co"># fitting knn</span></a>
-<a class="sourceLine" id="cb181-6" data-line-number="6"><span class="kw">library</span>(rpart)      <span class="co"># fitting trees</span></a></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="binary-classification.html#cb181-1"></a><span class="kw">library</span>(ucidata)    <span class="co"># access to data</span></span>
+<span id="cb181-2"><a href="binary-classification.html#cb181-2"></a><span class="kw">library</span>(tibble)     <span class="co"># data frame printing</span></span>
+<span id="cb181-3"><a href="binary-classification.html#cb181-3"></a><span class="kw">library</span>(dplyr)      <span class="co"># data manipulation</span></span>
+<span id="cb181-4"><a href="binary-classification.html#cb181-4"></a></span>
+<span id="cb181-5"><a href="binary-classification.html#cb181-5"></a><span class="kw">library</span>(caret)      <span class="co"># fitting knn</span></span>
+<span id="cb181-6"><a href="binary-classification.html#cb181-6"></a><span class="kw">library</span>(rpart)      <span class="co"># fitting trees</span></span></code></pre></div>
 <p>Recall that the <a href="index.html">Welcome</a> chapter contains directions for installing all necessary packages for following along with the text. The R Markdown source is provided as some code, mostly for creating plots, has been suppressed from the rendered document that you are currently reading.</p>
 <ul>
 <li><strong>R Markdown Source:</strong> <a href="binary-classification.Rmd"><code>binary-classification.Rmd</code></a></li>
 </ul>
 </div>
-<div id="breast-cancer-data" class="section level2">
+<div id="breast-cancer-data" class="section level2" number="9.2">
 <h2><span class="header-section-number">9.2</span> Breast Cancer Data</h2>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" data-line-number="1">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;coatless/ucidata&quot;</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" data-line-number="1"><span class="co"># load data</span></a>
-<a class="sourceLine" id="cb183-2" data-line-number="2">bc =<span class="st"> </span><span class="kw">na.omit</span>(tibble<span class="op">::</span><span class="kw">as_tibble</span>(bcw_original))</a></code></pre></div>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" data-line-number="1"><span class="co"># data prep</span></a>
-<a class="sourceLine" id="cb184-2" data-line-number="2">bc =<span class="st"> </span>bc <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb184-3" data-line-number="3"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">class =</span> <span class="kw">factor</span>(class, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;benign&quot;</span>, <span class="st">&quot;malignant&quot;</span>))) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb184-4" data-line-number="4"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span>sample_code_number)</a></code></pre></div>
-<p>For this example, and many medical testing examples, we will refer to the diseased status, in this case <code>&quot;Malignant&quot;</code> as the “Positive” class. Note that this is a somewhat arbitrary choice.</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" data-line-number="1"><span class="co"># set seed</span></a>
-<a class="sourceLine" id="cb185-2" data-line-number="2"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" data-line-number="1"><span class="co"># test-train split</span></a>
-<a class="sourceLine" id="cb186-2" data-line-number="2">bc_trn_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(bc), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(bc))</a>
-<a class="sourceLine" id="cb186-3" data-line-number="3">bc_trn =<span class="st"> </span>bc[bc_trn_idx, ]</a>
-<a class="sourceLine" id="cb186-4" data-line-number="4">bc_tst =<span class="st"> </span>bc[<span class="op">-</span>bc_trn_idx, ]</a></code></pre></div>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" data-line-number="1"><span class="co"># estimation-validation split</span></a>
-<a class="sourceLine" id="cb187-2" data-line-number="2">bc_est_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(bc_trn), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(bc_trn))</a>
-<a class="sourceLine" id="cb187-3" data-line-number="3">bc_est =<span class="st"> </span>bc_trn[bc_est_idx, ]</a>
-<a class="sourceLine" id="cb187-4" data-line-number="4">bc_val =<span class="st"> </span>bc_trn[<span class="op">-</span>bc_est_idx, ]</a></code></pre></div>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb188-1" data-line-number="1"><span class="co"># check data</span></a>
-<a class="sourceLine" id="cb188-2" data-line-number="2"><span class="kw">head</span>(bc_trn)</a></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="binary-classification.html#cb182-1"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;coatless/ucidata&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="binary-classification.html#cb183-1"></a><span class="co"># load data</span></span>
+<span id="cb183-2"><a href="binary-classification.html#cb183-2"></a>bc =<span class="st"> </span><span class="kw">na.omit</span>(tibble<span class="op">::</span><span class="kw">as_tibble</span>(bcw_original))</span></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="binary-classification.html#cb184-1"></a><span class="co"># data prep</span></span>
+<span id="cb184-2"><a href="binary-classification.html#cb184-2"></a>bc =<span class="st"> </span>bc <span class="op">%&gt;%</span></span>
+<span id="cb184-3"><a href="binary-classification.html#cb184-3"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">class =</span> <span class="kw">factor</span>(class, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;benign&quot;</span>, <span class="st">&quot;malignant&quot;</span>))) <span class="op">%&gt;%</span></span>
+<span id="cb184-4"><a href="binary-classification.html#cb184-4"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span>sample_code_number)</span></code></pre></div>
+<p>For this example, and many medical testing examples, we will refer to the diseased status, in this case <code>"Malignant"</code> as the “Positive” class. Note that this is a somewhat arbitrary choice.</p>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="binary-classification.html#cb185-1"></a><span class="co"># set seed</span></span>
+<span id="cb185-2"><a href="binary-classification.html#cb185-2"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="binary-classification.html#cb186-1"></a><span class="co"># test-train split</span></span>
+<span id="cb186-2"><a href="binary-classification.html#cb186-2"></a>bc_trn_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(bc), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(bc))</span>
+<span id="cb186-3"><a href="binary-classification.html#cb186-3"></a>bc_trn =<span class="st"> </span>bc[bc_trn_idx, ]</span>
+<span id="cb186-4"><a href="binary-classification.html#cb186-4"></a>bc_tst =<span class="st"> </span>bc[<span class="op">-</span>bc_trn_idx, ]</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="binary-classification.html#cb187-1"></a><span class="co"># estimation-validation split</span></span>
+<span id="cb187-2"><a href="binary-classification.html#cb187-2"></a>bc_est_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(bc_trn), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(bc_trn))</span>
+<span id="cb187-3"><a href="binary-classification.html#cb187-3"></a>bc_est =<span class="st"> </span>bc_trn[bc_est_idx, ]</span>
+<span id="cb187-4"><a href="binary-classification.html#cb187-4"></a>bc_val =<span class="st"> </span>bc_trn[<span class="op">-</span>bc_est_idx, ]</span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="binary-classification.html#cb188-1"></a><span class="co"># check data</span></span>
+<span id="cb188-2"><a href="binary-classification.html#cb188-2"></a><span class="kw">head</span>(bc_trn)</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 10
 ##   clump_thickness uniformity_of_c… uniformity_of_c… marginal_adhesi…
 ##             &lt;int&gt;            &lt;int&gt;            &lt;int&gt;            &lt;int&gt;
@@ -365,92 +388,92 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## # … with 6 more variables: single_epithelial_cell_size &lt;int&gt;,
 ## #   bare_nuclei &lt;int&gt;, bland_chromatin &lt;int&gt;, normal_nucleoli &lt;int&gt;,
 ## #   mitoses &lt;int&gt;, class &lt;fct&gt;</code></pre>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" data-line-number="1"><span class="co"># inspect response variable</span></a>
-<a class="sourceLine" id="cb190-2" data-line-number="2"><span class="kw">levels</span>(bc_trn<span class="op">$</span>class)</a></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="binary-classification.html#cb190-1"></a><span class="co"># inspect response variable</span></span>
+<span id="cb190-2"><a href="binary-classification.html#cb190-2"></a><span class="kw">levels</span>(bc_trn<span class="op">$</span>class)</span></code></pre></div>
 <pre><code>## [1] &quot;benign&quot;    &quot;malignant&quot;</code></pre>
 <p>Note that in this case, the positive class also corresponds to the class that logistic regression would view as <span class="math inline">\(Y = 1\)</span> which makes things somewhat simplier to discuss, but these do not actually need to be aligned.</p>
 </div>
-<div id="confusion-matrix" class="section level2">
+<div id="confusion-matrix" class="section level2" number="9.3">
 <h2><span class="header-section-number">9.3</span> Confusion Matrix</h2>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" data-line-number="1"><span class="co"># fit models</span></a>
-<a class="sourceLine" id="cb192-2" data-line-number="2">mod_tree =<span class="st"> </span><span class="kw">rpart</span>(class <span class="op">~</span><span class="st"> </span>clump_thickness <span class="op">+</span><span class="st"> </span>mitoses, <span class="dt">data =</span> bc_est)</a></code></pre></div>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" data-line-number="1"><span class="co"># obtain prediction using tree for validation data</span></a>
-<a class="sourceLine" id="cb193-2" data-line-number="2">pred_tree =<span class="st"> </span><span class="kw">predict</span>(mod_tree, bc_val, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="binary-classification.html#cb192-1"></a><span class="co"># fit models</span></span>
+<span id="cb192-2"><a href="binary-classification.html#cb192-2"></a>mod_tree =<span class="st"> </span><span class="kw">rpart</span>(class <span class="op">~</span><span class="st"> </span>clump_thickness <span class="op">+</span><span class="st"> </span>mitoses, <span class="dt">data =</span> bc_est)</span></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="binary-classification.html#cb193-1"></a><span class="co"># obtain prediction using tree for validation data</span></span>
+<span id="cb193-2"><a href="binary-classification.html#cb193-2"></a>pred_tree =<span class="st"> </span><span class="kw">predict</span>(mod_tree, bc_val, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</span></code></pre></div>
 <div class="figure">
-<img src="img/conf-mat.png" alt="Template Confusion Matrix" />
+<img src="img/conf-mat.png" alt="" />
 <p class="caption">Template Confusion Matrix</p>
 </div>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" data-line-number="1">tp =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;malignant&quot;</span> <span class="op">&amp;</span><span class="st"> </span>pred_tree <span class="op">==</span><span class="st"> &quot;malignant&quot;</span>)</a>
-<a class="sourceLine" id="cb194-2" data-line-number="2">fp =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;benign&quot;</span>    <span class="op">&amp;</span><span class="st"> </span>pred_tree <span class="op">==</span><span class="st"> &quot;malignant&quot;</span>)</a>
-<a class="sourceLine" id="cb194-3" data-line-number="3">fn =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;malignant&quot;</span> <span class="op">&amp;</span><span class="st"> </span>pred_tree <span class="op">==</span><span class="st"> &quot;benign&quot;</span>)</a>
-<a class="sourceLine" id="cb194-4" data-line-number="4">tn =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;benign&quot;</span>    <span class="op">&amp;</span><span class="st"> </span>pred_tree <span class="op">==</span><span class="st"> &quot;benign&quot;</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" data-line-number="1"><span class="kw">c</span>(<span class="dt">tp =</span> tp, <span class="dt">fp =</span> fp, <span class="dt">fn =</span> fn, <span class="dt">tn =</span> tn)</a></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="binary-classification.html#cb194-1"></a>tp =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;malignant&quot;</span> <span class="op">&amp;</span><span class="st"> </span>pred_tree <span class="op">==</span><span class="st"> &quot;malignant&quot;</span>)</span>
+<span id="cb194-2"><a href="binary-classification.html#cb194-2"></a>fp =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;benign&quot;</span>    <span class="op">&amp;</span><span class="st"> </span>pred_tree <span class="op">==</span><span class="st"> &quot;malignant&quot;</span>)</span>
+<span id="cb194-3"><a href="binary-classification.html#cb194-3"></a>fn =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;malignant&quot;</span> <span class="op">&amp;</span><span class="st"> </span>pred_tree <span class="op">==</span><span class="st"> &quot;benign&quot;</span>)</span>
+<span id="cb194-4"><a href="binary-classification.html#cb194-4"></a>tn =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;benign&quot;</span>    <span class="op">&amp;</span><span class="st"> </span>pred_tree <span class="op">==</span><span class="st"> &quot;benign&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="binary-classification.html#cb195-1"></a><span class="kw">c</span>(<span class="dt">tp =</span> tp, <span class="dt">fp =</span> fp, <span class="dt">fn =</span> fn, <span class="dt">tn =</span> tn)</span></code></pre></div>
 <pre><code>## tp fp fn tn 
 ## 24  7  9 70</code></pre>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" data-line-number="1"><span class="co"># note that these are not in the same positions are the image above</span></a>
-<a class="sourceLine" id="cb197-2" data-line-number="2"><span class="co"># that is OK and almost expected!</span></a>
-<a class="sourceLine" id="cb197-3" data-line-number="3"><span class="kw">table</span>(</a>
-<a class="sourceLine" id="cb197-4" data-line-number="4">  <span class="dt">predicted =</span> pred_tree,</a>
-<a class="sourceLine" id="cb197-5" data-line-number="5">  <span class="dt">actual =</span> bc_val<span class="op">$</span>class</a>
-<a class="sourceLine" id="cb197-6" data-line-number="6">)</a></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="binary-classification.html#cb197-1"></a><span class="co"># note that these are not in the same positions are the image above</span></span>
+<span id="cb197-2"><a href="binary-classification.html#cb197-2"></a><span class="co"># that is OK and almost expected!</span></span>
+<span id="cb197-3"><a href="binary-classification.html#cb197-3"></a><span class="kw">table</span>(</span>
+<span id="cb197-4"><a href="binary-classification.html#cb197-4"></a>  <span class="dt">predicted =</span> pred_tree,</span>
+<span id="cb197-5"><a href="binary-classification.html#cb197-5"></a>  <span class="dt">actual =</span> bc_val<span class="op">$</span>class</span>
+<span id="cb197-6"><a href="binary-classification.html#cb197-6"></a>)</span></code></pre></div>
 <pre><code>##            actual
 ## predicted   benign malignant
 ##   benign        70         9
 ##   malignant      7        24</code></pre>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" data-line-number="1">n_obs =<span class="st"> </span><span class="kw">nrow</span>(bc_val)</a>
-<a class="sourceLine" id="cb199-2" data-line-number="2">pos =<span class="st"> </span>tp <span class="op">+</span><span class="st"> </span>fn</a>
-<a class="sourceLine" id="cb199-3" data-line-number="3">neg =<span class="st"> </span>tn <span class="op">+</span><span class="st"> </span>fp</a></code></pre></div>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" data-line-number="1"><span class="kw">c</span>(<span class="dt">n_obs =</span> n_obs, <span class="dt">pos =</span> pos, <span class="dt">neg =</span> neg)</a></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="binary-classification.html#cb199-1"></a>n_obs =<span class="st"> </span><span class="kw">nrow</span>(bc_val)</span>
+<span id="cb199-2"><a href="binary-classification.html#cb199-2"></a>pos =<span class="st"> </span>tp <span class="op">+</span><span class="st"> </span>fn</span>
+<span id="cb199-3"><a href="binary-classification.html#cb199-3"></a>neg =<span class="st"> </span>tn <span class="op">+</span><span class="st"> </span>fp</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="binary-classification.html#cb200-1"></a><span class="kw">c</span>(<span class="dt">n_obs =</span> n_obs, <span class="dt">pos =</span> pos, <span class="dt">neg =</span> neg)</span></code></pre></div>
 <pre><code>## n_obs   pos   neg 
 ##   110    33    77</code></pre>
 </div>
-<div id="binary-classification-metrics" class="section level2">
+<div id="binary-classification-metrics" class="section level2" number="9.4">
 <h2><span class="header-section-number">9.4</span> Binary Classification Metrics</h2>
 <p>First, before we introduce new metrics, we could re-define previous metrics that we have seen as functions of true and false positives and negatives. Note, we will use <span class="math inline">\(P\)</span> for number of actual positive cases in the dataset under consideration, and <span class="math inline">\(N\)</span> for the number of actual negative cases.</p>
 <p><span class="math display">\[
 \text{Accuracy} = \frac{\text{TP + TN}}{\text{TP + FP + TN + FN}} = \frac{\text{TP + TN}}{\text{P + N}}
 \]</span></p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" data-line-number="1">(<span class="dt">acc =</span> (tp <span class="op">+</span><span class="st"> </span>tn) <span class="op">/</span><span class="st"> </span>(tp <span class="op">+</span><span class="st"> </span>fp <span class="op">+</span><span class="st"> </span>tn <span class="op">+</span><span class="st"> </span>fn))</a></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="binary-classification.html#cb202-1"></a>(<span class="dt">acc =</span> (tp <span class="op">+</span><span class="st"> </span>tn) <span class="op">/</span><span class="st"> </span>(tp <span class="op">+</span><span class="st"> </span>fp <span class="op">+</span><span class="st"> </span>tn <span class="op">+</span><span class="st"> </span>fn))</span></code></pre></div>
 <pre><code>## [1] 0.8545455</code></pre>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" data-line-number="1">(<span class="dt">acc =</span> <span class="kw">mean</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> </span>pred_tree))</a></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="binary-classification.html#cb204-1"></a>(<span class="dt">acc =</span> <span class="kw">mean</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> </span>pred_tree))</span></code></pre></div>
 <pre><code>## [1] 0.8545455</code></pre>
 <p>Here we pause to introduce the <strong>prevalence</strong> and the <strong>no information rate</strong>.</p>
 <p><span class="math display">\[
 \text{Prevalence} = \frac{\text{P}}{\text{P + N}}
 \]</span></p>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" data-line-number="1">(<span class="dt">prev =</span> pos <span class="op">/</span><span class="st"> </span>(pos <span class="op">+</span><span class="st"> </span>neg))</a></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="binary-classification.html#cb206-1"></a>(<span class="dt">prev =</span> pos <span class="op">/</span><span class="st"> </span>(pos <span class="op">+</span><span class="st"> </span>neg))</span></code></pre></div>
 <pre><code>## [1] 0.3</code></pre>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" data-line-number="1">(<span class="dt">prev =</span> pos <span class="op">/</span><span class="st"> </span>n_obs)</a></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="binary-classification.html#cb208-1"></a>(<span class="dt">prev =</span> pos <span class="op">/</span><span class="st"> </span>n_obs)</span></code></pre></div>
 <pre><code>## [1] 0.3</code></pre>
 <p><span class="math display">\[
 \text{No Information Rate} = \max\left(\frac{\text{P}}{\text{P + N}}, \frac{\text{N}}{\text{P + N}}\right)
 \]</span></p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" data-line-number="1">(<span class="dt">nir =</span> <span class="kw">max</span>(<span class="kw">c</span>(pos <span class="op">/</span><span class="st"> </span>(pos <span class="op">+</span><span class="st"> </span>neg), neg <span class="op">/</span><span class="st"> </span>(pos <span class="op">+</span><span class="st"> </span>neg))))</a></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="binary-classification.html#cb210-1"></a>(<span class="dt">nir =</span> <span class="kw">max</span>(<span class="kw">c</span>(pos <span class="op">/</span><span class="st"> </span>(pos <span class="op">+</span><span class="st"> </span>neg), neg <span class="op">/</span><span class="st"> </span>(pos <span class="op">+</span><span class="st"> </span>neg))))</span></code></pre></div>
 <pre><code>## [1] 0.7</code></pre>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" data-line-number="1">(<span class="dt">nir =</span> <span class="kw">max</span>(<span class="kw">c</span>(prev, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>prev)))</a></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="binary-classification.html#cb212-1"></a>(<span class="dt">nir =</span> <span class="kw">max</span>(<span class="kw">c</span>(prev, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>prev)))</span></code></pre></div>
 <pre><code>## [1] 0.7</code></pre>
 <p>The prevalence tells us the proportion of the positive class in the data. This is an important baseline for judging binary classifiers, especially as it relates to the no information rate. The no information rate is essentially the proportion of observations that fall into the “majority” class. If a classifier does not achieve an accuracy above this rate, the classifier is performing worse than simply always guessing the majority class!</p>
 <p><span class="math display">\[
 \text{Misclassification} = \frac{\text{FP + FN}}{\text{TP + FP + TN + FN}} = \frac{\text{FP + FN}}{\text{P + N}}
 \]</span></p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" data-line-number="1">(<span class="dt">mis =</span> (fp <span class="op">+</span><span class="st"> </span>fn) <span class="op">/</span><span class="st"> </span>(tp <span class="op">+</span><span class="st"> </span>fp <span class="op">+</span><span class="st"> </span>tn <span class="op">+</span><span class="st"> </span>fn))</a></code></pre></div>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="binary-classification.html#cb214-1"></a>(<span class="dt">mis =</span> (fp <span class="op">+</span><span class="st"> </span>fn) <span class="op">/</span><span class="st"> </span>(tp <span class="op">+</span><span class="st"> </span>fp <span class="op">+</span><span class="st"> </span>tn <span class="op">+</span><span class="st"> </span>fn))</span></code></pre></div>
 <pre><code>## [1] 0.1454545</code></pre>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" data-line-number="1">(<span class="dt">mis =</span> <span class="kw">mean</span>(bc_val<span class="op">$</span>class <span class="op">!=</span><span class="st"> </span>pred_tree))</a></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="binary-classification.html#cb216-1"></a>(<span class="dt">mis =</span> <span class="kw">mean</span>(bc_val<span class="op">$</span>class <span class="op">!=</span><span class="st"> </span>pred_tree))</span></code></pre></div>
 <pre><code>## [1] 0.1454545</code></pre>
 <p>Beyond simply looking at accuracy (or misclassification), when we are specifically concerned with binary classification, there are many more informative metrics that we could consider.</p>
 <p>First, <strong>sensitivity</strong> or <strong>true positive rate</strong> (TPR) looks at the number of observations correctly classified to the positive class, divided by the number of positive cases. In other words, how many of the positive cases did we detect?</p>
 <p><span class="math display">\[
 \text{Sensitivity} = \text{True Positive Rate} = \frac{\text{TP}}{\text{P}} = \frac{\text{TP}}{\text{TP + FN}}
 \]</span></p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" data-line-number="1">(<span class="dt">sens =</span> tp <span class="op">/</span><span class="st"> </span>(tp <span class="op">+</span><span class="st"> </span>fn))</a></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="binary-classification.html#cb218-1"></a>(<span class="dt">sens =</span> tp <span class="op">/</span><span class="st"> </span>(tp <span class="op">+</span><span class="st"> </span>fn))</span></code></pre></div>
 <pre><code>## [1] 0.7272727</code></pre>
 <p>A related but somewhat opposite quantity is the <strong>specificity</strong> or <strong>true negative rate</strong>. (TNR)</p>
 <p><span class="math display">\[
 \text{Specificity} = \text{True Negative Rate} = \frac{\text{TN}}{\text{N}} = \frac{\text{TN}}{\text{TN + FP}}
 \]</span></p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" data-line-number="1">(<span class="dt">spec =</span> tn <span class="op">/</span><span class="st"> </span>(tn <span class="op">+</span><span class="st"> </span>fp))</a></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="binary-classification.html#cb220-1"></a>(<span class="dt">spec =</span> tn <span class="op">/</span><span class="st"> </span>(tn <span class="op">+</span><span class="st"> </span>fp))</span></code></pre></div>
 <pre><code>## [1] 0.9090909</code></pre>
-<p>While we obviously want an accurate classifier, sometimes we care more about sensitivity or specificity. For example, in this cancer example, with <code>&quot;Malignant&quot;</code> as the “positive” class, do we care more about sensitivity or specificity?</p>
+<p>While we obviously want an accurate classifier, sometimes we care more about sensitivity or specificity. For example, in this cancer example, with <code>"Malignant"</code> as the “positive” class, do we care more about sensitivity or specificity?</p>
 <p>From here, we could define many, many more metrics for binary classification. We first note that there are several easy-to-read Wikipedia articles on this topic.</p>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Confusion_matrix">Wikipedia: Confusion Matrix</a></li>
@@ -463,27 +486,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display">\[
 \text{Positive Predictive Value} = \text{Precision} = \frac{\text{TP}}{\text{TP + FP}}
 \]</span></p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb222-1" data-line-number="1">(<span class="dt">ppv =</span> tp <span class="op">/</span><span class="st"> </span>(tp <span class="op">+</span><span class="st"> </span>fp))</a></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="binary-classification.html#cb222-1"></a>(<span class="dt">ppv =</span> tp <span class="op">/</span><span class="st"> </span>(tp <span class="op">+</span><span class="st"> </span>fp))</span></code></pre></div>
 <pre><code>## [1] 0.7741935</code></pre>
 <p><span class="math display">\[
 \text{Negative Predictive Value} = \frac{\text{TN}}{\text{TN + FN}}
 \]</span></p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb224-1" data-line-number="1">(<span class="dt">npv =</span> tn <span class="op">/</span><span class="st"> </span>(tn <span class="op">+</span><span class="st"> </span>fn))</a></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="binary-classification.html#cb224-1"></a>(<span class="dt">npv =</span> tn <span class="op">/</span><span class="st"> </span>(tn <span class="op">+</span><span class="st"> </span>fn))</span></code></pre></div>
 <pre><code>## [1] 0.8860759</code></pre>
 <p><span class="math display">\[
 \text{False Discovery Rate} = \frac{\text{FP}}{\text{TP + FP}}
 \]</span></p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb226-1" data-line-number="1">(<span class="dt">fdr =</span> fp <span class="op">/</span><span class="st"> </span>(tp <span class="op">+</span><span class="st"> </span>fp))</a></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="binary-classification.html#cb226-1"></a>(<span class="dt">fdr =</span> fp <span class="op">/</span><span class="st"> </span>(tp <span class="op">+</span><span class="st"> </span>fp))</span></code></pre></div>
 <pre><code>## [1] 0.2258065</code></pre>
 <p>What if we cared more about some of these metrics, and want to make our classifiers better on these metrics, possibly at the expense of accuracy?</p>
 </div>
-<div id="probability-cutoff" class="section level2">
+<div id="probability-cutoff" class="section level2" number="9.5">
 <h2><span class="header-section-number">9.5</span> Probability Cutoff</h2>
 <p>Recall that we use the notation</p>
 <p><span class="math display">\[
 \hat{p}(x) = \hat{P}(Y = 1 \mid X = x).
 \]</span></p>
-<p>And in this example because it is the second level of the response variable, <code>&quot;malignant&quot;</code> is considered <span class="math inline">\(Y = 1\)</span>. (It also is coincidentally the positive class.)</p>
+<p>And in this example because it is the second level of the response variable, <code>"malignant"</code> is considered <span class="math inline">\(Y = 1\)</span>. (It also is coincidentally the positive class.)</p>
 <p><span class="math display">\[
 \hat{C}(x) = 
 \begin{cases} 
@@ -492,11 +515,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \end{cases}
 \]</span></p>
 <p>First let’s verify that directly making classifications in R is the same as first obtaining probabilities, and then comparing to a cutoff.</p>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" data-line-number="1"><span class="co"># fit tree model</span></a>
-<a class="sourceLine" id="cb228-2" data-line-number="2">mod_tree =<span class="st"> </span><span class="kw">rpart</span>(class <span class="op">~</span><span class="st"> </span>clump_thickness <span class="op">+</span><span class="st"> </span>mitoses, <span class="dt">data =</span> bc_est)</a></code></pre></div>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb229-1" data-line-number="1"><span class="co"># obtain prediction using tree for validation data</span></a>
-<a class="sourceLine" id="cb229-2" data-line-number="2">pred_tree =<span class="st"> </span><span class="kw">predict</span>(mod_tree, bc_val, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">predict</span>(mod_tree, bc_val, <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="binary-classification.html#cb228-1"></a><span class="co"># fit tree model</span></span>
+<span id="cb228-2"><a href="binary-classification.html#cb228-2"></a>mod_tree =<span class="st"> </span><span class="kw">rpart</span>(class <span class="op">~</span><span class="st"> </span>clump_thickness <span class="op">+</span><span class="st"> </span>mitoses, <span class="dt">data =</span> bc_est)</span></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="binary-classification.html#cb229-1"></a><span class="co"># obtain prediction using tree for validation data</span></span>
+<span id="cb229-2"><a href="binary-classification.html#cb229-2"></a>pred_tree =<span class="st"> </span><span class="kw">predict</span>(mod_tree, bc_val, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="binary-classification.html#cb230-1"></a><span class="kw">head</span>(<span class="kw">predict</span>(mod_tree, bc_val, <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>))</span></code></pre></div>
 <pre><code>##       benign malignant
 ## 1 0.08547009 0.9145299
 ## 2 0.88235294 0.1176471
@@ -504,25 +527,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4 0.88235294 0.1176471
 ## 5 0.88235294 0.1176471
 ## 6 0.88235294 0.1176471</code></pre>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb232-1" data-line-number="1">prob_tree =<span class="st"> </span><span class="kw">predict</span>(mod_tree, bc_val, <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>)[, <span class="st">&quot;malignant&quot;</span>]</a></code></pre></div>
-<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb233-1" data-line-number="1"><span class="kw">all.equal</span>(</a>
-<a class="sourceLine" id="cb233-2" data-line-number="2">  <span class="kw">factor</span>(<span class="kw">ifelse</span>(prob_tree <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>, <span class="st">&quot;malignant&quot;</span>, <span class="st">&quot;benign&quot;</span>)),</a>
-<a class="sourceLine" id="cb233-3" data-line-number="3">  pred_tree)</a></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="binary-classification.html#cb232-1"></a>prob_tree =<span class="st"> </span><span class="kw">predict</span>(mod_tree, bc_val, <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>)[, <span class="st">&quot;malignant&quot;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="binary-classification.html#cb233-1"></a><span class="kw">all.equal</span>(</span>
+<span id="cb233-2"><a href="binary-classification.html#cb233-2"></a>  <span class="kw">factor</span>(<span class="kw">ifelse</span>(prob_tree <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>, <span class="st">&quot;malignant&quot;</span>, <span class="st">&quot;benign&quot;</span>)),</span>
+<span id="cb233-3"><a href="binary-classification.html#cb233-3"></a>  pred_tree)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>Now let’s switch to using logistic regression. (This is just to make a graph later slightly nice for illustrating a concept.)</p>
-<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb235-1" data-line-number="1">mod_glm =<span class="st"> </span><span class="kw">glm</span>(class <span class="op">~</span><span class="st"> </span>clump_thickness <span class="op">+</span><span class="st"> </span>mitoses, <span class="dt">data =</span> bc_est, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</a>
-<a class="sourceLine" id="cb235-2" data-line-number="2">prob_glm =<span class="st"> </span><span class="kw">predict</span>(mod_glm, bc_val, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</a>
-<a class="sourceLine" id="cb235-3" data-line-number="3">pred_glm =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">ifelse</span>(prob_glm <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>, <span class="st">&quot;malignant&quot;</span>, <span class="st">&quot;benign&quot;</span>))</a></code></pre></div>
-<p>We fit the model, obtain probabilities for the <code>&quot;malignant&quot;</code> class, then make predictions with the usual cutoff.</p>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="binary-classification.html#cb235-1"></a>mod_glm =<span class="st"> </span><span class="kw">glm</span>(class <span class="op">~</span><span class="st"> </span>clump_thickness <span class="op">+</span><span class="st"> </span>mitoses, <span class="dt">data =</span> bc_est, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb235-2"><a href="binary-classification.html#cb235-2"></a>prob_glm =<span class="st"> </span><span class="kw">predict</span>(mod_glm, bc_val, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb235-3"><a href="binary-classification.html#cb235-3"></a>pred_glm =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">ifelse</span>(prob_glm <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>, <span class="st">&quot;malignant&quot;</span>, <span class="st">&quot;benign&quot;</span>))</span></code></pre></div>
+<p>We fit the model, obtain probabilities for the <code>"malignant"</code> class, then make predictions with the usual cutoff.</p>
 <p>We then calculate validation accuracy, sensitivity, and specificity.</p>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb236-1" data-line-number="1">tp =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;malignant&quot;</span> <span class="op">&amp;</span><span class="st"> </span>pred_glm <span class="op">==</span><span class="st"> &quot;malignant&quot;</span>)</a>
-<a class="sourceLine" id="cb236-2" data-line-number="2">fp =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;benign&quot;</span>    <span class="op">&amp;</span><span class="st"> </span>pred_glm <span class="op">==</span><span class="st"> &quot;malignant&quot;</span>)</a>
-<a class="sourceLine" id="cb236-3" data-line-number="3">fn =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;malignant&quot;</span> <span class="op">&amp;</span><span class="st"> </span>pred_glm <span class="op">==</span><span class="st"> &quot;benign&quot;</span>)</a>
-<a class="sourceLine" id="cb236-4" data-line-number="4">tn =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;benign&quot;</span>    <span class="op">&amp;</span><span class="st"> </span>pred_glm <span class="op">==</span><span class="st"> &quot;benign&quot;</span>)</a>
-<a class="sourceLine" id="cb236-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb236-6" data-line-number="6"><span class="kw">c</span>(<span class="dt">acc =</span> (tp <span class="op">+</span><span class="st"> </span>tn) <span class="op">/</span><span class="st"> </span>(tp <span class="op">+</span><span class="st"> </span>fp <span class="op">+</span><span class="st"> </span>tn <span class="op">+</span><span class="st"> </span>fn),</a>
-<a class="sourceLine" id="cb236-7" data-line-number="7">  <span class="dt">sens =</span> tp <span class="op">/</span><span class="st"> </span>(tp <span class="op">+</span><span class="st"> </span>fn), </a>
-<a class="sourceLine" id="cb236-8" data-line-number="8">  <span class="dt">spec =</span> tn <span class="op">/</span><span class="st"> </span>(tn <span class="op">+</span><span class="st"> </span>fp))</a></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="binary-classification.html#cb236-1"></a>tp =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;malignant&quot;</span> <span class="op">&amp;</span><span class="st"> </span>pred_glm <span class="op">==</span><span class="st"> &quot;malignant&quot;</span>)</span>
+<span id="cb236-2"><a href="binary-classification.html#cb236-2"></a>fp =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;benign&quot;</span>    <span class="op">&amp;</span><span class="st"> </span>pred_glm <span class="op">==</span><span class="st"> &quot;malignant&quot;</span>)</span>
+<span id="cb236-3"><a href="binary-classification.html#cb236-3"></a>fn =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;malignant&quot;</span> <span class="op">&amp;</span><span class="st"> </span>pred_glm <span class="op">==</span><span class="st"> &quot;benign&quot;</span>)</span>
+<span id="cb236-4"><a href="binary-classification.html#cb236-4"></a>tn =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;benign&quot;</span>    <span class="op">&amp;</span><span class="st"> </span>pred_glm <span class="op">==</span><span class="st"> &quot;benign&quot;</span>)</span>
+<span id="cb236-5"><a href="binary-classification.html#cb236-5"></a></span>
+<span id="cb236-6"><a href="binary-classification.html#cb236-6"></a><span class="kw">c</span>(<span class="dt">acc =</span> (tp <span class="op">+</span><span class="st"> </span>tn) <span class="op">/</span><span class="st"> </span>(tp <span class="op">+</span><span class="st"> </span>fp <span class="op">+</span><span class="st"> </span>tn <span class="op">+</span><span class="st"> </span>fn),</span>
+<span id="cb236-7"><a href="binary-classification.html#cb236-7"></a>  <span class="dt">sens =</span> tp <span class="op">/</span><span class="st"> </span>(tp <span class="op">+</span><span class="st"> </span>fn), </span>
+<span id="cb236-8"><a href="binary-classification.html#cb236-8"></a>  <span class="dt">spec =</span> tn <span class="op">/</span><span class="st"> </span>(tn <span class="op">+</span><span class="st"> </span>fp))</span></code></pre></div>
 <pre><code>##       acc      sens      spec 
 ## 0.8727273 0.7575758 0.9220779</code></pre>
 <p>What if we change the cutoff?</p>
@@ -533,58 +556,58 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       0 &amp; \hat{p}(x) \leq \alpha 
 \end{cases}
 \]</span></p>
-<p>For example, if we raise the cutoff, the classifier is going to clasify to <code>&quot;malignant&quot;</code> less often. So we can predict that the sensitivity will go down.</p>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb238-1" data-line-number="1">pred_glm =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">ifelse</span>(prob_glm <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.8</span>, <span class="st">&quot;malignant&quot;</span>, <span class="st">&quot;benign&quot;</span>))</a></code></pre></div>
-<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb239-1" data-line-number="1">tp =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;malignant&quot;</span> <span class="op">&amp;</span><span class="st"> </span>pred_glm <span class="op">==</span><span class="st"> &quot;malignant&quot;</span>)</a>
-<a class="sourceLine" id="cb239-2" data-line-number="2">fp =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;benign&quot;</span>    <span class="op">&amp;</span><span class="st"> </span>pred_glm <span class="op">==</span><span class="st"> &quot;malignant&quot;</span>)</a>
-<a class="sourceLine" id="cb239-3" data-line-number="3">fn =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;malignant&quot;</span> <span class="op">&amp;</span><span class="st"> </span>pred_glm <span class="op">==</span><span class="st"> &quot;benign&quot;</span>)</a>
-<a class="sourceLine" id="cb239-4" data-line-number="4">tn =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;benign&quot;</span>    <span class="op">&amp;</span><span class="st"> </span>pred_glm <span class="op">==</span><span class="st"> &quot;benign&quot;</span>)</a>
-<a class="sourceLine" id="cb239-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb239-6" data-line-number="6"><span class="kw">c</span>(<span class="dt">acc =</span> (tp <span class="op">+</span><span class="st"> </span>tn) <span class="op">/</span><span class="st"> </span>(tp <span class="op">+</span><span class="st"> </span>fp <span class="op">+</span><span class="st"> </span>tn <span class="op">+</span><span class="st"> </span>fn),</a>
-<a class="sourceLine" id="cb239-7" data-line-number="7">  <span class="dt">sens =</span> tp <span class="op">/</span><span class="st"> </span>(tp <span class="op">+</span><span class="st"> </span>fn), </a>
-<a class="sourceLine" id="cb239-8" data-line-number="8">  <span class="dt">spec =</span> tn <span class="op">/</span><span class="st"> </span>(tn <span class="op">+</span><span class="st"> </span>fp))</a></code></pre></div>
+<p>For example, if we raise the cutoff, the classifier is going to clasify to <code>"malignant"</code> less often. So we can predict that the sensitivity will go down.</p>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="binary-classification.html#cb238-1"></a>pred_glm =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">ifelse</span>(prob_glm <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.8</span>, <span class="st">&quot;malignant&quot;</span>, <span class="st">&quot;benign&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="binary-classification.html#cb239-1"></a>tp =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;malignant&quot;</span> <span class="op">&amp;</span><span class="st"> </span>pred_glm <span class="op">==</span><span class="st"> &quot;malignant&quot;</span>)</span>
+<span id="cb239-2"><a href="binary-classification.html#cb239-2"></a>fp =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;benign&quot;</span>    <span class="op">&amp;</span><span class="st"> </span>pred_glm <span class="op">==</span><span class="st"> &quot;malignant&quot;</span>)</span>
+<span id="cb239-3"><a href="binary-classification.html#cb239-3"></a>fn =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;malignant&quot;</span> <span class="op">&amp;</span><span class="st"> </span>pred_glm <span class="op">==</span><span class="st"> &quot;benign&quot;</span>)</span>
+<span id="cb239-4"><a href="binary-classification.html#cb239-4"></a>tn =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;benign&quot;</span>    <span class="op">&amp;</span><span class="st"> </span>pred_glm <span class="op">==</span><span class="st"> &quot;benign&quot;</span>)</span>
+<span id="cb239-5"><a href="binary-classification.html#cb239-5"></a></span>
+<span id="cb239-6"><a href="binary-classification.html#cb239-6"></a><span class="kw">c</span>(<span class="dt">acc =</span> (tp <span class="op">+</span><span class="st"> </span>tn) <span class="op">/</span><span class="st"> </span>(tp <span class="op">+</span><span class="st"> </span>fp <span class="op">+</span><span class="st"> </span>tn <span class="op">+</span><span class="st"> </span>fn),</span>
+<span id="cb239-7"><a href="binary-classification.html#cb239-7"></a>  <span class="dt">sens =</span> tp <span class="op">/</span><span class="st"> </span>(tp <span class="op">+</span><span class="st"> </span>fn), </span>
+<span id="cb239-8"><a href="binary-classification.html#cb239-8"></a>  <span class="dt">spec =</span> tn <span class="op">/</span><span class="st"> </span>(tn <span class="op">+</span><span class="st"> </span>fp))</span></code></pre></div>
 <pre><code>##       acc      sens      spec 
 ## 0.8727273 0.6363636 0.9740260</code></pre>
 <p>What if we take the cutoff in the other direction?</p>
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb241-1" data-line-number="1">pred_glm =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">ifelse</span>(prob_glm <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.2</span>, <span class="st">&quot;malignant&quot;</span>, <span class="st">&quot;benign&quot;</span>))</a></code></pre></div>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb242-1" data-line-number="1">tp =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;malignant&quot;</span> <span class="op">&amp;</span><span class="st"> </span>pred_glm <span class="op">==</span><span class="st"> &quot;malignant&quot;</span>)</a>
-<a class="sourceLine" id="cb242-2" data-line-number="2">fp =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;benign&quot;</span>    <span class="op">&amp;</span><span class="st"> </span>pred_glm <span class="op">==</span><span class="st"> &quot;malignant&quot;</span>)</a>
-<a class="sourceLine" id="cb242-3" data-line-number="3">fn =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;malignant&quot;</span> <span class="op">&amp;</span><span class="st"> </span>pred_glm <span class="op">==</span><span class="st"> &quot;benign&quot;</span>)</a>
-<a class="sourceLine" id="cb242-4" data-line-number="4">tn =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;benign&quot;</span>    <span class="op">&amp;</span><span class="st"> </span>pred_glm <span class="op">==</span><span class="st"> &quot;benign&quot;</span>)</a>
-<a class="sourceLine" id="cb242-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb242-6" data-line-number="6"><span class="kw">c</span>(<span class="dt">acc =</span> (tp <span class="op">+</span><span class="st"> </span>tn) <span class="op">/</span><span class="st"> </span>(tp <span class="op">+</span><span class="st"> </span>fp <span class="op">+</span><span class="st"> </span>tn <span class="op">+</span><span class="st"> </span>fn),</a>
-<a class="sourceLine" id="cb242-7" data-line-number="7">  <span class="dt">sens =</span> tp <span class="op">/</span><span class="st"> </span>(tp <span class="op">+</span><span class="st"> </span>fn), </a>
-<a class="sourceLine" id="cb242-8" data-line-number="8">  <span class="dt">spec =</span> tn <span class="op">/</span><span class="st"> </span>(tn <span class="op">+</span><span class="st"> </span>fp))</a></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="binary-classification.html#cb241-1"></a>pred_glm =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">ifelse</span>(prob_glm <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.2</span>, <span class="st">&quot;malignant&quot;</span>, <span class="st">&quot;benign&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="binary-classification.html#cb242-1"></a>tp =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;malignant&quot;</span> <span class="op">&amp;</span><span class="st"> </span>pred_glm <span class="op">==</span><span class="st"> &quot;malignant&quot;</span>)</span>
+<span id="cb242-2"><a href="binary-classification.html#cb242-2"></a>fp =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;benign&quot;</span>    <span class="op">&amp;</span><span class="st"> </span>pred_glm <span class="op">==</span><span class="st"> &quot;malignant&quot;</span>)</span>
+<span id="cb242-3"><a href="binary-classification.html#cb242-3"></a>fn =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;malignant&quot;</span> <span class="op">&amp;</span><span class="st"> </span>pred_glm <span class="op">==</span><span class="st"> &quot;benign&quot;</span>)</span>
+<span id="cb242-4"><a href="binary-classification.html#cb242-4"></a>tn =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;benign&quot;</span>    <span class="op">&amp;</span><span class="st"> </span>pred_glm <span class="op">==</span><span class="st"> &quot;benign&quot;</span>)</span>
+<span id="cb242-5"><a href="binary-classification.html#cb242-5"></a></span>
+<span id="cb242-6"><a href="binary-classification.html#cb242-6"></a><span class="kw">c</span>(<span class="dt">acc =</span> (tp <span class="op">+</span><span class="st"> </span>tn) <span class="op">/</span><span class="st"> </span>(tp <span class="op">+</span><span class="st"> </span>fp <span class="op">+</span><span class="st"> </span>tn <span class="op">+</span><span class="st"> </span>fn),</span>
+<span id="cb242-7"><a href="binary-classification.html#cb242-7"></a>  <span class="dt">sens =</span> tp <span class="op">/</span><span class="st"> </span>(tp <span class="op">+</span><span class="st"> </span>fn), </span>
+<span id="cb242-8"><a href="binary-classification.html#cb242-8"></a>  <span class="dt">spec =</span> tn <span class="op">/</span><span class="st"> </span>(tn <span class="op">+</span><span class="st"> </span>fp))</span></code></pre></div>
 <pre><code>##       acc      sens      spec 
 ## 0.8363636 0.9090909 0.8051948</code></pre>
 <p>Hmmm. We see to really be repeating ourselves a lot… Maybe we should write a function.</p>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb244-1" data-line-number="1"><span class="co"># note that this is not a generic function</span></a>
-<a class="sourceLine" id="cb244-2" data-line-number="2"><span class="co"># it only works for specific data, and the pos and neg classes we have defined</span></a>
-<a class="sourceLine" id="cb244-3" data-line-number="3">calc_metrics_cutoff =<span class="st"> </span><span class="cf">function</span>(probs, cutoff) {</a>
-<a class="sourceLine" id="cb244-4" data-line-number="4">  </a>
-<a class="sourceLine" id="cb244-5" data-line-number="5">  pred =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">ifelse</span>(probs <span class="op">&gt;</span><span class="st"> </span>cutoff, <span class="st">&quot;malignant&quot;</span>, <span class="st">&quot;benign&quot;</span>))</a>
-<a class="sourceLine" id="cb244-6" data-line-number="6">  </a>
-<a class="sourceLine" id="cb244-7" data-line-number="7">  tp =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;malignant&quot;</span> <span class="op">&amp;</span><span class="st"> </span>pred <span class="op">==</span><span class="st"> &quot;malignant&quot;</span>)</a>
-<a class="sourceLine" id="cb244-8" data-line-number="8">  fp =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;benign&quot;</span>    <span class="op">&amp;</span><span class="st"> </span>pred <span class="op">==</span><span class="st"> &quot;malignant&quot;</span>)</a>
-<a class="sourceLine" id="cb244-9" data-line-number="9">  fn =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;malignant&quot;</span> <span class="op">&amp;</span><span class="st"> </span>pred <span class="op">==</span><span class="st"> &quot;benign&quot;</span>)</a>
-<a class="sourceLine" id="cb244-10" data-line-number="10">  tn =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;benign&quot;</span>    <span class="op">&amp;</span><span class="st"> </span>pred <span class="op">==</span><span class="st"> &quot;benign&quot;</span>)</a>
-<a class="sourceLine" id="cb244-11" data-line-number="11">  </a>
-<a class="sourceLine" id="cb244-12" data-line-number="12">  <span class="kw">c</span>(<span class="dt">acc =</span> (tp <span class="op">+</span><span class="st"> </span>tn) <span class="op">/</span><span class="st"> </span>(tp <span class="op">+</span><span class="st"> </span>fp <span class="op">+</span><span class="st"> </span>tn <span class="op">+</span><span class="st"> </span>fn),</a>
-<a class="sourceLine" id="cb244-13" data-line-number="13">    <span class="dt">sens =</span> tp <span class="op">/</span><span class="st"> </span>(tp <span class="op">+</span><span class="st"> </span>fn),</a>
-<a class="sourceLine" id="cb244-14" data-line-number="14">    <span class="dt">spec =</span> tn <span class="op">/</span><span class="st"> </span>(tn <span class="op">+</span><span class="st"> </span>fp))</a>
-<a class="sourceLine" id="cb244-15" data-line-number="15">  </a>
-<a class="sourceLine" id="cb244-16" data-line-number="16">}</a></code></pre></div>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb245-1" data-line-number="1"><span class="co"># testing function</span></a>
-<a class="sourceLine" id="cb245-2" data-line-number="2"><span class="kw">calc_metrics_cutoff</span>(<span class="dt">probs =</span> prob_glm, <span class="dt">cutoff =</span> <span class="fl">0.2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="binary-classification.html#cb244-1"></a><span class="co"># note that this is not a generic function</span></span>
+<span id="cb244-2"><a href="binary-classification.html#cb244-2"></a><span class="co"># it only works for specific data, and the pos and neg classes we have defined</span></span>
+<span id="cb244-3"><a href="binary-classification.html#cb244-3"></a>calc_metrics_cutoff =<span class="st"> </span><span class="cf">function</span>(probs, cutoff) {</span>
+<span id="cb244-4"><a href="binary-classification.html#cb244-4"></a>  </span>
+<span id="cb244-5"><a href="binary-classification.html#cb244-5"></a>  pred =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">ifelse</span>(probs <span class="op">&gt;</span><span class="st"> </span>cutoff, <span class="st">&quot;malignant&quot;</span>, <span class="st">&quot;benign&quot;</span>))</span>
+<span id="cb244-6"><a href="binary-classification.html#cb244-6"></a>  </span>
+<span id="cb244-7"><a href="binary-classification.html#cb244-7"></a>  tp =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;malignant&quot;</span> <span class="op">&amp;</span><span class="st"> </span>pred <span class="op">==</span><span class="st"> &quot;malignant&quot;</span>)</span>
+<span id="cb244-8"><a href="binary-classification.html#cb244-8"></a>  fp =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;benign&quot;</span>    <span class="op">&amp;</span><span class="st"> </span>pred <span class="op">==</span><span class="st"> &quot;malignant&quot;</span>)</span>
+<span id="cb244-9"><a href="binary-classification.html#cb244-9"></a>  fn =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;malignant&quot;</span> <span class="op">&amp;</span><span class="st"> </span>pred <span class="op">==</span><span class="st"> &quot;benign&quot;</span>)</span>
+<span id="cb244-10"><a href="binary-classification.html#cb244-10"></a>  tn =<span class="st"> </span><span class="kw">sum</span>(bc_val<span class="op">$</span>class <span class="op">==</span><span class="st"> &quot;benign&quot;</span>    <span class="op">&amp;</span><span class="st"> </span>pred <span class="op">==</span><span class="st"> &quot;benign&quot;</span>)</span>
+<span id="cb244-11"><a href="binary-classification.html#cb244-11"></a>  </span>
+<span id="cb244-12"><a href="binary-classification.html#cb244-12"></a>  <span class="kw">c</span>(<span class="dt">acc =</span> (tp <span class="op">+</span><span class="st"> </span>tn) <span class="op">/</span><span class="st"> </span>(tp <span class="op">+</span><span class="st"> </span>fp <span class="op">+</span><span class="st"> </span>tn <span class="op">+</span><span class="st"> </span>fn),</span>
+<span id="cb244-13"><a href="binary-classification.html#cb244-13"></a>    <span class="dt">sens =</span> tp <span class="op">/</span><span class="st"> </span>(tp <span class="op">+</span><span class="st"> </span>fn),</span>
+<span id="cb244-14"><a href="binary-classification.html#cb244-14"></a>    <span class="dt">spec =</span> tn <span class="op">/</span><span class="st"> </span>(tn <span class="op">+</span><span class="st"> </span>fp))</span>
+<span id="cb244-15"><a href="binary-classification.html#cb244-15"></a>  </span>
+<span id="cb244-16"><a href="binary-classification.html#cb244-16"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="binary-classification.html#cb245-1"></a><span class="co"># testing function</span></span>
+<span id="cb245-2"><a href="binary-classification.html#cb245-2"></a><span class="kw">calc_metrics_cutoff</span>(<span class="dt">probs =</span> prob_glm, <span class="dt">cutoff =</span> <span class="fl">0.2</span>)</span></code></pre></div>
 <pre><code>##       acc      sens      spec 
 ## 0.8363636 0.9090909 0.8051948</code></pre>
 <p>Now we can try a lot of cutoffs.</p>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb247-1" data-line-number="1"><span class="co"># trying a bunch of cutoffs</span></a>
-<a class="sourceLine" id="cb247-2" data-line-number="2">cutoffs =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)</a>
-<a class="sourceLine" id="cb247-3" data-line-number="3">results =<span class="st"> </span><span class="kw">sapply</span>(cutoffs, calc_metrics_cutoff, <span class="dt">probs =</span> prob_glm)</a>
-<a class="sourceLine" id="cb247-4" data-line-number="4">results =<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">t</span>(<span class="kw">rbind</span>(cutoffs, results)))</a></code></pre></div>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb248-1" data-line-number="1"><span class="co"># checking the results</span></a>
-<a class="sourceLine" id="cb248-2" data-line-number="2"><span class="kw">head</span>(results)</a></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="binary-classification.html#cb247-1"></a><span class="co"># trying a bunch of cutoffs</span></span>
+<span id="cb247-2"><a href="binary-classification.html#cb247-2"></a>cutoffs =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)</span>
+<span id="cb247-3"><a href="binary-classification.html#cb247-3"></a>results =<span class="st"> </span><span class="kw">sapply</span>(cutoffs, calc_metrics_cutoff, <span class="dt">probs =</span> prob_glm)</span>
+<span id="cb247-4"><a href="binary-classification.html#cb247-4"></a>results =<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">t</span>(<span class="kw">rbind</span>(cutoffs, results)))</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="binary-classification.html#cb248-1"></a><span class="co"># checking the results</span></span>
+<span id="cb248-2"><a href="binary-classification.html#cb248-2"></a><span class="kw">head</span>(results)</span></code></pre></div>
 <pre><code>##   cutoffs       acc     sens      spec
 ## 1    0.00 0.3000000 1.000000 0.0000000
 ## 2    0.01 0.3000000 1.000000 0.0000000
@@ -592,16 +615,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4    0.03 0.5454545 0.969697 0.3636364
 ## 5    0.04 0.6181818 0.969697 0.4675325
 ## 6    0.05 0.6181818 0.969697 0.4675325</code></pre>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb250-1" data-line-number="1"><span class="co"># plot the results</span></a>
-<a class="sourceLine" id="cb250-2" data-line-number="2"><span class="kw">plot</span>(acc <span class="op">~</span><span class="st"> </span>cutoffs, <span class="dt">data =</span> results, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">lwd =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb250-3" data-line-number="3">     <span class="dt">main =</span> <span class="st">&quot;Accuracy, Sensitivity, Specificity versus Probability Cutoff&quot;</span>)</a>
-<a class="sourceLine" id="cb250-4" data-line-number="4"><span class="kw">lines</span>(sens <span class="op">~</span><span class="st"> </span>cutoffs, <span class="dt">data =</span> results, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb250-5" data-line-number="5"><span class="kw">lines</span>(spec <span class="op">~</span><span class="st"> </span>cutoffs, <span class="dt">data =</span> results, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">lty =</span> <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb250-6" data-line-number="6"><span class="kw">grid</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="binary-classification.html#cb250-1"></a><span class="co"># plot the results</span></span>
+<span id="cb250-2"><a href="binary-classification.html#cb250-2"></a><span class="kw">plot</span>(acc <span class="op">~</span><span class="st"> </span>cutoffs, <span class="dt">data =</span> results, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb250-3"><a href="binary-classification.html#cb250-3"></a>     <span class="dt">main =</span> <span class="st">&quot;Accuracy, Sensitivity, Specificity versus Probability Cutoff&quot;</span>)</span>
+<span id="cb250-4"><a href="binary-classification.html#cb250-4"></a><span class="kw">lines</span>(sens <span class="op">~</span><span class="st"> </span>cutoffs, <span class="dt">data =</span> results, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb250-5"><a href="binary-classification.html#cb250-5"></a><span class="kw">lines</span>(spec <span class="op">~</span><span class="st"> </span>cutoffs, <span class="dt">data =</span> results, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb250-6"><a href="binary-classification.html#cb250-6"></a><span class="kw">grid</span>()</span></code></pre></div>
 <p><img src="binary-classification_files/figure-html/unnamed-chunk-40-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>Here we see the general pattern. We can sacrifice some accuracy for more sensitivity or specificity. There is also a sensitivity-specificity. tradeoff.</p>
 </div>
-<div id="r-packages-and-function" class="section level2">
+<div id="r-packages-and-function" class="section level2" number="9.6">
 <h2><span class="header-section-number">9.6</span> R Packages and Function</h2>
 <p>Use these at your own risk.</p>
 <ul>

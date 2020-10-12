@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 8 Logistic Regression | Basics of Statistical Learning</title>
   <meta name="description" content="Chapter 8 Logistic Regression | Basics of Statistical Learning" />
-  <meta name="generator" content="bookdown 0.20.6 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20.7 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 8 Logistic Regression | Basics of Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -32,6 +32,7 @@
   
 <link rel="prev" href="nonparametric-classification.html"/>
 <link rel="next" href="binary-classification.html"/>
+<script src="libs/header-attrs-2.4.1/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,6 +50,7 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
@@ -56,27 +58,26 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -85,9 +86,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -136,8 +137,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Basics of Statistical Learning</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a><ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i><b>0.1</b> Who?</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i><b>0.1</b> Who?</a>
+<ul>
 <li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#readers"><i class="fa fa-check"></i><b>0.1.1</b> Readers</a></li>
 <li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#author"><i class="fa fa-check"></i><b>0.1.2</b> Author</a></li>
 <li class="chapter" data-level="0.1.3" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.1.3</b> Acknowledgements</a></li>
@@ -146,22 +149,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#why"><i class="fa fa-check"></i><b>0.3</b> Why?</a></li>
 <li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#where"><i class="fa fa-check"></i><b>0.4</b> Where?</a></li>
 <li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#when"><i class="fa fa-check"></i><b>0.5</b> When?</a></li>
-<li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#how"><i class="fa fa-check"></i><b>0.6</b> How?</a><ul>
+<li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#how"><i class="fa fa-check"></i><b>0.6</b> How?</a>
+<ul>
 <li class="chapter" data-level="0.6.1" data-path="index.html"><a href="index.html#build-tools"><i class="fa fa-check"></i><b>0.6.1</b> Build Tools</a></li>
 <li class="chapter" data-level="0.6.2" data-path="index.html"><a href="index.html#active-development"><i class="fa fa-check"></i><b>0.6.2</b> Active Development</a></li>
 <li class="chapter" data-level="0.6.3" data-path="index.html"><a href="index.html#packages"><i class="fa fa-check"></i><b>0.6.3</b> Packages</a></li>
 <li class="chapter" data-level="0.6.4" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.6.4</b> License</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="ml-overview.html"><a href="ml-overview.html"><i class="fa fa-check"></i><b>1</b> Machine Learning Overview</a><ul>
+<li class="chapter" data-level="1" data-path="ml-overview.html"><a href="ml-overview.html"><i class="fa fa-check"></i><b>1</b> Machine Learning Overview</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="ml-overview.html"><a href="ml-overview.html#what-is-machine-learning"><i class="fa fa-check"></i><b>1.1</b> What is Machine Learning?</a></li>
-<li class="chapter" data-level="1.2" data-path="ml-overview.html"><a href="ml-overview.html#machine-learning-tasks"><i class="fa fa-check"></i><b>1.2</b> Machine Learning Tasks</a><ul>
+<li class="chapter" data-level="1.2" data-path="ml-overview.html"><a href="ml-overview.html#machine-learning-tasks"><i class="fa fa-check"></i><b>1.2</b> Machine Learning Tasks</a>
+<ul>
 <li class="chapter" data-level="1.2.1" data-path="ml-overview.html"><a href="ml-overview.html#supervised-learning"><i class="fa fa-check"></i><b>1.2.1</b> Supervised Learning</a></li>
 <li class="chapter" data-level="1.2.2" data-path="ml-overview.html"><a href="ml-overview.html#unsupervised-learning"><i class="fa fa-check"></i><b>1.2.2</b> Unsupervised Learning</a></li>
 </ul></li>
 <li class="chapter" data-level="1.3" data-path="ml-overview.html"><a href="ml-overview.html#open-questions"><i class="fa fa-check"></i><b>1.3</b> Open Questions</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>2</b> Linear Regression</a><ul>
+<li class="chapter" data-level="2" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>2</b> Linear Regression</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="linear-regression.html"><a href="linear-regression.html#r-setup-and-source"><i class="fa fa-check"></i><b>2.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="2.2" data-path="linear-regression.html"><a href="linear-regression.html#explanation-versus-prediction"><i class="fa fa-check"></i><b>2.2</b> Explanation versus Prediction</a></li>
 <li class="chapter" data-level="2.3" data-path="linear-regression.html"><a href="linear-regression.html#task-setup"><i class="fa fa-check"></i><b>2.3</b> Task Setup</a></li>
@@ -170,34 +177,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.6" data-path="linear-regression.html"><a href="linear-regression.html#using-lm"><i class="fa fa-check"></i><b>2.6</b> Using <code>lm()</code></a></li>
 <li class="chapter" data-level="2.7" data-path="linear-regression.html"><a href="linear-regression.html#the-predict-function"><i class="fa fa-check"></i><b>2.7</b> The <code>predict()</code> Function</a></li>
 <li class="chapter" data-level="2.8" data-path="linear-regression.html"><a href="linear-regression.html#data-splitting"><i class="fa fa-check"></i><b>2.8</b> Data Splitting</a></li>
-<li class="chapter" data-level="2.9" data-path="linear-regression.html"><a href="linear-regression.html#regression-metrics"><i class="fa fa-check"></i><b>2.9</b> Regression Metrics</a><ul>
+<li class="chapter" data-level="2.9" data-path="linear-regression.html"><a href="linear-regression.html#regression-metrics"><i class="fa fa-check"></i><b>2.9</b> Regression Metrics</a>
+<ul>
 <li class="chapter" data-level="2.9.1" data-path="linear-regression.html"><a href="linear-regression.html#graphical-evaluation"><i class="fa fa-check"></i><b>2.9.1</b> Graphical Evaluation</a></li>
 </ul></li>
 <li class="chapter" data-level="2.10" data-path="linear-regression.html"><a href="linear-regression.html#example-simple-simulated-data"><i class="fa fa-check"></i><b>2.10</b> Example: “Simple” Simulated Data</a></li>
 <li class="chapter" data-level="2.11" data-path="linear-regression.html"><a href="linear-regression.html#example-diamonds-data"><i class="fa fa-check"></i><b>2.11</b> Example: Diamonds Data</a></li>
 <li class="chapter" data-level="2.12" data-path="linear-regression.html"><a href="linear-regression.html#example-credit-card-data"><i class="fa fa-check"></i><b>2.12</b> Example: Credit Card Data</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html"><i class="fa fa-check"></i><b>3</b> Nonparametric Regression</a><ul>
+<li class="chapter" data-level="3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html"><i class="fa fa-check"></i><b>3</b> Nonparametric Regression</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#r-setup-and-source-1"><i class="fa fa-check"></i><b>3.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="3.2" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#mathematical-setup-1"><i class="fa fa-check"></i><b>3.2</b> Mathematical Setup</a></li>
 <li class="chapter" data-level="3.3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>3.3</b> k-Nearest Neighbors</a></li>
 <li class="chapter" data-level="3.4" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#decision-trees"><i class="fa fa-check"></i><b>3.4</b> Decision Trees</a></li>
 <li class="chapter" data-level="3.5" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#example-credit-card-data-1"><i class="fa fa-check"></i><b>3.5</b> Example: Credit Card Data</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html"><i class="fa fa-check"></i><b>4</b> The Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="4" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html"><i class="fa fa-check"></i><b>4</b> The Bias–Variance Tradeoff</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#r-setup-and-source-2"><i class="fa fa-check"></i><b>4.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="4.2" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#the-regression-setup"><i class="fa fa-check"></i><b>4.2</b> The Regression Setup</a></li>
 <li class="chapter" data-level="4.3" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>4.3</b> Reducible and Irreducible Error</a></li>
 <li class="chapter" data-level="4.4" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>4.4</b> Bias-Variance Decomposition</a></li>
 <li class="chapter" data-level="4.5" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#using-simulation-to-estimate-bias-and-variance"><i class="fa fa-check"></i><b>4.5</b> Using Simulation to Estimate Bias and Variance</a></li>
 <li class="chapter" data-level="4.6" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>4.6</b> Estimating Expected Prediction Error</a></li>
-<li class="chapter" data-level="4.7" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#model-flexibility"><i class="fa fa-check"></i><b>4.7</b> Model Flexibility</a><ul>
+<li class="chapter" data-level="4.7" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#model-flexibility"><i class="fa fa-check"></i><b>4.7</b> Model Flexibility</a>
+<ul>
 <li class="chapter" data-level="4.7.1" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#linear-models"><i class="fa fa-check"></i><b>4.7.1</b> Linear Models</a></li>
 <li class="chapter" data-level="4.7.2" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#k-nearest-neighbors-1"><i class="fa fa-check"></i><b>4.7.2</b> k-Nearest Neighbors</a></li>
 <li class="chapter" data-level="4.7.3" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#decision-trees-1"><i class="fa fa-check"></i><b>4.7.3</b> Decision Trees</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Regression Overview</a><ul>
+<li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Regression Overview</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="regression-overview.html"><a href="regression-overview.html#the-goal"><i class="fa fa-check"></i><b>5.1</b> The Goal</a></li>
 <li class="chapter" data-level="5.2" data-path="regression-overview.html"><a href="regression-overview.html#general-strategy"><i class="fa fa-check"></i><b>5.2</b> General Strategy</a></li>
 <li class="chapter" data-level="5.3" data-path="regression-overview.html"><a href="regression-overview.html#aglorithms"><i class="fa fa-check"></i><b>5.3</b> Aglorithms</a></li>
@@ -210,7 +222,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>6</b> Classification</a></li>
 <li class="chapter" data-level="7" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html"><i class="fa fa-check"></i><b>7</b> Nonparametric Classification</a></li>
 <li class="chapter" data-level="8" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>8</b> Logistic Regression</a></li>
-<li class="chapter" data-level="9" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>9</b> Binary Classification</a><ul>
+<li class="chapter" data-level="9" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>9</b> Binary Classification</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="binary-classification.html"><a href="binary-classification.html#r-setup-and-source-3"><i class="fa fa-check"></i><b>9.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="9.2" data-path="binary-classification.html"><a href="binary-classification.html#breast-cancer-data"><i class="fa fa-check"></i><b>9.2</b> Breast Cancer Data</a></li>
 <li class="chapter" data-level="9.3" data-path="binary-classification.html"><a href="binary-classification.html#confusion-matrix"><i class="fa fa-check"></i><b>9.3</b> Confusion Matrix</a></li>
@@ -218,7 +231,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.5" data-path="binary-classification.html"><a href="binary-classification.html#probability-cutoff"><i class="fa fa-check"></i><b>9.5</b> Probability Cutoff</a></li>
 <li class="chapter" data-level="9.6" data-path="binary-classification.html"><a href="binary-classification.html#r-packages-and-function"><i class="fa fa-check"></i><b>9.6</b> R Packages and Function</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="generative.html"><a href="generative.html"><i class="fa fa-check"></i><b>10</b> Generative Models</a><ul>
+<li class="chapter" data-level="10" data-path="generative.html"><a href="generative.html"><i class="fa fa-check"></i><b>10</b> Generative Models</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="generative.html"><a href="generative.html#r-setup-and-source-4"><i class="fa fa-check"></i><b>10.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="10.2" data-path="generative.html"><a href="generative.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>10.2</b> Linear Discriminant Analysis</a></li>
 <li class="chapter" data-level="10.3" data-path="generative.html"><a href="generative.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>10.3</b> Quadratic Discriminant Analysis</a></li>
@@ -226,20 +240,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5" data-path="generative.html"><a href="generative.html#categorical-features"><i class="fa fa-check"></i><b>10.5</b> Categorical Features</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="additional-reading.html"><a href="additional-reading.html"><i class="fa fa-check"></i><b>A</b> Additional Reading</a><ul>
+<li class="chapter" data-level="A" data-path="additional-reading.html"><a href="additional-reading.html"><i class="fa fa-check"></i><b>A</b> Additional Reading</a>
+<ul>
 <li class="chapter" data-level="A.1" data-path="additional-reading.html"><a href="additional-reading.html#books"><i class="fa fa-check"></i><b>A.1</b> Books</a></li>
 <li class="chapter" data-level="A.2" data-path="additional-reading.html"><a href="additional-reading.html#papers"><i class="fa fa-check"></i><b>A.2</b> Papers</a></li>
 <li class="chapter" data-level="A.3" data-path="additional-reading.html"><a href="additional-reading.html#blog-posts"><i class="fa fa-check"></i><b>A.3</b> Blog Posts</a></li>
 <li class="chapter" data-level="A.4" data-path="additional-reading.html"><a href="additional-reading.html#miscellaneous"><i class="fa fa-check"></i><b>A.4</b> Miscellaneous</a></li>
 </ul></li>
-<li class="chapter" data-level="B" data-path="computing.html"><a href="computing.html"><i class="fa fa-check"></i><b>B</b> Computing</a><ul>
+<li class="chapter" data-level="B" data-path="computing.html"><a href="computing.html"><i class="fa fa-check"></i><b>B</b> Computing</a>
+<ul>
 <li class="chapter" data-level="B.1" data-path="computing.html"><a href="computing.html#reading"><i class="fa fa-check"></i><b>B.1</b> Reading</a></li>
-<li class="chapter" data-level="B.2" data-path="computing.html"><a href="computing.html#additional-resources"><i class="fa fa-check"></i><b>B.2</b> Additional Resources</a><ul>
+<li class="chapter" data-level="B.2" data-path="computing.html"><a href="computing.html#additional-resources"><i class="fa fa-check"></i><b>B.2</b> Additional Resources</a>
+<ul>
 <li class="chapter" data-level="B.2.1" data-path="computing.html"><a href="computing.html#r"><i class="fa fa-check"></i><b>B.2.1</b> R</a></li>
 <li class="chapter" data-level="B.2.2" data-path="computing.html"><a href="computing.html#rstudio"><i class="fa fa-check"></i><b>B.2.2</b> RStudio</a></li>
 <li class="chapter" data-level="B.2.3" data-path="computing.html"><a href="computing.html#r-markdown"><i class="fa fa-check"></i><b>B.2.3</b> R Markdown</a></li>
 </ul></li>
-<li class="chapter" data-level="B.3" data-path="computing.html"><a href="computing.html#stat-432-idioms"><i class="fa fa-check"></i><b>B.3</b> STAT 432 Idioms</a><ul>
+<li class="chapter" data-level="B.3" data-path="computing.html"><a href="computing.html#stat-432-idioms"><i class="fa fa-check"></i><b>B.3</b> STAT 432 Idioms</a>
+<ul>
 <li class="chapter" data-level="B.3.1" data-path="computing.html"><a href="computing.html#dont-restore-old-workspaces"><i class="fa fa-check"></i><b>B.3.1</b> Don’t Restore Old Workspaces</a></li>
 <li class="chapter" data-level="B.3.2" data-path="computing.html"><a href="computing.html#r-versions"><i class="fa fa-check"></i><b>B.3.2</b> R Versions</a></li>
 <li class="chapter" data-level="B.3.3" data-path="computing.html"><a href="computing.html#packages-1"><i class="fa fa-check"></i><b>B.3.3</b> Packages</a></li>
@@ -254,12 +272,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="B.3.12" data-path="computing.html"><a href="computing.html#keyboard-shortcuts"><i class="fa fa-check"></i><b>B.3.12</b> Keyboard Shortcuts</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="C" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>C</b> Probability</a><ul>
+<li class="chapter" data-level="C" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>C</b> Probability</a>
+<ul>
 <li class="chapter" data-level="C.1" data-path="probability.html"><a href="probability.html#reading-1"><i class="fa fa-check"></i><b>C.1</b> Reading</a></li>
 <li class="chapter" data-level="C.2" data-path="probability.html"><a href="probability.html#probability-models"><i class="fa fa-check"></i><b>C.2</b> Probability Models</a></li>
 <li class="chapter" data-level="C.3" data-path="probability.html"><a href="probability.html#probability-axioms"><i class="fa fa-check"></i><b>C.3</b> Probability Axioms</a></li>
 <li class="chapter" data-level="C.4" data-path="probability.html"><a href="probability.html#probability-rules"><i class="fa fa-check"></i><b>C.4</b> Probability Rules</a></li>
-<li class="chapter" data-level="C.5" data-path="probability.html"><a href="probability.html#random-variables"><i class="fa fa-check"></i><b>C.5</b> Random Variables</a><ul>
+<li class="chapter" data-level="C.5" data-path="probability.html"><a href="probability.html#random-variables"><i class="fa fa-check"></i><b>C.5</b> Random Variables</a>
+<ul>
 <li class="chapter" data-level="C.5.1" data-path="probability.html"><a href="probability.html#distributions"><i class="fa fa-check"></i><b>C.5.1</b> Distributions</a></li>
 <li class="chapter" data-level="C.5.2" data-path="probability.html"><a href="probability.html#discrete-random-variables"><i class="fa fa-check"></i><b>C.5.2</b> Discrete Random Variables</a></li>
 <li class="chapter" data-level="C.5.3" data-path="probability.html"><a href="probability.html#continuous-random-variables"><i class="fa fa-check"></i><b>C.5.3</b> Continuous Random Variables</a></li>
@@ -268,14 +288,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="C.6" data-path="probability.html"><a href="probability.html#expectations"><i class="fa fa-check"></i><b>C.6</b> Expectations</a></li>
 <li class="chapter" data-level="C.7" data-path="probability.html"><a href="probability.html#likelihood"><i class="fa fa-check"></i><b>C.7</b> Likelihood</a></li>
-<li class="chapter" data-level="C.8" data-path="probability.html"><a href="probability.html#additional-references"><i class="fa fa-check"></i><b>C.8</b> Additional References</a><ul>
+<li class="chapter" data-level="C.8" data-path="probability.html"><a href="probability.html#additional-references"><i class="fa fa-check"></i><b>C.8</b> Additional References</a>
+<ul>
 <li class="chapter" data-level="C.8.1" data-path="probability.html"><a href="probability.html#videos"><i class="fa fa-check"></i><b>C.8.1</b> Videos</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="D" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>D</b> Statistics</a><ul>
+<li class="chapter" data-level="D" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>D</b> Statistics</a>
+<ul>
 <li class="chapter" data-level="D.1" data-path="statistics.html"><a href="statistics.html#reading-2"><i class="fa fa-check"></i><b>D.1</b> Reading</a></li>
 <li class="chapter" data-level="D.2" data-path="statistics.html"><a href="statistics.html#statistics-1"><i class="fa fa-check"></i><b>D.2</b> Statistics</a></li>
-<li class="chapter" data-level="D.3" data-path="statistics.html"><a href="statistics.html#estimators"><i class="fa fa-check"></i><b>D.3</b> Estimators</a><ul>
+<li class="chapter" data-level="D.3" data-path="statistics.html"><a href="statistics.html#estimators"><i class="fa fa-check"></i><b>D.3</b> Estimators</a>
+<ul>
 <li class="chapter" data-level="D.3.1" data-path="statistics.html"><a href="statistics.html#properties"><i class="fa fa-check"></i><b>D.3.1</b> Properties</a></li>
 <li class="chapter" data-level="D.3.2" data-path="statistics.html"><a href="statistics.html#example-mse-of-an-estimator"><i class="fa fa-check"></i><b>D.3.2</b> Example: MSE of an Estimator</a></li>
 <li class="chapter" data-level="D.3.3" data-path="statistics.html"><a href="statistics.html#estimation-methods"><i class="fa fa-check"></i><b>D.3.3</b> Estimation Methods</a></li>
@@ -305,175 +328,175 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="logistic-regression" class="section level1">
+<div id="logistic-regression" class="section level1" number="8">
 <h1><span class="header-section-number">Chapter 8</span> Logistic Regression</h1>
 <p>Full book chapter still delayed! Keeping up with writing every week is getting tough. Below are the notes from the video.</p>
 <ul>
 <li><a href="files/logistic-regression.pdf"><strong>Notes:</strong> Logistic Regression</a></li>
 </ul>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" data-line-number="1"><span class="co"># load packages</span></a>
-<a class="sourceLine" id="cb180-2" data-line-number="2"><span class="kw">library</span>(tibble)</a>
-<a class="sourceLine" id="cb180-3" data-line-number="3"><span class="kw">library</span>(mlbench)</a>
-<a class="sourceLine" id="cb180-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb180-5" data-line-number="5"><span class="co"># single feature variable ######################################################</span></a>
-<a class="sourceLine" id="cb180-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb180-7" data-line-number="7">sim_logistic_data =<span class="st"> </span><span class="cf">function</span>(<span class="dt">sample_size =</span> <span class="dv">25</span>, <span class="dt">beta_0 =</span> <span class="dv">-2</span>, <span class="dt">beta_1 =</span> <span class="dv">3</span>, <span class="dt">factor =</span> <span class="ot">TRUE</span>) {</a>
-<a class="sourceLine" id="cb180-8" data-line-number="8">  x =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size)</a>
-<a class="sourceLine" id="cb180-9" data-line-number="9">  eta =<span class="st"> </span>beta_<span class="dv">0</span> <span class="op">+</span><span class="st"> </span>beta_<span class="dv">1</span> <span class="op">*</span><span class="st"> </span>x</a>
-<a class="sourceLine" id="cb180-10" data-line-number="10">  p =<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>eta))</a>
-<a class="sourceLine" id="cb180-11" data-line-number="11">  y =<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> sample_size, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> p)</a>
-<a class="sourceLine" id="cb180-12" data-line-number="12">  <span class="cf">if</span> (factor) {</a>
-<a class="sourceLine" id="cb180-13" data-line-number="13">    y =<span class="st"> </span><span class="kw">factor</span>(y)</a>
-<a class="sourceLine" id="cb180-14" data-line-number="14">  }</a>
-<a class="sourceLine" id="cb180-15" data-line-number="15">  tibble<span class="op">::</span><span class="kw">tibble</span>(x, y)</a>
-<a class="sourceLine" id="cb180-16" data-line-number="16">}</a>
-<a class="sourceLine" id="cb180-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb180-18" data-line-number="18"><span class="co"># simulate data for logistic regression</span></a>
-<a class="sourceLine" id="cb180-19" data-line-number="19"><span class="kw">set.seed</span>(<span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb180-20" data-line-number="20">sim_data_factor =<span class="st"> </span><span class="kw">sim_logistic_data</span>()</a>
-<a class="sourceLine" id="cb180-21" data-line-number="21">sim_data_factor</a>
-<a class="sourceLine" id="cb180-22" data-line-number="22"><span class="kw">levels</span>(sim_data_factor<span class="op">$</span>y)</a>
-<a class="sourceLine" id="cb180-23" data-line-number="23"></a>
-<a class="sourceLine" id="cb180-24" data-line-number="24"><span class="co"># simulate data for linear regression</span></a>
-<a class="sourceLine" id="cb180-25" data-line-number="25"><span class="kw">set.seed</span>(<span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb180-26" data-line-number="26">sim_data_numeric =<span class="st"> </span><span class="kw">sim_logistic_data</span>(<span class="dt">factor =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb180-27" data-line-number="27">sim_data_numeric</a>
-<a class="sourceLine" id="cb180-28" data-line-number="28"></a>
-<a class="sourceLine" id="cb180-29" data-line-number="29"><span class="co"># initial plot</span></a>
-<a class="sourceLine" id="cb180-30" data-line-number="30"><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_data_numeric,</a>
-<a class="sourceLine" id="cb180-31" data-line-number="31">     <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">ylab =</span> <span class="st">&quot;Estimated Probability&quot;</span>,</a>
-<a class="sourceLine" id="cb180-32" data-line-number="32">     <span class="dt">main =</span> <span class="st">&quot;Ordinary vs Logistic Regression&quot;</span>,</a>
-<a class="sourceLine" id="cb180-33" data-line-number="33">     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.2</span>, <span class="fl">1.2</span>), <span class="dt">cex =</span> <span class="fl">1.5</span>)</a>
-<a class="sourceLine" id="cb180-34" data-line-number="34"><span class="kw">grid</span>()</a>
-<a class="sourceLine" id="cb180-35" data-line-number="35"><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb180-36" data-line-number="36"><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">1</span>, <span class="dt">lty =</span> <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb180-37" data-line-number="37"></a>
-<a class="sourceLine" id="cb180-38" data-line-number="38"><span class="co"># E[Y | X = x] = 1 * P(Y = 1 | X = x) + 0 * P(Y = 0 | X = x) = P(Y = 1 | X = x)</span></a>
-<a class="sourceLine" id="cb180-39" data-line-number="39"><span class="co"># ordinary linear regression</span></a>
-<a class="sourceLine" id="cb180-40" data-line-number="40">fit_lm  =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_data_numeric)</a>
-<a class="sourceLine" id="cb180-41" data-line-number="41">fit_lm  =<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_data_numeric)</a>
-<a class="sourceLine" id="cb180-42" data-line-number="42"></a>
-<a class="sourceLine" id="cb180-43" data-line-number="43"><span class="co"># logistic regression</span></a>
-<a class="sourceLine" id="cb180-44" data-line-number="44">fit_glm =<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_data_numeric, <span class="dt">family =</span> binomial)</a>
-<a class="sourceLine" id="cb180-45" data-line-number="45">fit_glm =<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_data_numeric, <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> <span class="st">&quot;logit&quot;</span>))</a>
-<a class="sourceLine" id="cb180-46" data-line-number="46"></a>
-<a class="sourceLine" id="cb180-47" data-line-number="47"><span class="co"># plot results</span></a>
-<a class="sourceLine" id="cb180-48" data-line-number="48"><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_data_numeric,</a>
-<a class="sourceLine" id="cb180-49" data-line-number="49">     <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">ylab =</span> <span class="st">&quot;Estimated Probability&quot;</span>,</a>
-<a class="sourceLine" id="cb180-50" data-line-number="50">     <span class="dt">main =</span> <span class="st">&quot;Ordinary vs Logistic Regression&quot;</span>,</a>
-<a class="sourceLine" id="cb180-51" data-line-number="51">     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.2</span>, <span class="fl">1.2</span>), <span class="dt">cex =</span> <span class="fl">1.5</span>)</a>
-<a class="sourceLine" id="cb180-52" data-line-number="52"><span class="kw">grid</span>()</a>
-<a class="sourceLine" id="cb180-53" data-line-number="53"><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb180-54" data-line-number="54"><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">1</span>, <span class="dt">lty =</span> <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb180-55" data-line-number="55"><span class="kw">abline</span>(fit_lm, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>)</a>
-<a class="sourceLine" id="cb180-56" data-line-number="56"><span class="kw">curve</span>(<span class="kw">predict</span>(fit_glm, <span class="kw">data.frame</span>(x), <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>),</a>
-<a class="sourceLine" id="cb180-57" data-line-number="57">      <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb180-58" data-line-number="58"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;Ordinary&quot;</span>, <span class="st">&quot;Logistic&quot;</span>, <span class="st">&quot;Data&quot;</span>), <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb180-59" data-line-number="59">       <span class="dt">pch =</span> <span class="kw">c</span>(<span class="ot">NA</span>, <span class="ot">NA</span>, <span class="dv">20</span>), <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;darkorange&quot;</span>, <span class="st">&quot;dodgerblue&quot;</span>, <span class="st">&quot;black&quot;</span>))</a>
-<a class="sourceLine" id="cb180-60" data-line-number="60"><span class="kw">abline</span>(<span class="dt">h =</span> <span class="fl">0.5</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb180-61" data-line-number="61"><span class="co"># abline(v = -coef(fit_glm)[1] / coef(fit_glm)[2], col = &quot;dodgerblue&quot;, lty = 2)</span></a>
-<a class="sourceLine" id="cb180-62" data-line-number="62"><span class="co"># abline(v = (0.5 - coef(fit_lm)[1]) / coef(fit_lm)[2], col = &quot;darkorange&quot;)</span></a>
-<a class="sourceLine" id="cb180-63" data-line-number="63"></a>
-<a class="sourceLine" id="cb180-64" data-line-number="64"><span class="co"># two feature variables, blobs #################################################</span></a>
-<a class="sourceLine" id="cb180-65" data-line-number="65"></a>
-<a class="sourceLine" id="cb180-66" data-line-number="66"><span class="co"># simulate data</span></a>
-<a class="sourceLine" id="cb180-67" data-line-number="67"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb180-68" data-line-number="68">blob_trn =<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">mlbench.2dnormals</span>(<span class="dt">n =</span> <span class="dv">100</span>))</a>
-<a class="sourceLine" id="cb180-69" data-line-number="69">blob_tst =<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">mlbench.2dnormals</span>(<span class="dt">n =</span> <span class="dv">1000</span>))</a>
-<a class="sourceLine" id="cb180-70" data-line-number="70"></a>
-<a class="sourceLine" id="cb180-71" data-line-number="71"><span class="co"># check data</span></a>
-<a class="sourceLine" id="cb180-72" data-line-number="72">blob_trn</a>
-<a class="sourceLine" id="cb180-73" data-line-number="73"><span class="kw">levels</span>(blob_trn<span class="op">$</span>classes)</a>
-<a class="sourceLine" id="cb180-74" data-line-number="74"></a>
-<a class="sourceLine" id="cb180-75" data-line-number="75"><span class="co"># check balance</span></a>
-<a class="sourceLine" id="cb180-76" data-line-number="76"><span class="kw">table</span>(blob_trn<span class="op">$</span>classes)</a>
-<a class="sourceLine" id="cb180-77" data-line-number="77"></a>
-<a class="sourceLine" id="cb180-78" data-line-number="78"><span class="co"># initial plot</span></a>
-<a class="sourceLine" id="cb180-79" data-line-number="79"><span class="kw">plot</span>(x<span class="fl">.2</span> <span class="op">~</span><span class="st"> </span>x<span class="fl">.1</span>, <span class="dt">data =</span> blob_trn, <span class="dt">col =</span> blob_trn<span class="op">$</span>classes, <span class="dt">pch =</span> <span class="dv">19</span>)</a>
-<a class="sourceLine" id="cb180-80" data-line-number="80"><span class="kw">grid</span>()</a>
-<a class="sourceLine" id="cb180-81" data-line-number="81"></a>
-<a class="sourceLine" id="cb180-82" data-line-number="82"><span class="co"># points where we will predict</span></a>
-<a class="sourceLine" id="cb180-83" data-line-number="83">xy_vals =<span class="st"> </span><span class="kw">expand.grid</span>(</a>
-<a class="sourceLine" id="cb180-84" data-line-number="84">  <span class="dt">x.1 =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="fl">-3.5</span>, <span class="dt">to =</span> <span class="fl">3.5</span>, <span class="dt">by =</span> <span class="fl">0.05</span>),</a>
-<a class="sourceLine" id="cb180-85" data-line-number="85">  <span class="dt">x.2 =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="fl">-3.5</span>, <span class="dt">to =</span> <span class="fl">3.5</span>, <span class="dt">by =</span> <span class="fl">0.05</span>)</a>
-<a class="sourceLine" id="cb180-86" data-line-number="86">)</a>
-<a class="sourceLine" id="cb180-87" data-line-number="87"><span class="kw">head</span>(xy_vals)</a>
-<a class="sourceLine" id="cb180-88" data-line-number="88"></a>
-<a class="sourceLine" id="cb180-89" data-line-number="89"><span class="co"># fit model, bad</span></a>
-<a class="sourceLine" id="cb180-90" data-line-number="90">mod =<span class="st"> </span><span class="kw">glm</span>(classes <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> blob_trn, <span class="dt">family =</span> binomial)</a>
-<a class="sourceLine" id="cb180-91" data-line-number="91">pred_xy =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">predict</span>(mod, xy_vals, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>, <span class="st">&quot;lightpink&quot;</span>, <span class="st">&quot;lightgrey&quot;</span>)</a>
-<a class="sourceLine" id="cb180-92" data-line-number="92">pred_xy =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">predict</span>(mod, xy_vals) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&quot;lightpink&quot;</span>, <span class="st">&quot;lightgrey&quot;</span>)</a>
-<a class="sourceLine" id="cb180-93" data-line-number="93"></a>
-<a class="sourceLine" id="cb180-94" data-line-number="94"><span class="co"># check predictions on plot</span></a>
-<a class="sourceLine" id="cb180-95" data-line-number="95"><span class="kw">plot</span>(x<span class="fl">.2</span> <span class="op">~</span><span class="st"> </span>x<span class="fl">.1</span>, <span class="dt">data =</span> xy_vals, <span class="dt">col =</span> pred_xy,</a>
-<a class="sourceLine" id="cb180-96" data-line-number="96">     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">pch =</span> <span class="dv">15</span>)</a>
-<a class="sourceLine" id="cb180-97" data-line-number="97"><span class="kw">points</span>(x<span class="fl">.2</span> <span class="op">~</span><span class="st"> </span>x<span class="fl">.1</span>, <span class="dt">data =</span> blob_trn, <span class="dt">col =</span> blob_trn<span class="op">$</span>classes, <span class="dt">pch =</span> <span class="dv">19</span>)</a>
-<a class="sourceLine" id="cb180-98" data-line-number="98"></a>
-<a class="sourceLine" id="cb180-99" data-line-number="99"><span class="co"># 0 = beta_0 + beta_1 x.1 + beta_2 x.2</span></a>
-<a class="sourceLine" id="cb180-100" data-line-number="100"><span class="co"># x.2 = -(beta_0 + beta_1 x.1) / beta_2</span></a>
-<a class="sourceLine" id="cb180-101" data-line-number="101"></a>
-<a class="sourceLine" id="cb180-102" data-line-number="102"><span class="co"># add analytic decision boundary</span></a>
-<a class="sourceLine" id="cb180-103" data-line-number="103"><span class="kw">plot</span>(x<span class="fl">.2</span> <span class="op">~</span><span class="st"> </span>x<span class="fl">.1</span>, <span class="dt">data =</span> xy_vals, <span class="dt">col =</span> pred_xy,</a>
-<a class="sourceLine" id="cb180-104" data-line-number="104">     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">pch =</span> <span class="dv">15</span>)</a>
-<a class="sourceLine" id="cb180-105" data-line-number="105"><span class="kw">points</span>(x<span class="fl">.2</span> <span class="op">~</span><span class="st"> </span>x<span class="fl">.1</span>, <span class="dt">data =</span> blob_trn, <span class="dt">col =</span> blob_trn<span class="op">$</span>classes, <span class="dt">pch =</span> <span class="dv">19</span>)</a>
-<a class="sourceLine" id="cb180-106" data-line-number="106"><span class="kw">abline</span>(</a>
-<a class="sourceLine" id="cb180-107" data-line-number="107">  <span class="dt">a =</span> <span class="op">-</span><span class="kw">coef</span>(mod)[<span class="dv">1</span>] <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(mod)[<span class="dv">3</span>],</a>
-<a class="sourceLine" id="cb180-108" data-line-number="108">  <span class="dt">b =</span> <span class="op">-</span><span class="kw">coef</span>(mod)[<span class="dv">2</span>] <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(mod)[<span class="dv">3</span>],</a>
-<a class="sourceLine" id="cb180-109" data-line-number="109">  <span class="dt">lwd =</span> <span class="dv">5</span>, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>)</a>
-<a class="sourceLine" id="cb180-110" data-line-number="110"></a>
-<a class="sourceLine" id="cb180-111" data-line-number="111"><span class="co"># check performance, miclassification</span></a>
-<a class="sourceLine" id="cb180-112" data-line-number="112">pred =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">ifelse</span>(<span class="kw">predict</span>(mod, blob_tst) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.0</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;1&quot;</span>))</a>
-<a class="sourceLine" id="cb180-113" data-line-number="113"><span class="kw">mean</span>(blob_tst<span class="op">$</span>classes <span class="op">!=</span><span class="st"> </span>pred)</a>
-<a class="sourceLine" id="cb180-114" data-line-number="114"></a>
-<a class="sourceLine" id="cb180-115" data-line-number="115">## two variables, circle #######################################################</a>
-<a class="sourceLine" id="cb180-116" data-line-number="116"></a>
-<a class="sourceLine" id="cb180-117" data-line-number="117"><span class="co"># simulate data</span></a>
-<a class="sourceLine" id="cb180-118" data-line-number="118"><span class="kw">set.seed</span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb180-119" data-line-number="119">circle_trn =<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">mlbench.circle</span>(<span class="dt">n =</span> <span class="dv">250</span>))</a>
-<a class="sourceLine" id="cb180-120" data-line-number="120">circle_tst =<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">mlbench.circle</span>(<span class="dt">n =</span> <span class="dv">1000</span>))</a>
-<a class="sourceLine" id="cb180-121" data-line-number="121"></a>
-<a class="sourceLine" id="cb180-122" data-line-number="122"><span class="co"># check data</span></a>
-<a class="sourceLine" id="cb180-123" data-line-number="123">circle_trn</a>
-<a class="sourceLine" id="cb180-124" data-line-number="124"></a>
-<a class="sourceLine" id="cb180-125" data-line-number="125"><span class="co"># check balance</span></a>
-<a class="sourceLine" id="cb180-126" data-line-number="126"><span class="kw">table</span>(circle_trn<span class="op">$</span>classes)</a>
-<a class="sourceLine" id="cb180-127" data-line-number="127"></a>
-<a class="sourceLine" id="cb180-128" data-line-number="128"><span class="co"># initial plot</span></a>
-<a class="sourceLine" id="cb180-129" data-line-number="129"><span class="kw">plot</span>(x<span class="fl">.2</span> <span class="op">~</span><span class="st"> </span>x<span class="fl">.1</span>, <span class="dt">data =</span> circle_trn, <span class="dt">col =</span> circle_trn<span class="op">$</span>classes, <span class="dt">pch =</span> <span class="dv">19</span>)</a>
-<a class="sourceLine" id="cb180-130" data-line-number="130"><span class="kw">grid</span>()</a>
-<a class="sourceLine" id="cb180-131" data-line-number="131"></a>
-<a class="sourceLine" id="cb180-132" data-line-number="132"><span class="co"># points where we will predict</span></a>
-<a class="sourceLine" id="cb180-133" data-line-number="133">xy_vals =<span class="st"> </span><span class="kw">expand.grid</span>(</a>
-<a class="sourceLine" id="cb180-134" data-line-number="134">  <span class="dt">x.1 =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="fl">-1.1</span>, <span class="dt">to =</span> <span class="fl">1.1</span>, <span class="dt">by =</span> <span class="fl">0.01</span>),</a>
-<a class="sourceLine" id="cb180-135" data-line-number="135">  <span class="dt">x.2 =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="fl">-1.1</span>, <span class="dt">to =</span> <span class="fl">1.1</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)</a>
-<a class="sourceLine" id="cb180-136" data-line-number="136">)</a>
-<a class="sourceLine" id="cb180-137" data-line-number="137"><span class="kw">head</span>(xy_vals)</a>
-<a class="sourceLine" id="cb180-138" data-line-number="138"></a>
-<a class="sourceLine" id="cb180-139" data-line-number="139"><span class="co"># fit model, bad</span></a>
-<a class="sourceLine" id="cb180-140" data-line-number="140">mod_bad =<span class="st"> </span><span class="kw">glm</span>(classes <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> circle_trn, <span class="dt">family =</span> binomial)</a>
-<a class="sourceLine" id="cb180-141" data-line-number="141">pred_bad_xy =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">predict</span>(mod_bad, xy_vals, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>, <span class="st">&quot;lightpink&quot;</span>, <span class="st">&quot;lightgrey&quot;</span>)</a>
-<a class="sourceLine" id="cb180-142" data-line-number="142"></a>
-<a class="sourceLine" id="cb180-143" data-line-number="143"><span class="co"># check predictions on plot</span></a>
-<a class="sourceLine" id="cb180-144" data-line-number="144"><span class="kw">plot</span>(x<span class="fl">.2</span> <span class="op">~</span><span class="st"> </span>x<span class="fl">.1</span>, <span class="dt">data =</span> xy_vals, <span class="dt">col =</span> pred_bad_xy,</a>
-<a class="sourceLine" id="cb180-145" data-line-number="145">     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">pch =</span> <span class="dv">15</span>)</a>
-<a class="sourceLine" id="cb180-146" data-line-number="146"><span class="kw">points</span>(x<span class="fl">.2</span> <span class="op">~</span><span class="st"> </span>x<span class="fl">.1</span>, <span class="dt">data =</span> circle_trn, <span class="dt">col =</span> circle_trn<span class="op">$</span>classes, <span class="dt">pch =</span> <span class="dv">19</span>)</a>
-<a class="sourceLine" id="cb180-147" data-line-number="147"></a>
-<a class="sourceLine" id="cb180-148" data-line-number="148"><span class="co"># check performance, accuracy</span></a>
-<a class="sourceLine" id="cb180-149" data-line-number="149">pred_bad =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">ifelse</span>(<span class="kw">predict</span>(mod_bad, circle_tst) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.0</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;1&quot;</span>))</a>
-<a class="sourceLine" id="cb180-150" data-line-number="150"><span class="kw">mean</span>(circle_tst<span class="op">$</span>classes <span class="op">==</span><span class="st"> </span>pred_bad)</a>
-<a class="sourceLine" id="cb180-151" data-line-number="151"></a>
-<a class="sourceLine" id="cb180-152" data-line-number="152"><span class="co"># fit model, good</span></a>
-<a class="sourceLine" id="cb180-153" data-line-number="153">mod_good =<span class="st"> </span><span class="kw">glm</span>(classes <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x<span class="fl">.1</span>, <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">poly</span>(x<span class="fl">.2</span>, <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>x<span class="fl">.1</span><span class="op">:</span>x<span class="fl">.2</span>, <span class="dt">data =</span> circle_trn, <span class="dt">family =</span> binomial)</a>
-<a class="sourceLine" id="cb180-154" data-line-number="154">pred_good_xy =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">predict</span>(mod_good, xy_vals, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>, <span class="st">&quot;lightpink&quot;</span>, <span class="st">&quot;lightgrey&quot;</span>)</a>
-<a class="sourceLine" id="cb180-155" data-line-number="155"></a>
-<a class="sourceLine" id="cb180-156" data-line-number="156"><span class="co"># check predictions on plot</span></a>
-<a class="sourceLine" id="cb180-157" data-line-number="157"><span class="kw">plot</span>(x<span class="fl">.2</span> <span class="op">~</span><span class="st"> </span>x<span class="fl">.1</span>, <span class="dt">data =</span> xy_vals, <span class="dt">col =</span> pred_good_xy,</a>
-<a class="sourceLine" id="cb180-158" data-line-number="158">     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">pch =</span> <span class="dv">15</span>)</a>
-<a class="sourceLine" id="cb180-159" data-line-number="159"><span class="kw">points</span>(x<span class="fl">.2</span> <span class="op">~</span><span class="st"> </span>x<span class="fl">.1</span>, <span class="dt">data =</span> circle_trn, <span class="dt">col =</span> circle_trn<span class="op">$</span>classes, <span class="dt">pch =</span> <span class="dv">19</span>)</a>
-<a class="sourceLine" id="cb180-160" data-line-number="160"></a>
-<a class="sourceLine" id="cb180-161" data-line-number="161"><span class="co"># check performance, accuracy</span></a>
-<a class="sourceLine" id="cb180-162" data-line-number="162">pred_good =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">ifelse</span>(<span class="kw">predict</span>(mod_good, circle_tst) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;1&quot;</span>))</a>
-<a class="sourceLine" id="cb180-163" data-line-number="163"><span class="kw">mean</span>(circle_tst<span class="op">$</span>classes <span class="op">==</span><span class="st"> </span>pred_good)</a></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="logistic-regression.html#cb180-1"></a><span class="co"># load packages</span></span>
+<span id="cb180-2"><a href="logistic-regression.html#cb180-2"></a><span class="kw">library</span>(tibble)</span>
+<span id="cb180-3"><a href="logistic-regression.html#cb180-3"></a><span class="kw">library</span>(mlbench)</span>
+<span id="cb180-4"><a href="logistic-regression.html#cb180-4"></a></span>
+<span id="cb180-5"><a href="logistic-regression.html#cb180-5"></a><span class="co"># single feature variable ######################################################</span></span>
+<span id="cb180-6"><a href="logistic-regression.html#cb180-6"></a></span>
+<span id="cb180-7"><a href="logistic-regression.html#cb180-7"></a>sim_logistic_data =<span class="st"> </span><span class="cf">function</span>(<span class="dt">sample_size =</span> <span class="dv">25</span>, <span class="dt">beta_0 =</span> <span class="dv">-2</span>, <span class="dt">beta_1 =</span> <span class="dv">3</span>, <span class="dt">factor =</span> <span class="ot">TRUE</span>) {</span>
+<span id="cb180-8"><a href="logistic-regression.html#cb180-8"></a>  x =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> sample_size)</span>
+<span id="cb180-9"><a href="logistic-regression.html#cb180-9"></a>  eta =<span class="st"> </span>beta_<span class="dv">0</span> <span class="op">+</span><span class="st"> </span>beta_<span class="dv">1</span> <span class="op">*</span><span class="st"> </span>x</span>
+<span id="cb180-10"><a href="logistic-regression.html#cb180-10"></a>  p =<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>eta))</span>
+<span id="cb180-11"><a href="logistic-regression.html#cb180-11"></a>  y =<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> sample_size, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> p)</span>
+<span id="cb180-12"><a href="logistic-regression.html#cb180-12"></a>  <span class="cf">if</span> (factor) {</span>
+<span id="cb180-13"><a href="logistic-regression.html#cb180-13"></a>    y =<span class="st"> </span><span class="kw">factor</span>(y)</span>
+<span id="cb180-14"><a href="logistic-regression.html#cb180-14"></a>  }</span>
+<span id="cb180-15"><a href="logistic-regression.html#cb180-15"></a>  tibble<span class="op">::</span><span class="kw">tibble</span>(x, y)</span>
+<span id="cb180-16"><a href="logistic-regression.html#cb180-16"></a>}</span>
+<span id="cb180-17"><a href="logistic-regression.html#cb180-17"></a></span>
+<span id="cb180-18"><a href="logistic-regression.html#cb180-18"></a><span class="co"># simulate data for logistic regression</span></span>
+<span id="cb180-19"><a href="logistic-regression.html#cb180-19"></a><span class="kw">set.seed</span>(<span class="dv">3</span>)</span>
+<span id="cb180-20"><a href="logistic-regression.html#cb180-20"></a>sim_data_factor =<span class="st"> </span><span class="kw">sim_logistic_data</span>()</span>
+<span id="cb180-21"><a href="logistic-regression.html#cb180-21"></a>sim_data_factor</span>
+<span id="cb180-22"><a href="logistic-regression.html#cb180-22"></a><span class="kw">levels</span>(sim_data_factor<span class="op">$</span>y)</span>
+<span id="cb180-23"><a href="logistic-regression.html#cb180-23"></a></span>
+<span id="cb180-24"><a href="logistic-regression.html#cb180-24"></a><span class="co"># simulate data for linear regression</span></span>
+<span id="cb180-25"><a href="logistic-regression.html#cb180-25"></a><span class="kw">set.seed</span>(<span class="dv">3</span>)</span>
+<span id="cb180-26"><a href="logistic-regression.html#cb180-26"></a>sim_data_numeric =<span class="st"> </span><span class="kw">sim_logistic_data</span>(<span class="dt">factor =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb180-27"><a href="logistic-regression.html#cb180-27"></a>sim_data_numeric</span>
+<span id="cb180-28"><a href="logistic-regression.html#cb180-28"></a></span>
+<span id="cb180-29"><a href="logistic-regression.html#cb180-29"></a><span class="co"># initial plot</span></span>
+<span id="cb180-30"><a href="logistic-regression.html#cb180-30"></a><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_data_numeric,</span>
+<span id="cb180-31"><a href="logistic-regression.html#cb180-31"></a>     <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">ylab =</span> <span class="st">&quot;Estimated Probability&quot;</span>,</span>
+<span id="cb180-32"><a href="logistic-regression.html#cb180-32"></a>     <span class="dt">main =</span> <span class="st">&quot;Ordinary vs Logistic Regression&quot;</span>,</span>
+<span id="cb180-33"><a href="logistic-regression.html#cb180-33"></a>     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.2</span>, <span class="fl">1.2</span>), <span class="dt">cex =</span> <span class="fl">1.5</span>)</span>
+<span id="cb180-34"><a href="logistic-regression.html#cb180-34"></a><span class="kw">grid</span>()</span>
+<span id="cb180-35"><a href="logistic-regression.html#cb180-35"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb180-36"><a href="logistic-regression.html#cb180-36"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">1</span>, <span class="dt">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb180-37"><a href="logistic-regression.html#cb180-37"></a></span>
+<span id="cb180-38"><a href="logistic-regression.html#cb180-38"></a><span class="co"># E[Y | X = x] = 1 * P(Y = 1 | X = x) + 0 * P(Y = 0 | X = x) = P(Y = 1 | X = x)</span></span>
+<span id="cb180-39"><a href="logistic-regression.html#cb180-39"></a><span class="co"># ordinary linear regression</span></span>
+<span id="cb180-40"><a href="logistic-regression.html#cb180-40"></a>fit_lm  =<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_data_numeric)</span>
+<span id="cb180-41"><a href="logistic-regression.html#cb180-41"></a>fit_lm  =<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_data_numeric)</span>
+<span id="cb180-42"><a href="logistic-regression.html#cb180-42"></a></span>
+<span id="cb180-43"><a href="logistic-regression.html#cb180-43"></a><span class="co"># logistic regression</span></span>
+<span id="cb180-44"><a href="logistic-regression.html#cb180-44"></a>fit_glm =<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_data_numeric, <span class="dt">family =</span> binomial)</span>
+<span id="cb180-45"><a href="logistic-regression.html#cb180-45"></a>fit_glm =<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_data_numeric, <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> <span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb180-46"><a href="logistic-regression.html#cb180-46"></a></span>
+<span id="cb180-47"><a href="logistic-regression.html#cb180-47"></a><span class="co"># plot results</span></span>
+<span id="cb180-48"><a href="logistic-regression.html#cb180-48"></a><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim_data_numeric,</span>
+<span id="cb180-49"><a href="logistic-regression.html#cb180-49"></a>     <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">ylab =</span> <span class="st">&quot;Estimated Probability&quot;</span>,</span>
+<span id="cb180-50"><a href="logistic-regression.html#cb180-50"></a>     <span class="dt">main =</span> <span class="st">&quot;Ordinary vs Logistic Regression&quot;</span>,</span>
+<span id="cb180-51"><a href="logistic-regression.html#cb180-51"></a>     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.2</span>, <span class="fl">1.2</span>), <span class="dt">cex =</span> <span class="fl">1.5</span>)</span>
+<span id="cb180-52"><a href="logistic-regression.html#cb180-52"></a><span class="kw">grid</span>()</span>
+<span id="cb180-53"><a href="logistic-regression.html#cb180-53"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb180-54"><a href="logistic-regression.html#cb180-54"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">1</span>, <span class="dt">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb180-55"><a href="logistic-regression.html#cb180-55"></a><span class="kw">abline</span>(fit_lm, <span class="dt">col =</span> <span class="st">&quot;darkorange&quot;</span>)</span>
+<span id="cb180-56"><a href="logistic-regression.html#cb180-56"></a><span class="kw">curve</span>(<span class="kw">predict</span>(fit_glm, <span class="kw">data.frame</span>(x), <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>),</span>
+<span id="cb180-57"><a href="logistic-regression.html#cb180-57"></a>      <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb180-58"><a href="logistic-regression.html#cb180-58"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;Ordinary&quot;</span>, <span class="st">&quot;Logistic&quot;</span>, <span class="st">&quot;Data&quot;</span>), <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>),</span>
+<span id="cb180-59"><a href="logistic-regression.html#cb180-59"></a>       <span class="dt">pch =</span> <span class="kw">c</span>(<span class="ot">NA</span>, <span class="ot">NA</span>, <span class="dv">20</span>), <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;darkorange&quot;</span>, <span class="st">&quot;dodgerblue&quot;</span>, <span class="st">&quot;black&quot;</span>))</span>
+<span id="cb180-60"><a href="logistic-regression.html#cb180-60"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="fl">0.5</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb180-61"><a href="logistic-regression.html#cb180-61"></a><span class="co"># abline(v = -coef(fit_glm)[1] / coef(fit_glm)[2], col = &quot;dodgerblue&quot;, lty = 2)</span></span>
+<span id="cb180-62"><a href="logistic-regression.html#cb180-62"></a><span class="co"># abline(v = (0.5 - coef(fit_lm)[1]) / coef(fit_lm)[2], col = &quot;darkorange&quot;)</span></span>
+<span id="cb180-63"><a href="logistic-regression.html#cb180-63"></a></span>
+<span id="cb180-64"><a href="logistic-regression.html#cb180-64"></a><span class="co"># two feature variables, blobs #################################################</span></span>
+<span id="cb180-65"><a href="logistic-regression.html#cb180-65"></a></span>
+<span id="cb180-66"><a href="logistic-regression.html#cb180-66"></a><span class="co"># simulate data</span></span>
+<span id="cb180-67"><a href="logistic-regression.html#cb180-67"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb180-68"><a href="logistic-regression.html#cb180-68"></a>blob_trn =<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">mlbench.2dnormals</span>(<span class="dt">n =</span> <span class="dv">100</span>))</span>
+<span id="cb180-69"><a href="logistic-regression.html#cb180-69"></a>blob_tst =<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">mlbench.2dnormals</span>(<span class="dt">n =</span> <span class="dv">1000</span>))</span>
+<span id="cb180-70"><a href="logistic-regression.html#cb180-70"></a></span>
+<span id="cb180-71"><a href="logistic-regression.html#cb180-71"></a><span class="co"># check data</span></span>
+<span id="cb180-72"><a href="logistic-regression.html#cb180-72"></a>blob_trn</span>
+<span id="cb180-73"><a href="logistic-regression.html#cb180-73"></a><span class="kw">levels</span>(blob_trn<span class="op">$</span>classes)</span>
+<span id="cb180-74"><a href="logistic-regression.html#cb180-74"></a></span>
+<span id="cb180-75"><a href="logistic-regression.html#cb180-75"></a><span class="co"># check balance</span></span>
+<span id="cb180-76"><a href="logistic-regression.html#cb180-76"></a><span class="kw">table</span>(blob_trn<span class="op">$</span>classes)</span>
+<span id="cb180-77"><a href="logistic-regression.html#cb180-77"></a></span>
+<span id="cb180-78"><a href="logistic-regression.html#cb180-78"></a><span class="co"># initial plot</span></span>
+<span id="cb180-79"><a href="logistic-regression.html#cb180-79"></a><span class="kw">plot</span>(x<span class="fl">.2</span> <span class="op">~</span><span class="st"> </span>x<span class="fl">.1</span>, <span class="dt">data =</span> blob_trn, <span class="dt">col =</span> blob_trn<span class="op">$</span>classes, <span class="dt">pch =</span> <span class="dv">19</span>)</span>
+<span id="cb180-80"><a href="logistic-regression.html#cb180-80"></a><span class="kw">grid</span>()</span>
+<span id="cb180-81"><a href="logistic-regression.html#cb180-81"></a></span>
+<span id="cb180-82"><a href="logistic-regression.html#cb180-82"></a><span class="co"># points where we will predict</span></span>
+<span id="cb180-83"><a href="logistic-regression.html#cb180-83"></a>xy_vals =<span class="st"> </span><span class="kw">expand.grid</span>(</span>
+<span id="cb180-84"><a href="logistic-regression.html#cb180-84"></a>  <span class="dt">x.1 =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="fl">-3.5</span>, <span class="dt">to =</span> <span class="fl">3.5</span>, <span class="dt">by =</span> <span class="fl">0.05</span>),</span>
+<span id="cb180-85"><a href="logistic-regression.html#cb180-85"></a>  <span class="dt">x.2 =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="fl">-3.5</span>, <span class="dt">to =</span> <span class="fl">3.5</span>, <span class="dt">by =</span> <span class="fl">0.05</span>)</span>
+<span id="cb180-86"><a href="logistic-regression.html#cb180-86"></a>)</span>
+<span id="cb180-87"><a href="logistic-regression.html#cb180-87"></a><span class="kw">head</span>(xy_vals)</span>
+<span id="cb180-88"><a href="logistic-regression.html#cb180-88"></a></span>
+<span id="cb180-89"><a href="logistic-regression.html#cb180-89"></a><span class="co"># fit model, bad</span></span>
+<span id="cb180-90"><a href="logistic-regression.html#cb180-90"></a>mod =<span class="st"> </span><span class="kw">glm</span>(classes <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> blob_trn, <span class="dt">family =</span> binomial)</span>
+<span id="cb180-91"><a href="logistic-regression.html#cb180-91"></a>pred_xy =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">predict</span>(mod, xy_vals, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>, <span class="st">&quot;lightpink&quot;</span>, <span class="st">&quot;lightgrey&quot;</span>)</span>
+<span id="cb180-92"><a href="logistic-regression.html#cb180-92"></a>pred_xy =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">predict</span>(mod, xy_vals) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&quot;lightpink&quot;</span>, <span class="st">&quot;lightgrey&quot;</span>)</span>
+<span id="cb180-93"><a href="logistic-regression.html#cb180-93"></a></span>
+<span id="cb180-94"><a href="logistic-regression.html#cb180-94"></a><span class="co"># check predictions on plot</span></span>
+<span id="cb180-95"><a href="logistic-regression.html#cb180-95"></a><span class="kw">plot</span>(x<span class="fl">.2</span> <span class="op">~</span><span class="st"> </span>x<span class="fl">.1</span>, <span class="dt">data =</span> xy_vals, <span class="dt">col =</span> pred_xy,</span>
+<span id="cb180-96"><a href="logistic-regression.html#cb180-96"></a>     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">pch =</span> <span class="dv">15</span>)</span>
+<span id="cb180-97"><a href="logistic-regression.html#cb180-97"></a><span class="kw">points</span>(x<span class="fl">.2</span> <span class="op">~</span><span class="st"> </span>x<span class="fl">.1</span>, <span class="dt">data =</span> blob_trn, <span class="dt">col =</span> blob_trn<span class="op">$</span>classes, <span class="dt">pch =</span> <span class="dv">19</span>)</span>
+<span id="cb180-98"><a href="logistic-regression.html#cb180-98"></a></span>
+<span id="cb180-99"><a href="logistic-regression.html#cb180-99"></a><span class="co"># 0 = beta_0 + beta_1 x.1 + beta_2 x.2</span></span>
+<span id="cb180-100"><a href="logistic-regression.html#cb180-100"></a><span class="co"># x.2 = -(beta_0 + beta_1 x.1) / beta_2</span></span>
+<span id="cb180-101"><a href="logistic-regression.html#cb180-101"></a></span>
+<span id="cb180-102"><a href="logistic-regression.html#cb180-102"></a><span class="co"># add analytic decision boundary</span></span>
+<span id="cb180-103"><a href="logistic-regression.html#cb180-103"></a><span class="kw">plot</span>(x<span class="fl">.2</span> <span class="op">~</span><span class="st"> </span>x<span class="fl">.1</span>, <span class="dt">data =</span> xy_vals, <span class="dt">col =</span> pred_xy,</span>
+<span id="cb180-104"><a href="logistic-regression.html#cb180-104"></a>     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">pch =</span> <span class="dv">15</span>)</span>
+<span id="cb180-105"><a href="logistic-regression.html#cb180-105"></a><span class="kw">points</span>(x<span class="fl">.2</span> <span class="op">~</span><span class="st"> </span>x<span class="fl">.1</span>, <span class="dt">data =</span> blob_trn, <span class="dt">col =</span> blob_trn<span class="op">$</span>classes, <span class="dt">pch =</span> <span class="dv">19</span>)</span>
+<span id="cb180-106"><a href="logistic-regression.html#cb180-106"></a><span class="kw">abline</span>(</span>
+<span id="cb180-107"><a href="logistic-regression.html#cb180-107"></a>  <span class="dt">a =</span> <span class="op">-</span><span class="kw">coef</span>(mod)[<span class="dv">1</span>] <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(mod)[<span class="dv">3</span>],</span>
+<span id="cb180-108"><a href="logistic-regression.html#cb180-108"></a>  <span class="dt">b =</span> <span class="op">-</span><span class="kw">coef</span>(mod)[<span class="dv">2</span>] <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(mod)[<span class="dv">3</span>],</span>
+<span id="cb180-109"><a href="logistic-regression.html#cb180-109"></a>  <span class="dt">lwd =</span> <span class="dv">5</span>, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>)</span>
+<span id="cb180-110"><a href="logistic-regression.html#cb180-110"></a></span>
+<span id="cb180-111"><a href="logistic-regression.html#cb180-111"></a><span class="co"># check performance, miclassification</span></span>
+<span id="cb180-112"><a href="logistic-regression.html#cb180-112"></a>pred =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">ifelse</span>(<span class="kw">predict</span>(mod, blob_tst) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.0</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;1&quot;</span>))</span>
+<span id="cb180-113"><a href="logistic-regression.html#cb180-113"></a><span class="kw">mean</span>(blob_tst<span class="op">$</span>classes <span class="op">!=</span><span class="st"> </span>pred)</span>
+<span id="cb180-114"><a href="logistic-regression.html#cb180-114"></a></span>
+<span id="cb180-115"><a href="logistic-regression.html#cb180-115"></a><span class="co">## two variables, circle #######################################################</span></span>
+<span id="cb180-116"><a href="logistic-regression.html#cb180-116"></a></span>
+<span id="cb180-117"><a href="logistic-regression.html#cb180-117"></a><span class="co"># simulate data</span></span>
+<span id="cb180-118"><a href="logistic-regression.html#cb180-118"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb180-119"><a href="logistic-regression.html#cb180-119"></a>circle_trn =<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">mlbench.circle</span>(<span class="dt">n =</span> <span class="dv">250</span>))</span>
+<span id="cb180-120"><a href="logistic-regression.html#cb180-120"></a>circle_tst =<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">mlbench.circle</span>(<span class="dt">n =</span> <span class="dv">1000</span>))</span>
+<span id="cb180-121"><a href="logistic-regression.html#cb180-121"></a></span>
+<span id="cb180-122"><a href="logistic-regression.html#cb180-122"></a><span class="co"># check data</span></span>
+<span id="cb180-123"><a href="logistic-regression.html#cb180-123"></a>circle_trn</span>
+<span id="cb180-124"><a href="logistic-regression.html#cb180-124"></a></span>
+<span id="cb180-125"><a href="logistic-regression.html#cb180-125"></a><span class="co"># check balance</span></span>
+<span id="cb180-126"><a href="logistic-regression.html#cb180-126"></a><span class="kw">table</span>(circle_trn<span class="op">$</span>classes)</span>
+<span id="cb180-127"><a href="logistic-regression.html#cb180-127"></a></span>
+<span id="cb180-128"><a href="logistic-regression.html#cb180-128"></a><span class="co"># initial plot</span></span>
+<span id="cb180-129"><a href="logistic-regression.html#cb180-129"></a><span class="kw">plot</span>(x<span class="fl">.2</span> <span class="op">~</span><span class="st"> </span>x<span class="fl">.1</span>, <span class="dt">data =</span> circle_trn, <span class="dt">col =</span> circle_trn<span class="op">$</span>classes, <span class="dt">pch =</span> <span class="dv">19</span>)</span>
+<span id="cb180-130"><a href="logistic-regression.html#cb180-130"></a><span class="kw">grid</span>()</span>
+<span id="cb180-131"><a href="logistic-regression.html#cb180-131"></a></span>
+<span id="cb180-132"><a href="logistic-regression.html#cb180-132"></a><span class="co"># points where we will predict</span></span>
+<span id="cb180-133"><a href="logistic-regression.html#cb180-133"></a>xy_vals =<span class="st"> </span><span class="kw">expand.grid</span>(</span>
+<span id="cb180-134"><a href="logistic-regression.html#cb180-134"></a>  <span class="dt">x.1 =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="fl">-1.1</span>, <span class="dt">to =</span> <span class="fl">1.1</span>, <span class="dt">by =</span> <span class="fl">0.01</span>),</span>
+<span id="cb180-135"><a href="logistic-regression.html#cb180-135"></a>  <span class="dt">x.2 =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="fl">-1.1</span>, <span class="dt">to =</span> <span class="fl">1.1</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)</span>
+<span id="cb180-136"><a href="logistic-regression.html#cb180-136"></a>)</span>
+<span id="cb180-137"><a href="logistic-regression.html#cb180-137"></a><span class="kw">head</span>(xy_vals)</span>
+<span id="cb180-138"><a href="logistic-regression.html#cb180-138"></a></span>
+<span id="cb180-139"><a href="logistic-regression.html#cb180-139"></a><span class="co"># fit model, bad</span></span>
+<span id="cb180-140"><a href="logistic-regression.html#cb180-140"></a>mod_bad =<span class="st"> </span><span class="kw">glm</span>(classes <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> circle_trn, <span class="dt">family =</span> binomial)</span>
+<span id="cb180-141"><a href="logistic-regression.html#cb180-141"></a>pred_bad_xy =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">predict</span>(mod_bad, xy_vals, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>, <span class="st">&quot;lightpink&quot;</span>, <span class="st">&quot;lightgrey&quot;</span>)</span>
+<span id="cb180-142"><a href="logistic-regression.html#cb180-142"></a></span>
+<span id="cb180-143"><a href="logistic-regression.html#cb180-143"></a><span class="co"># check predictions on plot</span></span>
+<span id="cb180-144"><a href="logistic-regression.html#cb180-144"></a><span class="kw">plot</span>(x<span class="fl">.2</span> <span class="op">~</span><span class="st"> </span>x<span class="fl">.1</span>, <span class="dt">data =</span> xy_vals, <span class="dt">col =</span> pred_bad_xy,</span>
+<span id="cb180-145"><a href="logistic-regression.html#cb180-145"></a>     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">pch =</span> <span class="dv">15</span>)</span>
+<span id="cb180-146"><a href="logistic-regression.html#cb180-146"></a><span class="kw">points</span>(x<span class="fl">.2</span> <span class="op">~</span><span class="st"> </span>x<span class="fl">.1</span>, <span class="dt">data =</span> circle_trn, <span class="dt">col =</span> circle_trn<span class="op">$</span>classes, <span class="dt">pch =</span> <span class="dv">19</span>)</span>
+<span id="cb180-147"><a href="logistic-regression.html#cb180-147"></a></span>
+<span id="cb180-148"><a href="logistic-regression.html#cb180-148"></a><span class="co"># check performance, accuracy</span></span>
+<span id="cb180-149"><a href="logistic-regression.html#cb180-149"></a>pred_bad =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">ifelse</span>(<span class="kw">predict</span>(mod_bad, circle_tst) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.0</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;1&quot;</span>))</span>
+<span id="cb180-150"><a href="logistic-regression.html#cb180-150"></a><span class="kw">mean</span>(circle_tst<span class="op">$</span>classes <span class="op">==</span><span class="st"> </span>pred_bad)</span>
+<span id="cb180-151"><a href="logistic-regression.html#cb180-151"></a></span>
+<span id="cb180-152"><a href="logistic-regression.html#cb180-152"></a><span class="co"># fit model, good</span></span>
+<span id="cb180-153"><a href="logistic-regression.html#cb180-153"></a>mod_good =<span class="st"> </span><span class="kw">glm</span>(classes <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x<span class="fl">.1</span>, <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">poly</span>(x<span class="fl">.2</span>, <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>x<span class="fl">.1</span><span class="op">:</span>x<span class="fl">.2</span>, <span class="dt">data =</span> circle_trn, <span class="dt">family =</span> binomial)</span>
+<span id="cb180-154"><a href="logistic-regression.html#cb180-154"></a>pred_good_xy =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">predict</span>(mod_good, xy_vals, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>, <span class="st">&quot;lightpink&quot;</span>, <span class="st">&quot;lightgrey&quot;</span>)</span>
+<span id="cb180-155"><a href="logistic-regression.html#cb180-155"></a></span>
+<span id="cb180-156"><a href="logistic-regression.html#cb180-156"></a><span class="co"># check predictions on plot</span></span>
+<span id="cb180-157"><a href="logistic-regression.html#cb180-157"></a><span class="kw">plot</span>(x<span class="fl">.2</span> <span class="op">~</span><span class="st"> </span>x<span class="fl">.1</span>, <span class="dt">data =</span> xy_vals, <span class="dt">col =</span> pred_good_xy,</span>
+<span id="cb180-158"><a href="logistic-regression.html#cb180-158"></a>     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">pch =</span> <span class="dv">15</span>)</span>
+<span id="cb180-159"><a href="logistic-regression.html#cb180-159"></a><span class="kw">points</span>(x<span class="fl">.2</span> <span class="op">~</span><span class="st"> </span>x<span class="fl">.1</span>, <span class="dt">data =</span> circle_trn, <span class="dt">col =</span> circle_trn<span class="op">$</span>classes, <span class="dt">pch =</span> <span class="dv">19</span>)</span>
+<span id="cb180-160"><a href="logistic-regression.html#cb180-160"></a></span>
+<span id="cb180-161"><a href="logistic-regression.html#cb180-161"></a><span class="co"># check performance, accuracy</span></span>
+<span id="cb180-162"><a href="logistic-regression.html#cb180-162"></a>pred_good =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">ifelse</span>(<span class="kw">predict</span>(mod_good, circle_tst) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;1&quot;</span>))</span>
+<span id="cb180-163"><a href="logistic-regression.html#cb180-163"></a><span class="kw">mean</span>(circle_tst<span class="op">$</span>classes <span class="op">==</span><span class="st"> </span>pred_good)</span></code></pre></div>
 <!-- ```{r setup, include = FALSE} -->
 <!-- knitr::opts_chunk$set(echo = TRUE, fig.align = "center", cache = TRUE, autodep = TRUE) -->
 <!-- ``` -->

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Basics of Statistical Learning</title>
   <meta name="description" content="Basics of Statistical Learning" />
-  <meta name="generator" content="bookdown 0.20.6 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20.7 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Basics of Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -32,6 +32,7 @@
   
 
 <link rel="next" href="ml-overview.html"/>
+<script src="libs/header-attrs-2.4.1/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,6 +50,7 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
@@ -56,27 +58,26 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -85,9 +86,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -136,8 +137,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Basics of Statistical Learning</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a><ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i><b>0.1</b> Who?</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i><b>0.1</b> Who?</a>
+<ul>
 <li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#readers"><i class="fa fa-check"></i><b>0.1.1</b> Readers</a></li>
 <li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#author"><i class="fa fa-check"></i><b>0.1.2</b> Author</a></li>
 <li class="chapter" data-level="0.1.3" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.1.3</b> Acknowledgements</a></li>
@@ -146,22 +149,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#why"><i class="fa fa-check"></i><b>0.3</b> Why?</a></li>
 <li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#where"><i class="fa fa-check"></i><b>0.4</b> Where?</a></li>
 <li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#when"><i class="fa fa-check"></i><b>0.5</b> When?</a></li>
-<li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#how"><i class="fa fa-check"></i><b>0.6</b> How?</a><ul>
+<li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#how"><i class="fa fa-check"></i><b>0.6</b> How?</a>
+<ul>
 <li class="chapter" data-level="0.6.1" data-path="index.html"><a href="index.html#build-tools"><i class="fa fa-check"></i><b>0.6.1</b> Build Tools</a></li>
 <li class="chapter" data-level="0.6.2" data-path="index.html"><a href="index.html#active-development"><i class="fa fa-check"></i><b>0.6.2</b> Active Development</a></li>
 <li class="chapter" data-level="0.6.3" data-path="index.html"><a href="index.html#packages"><i class="fa fa-check"></i><b>0.6.3</b> Packages</a></li>
 <li class="chapter" data-level="0.6.4" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.6.4</b> License</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="ml-overview.html"><a href="ml-overview.html"><i class="fa fa-check"></i><b>1</b> Machine Learning Overview</a><ul>
+<li class="chapter" data-level="1" data-path="ml-overview.html"><a href="ml-overview.html"><i class="fa fa-check"></i><b>1</b> Machine Learning Overview</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="ml-overview.html"><a href="ml-overview.html#what-is-machine-learning"><i class="fa fa-check"></i><b>1.1</b> What is Machine Learning?</a></li>
-<li class="chapter" data-level="1.2" data-path="ml-overview.html"><a href="ml-overview.html#machine-learning-tasks"><i class="fa fa-check"></i><b>1.2</b> Machine Learning Tasks</a><ul>
+<li class="chapter" data-level="1.2" data-path="ml-overview.html"><a href="ml-overview.html#machine-learning-tasks"><i class="fa fa-check"></i><b>1.2</b> Machine Learning Tasks</a>
+<ul>
 <li class="chapter" data-level="1.2.1" data-path="ml-overview.html"><a href="ml-overview.html#supervised-learning"><i class="fa fa-check"></i><b>1.2.1</b> Supervised Learning</a></li>
 <li class="chapter" data-level="1.2.2" data-path="ml-overview.html"><a href="ml-overview.html#unsupervised-learning"><i class="fa fa-check"></i><b>1.2.2</b> Unsupervised Learning</a></li>
 </ul></li>
 <li class="chapter" data-level="1.3" data-path="ml-overview.html"><a href="ml-overview.html#open-questions"><i class="fa fa-check"></i><b>1.3</b> Open Questions</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>2</b> Linear Regression</a><ul>
+<li class="chapter" data-level="2" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>2</b> Linear Regression</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="linear-regression.html"><a href="linear-regression.html#r-setup-and-source"><i class="fa fa-check"></i><b>2.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="2.2" data-path="linear-regression.html"><a href="linear-regression.html#explanation-versus-prediction"><i class="fa fa-check"></i><b>2.2</b> Explanation versus Prediction</a></li>
 <li class="chapter" data-level="2.3" data-path="linear-regression.html"><a href="linear-regression.html#task-setup"><i class="fa fa-check"></i><b>2.3</b> Task Setup</a></li>
@@ -170,34 +177,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.6" data-path="linear-regression.html"><a href="linear-regression.html#using-lm"><i class="fa fa-check"></i><b>2.6</b> Using <code>lm()</code></a></li>
 <li class="chapter" data-level="2.7" data-path="linear-regression.html"><a href="linear-regression.html#the-predict-function"><i class="fa fa-check"></i><b>2.7</b> The <code>predict()</code> Function</a></li>
 <li class="chapter" data-level="2.8" data-path="linear-regression.html"><a href="linear-regression.html#data-splitting"><i class="fa fa-check"></i><b>2.8</b> Data Splitting</a></li>
-<li class="chapter" data-level="2.9" data-path="linear-regression.html"><a href="linear-regression.html#regression-metrics"><i class="fa fa-check"></i><b>2.9</b> Regression Metrics</a><ul>
+<li class="chapter" data-level="2.9" data-path="linear-regression.html"><a href="linear-regression.html#regression-metrics"><i class="fa fa-check"></i><b>2.9</b> Regression Metrics</a>
+<ul>
 <li class="chapter" data-level="2.9.1" data-path="linear-regression.html"><a href="linear-regression.html#graphical-evaluation"><i class="fa fa-check"></i><b>2.9.1</b> Graphical Evaluation</a></li>
 </ul></li>
 <li class="chapter" data-level="2.10" data-path="linear-regression.html"><a href="linear-regression.html#example-simple-simulated-data"><i class="fa fa-check"></i><b>2.10</b> Example: “Simple” Simulated Data</a></li>
 <li class="chapter" data-level="2.11" data-path="linear-regression.html"><a href="linear-regression.html#example-diamonds-data"><i class="fa fa-check"></i><b>2.11</b> Example: Diamonds Data</a></li>
 <li class="chapter" data-level="2.12" data-path="linear-regression.html"><a href="linear-regression.html#example-credit-card-data"><i class="fa fa-check"></i><b>2.12</b> Example: Credit Card Data</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html"><i class="fa fa-check"></i><b>3</b> Nonparametric Regression</a><ul>
+<li class="chapter" data-level="3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html"><i class="fa fa-check"></i><b>3</b> Nonparametric Regression</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#r-setup-and-source-1"><i class="fa fa-check"></i><b>3.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="3.2" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#mathematical-setup-1"><i class="fa fa-check"></i><b>3.2</b> Mathematical Setup</a></li>
 <li class="chapter" data-level="3.3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>3.3</b> k-Nearest Neighbors</a></li>
 <li class="chapter" data-level="3.4" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#decision-trees"><i class="fa fa-check"></i><b>3.4</b> Decision Trees</a></li>
 <li class="chapter" data-level="3.5" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#example-credit-card-data-1"><i class="fa fa-check"></i><b>3.5</b> Example: Credit Card Data</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html"><i class="fa fa-check"></i><b>4</b> The Bias–Variance Tradeoff</a><ul>
+<li class="chapter" data-level="4" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html"><i class="fa fa-check"></i><b>4</b> The Bias–Variance Tradeoff</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#r-setup-and-source-2"><i class="fa fa-check"></i><b>4.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="4.2" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#the-regression-setup"><i class="fa fa-check"></i><b>4.2</b> The Regression Setup</a></li>
 <li class="chapter" data-level="4.3" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>4.3</b> Reducible and Irreducible Error</a></li>
 <li class="chapter" data-level="4.4" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>4.4</b> Bias-Variance Decomposition</a></li>
 <li class="chapter" data-level="4.5" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#using-simulation-to-estimate-bias-and-variance"><i class="fa fa-check"></i><b>4.5</b> Using Simulation to Estimate Bias and Variance</a></li>
 <li class="chapter" data-level="4.6" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>4.6</b> Estimating Expected Prediction Error</a></li>
-<li class="chapter" data-level="4.7" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#model-flexibility"><i class="fa fa-check"></i><b>4.7</b> Model Flexibility</a><ul>
+<li class="chapter" data-level="4.7" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#model-flexibility"><i class="fa fa-check"></i><b>4.7</b> Model Flexibility</a>
+<ul>
 <li class="chapter" data-level="4.7.1" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#linear-models"><i class="fa fa-check"></i><b>4.7.1</b> Linear Models</a></li>
 <li class="chapter" data-level="4.7.2" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#k-nearest-neighbors-1"><i class="fa fa-check"></i><b>4.7.2</b> k-Nearest Neighbors</a></li>
 <li class="chapter" data-level="4.7.3" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#decision-trees-1"><i class="fa fa-check"></i><b>4.7.3</b> Decision Trees</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Regression Overview</a><ul>
+<li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Regression Overview</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="regression-overview.html"><a href="regression-overview.html#the-goal"><i class="fa fa-check"></i><b>5.1</b> The Goal</a></li>
 <li class="chapter" data-level="5.2" data-path="regression-overview.html"><a href="regression-overview.html#general-strategy"><i class="fa fa-check"></i><b>5.2</b> General Strategy</a></li>
 <li class="chapter" data-level="5.3" data-path="regression-overview.html"><a href="regression-overview.html#aglorithms"><i class="fa fa-check"></i><b>5.3</b> Aglorithms</a></li>
@@ -210,7 +222,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>6</b> Classification</a></li>
 <li class="chapter" data-level="7" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html"><i class="fa fa-check"></i><b>7</b> Nonparametric Classification</a></li>
 <li class="chapter" data-level="8" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>8</b> Logistic Regression</a></li>
-<li class="chapter" data-level="9" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>9</b> Binary Classification</a><ul>
+<li class="chapter" data-level="9" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>9</b> Binary Classification</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="binary-classification.html"><a href="binary-classification.html#r-setup-and-source-3"><i class="fa fa-check"></i><b>9.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="9.2" data-path="binary-classification.html"><a href="binary-classification.html#breast-cancer-data"><i class="fa fa-check"></i><b>9.2</b> Breast Cancer Data</a></li>
 <li class="chapter" data-level="9.3" data-path="binary-classification.html"><a href="binary-classification.html#confusion-matrix"><i class="fa fa-check"></i><b>9.3</b> Confusion Matrix</a></li>
@@ -218,7 +231,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.5" data-path="binary-classification.html"><a href="binary-classification.html#probability-cutoff"><i class="fa fa-check"></i><b>9.5</b> Probability Cutoff</a></li>
 <li class="chapter" data-level="9.6" data-path="binary-classification.html"><a href="binary-classification.html#r-packages-and-function"><i class="fa fa-check"></i><b>9.6</b> R Packages and Function</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="generative.html"><a href="generative.html"><i class="fa fa-check"></i><b>10</b> Generative Models</a><ul>
+<li class="chapter" data-level="10" data-path="generative.html"><a href="generative.html"><i class="fa fa-check"></i><b>10</b> Generative Models</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="generative.html"><a href="generative.html#r-setup-and-source-4"><i class="fa fa-check"></i><b>10.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="10.2" data-path="generative.html"><a href="generative.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>10.2</b> Linear Discriminant Analysis</a></li>
 <li class="chapter" data-level="10.3" data-path="generative.html"><a href="generative.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>10.3</b> Quadratic Discriminant Analysis</a></li>
@@ -226,20 +240,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5" data-path="generative.html"><a href="generative.html#categorical-features"><i class="fa fa-check"></i><b>10.5</b> Categorical Features</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="additional-reading.html"><a href="additional-reading.html"><i class="fa fa-check"></i><b>A</b> Additional Reading</a><ul>
+<li class="chapter" data-level="A" data-path="additional-reading.html"><a href="additional-reading.html"><i class="fa fa-check"></i><b>A</b> Additional Reading</a>
+<ul>
 <li class="chapter" data-level="A.1" data-path="additional-reading.html"><a href="additional-reading.html#books"><i class="fa fa-check"></i><b>A.1</b> Books</a></li>
 <li class="chapter" data-level="A.2" data-path="additional-reading.html"><a href="additional-reading.html#papers"><i class="fa fa-check"></i><b>A.2</b> Papers</a></li>
 <li class="chapter" data-level="A.3" data-path="additional-reading.html"><a href="additional-reading.html#blog-posts"><i class="fa fa-check"></i><b>A.3</b> Blog Posts</a></li>
 <li class="chapter" data-level="A.4" data-path="additional-reading.html"><a href="additional-reading.html#miscellaneous"><i class="fa fa-check"></i><b>A.4</b> Miscellaneous</a></li>
 </ul></li>
-<li class="chapter" data-level="B" data-path="computing.html"><a href="computing.html"><i class="fa fa-check"></i><b>B</b> Computing</a><ul>
+<li class="chapter" data-level="B" data-path="computing.html"><a href="computing.html"><i class="fa fa-check"></i><b>B</b> Computing</a>
+<ul>
 <li class="chapter" data-level="B.1" data-path="computing.html"><a href="computing.html#reading"><i class="fa fa-check"></i><b>B.1</b> Reading</a></li>
-<li class="chapter" data-level="B.2" data-path="computing.html"><a href="computing.html#additional-resources"><i class="fa fa-check"></i><b>B.2</b> Additional Resources</a><ul>
+<li class="chapter" data-level="B.2" data-path="computing.html"><a href="computing.html#additional-resources"><i class="fa fa-check"></i><b>B.2</b> Additional Resources</a>
+<ul>
 <li class="chapter" data-level="B.2.1" data-path="computing.html"><a href="computing.html#r"><i class="fa fa-check"></i><b>B.2.1</b> R</a></li>
 <li class="chapter" data-level="B.2.2" data-path="computing.html"><a href="computing.html#rstudio"><i class="fa fa-check"></i><b>B.2.2</b> RStudio</a></li>
 <li class="chapter" data-level="B.2.3" data-path="computing.html"><a href="computing.html#r-markdown"><i class="fa fa-check"></i><b>B.2.3</b> R Markdown</a></li>
 </ul></li>
-<li class="chapter" data-level="B.3" data-path="computing.html"><a href="computing.html#stat-432-idioms"><i class="fa fa-check"></i><b>B.3</b> STAT 432 Idioms</a><ul>
+<li class="chapter" data-level="B.3" data-path="computing.html"><a href="computing.html#stat-432-idioms"><i class="fa fa-check"></i><b>B.3</b> STAT 432 Idioms</a>
+<ul>
 <li class="chapter" data-level="B.3.1" data-path="computing.html"><a href="computing.html#dont-restore-old-workspaces"><i class="fa fa-check"></i><b>B.3.1</b> Don’t Restore Old Workspaces</a></li>
 <li class="chapter" data-level="B.3.2" data-path="computing.html"><a href="computing.html#r-versions"><i class="fa fa-check"></i><b>B.3.2</b> R Versions</a></li>
 <li class="chapter" data-level="B.3.3" data-path="computing.html"><a href="computing.html#packages-1"><i class="fa fa-check"></i><b>B.3.3</b> Packages</a></li>
@@ -254,12 +272,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="B.3.12" data-path="computing.html"><a href="computing.html#keyboard-shortcuts"><i class="fa fa-check"></i><b>B.3.12</b> Keyboard Shortcuts</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="C" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>C</b> Probability</a><ul>
+<li class="chapter" data-level="C" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>C</b> Probability</a>
+<ul>
 <li class="chapter" data-level="C.1" data-path="probability.html"><a href="probability.html#reading-1"><i class="fa fa-check"></i><b>C.1</b> Reading</a></li>
 <li class="chapter" data-level="C.2" data-path="probability.html"><a href="probability.html#probability-models"><i class="fa fa-check"></i><b>C.2</b> Probability Models</a></li>
 <li class="chapter" data-level="C.3" data-path="probability.html"><a href="probability.html#probability-axioms"><i class="fa fa-check"></i><b>C.3</b> Probability Axioms</a></li>
 <li class="chapter" data-level="C.4" data-path="probability.html"><a href="probability.html#probability-rules"><i class="fa fa-check"></i><b>C.4</b> Probability Rules</a></li>
-<li class="chapter" data-level="C.5" data-path="probability.html"><a href="probability.html#random-variables"><i class="fa fa-check"></i><b>C.5</b> Random Variables</a><ul>
+<li class="chapter" data-level="C.5" data-path="probability.html"><a href="probability.html#random-variables"><i class="fa fa-check"></i><b>C.5</b> Random Variables</a>
+<ul>
 <li class="chapter" data-level="C.5.1" data-path="probability.html"><a href="probability.html#distributions"><i class="fa fa-check"></i><b>C.5.1</b> Distributions</a></li>
 <li class="chapter" data-level="C.5.2" data-path="probability.html"><a href="probability.html#discrete-random-variables"><i class="fa fa-check"></i><b>C.5.2</b> Discrete Random Variables</a></li>
 <li class="chapter" data-level="C.5.3" data-path="probability.html"><a href="probability.html#continuous-random-variables"><i class="fa fa-check"></i><b>C.5.3</b> Continuous Random Variables</a></li>
@@ -268,14 +288,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="C.6" data-path="probability.html"><a href="probability.html#expectations"><i class="fa fa-check"></i><b>C.6</b> Expectations</a></li>
 <li class="chapter" data-level="C.7" data-path="probability.html"><a href="probability.html#likelihood"><i class="fa fa-check"></i><b>C.7</b> Likelihood</a></li>
-<li class="chapter" data-level="C.8" data-path="probability.html"><a href="probability.html#additional-references"><i class="fa fa-check"></i><b>C.8</b> Additional References</a><ul>
+<li class="chapter" data-level="C.8" data-path="probability.html"><a href="probability.html#additional-references"><i class="fa fa-check"></i><b>C.8</b> Additional References</a>
+<ul>
 <li class="chapter" data-level="C.8.1" data-path="probability.html"><a href="probability.html#videos"><i class="fa fa-check"></i><b>C.8.1</b> Videos</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="D" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>D</b> Statistics</a><ul>
+<li class="chapter" data-level="D" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>D</b> Statistics</a>
+<ul>
 <li class="chapter" data-level="D.1" data-path="statistics.html"><a href="statistics.html#reading-2"><i class="fa fa-check"></i><b>D.1</b> Reading</a></li>
 <li class="chapter" data-level="D.2" data-path="statistics.html"><a href="statistics.html#statistics-1"><i class="fa fa-check"></i><b>D.2</b> Statistics</a></li>
-<li class="chapter" data-level="D.3" data-path="statistics.html"><a href="statistics.html#estimators"><i class="fa fa-check"></i><b>D.3</b> Estimators</a><ul>
+<li class="chapter" data-level="D.3" data-path="statistics.html"><a href="statistics.html#estimators"><i class="fa fa-check"></i><b>D.3</b> Estimators</a>
+<ul>
 <li class="chapter" data-level="D.3.1" data-path="statistics.html"><a href="statistics.html#properties"><i class="fa fa-check"></i><b>D.3.1</b> Properties</a></li>
 <li class="chapter" data-level="D.3.2" data-path="statistics.html"><a href="statistics.html#example-mse-of-an-estimator"><i class="fa fa-check"></i><b>D.3.2</b> Example: MSE of an Estimator</a></li>
 <li class="chapter" data-level="D.3.3" data-path="statistics.html"><a href="statistics.html#estimation-methods"><i class="fa fa-check"></i><b>D.3.3</b> Estimation Methods</a></li>
@@ -309,13 +332,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1 class="title">Basics of Statistical Learning</h1>
 <p class="author"><em><a href="https://daviddalpiaz.org/">David Dalpiaz</a></em></p>
 </div>
-<div id="welcome" class="section level1 unnumbered">
+<div id="welcome" class="section level1 unnumbered" number="">
 <h1>Welcome</h1>
 <p>Welcome to Basics of Statistical Learning! What a boring title! The title was chosen to mirror that of the <a href="https://illinois.edu/">University of Illinois at Urbana-Champaign</a> course <a href="https://stat432.org/">STAT 432 - Basics of Statistical Learning</a>. That title was chosen to meet certain University course naming conventions, hence the boring title. A more appropriate title would be <em>a broad introduction to machine learning from the perspective of a statistician who uses R<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> and emphasizes practice over theory</em>. This is more descriptive, still boring, and way too many words. Anyway, this “book” will be referred to as <strong>BSL</strong> for short.</p>
 <p>This chapter will outline the <strong>who</strong>, <strong>what</strong>, <strong>when</strong>, <strong>where</strong>, <strong>why</strong>, and <strong>how</strong><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> of this book, but not necessarily in that order.</p>
-<div id="who" class="section level2">
+<div id="who" class="section level2" number="0.1">
 <h2><span class="header-section-number">0.1</span> Who?</h2>
-<div id="readers" class="section level3">
+<div id="readers" class="section level3" number="0.1.1">
 <h3><span class="header-section-number">0.1.1</span> Readers</h3>
 <p>This book is targeted at advanced undergraduate or first year MS students in Statistics who have <em>no prior machine learning experience</em>. While both will be discussed in great detail, previous experience with both statistical modeling and R are assumed. In other words, this books is for students in STAT 432<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
 <p>If you are reading this book but are not involved in STAT 432, we assume:</p>
@@ -325,11 +348,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>enough understanding of linear models and R to be able to use R’s formula syntax to specify models</li>
 </ul>
 </div>
-<div id="author" class="section level3">
+<div id="author" class="section level3" number="0.1.2">
 <h3><span class="header-section-number">0.1.2</span> Author</h3>
 <p>This text was written by <a href="https://daviddalpiaz.org/">David Dalpiaz</a><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>.</p>
 </div>
-<div id="acknowledgements" class="section level3">
+<div id="acknowledgements" class="section level3" number="0.1.3">
 <h3><span class="header-section-number">0.1.3</span> Acknowledgements</h3>
 <p>The following is a (likely incomplete) list of helpful contributors. This book was also influenced by the helpful <a href="https://daviddalpiaz.github.io/r4sl/index.html#acknowledgements">contributors to R4SL</a>.</p>
 <!-- TODO: Simply list R4Sl contributors here. -->
@@ -346,7 +369,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- TODO: Standing on the shoulder of giants. High level acknowledgments. -->
 </div>
 </div>
-<div id="what" class="section level2">
+<div id="what" class="section level2" number="0.2">
 <h2><span class="header-section-number">0.2</span> What?</h2>
 <p>Well, this is a book. But you already knew that. More specifically, this is a book for use in STAT 432. But if you are reading this chapter, you’re either not in STAT 432, or new to STAT 432, so that isn’t really helpful. This is a book about machine learning. But this is too vague a description. It is probably most useful to describe the desired outcome as a result of reading this book. In a single sentence:</p>
 <blockquote>
@@ -362,7 +385,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>For a better understanding of the specific topics covered, please see the next chapter which serves as an overview of the text.</p>
 <p>To be clear: This book is not an exhaustive treatment of machine learning. If this is your first brush with machine learning, hopefully it is not your last!</p>
 </div>
-<div id="why" class="section level2">
+<div id="why" class="section level2" number="0.3">
 <h2><span class="header-section-number">0.3</span> Why?</h2>
 <p><em>Why does this book exists?</em> That is a very good question, especially given the existence of <a href="https://faculty.marshall.usc.edu/gareth-james/ISL/"><em>An Introduction to Statistical Learning</em></a><a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a>, the immensely popular book<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a> by James, Witten, Hastie, and Tibshirani. The author of this text believes ISL is a great text<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>, so much so that he would suggest that any readers of BSL also read all of ISL<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a>. Despite this, a book that was more inline with the content and goals of STAT 432<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a> was conceived by the author, so here we are.</p>
 <p><em>Why does STAT 432 exist?</em> Short answer: to add a course on machine learning to the undergraduate Statistics curriculum at the University of Illinois. The long story is long, but two individuals deserve credit for their work in the background:</p>
@@ -371,56 +394,56 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="https://stat.illinois.edu/directory/profile/jeffdoug">Jeff Douglas</a> for actually getting the pilot version of STAT 432 off the ground<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a>.</li>
 </ul>
 </div>
-<div id="where" class="section level2">
+<div id="where" class="section level2" number="0.4">
 <h2><span class="header-section-number">0.4</span> Where?</h2>
 <p>Currently, this text is used exclusively<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a> for STAT 432<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a> at the University of Illinois at Urbana-Champaign.</p>
 <p>The text can be accessed from <a href="https://statisticallearning.org/" class="uri">https://statisticallearning.org/</a>.</p>
 </div>
-<div id="when" class="section level2">
+<div id="when" class="section level2" number="0.5">
 <h2><span class="header-section-number">0.5</span> When?</h2>
-<p>This book was last updated on: 2020-10-07.<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a></p>
+<p>This book was last updated on: 2020-10-12.<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a></p>
 </div>
-<div id="how" class="section level2">
+<div id="how" class="section level2" number="0.6">
 <h2><span class="header-section-number">0.6</span> How?</h2>
 <p>Knowing a bit about how this book was built will help readers better interact with the text.</p>
-<div id="build-tools" class="section level3">
+<div id="build-tools" class="section level3" number="0.6.1">
 <h3><span class="header-section-number">0.6.1</span> Build Tools</h3>
 <p>This book is authored using Bookdown<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a>, built using <a href="https://travis-ci.com/">Travis-CI</a>, and hosted via <a href="https://pages.github.com/">GitHub pages</a>. Details of this setup can be found by browser the relevant GitHub repository.<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a></p>
 <p>Users that are familiar with these tools, most importantly GitHub, are encouraged to contribute. As noted above, please see the <a href="https://github.com/daviddalpiaz/bsl/blob/master/CONTRIBUTING.md">CONTRIBUTING</a> document on GitHub for details on interacting with this project.</p>
 </div>
-<div id="active-development" class="section level3">
+<div id="active-development" class="section level3" number="0.6.2">
 <h3><span class="header-section-number">0.6.2</span> Active Development</h3>
 <p><strong>This “book” is under active development.</strong> Literally every element of the book is subject to change, at any moment. This text, BSL, is the successor to <a href="https://daviddalpiaz.github.io/r4sl/">R4SL</a>, an unfinished work that began as a supplement to <a href="https://faculty.marshall.usc.edu/gareth-james/ISL/">Introduction to Statistical Learning</a>, but was never finished. (In some sense, this book is just a fresh start due to the author wanting to change the presentation of the material. The author is seriously worried that he will encounter the second-system effect.<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a></p>
 <p>Because this book is written with a course in mind, that is actively being taught, often out of convenience the text will speak directly to the students of that course. Thus, be aware that any references to a “course” are a reference to <a href="www.stat432.org">STAT 432 @ UIUC</a>.</p>
 <p>Since this book is under active development you may encounter errors ranging from typos, to broken code, to poorly explained topics. If you do, please let us know! Better yet, fix the issue yourself!<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a> If you are familiar with R Markdown and GitHub, <a href="https://github.com/daviddalpiaz/bsl">pull requests are highly encouraged!</a>. This process is partially automated by the edit button in the top-left corner of the html version. If your suggestion or fix becomes part of the book, you will be added to the acknowledgments in this chapter this chapter. We’ll also link to your GitHub account, or personal website upon request. If you’re not familiar with version control systems feel free to email the author, <code>dalpiaz2 AT illinois DOT edu</code>.<a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a> See additional details in the Acknowledgments section above.</p>
 <p>While development is taking place, you may see “TODO” items scattered throughout the text. These are mostly notes for internal use, but give the reader some idea of what development is still to come.</p>
 </div>
-<div id="packages" class="section level3">
+<div id="packages" class="section level3" number="0.6.3">
 <h3><span class="header-section-number">0.6.3</span> Packages</h3>
 <p>The following will install all R packages needed to follow along with the text.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>(</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">    <span class="st">&quot;tidyverse&quot;</span>,</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">    <span class="st">&quot;kableExtra&quot;</span>,</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">    <span class="st">&quot;GGally&quot;</span>,</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">    <span class="st">&quot;ISLR&quot;</span>,</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">    <span class="st">&quot;klaR&quot;</span>,</a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">    <span class="st">&quot;rpart&quot;</span>,</a>
-<a class="sourceLine" id="cb1-9" data-line-number="9">    <span class="st">&quot;rpart.plot&quot;</span>,</a>
-<a class="sourceLine" id="cb1-10" data-line-number="10">    <span class="st">&quot;caret&quot;</span>,</a>
-<a class="sourceLine" id="cb1-11" data-line-number="11">    <span class="st">&quot;ellipse&quot;</span>,</a>
-<a class="sourceLine" id="cb1-12" data-line-number="12">    <span class="st">&quot;gbm&quot;</span>,</a>
-<a class="sourceLine" id="cb1-13" data-line-number="13">    <span class="st">&quot;cvms&quot;</span>,</a>
-<a class="sourceLine" id="cb1-14" data-line-number="14">    <span class="st">&quot;palmerpenguins&quot;</span></a>
-<a class="sourceLine" id="cb1-15" data-line-number="15">  )</a>
-<a class="sourceLine" id="cb1-16" data-line-number="16">)</a>
-<a class="sourceLine" id="cb1-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb1-18" data-line-number="18">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;coatless/ucidata&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1"></a><span class="kw">install.packages</span>(</span>
+<span id="cb1-2"><a href="index.html#cb1-2"></a>  <span class="kw">c</span>(</span>
+<span id="cb1-3"><a href="index.html#cb1-3"></a>    <span class="st">&quot;tidyverse&quot;</span>,</span>
+<span id="cb1-4"><a href="index.html#cb1-4"></a>    <span class="st">&quot;kableExtra&quot;</span>,</span>
+<span id="cb1-5"><a href="index.html#cb1-5"></a>    <span class="st">&quot;GGally&quot;</span>,</span>
+<span id="cb1-6"><a href="index.html#cb1-6"></a>    <span class="st">&quot;ISLR&quot;</span>,</span>
+<span id="cb1-7"><a href="index.html#cb1-7"></a>    <span class="st">&quot;klaR&quot;</span>,</span>
+<span id="cb1-8"><a href="index.html#cb1-8"></a>    <span class="st">&quot;rpart&quot;</span>,</span>
+<span id="cb1-9"><a href="index.html#cb1-9"></a>    <span class="st">&quot;rpart.plot&quot;</span>,</span>
+<span id="cb1-10"><a href="index.html#cb1-10"></a>    <span class="st">&quot;caret&quot;</span>,</span>
+<span id="cb1-11"><a href="index.html#cb1-11"></a>    <span class="st">&quot;ellipse&quot;</span>,</span>
+<span id="cb1-12"><a href="index.html#cb1-12"></a>    <span class="st">&quot;gbm&quot;</span>,</span>
+<span id="cb1-13"><a href="index.html#cb1-13"></a>    <span class="st">&quot;cvms&quot;</span>,</span>
+<span id="cb1-14"><a href="index.html#cb1-14"></a>    <span class="st">&quot;palmerpenguins&quot;</span></span>
+<span id="cb1-15"><a href="index.html#cb1-15"></a>  )</span>
+<span id="cb1-16"><a href="index.html#cb1-16"></a>)</span>
+<span id="cb1-17"><a href="index.html#cb1-17"></a></span>
+<span id="cb1-18"><a href="index.html#cb1-18"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;coatless/ucidata&quot;</span>)</span></code></pre></div>
 </div>
-<div id="license" class="section level3">
+<div id="license" class="section level3" number="0.6.4">
 <h3><span class="header-section-number">0.6.4</span> License</h3>
 <div class="figure">
-<img src="img/cc.png" alt="This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License" />
+<img src="img/cc.png" alt="" />
 <p class="caption">This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a></p>
 </div>
 
@@ -430,29 +453,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="footnotes">
 <hr />
 <ol start="1">
-<li id="fn1"><p><span class="citation">R Core Team, <em>R: A Language and Environment for Statistical Computing</em> (Vienna, Austria: R Foundation for Statistical Computing, 2016), <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a></span><a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p>Wikipedia: <a href="https://en.wikipedia.org/wiki/Five_Ws">Five Ws</a><a href="index.html#fnref2" class="footnote-back">↩</a></p></li>
-<li id="fn3"><p>STAT 432 is also cross-listed as ASRM 451, but we will exclusively refer to STAT 432 for simplicity.<a href="index.html#fnref3" class="footnote-back">↩</a></p></li>
-<li id="fn4"><p>He does not enjoy writing about himself<a href="index.html#fnref4" class="footnote-back">↩</a></p></li>
-<li id="fn5"><p>Theory here is ill defined. Loosely, “theory” is activities that are closer to writing theorem-proof mathematics while “practice” is more akin to using built-in statistical computing tools in a language like R.<a href="index.html#fnref5" class="footnote-back">↩</a></p></li>
-<li id="fn6"><p><a href="https://twitter.com/PhDemetri/status/1235380313272070144">This is not a unique opinion.</a><a href="index.html#fnref6" class="footnote-back">↩</a></p></li>
-<li id="fn7"><p>This is impossible.<a href="index.html#fnref7" class="footnote-back">↩</a></p></li>
-<li id="fn8"><p>Students often ask if we will cover support vector machines or deep learning or <em>insert latest buzzword model here</em>. The author believes this is because students consider these to be “cool” methods. One of the goals of this text is to make machine learning seems as uncool as possible. The hope would be for readers to understand something like an SVM to be “just another method” which also needs to be <strong>evaluated</strong>. The author believes deep learning is useful, but would clutter the presentation because of the additional background and computing that would need to be introduced. Follow-up learning of deep learning is encouraged after reading BSL. Hopefully, by reading BSL, getting up to speed <em>using</em> deep learning will be made easier.<a href="index.html#fnref8" class="footnote-back">↩</a></p></li>
-<li id="fn9"><p>Also provided the user reads the documentation.<a href="index.html#fnref9" class="footnote-back">↩</a></p></li>
-<li id="fn10"><p><span class="citation">Gareth James et al., <em>An Introduction to Statistical Learning</em>, vol. 112 (Springer, 2013), <a href="http://faculty.marshall.usc.edu/gareth-james/ISL/" class="uri">http://faculty.marshall.usc.edu/gareth-james/ISL/</a></span><a href="index.html#fnref10" class="footnote-back">↩</a></p></li>
-<li id="fn11"><p>This book is generally referred to as <strong>ISL</strong>.<a href="index.html#fnref11" class="footnote-back">↩</a></p></li>
-<li id="fn12"><p>He has spent so much time referencing ISL that he found and suggested a <a href="https://faculty.marshall.usc.edu/gareth-james/ISL/errata.html">typo fix</a>.<a href="index.html#fnref12" class="footnote-back">↩</a></p></li>
-<li id="fn13"><p>One of the biggest strengths of ISL is its readability.<a href="index.html#fnref13" class="footnote-back">↩</a></p></li>
-<li id="fn14"><p>The biggest differences are: Assumed reader background, overall structure, and R code usage and style.<a href="index.html#fnref14" class="footnote-back">↩</a></p></li>
-<li id="fn15"><p>Jeff taught the first proto-version of STAT 432 as a topics course, but then allowed the author to take over teaching and development while he worked to get the course fully approved.<a href="index.html#fnref15" class="footnote-back">↩</a></p></li>
-<li id="fn16"><p>If you are using this text elsewhere, that’s great! Please let the author know!<a href="index.html#fnref16" class="footnote-back">↩</a></p></li>
-<li id="fn17"><p><a href="https://stat432.org/" class="uri">https://stat432.org/</a><a href="index.html#fnref17" class="footnote-back">↩</a></p></li>
-<li id="fn18"><p>The author has no idea what else to write in this section, but the last updated date seems like useful information.<a href="index.html#fnref18" class="footnote-back">↩</a></p></li>
-<li id="fn19"><p><span class="citation">Yihui Xie, <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>, 2020, <a href="https://github.com/rstudio/bookdown" class="uri">https://github.com/rstudio/bookdown</a></span><a href="index.html#fnref19" class="footnote-back">↩</a></p></li>
-<li id="fn20"><p><a href="https://github.com/daviddalpiaz/bsl" class="uri">https://github.com/daviddalpiaz/bsl</a><a href="index.html#fnref20" class="footnote-back">↩</a></p></li>
-<li id="fn21"><p>Wikipedia: <a href="https://en.wikipedia.org/wiki/Second-system_effect">Second-System Effect</a><a href="index.html#fnref21" class="footnote-back">↩</a></p></li>
-<li id="fn22"><p>Yihui Xie: <a href="https://yihui.name/en/2013/06/fix-typo-in-documentation/">You Do Not Need to Tell Me I Have A Typo in My Documentation</a><a href="index.html#fnref22" class="footnote-back">↩</a></p></li>
-<li id="fn23"><p>But also consider using this opportunity to learn a bit about version control!<a href="index.html#fnref23" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p><span class="citation">R Core Team, <em>R: A Language and Environment for Statistical Computing</em> (Vienna, Austria: R Foundation for Statistical Computing, 2016), <a href="https://www.R-project.org/" role="doc-biblioref">https://www.R-project.org/</a></span><a href="index.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Wikipedia: <a href="https://en.wikipedia.org/wiki/Five_Ws">Five Ws</a><a href="index.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>STAT 432 is also cross-listed as ASRM 451, but we will exclusively refer to STAT 432 for simplicity.<a href="index.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>He does not enjoy writing about himself<a href="index.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>Theory here is ill defined. Loosely, “theory” is activities that are closer to writing theorem-proof mathematics while “practice” is more akin to using built-in statistical computing tools in a language like R.<a href="index.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p><a href="https://twitter.com/PhDemetri/status/1235380313272070144">This is not a unique opinion.</a><a href="index.html#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>This is impossible.<a href="index.html#fnref7" class="footnote-back">↩︎</a></p></li>
+<li id="fn8"><p>Students often ask if we will cover support vector machines or deep learning or <em>insert latest buzzword model here</em>. The author believes this is because students consider these to be “cool” methods. One of the goals of this text is to make machine learning seems as uncool as possible. The hope would be for readers to understand something like an SVM to be “just another method” which also needs to be <strong>evaluated</strong>. The author believes deep learning is useful, but would clutter the presentation because of the additional background and computing that would need to be introduced. Follow-up learning of deep learning is encouraged after reading BSL. Hopefully, by reading BSL, getting up to speed <em>using</em> deep learning will be made easier.<a href="index.html#fnref8" class="footnote-back">↩︎</a></p></li>
+<li id="fn9"><p>Also provided the user reads the documentation.<a href="index.html#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn10"><p><span class="citation">Gareth James et al., <em>An Introduction to Statistical Learning</em>, vol. 112 (Springer, 2013), <a href="http://faculty.marshall.usc.edu/gareth-james/ISL/" role="doc-biblioref">http://faculty.marshall.usc.edu/gareth-james/ISL/</a></span><a href="index.html#fnref10" class="footnote-back">↩︎</a></p></li>
+<li id="fn11"><p>This book is generally referred to as <strong>ISL</strong>.<a href="index.html#fnref11" class="footnote-back">↩︎</a></p></li>
+<li id="fn12"><p>He has spent so much time referencing ISL that he found and suggested a <a href="https://faculty.marshall.usc.edu/gareth-james/ISL/errata.html">typo fix</a>.<a href="index.html#fnref12" class="footnote-back">↩︎</a></p></li>
+<li id="fn13"><p>One of the biggest strengths of ISL is its readability.<a href="index.html#fnref13" class="footnote-back">↩︎</a></p></li>
+<li id="fn14"><p>The biggest differences are: Assumed reader background, overall structure, and R code usage and style.<a href="index.html#fnref14" class="footnote-back">↩︎</a></p></li>
+<li id="fn15"><p>Jeff taught the first proto-version of STAT 432 as a topics course, but then allowed the author to take over teaching and development while he worked to get the course fully approved.<a href="index.html#fnref15" class="footnote-back">↩︎</a></p></li>
+<li id="fn16"><p>If you are using this text elsewhere, that’s great! Please let the author know!<a href="index.html#fnref16" class="footnote-back">↩︎</a></p></li>
+<li id="fn17"><p><a href="https://stat432.org/" class="uri">https://stat432.org/</a><a href="index.html#fnref17" class="footnote-back">↩︎</a></p></li>
+<li id="fn18"><p>The author has no idea what else to write in this section, but the last updated date seems like useful information.<a href="index.html#fnref18" class="footnote-back">↩︎</a></p></li>
+<li id="fn19"><p><span class="citation">Yihui Xie, <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>, 2020, <a href="https://github.com/rstudio/bookdown" role="doc-biblioref">https://github.com/rstudio/bookdown</a></span><a href="index.html#fnref19" class="footnote-back">↩︎</a></p></li>
+<li id="fn20"><p><a href="https://github.com/daviddalpiaz/bsl" class="uri">https://github.com/daviddalpiaz/bsl</a><a href="index.html#fnref20" class="footnote-back">↩︎</a></p></li>
+<li id="fn21"><p>Wikipedia: <a href="https://en.wikipedia.org/wiki/Second-system_effect">Second-System Effect</a><a href="index.html#fnref21" class="footnote-back">↩︎</a></p></li>
+<li id="fn22"><p>Yihui Xie: <a href="https://yihui.name/en/2013/06/fix-typo-in-documentation/">You Do Not Need to Tell Me I Have A Typo in My Documentation</a><a href="index.html#fnref22" class="footnote-back">↩︎</a></p></li>
+<li id="fn23"><p>But also consider using this opportunity to learn a bit about version control!<a href="index.html#fnref23" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
