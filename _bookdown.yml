@@ -19,7 +19,7 @@ rmd_files: [
   #  "supervised-i.Rmd",
   # "simulation.Rmd",
   # "bootstrap.Rmd",
-  # "cross-validation.Rmd",
+  "cross-validation.Rmd",
   #  "supervised-ii.Rmd",
   #  "regularization.Rmd",
   #  "dimension-reduction.Rmd",
