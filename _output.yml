@@ -1,4 +1,5 @@
 bookdown::gitbook:
+  smart: false
   css: style.css
   split_by: rmd
   # df_print: paged
