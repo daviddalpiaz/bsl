@@ -15,11 +15,11 @@ rmd_files: [
   "nonparametric-classification.Rmd",
   "logistic-regression.Rmd",
   "binary-classification.Rmd",
-   "generative.Rmd",
+  "generative.Rmd",
   #  "supervised-i.Rmd",
-   # "simulation.Rmd",
-   # "bootstrap.Rmd",
-   # "cross-validation.Rmd",
+  # "simulation.Rmd",
+  # "bootstrap.Rmd",
+  # "cross-validation.Rmd",
   #  "supervised-ii.Rmd",
   #  "regularization.Rmd",
   #  "dimension-reduction.Rmd",
@@ -29,5 +29,5 @@ rmd_files: [
   "computing.Rmd",
   "probability.Rmd",
   "statistics.Rmd",
-  # "references.Rmd"
+  "references.Rmd"
 ]
