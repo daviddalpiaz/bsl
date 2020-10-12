@@ -84,6 +84,7 @@ linear-discriminant-analysis
 quadratic-discriminant-analysis
 naive-bayes
 categorical-features
+cross-validation
 additional-reading
 books
 papers

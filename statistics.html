@@ -239,6 +239,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.4" data-path="generative.html"><a href="generative.html#naive-bayes"><i class="fa fa-check"></i><b>10.4</b> Naive Bayes</a></li>
 <li class="chapter" data-level="10.5" data-path="generative.html"><a href="generative.html#categorical-features"><i class="fa fa-check"></i><b>10.5</b> Categorical Features</a></li>
 </ul></li>
+<li class="chapter" data-level="11" data-path="cross-validation.html"><a href="cross-validation.html"><i class="fa fa-check"></i><b>11</b> Cross-Validation</a></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="additional-reading.html"><a href="additional-reading.html"><i class="fa fa-check"></i><b>A</b> Additional Reading</a>
 <ul>
@@ -328,12 +329,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="statistics" class="section level1" number="14">
+<div id="statistics" class="section level1" number="15">
 <h1><span class="header-section-number">D</span> Statistics</h1>
 <p>STAT 432 is a course about statistics, in particular, some specific statistics. To discuss the statistics of interest in STAT 432, we will need some general concepts about statistics.</p>
 <!-- - TODO: Where we are going, estimating conditional means and distributions. -->
 <!-- - TODO: estimation = learning. "learning from data." what are we learning about? often parameters. -->
-<div id="reading-2" class="section level2" number="14.1">
+<div id="reading-2" class="section level2" number="15.1">
 <h2><span class="header-section-number">D.1</span> Reading</h2>
 <ul>
 <li><strong>Reference:</strong> <a href="http://stat400.org">STAT 400 @ UIUC: Notes and Homework</a></li>
@@ -341,7 +342,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong>Reference:</strong> <a href="https://online.stat.psu.edu/stat414/node/213/">STAT 415 @ PSU: Notes</a></li>
 </ul>
 </div>
-<div id="statistics-1" class="section level2" number="14.2">
+<div id="statistics-1" class="section level2" number="15.2">
 <h2><span class="header-section-number">D.2</span> Statistics</h2>
 <p>In short: a <strong>statistic</strong> is a <em>function of (sample) data</em>. (This mirrors <strong>parameters</strong> being <em>functions of (population) distributions</em>. In SAT terminology, statistics : data :: parameter : distribution.)</p>
 <p>Consider a random variable <span class="math inline">\(X\)</span>, with PDF <span class="math inline">\(f(x)\)</span> which defines the distribution of <span class="math inline">\(X\)</span>. Now consider the parameter <span class="math inline">\(\mu\)</span>, which we usually refer to as the mean of a distribution. We use <span class="math inline">\(\mu_X\)</span> to note that <span class="math inline">\(\mu\)</span> is dependent on the distribution of <span class="math inline">\(X\)</span>.</p>
@@ -373,10 +374,10 @@ x_1 = 2, x_2 = 1, x_3 =5
 \]</span></p>
 <p>Note that 2.66 is <strong>not a statistic</strong>. It is the <strong>value</strong> of a statistic given a particular set of data. The statistic is still <span class="math inline">\(\hat{\mu}\)</span> which has output the value 2.66. Statistics output values given some data.</p>
 </div>
-<div id="estimators" class="section level2" number="14.3">
+<div id="estimators" class="section level2" number="15.3">
 <h2><span class="header-section-number">D.3</span> Estimators</h2>
 <p>Estimators are just statistics with a purpose, that is, estimators are statistics that attempt to estimate some quantity of interest, usually some parameter. (In other words, <em>learn</em> from data.) Like statistics, estimators are functions of data that output values, which we call estimates.</p>
-<div id="properties" class="section level3" number="14.3.1">
+<div id="properties" class="section level3" number="15.3.1">
 <h3><span class="header-section-number">D.3.1</span> Properties</h3>
 <div class="figure">
 <img src="img/bias-var.png" alt="" />
@@ -385,7 +386,7 @@ x_1 = 2, x_2 = 1, x_3 =5
 <!-- - TODO: explain image above, source copyright or recreate. -->
 <p>Because they are just statistics, estimators are simply functions of data. What makes an estimator <em>good</em>? Essentially, an estimator is good if it produces estimates that are close to the thing being estimated. The following properties help to better define this “closeness” as a function of the errors made by estimators.</p>
 <p>To estimate some parameter <span class="math inline">\(\theta\)</span> we will consider some estimator <span class="math inline">\(\hat{\theta}\)</span>.</p>
-<div id="bias" class="section level4" number="14.3.1.1">
+<div id="bias" class="section level4" number="15.3.1.1">
 <h4><span class="header-section-number">D.3.1.1</span> Bias</h4>
 <p>The <strong>bias</strong> of an estimator defines the systematic error of the estimator, that is, how the estimator “misses” on average.</p>
 <p><span class="math display">\[
@@ -393,7 +394,7 @@ x_1 = 2, x_2 = 1, x_3 =5
 \mathbb{E}\left[\hat{\theta}\right] - \theta
 \]</span></p>
 </div>
-<div id="variance" class="section level4" number="14.3.1.2">
+<div id="variance" class="section level4" number="15.3.1.2">
 <h4><span class="header-section-number">D.3.1.2</span> Variance</h4>
 <p>The <strong>variance</strong> of an estimator defines how close resulting estimates are to each other. (Assuming the estimated was repeated.)</p>
 <p><span class="math display">\[
@@ -401,7 +402,7 @@ x_1 = 2, x_2 = 1, x_3 =5
 \mathbb{E}\left[ \left( \hat{\theta} - \mathbb{E}\left[\hat{\theta}\right] \right)^2 \right]
 \]</span></p>
 </div>
-<div id="mean-squared-error" class="section level4" number="14.3.1.3">
+<div id="mean-squared-error" class="section level4" number="15.3.1.3">
 <h4><span class="header-section-number">D.3.1.3</span> Mean Squared Error</h4>
 <p>The <strong>mean squared error</strong> (MSE) is exactly what the name suggests, it is the average squared error of the estimator. Interestingly, the MSE decomposes into terms related to the bias and the variance. We will return to this idea later for a detailed discussion in the context of machine learning.</p>
 <p><span class="math display">\[
@@ -411,7 +412,7 @@ x_1 = 2, x_2 = 1, x_3 =5
 \text{var}\left[\hat{\theta}\right]
 \]</span></p>
 </div>
-<div id="consistency" class="section level4" number="14.3.1.4">
+<div id="consistency" class="section level4" number="15.3.1.4">
 <h4><span class="header-section-number">D.3.1.4</span> Consistency</h4>
 <p>An estimator <span class="math inline">\(\hat{\theta}_n\)</span> is said to be a <strong>consistent estimator</strong> of <span class="math inline">\(\theta\)</span> if, for any positive <span class="math inline">\(\epsilon\)</span>,</p>
 <p><span class="math display">\[
@@ -424,7 +425,7 @@ x_1 = 2, x_2 = 1, x_3 =5
 <p>We say that <span class="math inline">\(\hat{\theta}_n\)</span> <strong>converges in probability</strong> to <span class="math inline">\(\theta\)</span> and we write <span class="math inline">\(\hat{\theta}_n \overset P \rightarrow \theta\)</span>.</p>
 </div>
 </div>
-<div id="example-mse-of-an-estimator" class="section level3" number="14.3.2">
+<div id="example-mse-of-an-estimator" class="section level3" number="15.3.2">
 <h3><span class="header-section-number">D.3.2</span> Example: MSE of an Estimator</h3>
 <p>Consider <span class="math inline">\(X_1, X_2, X_3 \sim N(\mu, \sigma^2)\)</span>.</p>
 <p>Define two estimators for the true mean, <span class="math inline">\(\mu\)</span>.</p>
@@ -481,11 +482,11 @@ x_1 = 2, x_2 = 1, x_3 =5
 \]</span></p>
 <p>Note that <span class="math inline">\(\text{MSE}\left[\hat{\mu}\right]\)</span> is small when <span class="math inline">\(\mu\)</span> is close to 0.</p>
 </div>
-<div id="estimation-methods" class="section level3" number="14.3.3">
+<div id="estimation-methods" class="section level3" number="15.3.3">
 <h3><span class="header-section-number">D.3.3</span> Estimation Methods</h3>
 <p>So far we have discussed properties of estimators, but how do we <em>create</em> estimators? You <em>could</em> just define a bunch of estimators and then evaluate them to see what works best (an idea we will return to later in the context of ML) but (the field of) statistics has develop some methods that result in estimators with desirable properties.</p>
 </div>
-<div id="maximum-likelihood-estimation" class="section level3" number="14.3.4">
+<div id="maximum-likelihood-estimation" class="section level3" number="15.3.4">
 <h3><span class="header-section-number">D.3.4</span> Maximum Likelihood Estimation</h3>
 <p>Given a random sample <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> from a population with parameter <span class="math inline">\(\theta\)</span> and density or mass <span class="math inline">\(f(x; \theta)\)</span>, we define the likelihood as</p>
 <p><span class="math display">\[
@@ -495,16 +496,16 @@ x_1 = 2, x_2 = 1, x_3 =5
 <p><span class="math display">\[
 \hat{\theta} \triangleq \underset{\theta}{\text{argmax}} \ \mathcal{L}(\theta \mid x_1, x_2, \ldots x_n) = \underset{\theta}{\text{argmax}} \ \log \mathcal{L}(\theta \mid x_1, x_2, \ldots x_n)
 \]</span></p>
-<div id="invariance-principle" class="section level4" number="14.3.4.1">
+<div id="invariance-principle" class="section level4" number="15.3.4.1">
 <h4><span class="header-section-number">D.3.4.1</span> Invariance Principle</h4>
 <p>If <span class="math inline">\(\hat{\theta}\)</span> is the MLE of <span class="math inline">\(\theta\)</span> and the function <span class="math inline">\(h(\theta)\)</span> is continuous, then <span class="math inline">\(h(\hat{\theta})\)</span> is the MLE of <span class="math inline">\(h(\theta)\)</span>.</p>
 </div>
 </div>
-<div id="method-of-moments" class="section level3" number="14.3.5">
+<div id="method-of-moments" class="section level3" number="15.3.5">
 <h3><span class="header-section-number">D.3.5</span> Method of Moments</h3>
 <p>While it is very unlikely that we will use the <a href="https://online.stat.psu.edu/stat414/node/193/">Method of Moments</a> in STAT 432, you should still be aware of its existence.</p>
 </div>
-<div id="empirical-distribution-function" class="section level3" number="14.3.6">
+<div id="empirical-distribution-function" class="section level3" number="15.3.6">
 <h3><span class="header-section-number">D.3.6</span> Empirical Distribution Function</h3>
 <p>Consider a random variable <span class="math inline">\(X\)</span> with CDF <span class="math inline">\(F(k) = P(X &lt; k)\)</span> and an iid random sample <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span>. We can estimate <span class="math inline">\(F(k)\)</span> using the <a href="https://en.wikipedia.org/wiki/Empirical_distribution_function"><strong>Empirical Distribution Function</strong></a> (EDF),</p>
 <p><span class="math display">\[

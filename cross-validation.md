@@ -2,31 +2,16 @@
 
 
 
-***
+This chapter will introduce no new modeling techniques, but instead will focus on evaluating models through the use of **cross-validation.**
 
-In this chapter...
+Specifically, we will discuss:
 
-***
+- How to "manually" perform **cross-validation** for any model-metric combination.
+- The need for **cross-validation**.
+- The need for a separate **test set** outside of the **training data** where cross-validation takes place.
 
-## Reading
+This chapter is currently **under construction**. While it is being developed, the following links to the STAT 432 course notes.
 
-- **Required:** ???
-
-***
-
-
-```r
-library("tidyverse")
-```
-
-***
-
-TBD
-
-***
-
-## Source
-
-- `R` Markdown: [`cross-validation.Rmd`](cross-validation.Rmd)
-
-***
+- [**Notes:** Cross-Validation](files/simulation.pdf)
+- [**Notes:** Cross-Validation](files/bootstrap.pdf)
+- [**Notes:** Cross-Validation](files/cross-validation.pdf)
