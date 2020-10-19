@@ -18,7 +18,9 @@ Imports:
   gbm,
   cvms,
   ucidata,
-  palmerpenguins
+  palmerpenguins,
+  glmnet,
+  broom
 Remotes:
   coatless/ucidata,
   rstudio/bookdown
