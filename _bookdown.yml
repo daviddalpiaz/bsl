@@ -21,7 +21,7 @@ rmd_files: [
   # "bootstrap.Rmd",
   "cross-validation.Rmd",
   #  "supervised-ii.Rmd",
-  #  "regularization.Rmd",
+  "regularization.Rmd",
   #  "dimension-reduction.Rmd",
   #  "ensemble-methods.Rmd",
   #  "regularization.Rmd",
