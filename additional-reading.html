@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>A Additional Reading | Basics of Statistical Learning</title>
   <meta name="description" content="A Additional Reading | Basics of Statistical Learning" />
-  <meta name="generator" content="bookdown 0.20.7 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21.2 and GitBook 2.6.7" />
 
   <meta property="og:title" content="A Additional Reading | Basics of Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -30,9 +30,9 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="cross-validation.html"/>
+<link rel="prev" href="regularization.html"/>
 <link rel="next" href="computing.html"/>
-<script src="libs/header-attrs-2.4.1/header-attrs.js"></script>
+<script src="libs/header-attrs-2.4.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -240,6 +240,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5" data-path="generative.html"><a href="generative.html#categorical-features"><i class="fa fa-check"></i><b>10.5</b> Categorical Features</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="cross-validation.html"><a href="cross-validation.html"><i class="fa fa-check"></i><b>11</b> Cross-Validation</a></li>
+<li class="chapter" data-level="12" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>12</b> Regularization</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="regularization.html"><a href="regularization.html#ridge-regression"><i class="fa fa-check"></i><b>12.1</b> Ridge Regression</a></li>
+<li class="chapter" data-level="12.2" data-path="regularization.html"><a href="regularization.html#lasso"><i class="fa fa-check"></i><b>12.2</b> Lasso</a></li>
+<li class="chapter" data-level="12.3" data-path="regularization.html"><a href="regularization.html#broom"><i class="fa fa-check"></i><b>12.3</b> <code>broom</code></a></li>
+<li class="chapter" data-level="12.4" data-path="regularization.html"><a href="regularization.html#simulated-data-p-n"><i class="fa fa-check"></i><b>12.4</b> Simulated Data, <span class="math inline">\(p &gt; n\)</span></a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="additional-reading.html"><a href="additional-reading.html"><i class="fa fa-check"></i><b>A</b> Additional Reading</a>
 <ul>
@@ -329,9 +336,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="additional-reading" class="section level1" number="12">
+<div id="additional-reading" class="section level1" number="13">
 <h1><span class="header-section-number">A</span> Additional Reading</h1>
-<div id="books" class="section level2" number="12.1">
+<div id="books" class="section level2" number="13.1">
 <h2><span class="header-section-number">A.1</span> Books</h2>
 <ul>
 <li><a href="https://faculty.marshall.usc.edu/gareth-james/ISL/">An Introduction to Statistical Learning</a>
@@ -388,7 +395,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul>
 </div>
-<div id="papers" class="section level2" number="12.2">
+<div id="papers" class="section level2" number="13.2">
 <h2><span class="header-section-number">A.2</span> Papers</h2>
 <ul>
 <li><a href="http://jmlr.csail.mit.edu/papers/volume15/delgado14a/delgado14a.pdf">Do we Need Hundreds of Classifiers to Solve Real World Classification Problems?</a>
@@ -405,7 +412,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul>
 </div>
-<div id="blog-posts" class="section level2" number="12.3">
+<div id="blog-posts" class="section level2" number="13.3">
 <h2><span class="header-section-number">A.3</span> Blog Posts</h2>
 <ul>
 <li><a href="https://peekaboo-vision.blogspot.com/2019/07/dont-cite-no-free-lunch-theorem.html">Peekaboo: Don’t cite the No Free Lunch Theorem</a></li>
@@ -414,7 +421,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="http://varianceexplained.org/r/ds-ml-ai/">Variance Explained: What’s the difference between data science, machine learning, and artificial intelligence?</a></li>
 </ul>
 </div>
-<div id="miscellaneous" class="section level2" number="12.4">
+<div id="miscellaneous" class="section level2" number="13.4">
 <h2><span class="header-section-number">A.4</span> Miscellaneous</h2>
 <ul>
 <li><a href="https://statweb.stanford.edu/~tibs/stat315a/glossary.pdf">Machine Learning verus Statistics, A Glossary</a>
@@ -430,7 +437,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="cross-validation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="regularization.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="computing.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

@@ -85,6 +85,11 @@ quadratic-discriminant-analysis
 naive-bayes
 categorical-features
 cross-validation
+regularization
+ridge-regression
+lasso
+broom
+simulated-data-p-n
 additional-reading
 books
 papers

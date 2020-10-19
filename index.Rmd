@@ -134,7 +134,9 @@ install.packages(
     "ellipse",
     "gbm",
     "cvms",
-    "palmerpenguins"
+    "palmerpenguins",
+    "glmnet",
+    "broom"
   )
 )
 

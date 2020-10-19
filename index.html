@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Basics of Statistical Learning</title>
   <meta name="description" content="Basics of Statistical Learning" />
-  <meta name="generator" content="bookdown 0.20.7 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21.2 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Basics of Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -32,7 +32,7 @@
   
 
 <link rel="next" href="ml-overview.html"/>
-<script src="libs/header-attrs-2.4.1/header-attrs.js"></script>
+<script src="libs/header-attrs-2.4.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -240,6 +240,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5" data-path="generative.html"><a href="generative.html#categorical-features"><i class="fa fa-check"></i><b>10.5</b> Categorical Features</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="cross-validation.html"><a href="cross-validation.html"><i class="fa fa-check"></i><b>11</b> Cross-Validation</a></li>
+<li class="chapter" data-level="12" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>12</b> Regularization</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="regularization.html"><a href="regularization.html#ridge-regression"><i class="fa fa-check"></i><b>12.1</b> Ridge Regression</a></li>
+<li class="chapter" data-level="12.2" data-path="regularization.html"><a href="regularization.html#lasso"><i class="fa fa-check"></i><b>12.2</b> Lasso</a></li>
+<li class="chapter" data-level="12.3" data-path="regularization.html"><a href="regularization.html#broom"><i class="fa fa-check"></i><b>12.3</b> <code>broom</code></a></li>
+<li class="chapter" data-level="12.4" data-path="regularization.html"><a href="regularization.html#simulated-data-p-n"><i class="fa fa-check"></i><b>12.4</b> Simulated Data, <span class="math inline">\(p &gt; n\)</span></a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="additional-reading.html"><a href="additional-reading.html"><i class="fa fa-check"></i><b>A</b> Additional Reading</a>
 <ul>
@@ -402,7 +409,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="when" class="section level2" number="0.5">
 <h2><span class="header-section-number">0.5</span> When?</h2>
-<p>This book was last updated on: 2020-10-12.<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a></p>
+<p>This book was last updated on: 2020-10-19.<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a></p>
 </div>
 <div id="how" class="section level2" number="0.6">
 <h2><span class="header-section-number">0.6</span> How?</h2>
@@ -435,11 +442,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-11"><a href="index.html#cb1-11"></a>    <span class="st">&quot;ellipse&quot;</span>,</span>
 <span id="cb1-12"><a href="index.html#cb1-12"></a>    <span class="st">&quot;gbm&quot;</span>,</span>
 <span id="cb1-13"><a href="index.html#cb1-13"></a>    <span class="st">&quot;cvms&quot;</span>,</span>
-<span id="cb1-14"><a href="index.html#cb1-14"></a>    <span class="st">&quot;palmerpenguins&quot;</span></span>
-<span id="cb1-15"><a href="index.html#cb1-15"></a>  )</span>
-<span id="cb1-16"><a href="index.html#cb1-16"></a>)</span>
-<span id="cb1-17"><a href="index.html#cb1-17"></a></span>
-<span id="cb1-18"><a href="index.html#cb1-18"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;coatless/ucidata&quot;</span>)</span></code></pre></div>
+<span id="cb1-14"><a href="index.html#cb1-14"></a>    <span class="st">&quot;palmerpenguins&quot;</span>,</span>
+<span id="cb1-15"><a href="index.html#cb1-15"></a>    <span class="st">&quot;glmnet&quot;</span>,</span>
+<span id="cb1-16"><a href="index.html#cb1-16"></a>    <span class="st">&quot;broom&quot;</span></span>
+<span id="cb1-17"><a href="index.html#cb1-17"></a>  )</span>
+<span id="cb1-18"><a href="index.html#cb1-18"></a>)</span>
+<span id="cb1-19"><a href="index.html#cb1-19"></a></span>
+<span id="cb1-20"><a href="index.html#cb1-20"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;coatless/ucidata&quot;</span>)</span></code></pre></div>
 </div>
 <div id="license" class="section level3" number="0.6.4">
 <h3><span class="header-section-number">0.6.4</span> License</h3>

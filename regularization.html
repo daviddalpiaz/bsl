@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 16 Regularization | Basics of Statistical Learning</title>
-  <meta name="description" content="Chapter 16 Regularization | Basics of Statistical Learning" />
-  <meta name="generator" content="bookdown 0.20.2 and GitBook 2.6.7" />
+  <title>Chapter 12 Regularization | Basics of Statistical Learning</title>
+  <meta name="description" content="Chapter 12 Regularization | Basics of Statistical Learning" />
+  <meta name="generator" content="bookdown 0.21.2 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 16 Regularization | Basics of Statistical Learning" />
+  <meta property="og:title" content="Chapter 12 Regularization | Basics of Statistical Learning" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://statisticallearning.org/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="daviddalpiaz/bsl" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 16 Regularization | Basics of Statistical Learning" />
+  <meta name="twitter:title" content="Chapter 12 Regularization | Basics of Statistical Learning" />
   
   
   
@@ -30,8 +30,9 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="supervised-ii.html"/>
-<link rel="next" href="dimension-reduction.html"/>
+<link rel="prev" href="cross-validation.html"/>
+<link rel="next" href="additional-reading.html"/>
+<script src="libs/header-attrs-2.4.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,31 +50,34 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -82,9 +86,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -133,8 +137,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Basics of Statistical Learning</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a><ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i><b>0.1</b> Who?</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#who"><i class="fa fa-check"></i><b>0.1</b> Who?</a>
+<ul>
 <li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#readers"><i class="fa fa-check"></i><b>0.1.1</b> Readers</a></li>
 <li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#author"><i class="fa fa-check"></i><b>0.1.2</b> Author</a></li>
 <li class="chapter" data-level="0.1.3" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.1.3</b> Acknowledgements</a></li>
@@ -143,200 +149,171 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#why"><i class="fa fa-check"></i><b>0.3</b> Why?</a></li>
 <li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#where"><i class="fa fa-check"></i><b>0.4</b> Where?</a></li>
 <li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#when"><i class="fa fa-check"></i><b>0.5</b> When?</a></li>
-<li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#how"><i class="fa fa-check"></i><b>0.6</b> How?</a><ul>
+<li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#how"><i class="fa fa-check"></i><b>0.6</b> How?</a>
+<ul>
 <li class="chapter" data-level="0.6.1" data-path="index.html"><a href="index.html#build-tools"><i class="fa fa-check"></i><b>0.6.1</b> Build Tools</a></li>
 <li class="chapter" data-level="0.6.2" data-path="index.html"><a href="index.html#active-development"><i class="fa fa-check"></i><b>0.6.2</b> Active Development</a></li>
-<li class="chapter" data-level="0.6.3" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.6.3</b> License</a></li>
+<li class="chapter" data-level="0.6.3" data-path="index.html"><a href="index.html#packages"><i class="fa fa-check"></i><b>0.6.3</b> Packages</a></li>
+<li class="chapter" data-level="0.6.4" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.6.4</b> License</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="ml-overview.html"><a href="ml-overview.html"><i class="fa fa-check"></i><b>1</b> Machine Learning Overview</a><ul>
+<li class="chapter" data-level="1" data-path="ml-overview.html"><a href="ml-overview.html"><i class="fa fa-check"></i><b>1</b> Machine Learning Overview</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="ml-overview.html"><a href="ml-overview.html#what-is-machine-learning"><i class="fa fa-check"></i><b>1.1</b> What is Machine Learning?</a></li>
-<li class="chapter" data-level="1.2" data-path="ml-overview.html"><a href="ml-overview.html#machine-learning-tasks"><i class="fa fa-check"></i><b>1.2</b> Machine Learning Tasks</a><ul>
+<li class="chapter" data-level="1.2" data-path="ml-overview.html"><a href="ml-overview.html#machine-learning-tasks"><i class="fa fa-check"></i><b>1.2</b> Machine Learning Tasks</a>
+<ul>
 <li class="chapter" data-level="1.2.1" data-path="ml-overview.html"><a href="ml-overview.html#supervised-learning"><i class="fa fa-check"></i><b>1.2.1</b> Supervised Learning</a></li>
 <li class="chapter" data-level="1.2.2" data-path="ml-overview.html"><a href="ml-overview.html#unsupervised-learning"><i class="fa fa-check"></i><b>1.2.2</b> Unsupervised Learning</a></li>
 </ul></li>
 <li class="chapter" data-level="1.3" data-path="ml-overview.html"><a href="ml-overview.html#open-questions"><i class="fa fa-check"></i><b>1.3</b> Open Questions</a></li>
-<li class="chapter" data-level="1.4" data-path="ml-overview.html"><a href="ml-overview.html#source"><i class="fa fa-check"></i><b>1.4</b> Source</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>2</b> Linear Regression</a><ul>
-<li class="chapter" data-level="2.1" data-path="linear-regression.html"><a href="linear-regression.html#reading"><i class="fa fa-check"></i><b>2.1</b> Reading</a></li>
+<li class="chapter" data-level="2" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>2</b> Linear Regression</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="linear-regression.html"><a href="linear-regression.html#r-setup-and-source"><i class="fa fa-check"></i><b>2.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="2.2" data-path="linear-regression.html"><a href="linear-regression.html#explanation-versus-prediction"><i class="fa fa-check"></i><b>2.2</b> Explanation versus Prediction</a></li>
-<li class="chapter" data-level="2.3" data-path="linear-regression.html"><a href="linear-regression.html#setup"><i class="fa fa-check"></i><b>2.3</b> Setup</a></li>
+<li class="chapter" data-level="2.3" data-path="linear-regression.html"><a href="linear-regression.html#task-setup"><i class="fa fa-check"></i><b>2.3</b> Task Setup</a></li>
 <li class="chapter" data-level="2.4" data-path="linear-regression.html"><a href="linear-regression.html#mathematical-setup"><i class="fa fa-check"></i><b>2.4</b> Mathematical Setup</a></li>
 <li class="chapter" data-level="2.5" data-path="linear-regression.html"><a href="linear-regression.html#linear-regression-models"><i class="fa fa-check"></i><b>2.5</b> Linear Regression Models</a></li>
 <li class="chapter" data-level="2.6" data-path="linear-regression.html"><a href="linear-regression.html#using-lm"><i class="fa fa-check"></i><b>2.6</b> Using <code>lm()</code></a></li>
 <li class="chapter" data-level="2.7" data-path="linear-regression.html"><a href="linear-regression.html#the-predict-function"><i class="fa fa-check"></i><b>2.7</b> The <code>predict()</code> Function</a></li>
 <li class="chapter" data-level="2.8" data-path="linear-regression.html"><a href="linear-regression.html#data-splitting"><i class="fa fa-check"></i><b>2.8</b> Data Splitting</a></li>
-<li class="chapter" data-level="2.9" data-path="linear-regression.html"><a href="linear-regression.html#regression-metrics"><i class="fa fa-check"></i><b>2.9</b> Regression Metrics</a><ul>
+<li class="chapter" data-level="2.9" data-path="linear-regression.html"><a href="linear-regression.html#regression-metrics"><i class="fa fa-check"></i><b>2.9</b> Regression Metrics</a>
+<ul>
 <li class="chapter" data-level="2.9.1" data-path="linear-regression.html"><a href="linear-regression.html#graphical-evaluation"><i class="fa fa-check"></i><b>2.9.1</b> Graphical Evaluation</a></li>
 </ul></li>
 <li class="chapter" data-level="2.10" data-path="linear-regression.html"><a href="linear-regression.html#example-simple-simulated-data"><i class="fa fa-check"></i><b>2.10</b> Example: “Simple” Simulated Data</a></li>
 <li class="chapter" data-level="2.11" data-path="linear-regression.html"><a href="linear-regression.html#example-diamonds-data"><i class="fa fa-check"></i><b>2.11</b> Example: Diamonds Data</a></li>
 <li class="chapter" data-level="2.12" data-path="linear-regression.html"><a href="linear-regression.html#example-credit-card-data"><i class="fa fa-check"></i><b>2.12</b> Example: Credit Card Data</a></li>
-<li class="chapter" data-level="2.13" data-path="linear-regression.html"><a href="linear-regression.html#source-1"><i class="fa fa-check"></i><b>2.13</b> Source</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html"><i class="fa fa-check"></i><b>3</b> Nonparametric Regression</a><ul>
-<li class="chapter" data-level="3.1" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#reading-1"><i class="fa fa-check"></i><b>3.1</b> Reading</a></li>
+<li class="chapter" data-level="3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html"><i class="fa fa-check"></i><b>3</b> Nonparametric Regression</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#r-setup-and-source-1"><i class="fa fa-check"></i><b>3.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="3.2" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#mathematical-setup-1"><i class="fa fa-check"></i><b>3.2</b> Mathematical Setup</a></li>
 <li class="chapter" data-level="3.3" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>3.3</b> k-Nearest Neighbors</a></li>
 <li class="chapter" data-level="3.4" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#decision-trees"><i class="fa fa-check"></i><b>3.4</b> Decision Trees</a></li>
 <li class="chapter" data-level="3.5" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#example-credit-card-data-1"><i class="fa fa-check"></i><b>3.5</b> Example: Credit Card Data</a></li>
-<li class="chapter" data-level="3.6" data-path="nonparametric-regression.html"><a href="nonparametric-regression.html#source-2"><i class="fa fa-check"></i><b>3.6</b> Source</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="bvt.html"><a href="bvt.html"><i class="fa fa-check"></i><b>4</b> Bias–Variance Tradeoff</a><ul>
-<li class="chapter" data-level="4.1" data-path="bvt.html"><a href="bvt.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>4.1</b> Reducible and Irreducible Error</a></li>
-<li class="chapter" data-level="4.2" data-path="bvt.html"><a href="bvt.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>4.2</b> Bias-Variance Decomposition</a></li>
-<li class="chapter" data-level="4.3" data-path="bvt.html"><a href="bvt.html#simulation"><i class="fa fa-check"></i><b>4.3</b> Simulation</a></li>
-<li class="chapter" data-level="4.4" data-path="bvt.html"><a href="bvt.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>4.4</b> Estimating Expected Prediction Error</a></li>
-<li class="chapter" data-level="4.5" data-path="bvt.html"><a href="bvt.html#source-3"><i class="fa fa-check"></i><b>4.5</b> Source</a></li>
+<li class="chapter" data-level="4" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html"><i class="fa fa-check"></i><b>4</b> The Bias–Variance Tradeoff</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#r-setup-and-source-2"><i class="fa fa-check"></i><b>4.1</b> R Setup and Source</a></li>
+<li class="chapter" data-level="4.2" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#the-regression-setup"><i class="fa fa-check"></i><b>4.2</b> The Regression Setup</a></li>
+<li class="chapter" data-level="4.3" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#reducible-and-irreducible-error"><i class="fa fa-check"></i><b>4.3</b> Reducible and Irreducible Error</a></li>
+<li class="chapter" data-level="4.4" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#bias-variance-decomposition"><i class="fa fa-check"></i><b>4.4</b> Bias-Variance Decomposition</a></li>
+<li class="chapter" data-level="4.5" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#using-simulation-to-estimate-bias-and-variance"><i class="fa fa-check"></i><b>4.5</b> Using Simulation to Estimate Bias and Variance</a></li>
+<li class="chapter" data-level="4.6" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#estimating-expected-prediction-error"><i class="fa fa-check"></i><b>4.6</b> Estimating Expected Prediction Error</a></li>
+<li class="chapter" data-level="4.7" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#model-flexibility"><i class="fa fa-check"></i><b>4.7</b> Model Flexibility</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#linear-models"><i class="fa fa-check"></i><b>4.7.1</b> Linear Models</a></li>
+<li class="chapter" data-level="4.7.2" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#k-nearest-neighbors-1"><i class="fa fa-check"></i><b>4.7.2</b> k-Nearest Neighbors</a></li>
+<li class="chapter" data-level="4.7.3" data-path="bias-variance-tradeoff.html"><a href="bias-variance-tradeoff.html#decision-trees-1"><i class="fa fa-check"></i><b>4.7.3</b> Decision Trees</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Regression Overview</a><ul>
-<li class="chapter" data-level="5.1" data-path="regression-overview.html"><a href="regression-overview.html#goal"><i class="fa fa-check"></i><b>5.1</b> Goal</a></li>
-<li class="chapter" data-level="5.2" data-path="regression-overview.html"><a href="regression-overview.html#strategy"><i class="fa fa-check"></i><b>5.2</b> Strategy</a></li>
-<li class="chapter" data-level="5.3" data-path="regression-overview.html"><a href="regression-overview.html#models"><i class="fa fa-check"></i><b>5.3</b> Models</a></li>
-<li class="chapter" data-level="5.4" data-path="regression-overview.html"><a href="regression-overview.html#model-flexibility"><i class="fa fa-check"></i><b>5.4</b> Model Flexibility</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="regression-overview.html"><a href="regression-overview.html"><i class="fa fa-check"></i><b>5</b> Regression Overview</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="regression-overview.html"><a href="regression-overview.html#the-goal"><i class="fa fa-check"></i><b>5.1</b> The Goal</a></li>
+<li class="chapter" data-level="5.2" data-path="regression-overview.html"><a href="regression-overview.html#general-strategy"><i class="fa fa-check"></i><b>5.2</b> General Strategy</a></li>
+<li class="chapter" data-level="5.3" data-path="regression-overview.html"><a href="regression-overview.html#aglorithms"><i class="fa fa-check"></i><b>5.3</b> Aglorithms</a></li>
+<li class="chapter" data-level="5.4" data-path="regression-overview.html"><a href="regression-overview.html#model-flexibility-1"><i class="fa fa-check"></i><b>5.4</b> Model Flexibility</a></li>
 <li class="chapter" data-level="5.5" data-path="regression-overview.html"><a href="regression-overview.html#overfitting"><i class="fa fa-check"></i><b>5.5</b> Overfitting</a></li>
 <li class="chapter" data-level="5.6" data-path="regression-overview.html"><a href="regression-overview.html#bias-variance-tradeoff"><i class="fa fa-check"></i><b>5.6</b> Bias-Variance Tradeoff</a></li>
-<li class="chapter" data-level="5.7" data-path="regression-overview.html"><a href="regression-overview.html#source-4"><i class="fa fa-check"></i><b>5.7</b> Source</a></li>
+<li class="chapter" data-level="5.7" data-path="regression-overview.html"><a href="regression-overview.html#no-free-lunch"><i class="fa fa-check"></i><b>5.7</b> No Free Lunch</a></li>
+<li class="chapter" data-level="5.8" data-path="regression-overview.html"><a href="regression-overview.html#curse-of-dimensionality"><i class="fa fa-check"></i><b>5.8</b> Curse of Dimensionality</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>6</b> Classification</a><ul>
-<li class="chapter" data-level="6.1" data-path="classification.html"><a href="classification.html#reading-2"><i class="fa fa-check"></i><b>6.1</b> Reading</a></li>
-<li class="chapter" data-level="6.2" data-path="classification.html"><a href="classification.html#classification-metrics"><i class="fa fa-check"></i><b>6.2</b> Classification Metrics</a></li>
-<li class="chapter" data-level="6.3" data-path="classification.html"><a href="classification.html#source-5"><i class="fa fa-check"></i><b>6.3</b> Source</a></li>
+<li class="chapter" data-level="6" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>6</b> Classification</a></li>
+<li class="chapter" data-level="7" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html"><i class="fa fa-check"></i><b>7</b> Nonparametric Classification</a></li>
+<li class="chapter" data-level="8" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>8</b> Logistic Regression</a></li>
+<li class="chapter" data-level="9" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>9</b> Binary Classification</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="binary-classification.html"><a href="binary-classification.html#r-setup-and-source-3"><i class="fa fa-check"></i><b>9.1</b> R Setup and Source</a></li>
+<li class="chapter" data-level="9.2" data-path="binary-classification.html"><a href="binary-classification.html#breast-cancer-data"><i class="fa fa-check"></i><b>9.2</b> Breast Cancer Data</a></li>
+<li class="chapter" data-level="9.3" data-path="binary-classification.html"><a href="binary-classification.html#confusion-matrix"><i class="fa fa-check"></i><b>9.3</b> Confusion Matrix</a></li>
+<li class="chapter" data-level="9.4" data-path="binary-classification.html"><a href="binary-classification.html#binary-classification-metrics"><i class="fa fa-check"></i><b>9.4</b> Binary Classification Metrics</a></li>
+<li class="chapter" data-level="9.5" data-path="binary-classification.html"><a href="binary-classification.html#probability-cutoff"><i class="fa fa-check"></i><b>9.5</b> Probability Cutoff</a></li>
+<li class="chapter" data-level="9.6" data-path="binary-classification.html"><a href="binary-classification.html#r-packages-and-function"><i class="fa fa-check"></i><b>9.6</b> R Packages and Function</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html"><i class="fa fa-check"></i><b>7</b> Nonparametric Classification</a><ul>
-<li class="chapter" data-level="7.1" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html#reading-3"><i class="fa fa-check"></i><b>7.1</b> Reading</a></li>
-<li class="chapter" data-level="7.2" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html#source-6"><i class="fa fa-check"></i><b>7.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>8</b> Logistic Regression</a><ul>
-<li class="chapter" data-level="8.1" data-path="logistic-regression.html"><a href="logistic-regression.html#reading-4"><i class="fa fa-check"></i><b>8.1</b> Reading</a></li>
-<li class="chapter" data-level="8.2" data-path="logistic-regression.html"><a href="logistic-regression.html#source-7"><i class="fa fa-check"></i><b>8.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>9</b> Binary Classification</a><ul>
-<li class="chapter" data-level="9.1" data-path="binary-classification.html"><a href="binary-classification.html#reading-5"><i class="fa fa-check"></i><b>9.1</b> Reading</a></li>
-<li class="chapter" data-level="9.2" data-path="binary-classification.html"><a href="binary-classification.html#source-8"><i class="fa fa-check"></i><b>9.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="generative.html"><a href="generative.html"><i class="fa fa-check"></i><b>10</b> Generative Models</a><ul>
-<li class="chapter" data-level="10.1" data-path="generative.html"><a href="generative.html#reading-6"><i class="fa fa-check"></i><b>10.1</b> Reading</a></li>
+<li class="chapter" data-level="10" data-path="generative.html"><a href="generative.html"><i class="fa fa-check"></i><b>10</b> Generative Models</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="generative.html"><a href="generative.html#r-setup-and-source-4"><i class="fa fa-check"></i><b>10.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="10.2" data-path="generative.html"><a href="generative.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>10.2</b> Linear Discriminant Analysis</a></li>
 <li class="chapter" data-level="10.3" data-path="generative.html"><a href="generative.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>10.3</b> Quadratic Discriminant Analysis</a></li>
 <li class="chapter" data-level="10.4" data-path="generative.html"><a href="generative.html#naive-bayes"><i class="fa fa-check"></i><b>10.4</b> Naive Bayes</a></li>
-<li class="chapter" data-level="10.5" data-path="generative.html"><a href="generative.html#discrete-inputs"><i class="fa fa-check"></i><b>10.5</b> Discrete Inputs</a></li>
-<li class="chapter" data-level="10.6" data-path="generative.html"><a href="generative.html#source-9"><i class="fa fa-check"></i><b>10.6</b> Source</a></li>
+<li class="chapter" data-level="10.5" data-path="generative.html"><a href="generative.html#categorical-features"><i class="fa fa-check"></i><b>10.5</b> Categorical Features</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="supervised-i.html"><a href="supervised-i.html"><i class="fa fa-check"></i><b>11</b> Supervised Learning Overview I</a><ul>
-<li class="chapter" data-level="11.1" data-path="supervised-i.html"><a href="supervised-i.html#reading-7"><i class="fa fa-check"></i><b>11.1</b> Reading</a></li>
-<li class="chapter" data-level="11.2" data-path="supervised-i.html"><a href="supervised-i.html#source-10"><i class="fa fa-check"></i><b>11.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="12" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>12</b> Simulation</a><ul>
-<li class="chapter" data-level="12.1" data-path="simulation.html"><a href="simulation.html#reading-8"><i class="fa fa-check"></i><b>12.1</b> Reading</a></li>
-<li class="chapter" data-level="12.2" data-path="simulation.html"><a href="simulation.html#source-11"><i class="fa fa-check"></i><b>12.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="13" data-path="bootstrap.html"><a href="bootstrap.html"><i class="fa fa-check"></i><b>13</b> Bootstrap Resampling</a><ul>
-<li class="chapter" data-level="13.1" data-path="bootstrap.html"><a href="bootstrap.html#reading-9"><i class="fa fa-check"></i><b>13.1</b> Reading</a></li>
-<li class="chapter" data-level="13.2" data-path="bootstrap.html"><a href="bootstrap.html#source-12"><i class="fa fa-check"></i><b>13.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="14" data-path="cross-validation.html"><a href="cross-validation.html"><i class="fa fa-check"></i><b>14</b> Cross-Validation</a><ul>
-<li class="chapter" data-level="14.1" data-path="cross-validation.html"><a href="cross-validation.html#reading-10"><i class="fa fa-check"></i><b>14.1</b> Reading</a></li>
-<li class="chapter" data-level="14.2" data-path="cross-validation.html"><a href="cross-validation.html#source-13"><i class="fa fa-check"></i><b>14.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="15" data-path="supervised-ii.html"><a href="supervised-ii.html"><i class="fa fa-check"></i><b>15</b> Supervised Learning Overview II</a><ul>
-<li class="chapter" data-level="15.1" data-path="supervised-ii.html"><a href="supervised-ii.html#classification-2"><i class="fa fa-check"></i><b>15.1</b> Classification</a><ul>
-<li class="chapter" data-level="15.1.1" data-path="supervised-ii.html"><a href="supervised-ii.html#tuning"><i class="fa fa-check"></i><b>15.1.1</b> Tuning</a></li>
-</ul></li>
-<li class="chapter" data-level="15.2" data-path="supervised-ii.html"><a href="supervised-ii.html#regression-1"><i class="fa fa-check"></i><b>15.2</b> Regression</a><ul>
-<li class="chapter" data-level="15.2.1" data-path="supervised-ii.html"><a href="supervised-ii.html#methods"><i class="fa fa-check"></i><b>15.2.1</b> Methods</a></li>
-</ul></li>
-<li class="chapter" data-level="15.3" data-path="supervised-ii.html"><a href="supervised-ii.html#external-links"><i class="fa fa-check"></i><b>15.3</b> External Links</a></li>
-<li class="chapter" data-level="15.4" data-path="supervised-ii.html"><a href="supervised-ii.html#rmarkdown"><i class="fa fa-check"></i><b>15.4</b> <code>rmarkdown</code></a></li>
-</ul></li>
-<li class="chapter" data-level="16" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>16</b> Regularization</a><ul>
-<li class="chapter" data-level="16.1" data-path="regularization.html"><a href="regularization.html#reading-11"><i class="fa fa-check"></i><b>16.1</b> Reading</a></li>
-<li class="chapter" data-level="16.2" data-path="regularization.html"><a href="regularization.html#source-14"><i class="fa fa-check"></i><b>16.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="17" data-path="dimension-reduction.html"><a href="dimension-reduction.html"><i class="fa fa-check"></i><b>17</b> Dimension Reduction</a><ul>
-<li class="chapter" data-level="17.1" data-path="dimension-reduction.html"><a href="dimension-reduction.html#reading-12"><i class="fa fa-check"></i><b>17.1</b> Reading</a></li>
-<li class="chapter" data-level="17.2" data-path="dimension-reduction.html"><a href="dimension-reduction.html#source-15"><i class="fa fa-check"></i><b>17.2</b> Source</a></li>
-</ul></li>
-<li class="chapter" data-level="18" data-path="ensemble-methods.html"><a href="ensemble-methods.html"><i class="fa fa-check"></i><b>18</b> Ensemble Methods</a><ul>
-<li class="chapter" data-level="18.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#reading-13"><i class="fa fa-check"></i><b>18.1</b> Reading</a></li>
-<li class="chapter" data-level="18.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#source-16"><i class="fa fa-check"></i><b>18.2</b> Source</a></li>
+<li class="chapter" data-level="11" data-path="cross-validation.html"><a href="cross-validation.html"><i class="fa fa-check"></i><b>11</b> Cross-Validation</a></li>
+<li class="chapter" data-level="12" data-path="regularization.html"><a href="regularization.html"><i class="fa fa-check"></i><b>12</b> Regularization</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="regularization.html"><a href="regularization.html#ridge-regression"><i class="fa fa-check"></i><b>12.1</b> Ridge Regression</a></li>
+<li class="chapter" data-level="12.2" data-path="regularization.html"><a href="regularization.html#lasso"><i class="fa fa-check"></i><b>12.2</b> Lasso</a></li>
+<li class="chapter" data-level="12.3" data-path="regularization.html"><a href="regularization.html#broom"><i class="fa fa-check"></i><b>12.3</b> <code>broom</code></a></li>
+<li class="chapter" data-level="12.4" data-path="regularization.html"><a href="regularization.html#simulated-data-p-n"><i class="fa fa-check"></i><b>12.4</b> Simulated Data, <span class="math inline">\(p &gt; n\)</span></a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="additional-reading.html"><a href="additional-reading.html"><i class="fa fa-check"></i><b>A</b> Additional Reading</a><ul>
+<li class="chapter" data-level="A" data-path="additional-reading.html"><a href="additional-reading.html"><i class="fa fa-check"></i><b>A</b> Additional Reading</a>
+<ul>
 <li class="chapter" data-level="A.1" data-path="additional-reading.html"><a href="additional-reading.html#books"><i class="fa fa-check"></i><b>A.1</b> Books</a></li>
 <li class="chapter" data-level="A.2" data-path="additional-reading.html"><a href="additional-reading.html#papers"><i class="fa fa-check"></i><b>A.2</b> Papers</a></li>
 <li class="chapter" data-level="A.3" data-path="additional-reading.html"><a href="additional-reading.html#blog-posts"><i class="fa fa-check"></i><b>A.3</b> Blog Posts</a></li>
 <li class="chapter" data-level="A.4" data-path="additional-reading.html"><a href="additional-reading.html#miscellaneous"><i class="fa fa-check"></i><b>A.4</b> Miscellaneous</a></li>
 </ul></li>
-<li class="chapter" data-level="B" data-path="ten-rules.html"><a href="ten-rules.html"><i class="fa fa-check"></i><b>B</b> Ten Simple Rules for Success in STAT 432</a><ul>
-<li class="chapter" data-level="B.1" data-path="ten-rules.html"><a href="ten-rules.html#rule-1-there-are-no-rules"><i class="fa fa-check"></i><b>B.1</b> Rule 1: There Are No Rules</a></li>
-<li class="chapter" data-level="B.2" data-path="ten-rules.html"><a href="ten-rules.html#rule-2-read-the-syllabus"><i class="fa fa-check"></i><b>B.2</b> Rule 2: Read the Syllabus</a></li>
-<li class="chapter" data-level="B.3" data-path="ten-rules.html"><a href="ten-rules.html#rule-3-previous-learning-is-not-gospel"><i class="fa fa-check"></i><b>B.3</b> Rule 3: Previous Learning is Not Gospel</a></li>
-<li class="chapter" data-level="B.4" data-path="ten-rules.html"><a href="ten-rules.html#rule-4-all-statements-are-true"><i class="fa fa-check"></i><b>B.4</b> Rule 4: All Statements Are True</a></li>
-<li class="chapter" data-level="B.5" data-path="ten-rules.html"><a href="ten-rules.html#rule-5-dont-miss-the-forest-for-the-trees"><i class="fa fa-check"></i><b>B.5</b> Rule 5: Don’t Miss The Forest For The Trees</a></li>
-<li class="chapter" data-level="B.6" data-path="ten-rules.html"><a href="ten-rules.html#rule-6-you-will-struggle"><i class="fa fa-check"></i><b>B.6</b> Rule 6: You Will Struggle</a></li>
-<li class="chapter" data-level="B.7" data-path="ten-rules.html"><a href="ten-rules.html#rule-7-keep-it-simple"><i class="fa fa-check"></i><b>B.7</b> Rule 7: Keep It Simple</a></li>
-<li class="chapter" data-level="B.8" data-path="ten-rules.html"><a href="ten-rules.html#rule-8-rtfm"><i class="fa fa-check"></i><b>B.8</b> Rule 8: RTFM</a></li>
-<li class="chapter" data-level="B.9" data-path="ten-rules.html"><a href="ten-rules.html#rule-9-there-are-no-stupid-questions"><i class="fa fa-check"></i><b>B.9</b> Rule 9: There Are No Stupid Questions</a></li>
-<li class="chapter" data-level="B.10" data-path="ten-rules.html"><a href="ten-rules.html#rule-10-learn-by-doing"><i class="fa fa-check"></i><b>B.10</b> Rule 10: Learn By Doing</a></li>
-<li class="chapter" data-level="B.11" data-path="ten-rules.html"><a href="ten-rules.html#conclusion"><i class="fa fa-check"></i><b>B.11</b> Conclusion</a></li>
-<li class="chapter" data-level="B.12" data-path="ten-rules.html"><a href="ten-rules.html#source-17"><i class="fa fa-check"></i><b>B.12</b> Source</a></li>
+<li class="chapter" data-level="B" data-path="computing.html"><a href="computing.html"><i class="fa fa-check"></i><b>B</b> Computing</a>
+<ul>
+<li class="chapter" data-level="B.1" data-path="computing.html"><a href="computing.html#reading"><i class="fa fa-check"></i><b>B.1</b> Reading</a></li>
+<li class="chapter" data-level="B.2" data-path="computing.html"><a href="computing.html#additional-resources"><i class="fa fa-check"></i><b>B.2</b> Additional Resources</a>
+<ul>
+<li class="chapter" data-level="B.2.1" data-path="computing.html"><a href="computing.html#r"><i class="fa fa-check"></i><b>B.2.1</b> R</a></li>
+<li class="chapter" data-level="B.2.2" data-path="computing.html"><a href="computing.html#rstudio"><i class="fa fa-check"></i><b>B.2.2</b> RStudio</a></li>
+<li class="chapter" data-level="B.2.3" data-path="computing.html"><a href="computing.html#r-markdown"><i class="fa fa-check"></i><b>B.2.3</b> R Markdown</a></li>
 </ul></li>
-<li class="chapter" data-level="C" data-path="computing.html"><a href="computing.html"><i class="fa fa-check"></i><b>C</b> Computing</a><ul>
-<li class="chapter" data-level="C.1" data-path="computing.html"><a href="computing.html#reading-14"><i class="fa fa-check"></i><b>C.1</b> Reading</a></li>
-<li class="chapter" data-level="C.2" data-path="computing.html"><a href="computing.html#additional-resources"><i class="fa fa-check"></i><b>C.2</b> Additional Resources</a><ul>
-<li class="chapter" data-level="C.2.1" data-path="computing.html"><a href="computing.html#r"><i class="fa fa-check"></i><b>C.2.1</b> R</a></li>
-<li class="chapter" data-level="C.2.2" data-path="computing.html"><a href="computing.html#rstudio"><i class="fa fa-check"></i><b>C.2.2</b> RStudio</a></li>
-<li class="chapter" data-level="C.2.3" data-path="computing.html"><a href="computing.html#r-markdown"><i class="fa fa-check"></i><b>C.2.3</b> R Markdown</a></li>
+<li class="chapter" data-level="B.3" data-path="computing.html"><a href="computing.html#stat-432-idioms"><i class="fa fa-check"></i><b>B.3</b> STAT 432 Idioms</a>
+<ul>
+<li class="chapter" data-level="B.3.1" data-path="computing.html"><a href="computing.html#dont-restore-old-workspaces"><i class="fa fa-check"></i><b>B.3.1</b> Don’t Restore Old Workspaces</a></li>
+<li class="chapter" data-level="B.3.2" data-path="computing.html"><a href="computing.html#r-versions"><i class="fa fa-check"></i><b>B.3.2</b> R Versions</a></li>
+<li class="chapter" data-level="B.3.3" data-path="computing.html"><a href="computing.html#packages-1"><i class="fa fa-check"></i><b>B.3.3</b> Packages</a></li>
+<li class="chapter" data-level="B.3.4" data-path="computing.html"><a href="computing.html#code-style"><i class="fa fa-check"></i><b>B.3.4</b> Code Style</a></li>
+<li class="chapter" data-level="B.3.5" data-path="computing.html"><a href="computing.html#reference-style"><i class="fa fa-check"></i><b>B.3.5</b> Reference Style</a></li>
+<li class="chapter" data-level="B.3.6" data-path="computing.html"><a href="computing.html#stat-432-r-style-overrides"><i class="fa fa-check"></i><b>B.3.6</b> STAT 432 R Style Overrides</a></li>
+<li class="chapter" data-level="B.3.7" data-path="computing.html"><a href="computing.html#stat-432-r-markdown-style"><i class="fa fa-check"></i><b>B.3.7</b> STAT 432 R Markdown Style</a></li>
+<li class="chapter" data-level="B.3.8" data-path="computing.html"><a href="computing.html#style-heuristics"><i class="fa fa-check"></i><b>B.3.8</b> Style Heuristics</a></li>
+<li class="chapter" data-level="B.3.9" data-path="computing.html"><a href="computing.html#objects-and-functions"><i class="fa fa-check"></i><b>B.3.9</b> Objects and Functions</a></li>
+<li class="chapter" data-level="B.3.10" data-path="computing.html"><a href="computing.html#print-versus-return"><i class="fa fa-check"></i><b>B.3.10</b> Print versus Return</a></li>
+<li class="chapter" data-level="B.3.11" data-path="computing.html"><a href="computing.html#help"><i class="fa fa-check"></i><b>B.3.11</b> Help</a></li>
+<li class="chapter" data-level="B.3.12" data-path="computing.html"><a href="computing.html#keyboard-shortcuts"><i class="fa fa-check"></i><b>B.3.12</b> Keyboard Shortcuts</a></li>
 </ul></li>
-<li class="chapter" data-level="C.3" data-path="computing.html"><a href="computing.html#stat-432-idioms"><i class="fa fa-check"></i><b>C.3</b> STAT 432 Idioms</a><ul>
-<li class="chapter" data-level="C.3.1" data-path="computing.html"><a href="computing.html#dont-restore-old-workspaces"><i class="fa fa-check"></i><b>C.3.1</b> Don’t Restore Old Workspaces</a></li>
-<li class="chapter" data-level="C.3.2" data-path="computing.html"><a href="computing.html#r-versions"><i class="fa fa-check"></i><b>C.3.2</b> R Versions</a></li>
-<li class="chapter" data-level="C.3.3" data-path="computing.html"><a href="computing.html#code-style"><i class="fa fa-check"></i><b>C.3.3</b> Code Style</a></li>
-<li class="chapter" data-level="C.3.4" data-path="computing.html"><a href="computing.html#reference-style"><i class="fa fa-check"></i><b>C.3.4</b> Reference Style</a></li>
-<li class="chapter" data-level="C.3.5" data-path="computing.html"><a href="computing.html#stat-432-r-style-overrides"><i class="fa fa-check"></i><b>C.3.5</b> STAT 432 R Style Overrides</a></li>
-<li class="chapter" data-level="C.3.6" data-path="computing.html"><a href="computing.html#stat-432-r-markdown-style"><i class="fa fa-check"></i><b>C.3.6</b> STAT 432 R Markdown Style</a></li>
-<li class="chapter" data-level="C.3.7" data-path="computing.html"><a href="computing.html#style-heuristics"><i class="fa fa-check"></i><b>C.3.7</b> Style Heuristics</a></li>
-<li class="chapter" data-level="C.3.8" data-path="computing.html"><a href="computing.html#objects-and-functions"><i class="fa fa-check"></i><b>C.3.8</b> Objects and Functions</a></li>
-<li class="chapter" data-level="C.3.9" data-path="computing.html"><a href="computing.html#print-versus-return"><i class="fa fa-check"></i><b>C.3.9</b> Print versus Return</a></li>
-<li class="chapter" data-level="C.3.10" data-path="computing.html"><a href="computing.html#help"><i class="fa fa-check"></i><b>C.3.10</b> Help</a></li>
-<li class="chapter" data-level="C.3.11" data-path="computing.html"><a href="computing.html#keyboard-shortcuts"><i class="fa fa-check"></i><b>C.3.11</b> Keyboard Shortcuts</a></li>
-<li class="chapter" data-level="C.3.12" data-path="computing.html"><a href="computing.html#common-issues"><i class="fa fa-check"></i><b>C.3.12</b> Common Issues</a></li>
 </ul></li>
-<li class="chapter" data-level="C.4" data-path="computing.html"><a href="computing.html#source-18"><i class="fa fa-check"></i><b>C.4</b> Source</a></li>
+<li class="chapter" data-level="C" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>C</b> Probability</a>
+<ul>
+<li class="chapter" data-level="C.1" data-path="probability.html"><a href="probability.html#reading-1"><i class="fa fa-check"></i><b>C.1</b> Reading</a></li>
+<li class="chapter" data-level="C.2" data-path="probability.html"><a href="probability.html#probability-models"><i class="fa fa-check"></i><b>C.2</b> Probability Models</a></li>
+<li class="chapter" data-level="C.3" data-path="probability.html"><a href="probability.html#probability-axioms"><i class="fa fa-check"></i><b>C.3</b> Probability Axioms</a></li>
+<li class="chapter" data-level="C.4" data-path="probability.html"><a href="probability.html#probability-rules"><i class="fa fa-check"></i><b>C.4</b> Probability Rules</a></li>
+<li class="chapter" data-level="C.5" data-path="probability.html"><a href="probability.html#random-variables"><i class="fa fa-check"></i><b>C.5</b> Random Variables</a>
+<ul>
+<li class="chapter" data-level="C.5.1" data-path="probability.html"><a href="probability.html#distributions"><i class="fa fa-check"></i><b>C.5.1</b> Distributions</a></li>
+<li class="chapter" data-level="C.5.2" data-path="probability.html"><a href="probability.html#discrete-random-variables"><i class="fa fa-check"></i><b>C.5.2</b> Discrete Random Variables</a></li>
+<li class="chapter" data-level="C.5.3" data-path="probability.html"><a href="probability.html#continuous-random-variables"><i class="fa fa-check"></i><b>C.5.3</b> Continuous Random Variables</a></li>
+<li class="chapter" data-level="C.5.4" data-path="probability.html"><a href="probability.html#distributions-in-r"><i class="fa fa-check"></i><b>C.5.4</b> Distributions in R</a></li>
+<li class="chapter" data-level="C.5.5" data-path="probability.html"><a href="probability.html#several-random-variables"><i class="fa fa-check"></i><b>C.5.5</b> Several Random Variables</a></li>
 </ul></li>
-<li class="chapter" data-level="D" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>D</b> Probability</a><ul>
-<li class="chapter" data-level="D.1" data-path="probability.html"><a href="probability.html#reading-15"><i class="fa fa-check"></i><b>D.1</b> Reading</a></li>
-<li class="chapter" data-level="D.2" data-path="probability.html"><a href="probability.html#probability-models"><i class="fa fa-check"></i><b>D.2</b> Probability Models</a></li>
-<li class="chapter" data-level="D.3" data-path="probability.html"><a href="probability.html#probability-axioms"><i class="fa fa-check"></i><b>D.3</b> Probability Axioms</a></li>
-<li class="chapter" data-level="D.4" data-path="probability.html"><a href="probability.html#probability-rules"><i class="fa fa-check"></i><b>D.4</b> Probability Rules</a></li>
-<li class="chapter" data-level="D.5" data-path="probability.html"><a href="probability.html#random-variables"><i class="fa fa-check"></i><b>D.5</b> Random Variables</a><ul>
-<li class="chapter" data-level="D.5.1" data-path="probability.html"><a href="probability.html#distributions"><i class="fa fa-check"></i><b>D.5.1</b> Distributions</a></li>
-<li class="chapter" data-level="D.5.2" data-path="probability.html"><a href="probability.html#discrete-random-variables"><i class="fa fa-check"></i><b>D.5.2</b> Discrete Random Variables</a></li>
-<li class="chapter" data-level="D.5.3" data-path="probability.html"><a href="probability.html#continuous-random-variables"><i class="fa fa-check"></i><b>D.5.3</b> Continuous Random Variables</a></li>
-<li class="chapter" data-level="D.5.4" data-path="probability.html"><a href="probability.html#distributions-in-r"><i class="fa fa-check"></i><b>D.5.4</b> Distributions in R</a></li>
-<li class="chapter" data-level="D.5.5" data-path="probability.html"><a href="probability.html#several-random-variables"><i class="fa fa-check"></i><b>D.5.5</b> Several Random Variables</a></li>
+<li class="chapter" data-level="C.6" data-path="probability.html"><a href="probability.html#expectations"><i class="fa fa-check"></i><b>C.6</b> Expectations</a></li>
+<li class="chapter" data-level="C.7" data-path="probability.html"><a href="probability.html#likelihood"><i class="fa fa-check"></i><b>C.7</b> Likelihood</a></li>
+<li class="chapter" data-level="C.8" data-path="probability.html"><a href="probability.html#additional-references"><i class="fa fa-check"></i><b>C.8</b> Additional References</a>
+<ul>
+<li class="chapter" data-level="C.8.1" data-path="probability.html"><a href="probability.html#videos"><i class="fa fa-check"></i><b>C.8.1</b> Videos</a></li>
 </ul></li>
-<li class="chapter" data-level="D.6" data-path="probability.html"><a href="probability.html#expectations"><i class="fa fa-check"></i><b>D.6</b> Expectations</a></li>
-<li class="chapter" data-level="D.7" data-path="probability.html"><a href="probability.html#likelihood"><i class="fa fa-check"></i><b>D.7</b> Likelihood</a></li>
-<li class="chapter" data-level="D.8" data-path="probability.html"><a href="probability.html#references"><i class="fa fa-check"></i><b>D.8</b> References</a><ul>
-<li class="chapter" data-level="D.8.1" data-path="probability.html"><a href="probability.html#videos"><i class="fa fa-check"></i><b>D.8.1</b> Videos</a></li>
 </ul></li>
-<li class="chapter" data-level="D.9" data-path="probability.html"><a href="probability.html#source-19"><i class="fa fa-check"></i><b>D.9</b> Source</a></li>
+<li class="chapter" data-level="D" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>D</b> Statistics</a>
+<ul>
+<li class="chapter" data-level="D.1" data-path="statistics.html"><a href="statistics.html#reading-2"><i class="fa fa-check"></i><b>D.1</b> Reading</a></li>
+<li class="chapter" data-level="D.2" data-path="statistics.html"><a href="statistics.html#statistics-1"><i class="fa fa-check"></i><b>D.2</b> Statistics</a></li>
+<li class="chapter" data-level="D.3" data-path="statistics.html"><a href="statistics.html#estimators"><i class="fa fa-check"></i><b>D.3</b> Estimators</a>
+<ul>
+<li class="chapter" data-level="D.3.1" data-path="statistics.html"><a href="statistics.html#properties"><i class="fa fa-check"></i><b>D.3.1</b> Properties</a></li>
+<li class="chapter" data-level="D.3.2" data-path="statistics.html"><a href="statistics.html#example-mse-of-an-estimator"><i class="fa fa-check"></i><b>D.3.2</b> Example: MSE of an Estimator</a></li>
+<li class="chapter" data-level="D.3.3" data-path="statistics.html"><a href="statistics.html#estimation-methods"><i class="fa fa-check"></i><b>D.3.3</b> Estimation Methods</a></li>
+<li class="chapter" data-level="D.3.4" data-path="statistics.html"><a href="statistics.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>D.3.4</b> Maximum Likelihood Estimation</a></li>
+<li class="chapter" data-level="D.3.5" data-path="statistics.html"><a href="statistics.html#method-of-moments"><i class="fa fa-check"></i><b>D.3.5</b> Method of Moments</a></li>
+<li class="chapter" data-level="D.3.6" data-path="statistics.html"><a href="statistics.html#empirical-distribution-function"><i class="fa fa-check"></i><b>D.3.6</b> Empirical Distribution Function</a></li>
 </ul></li>
-<li class="chapter" data-level="E" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>E</b> Statistics</a><ul>
-<li class="chapter" data-level="E.1" data-path="statistics.html"><a href="statistics.html#reading-16"><i class="fa fa-check"></i><b>E.1</b> Reading</a></li>
-<li class="chapter" data-level="E.2" data-path="statistics.html"><a href="statistics.html#statistics-1"><i class="fa fa-check"></i><b>E.2</b> Statistics</a></li>
-<li class="chapter" data-level="E.3" data-path="statistics.html"><a href="statistics.html#estimators"><i class="fa fa-check"></i><b>E.3</b> Estimators</a><ul>
-<li class="chapter" data-level="E.3.1" data-path="statistics.html"><a href="statistics.html#properties"><i class="fa fa-check"></i><b>E.3.1</b> Properties</a></li>
-<li class="chapter" data-level="E.3.2" data-path="statistics.html"><a href="statistics.html#example-mse-of-an-estimator"><i class="fa fa-check"></i><b>E.3.2</b> Example: MSE of an Estimator</a></li>
-<li class="chapter" data-level="E.3.3" data-path="statistics.html"><a href="statistics.html#estimation-methods"><i class="fa fa-check"></i><b>E.3.3</b> Estimation Methods</a></li>
-<li class="chapter" data-level="E.3.4" data-path="statistics.html"><a href="statistics.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>E.3.4</b> Maximum Likelihood Estimation</a></li>
-<li class="chapter" data-level="E.3.5" data-path="statistics.html"><a href="statistics.html#method-of-moments"><i class="fa fa-check"></i><b>E.3.5</b> Method of Moments</a></li>
-<li class="chapter" data-level="E.3.6" data-path="statistics.html"><a href="statistics.html#empirical-distribution-function"><i class="fa fa-check"></i><b>E.3.6</b> Empirical Distribution Function</a></li>
-</ul></li>
-<li class="chapter" data-level="E.4" data-path="statistics.html"><a href="statistics.html#source-20"><i class="fa fa-check"></i><b>E.4</b> Source</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -359,38 +336,1085 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="regularization" class="section level1">
-<h1><span class="header-section-number">Chapter 16</span> Regularization</h1>
+<div id="regularization" class="section level1" number="12">
+<h1><span class="header-section-number">Chapter 12</span> Regularization</h1>
 <hr />
-<p>In this chapter…</p>
-<hr />
-<div id="reading-11" class="section level2">
-<h2><span class="header-section-number">16.1</span> Reading</h2>
-<ul>
-<li><strong>Required:</strong> ???</li>
-</ul>
-<hr />
-<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb314-1" data-line-number="1"><span class="kw">library</span>(<span class="st">&quot;tidyverse&quot;</span>)</a></code></pre></div>
-<hr />
-<p>TBD</p>
-<hr />
+<p><strong>Chapter Status:</strong> Currently this chapter is very sparse. It essentially only expands upon an example discussed in ISL, thus only illustrates usage of the methods. Mathematical and conceptual details of the methods will be added later.</p>
+<p>We will use the <code>Hitters</code> dataset from the <code>ISLR</code> package to explore two shrinkage methods: <strong>ridge regression</strong> and <strong>lasso</strong>. These are otherwise known as <strong>penalized regression</strong> methods.</p>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="regularization.html#cb316-1"></a><span class="kw">data</span>(Hitters, <span class="dt">package =</span> <span class="st">&quot;ISLR&quot;</span>)</span></code></pre></div>
+<p>This dataset has some missing data in the response <code>Salaray</code>. We use the <code>na.omit()</code> function to clean the dataset for ease-of-use.</p>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="regularization.html#cb317-1"></a><span class="kw">sum</span>(<span class="kw">is.na</span>(Hitters))</span></code></pre></div>
+<pre><code>## [1] 59</code></pre>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="regularization.html#cb319-1"></a><span class="kw">sum</span>(<span class="kw">is.na</span>(Hitters<span class="op">$</span>Salary))</span></code></pre></div>
+<pre><code>## [1] 59</code></pre>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="regularization.html#cb321-1"></a>Hitters =<span class="st"> </span><span class="kw">na.omit</span>(Hitters)</span>
+<span id="cb321-2"><a href="regularization.html#cb321-2"></a><span class="kw">sum</span>(<span class="kw">is.na</span>(Hitters))</span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<p>The feature variables are offensive and defensive statistics for a number of baseball players.</p>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="regularization.html#cb323-1"></a><span class="kw">names</span>(Hitters)</span></code></pre></div>
+<pre><code>##  [1] &quot;AtBat&quot;     &quot;Hits&quot;      &quot;HmRun&quot;     &quot;Runs&quot;      &quot;RBI&quot;       &quot;Walks&quot;    
+##  [7] &quot;Years&quot;     &quot;CAtBat&quot;    &quot;CHits&quot;     &quot;CHmRun&quot;    &quot;CRuns&quot;     &quot;CRBI&quot;     
+## [13] &quot;CWalks&quot;    &quot;League&quot;    &quot;Division&quot;  &quot;PutOuts&quot;   &quot;Assists&quot;   &quot;Errors&quot;   
+## [19] &quot;Salary&quot;    &quot;NewLeague&quot;</code></pre>
+<p>We use the <code>glmnet()</code> and <code>cv.glmnet()</code> functions from the <code>glmnet</code> package to fit penalized regressions.</p>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="regularization.html#cb325-1"></a><span class="kw">library</span>(glmnet)</span></code></pre></div>
+<p>Unfortunately, the <code>glmnet</code> function does not allow the use of model formulas, so we setup the data for ease of use with <code>glmnet</code>. Eventually we will use <code>train()</code> from <code>caret</code> which does allow for fitting penalized regression with the formula syntax, but to explore some of the details, we first work with the functions from <code>glmnet</code> directly.</p>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="regularization.html#cb326-1"></a>X =<span class="st"> </span><span class="kw">model.matrix</span>(Salary <span class="op">~</span><span class="st"> </span>., Hitters)[, <span class="dv">-1</span>]</span>
+<span id="cb326-2"><a href="regularization.html#cb326-2"></a>y =<span class="st"> </span>Hitters<span class="op">$</span>Salary</span></code></pre></div>
+<p>Note, we’re being lazy and just using the full dataset as the training dataset.</p>
+<p>First, we fit an ordinary linear regression, and note the size of the features’ coefficients, and features’ coefficients squared. (The two penalties we will use.)</p>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="regularization.html#cb327-1"></a>fit =<span class="st"> </span><span class="kw">lm</span>(Salary <span class="op">~</span><span class="st"> </span>., Hitters)</span>
+<span id="cb327-2"><a href="regularization.html#cb327-2"></a><span class="kw">coef</span>(fit)</span></code></pre></div>
+<pre><code>##  (Intercept)        AtBat         Hits        HmRun         Runs          RBI 
+##  163.1035878   -1.9798729    7.5007675    4.3308829   -2.3762100   -1.0449620 
+##        Walks        Years       CAtBat        CHits       CHmRun        CRuns 
+##    6.2312863   -3.4890543   -0.1713405    0.1339910   -0.1728611    1.4543049 
+##         CRBI       CWalks      LeagueN    DivisionW      PutOuts      Assists 
+##    0.8077088   -0.8115709   62.5994230 -116.8492456    0.2818925    0.3710692 
+##       Errors   NewLeagueN 
+##   -3.3607605  -24.7623251</code></pre>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="regularization.html#cb329-1"></a><span class="kw">sum</span>(<span class="kw">abs</span>(<span class="kw">coef</span>(fit)[<span class="op">-</span><span class="dv">1</span>]))</span></code></pre></div>
+<pre><code>## [1] 238.7295</code></pre>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="regularization.html#cb331-1"></a><span class="kw">sum</span>(<span class="kw">coef</span>(fit)[<span class="op">-</span><span class="dv">1</span>] <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 18337.3</code></pre>
+<div id="ridge-regression" class="section level2" number="12.1">
+<h2><span class="header-section-number">12.1</span> Ridge Regression</h2>
+<p>We first illustrate <strong>ridge regression</strong>, which can be fit using <code>glmnet()</code> with <code>alpha = 0</code> and seeks to minimize</p>
+<p><span class="math display">\[
+\sum_{i=1}^{n} \left( y_i - \beta_0 - \sum_{j=1}^{p} \beta_j x_{ij}    \right) ^ 2 + \lambda \sum_{j=1}^{p} \beta_j^2 .
+\]</span></p>
+<p>Notice that the intercept is <strong>not</strong> penalized. Also, note that that ridge regression is <strong>not</strong> scale invariant like the usual unpenalized regression. Thankfully, <code>glmnet()</code> takes care of this internally. It automatically standardizes predictors for fitting, then reports fitted coefficient using the original scale.</p>
+<p>The two plots illustrate how much the coefficients are penalized for different values of <span class="math inline">\(\lambda\)</span>. Notice none of the coefficients are forced to be zero.</p>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="regularization.html#cb333-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb333-2"><a href="regularization.html#cb333-2"></a>fit_ridge =<span class="st"> </span><span class="kw">glmnet</span>(X, y, <span class="dt">alpha =</span> <span class="dv">0</span>)</span>
+<span id="cb333-3"><a href="regularization.html#cb333-3"></a><span class="kw">plot</span>(fit_ridge)</span>
+<span id="cb333-4"><a href="regularization.html#cb333-4"></a><span class="kw">plot</span>(fit_ridge, <span class="dt">xvar =</span> <span class="st">&quot;lambda&quot;</span>, <span class="dt">label =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<p><img src="regularization_files/figure-html/ridge-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>We use cross-validation to select a good <span class="math inline">\(\lambda\)</span> value. The <code>cv.glmnet()</code>function uses 10 folds by default. The plot illustrates the MSE for the <span class="math inline">\(\lambda\)</span>s considered. Two lines are drawn. The first is the <span class="math inline">\(\lambda\)</span> that gives the smallest MSE. The second is the <span class="math inline">\(\lambda\)</span> that gives an MSE within one standard error of the smallest.</p>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="regularization.html#cb334-1"></a>fit_ridge_cv =<span class="st"> </span><span class="kw">cv.glmnet</span>(X, y, <span class="dt">alpha =</span> <span class="dv">0</span>)</span>
+<span id="cb334-2"><a href="regularization.html#cb334-2"></a><span class="kw">plot</span>(fit_ridge_cv)</span></code></pre></div>
+<p><img src="regularization_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>The <code>cv.glmnet()</code> function returns several details of the fit for both <span class="math inline">\(\lambda\)</span> values in the plot. Notice the penalty terms are smaller than the full linear regression. (As we would expect.)</p>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="regularization.html#cb335-1"></a><span class="co"># estimated coefficients, using 1-SE rule lambda, default behavior</span></span>
+<span id="cb335-2"><a href="regularization.html#cb335-2"></a><span class="kw">coef</span>(fit_ridge_cv)</span></code></pre></div>
+<pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                         1
+## (Intercept) 226.844379891
+## AtBat         0.086613902
+## Hits          0.352962515
+## HmRun         1.144213851
+## Runs          0.569353372
+## RBI           0.570074066
+## Walks         0.735072618
+## Years         2.397356090
+## CAtBat        0.007295083
+## CHits         0.027995153
+## CHmRun        0.208112349
+## CRuns         0.056146219
+## CRBI          0.058060281
+## CWalks        0.056586702
+## LeagueN       2.850306094
+## DivisionW   -20.329125634
+## PutOuts       0.049296951
+## Assists       0.007063169
+## Errors       -0.128066380
+## NewLeagueN    2.654025549</code></pre>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="regularization.html#cb337-1"></a><span class="co"># estimated coefficients, using minimum lambda</span></span>
+<span id="cb337-2"><a href="regularization.html#cb337-2"></a><span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</span></code></pre></div>
+<pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                        1
+## (Intercept)  11.26303439
+## AtBat         0.05681886
+## Hits          0.93088191
+## HmRun         0.37390139
+## Runs          1.09069163
+## RBI           0.87757438
+## Walks         1.71399148
+## Years         0.78041117
+## CAtBat        0.01129281
+## CHits         0.06105328
+## CHmRun        0.42884413
+## CRuns         0.12153596
+## CRBI          0.12905186
+## CWalks        0.04225513
+## LeagueN      24.65329547
+## DivisionW   -85.67844190
+## PutOuts       0.17943174
+## Assists       0.03550485
+## Errors       -1.58633587
+## NewLeagueN    8.37544584</code></pre>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="regularization.html#cb339-1"></a><span class="co"># penalty term using minimum lambda</span></span>
+<span id="cb339-2"><a href="regularization.html#cb339-2"></a><span class="kw">sum</span>(<span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)[<span class="op">-</span><span class="dv">1</span>] <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 8028.015</code></pre>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="regularization.html#cb341-1"></a><span class="co"># estimated coefficients, using 1-SE rule lambda</span></span>
+<span id="cb341-2"><a href="regularization.html#cb341-2"></a><span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)</span></code></pre></div>
+<pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                         1
+## (Intercept) 226.844379891
+## AtBat         0.086613902
+## Hits          0.352962515
+## HmRun         1.144213851
+## Runs          0.569353372
+## RBI           0.570074066
+## Walks         0.735072618
+## Years         2.397356090
+## CAtBat        0.007295083
+## CHits         0.027995153
+## CHmRun        0.208112349
+## CRuns         0.056146219
+## CRBI          0.058060281
+## CWalks        0.056586702
+## LeagueN       2.850306094
+## DivisionW   -20.329125634
+## PutOuts       0.049296951
+## Assists       0.007063169
+## Errors       -0.128066380
+## NewLeagueN    2.654025549</code></pre>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="regularization.html#cb343-1"></a><span class="co"># penalty term using 1-SE rule lambda</span></span>
+<span id="cb343-2"><a href="regularization.html#cb343-2"></a><span class="kw">sum</span>(<span class="kw">coef</span>(fit_ridge_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)[<span class="op">-</span><span class="dv">1</span>] <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 436.8923</code></pre>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="regularization.html#cb345-1"></a><span class="co"># predict using minimum lambda</span></span>
+<span id="cb345-2"><a href="regularization.html#cb345-2"></a><span class="kw">predict</span>(fit_ridge_cv, X, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="regularization.html#cb346-1"></a><span class="co"># predict using 1-SE rule lambda, default behavior</span></span>
+<span id="cb346-2"><a href="regularization.html#cb346-2"></a><span class="kw">predict</span>(fit_ridge_cv, X)</span></code></pre></div>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="regularization.html#cb347-1"></a><span class="co"># calculate &quot;train error&quot;</span></span>
+<span id="cb347-2"><a href="regularization.html#cb347-2"></a><span class="kw">mean</span>((y <span class="op">-</span><span class="st"> </span><span class="kw">predict</span>(fit_ridge_cv, X)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 134397.5</code></pre>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="regularization.html#cb349-1"></a><span class="co"># CV-RMSEs</span></span>
+<span id="cb349-2"><a href="regularization.html#cb349-2"></a><span class="kw">sqrt</span>(fit_ridge_cv<span class="op">$</span>cvm)</span></code></pre></div>
+<pre><code>##   [1] 451.2440 449.5213 448.7621 448.4939 448.2008 447.8805 447.5307 447.1487
+##   [9] 446.7319 446.2774 445.7820 445.2423 444.6550 444.0162 443.3220 442.5683
+##  [17] 441.7508 440.8653 439.9071 438.8716 437.7541 436.5501 435.2550 433.8645
+##  [25] 432.3743 430.7807 429.0805 427.2710 425.3502 423.3170 421.1714 418.9146
+##  [33] 416.5491 414.0786 411.5088 408.8468 406.1014 403.2827 400.4031 397.4761
+##  [41] 394.5166 391.5408 388.5656 385.6083 382.6865 379.8175 377.0179 374.3034
+##  [49] 371.6879 369.1843 366.8016 364.5496 362.4345 360.4601 358.6283 356.9392
+##  [57] 355.3909 353.9801 352.7021 351.5514 350.5213 349.6052 348.7957 348.0834
+##  [65] 347.4691 346.9389 346.4878 346.1080 345.7941 345.5404 345.3454 345.1982
+##  [73] 345.0938 345.0369 345.0112 345.0166 345.0556 345.1153 345.1951 345.2979
+##  [81] 345.4098 345.5359 345.6711 345.8147 345.9627 346.1114 346.2617 346.4112
+##  [89] 346.5588 346.7013 346.8402 346.9739 347.1003 347.2197 347.3325 347.4378
+##  [97] 347.5348 347.6266 347.7097 347.8187</code></pre>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="regularization.html#cb351-1"></a><span class="co"># CV-RMSE using minimum lambda</span></span>
+<span id="cb351-2"><a href="regularization.html#cb351-2"></a><span class="kw">sqrt</span>(fit_ridge_cv<span class="op">$</span>cvm[fit_ridge_cv<span class="op">$</span>lambda <span class="op">==</span><span class="st"> </span>fit_ridge_cv<span class="op">$</span>lambda.min])</span></code></pre></div>
+<pre><code>## [1] 345.0112</code></pre>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="regularization.html#cb353-1"></a><span class="co"># CV-RMSE using 1-SE rule lambda</span></span>
+<span id="cb353-2"><a href="regularization.html#cb353-2"></a><span class="kw">sqrt</span>(fit_ridge_cv<span class="op">$</span>cvm[fit_ridge_cv<span class="op">$</span>lambda <span class="op">==</span><span class="st"> </span>fit_ridge_cv<span class="op">$</span>lambda<span class="fl">.1</span>se]) </span></code></pre></div>
+<pre><code>## [1] 371.6879</code></pre>
 </div>
-<div id="source-14" class="section level2">
-<h2><span class="header-section-number">16.2</span> Source</h2>
-<ul>
-<li><code>R</code> Markdown: <a href="regularization.Rmd"><code>regularization.Rmd</code></a></li>
-</ul>
-<hr />
+<div id="lasso" class="section level2" number="12.2">
+<h2><span class="header-section-number">12.2</span> Lasso</h2>
+<p>We now illustrate <strong>lasso</strong>, which can be fit using <code>glmnet()</code> with <code>alpha = 1</code> and seeks to minimize</p>
+<p><span class="math display">\[
+\sum_{i=1}^{n} \left( y_i - \beta_0 - \sum_{j=1}^{p} \beta_j x_{ij}    \right) ^ 2 + \lambda \sum_{j=1}^{p} |\beta_j| .
+\]</span></p>
+<p>Like ridge, lasso is not scale invariant.</p>
+<p>The two plots illustrate how much the coefficients are penalized for different values of <span class="math inline">\(\lambda\)</span>. Notice some of the coefficients are forced to be zero.</p>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="regularization.html#cb355-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb355-2"><a href="regularization.html#cb355-2"></a>fit_lasso =<span class="st"> </span><span class="kw">glmnet</span>(X, y, <span class="dt">alpha =</span> <span class="dv">1</span>)</span>
+<span id="cb355-3"><a href="regularization.html#cb355-3"></a><span class="kw">plot</span>(fit_lasso)</span>
+<span id="cb355-4"><a href="regularization.html#cb355-4"></a><span class="kw">plot</span>(fit_lasso, <span class="dt">xvar =</span> <span class="st">&quot;lambda&quot;</span>, <span class="dt">label =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<p><img src="regularization_files/figure-html/lasso-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>Again, to actually pick a <span class="math inline">\(\lambda\)</span>, we will use cross-validation. The plot is similar to the ridge plot. Notice along the top is the number of features in the model. (Which changed in this plot.)</p>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="regularization.html#cb356-1"></a>fit_lasso_cv =<span class="st"> </span><span class="kw">cv.glmnet</span>(X, y, <span class="dt">alpha =</span> <span class="dv">1</span>)</span>
+<span id="cb356-2"><a href="regularization.html#cb356-2"></a><span class="kw">plot</span>(fit_lasso_cv)</span></code></pre></div>
+<p><img src="regularization_files/figure-html/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><code>cv.glmnet()</code> returns several details of the fit for both <span class="math inline">\(\lambda\)</span> values in the plot. Notice the penalty terms are again smaller than the full linear regression. (As we would expect.) Some coefficients are 0.</p>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="regularization.html#cb357-1"></a><span class="co"># estimated coefficients, using 1-SE rule lambda, default behavior</span></span>
+<span id="cb357-2"><a href="regularization.html#cb357-2"></a><span class="kw">coef</span>(fit_lasso_cv)</span></code></pre></div>
+<pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                        1
+## (Intercept) 193.74263886
+## AtBat         .         
+## Hits          1.21471320
+## HmRun         .         
+## Runs          .         
+## RBI           .         
+## Walks         1.28957901
+## Years         .         
+## CAtBat        .         
+## CHits         .         
+## CHmRun        .         
+## CRuns         0.12923755
+## CRBI          0.31515925
+## CWalks        .         
+## LeagueN       .         
+## DivisionW     .         
+## PutOuts       0.02533305
+## Assists       .         
+## Errors        .         
+## NewLeagueN    .</code></pre>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="regularization.html#cb359-1"></a><span class="co"># estimated coefficients, using minimum lambda</span></span>
+<span id="cb359-2"><a href="regularization.html#cb359-2"></a><span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</span></code></pre></div>
+<pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                        1
+## (Intercept)  129.4155569
+## AtBat         -1.6130155
+## Hits           5.8058915
+## HmRun          .        
+## Runs           .        
+## RBI            .        
+## Walks          4.8469340
+## Years         -9.9724045
+## CAtBat         .        
+## CHits          .        
+## CHmRun         0.5374550
+## CRuns          0.6811938
+## CRBI           0.3903563
+## CWalks        -0.5560143
+## LeagueN       32.4646094
+## DivisionW   -119.3480842
+## PutOuts        0.2741895
+## Assists        0.1855978
+## Errors        -2.1650837
+## NewLeagueN     .</code></pre>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="regularization.html#cb361-1"></a><span class="co"># penalty term using minimum lambda</span></span>
+<span id="cb361-2"><a href="regularization.html#cb361-2"></a><span class="kw">sum</span>(<span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)[<span class="op">-</span><span class="dv">1</span>] <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 15463.18</code></pre>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="regularization.html#cb363-1"></a><span class="co"># estimated coefficients, using 1-SE rule lambda</span></span>
+<span id="cb363-2"><a href="regularization.html#cb363-2"></a><span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)</span></code></pre></div>
+<pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                        1
+## (Intercept) 193.74263886
+## AtBat         .         
+## Hits          1.21471320
+## HmRun         .         
+## Runs          .         
+## RBI           .         
+## Walks         1.28957901
+## Years         .         
+## CAtBat        .         
+## CHits         .         
+## CHmRun        .         
+## CRuns         0.12923755
+## CRBI          0.31515925
+## CWalks        .         
+## LeagueN       .         
+## DivisionW     .         
+## PutOuts       0.02533305
+## Assists       .         
+## Errors        .         
+## NewLeagueN    .</code></pre>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="regularization.html#cb365-1"></a><span class="co"># penalty term using 1-SE rule lambda</span></span>
+<span id="cb365-2"><a href="regularization.html#cb365-2"></a><span class="kw">sum</span>(<span class="kw">coef</span>(fit_lasso_cv, <span class="dt">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)[<span class="op">-</span><span class="dv">1</span>] <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 3.255212</code></pre>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="regularization.html#cb367-1"></a><span class="co"># predict using minimum lambda</span></span>
+<span id="cb367-2"><a href="regularization.html#cb367-2"></a><span class="kw">predict</span>(fit_lasso_cv, X, <span class="dt">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="regularization.html#cb368-1"></a><span class="co"># predict using 1-SE rule lambda, default behavior</span></span>
+<span id="cb368-2"><a href="regularization.html#cb368-2"></a><span class="kw">predict</span>(fit_lasso_cv, X)</span></code></pre></div>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="regularization.html#cb369-1"></a><span class="co"># calcualte &quot;train error&quot;</span></span>
+<span id="cb369-2"><a href="regularization.html#cb369-2"></a><span class="kw">mean</span>((y <span class="op">-</span><span class="st"> </span><span class="kw">predict</span>(fit_lasso_cv, X)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 127112.4</code></pre>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="regularization.html#cb371-1"></a><span class="co"># CV-RMSEs</span></span>
+<span id="cb371-2"><a href="regularization.html#cb371-2"></a><span class="kw">sqrt</span>(fit_lasso_cv<span class="op">$</span>cvm)</span></code></pre></div>
+<pre><code>##  [1] 450.5050 440.0692 429.3063 420.3461 411.8850 402.8150 394.2837 386.9201
+##  [9] 380.6765 375.4116 370.9037 366.7772 363.1193 359.9917 356.8426 353.8294
+## [17] 351.2886 349.1854 347.2837 345.6108 344.2301 343.0934 342.1611 341.4019
+## [25] 340.7892 340.3586 340.0932 339.9361 339.9030 339.9663 340.0569 340.1319
+## [33] 340.1800 340.2042 340.2432 340.4433 340.7655 341.0229 340.8282 340.2964
+## [41] 339.7755 339.1886 338.8162 338.5140 338.2311 337.9505 337.5426 337.2267
+## [49] 336.9961 336.8341 336.8040 336.8734 337.0186 337.3109 337.6618 337.9231
+## [57] 338.2313 338.4739 338.6866 338.8488 339.0017 339.1431 339.3230 339.4743
+## [65] 339.6478 339.7971 339.9640 340.0950 340.2463 340.3625 340.5159 340.6321
+## [73] 340.7594 340.8809 340.9877 341.1218 341.2099 341.3044 341.4422 341.5391</code></pre>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="regularization.html#cb373-1"></a><span class="co"># CV-RMSE using minimum lambda</span></span>
+<span id="cb373-2"><a href="regularization.html#cb373-2"></a><span class="kw">sqrt</span>(fit_lasso_cv<span class="op">$</span>cvm[fit_lasso_cv<span class="op">$</span>lambda <span class="op">==</span><span class="st"> </span>fit_lasso_cv<span class="op">$</span>lambda.min])</span></code></pre></div>
+<pre><code>## [1] 336.804</code></pre>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="regularization.html#cb375-1"></a><span class="co"># CV-RMSE using 1-SE rule lambda</span></span>
+<span id="cb375-2"><a href="regularization.html#cb375-2"></a><span class="kw">sqrt</span>(fit_lasso_cv<span class="op">$</span>cvm[fit_lasso_cv<span class="op">$</span>lambda <span class="op">==</span><span class="st"> </span>fit_lasso_cv<span class="op">$</span>lambda<span class="fl">.1</span>se]) </span></code></pre></div>
+<pre><code>## [1] 366.7772</code></pre>
+</div>
+<div id="broom" class="section level2" number="12.3">
+<h2><span class="header-section-number">12.3</span> <code>broom</code></h2>
+<p>Sometimes, the output from <code>glmnet()</code> can be overwhelming. The <code>broom</code> package can help with that.</p>
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="regularization.html#cb377-1"></a><span class="kw">library</span>(broom)</span>
+<span id="cb377-2"><a href="regularization.html#cb377-2"></a><span class="co"># the output from the commented line would be immense</span></span>
+<span id="cb377-3"><a href="regularization.html#cb377-3"></a><span class="co"># fit_lasso_cv</span></span>
+<span id="cb377-4"><a href="regularization.html#cb377-4"></a><span class="kw">tidy</span>(fit_lasso_cv)</span></code></pre></div>
+<pre><code>## # A tibble: 80 x 6
+##    lambda estimate std.error conf.low conf.high nzero
+##     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
+##  1   255.  202955.    30760.  172195.   233715.     0
+##  2   233.  193661.    30072.  163589.   223733.     1
+##  3   212.  184304.    28994.  155310.   213298.     2
+##  4   193.  176691.    28100.  148591.   204791.     2
+##  5   176.  169649.    27329.  142321.   196978.     3
+##  6   160.  162260.    26700.  135559.   188960.     4
+##  7   146.  155460.    26161.  129298.   181621.     4
+##  8   133.  149707.    25723.  123985.   175430.     4
+##  9   121.  144915.    25391.  119524.   170305.     4
+## 10   111.  140934.    25122.  115812.   166056.     4
+## # … with 70 more rows</code></pre>
+<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="regularization.html#cb379-1"></a><span class="co"># the two lambda values of interest</span></span>
+<span id="cb379-2"><a href="regularization.html#cb379-2"></a><span class="kw">glance</span>(fit_lasso_cv) </span></code></pre></div>
+<pre><code>## # A tibble: 1 x 3
+##   lambda.min lambda.1se  nobs
+##        &lt;dbl&gt;      &lt;dbl&gt; &lt;int&gt;
+## 1       2.44       91.7   263</code></pre>
+</div>
+<div id="simulated-data-p-n" class="section level2" number="12.4">
+<h2><span class="header-section-number">12.4</span> Simulated Data, <span class="math inline">\(p &gt; n\)</span></h2>
+<p>Aside from simply shrinking coefficients (ridge and lasso) and setting some coefficients to 0 (lasso), penalized regression also has the advantage of being able to handle the <span class="math inline">\(p &gt; n\)</span> case.</p>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="regularization.html#cb381-1"></a><span class="kw">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb381-2"><a href="regularization.html#cb381-2"></a>n =<span class="st"> </span><span class="dv">1000</span></span>
+<span id="cb381-3"><a href="regularization.html#cb381-3"></a>p =<span class="st"> </span><span class="dv">5500</span></span>
+<span id="cb381-4"><a href="regularization.html#cb381-4"></a>X =<span class="st"> </span><span class="kw">replicate</span>(p, <span class="kw">rnorm</span>(<span class="dt">n =</span> n))</span>
+<span id="cb381-5"><a href="regularization.html#cb381-5"></a>beta =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">5497</span>))</span>
+<span id="cb381-6"><a href="regularization.html#cb381-6"></a>z =<span class="st"> </span>X <span class="op">%*%</span><span class="st"> </span>beta</span>
+<span id="cb381-7"><a href="regularization.html#cb381-7"></a>prob =<span class="st"> </span><span class="kw">exp</span>(z) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(z))</span>
+<span id="cb381-8"><a href="regularization.html#cb381-8"></a>y =<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">rbinom</span>(<span class="kw">length</span>(z), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> prob))</span></code></pre></div>
+<p>We first simulate a classification example where <span class="math inline">\(p &gt; n\)</span>.</p>
+<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="regularization.html#cb382-1"></a><span class="co"># glm(y ~ X, family = &quot;binomial&quot;)</span></span>
+<span id="cb382-2"><a href="regularization.html#cb382-2"></a><span class="co"># will not converge</span></span></code></pre></div>
+<p>We then use a lasso penalty to fit penalized logistic regression. This minimizes</p>
+<p><span class="math display">\[
+\sum_{i=1}^{n} L\left(y_i, \beta_0 + \sum_{j=1}^{p} \beta_j x_{ij}\right) + \lambda \sum_{j=1}^{p} |\beta_j|
+\]</span></p>
+<p>where <span class="math inline">\(L\)</span> is the appropriate <em>negative</em> <strong>log</strong>-likelihood.</p>
+<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="regularization.html#cb383-1"></a><span class="kw">library</span>(glmnet)</span>
+<span id="cb383-2"><a href="regularization.html#cb383-2"></a>fit_cv =<span class="st"> </span><span class="kw">cv.glmnet</span>(X, y, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">alpha =</span> <span class="dv">1</span>)</span>
+<span id="cb383-3"><a href="regularization.html#cb383-3"></a><span class="kw">plot</span>(fit_cv)</span></code></pre></div>
+<p><img src="regularization_files/figure-html/unnamed-chunk-34-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>We’re being lazy again and using the entire dataset as the training data.</p>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="regularization.html#cb384-1"></a><span class="kw">head</span>(<span class="kw">coef</span>(fit_cv), <span class="dt">n =</span> <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## 10 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                      1
+## (Intercept) 0.02397452
+## V1          0.59674958
+## V2          0.56251761
+## V3          0.60065105
+## V4          .         
+## V5          .         
+## V6          .         
+## V7          .         
+## V8          .         
+## V9          .</code></pre>
+<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="regularization.html#cb386-1"></a>fit_cv<span class="op">$</span>nzero</span></code></pre></div>
+<pre><code>##  s0  s1  s2  s3  s4  s5  s6  s7  s8  s9 s10 s11 s12 s13 s14 s15 s16 s17 s18 s19 
+##   0   2   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3 
+## s20 s21 s22 s23 s24 s25 s26 s27 s28 s29 s30 s31 s32 s33 s34 s35 s36 s37 s38 s39 
+##   3   3   3   3   3   3   3   3   3   3   4   6   7  10  18  24  35  54  65  75 
+## s40 s41 s42 s43 s44 s45 s46 s47 s48 s49 s50 s51 s52 s53 s54 s55 s56 s57 s58 s59 
+##  86 100 110 129 147 168 187 202 221 241 254 269 283 298 310 324 333 350 364 375 
+## s60 s61 s62 s63 s64 s65 s66 s67 s68 s69 s70 s71 s72 s73 s74 s75 s76 s77 s78 s79 
+## 387 400 411 429 435 445 453 455 462 466 475 481 487 491 496 498 502 504 512 518 
+## s80 s81 s82 s83 s84 s85 s86 s87 s88 s89 s90 s91 s92 s93 s94 s95 s96 s97 s98 s99 
+## 523 526 528 536 543 550 559 561 563 566 570 571 576 582 586 590 596 596 600 599</code></pre>
+<p>Notice, only the first three predictors generated are truly significant, and that is exactly what the suggested model finds.</p>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="regularization.html#cb388-1"></a>fit_1se =<span class="st"> </span><span class="kw">glmnet</span>(X, y, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">lambda =</span> fit_cv<span class="op">$</span>lambda<span class="fl">.1</span>se)</span>
+<span id="cb388-2"><a href="regularization.html#cb388-2"></a><span class="kw">which</span>(<span class="kw">as.vector</span>(<span class="kw">as.matrix</span>(fit_1se<span class="op">$</span>beta)) <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## [1] 1 2 3</code></pre>
+<p>We can also see in the following plots, the three features entering the model well ahead of the irrelevant features.</p>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="regularization.html#cb390-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb390-2"><a href="regularization.html#cb390-2"></a><span class="kw">plot</span>(<span class="kw">glmnet</span>(X, y, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>))</span>
+<span id="cb390-3"><a href="regularization.html#cb390-3"></a><span class="kw">plot</span>(<span class="kw">glmnet</span>(X, y, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>), <span class="dt">xvar =</span> <span class="st">&quot;lambda&quot;</span>)</span></code></pre></div>
+<p><img src="regularization_files/figure-html/unnamed-chunk-38-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>We can extract the two relevant <span class="math inline">\(\lambda\)</span> values.</p>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="regularization.html#cb391-1"></a>fit_cv<span class="op">$</span>lambda.min</span></code></pre></div>
+<pre><code>## [1] 0.03718493</code></pre>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="regularization.html#cb393-1"></a>fit_cv<span class="op">$</span>lambda<span class="fl">.1</span>se</span></code></pre></div>
+<pre><code>## [1] 0.0514969</code></pre>
+<p>TODO: use default of <code>type.measure="deviance"</code> but note that <code>type.measure="class"</code> exists.</p>
+<!-- In this chapter... -->
+<!-- - add regularization to linear and logistic regression (linear models againg!) -->
+<!-- fit SLR no intercept model with "constraint," showing how this limits model "flexibility" -->
+<!-- - show datasets that can and cannot be well learned -->
+<!-- - contrast flexibility with rigidity -->
+<!-- three types of regularization (start with whichever is the deafult) -->
+<!-- - best subset selection!!! -->
+<!-- - ridge  -->
+<!-- - lasso -->
+<!-- - elastic-net -->
+<!-- learn two new R functions -->
+<!-- - glmnet -->
+<!-- - cv.glmnet -->
+<!-- learn how and why regularization works -->
+<!-- - geometry -->
+<!-- - simulation studies -->
+<!--     - dense vs sparse -->
+<!--     - indep vs corr -->
+<!--     - look at old ipad notes -->
+<!-- misc  -->
+<!-- - FIT + PENALTY -->
+<!--   - how (negative) log-lik can be used as a measure of "fit" -->
+<!--   - actual lambda value is meaningless because of scale of RSS and log-lik -->
+<!--   - how are models fit to begin with (MLE, show that RSS is just this...) -->
+<!-- - model selection vs variable (feature) selection -->
+<!-- - pictures -->
+<!-- - a note about scaling (where else is this a "problem"?) -->
+<!-- - package for extra nice plotting -->
+<!-- - gather all relevant links -->
+<!-- - `as.matrix()` vs `model.matrix()` -->
+<!-- - https://bradleyboehmke.github.io/HOML/regularized-regression.html -->
+<!-- - compare with traditional "variable selection" methods -->
+<!--     - "variable selection" vs "model selection" -->
+<!--         - validated whole procedures -->
+<!-- - consider using footnotes -->
+<!-- - hand draw a picture for the beginning of each chapter that illustrates the "main idea"? -->
+<!--   - use "ML notecars" for possible inspiration (but include less detail?) -->
+<!-- - bigger "chapters" at first, then smaller, more specific chapters? -->
+<!-- - misspelled arguments are passed to `...`, not the correctly spelled arugment -->
+<!-- - how this function internally does validation then full train data fits -->
+<!-- - 1-SE rule -->
+<!-- - look at last year's notes on iPad -->
+<!-- - a chapter on GLMs before moving to regularization? -->
+<!--   - negative log-likelihood! -->
+<!-- - multiclass logistic? -->
+<!--   - can this be doen with glm instead of nnet? (don't think so) -->
+<!-- - figure out a bib -->
+<!-- - a map of all STAT 432 concepts??? -->
+<!-- - https://web.stanford.edu/~hastie/StatLearnSparsity_files/SLS.pdf -->
+<!-- - https://web.stanford.edu/~hastie/glmnet/glmnet_alpha.html -->
+<!-- book chapter theme -->
+<!-- - do -->
+<!-- - understand -->
+<!-- - create??? -->
+<!-- *** -->
+<!-- ```{r packages, message = FALSE, warning = FALSE} -->
+<!-- library("tidyverse") -->
+<!-- library("glmnet") -->
+<!-- library("broom") -->
+<!-- ``` -->
+<!-- *** -->
+<!-- ```{r} -->
+<!-- hitters = na.omit(as_tibble(ISLR::Hitters)) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- set.seed(42) -->
+<!-- hit_trn_idx = sample(nrow(hitters), size = 0.8 * nrow(hitters)) -->
+<!-- hit_trn = hitters[hit_trn_idx, ] -->
+<!-- hit_tst = hitters[-hit_trn_idx, ] -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- hit_trn -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- hit_trn_y = hit_trn$Salary -->
+<!-- hit_trn_x = model.matrix(Salary ~ . + 0, data = hit_trn) -->
+<!-- hit_tst_y = hit_tst$Salary -->
+<!-- hit_tst_x = model.matrix(Salary ~ . + 0, data = hit_tst) -->
+<!-- ``` -->
+<!-- - TODO: consider the `nlambda` argument -->
+<!-- ```{r} -->
+<!-- plot(glmnet(x = hit_trn_x, y = hit_trn_y, alpha = 1), xvar = "lambda") -->
+<!-- grid() -->
+<!-- ``` -->
+<!-- TODO: some information about the important default values: standardize, nlambda, family, intercept, etc -->
+<!-- - https://cran.r-project.org/web/packages/glmnet/vignettes/glmnet.pdf -->
+<!-- - https://cran.r-project.org/web/packages/glmnetUtils/vignettes/intro.html -->
+<!-- TODO: fit + penalty (= penalized loss?) see `?glmnet` documentation for "details" (also maybe check vingette?) -->
+<!-- ```{r} -->
+<!-- asdf = cv.glmnet(x = hit_trn_x, y = hit_trn_y, nlambda = 500) -->
+<!-- asdf$lambda -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- plot(asdf) -->
+<!-- ``` -->
+<!-- - an example with a really nice U-shaped plot? needing to use more lambdas? sometimes you just can't get the U! -->
+<!-- ```{r} -->
+<!-- # nlambda (or other glmnet args) to cv.glmnet? -->
+<!-- ``` -->
+<!-- TODO: first use glmnet (to get args set) then add cv. to the front -->
+<!-- ```{r} -->
+<!-- glance(asdf) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- asdf$cvm # here, m = "measure"!!! don't get into the weeds about deviance, just note how it relates to RSS -->
+<!-- ``` -->
+<!-- - `tidy.glmnet` -->
+<!-- - `glance.cv.glmnet()` -->
+<!-- - `glance.glmnet()` -->
+<!-- - `tidy.cv.glmnet()` -->
+<!-- TODO: write a "chapter" about how this work (different function depending on object passed) -->
+<!-- NOTE: use README for technical details about book, then self document conent in the book -->
+<!-- *** -->
+<!-- ## Additional Reading -->
+<!-- - **Required:** ??? -->
+<!-- *** -->
+<!-- ## Source -->
+<!-- - `R` Markdown: [`regularization.Rmd`](regularization.Rmd) -->
+<!-- *** -->
+<!-- ## Old FA19 Regularization -->
+<!-- *** -->
+<!-- ## STAT 432 Materials -->
+<!-- - ISL Readings: Sections 6.1 - 6.4 -->
+<!-- *** -->
+<!-- ```{r resampling_opts, include = FALSE} -->
+<!-- knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center") -->
+<!-- ``` -->
+<!-- ```{r, message = FALSE, warning = FALSE} -->
+<!-- library("tidyverse") -->
+<!-- library("glmnet") -->
+<!-- library("broom") -->
+<!-- library("kableExtra") -->
+<!-- ``` -->
+<!-- ## Reducing Variance with Added Bias -->
+<!-- ```{r} -->
+<!-- gen_simple_data = function(sample_size = 25) { -->
+<!--   x = runif(n = sample_size) -->
+<!--   y = 0 + 5 * x + rnorm(n = sample_size) -->
+<!--   data.frame(x, y) -->
+<!-- } -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- set.seed(42) -->
+<!-- simple_data = gen_simple_data() -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- # fit least squares -->
+<!-- beta_ls = lm(y ~ 0 + x, data = simple_data) -->
+<!-- # fit a biased model -->
+<!-- # restrict beta-hat to be at most 5 -->
+<!-- beta_05 = lm(y ~ 0 + x, data = simple_data) -->
+<!-- beta_05$coefficients = min(beta_05$coefficients, 5) -->
+<!-- # fit a biased model -->
+<!-- # restrict beta-hat to be at most 4 -->
+<!-- beta_04 = lm(y ~ 0 + x, data = simple_data) -->
+<!-- beta_04$coefficients = min(beta_04$coefficients, 4) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- map_dbl(list(beta_ls, beta_05, beta_04), coef) -->
+<!-- ``` -->
+<!-- ```{r, fig.height = 6, fig.width = 10, echo = FALSE} -->
+<!-- plot(simple_data, pch = 20, col = "darkgrey", -->
+<!--      xlim = c(0, 1), ylim = c(0, 7)) -->
+<!-- grid() -->
+<!-- abline(0, 5, lwd = 4) -->
+<!-- abline(beta_ls, col = "firebrick",  lwd = 3, lty = 2) -->
+<!-- abline(beta_05, col = "dodgerblue", lwd = 3, lty = 3) -->
+<!-- abline(beta_04, col = "limegreen",  lwd = 3, lty = 4) -->
+<!-- # TODO: add legend -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- # maybe write a function for each -->
+<!-- # should switch this to make each model fit to the same data -->
+<!-- set.seed(42) -->
+<!-- beta_estimates = list( -->
+<!--   beta_ls = replicate(n = 5000, coef(lm(y ~ 0 + x, data = gen_simple_data()))["x"]), -->
+<!--   beta_05 = replicate(n = 5000, min(coef(lm(y ~ 0 + x, data = gen_simple_data()))["x"], 5)), -->
+<!--   beta_04 = replicate(n = 5000, min(coef(lm(y ~ 0 + x, data = gen_simple_data()))["x"], 4)) -->
+<!-- ) -->
+<!-- ``` -->
+<!-- ```{r, echo = FALSE} -->
+<!-- tibble( -->
+<!--   Model = c("Least Squares", "Biased to 5", "Biased to 4"), -->
+<!--   Bias = map_dbl(beta_estimates, ~ {mean(.x) - 5}), -->
+<!--   Variance = map_dbl(beta_estimates, var), -->
+<!--   MSE = Bias ^ 2 + Variance -->
+<!-- ) %>%  -->
+<!--   kable(digits = 3) %>%  -->
+<!--   kable_styling("striped", full_width = FALSE) -->
+<!-- ``` -->
+<!-- ## scaling matters? -->
+<!-- ```{r} -->
+<!-- another_dgp = function(sample_size = 25) { -->
+<!--   x = runif(n = sample_size) -->
+<!--   y = -2 + 5 * x + rnorm(n = sample_size) -->
+<!--   tibble(x, y) -->
+<!-- } -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- data_for_scaling = another_dgp() -->
+<!-- predict(lm(y ~ x, data = data_for_scaling)) -->
+<!-- coef(lm(y ~ x, data = data_for_scaling)) -->
+<!-- data_for_scaling$x = scale(data_for_scaling$x) -->
+<!-- predict(lm(y ~ x, data = data_for_scaling)) -->
+<!-- coef(lm(y ~ x, data = data_for_scaling)) -->
+<!-- ``` -->
+<!-- ## Constraints in Two Dimensions -->
+<!-- ```{r} -->
+<!-- gen_linear_data = function() { -->
+<!--   x1 = rnorm(100) -->
+<!--   x2 = rnorm(100) -->
+<!--   y = 0 + -5 * x1 + 5 * x2 + rnorm(100) -->
+<!--   tibble(x1 = x1, x2 = x2, y = y) -->
+<!-- } -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- data = gen_linear_data() -->
+<!-- beta = expand.grid(beta_1 = seq(-10, 10, 0.1), -->
+<!--                    beta_2 = seq(-10, 10, 0.1)) -->
+<!-- beta_error = rep(0, dim(beta)[1]) -->
+<!-- for (i in 1:dim(beta)[1]) { -->
+<!--   beta_error[i] = with(data, sum((y - (beta$beta_1[i] * x1 + beta$beta_2[i] * x2)) ^ 2 )) -->
+<!-- } -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- # TODO: make this into a function -->
+<!-- # TODO: add ridge constraint -->
+<!-- contour(x = seq(-10, 10, 0.1),  -->
+<!--         y = seq(-10, 10, 0.1),  -->
+<!--         z = matrix(beta_error,  -->
+<!--                    nrow = length(seq(-10, 10, 0.1)), -->
+<!--                    ncol = length(seq(-10, 10, 0.1))), -->
+<!--         nlevels = 50, -->
+<!--         col = "darkgrey" -->
+<!-- ) -->
+<!-- abline(h = 0) -->
+<!-- abline(v = 0) -->
+<!-- a = 4 -->
+<!-- segments(0, a, a, 0, col = "dodgerblue", lwd = 2) -->
+<!-- segments(0, -a, a, 0, col = "dodgerblue", lwd = 2) -->
+<!-- segments(-a, 0, 0, a, col = "dodgerblue", lwd = 2) -->
+<!-- segments(-a, 0, 0, -a, col = "dodgerblue", lwd = 2) -->
+<!-- points(beta[which.min(beta_error), ], col = "darkorange", pch = 20, cex = 2) -->
+<!-- ``` -->
+<!-- ## High Dimensional Data -->
+<!-- ```{r} -->
+<!-- gen_wide_data = function(sample_size = 100, sig_betas = 5, p = 200) { -->
+<!--   if (p <= sample_size) { -->
+<!--     warning("You're not generating wide data, despite the name of the function.") -->
+<!--   } -->
+<!--   if (sig_betas > p) { -->
+<!--     stop("Cannot have more significant variables than variables!") -->
+<!--   } -->
+<!--   x = map_dfc(1:p, ~ rnorm(n = sample_size)) -->
+<!--   x = x %>% rename_all( ~ str_replace(., "V", "x")) -->
+<!--   sig_x = x[, 1:sig_betas] -->
+<!--   beta = rep(3, times = sig_betas) -->
+<!--   y = as.matrix(sig_x) %*% beta + rnorm(n = sample_size) -->
+<!--   bind_cols(y = y, x) -->
+<!-- } -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- some_wide_data = gen_wide_data() -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- some_wide_data -->
+<!-- ``` -->
+<!-- ## Ridge Regression -->
+<!-- $$ -->
+<!-- \sum_{i=1}^{n} \left( y_i - \beta_0 - \sum_{j=1}^{p} \beta_j x_{ij}    \right) ^ 2 + \lambda \sum_{j=1}^{p} \beta_j^2 . -->
+<!-- $$ -->
+<!-- ```{r} -->
+<!-- set.seed(42) -->
+<!-- data_for_ridge = gen_wide_data(sample_size = 100, sig_betas = 5, p = 200) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- x_ridge = data_for_ridge %>% select(-y) %>% as.matrix() -->
+<!-- y_ridge = data_for_ridge %>% pull(y) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- mod_ridge = glmnet(x = x_ridge, y = y_ridge, alpha = 0) -->
+<!-- ``` -->
+<!-- ```{r, fig.height = 6, fig.width = 8} -->
+<!-- plot(mod_ridge, xvar = "lambda", label = TRUE) -->
+<!-- grid() -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- as_tibble(predict(mod_ridge, x_ridge[1:5, ])) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- set.seed(42) -->
+<!-- mod_ridge = cv.glmnet(x = x_ridge, y = y_ridge, alpha = 0, nfolds = 5) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- glance(mod_ridge) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- plot(mod_ridge) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- tidy(mod_ridge) -->
+<!-- ``` -->
+<!-- ## Lasso -->
+<!-- ## boston is boring -->
+<!-- ```{r} -->
+<!-- bstn = MASS::Boston -->
+<!-- bstn$chas = factor(bstn$chas) # why did we do this??? -->
+<!-- bstn$rad = factor(bstn$rad) -->
+<!-- levels(bstn$chas) -->
+<!-- levels(bstn$rad) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- lm(medv ~ ., data = bstn) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- head(as_tibble(model.matrix(lm(medv ~ ., data = bstn)))) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- bstn_x = model.matrix(lm(medv ~ ., data = bstn)) -->
+<!-- bstn_y = bstn$medv -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- coef(lm.fit(x = bstn_x, y = bstn_y)) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- bstn_x = model.matrix(lm(medv ~ ., data = bstn))[, -1] -->
+<!-- bstn_y = bstn$medv -->
+<!-- ``` -->
+<!-- ```{r, fig.height = 4, fig.width = 8} -->
+<!-- par(mfrow = c(1, 2)) -->
+<!-- plot(glmnet(x = bstn_x, y = bstn_y, alpha = 0), xvar = "lambda") -->
+<!-- grid() -->
+<!-- plot(glmnet(x = bstn_x, y = bstn_y, alpha = 1), xvar = "lambda") -->
+<!-- grid() -->
+<!-- ``` -->
+<!-- ```{r, fig.height = 4, fig.width = 8} -->
+<!-- par(mfrow = c(1, 2)) -->
+<!-- plot(cv.glmnet(x = bstn_x, y = bstn_y, alpha = 0)) -->
+<!-- plot(cv.glmnet(x = bstn_x, y = bstn_y, alpha = 1)) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- bstn_ridge = cv.glmnet(x = bstn_x, y = bstn_y, alpha = 0) -->
+<!-- bstn_lasso = cv.glmnet(x = bstn_x, y = bstn_y, alpha = 1) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- library("broom") -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- tidy(bstn_lasso) -->
+<!-- glance(bstn_lasso) -->
+<!-- # TODO: pull out rows of tidy with the values from glance -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- predict(bstn_lasso, newx = bstn_x[1:10,], type = "link") -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- predict(bstn_lasso, newx = bstn_x[1:10,], type = "response") -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- predict(bstn_lasso, type = "coefficients", s = c("lambda.1se", "lambda.min")) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- predict(bstn_lasso, type = "nonzero") -->
+<!-- ``` -->
+<!-- ## some more simulation -->
+<!-- ```{r} -->
+<!-- # diag(100) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- p = 100 -->
+<!-- A = matrix(runif(p ^ 2) * 2 - 1, ncol = p) -->
+<!-- Sigma = t(A) %*% A -->
+<!-- sample_size = 500 -->
+<!-- X = MASS::mvrnorm(n = sample_size, mu = rep(0, p), Sigma = Sigma) -->
+<!-- beta = ifelse(sample(c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1), size = p, replace = TRUE), runif(n = p, -1, 1), 0) * 2 -->
+<!-- y = X %*% beta + rnorm(n = sample_size, sd = 4) -->
+<!-- fit = glmnet::cv.glmnet(x = X, y = y, alpha = 1) -->
+<!-- sqrt(min(fit$cvm)) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- plot(fit, xlim = c(-6, 1), ylim = c(15, 20)) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- # type.measure = "class" -->
+<!-- ``` -->
+<!-- - TODO: Least Absolute Shrinkage and Selection Operator -->
+<!-- - TODO: https://statisticaloddsandends.wordpress.com/2018/11/15/a-deep-dive-into-glmnet-standardize/ -->
+<!-- - TODO: https://www.jaredlander.com/2018/02/using-coefplot-with-glmnet/ -->
+<!-- - TODO: statistical learning with sparsity book -->
+<!-- ##  Old R4SL Regularization -->
+<!-- **Chapter Status:** Currently this chapter is very sparse. It essentially only expands upon an example discussed in ISL, thus only illustrates usage of the methods. Mathematical and conceptual details of the methods will be added later. Also, more comments on using `glmnet` with `caret` will be discussed. -->
+<!-- ```{r reg_opts, include = FALSE} -->
+<!-- knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center") -->
+<!-- ``` -->
+<!-- We will use the `Hitters` dataset from the `ISLR` package to explore two shrinkage methods: **ridge regression** and **lasso**. These are otherwise known as **penalized regression** methods. -->
+<!-- ```{r} -->
+<!-- data(Hitters, package = "ISLR") -->
+<!-- ``` -->
+<!-- This dataset has some missing data in the response `Salaray`. We use the `na.omit()` function the clean the dataset. -->
+<!-- ```{r} -->
+<!-- sum(is.na(Hitters)) -->
+<!-- sum(is.na(Hitters$Salary)) -->
+<!-- Hitters = na.omit(Hitters) -->
+<!-- sum(is.na(Hitters)) -->
+<!-- ``` -->
+<!-- The predictors variables are offensive and defensive statistics for a number of baseball players. -->
+<!-- ```{r} -->
+<!-- names(Hitters) -->
+<!-- ``` -->
+<!-- We use the `glmnet()` and `cv.glmnet()` functions from the `glmnet` package to fit penalized regressions. -->
+<!-- ```{r, message = FALSE, warning = FALSE} -->
+<!-- library(glmnet) -->
+<!-- ``` -->
+<!-- Unfortunately, the `glmnet` function does not allow the use of model formulas, so we setup the data for ease of use with `glmnet`. Eventually we will use `train()` from `caret` which does allow for fitting penalized regression with the formula syntax, but to explore some of the details, we first work with the functions from `glmnet` directly. -->
+<!-- ```{r} -->
+<!-- X = model.matrix(Salary ~ ., Hitters)[, -1] -->
+<!-- y = Hitters$Salary -->
+<!-- ``` -->
+<!-- First, we fit an ordinary linear regression, and note the size of the predictors' coefficients, and predictors' coefficients squared. (The two penalties we will use.) -->
+<!-- ```{r} -->
+<!-- fit = lm(Salary ~ ., Hitters) -->
+<!-- coef(fit) -->
+<!-- sum(abs(coef(fit)[-1])) -->
+<!-- sum(coef(fit)[-1] ^ 2) -->
+<!-- ``` -->
+<!-- ## Ridge Regression -->
+<!-- We first illustrate **ridge regression**, which can be fit using `glmnet()` with `alpha = 0` and seeks to minimize -->
+<!-- $$ -->
+<!-- \sum_{i=1}^{n} \left( y_i - \beta_0 - \sum_{j=1}^{p} \beta_j x_{ij}    \right) ^ 2 + \lambda \sum_{j=1}^{p} \beta_j^2 . -->
+<!-- $$ -->
+<!-- Notice that the intercept is **not** penalized. Also, note that that ridge regression is **not** scale invariant like the usual unpenalized regression. Thankfully, `glmnet()` takes care of this internally. It automatically standardizes predictors for fitting, then reports fitted coefficient using the original scale. -->
+<!-- The two plots illustrate how much the coefficients are penalized for different values of $\lambda$. Notice none of the coefficients are forced to be zero. -->
+<!-- ```{r ridge, fig.height = 4, fig.width = 8} -->
+<!-- par(mfrow = c(1, 2)) -->
+<!-- fit_ridge = glmnet(X, y, alpha = 0) -->
+<!-- plot(fit_ridge) -->
+<!-- plot(fit_ridge, xvar = "lambda", label = TRUE) -->
+<!-- ``` -->
+<!-- We use cross-validation to select a good $\lambda$ value. The `cv.glmnet()`function uses 10 folds by default. The plot illustrates the MSE for the $\lambda$s considered. Two lines are drawn. The first is the $\lambda$ that gives the smallest MSE. The second is the $\lambda$ that gives an MSE within one standard error of the smallest. -->
+<!-- ```{r} -->
+<!-- fit_ridge_cv = cv.glmnet(X, y, alpha = 0) -->
+<!-- plot(fit_ridge_cv) -->
+<!-- ``` -->
+<!-- The `cv.glmnet()` function returns several details of the fit for both $\lambda$ values in the plot. Notice the penalty terms are smaller than the full linear regression. (As we would expect.) -->
+<!-- ```{r} -->
+<!-- # fitted coefficients, using 1-SE rule lambda, default behavior -->
+<!-- coef(fit_ridge_cv) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- # fitted coefficients, using minimum lambda -->
+<!-- coef(fit_ridge_cv, s = "lambda.min") -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- # penalty term using minimum lambda -->
+<!-- sum(coef(fit_ridge_cv, s = "lambda.min")[-1] ^ 2) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- # fitted coefficients, using 1-SE rule lambda -->
+<!-- coef(fit_ridge_cv, s = "lambda.1se") -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- # penalty term using 1-SE rule lambda -->
+<!-- sum(coef(fit_ridge_cv, s = "lambda.1se")[-1] ^ 2) -->
+<!-- ``` -->
+<!-- ```{r, eval = FALSE} -->
+<!-- # predict using minimum lambda -->
+<!-- predict(fit_ridge_cv, X, s = "lambda.min") -->
+<!-- ``` -->
+<!-- ```{r, eval = FALSE} -->
+<!-- # predict using 1-SE rule lambda, default behavior -->
+<!-- predict(fit_ridge_cv, X) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- # calcualte "train error" -->
+<!-- mean((y - predict(fit_ridge_cv, X)) ^ 2) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- # CV-RMSEs -->
+<!-- sqrt(fit_ridge_cv$cvm) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- # CV-RMSE using minimum lambda -->
+<!-- sqrt(fit_ridge_cv$cvm[fit_ridge_cv$lambda == fit_ridge_cv$lambda.min]) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- # CV-RMSE using 1-SE rule lambda -->
+<!-- sqrt(fit_ridge_cv$cvm[fit_ridge_cv$lambda == fit_ridge_cv$lambda.1se])  -->
+<!-- ``` -->
+<!-- ## Lasso -->
+<!-- We now illustrate **lasso**, which can be fit using `glmnet()` with `alpha = 1` and seeks to minimize -->
+<!-- $$ -->
+<!-- \sum_{i=1}^{n} \left( y_i - \beta_0 - \sum_{j=1}^{p} \beta_j x_{ij}    \right) ^ 2 + \lambda \sum_{j=1}^{p} |\beta_j| . -->
+<!-- $$ -->
+<!-- Like ridge, lasso is not scale invariant. -->
+<!-- The two plots illustrate how much the coefficients are penalized for different values of $\lambda$. Notice some of the coefficients are forced to be zero. -->
+<!-- ```{r lasso, fig.height = 4, fig.width = 8} -->
+<!-- par(mfrow = c(1, 2)) -->
+<!-- fit_lasso = glmnet(X, y, alpha = 1) -->
+<!-- plot(fit_lasso) -->
+<!-- plot(fit_lasso, xvar = "lambda", label = TRUE) -->
+<!-- ``` -->
+<!-- Again, to actually pick a $\lambda$, we will use cross-validation. The plot is similar to the ridge plot. Notice along the top is the number of features in the model. (Which changed in this plot.) -->
+<!-- ```{r} -->
+<!-- fit_lasso_cv = cv.glmnet(X, y, alpha = 1) -->
+<!-- plot(fit_lasso_cv) -->
+<!-- ``` -->
+<!-- `cv.glmnet()` returns several details of the fit for both $\lambda$ values in the plot. Notice the penalty terms are again smaller than the full linear regression. (As we would expect.) Some coefficients are 0. -->
+<!-- ```{r} -->
+<!-- # fitted coefficients, using 1-SE rule lambda, default behavior -->
+<!-- coef(fit_lasso_cv) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- # fitted coefficients, using minimum lambda -->
+<!-- coef(fit_lasso_cv, s = "lambda.min") -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- # penalty term using minimum lambda -->
+<!-- sum(coef(fit_lasso_cv, s = "lambda.min")[-1] ^ 2) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- # fitted coefficients, using 1-SE rule lambda -->
+<!-- coef(fit_lasso_cv, s = "lambda.1se") -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- # penalty term using 1-SE rule lambda -->
+<!-- sum(coef(fit_lasso_cv, s = "lambda.1se")[-1] ^ 2) -->
+<!-- ``` -->
+<!-- ```{r, eval = FALSE} -->
+<!-- # predict using minimum lambda -->
+<!-- predict(fit_lasso_cv, X, s = "lambda.min") -->
+<!-- ``` -->
+<!-- ```{r, eval = FALSE} -->
+<!-- # predict using 1-SE rule lambda, default behavior -->
+<!-- predict(fit_lasso_cv, X) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- # calcualte "train error" -->
+<!-- mean((y - predict(fit_lasso_cv, X)) ^ 2) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- # CV-RMSEs -->
+<!-- sqrt(fit_lasso_cv$cvm) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- # CV-RMSE using minimum lambda -->
+<!-- sqrt(fit_lasso_cv$cvm[fit_lasso_cv$lambda == fit_lasso_cv$lambda.min]) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- # CV-RMSE using 1-SE rule lambda -->
+<!-- sqrt(fit_lasso_cv$cvm[fit_lasso_cv$lambda == fit_lasso_cv$lambda.1se])  -->
+<!-- ``` -->
+<!-- ## `broom` -->
+<!-- Sometimes, the output from `glmnet()` can be overwhelming. The `broom` package can help with that. -->
+<!-- ```{r, message = FALSE, warning = FALSE} -->
+<!-- library(broom) -->
+<!-- # the output from the commented line would be immense -->
+<!-- # fit_lasso_cv -->
+<!-- tidy(fit_lasso_cv) -->
+<!-- # the two lambda values of interest -->
+<!-- glance(fit_lasso_cv)  -->
+<!-- ``` -->
+<!-- ## Simulated Data, $p > n$ -->
+<!-- Aside from simply shrinking coefficients (ridge) and setting some coefficients to 0 (lasso), penalized regression also has the advantage of being able to handle the $p > n$ case. -->
+<!-- ```{r} -->
+<!-- set.seed(1234) -->
+<!-- n = 1000 -->
+<!-- p = 5500 -->
+<!-- X = replicate(p, rnorm(n = n)) -->
+<!-- beta = c(1, 1, 1, rep(0, 5497)) -->
+<!-- z = X %*% beta -->
+<!-- prob = exp(z) / (1 + exp(z)) -->
+<!-- y = as.factor(rbinom(length(z), size = 1, prob = prob)) -->
+<!-- ``` -->
+<!-- We first simulate a classification example where $p > n$. -->
+<!-- ```{r} -->
+<!-- # glm(y ~ X, family = "binomial") -->
+<!-- # will not converge -->
+<!-- ``` -->
+<!-- We then use a lasso penalty to fit penalized logistic regression. This minimizes -->
+<!-- $$ -->
+<!-- \sum_{i=1}^{n} L\left(y_i, \beta_0 + \sum_{j=1}^{p} \beta_j x_{ij}\right) + \lambda \sum_{j=1}^{p} |\beta_j| -->
+<!-- $$ -->
+<!-- where $L$ is the appropriate *negative* **log**-likelihood. -->
+<!-- ```{r} -->
+<!-- library(glmnet) -->
+<!-- fit_cv = cv.glmnet(X, y, family = "binomial", alpha = 1) -->
+<!-- plot(fit_cv) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- head(coef(fit_cv), n = 10) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- fit_cv$nzero -->
+<!-- ``` -->
+<!-- Notice, only the first three predictors generated are truly significant, and that is exactly what the suggested model finds. -->
+<!-- ```{r} -->
+<!-- fit_1se = glmnet(X, y, family = "binomial", lambda = fit_cv$lambda.1se) -->
+<!-- which(as.vector(as.matrix(fit_1se$beta)) != 0) -->
+<!-- ``` -->
+<!-- We can also see in the following plots, the three features entering the model well ahead of the irrelevant features. -->
+<!-- ```{r, fig.height = 4, fig.width = 8} -->
+<!-- par(mfrow = c(1, 2)) -->
+<!-- plot(glmnet(X, y, family = "binomial")) -->
+<!-- plot(glmnet(X, y, family = "binomial"), xvar = "lambda") -->
+<!-- ``` -->
+<!-- We can extract the two relevant $\lambda$ values. -->
+<!-- ```{r} -->
+<!-- fit_cv$lambda.min -->
+<!-- fit_cv$lambda.1se -->
+<!-- ``` -->
+<!-- Since `cv.glmnet()` does not calculate prediction accuracy for classification, we take the $\lambda$ values and create a grid for `caret` to search in order to obtain prediction accuracy with `train()`. We set $\alpha = 1$ in this grid, as `glmnet` can actually tune over the $\alpha = 1$ parameter. (More on that later.) -->
+<!-- Note that we have to force `y` to be a factor, so that `train()` recognizes we want to have a binomial response. The `train()` function in `caret` use the type of variable in `y` to determine if you want to use `family = "binomial"` or `family = "gaussian"`. -->
+<!-- ```{r, message = FALSE, warning = FALSE} -->
+<!-- library(caret) -->
+<!-- cv_5 = trainControl(method = "cv", number = 5) -->
+<!-- lasso_grid = expand.grid(alpha = 1,  -->
+<!--                          lambda = c(fit_cv$lambda.min, fit_cv$lambda.1se)) -->
+<!-- lasso_grid -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- sim_data = data.frame(y, X) -->
+<!-- fit_lasso = train( -->
+<!--   y ~ ., data = sim_data, -->
+<!--   method = "glmnet", -->
+<!--   trControl = cv_5, -->
+<!--   tuneGrid = lasso_grid -->
+<!-- ) -->
+<!-- fit_lasso$results -->
+<!-- ``` -->
+<!-- The interaction between the `glmnet` and `caret` packages is sometimes frustrating, but for obtaining results for particular values of $\lambda$, we see it can be easily used. More on this next chapter. -->
+<!-- ## External Links -->
+<!-- - [`glmnet` Web Vingette](https://web.stanford.edu/~hastie/glmnet/glmnet_alpha.html) - Details from the package developers. (Is this old and out-of-date? But still useful?) -->
+<!-- ## `rmarkdown` -->
+<!-- The `rmarkdown` file for this chapter can be found [**here**](24-regularization.Rmd). The file was created using `R` version 4.0.2. The following packages (and their dependencies) were loaded when knitting this file: -->
+<!-- ```{r, echo = FALSE} -->
+<!-- names(sessionInfo()$otherPkgs) -->
+<!-- ``` -->
+<!-- ## from scratch.r -->
+<!-- ```{r, eval = FALSE} -->
+<!-- # add test-train splitting of data -->
+<!-- # only do this in the book???? -->
+<!-- library("glmnet") -->
+<!-- make_new_var = function(x, mu = 0, sigma = 0.6) { -->
+<!--   (x + rnorm(n = length(x), mean = mu, sd = sigma)) * sample(c(1, 1), size = 1) -->
+<!-- } -->
+<!-- sample_size = 500 -->
+<!-- p = 1000 -->
+<!-- mu = rep(0, p) -->
+<!-- # cov_mat = rWishart(1, p, diag(1, nrow = p, ncol = p))[, , 1] -->
+<!-- # x = MASS::mvrnorm(n = sample_size, mu = mu, Sigma = cov_mat) -->
+<!-- x_1 = runif(n = sample_size, min = -1, max = 1) -->
+<!-- x_list = purrr::map(1:p, ~ make_new_var(x = x_1)) -->
+<!-- x = as.matrix(do.call(cbind.data.frame, x_list)) -->
+<!-- # beta = rep(0.001, p) -->
+<!-- beta = sample(x = c(0, 0.2), replace = TRUE, size = p, prob = c(0.80, 0.20)) -->
+<!-- y = 5 + x %*% beta + rnorm(n = sample_size) -->
+<!-- z = list(x = x, y = y) -->
+<!-- fit_lasso = cv.glmnet(x = z$x, y = z$y, alpha = 1) # lasso -->
+<!-- fit_ridge = cv.glmnet(x = z$x, y = z$y, alpha = 0) # ridge -->
+<!-- # fit_ordin = cv.glmnet(x = z$x, y = z$y, alpha = 0, lambda = c(999, 0)) -->
+<!-- fit_lasso -->
+<!-- fit_ridge -->
+<!-- # fit_ordin -->
+<!-- plot(fit_lasso) -->
+<!-- plot(fit_ridge) -->
+<!-- hist(cor(x)[upper.tri(cor(x))]) -->
+<!-- cor(asdf[[1]], asdf[[5]]) -->
+<!-- cor(zzz[1, ], zzz[5, ]) -->
+<!-- cor_mat = matrix(runif(p * p), ncol = p) -->
+<!-- cor_mat = (cor_mat * lower.tri(cor_mat)) + t(cor_mat * lower.tri(cor_mat)) -->
+<!-- diag(cor_mat) = 1 -->
+<!-- # asdf = Matrix::nearPD(cor_mat) -->
+<!-- stdevs = round(rexp(n = p, rate = 0.25), 2) -->
+<!-- cov_mat = cor2cov(V = cor_mat, sd = stdevs) -->
+<!-- # with diag(p) -->
+<!-- # > summary(as.numeric(cor(x))) -->
+<!-- # Min.    1st Qu.     Median       Mean    3rd Qu.       Max.  -->
+<!-- # -0.2080438 -0.0303084 -0.0001621  0.0008833  0.0302504  1.0000000  -->
+<!-- # with random wishart -->
+<!-- # > summary(as.numeric(cor(x))) -->
+<!-- # Min.    1st Qu.     Median       Mean    3rd Qu.       Max.  -->
+<!-- # -0.2820794 -0.0369705  0.0001681  0.0010356  0.0372237  1.0000000  -->
+<!-- p = 100 -->
+<!-- hist(cov2cor(rWishart(1, p, diag(1, nrow = p, ncol = p))[, , 1])) -->
+<!-- A = matrix(runif(p ^ 2) * 2 - 1, ncol = p) -->
+<!-- hist(cov2cor(A + t(A))) -->
+<!-- ``` -->
 
 </div>
 </div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="supervised-ii.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="dimension-reduction.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="cross-validation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="additional-reading.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
