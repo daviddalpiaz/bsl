@@ -251,7 +251,7 @@ Blindly following the rules is foolish. Breaking rules can be fun! If you do it 
 > - Everything that exists is an object. 
 > - Everything that happens is a function call. 
 >
-> — John Chambers
+> — John Chambers^[@chambers2020s]
 
 As you continue to sharpen your `R` skills, keep this quotation in mind. Eventually, you will realize that everything you "do" in R, you do by running a function. To debug your code, you will need to explore the objects returned by functions. To fix your code, you will need to alter the inputs to functions, which are objects.
 
