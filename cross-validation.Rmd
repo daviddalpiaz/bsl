@@ -14,6 +14,6 @@ Specifically, we will discuss:
 
 This chapter is currently **under construction**. While it is being developed, the following links to the STAT 432 course notes.
 
-- [**Notes:** Cross-Validation](files/simulation.pdf)
-- [**Notes:** Cross-Validation](files/bootstrap.pdf)
+- [**Notes:** Simulation](files/simulation.pdf)
+- [**Notes:** Bootstrap](files/bootstrap.pdf)
 - [**Notes:** Cross-Validation](files/cross-validation.pdf)
