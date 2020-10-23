@@ -32,7 +32,7 @@
   
 <link rel="prev" href="cross-validation.html"/>
 <link rel="next" href="additional-reading.html"/>
-<script src="libs/header-attrs-2.5.1/header-attrs.js"></script>
+<script src="libs/header-attrs-2.5.2/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -340,6 +340,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 12</span> Regularization</h1>
 <hr />
 <p><strong>Chapter Status:</strong> Currently this chapter is very sparse. It essentially only expands upon an example discussed in ISL, thus only illustrates usage of the methods. Mathematical and conceptual details of the methods will be added later.</p>
+<ul>
+<li><a href="files/regularization.pdf"><strong>Notes:</strong> Cross-Validation</a></li>
+</ul>
 <p>We will use the <code>Hitters</code> dataset from the <code>ISLR</code> package to explore two shrinkage methods: <strong>ridge regression</strong> and <strong>lasso</strong>. These are otherwise known as <strong>penalized regression</strong> methods.</p>
 <div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="regularization.html#cb316-1"></a><span class="kw">data</span>(Hitters, <span class="dt">package =</span> <span class="st">&quot;ISLR&quot;</span>)</span></code></pre></div>
 <p>This dataset has some missing data in the response <code>Salaray</code>. We use the <code>na.omit()</code> function to clean the dataset for ease-of-use.</p>

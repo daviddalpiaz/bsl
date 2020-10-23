@@ -6,6 +6,8 @@
 
 **Chapter Status:** Currently this chapter is very sparse. It essentially only expands upon an example discussed in ISL, thus only illustrates usage of the methods. Mathematical and conceptual details of the methods will be added later.
 
+- [**Notes:** Cross-Validation](files/regularization.pdf)
+
 We will use the `Hitters` dataset from the `ISLR` package to explore two shrinkage methods: **ridge regression** and **lasso**. These are otherwise known as **penalized regression** methods.
 
 

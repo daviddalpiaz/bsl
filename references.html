@@ -32,7 +32,7 @@
   
 <link rel="prev" href="statistics.html"/>
 
-<script src="libs/header-attrs-2.5.1/header-attrs.js"></script>
+<script src="libs/header-attrs-2.5.2/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -339,6 +339,135 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="references" class="section level1 unnumbered" number="">
 <h1>References</h1>
 
+<p>–[[
+pagebreak – convert raw LaTeX page breaks to other formats</p>
+<p>Copyright © 2017-2019 Benct Philip Jonsson, Albert Krewinkel</p>
+<p>Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.</p>
+<p>THE SOFTWARE IS PROVIDED “AS IS” AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+]]
+local stringify_orig = (require ‘pandoc.utils’).stringify</p>
+<p>local function stringify(x)
+return type(x) == ‘string’ and x or stringify_orig(x)
+end</p>
+— configs – these are populated in the Meta filter.
+local pagebreak = {
+epub = ’
+<p style="page-break-after: always;">
+</p>
+‘,
+html =’
+<div style="page-break-after: always;">
+
+</div>
+<p>‘,
+latex =’\newpage{}‘,
+ooxml =’<w:p><w:r><w:br w:type="page"/></w:r></w:p>‘,
+odt =’<text:p text:style-name="Pagebreak"/>‘,
+context =’\page’
+}</p>
+local function pagebreaks_from_config (meta)
+local html_class =
+(meta.newpage_html_class and stringify(meta.newpage_html_class))
+or os.getenv ‘PANDOC_NEWPAGE_HTML_CLASS’
+if html_class and html_class ~= ’’ then
+pagebreak.html = string.format(’
+<div class="%s">
+
+</div>
+<p>’, html_class)
+end</p>
+<p>local odt_style =
+(meta.newpage_odt_style and stringify(meta.newpage_odt_style))
+or os.getenv ‘PANDOC_NEWPAGE_ODT_STYLE’
+if odt_style and odt_style ~= ’’ then
+pagebreak.odt = string.format(‘<text:p text:style-name="%s"/>’, odt_style)
+end
+end</p>
+<p>— Return a block element causing a page break in the given format.
+local function newpage(format)
+if format == ‘docx’ then
+return pandoc.RawBlock(‘openxml’, pagebreak.ooxml)
+elseif format:match ‘latex’ then
+return pandoc.RawBlock(‘tex’, pagebreak.latex)
+elseif format:match ‘odt’ then
+return pandoc.RawBlock(‘opendocument’, pagebreak.odt)
+elseif format:match ’html.*’ then
+return pandoc.RawBlock(‘html’, pagebreak.html)
+elseif format:match ‘epub’ then
+return pandoc.RawBlock(‘html’, pagebreak.epub)
+elseif format:match ‘context’ then
+return pandoc.RawBlock(‘context’, pagebreak.context)
+else
+– fall back to insert a form feed character
+return pandoc.Para{pandoc.Str ’}
+end
+end</p>
+<p>local function is_newpage_command(command)
+return command:match ‘^\newpage%{?%}?<span class="math inline">\(&#39;  or command:match &#39;^\\pagebreak%{?%}?\)</span>’
+end</p>
+<p>– Filter function called on each RawBlock element.
+function RawBlock (el)
+– Don’t do anything if the output is TeX
+if FORMAT:match ‘tex$’ then
+return nil
+end
+– check that the block is TeX or LaTeX and contains only
+– or .
+if el.format:match ‘tex’ and is_newpage_command(el.text) then
+– use format-specific pagebreak marker. FORMAT is set by pandoc to
+– the targeted output format.
+return newpage(FORMAT)
+end
+– otherwise, leave the block unchanged
+return nil
+end</p>
+<p>– Turning paragraphs which contain nothing but a form feed
+– characters into line breaks.
+function Para (el)
+if #el.content == 1 and el.content[1].text == ’ then
+return newpage(FORMAT)
+end
+end</p>
+<p>return {
+{Meta = pagebreaks_from_config},
+{RawBlock = RawBlock, Para = Para}
+}</p>
+<p>–[[
+A Pandoc 2 Lua filter converting Pandoc native divs to LaTeX environments
+Author: Romain Lesur, Christophe Dervieux, and Yihui Xie
+License: Public domain
+–]]</p>
+<p>Div = function (div)
+local options = div.attributes[‘data-latex’]
+if options == nil then return nil end</p>
+<p>– if the output format is not latex, remove the data-latex attr and return
+if FORMAT ~= ‘latex’ and FORMAT ~= ‘beamer’ then
+div.attributes[‘data-latex’] = nil
+return div
+end</p>
+<p>local env = div.classes[1]
+– if the div has no class, the object is left unchanged
+if not env then return nil end</p>
+<p>– insert raw latex before content
+table.insert(
+div.content, 1,
+pandoc.RawBlock(‘tex’, ‘\begin’ .. ‘{’ .. env .. ‘}’ .. options)
+)
+– insert raw latex after content
+table.insert(
+div.content,
+pandoc.RawBlock(‘tex’, ‘\end{’ .. env .. ‘}’)
+)
+return div
+end</p>
 <div id="refs" class="references hanging-indent">
 <div>
 <p>Belkin, Mikhail, Daniel Hsu, Siyuan Ma, and Soumik Mandal. “Reconciling Modern Machine Learning Practice and the Bias-Variance Trade-Off.” <em>arXiv Preprint arXiv:1812.11118</em>, 2018. <a href="https://arxiv.org/abs/1812.11118">https://arxiv.org/abs/1812.11118</a>.</p>
