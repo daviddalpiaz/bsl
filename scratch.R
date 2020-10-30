@@ -120,6 +120,8 @@ sqrt(mean((tst_data$y - predict(mod, tst_data)) ^ 2))
 ## tidymodels
 ## mlr3
 ## cvms
+## h20
+## deep learning?
 ## ????
 
 
