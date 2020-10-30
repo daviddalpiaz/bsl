@@ -521,11 +521,6 @@ fit_lasso_cv$cvm[fit_lasso_cv$lambda == fit_lasso_cv$lambda.min]
 
 ```r
 # CV-MSE using 1-SE rule lambda
-fit_lasso_cv$cvm[fit_lasso_cv$lambda == fit_lasso_cv$lambda.1se]
-```
-
-```
-## [1] 134525.5
 ```
 
 ## `broom`

@@ -623,17 +623,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="regularization.html#cb373-1"></a><span class="co"># CV-MSE using minimum lambda</span></span>
 <span id="cb373-2"><a href="regularization.html#cb373-2"></a>fit_lasso_cv<span class="op">$</span>cvm[fit_lasso_cv<span class="op">$</span>lambda <span class="op">==</span><span class="st"> </span>fit_lasso_cv<span class="op">$</span>lambda.min]</span></code></pre></div>
 <pre><code>## [1] 113436.9</code></pre>
-<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="regularization.html#cb375-1"></a><span class="co"># CV-MSE using 1-SE rule lambda</span></span>
-<span id="cb375-2"><a href="regularization.html#cb375-2"></a>fit_lasso_cv<span class="op">$</span>cvm[fit_lasso_cv<span class="op">$</span>lambda <span class="op">==</span><span class="st"> </span>fit_lasso_cv<span class="op">$</span>lambda<span class="fl">.1</span>se]</span></code></pre></div>
-<pre><code>## [1] 134525.5</code></pre>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="regularization.html#cb375-1"></a><span class="co"># CV-MSE using 1-SE rule lambda</span></span></code></pre></div>
 </div>
 <div id="broom" class="section level2" number="12.3">
 <h2><span class="header-section-number">12.3</span> <code>broom</code></h2>
 <p>Sometimes, the output from <code>glmnet()</code> can be overwhelming. The <code>broom</code> package can help with that.</p>
-<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="regularization.html#cb377-1"></a><span class="kw">library</span>(broom)</span>
-<span id="cb377-2"><a href="regularization.html#cb377-2"></a><span class="co"># the output from the commented line would be immense</span></span>
-<span id="cb377-3"><a href="regularization.html#cb377-3"></a><span class="co"># fit_lasso_cv</span></span>
-<span id="cb377-4"><a href="regularization.html#cb377-4"></a><span class="kw">tidy</span>(fit_lasso_cv)</span></code></pre></div>
+<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="regularization.html#cb376-1"></a><span class="kw">library</span>(broom)</span>
+<span id="cb376-2"><a href="regularization.html#cb376-2"></a><span class="co"># the output from the commented line would be immense</span></span>
+<span id="cb376-3"><a href="regularization.html#cb376-3"></a><span class="co"># fit_lasso_cv</span></span>
+<span id="cb376-4"><a href="regularization.html#cb376-4"></a><span class="kw">tidy</span>(fit_lasso_cv)</span></code></pre></div>
 <pre><code>## # A tibble: 80 x 6
 ##    lambda estimate std.error conf.low conf.high nzero
 ##     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
@@ -648,8 +646,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  9   121.  144915.    25391.  119524.   170305.     4
 ## 10   111.  140934.    25122.  115812.   166056.     4
 ## # … with 70 more rows</code></pre>
-<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="regularization.html#cb379-1"></a><span class="co"># the two lambda values of interest</span></span>
-<span id="cb379-2"><a href="regularization.html#cb379-2"></a><span class="kw">glance</span>(fit_lasso_cv) </span></code></pre></div>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="regularization.html#cb378-1"></a><span class="co"># the two lambda values of interest</span></span>
+<span id="cb378-2"><a href="regularization.html#cb378-2"></a><span class="kw">glance</span>(fit_lasso_cv) </span></code></pre></div>
 <pre><code>## # A tibble: 1 x 3
 ##   lambda.min lambda.1se  nobs
 ##        &lt;dbl&gt;      &lt;dbl&gt; &lt;int&gt;
@@ -658,28 +656,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="simulated-data-p-n" class="section level2" number="12.4">
 <h2><span class="header-section-number">12.4</span> Simulated Data, <span class="math inline">\(p &gt; n\)</span></h2>
 <p>Aside from simply shrinking coefficients (ridge and lasso) and setting some coefficients to 0 (lasso), penalized regression also has the advantage of being able to handle the <span class="math inline">\(p &gt; n\)</span> case.</p>
-<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="regularization.html#cb381-1"></a><span class="kw">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb381-2"><a href="regularization.html#cb381-2"></a>n =<span class="st"> </span><span class="dv">1000</span></span>
-<span id="cb381-3"><a href="regularization.html#cb381-3"></a>p =<span class="st"> </span><span class="dv">5500</span></span>
-<span id="cb381-4"><a href="regularization.html#cb381-4"></a>X =<span class="st"> </span><span class="kw">replicate</span>(p, <span class="kw">rnorm</span>(<span class="dt">n =</span> n))</span>
-<span id="cb381-5"><a href="regularization.html#cb381-5"></a>beta =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">5497</span>))</span>
-<span id="cb381-6"><a href="regularization.html#cb381-6"></a>z =<span class="st"> </span>X <span class="op">%*%</span><span class="st"> </span>beta</span>
-<span id="cb381-7"><a href="regularization.html#cb381-7"></a>prob =<span class="st"> </span><span class="kw">exp</span>(z) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(z))</span>
-<span id="cb381-8"><a href="regularization.html#cb381-8"></a>y =<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">rbinom</span>(<span class="kw">length</span>(z), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> prob))</span></code></pre></div>
+<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="regularization.html#cb380-1"></a><span class="kw">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb380-2"><a href="regularization.html#cb380-2"></a>n =<span class="st"> </span><span class="dv">1000</span></span>
+<span id="cb380-3"><a href="regularization.html#cb380-3"></a>p =<span class="st"> </span><span class="dv">5500</span></span>
+<span id="cb380-4"><a href="regularization.html#cb380-4"></a>X =<span class="st"> </span><span class="kw">replicate</span>(p, <span class="kw">rnorm</span>(<span class="dt">n =</span> n))</span>
+<span id="cb380-5"><a href="regularization.html#cb380-5"></a>beta =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">5497</span>))</span>
+<span id="cb380-6"><a href="regularization.html#cb380-6"></a>z =<span class="st"> </span>X <span class="op">%*%</span><span class="st"> </span>beta</span>
+<span id="cb380-7"><a href="regularization.html#cb380-7"></a>prob =<span class="st"> </span><span class="kw">exp</span>(z) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(z))</span>
+<span id="cb380-8"><a href="regularization.html#cb380-8"></a>y =<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">rbinom</span>(<span class="kw">length</span>(z), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> prob))</span></code></pre></div>
 <p>We first simulate a classification example where <span class="math inline">\(p &gt; n\)</span>.</p>
-<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="regularization.html#cb382-1"></a><span class="co"># glm(y ~ X, family = &quot;binomial&quot;)</span></span>
-<span id="cb382-2"><a href="regularization.html#cb382-2"></a><span class="co"># will not converge</span></span></code></pre></div>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="regularization.html#cb381-1"></a><span class="co"># glm(y ~ X, family = &quot;binomial&quot;)</span></span>
+<span id="cb381-2"><a href="regularization.html#cb381-2"></a><span class="co"># will not converge</span></span></code></pre></div>
 <p>We then use a lasso penalty to fit penalized logistic regression. This minimizes</p>
 <p><span class="math display">\[
 \sum_{i=1}^{n} L\left(y_i, \beta_0 + \sum_{j=1}^{p} \beta_j x_{ij}\right) + \lambda \sum_{j=1}^{p} |\beta_j|
 \]</span></p>
 <p>where <span class="math inline">\(L\)</span> is the appropriate <em>negative</em> <strong>log</strong>-likelihood.</p>
-<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="regularization.html#cb383-1"></a><span class="kw">library</span>(glmnet)</span>
-<span id="cb383-2"><a href="regularization.html#cb383-2"></a>fit_cv =<span class="st"> </span><span class="kw">cv.glmnet</span>(X, y, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">alpha =</span> <span class="dv">1</span>)</span>
-<span id="cb383-3"><a href="regularization.html#cb383-3"></a><span class="kw">plot</span>(fit_cv)</span></code></pre></div>
+<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="regularization.html#cb382-1"></a><span class="kw">library</span>(glmnet)</span>
+<span id="cb382-2"><a href="regularization.html#cb382-2"></a>fit_cv =<span class="st"> </span><span class="kw">cv.glmnet</span>(X, y, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">alpha =</span> <span class="dv">1</span>)</span>
+<span id="cb382-3"><a href="regularization.html#cb382-3"></a><span class="kw">plot</span>(fit_cv)</span></code></pre></div>
 <p><img src="regularization_files/figure-html/unnamed-chunk-34-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>We’re being lazy again and using the entire dataset as the training data.</p>
-<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="regularization.html#cb384-1"></a><span class="kw">head</span>(<span class="kw">coef</span>(fit_cv), <span class="dt">n =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="regularization.html#cb383-1"></a><span class="kw">head</span>(<span class="kw">coef</span>(fit_cv), <span class="dt">n =</span> <span class="dv">10</span>)</span></code></pre></div>
 <pre><code>## 10 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
 ##                      1
 ## (Intercept) 0.02397452
@@ -692,7 +690,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## V7          .         
 ## V8          .         
 ## V9          .</code></pre>
-<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="regularization.html#cb386-1"></a>fit_cv<span class="op">$</span>nzero</span></code></pre></div>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="regularization.html#cb385-1"></a>fit_cv<span class="op">$</span>nzero</span></code></pre></div>
 <pre><code>##  s0  s1  s2  s3  s4  s5  s6  s7  s8  s9 s10 s11 s12 s13 s14 s15 s16 s17 s18 s19 
 ##   0   2   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3 
 ## s20 s21 s22 s23 s24 s25 s26 s27 s28 s29 s30 s31 s32 s33 s34 s35 s36 s37 s38 s39 
@@ -704,18 +702,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## s80 s81 s82 s83 s84 s85 s86 s87 s88 s89 s90 s91 s92 s93 s94 s95 s96 s97 s98 s99 
 ## 523 526 528 536 543 550 559 561 563 566 570 571 576 582 586 590 596 596 600 599</code></pre>
 <p>Notice, only the first three predictors generated are truly significant, and that is exactly what the suggested model finds.</p>
-<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="regularization.html#cb388-1"></a>fit_1se =<span class="st"> </span><span class="kw">glmnet</span>(X, y, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">lambda =</span> fit_cv<span class="op">$</span>lambda<span class="fl">.1</span>se)</span>
-<span id="cb388-2"><a href="regularization.html#cb388-2"></a><span class="kw">which</span>(<span class="kw">as.vector</span>(<span class="kw">as.matrix</span>(fit_1se<span class="op">$</span>beta)) <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="regularization.html#cb387-1"></a>fit_1se =<span class="st"> </span><span class="kw">glmnet</span>(X, y, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">lambda =</span> fit_cv<span class="op">$</span>lambda<span class="fl">.1</span>se)</span>
+<span id="cb387-2"><a href="regularization.html#cb387-2"></a><span class="kw">which</span>(<span class="kw">as.vector</span>(<span class="kw">as.matrix</span>(fit_1se<span class="op">$</span>beta)) <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## [1] 1 2 3</code></pre>
 <p>We can also see in the following plots, the three features entering the model well ahead of the irrelevant features.</p>
-<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="regularization.html#cb390-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb390-2"><a href="regularization.html#cb390-2"></a><span class="kw">plot</span>(<span class="kw">glmnet</span>(X, y, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>))</span>
-<span id="cb390-3"><a href="regularization.html#cb390-3"></a><span class="kw">plot</span>(<span class="kw">glmnet</span>(X, y, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>), <span class="dt">xvar =</span> <span class="st">&quot;lambda&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="regularization.html#cb389-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb389-2"><a href="regularization.html#cb389-2"></a><span class="kw">plot</span>(<span class="kw">glmnet</span>(X, y, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>))</span>
+<span id="cb389-3"><a href="regularization.html#cb389-3"></a><span class="kw">plot</span>(<span class="kw">glmnet</span>(X, y, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>), <span class="dt">xvar =</span> <span class="st">&quot;lambda&quot;</span>)</span></code></pre></div>
 <p><img src="regularization_files/figure-html/unnamed-chunk-38-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>We can extract the two relevant <span class="math inline">\(\lambda\)</span> values.</p>
-<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="regularization.html#cb391-1"></a>fit_cv<span class="op">$</span>lambda.min</span></code></pre></div>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="regularization.html#cb390-1"></a>fit_cv<span class="op">$</span>lambda.min</span></code></pre></div>
 <pre><code>## [1] 0.03718493</code></pre>
-<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="regularization.html#cb393-1"></a>fit_cv<span class="op">$</span>lambda<span class="fl">.1</span>se</span></code></pre></div>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="regularization.html#cb392-1"></a>fit_cv<span class="op">$</span>lambda<span class="fl">.1</span>se</span></code></pre></div>
 <pre><code>## [1] 0.0514969</code></pre>
 <p>TODO: use default of <code>type.measure="deviance"</code> but note that <code>type.measure="class"</code> exists.</p>
 <!-- In this chapter... -->
