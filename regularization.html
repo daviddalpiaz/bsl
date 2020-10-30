@@ -32,7 +32,7 @@
   
 <link rel="prev" href="cross-validation.html"/>
 <link rel="next" href="additional-reading.html"/>
-<script src="libs/header-attrs-2.5.2/header-attrs.js"></script>
+<script src="libs/header-attrs-2.5.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,8 +51,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -483,27 +483,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="regularization.html#cb347-1"></a><span class="co"># calculate &quot;train error&quot;</span></span>
 <span id="cb347-2"><a href="regularization.html#cb347-2"></a><span class="kw">mean</span>((y <span class="op">-</span><span class="st"> </span><span class="kw">predict</span>(fit_ridge_cv, X)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 134397.5</code></pre>
-<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="regularization.html#cb349-1"></a><span class="co"># CV-RMSEs</span></span>
-<span id="cb349-2"><a href="regularization.html#cb349-2"></a><span class="kw">sqrt</span>(fit_ridge_cv<span class="op">$</span>cvm)</span></code></pre></div>
-<pre><code>##   [1] 451.2440 449.5213 448.7621 448.4939 448.2008 447.8805 447.5307 447.1487
-##   [9] 446.7319 446.2774 445.7820 445.2423 444.6550 444.0162 443.3220 442.5683
-##  [17] 441.7508 440.8653 439.9071 438.8716 437.7541 436.5501 435.2550 433.8645
-##  [25] 432.3743 430.7807 429.0805 427.2710 425.3502 423.3170 421.1714 418.9146
-##  [33] 416.5491 414.0786 411.5088 408.8468 406.1014 403.2827 400.4031 397.4761
-##  [41] 394.5166 391.5408 388.5656 385.6083 382.6865 379.8175 377.0179 374.3034
-##  [49] 371.6879 369.1843 366.8016 364.5496 362.4345 360.4601 358.6283 356.9392
-##  [57] 355.3909 353.9801 352.7021 351.5514 350.5213 349.6052 348.7957 348.0834
-##  [65] 347.4691 346.9389 346.4878 346.1080 345.7941 345.5404 345.3454 345.1982
-##  [73] 345.0938 345.0369 345.0112 345.0166 345.0556 345.1153 345.1951 345.2979
-##  [81] 345.4098 345.5359 345.6711 345.8147 345.9627 346.1114 346.2617 346.4112
-##  [89] 346.5588 346.7013 346.8402 346.9739 347.1003 347.2197 347.3325 347.4378
-##  [97] 347.5348 347.6266 347.7097 347.8187</code></pre>
-<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="regularization.html#cb351-1"></a><span class="co"># CV-RMSE using minimum lambda</span></span>
-<span id="cb351-2"><a href="regularization.html#cb351-2"></a><span class="kw">sqrt</span>(fit_ridge_cv<span class="op">$</span>cvm[fit_ridge_cv<span class="op">$</span>lambda <span class="op">==</span><span class="st"> </span>fit_ridge_cv<span class="op">$</span>lambda.min])</span></code></pre></div>
-<pre><code>## [1] 345.0112</code></pre>
-<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="regularization.html#cb353-1"></a><span class="co"># CV-RMSE using 1-SE rule lambda</span></span>
-<span id="cb353-2"><a href="regularization.html#cb353-2"></a><span class="kw">sqrt</span>(fit_ridge_cv<span class="op">$</span>cvm[fit_ridge_cv<span class="op">$</span>lambda <span class="op">==</span><span class="st"> </span>fit_ridge_cv<span class="op">$</span>lambda<span class="fl">.1</span>se]) </span></code></pre></div>
-<pre><code>## [1] 371.6879</code></pre>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="regularization.html#cb349-1"></a><span class="co"># CV-MSEs</span></span>
+<span id="cb349-2"><a href="regularization.html#cb349-2"></a>fit_ridge_cv<span class="op">$</span>cvm</span></code></pre></div>
+<pre><code>##   [1] 203621.2 202069.4 201387.4 201146.8 200884.0 200596.9 200283.7 199942.0
+##   [9] 199569.4 199163.5 198721.6 198240.7 197718.1 197150.4 196534.4 195866.7
+##  [17] 195143.8 194362.2 193518.2 192608.3 191628.7 190576.0 189446.9 188238.4
+##  [25] 186947.5 185572.0 184110.1 182560.5 180922.8 179197.3 177385.4 175489.5
+##  [33] 173513.1 171461.1 169339.5 167155.7 164918.3 162637.0 160322.6 157987.2
+##  [41] 155643.4 153304.2 150983.2 148693.7 146449.0 144261.3 142142.5 140103.0
+##  [49] 138151.9 136297.0 134543.4 132896.4 131358.8 129931.4 128614.2 127405.6
+##  [57] 126302.7 125301.9 124398.8 123588.4 122865.2 122223.8 121658.4 121162.0
+##  [65] 120734.8 120366.6 120053.8 119790.8 119573.6 119398.2 119263.5 119161.8
+##  [73] 119089.7 119050.5 119032.7 119036.4 119063.4 119104.5 119159.7 119230.6
+##  [81] 119307.9 119395.1 119488.5 119587.8 119690.2 119793.1 119897.2 120000.7
+##  [89] 120103.0 120201.8 120298.1 120390.9 120478.6 120561.6 120639.9 120713.0
+##  [97] 120780.5 120844.2 120902.0 120977.9</code></pre>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="regularization.html#cb351-1"></a><span class="co"># CV-MSE using minimum lambda</span></span>
+<span id="cb351-2"><a href="regularization.html#cb351-2"></a>fit_ridge_cv<span class="op">$</span>cvm[fit_ridge_cv<span class="op">$</span>lambda <span class="op">==</span><span class="st"> </span>fit_ridge_cv<span class="op">$</span>lambda.min]</span></code></pre></div>
+<pre><code>## [1] 119032.7</code></pre>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="regularization.html#cb353-1"></a><span class="co"># CV-MSE using 1-SE rule lambda</span></span>
+<span id="cb353-2"><a href="regularization.html#cb353-2"></a>fit_ridge_cv<span class="op">$</span>cvm[fit_ridge_cv<span class="op">$</span>lambda <span class="op">==</span><span class="st"> </span>fit_ridge_cv<span class="op">$</span>lambda<span class="fl">.1</span>se]</span></code></pre></div>
+<pre><code>## [1] 138151.9</code></pre>
 </div>
 <div id="lasso" class="section level2" number="12.2">
 <h2><span class="header-section-number">12.2</span> Lasso</h2>
@@ -608,24 +608,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="regularization.html#cb369-1"></a><span class="co"># calcualte &quot;train error&quot;</span></span>
 <span id="cb369-2"><a href="regularization.html#cb369-2"></a><span class="kw">mean</span>((y <span class="op">-</span><span class="st"> </span><span class="kw">predict</span>(fit_lasso_cv, X)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 127112.4</code></pre>
-<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="regularization.html#cb371-1"></a><span class="co"># CV-RMSEs</span></span>
-<span id="cb371-2"><a href="regularization.html#cb371-2"></a><span class="kw">sqrt</span>(fit_lasso_cv<span class="op">$</span>cvm)</span></code></pre></div>
-<pre><code>##  [1] 450.5050 440.0692 429.3063 420.3461 411.8850 402.8150 394.2837 386.9201
-##  [9] 380.6765 375.4116 370.9037 366.7772 363.1193 359.9917 356.8426 353.8294
-## [17] 351.2886 349.1854 347.2837 345.6108 344.2301 343.0934 342.1611 341.4019
-## [25] 340.7892 340.3586 340.0932 339.9361 339.9030 339.9663 340.0569 340.1319
-## [33] 340.1800 340.2042 340.2432 340.4433 340.7655 341.0229 340.8282 340.2964
-## [41] 339.7755 339.1886 338.8162 338.5140 338.2311 337.9505 337.5426 337.2267
-## [49] 336.9961 336.8341 336.8040 336.8734 337.0186 337.3109 337.6618 337.9231
-## [57] 338.2313 338.4739 338.6866 338.8488 339.0017 339.1431 339.3230 339.4743
-## [65] 339.6478 339.7971 339.9640 340.0950 340.2463 340.3625 340.5159 340.6321
-## [73] 340.7594 340.8809 340.9877 341.1218 341.2099 341.3044 341.4422 341.5391</code></pre>
-<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="regularization.html#cb373-1"></a><span class="co"># CV-RMSE using minimum lambda</span></span>
-<span id="cb373-2"><a href="regularization.html#cb373-2"></a><span class="kw">sqrt</span>(fit_lasso_cv<span class="op">$</span>cvm[fit_lasso_cv<span class="op">$</span>lambda <span class="op">==</span><span class="st"> </span>fit_lasso_cv<span class="op">$</span>lambda.min])</span></code></pre></div>
-<pre><code>## [1] 336.804</code></pre>
-<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="regularization.html#cb375-1"></a><span class="co"># CV-RMSE using 1-SE rule lambda</span></span>
-<span id="cb375-2"><a href="regularization.html#cb375-2"></a><span class="kw">sqrt</span>(fit_lasso_cv<span class="op">$</span>cvm[fit_lasso_cv<span class="op">$</span>lambda <span class="op">==</span><span class="st"> </span>fit_lasso_cv<span class="op">$</span>lambda<span class="fl">.1</span>se]) </span></code></pre></div>
-<pre><code>## [1] 366.7772</code></pre>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="regularization.html#cb371-1"></a><span class="co"># CV-MSEs</span></span>
+<span id="cb371-2"><a href="regularization.html#cb371-2"></a>fit_lasso_cv<span class="op">$</span>cvm</span></code></pre></div>
+<pre><code>##  [1] 202954.8 193660.9 184303.9 176690.8 169649.2 162259.9 155459.6 149707.1
+##  [9] 144914.6 140933.9 137569.5 134525.5 131855.7 129594.0 127336.6 125195.3
+## [17] 123403.7 121930.4 120606.0 119446.8 118494.4 117713.1 117074.2 116555.3
+## [25] 116137.3 115844.0 115663.4 115556.6 115534.0 115577.1 115638.7 115689.7
+## [33] 115722.4 115738.9 115765.4 115901.6 116121.2 116296.6 116163.9 115801.6
+## [41] 115447.4 115048.9 114796.4 114591.7 114400.3 114210.5 113935.0 113721.9
+## [49] 113566.4 113457.2 113436.9 113483.7 113581.5 113778.6 114015.5 114192.0
+## [57] 114400.4 114564.6 114708.6 114818.5 114922.1 115018.1 115140.1 115242.8
+## [65] 115360.6 115462.0 115575.5 115664.6 115767.6 115846.7 115951.1 116030.2
+## [73] 116117.0 116199.8 116272.6 116364.1 116424.2 116488.7 116582.8 116649.0</code></pre>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="regularization.html#cb373-1"></a><span class="co"># CV-MSE using minimum lambda</span></span>
+<span id="cb373-2"><a href="regularization.html#cb373-2"></a>fit_lasso_cv<span class="op">$</span>cvm[fit_lasso_cv<span class="op">$</span>lambda <span class="op">==</span><span class="st"> </span>fit_lasso_cv<span class="op">$</span>lambda.min]</span></code></pre></div>
+<pre><code>## [1] 113436.9</code></pre>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="regularization.html#cb375-1"></a><span class="co"># CV-MSE using 1-SE rule lambda</span></span>
+<span id="cb375-2"><a href="regularization.html#cb375-2"></a>fit_lasso_cv<span class="op">$</span>cvm[fit_lasso_cv<span class="op">$</span>lambda <span class="op">==</span><span class="st"> </span>fit_lasso_cv<span class="op">$</span>lambda<span class="fl">.1</span>se]</span></code></pre></div>
+<pre><code>## [1] 134525.5</code></pre>
 </div>
 <div id="broom" class="section level2" number="12.3">
 <h2><span class="header-section-number">12.3</span> <code>broom</code></h2>

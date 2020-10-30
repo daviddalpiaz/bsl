@@ -124,18 +124,18 @@ mean((y - predict(fit_ridge_cv, X)) ^ 2)
 ```
 
 ```{r}
-# CV-RMSEs
-sqrt(fit_ridge_cv$cvm)
+# CV-MSEs
+fit_ridge_cv$cvm
 ```
 
 ```{r}
-# CV-RMSE using minimum lambda
-sqrt(fit_ridge_cv$cvm[fit_ridge_cv$lambda == fit_ridge_cv$lambda.min])
+# CV-MSE using minimum lambda
+fit_ridge_cv$cvm[fit_ridge_cv$lambda == fit_ridge_cv$lambda.min]
 ```
 
 ```{r}
-# CV-RMSE using 1-SE rule lambda
-sqrt(fit_ridge_cv$cvm[fit_ridge_cv$lambda == fit_ridge_cv$lambda.1se]) 
+# CV-MSE using 1-SE rule lambda
+fit_ridge_cv$cvm[fit_ridge_cv$lambda == fit_ridge_cv$lambda.1se]
 ```
 
 ## Lasso
@@ -207,18 +207,18 @@ mean((y - predict(fit_lasso_cv, X)) ^ 2)
 ```
 
 ```{r}
-# CV-RMSEs
-sqrt(fit_lasso_cv$cvm)
+# CV-MSEs
+fit_lasso_cv$cvm
 ```
 
 ```{r}
-# CV-RMSE using minimum lambda
-sqrt(fit_lasso_cv$cvm[fit_lasso_cv$lambda == fit_lasso_cv$lambda.min])
+# CV-MSE using minimum lambda
+fit_lasso_cv$cvm[fit_lasso_cv$lambda == fit_lasso_cv$lambda.min]
 ```
 
 ```{r}
-# CV-RMSE using 1-SE rule lambda
-sqrt(fit_lasso_cv$cvm[fit_lasso_cv$lambda == fit_lasso_cv$lambda.1se]) 
+# CV-MSE using 1-SE rule lambda
+fit_lasso_cv$cvm[fit_lasso_cv$lambda == fit_lasso_cv$lambda.1se]
 ```
 
 ## `broom`
