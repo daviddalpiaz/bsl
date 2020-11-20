@@ -4,30 +4,55 @@
 knitr::opts_chunk$set(echo = TRUE, fig.align = "center", cache = TRUE, autodep = TRUE)
 ```
 
-***
+While this chapter is currently completely incomplete, the following resources will be useful for navigating the Graduate Student quiz in the Fall 2020 semester of STAT 432. Note that these resources might not necessarily follow all conventions of STAT 432, so notation and nomenclature may have minor differences.
 
-In this chapter...
+This chapter introduces **ensemble methods** that use the combination of several models fit to the same data to create one model that may perform better than any single model.
 
-***
+The following are old notes from STAT 432. Like the resources below, these notes suffer from some deviation of the conventions established throughout the course this semester.
 
-## Reading
+- [R for Statistical Learning: Ensemble Methods](https://daviddalpiaz.github.io/r4sl/ensemble-methods.html)
 
-- **Required:** ???
+## Bagging
 
-***
+**Bagging** is a combination of the words *bootstrap* and *aggregation* and refers to a process of fitting many models to bootstrap resamples of data and then aggregating the predictions from these models. Most of the reason we introduced the bootstrap earlier was for its use in the creation of ensemble methods. Bagging is often associated with decision trees, but you could use any methods that you'd like!
 
-```{r packages, message = FALSE, warning = FALSE}
-library("tidyverse")
-```
+### Reading
 
-***
+- [Introduction to Statistical Learning: Section 8.2.1](https://faculty.marshall.usc.edu/gareth-james/ISL/ISLR%20Seventh%20Printing.pdf)
+- [Hands-On Machine Learning with R: Bagging](https://bradleyboehmke.github.io/HOML/bagging.html)
 
-TBD
+## Random Forest
 
-***
+A **random forest** is a method that combines decision trees, bagging, and a little bit of extra randomness. The randomness is added to overcome the correlation in the results of the models in the ensemble.
 
-## Source
+### Reading
 
-- `R` Markdown: [`ensemble-methods.Rmd`](ensemble-methods.Rmd)
+- [Introduction to Statistical Learning: Section 8.2.2](https://faculty.marshall.usc.edu/gareth-james/ISL/ISLR%20Seventh%20Printing.pdf)
+- [Hands-On Machine Learning with R: Random Forest](https://bradleyboehmke.github.io/HOML/random-forest.html)
 
-***
+### Video
+
+- [StatQuest: Random Forests Part 1 - Building, Using and Evaluating](https://www.youtube.com/watch?v=J4Wdy0Wc_xQ&list=PLblh5JKOoLUICTaGLRoHQDuF_7q2GfuJF&index=43)
+- [StatQuest: Random Forests Part 2: Missing data and clustering](https://www.youtube.com/watch?v=sQ870aTKqiM&list=PLblh5JKOoLUICTaGLRoHQDuF_7q2GfuJF&index=44)
+- [StatQuest: Random Forests in R](https://www.youtube.com/watch?v=6EXPYzbfLCE&list=PLblh5JKOoLUICTaGLRoHQDuF_7q2GfuJF&index=45)
+
+## Boosting
+
+Like bagging, **boosting** uses many models, but instead of many models in parallel, it uses many models in sequence. Many methods can be boosted, but most often we boost decision trees.
+
+### Reading
+
+- [Introduction to Statistical Learning: Section 8.2.3](https://faculty.marshall.usc.edu/gareth-james/ISL/ISLR%20Seventh%20Printing.pdf)
+- [Hands-On Machine Learning with R: Gradient Boosting](https://bradleyboehmke.github.io/HOML/gbm.html)
+
+### Video
+
+- [Gradient Boost Part 1: Regression Main Ideas](https://www.youtube.com/watch?v=3CC4N4z3GJc&list=PLblh5JKOoLUICTaGLRoHQDuF_7q2GfuJF&index=50)
+- [Gradient Boost Part 2: Regression Details](https://www.youtube.com/watch?v=2xudPOBz-vs&list=PLblh5JKOoLUICTaGLRoHQDuF_7q2GfuJF&index=51)
+- [Gradient Boost Part 3: Classification](https://www.youtube.com/watch?v=jxuNLH5dXCs&list=PLblh5JKOoLUICTaGLRoHQDuF_7q2GfuJF&index=52)
+- [Gradient Boost Part 4: Classification Details](https://www.youtube.com/watch?v=StWY5QWMXCw&list=PLblh5JKOoLUICTaGLRoHQDuF_7q2GfuJF&index=53)
+- [XGBoost Part 1: Regression](https://www.youtube.com/watch?v=OtD8wVaFm6E&list=PLblh5JKOoLUICTaGLRoHQDuF_7q2GfuJF&index=59)
+- [XGBoost Part 2: Classification](https://www.youtube.com/watch?v=8b1JEDvenQU&list=PLblh5JKOoLUICTaGLRoHQDuF_7q2GfuJF&index=60)
+- [XGBoost Part 3: Mathematical Details](https://www.youtube.com/watch?v=ZVFeW798-2I&list=PLblh5JKOoLUICTaGLRoHQDuF_7q2GfuJF&index=61)
+- [XGBoost Part 4: Crazy Cool Optimizations](https://www.youtube.com/watch?v=oRrKeUCEbq8&list=PLblh5JKOoLUICTaGLRoHQDuF_7q2GfuJF&index=62)
+- [XGBoost Part 1: Regression](https://www.youtube.com/watch?v=OtD8wVaFm6E&list=PLblh5JKOoLUICTaGLRoHQDuF_7q2GfuJF&index=59)
