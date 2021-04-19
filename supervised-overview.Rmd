@@ -4,8 +4,6 @@
 knitr::opts_chunk$set(echo = TRUE, fig.align = "center", cache = TRUE, autodep = TRUE)
 ```
 
-***
-
 This chapter is currently just a bit of a placeholder that introduces `caret` as a systematized way of doing supervised learning.
 
 ***
@@ -293,7 +291,6 @@ head(predict(iris_knn_mod, type = "prob"))
 head(predict(iris_qda_mod, type = "prob"))
 ```
 
-
 ## Regression
 
 To illustrate the use of `caret` for regression, we'll consider some simulated data.
@@ -386,7 +383,6 @@ calc_rmse(actual = sim_tst$y,
 
 Here we see that the cross-validated RMSE is a bit of an overestimate, but still rather close to the test error. The real question is, are either of these any good? Is this model predicting well? No! Notice that we simulated this data with an error standard deviation of 1!
 
-
 ### Methods
 
 Now that `caret` has given us a pipeline for a predictive analysis, we can very quickly and easily test new methods. For example, in an upcoming chapter we will discuss boosted tree models, but now that we understand how to use `caret`, in order to *use* a boosted tree model, we simply need to know the "method" to do so, which in this case is `gbm`. Beyond knowing that the method exists, we just need to know its tuning parameters, in this case, there are four. We actually could get away with knowing nothing about them, and simply specify a `tuneLength`, then `caret` would automatically try some reasonable values.
@@ -471,19 +467,9 @@ This model dominates the previous two. The `gbm` model does still have a big adv
 
 This question of *which* variables should be included is where we will turn our focus next. We'll consider both what variables are useful for prediction, and learn tools to asses how useful they are.
 
-
 ## External Links
 
 - [The `caret` Package](http://topepo.github.io/caret/index.html) - Reference documentation for the `caret` package in `bookdown` format.
 - [`caret` Model List](http://topepo.github.io/caret/available-models.html) - List of available models in `caret`.
 - [`caret` Model List, By Tag](https://topepo.github.io/caret/train-models-by-tag.html) - Gives information on tuning parameters and necessary packages.
 - [Applied Predictive Modeling](http://www.springer.com/us/book/9781461468486) - Book from the author of the `caret` package, Max Kuhn, as well as Kjell Johnson. Further discussion on use of statistical learning methods in practice.
-
-
-## `rmarkdown`
-
-The `rmarkdown` file for this chapter can be found [**here**](21-caret.Rmd). The file was created using `R` version `r paste0(version$major, "." ,version$minor)`. The following packages (and their dependencies) were loaded when knitting this file:
-
-```{r, echo = FALSE}
-names(sessionInfo()$otherPkgs)
-```
