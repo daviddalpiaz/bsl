@@ -21,7 +21,8 @@ Imports:
   palmerpenguins,
   glmnet,
   broom,
-  mlbench
+  mlbench,
+  gridExtra
 Remotes:
   coatless/ucidata,
   rstudio/bookdown
