@@ -115,7 +115,7 @@ video
 boosting
 reading-2
 video-1
-supervised-learning-overview-ii
+supervised-learning-overview
 classification-2
 tuning
 regression-1
