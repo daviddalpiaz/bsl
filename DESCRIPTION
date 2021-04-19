@@ -20,7 +20,8 @@ Imports:
   ucidata,
   palmerpenguins,
   glmnet,
-  broom
+  broom,
+  mlbench
 Remotes:
   coatless/ucidata,
   rstudio/bookdown
