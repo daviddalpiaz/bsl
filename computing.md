@@ -124,7 +124,7 @@ Be sure to keep your packages up-to-date. To do so:
 
 At this point, you may be asked: "Do you want to restart R prior to installing?" Select "Yes." If asked again, Select "No."
 
-During the update you may be asked "Do you want to install from sources the packages which need compilation? (Yes/no/cancel)" Type `no` and press enter. Do the same if you encounter this when installing packages.^[You'll technically note be as up to date with this selection, but this won't be an issue.]
+During the update you may be asked "Do you want to install from sources the packages which need compilation? (Yes/no/cancel)" Type `no` and press enter. Do the same if you encounter this when installing packages.^[You'll technically not be as up to date with this selection, but this shouldn't cause any issues, and will make installation quicker and easier.]
 
 Errors often rise when installing packages. Two common tips to overcome these:
 

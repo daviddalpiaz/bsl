@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 7 Nonparametric Classification | Basics of Statistical Learning</title>
   <meta name="description" content="Chapter 7 Nonparametric Classification | Basics of Statistical Learning" />
-  <meta name="generator" content="bookdown 0.21.4 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21.11 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 7 Nonparametric Classification | Basics of Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -32,7 +32,7 @@
   
 <link rel="prev" href="classification.html"/>
 <link rel="next" href="logistic-regression.html"/>
-<script src="libs/header-attrs-2.5.3/header-attrs.js"></script>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -120,6 +120,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -219,12 +220,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.7" data-path="regression-overview.html"><a href="regression-overview.html#no-free-lunch"><i class="fa fa-check"></i><b>5.7</b> No Free Lunch</a></li>
 <li class="chapter" data-level="5.8" data-path="regression-overview.html"><a href="regression-overview.html#curse-of-dimensionality"><i class="fa fa-check"></i><b>5.8</b> Curse of Dimensionality</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>6</b> Classification</a></li>
-<li class="chapter" data-level="7" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html"><i class="fa fa-check"></i><b>7</b> Nonparametric Classification</a></li>
+<li class="chapter" data-level="6" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>6</b> Classification</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="classification.html"><a href="classification.html#r-setup-and-source-3"><i class="fa fa-check"></i><b>6.1</b> R Setup and Source</a></li>
+<li class="chapter" data-level="6.2" data-path="classification.html"><a href="classification.html#data-setup"><i class="fa fa-check"></i><b>6.2</b> Data Setup</a></li>
+<li class="chapter" data-level="6.3" data-path="classification.html"><a href="classification.html#mathematical-setup-2"><i class="fa fa-check"></i><b>6.3</b> Mathematical Setup</a></li>
+<li class="chapter" data-level="6.4" data-path="classification.html"><a href="classification.html#example"><i class="fa fa-check"></i><b>6.4</b> Example</a></li>
+<li class="chapter" data-level="6.5" data-path="classification.html"><a href="classification.html#bayes-classifier"><i class="fa fa-check"></i><b>6.5</b> Bayes Classifier</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="classification.html"><a href="classification.html#bayes-error-rate"><i class="fa fa-check"></i><b>6.5.1</b> Bayes Error Rate</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="classification.html"><a href="classification.html#building-a-classifier"><i class="fa fa-check"></i><b>6.6</b> Building a Classifier</a></li>
+<li class="chapter" data-level="6.7" data-path="classification.html"><a href="classification.html#modeling"><i class="fa fa-check"></i><b>6.7</b> Modeling</a>
+<ul>
+<li class="chapter" data-level="6.7.1" data-path="classification.html"><a href="classification.html#linear-models-3"><i class="fa fa-check"></i><b>6.7.1</b> Linear Models</a></li>
+<li class="chapter" data-level="6.7.2" data-path="classification.html"><a href="classification.html#k-nearest-neighbors-4"><i class="fa fa-check"></i><b>6.7.2</b> k-Nearest Neighbors</a></li>
+<li class="chapter" data-level="6.7.3" data-path="classification.html"><a href="classification.html#decision-trees-3"><i class="fa fa-check"></i><b>6.7.3</b> Decision Trees</a></li>
+</ul></li>
+<li class="chapter" data-level="6.8" data-path="classification.html"><a href="classification.html#classification-metrics"><i class="fa fa-check"></i><b>6.8</b> Classification Metrics</a>
+<ul>
+<li class="chapter" data-level="6.8.1" data-path="classification.html"><a href="classification.html#misclassification"><i class="fa fa-check"></i><b>6.8.1</b> Misclassification</a></li>
+<li class="chapter" data-level="6.8.2" data-path="classification.html"><a href="classification.html#accuracy"><i class="fa fa-check"></i><b>6.8.2</b> Accuracy</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html"><i class="fa fa-check"></i><b>7</b> Nonparametric Classification</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html#example-knn-on-simulated-data"><i class="fa fa-check"></i><b>7.1</b> Example: KNN on Simulated Data</a></li>
+<li class="chapter" data-level="7.2" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html#example-decision-tree-on-penguin-data"><i class="fa fa-check"></i><b>7.2</b> Example: Decision Tree on Penguin Data</a></li>
+</ul></li>
 <li class="chapter" data-level="8" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>8</b> Logistic Regression</a></li>
 <li class="chapter" data-level="9" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>9</b> Binary Classification</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="binary-classification.html"><a href="binary-classification.html#r-setup-and-source-3"><i class="fa fa-check"></i><b>9.1</b> R Setup and Source</a></li>
+<li class="chapter" data-level="9.1" data-path="binary-classification.html"><a href="binary-classification.html#r-setup-and-source-4"><i class="fa fa-check"></i><b>9.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="9.2" data-path="binary-classification.html"><a href="binary-classification.html#breast-cancer-data"><i class="fa fa-check"></i><b>9.2</b> Breast Cancer Data</a></li>
 <li class="chapter" data-level="9.3" data-path="binary-classification.html"><a href="binary-classification.html#confusion-matrix"><i class="fa fa-check"></i><b>9.3</b> Confusion Matrix</a></li>
 <li class="chapter" data-level="9.4" data-path="binary-classification.html"><a href="binary-classification.html#binary-classification-metrics"><i class="fa fa-check"></i><b>9.4</b> Binary Classification Metrics</a></li>
@@ -233,7 +260,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10" data-path="generative.html"><a href="generative.html"><i class="fa fa-check"></i><b>10</b> Generative Models</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="generative.html"><a href="generative.html#r-setup-and-source-4"><i class="fa fa-check"></i><b>10.1</b> R Setup and Source</a></li>
+<li class="chapter" data-level="10.1" data-path="generative.html"><a href="generative.html#r-setup-and-source-5"><i class="fa fa-check"></i><b>10.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="10.2" data-path="generative.html"><a href="generative.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>10.2</b> Linear Discriminant Analysis</a></li>
 <li class="chapter" data-level="10.3" data-path="generative.html"><a href="generative.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>10.3</b> Quadratic Discriminant Analysis</a></li>
 <li class="chapter" data-level="10.4" data-path="generative.html"><a href="generative.html#naive-bayes"><i class="fa fa-check"></i><b>10.4</b> Naive Bayes</a></li>
@@ -263,6 +290,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.3.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#reading-2"><i class="fa fa-check"></i><b>13.3.1</b> Reading</a></li>
 <li class="chapter" data-level="13.3.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#video-1"><i class="fa fa-check"></i><b>13.3.2</b> Video</a></li>
 </ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="supervised-overview.html"><a href="supervised-overview.html"><i class="fa fa-check"></i><b>14</b> Supervised Learning Overview II</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="supervised-overview.html"><a href="supervised-overview.html#classification-2"><i class="fa fa-check"></i><b>14.1</b> Classification</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="supervised-overview.html"><a href="supervised-overview.html#tuning"><i class="fa fa-check"></i><b>14.1.1</b> Tuning</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="supervised-overview.html"><a href="supervised-overview.html#regression-1"><i class="fa fa-check"></i><b>14.2</b> Regression</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="supervised-overview.html"><a href="supervised-overview.html#methods"><i class="fa fa-check"></i><b>14.2.1</b> Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="supervised-overview.html"><a href="supervised-overview.html#external-links"><i class="fa fa-check"></i><b>14.3</b> External Links</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="additional-reading.html"><a href="additional-reading.html"><i class="fa fa-check"></i><b>A</b> Additional Reading</a>
@@ -359,148 +398,191 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><a href="files/nonparametric-classification.pdf"><strong>Notes:</strong> Nonparametric Classification</a></li>
 </ul>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="nonparametric-classification.html#cb179-1"></a><span class="co"># load packages</span></span>
-<span id="cb179-2"><a href="nonparametric-classification.html#cb179-2"></a><span class="kw">library</span>(tibble)</span>
-<span id="cb179-3"><a href="nonparametric-classification.html#cb179-3"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb179-4"><a href="nonparametric-classification.html#cb179-4"></a><span class="kw">library</span>(rpart)</span>
-<span id="cb179-5"><a href="nonparametric-classification.html#cb179-5"></a><span class="kw">library</span>(rpart.plot)</span>
-<span id="cb179-6"><a href="nonparametric-classification.html#cb179-6"></a><span class="kw">library</span>(caret)</span>
-<span id="cb179-7"><a href="nonparametric-classification.html#cb179-7"></a><span class="kw">library</span>(palmerpenguins)</span>
-<span id="cb179-8"><a href="nonparametric-classification.html#cb179-8"></a><span class="kw">library</span>(mlbench)</span>
-<span id="cb179-9"><a href="nonparametric-classification.html#cb179-9"></a></span>
-<span id="cb179-10"><a href="nonparametric-classification.html#cb179-10"></a><span class="co"># set seed</span></span>
-<span id="cb179-11"><a href="nonparametric-classification.html#cb179-11"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb179-12"><a href="nonparametric-classification.html#cb179-12"></a></span>
-<span id="cb179-13"><a href="nonparametric-classification.html#cb179-13"></a><span class="co"># generate data</span></span>
-<span id="cb179-14"><a href="nonparametric-classification.html#cb179-14"></a>sim_data =<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">mlbench.2dnormals</span>(<span class="dt">n =</span> <span class="dv">1000</span>, <span class="dt">cl =</span> <span class="dv">3</span>, <span class="dt">sd =</span> <span class="fl">1.3</span>))</span>
-<span id="cb179-15"><a href="nonparametric-classification.html#cb179-15"></a></span>
-<span id="cb179-16"><a href="nonparametric-classification.html#cb179-16"></a><span class="co"># tst-trn split data</span></span>
-<span id="cb179-17"><a href="nonparametric-classification.html#cb179-17"></a>trn_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(sim_data), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(sim_data))</span>
-<span id="cb179-18"><a href="nonparametric-classification.html#cb179-18"></a>trn =<span class="st"> </span>sim_data[trn_idx, ]</span>
-<span id="cb179-19"><a href="nonparametric-classification.html#cb179-19"></a>tst =<span class="st"> </span>sim_data[<span class="op">-</span>trn_idx, ]</span>
-<span id="cb179-20"><a href="nonparametric-classification.html#cb179-20"></a></span>
-<span id="cb179-21"><a href="nonparametric-classification.html#cb179-21"></a><span class="co"># est-val split data</span></span>
-<span id="cb179-22"><a href="nonparametric-classification.html#cb179-22"></a>est_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(trn), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(trn))</span>
-<span id="cb179-23"><a href="nonparametric-classification.html#cb179-23"></a>est =<span class="st"> </span>trn[est_idx, ]</span>
-<span id="cb179-24"><a href="nonparametric-classification.html#cb179-24"></a>val =<span class="st"> </span>trn[<span class="op">-</span>est_idx, ]</span>
-<span id="cb179-25"><a href="nonparametric-classification.html#cb179-25"></a></span>
-<span id="cb179-26"><a href="nonparametric-classification.html#cb179-26"></a><span class="co"># check data</span></span>
-<span id="cb179-27"><a href="nonparametric-classification.html#cb179-27"></a>trn</span>
-<span id="cb179-28"><a href="nonparametric-classification.html#cb179-28"></a></span>
-<span id="cb179-29"><a href="nonparametric-classification.html#cb179-29"></a><span class="co"># visualize data</span></span>
-<span id="cb179-30"><a href="nonparametric-classification.html#cb179-30"></a></span>
-<span id="cb179-31"><a href="nonparametric-classification.html#cb179-31"></a>p1 =<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> trn, <span class="kw">aes</span>(<span class="dt">x =</span> x<span class="fl">.1</span>)) <span class="op">+</span></span>
-<span id="cb179-32"><a href="nonparametric-classification.html#cb179-32"></a><span class="st">  </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> classes), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
-<span id="cb179-33"><a href="nonparametric-classification.html#cb179-33"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span>
-<span id="cb179-34"><a href="nonparametric-classification.html#cb179-34"></a></span>
-<span id="cb179-35"><a href="nonparametric-classification.html#cb179-35"></a>p2 =<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> trn, <span class="kw">aes</span>(<span class="dt">x =</span> x<span class="fl">.2</span>)) <span class="op">+</span></span>
-<span id="cb179-36"><a href="nonparametric-classification.html#cb179-36"></a><span class="st">  </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> classes), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
-<span id="cb179-37"><a href="nonparametric-classification.html#cb179-37"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span>
-<span id="cb179-38"><a href="nonparametric-classification.html#cb179-38"></a></span>
-<span id="cb179-39"><a href="nonparametric-classification.html#cb179-39"></a>p3 =<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> trn, <span class="kw">aes</span>(<span class="dt">x =</span> x<span class="fl">.1</span>)) <span class="op">+</span></span>
-<span id="cb179-40"><a href="nonparametric-classification.html#cb179-40"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> classes), <span class="dt">alpha =</span> <span class="fl">0.7</span>, <span class="dt">position =</span> <span class="st">&quot;identity&quot;</span>) <span class="op">+</span></span>
-<span id="cb179-41"><a href="nonparametric-classification.html#cb179-41"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span>
-<span id="cb179-42"><a href="nonparametric-classification.html#cb179-42"></a></span>
-<span id="cb179-43"><a href="nonparametric-classification.html#cb179-43"></a>p4 =<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> trn, <span class="kw">aes</span>(<span class="dt">x =</span> x<span class="fl">.2</span>)) <span class="op">+</span></span>
-<span id="cb179-44"><a href="nonparametric-classification.html#cb179-44"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> classes), <span class="dt">alpha =</span> <span class="fl">0.7</span>, <span class="dt">position =</span> <span class="st">&quot;identity&quot;</span>) <span class="op">+</span></span>
-<span id="cb179-45"><a href="nonparametric-classification.html#cb179-45"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span>
-<span id="cb179-46"><a href="nonparametric-classification.html#cb179-46"></a></span>
-<span id="cb179-47"><a href="nonparametric-classification.html#cb179-47"></a>gridExtra<span class="op">::</span><span class="kw">grid.arrange</span>(p1, p2, p3, p4)</span>
-<span id="cb179-48"><a href="nonparametric-classification.html#cb179-48"></a></span>
-<span id="cb179-49"><a href="nonparametric-classification.html#cb179-49"></a><span class="kw">plot</span>(x<span class="fl">.2</span> <span class="op">~</span><span class="st"> </span>x<span class="fl">.1</span>, <span class="dt">data =</span> trn, <span class="dt">col =</span> classes, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)</span>
-<span id="cb179-50"><a href="nonparametric-classification.html#cb179-50"></a><span class="kw">grid</span>()</span>
-<span id="cb179-51"><a href="nonparametric-classification.html#cb179-51"></a></span>
-<span id="cb179-52"><a href="nonparametric-classification.html#cb179-52"></a><span class="co"># fit knn model</span></span>
-<span id="cb179-53"><a href="nonparametric-classification.html#cb179-53"></a>mod_knn =<span class="st"> </span><span class="kw">knn3</span>(classes <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> trn, <span class="dt">k =</span> <span class="dv">10</span>)</span>
-<span id="cb179-54"><a href="nonparametric-classification.html#cb179-54"></a></span>
-<span id="cb179-55"><a href="nonparametric-classification.html#cb179-55"></a><span class="co"># make &quot;predictions&quot; with knn model</span></span>
-<span id="cb179-56"><a href="nonparametric-classification.html#cb179-56"></a>new_obs =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x.1 =</span> <span class="dv">2</span>, <span class="dt">x.2 =</span> <span class="dv">-2</span>)</span>
-<span id="cb179-57"><a href="nonparametric-classification.html#cb179-57"></a><span class="kw">predict</span>(mod_knn, new_obs, <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>)</span>
-<span id="cb179-58"><a href="nonparametric-classification.html#cb179-58"></a><span class="kw">predict</span>(mod_knn, new_obs, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</span>
-<span id="cb179-59"><a href="nonparametric-classification.html#cb179-59"></a></span>
-<span id="cb179-60"><a href="nonparametric-classification.html#cb179-60"></a><span class="co"># fit tree model</span></span>
-<span id="cb179-61"><a href="nonparametric-classification.html#cb179-61"></a>mod_tree =<span class="st"> </span><span class="kw">rpart</span>(classes <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> trn, <span class="dt">minsplit =</span> <span class="dv">5</span>)</span>
-<span id="cb179-62"><a href="nonparametric-classification.html#cb179-62"></a></span>
-<span id="cb179-63"><a href="nonparametric-classification.html#cb179-63"></a><span class="co"># make &quot;predictions&quot; with knn model</span></span>
-<span id="cb179-64"><a href="nonparametric-classification.html#cb179-64"></a>new_obs =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x.1 =</span> <span class="dv">3</span>, <span class="dt">x.2 =</span> <span class="dv">3</span>)</span>
-<span id="cb179-65"><a href="nonparametric-classification.html#cb179-65"></a><span class="kw">predict</span>(mod_tree, new_obs, <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>)</span>
-<span id="cb179-66"><a href="nonparametric-classification.html#cb179-66"></a><span class="kw">predict</span>(mod_tree, new_obs, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</span>
-<span id="cb179-67"><a href="nonparametric-classification.html#cb179-67"></a></span>
-<span id="cb179-68"><a href="nonparametric-classification.html#cb179-68"></a><span class="co"># visualize tree results</span></span>
-<span id="cb179-69"><a href="nonparametric-classification.html#cb179-69"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb179-70"><a href="nonparametric-classification.html#cb179-70"></a><span class="kw">plot</span>(x<span class="fl">.2</span> <span class="op">~</span><span class="st"> </span>x<span class="fl">.1</span>, <span class="dt">data =</span> trn, <span class="dt">col =</span> classes, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)</span>
-<span id="cb179-71"><a href="nonparametric-classification.html#cb179-71"></a><span class="kw">grid</span>()</span>
-<span id="cb179-72"><a href="nonparametric-classification.html#cb179-72"></a><span class="kw">rpart.plot</span>(mod_tree, <span class="dt">type =</span> <span class="dv">2</span>, <span class="dt">box.palette =</span> <span class="kw">list</span>(<span class="st">&quot;Grays&quot;</span>, <span class="st">&quot;Reds&quot;</span>, <span class="st">&quot;Greens&quot;</span>))</span>
-<span id="cb179-73"><a href="nonparametric-classification.html#cb179-73"></a></span>
-<span id="cb179-74"><a href="nonparametric-classification.html#cb179-74"></a><span class="co"># reset plotting</span></span>
-<span id="cb179-75"><a href="nonparametric-classification.html#cb179-75"></a><span class="kw">dev.off</span>()</span>
-<span id="cb179-76"><a href="nonparametric-classification.html#cb179-76"></a></span>
-<span id="cb179-77"><a href="nonparametric-classification.html#cb179-77"></a><span class="co"># helper function to calculate misclassification</span></span>
-<span id="cb179-78"><a href="nonparametric-classification.html#cb179-78"></a>calc_misclass =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</span>
-<span id="cb179-79"><a href="nonparametric-classification.html#cb179-79"></a>  <span class="kw">mean</span>(actual <span class="op">!=</span><span class="st"> </span>predicted)</span>
-<span id="cb179-80"><a href="nonparametric-classification.html#cb179-80"></a>}</span>
-<span id="cb179-81"><a href="nonparametric-classification.html#cb179-81"></a></span>
-<span id="cb179-82"><a href="nonparametric-classification.html#cb179-82"></a><span class="co"># calculate test metric</span></span>
-<span id="cb179-83"><a href="nonparametric-classification.html#cb179-83"></a>mod_knn =<span class="st"> </span><span class="kw">knn3</span>(classes <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> trn, <span class="dt">k =</span> <span class="dv">10</span>)</span>
-<span id="cb179-84"><a href="nonparametric-classification.html#cb179-84"></a><span class="kw">calc_misclass</span>(</span>
-<span id="cb179-85"><a href="nonparametric-classification.html#cb179-85"></a>  <span class="dt">actual =</span> tst<span class="op">$</span>classes,</span>
-<span id="cb179-86"><a href="nonparametric-classification.html#cb179-86"></a>  <span class="dt">predicted =</span> <span class="kw">predict</span>(mod_knn, tst, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</span>
-<span id="cb179-87"><a href="nonparametric-classification.html#cb179-87"></a>)</span>
-<span id="cb179-88"><a href="nonparametric-classification.html#cb179-88"></a></span>
-<span id="cb179-89"><a href="nonparametric-classification.html#cb179-89"></a><span class="kw">mean</span>(tst<span class="op">$</span>classes <span class="op">!=</span><span class="st"> </span><span class="kw">predict</span>(mod_knn, tst, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>))</span>
-<span id="cb179-90"><a href="nonparametric-classification.html#cb179-90"></a></span>
-<span id="cb179-91"><a href="nonparametric-classification.html#cb179-91"></a><span class="co"># tune knn model ###############################################################</span></span>
-<span id="cb179-92"><a href="nonparametric-classification.html#cb179-92"></a></span>
-<span id="cb179-93"><a href="nonparametric-classification.html#cb179-93"></a><span class="co"># set seed</span></span>
-<span id="cb179-94"><a href="nonparametric-classification.html#cb179-94"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb179-95"><a href="nonparametric-classification.html#cb179-95"></a></span>
-<span id="cb179-96"><a href="nonparametric-classification.html#cb179-96"></a><span class="co"># k values to consider</span></span>
-<span id="cb179-97"><a href="nonparametric-classification.html#cb179-97"></a>k_val =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">101</span>, <span class="dt">by =</span> <span class="dv">2</span>)</span>
-<span id="cb179-98"><a href="nonparametric-classification.html#cb179-98"></a></span>
-<span id="cb179-99"><a href="nonparametric-classification.html#cb179-99"></a><span class="co"># function to fit knn to est for various k</span></span>
-<span id="cb179-100"><a href="nonparametric-classification.html#cb179-100"></a>fit_knn_to_est =<span class="st"> </span><span class="cf">function</span>(k) {</span>
-<span id="cb179-101"><a href="nonparametric-classification.html#cb179-101"></a>  <span class="kw">knn3</span>(classes <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> est, <span class="dt">k =</span> k)</span>
-<span id="cb179-102"><a href="nonparametric-classification.html#cb179-102"></a>}</span>
-<span id="cb179-103"><a href="nonparametric-classification.html#cb179-103"></a></span>
-<span id="cb179-104"><a href="nonparametric-classification.html#cb179-104"></a><span class="co"># fit models</span></span>
-<span id="cb179-105"><a href="nonparametric-classification.html#cb179-105"></a>knn_mods =<span class="st"> </span><span class="kw">lapply</span>(k_val, fit_knn_to_est)</span>
-<span id="cb179-106"><a href="nonparametric-classification.html#cb179-106"></a></span>
-<span id="cb179-107"><a href="nonparametric-classification.html#cb179-107"></a><span class="co"># make predictions</span></span>
-<span id="cb179-108"><a href="nonparametric-classification.html#cb179-108"></a>knn_preds =<span class="st"> </span><span class="kw">lapply</span>(knn_mods, predict, val, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</span>
-<span id="cb179-109"><a href="nonparametric-classification.html#cb179-109"></a></span>
-<span id="cb179-110"><a href="nonparametric-classification.html#cb179-110"></a><span class="co"># calculate misclass</span></span>
-<span id="cb179-111"><a href="nonparametric-classification.html#cb179-111"></a>knn_misclass =<span class="st"> </span><span class="kw">sapply</span>(knn_preds, calc_misclass, <span class="dt">actual =</span> val<span class="op">$</span>classes)</span>
-<span id="cb179-112"><a href="nonparametric-classification.html#cb179-112"></a></span>
-<span id="cb179-113"><a href="nonparametric-classification.html#cb179-113"></a><span class="co"># plot results</span></span>
-<span id="cb179-114"><a href="nonparametric-classification.html#cb179-114"></a><span class="kw">plot</span>(k_val, knn_misclass, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>)</span>
-<span id="cb179-115"><a href="nonparametric-classification.html#cb179-115"></a><span class="kw">grid</span>()</span>
-<span id="cb179-116"><a href="nonparametric-classification.html#cb179-116"></a></span>
-<span id="cb179-117"><a href="nonparametric-classification.html#cb179-117"></a>k_val[<span class="kw">which.min</span>(knn_misclass)]</span>
-<span id="cb179-118"><a href="nonparametric-classification.html#cb179-118"></a></span>
-<span id="cb179-119"><a href="nonparametric-classification.html#cb179-119"></a><span class="co"># trees and penguins ###########################################################</span></span>
-<span id="cb179-120"><a href="nonparametric-classification.html#cb179-120"></a></span>
-<span id="cb179-121"><a href="nonparametric-classification.html#cb179-121"></a><span class="co"># check data</span></span>
-<span id="cb179-122"><a href="nonparametric-classification.html#cb179-122"></a>penguins</span>
-<span id="cb179-123"><a href="nonparametric-classification.html#cb179-123"></a></span>
-<span id="cb179-124"><a href="nonparametric-classification.html#cb179-124"></a><span class="co"># visualize data</span></span>
-<span id="cb179-125"><a href="nonparametric-classification.html#cb179-125"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb179-126"><a href="nonparametric-classification.html#cb179-126"></a><span class="kw">plot</span>(body_mass_g <span class="op">~</span><span class="st"> </span>flipper_length_mm, <span class="dt">data =</span> penguins,</span>
-<span id="cb179-127"><a href="nonparametric-classification.html#cb179-127"></a>     <span class="dt">col =</span> species, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)</span>
-<span id="cb179-128"><a href="nonparametric-classification.html#cb179-128"></a><span class="kw">grid</span>()</span>
-<span id="cb179-129"><a href="nonparametric-classification.html#cb179-129"></a><span class="kw">plot</span>(bill_length_mm <span class="op">~</span><span class="st"> </span>flipper_length_mm, <span class="dt">data =</span> penguins,</span>
-<span id="cb179-130"><a href="nonparametric-classification.html#cb179-130"></a>     <span class="dt">col =</span> species, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)</span>
-<span id="cb179-131"><a href="nonparametric-classification.html#cb179-131"></a><span class="kw">grid</span>()</span>
-<span id="cb179-132"><a href="nonparametric-classification.html#cb179-132"></a></span>
-<span id="cb179-133"><a href="nonparametric-classification.html#cb179-133"></a><span class="co"># reset plotting</span></span>
-<span id="cb179-134"><a href="nonparametric-classification.html#cb179-134"></a><span class="kw">dev.off</span>()</span>
-<span id="cb179-135"><a href="nonparametric-classification.html#cb179-135"></a></span>
-<span id="cb179-136"><a href="nonparametric-classification.html#cb179-136"></a><span class="co"># fit tree and visualize</span></span>
-<span id="cb179-137"><a href="nonparametric-classification.html#cb179-137"></a>peng_mod =<span class="st"> </span><span class="kw">rpart</span>(species <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>year, <span class="dt">data =</span> penguins)</span>
-<span id="cb179-138"><a href="nonparametric-classification.html#cb179-138"></a><span class="kw">rpart.plot</span>(peng_mod, <span class="dt">type =</span> <span class="dv">2</span>, <span class="dt">box.palette =</span> <span class="kw">list</span>(<span class="st">&quot;Grays&quot;</span>, <span class="st">&quot;Reds&quot;</span>, <span class="st">&quot;Greens&quot;</span>))</span>
-<span id="cb179-139"><a href="nonparametric-classification.html#cb179-139"></a></span>
-<span id="cb179-140"><a href="nonparametric-classification.html#cb179-140"></a><span class="co"># fit bigger tree and visualize</span></span>
-<span id="cb179-141"><a href="nonparametric-classification.html#cb179-141"></a>peng_mod_big =<span class="st"> </span><span class="kw">rpart</span>(species <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>year, <span class="dt">data =</span> penguins, <span class="dt">minsplit =</span> <span class="dv">2</span>, <span class="dt">cp =</span> <span class="dv">0</span>)</span>
-<span id="cb179-142"><a href="nonparametric-classification.html#cb179-142"></a><span class="kw">rpart.plot</span>(peng_mod_big, <span class="dt">type =</span> <span class="dv">2</span>, <span class="dt">box.palette =</span> <span class="kw">list</span>(<span class="st">&quot;Grays&quot;</span>, <span class="st">&quot;Reds&quot;</span>, <span class="st">&quot;Greens&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="nonparametric-classification.html#cb182-1"></a><span class="co"># load packages</span></span>
+<span id="cb182-2"><a href="nonparametric-classification.html#cb182-2"></a><span class="kw">library</span>(tibble)</span>
+<span id="cb182-3"><a href="nonparametric-classification.html#cb182-3"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb182-4"><a href="nonparametric-classification.html#cb182-4"></a><span class="kw">library</span>(rpart)</span>
+<span id="cb182-5"><a href="nonparametric-classification.html#cb182-5"></a><span class="kw">library</span>(rpart.plot)</span>
+<span id="cb182-6"><a href="nonparametric-classification.html#cb182-6"></a><span class="kw">library</span>(caret)</span></code></pre></div>
+<pre><code>## Loading required package: lattice</code></pre>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="nonparametric-classification.html#cb184-1"></a><span class="kw">library</span>(palmerpenguins)</span>
+<span id="cb184-2"><a href="nonparametric-classification.html#cb184-2"></a><span class="kw">library</span>(mlbench)</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="nonparametric-classification.html#cb185-1"></a><span class="co"># set seed</span></span>
+<span id="cb185-2"><a href="nonparametric-classification.html#cb185-2"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb185-3"><a href="nonparametric-classification.html#cb185-3"></a></span>
+<span id="cb185-4"><a href="nonparametric-classification.html#cb185-4"></a><span class="co"># generate data</span></span>
+<span id="cb185-5"><a href="nonparametric-classification.html#cb185-5"></a>sim_data =<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">mlbench.2dnormals</span>(<span class="dt">n =</span> <span class="dv">1000</span>, <span class="dt">cl =</span> <span class="dv">3</span>, <span class="dt">sd =</span> <span class="fl">1.3</span>))</span>
+<span id="cb185-6"><a href="nonparametric-classification.html#cb185-6"></a></span>
+<span id="cb185-7"><a href="nonparametric-classification.html#cb185-7"></a><span class="co"># tst-trn split data</span></span>
+<span id="cb185-8"><a href="nonparametric-classification.html#cb185-8"></a>trn_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(sim_data), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(sim_data))</span>
+<span id="cb185-9"><a href="nonparametric-classification.html#cb185-9"></a>trn =<span class="st"> </span>sim_data[trn_idx, ]</span>
+<span id="cb185-10"><a href="nonparametric-classification.html#cb185-10"></a>tst =<span class="st"> </span>sim_data[<span class="op">-</span>trn_idx, ]</span>
+<span id="cb185-11"><a href="nonparametric-classification.html#cb185-11"></a></span>
+<span id="cb185-12"><a href="nonparametric-classification.html#cb185-12"></a><span class="co"># est-val split data</span></span>
+<span id="cb185-13"><a href="nonparametric-classification.html#cb185-13"></a>est_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(trn), <span class="dt">size =</span> <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(trn))</span>
+<span id="cb185-14"><a href="nonparametric-classification.html#cb185-14"></a>est =<span class="st"> </span>trn[est_idx, ]</span>
+<span id="cb185-15"><a href="nonparametric-classification.html#cb185-15"></a>val =<span class="st"> </span>trn[<span class="op">-</span>est_idx, ]</span>
+<span id="cb185-16"><a href="nonparametric-classification.html#cb185-16"></a></span>
+<span id="cb185-17"><a href="nonparametric-classification.html#cb185-17"></a><span class="co"># check data</span></span>
+<span id="cb185-18"><a href="nonparametric-classification.html#cb185-18"></a>trn</span></code></pre></div>
+<pre><code>## # A tibble: 800 x 3
+##       x.1    x.2 classes
+##     &lt;dbl&gt;  &lt;dbl&gt; &lt;fct&gt;  
+##  1 -0.929  2.32  1      
+##  2 -3.25   2.27  2      
+##  3 -0.767  1.06  2      
+##  4  3.42   3.10  1      
+##  5  2.37   0.786 3      
+##  6  3.90   1.54  1      
+##  7 -0.373 -1.89  2      
+##  8 -1.10  -1.58  2      
+##  9  0.609  1.29  1      
+## 10  2.31   1.49  1      
+## # … with 790 more rows</code></pre>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="nonparametric-classification.html#cb187-1"></a><span class="co"># visualize data</span></span>
+<span id="cb187-2"><a href="nonparametric-classification.html#cb187-2"></a></span>
+<span id="cb187-3"><a href="nonparametric-classification.html#cb187-3"></a>p1 =<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> trn, <span class="kw">aes</span>(<span class="dt">x =</span> x<span class="fl">.1</span>)) <span class="op">+</span></span>
+<span id="cb187-4"><a href="nonparametric-classification.html#cb187-4"></a><span class="st">  </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> classes), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
+<span id="cb187-5"><a href="nonparametric-classification.html#cb187-5"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span>
+<span id="cb187-6"><a href="nonparametric-classification.html#cb187-6"></a></span>
+<span id="cb187-7"><a href="nonparametric-classification.html#cb187-7"></a>p2 =<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> trn, <span class="kw">aes</span>(<span class="dt">x =</span> x<span class="fl">.2</span>)) <span class="op">+</span></span>
+<span id="cb187-8"><a href="nonparametric-classification.html#cb187-8"></a><span class="st">  </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> classes), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
+<span id="cb187-9"><a href="nonparametric-classification.html#cb187-9"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span>
+<span id="cb187-10"><a href="nonparametric-classification.html#cb187-10"></a></span>
+<span id="cb187-11"><a href="nonparametric-classification.html#cb187-11"></a>p3 =<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> trn, <span class="kw">aes</span>(<span class="dt">x =</span> x<span class="fl">.1</span>)) <span class="op">+</span></span>
+<span id="cb187-12"><a href="nonparametric-classification.html#cb187-12"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> classes), <span class="dt">alpha =</span> <span class="fl">0.7</span>, <span class="dt">position =</span> <span class="st">&quot;identity&quot;</span>) <span class="op">+</span></span>
+<span id="cb187-13"><a href="nonparametric-classification.html#cb187-13"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span>
+<span id="cb187-14"><a href="nonparametric-classification.html#cb187-14"></a></span>
+<span id="cb187-15"><a href="nonparametric-classification.html#cb187-15"></a>p4 =<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> trn, <span class="kw">aes</span>(<span class="dt">x =</span> x<span class="fl">.2</span>)) <span class="op">+</span></span>
+<span id="cb187-16"><a href="nonparametric-classification.html#cb187-16"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> classes), <span class="dt">alpha =</span> <span class="fl">0.7</span>, <span class="dt">position =</span> <span class="st">&quot;identity&quot;</span>) <span class="op">+</span></span>
+<span id="cb187-17"><a href="nonparametric-classification.html#cb187-17"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span>
+<span id="cb187-18"><a href="nonparametric-classification.html#cb187-18"></a></span>
+<span id="cb187-19"><a href="nonparametric-classification.html#cb187-19"></a>gridExtra<span class="op">::</span><span class="kw">grid.arrange</span>(p1, p2, p3, p4)</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="nonparametric-classification_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="nonparametric-classification.html#cb189-1"></a><span class="kw">plot</span>(x<span class="fl">.2</span> <span class="op">~</span><span class="st"> </span>x<span class="fl">.1</span>, <span class="dt">data =</span> trn, <span class="dt">col =</span> classes, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)</span>
+<span id="cb189-2"><a href="nonparametric-classification.html#cb189-2"></a><span class="kw">grid</span>()</span></code></pre></div>
+<p><img src="nonparametric-classification_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="nonparametric-classification.html#cb190-1"></a><span class="co"># fit knn model</span></span>
+<span id="cb190-2"><a href="nonparametric-classification.html#cb190-2"></a>mod_knn =<span class="st"> </span><span class="kw">knn3</span>(classes <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> trn, <span class="dt">k =</span> <span class="dv">10</span>)</span>
+<span id="cb190-3"><a href="nonparametric-classification.html#cb190-3"></a></span>
+<span id="cb190-4"><a href="nonparametric-classification.html#cb190-4"></a><span class="co"># make &quot;predictions&quot; with knn model</span></span>
+<span id="cb190-5"><a href="nonparametric-classification.html#cb190-5"></a>new_obs =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x.1 =</span> <span class="dv">2</span>, <span class="dt">x.2 =</span> <span class="dv">-2</span>)</span>
+<span id="cb190-6"><a href="nonparametric-classification.html#cb190-6"></a><span class="kw">predict</span>(mod_knn, new_obs, <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>)</span></code></pre></div>
+<pre><code>##      1 2 3
+## [1,] 0 0 1</code></pre>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="nonparametric-classification.html#cb192-1"></a><span class="kw">predict</span>(mod_knn, new_obs, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] 3
+## Levels: 1 2 3</code></pre>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="nonparametric-classification.html#cb194-1"></a><span class="co"># fit tree model</span></span>
+<span id="cb194-2"><a href="nonparametric-classification.html#cb194-2"></a>mod_tree =<span class="st"> </span><span class="kw">rpart</span>(classes <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> trn, <span class="dt">minsplit =</span> <span class="dv">5</span>)</span>
+<span id="cb194-3"><a href="nonparametric-classification.html#cb194-3"></a></span>
+<span id="cb194-4"><a href="nonparametric-classification.html#cb194-4"></a><span class="co"># make &quot;predictions&quot; with knn model</span></span>
+<span id="cb194-5"><a href="nonparametric-classification.html#cb194-5"></a>new_obs =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x.1 =</span> <span class="dv">3</span>, <span class="dt">x.2 =</span> <span class="dv">3</span>)</span>
+<span id="cb194-6"><a href="nonparametric-classification.html#cb194-6"></a><span class="kw">predict</span>(mod_tree, new_obs, <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>)</span></code></pre></div>
+<pre><code>##           1        2         3
+## 1 0.7508772 0.122807 0.1263158</code></pre>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="nonparametric-classification.html#cb196-1"></a><span class="kw">predict</span>(mod_tree, new_obs, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</span></code></pre></div>
+<pre><code>## 1 
+## 1 
+## Levels: 1 2 3</code></pre>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="nonparametric-classification.html#cb198-1"></a><span class="co"># visualize tree results</span></span>
+<span id="cb198-2"><a href="nonparametric-classification.html#cb198-2"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb198-3"><a href="nonparametric-classification.html#cb198-3"></a><span class="kw">plot</span>(x<span class="fl">.2</span> <span class="op">~</span><span class="st"> </span>x<span class="fl">.1</span>, <span class="dt">data =</span> trn, <span class="dt">col =</span> classes, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)</span>
+<span id="cb198-4"><a href="nonparametric-classification.html#cb198-4"></a><span class="kw">grid</span>()</span>
+<span id="cb198-5"><a href="nonparametric-classification.html#cb198-5"></a><span class="kw">rpart.plot</span>(mod_tree, <span class="dt">type =</span> <span class="dv">2</span>, <span class="dt">box.palette =</span> <span class="kw">list</span>(<span class="st">&quot;Grays&quot;</span>, <span class="st">&quot;Reds&quot;</span>, <span class="st">&quot;Greens&quot;</span>))</span></code></pre></div>
+<p><img src="nonparametric-classification_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="nonparametric-classification.html#cb199-1"></a><span class="co"># helper function to calculate misclassification</span></span>
+<span id="cb199-2"><a href="nonparametric-classification.html#cb199-2"></a>calc_misclass =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</span>
+<span id="cb199-3"><a href="nonparametric-classification.html#cb199-3"></a>  <span class="kw">mean</span>(actual <span class="op">!=</span><span class="st"> </span>predicted)</span>
+<span id="cb199-4"><a href="nonparametric-classification.html#cb199-4"></a>}</span>
+<span id="cb199-5"><a href="nonparametric-classification.html#cb199-5"></a></span>
+<span id="cb199-6"><a href="nonparametric-classification.html#cb199-6"></a><span class="co"># calculate test metric</span></span>
+<span id="cb199-7"><a href="nonparametric-classification.html#cb199-7"></a>mod_knn =<span class="st"> </span><span class="kw">knn3</span>(classes <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> trn, <span class="dt">k =</span> <span class="dv">10</span>)</span>
+<span id="cb199-8"><a href="nonparametric-classification.html#cb199-8"></a><span class="kw">calc_misclass</span>(</span>
+<span id="cb199-9"><a href="nonparametric-classification.html#cb199-9"></a>  <span class="dt">actual =</span> tst<span class="op">$</span>classes,</span>
+<span id="cb199-10"><a href="nonparametric-classification.html#cb199-10"></a>  <span class="dt">predicted =</span> <span class="kw">predict</span>(mod_knn, tst, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</span>
+<span id="cb199-11"><a href="nonparametric-classification.html#cb199-11"></a>)</span></code></pre></div>
+<pre><code>## [1] 0.215</code></pre>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="nonparametric-classification.html#cb201-1"></a><span class="kw">mean</span>(tst<span class="op">$</span>classes <span class="op">!=</span><span class="st"> </span><span class="kw">predict</span>(mod_knn, tst, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>))</span></code></pre></div>
+<pre><code>## [1] 0.225</code></pre>
+<div id="example-knn-on-simulated-data" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> Example: KNN on Simulated Data</h2>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="nonparametric-classification.html#cb203-1"></a><span class="co"># tune knn model ###############################################################</span></span>
+<span id="cb203-2"><a href="nonparametric-classification.html#cb203-2"></a></span>
+<span id="cb203-3"><a href="nonparametric-classification.html#cb203-3"></a><span class="co"># set seed</span></span>
+<span id="cb203-4"><a href="nonparametric-classification.html#cb203-4"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb203-5"><a href="nonparametric-classification.html#cb203-5"></a></span>
+<span id="cb203-6"><a href="nonparametric-classification.html#cb203-6"></a><span class="co"># k values to consider</span></span>
+<span id="cb203-7"><a href="nonparametric-classification.html#cb203-7"></a>k_val =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">101</span>, <span class="dt">by =</span> <span class="dv">2</span>)</span>
+<span id="cb203-8"><a href="nonparametric-classification.html#cb203-8"></a></span>
+<span id="cb203-9"><a href="nonparametric-classification.html#cb203-9"></a><span class="co"># function to fit knn to est for various k</span></span>
+<span id="cb203-10"><a href="nonparametric-classification.html#cb203-10"></a>fit_knn_to_est =<span class="st"> </span><span class="cf">function</span>(k) {</span>
+<span id="cb203-11"><a href="nonparametric-classification.html#cb203-11"></a>  <span class="kw">knn3</span>(classes <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> est, <span class="dt">k =</span> k)</span>
+<span id="cb203-12"><a href="nonparametric-classification.html#cb203-12"></a>}</span>
+<span id="cb203-13"><a href="nonparametric-classification.html#cb203-13"></a></span>
+<span id="cb203-14"><a href="nonparametric-classification.html#cb203-14"></a><span class="co"># fit models</span></span>
+<span id="cb203-15"><a href="nonparametric-classification.html#cb203-15"></a>knn_mods =<span class="st"> </span><span class="kw">lapply</span>(k_val, fit_knn_to_est)</span>
+<span id="cb203-16"><a href="nonparametric-classification.html#cb203-16"></a></span>
+<span id="cb203-17"><a href="nonparametric-classification.html#cb203-17"></a><span class="co"># make predictions</span></span>
+<span id="cb203-18"><a href="nonparametric-classification.html#cb203-18"></a>knn_preds =<span class="st"> </span><span class="kw">lapply</span>(knn_mods, predict, val, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</span>
+<span id="cb203-19"><a href="nonparametric-classification.html#cb203-19"></a></span>
+<span id="cb203-20"><a href="nonparametric-classification.html#cb203-20"></a><span class="co"># calculate validation misclass</span></span>
+<span id="cb203-21"><a href="nonparametric-classification.html#cb203-21"></a>knn_misclass =<span class="st"> </span><span class="kw">sapply</span>(knn_preds, calc_misclass, <span class="dt">actual =</span> val<span class="op">$</span>classes)</span>
+<span id="cb203-22"><a href="nonparametric-classification.html#cb203-22"></a></span>
+<span id="cb203-23"><a href="nonparametric-classification.html#cb203-23"></a><span class="co"># plot results</span></span>
+<span id="cb203-24"><a href="nonparametric-classification.html#cb203-24"></a><span class="kw">plot</span>(k_val, knn_misclass, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>)</span>
+<span id="cb203-25"><a href="nonparametric-classification.html#cb203-25"></a><span class="kw">grid</span>()</span></code></pre></div>
+<p><img src="nonparametric-classification_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="nonparametric-classification.html#cb204-1"></a>k_val[<span class="kw">which.min</span>(knn_misclass)]</span></code></pre></div>
+<pre><code>## [1] 55</code></pre>
+<ul>
+<li>TODO: add training misclass</li>
+<li>TODO: expand possible k value</li>
+<li>TODO: re-fit to training data, report test misclass</li>
+</ul>
+</div>
+<div id="example-decision-tree-on-penguin-data" class="section level2" number="7.2">
+<h2><span class="header-section-number">7.2</span> Example: Decision Tree on Penguin Data</h2>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="nonparametric-classification.html#cb206-1"></a><span class="co"># trees and penguins ###########################################################</span></span></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="nonparametric-classification.html#cb207-1"></a><span class="co"># check data</span></span>
+<span id="cb207-2"><a href="nonparametric-classification.html#cb207-2"></a>penguins</span></code></pre></div>
+<pre><code>## # A tibble: 344 x 8
+##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+##  1 Adelie  Torgersen           39.1          18.7               181        3750
+##  2 Adelie  Torgersen           39.5          17.4               186        3800
+##  3 Adelie  Torgersen           40.3          18                 195        3250
+##  4 Adelie  Torgersen           NA            NA                  NA          NA
+##  5 Adelie  Torgersen           36.7          19.3               193        3450
+##  6 Adelie  Torgersen           39.3          20.6               190        3650
+##  7 Adelie  Torgersen           38.9          17.8               181        3625
+##  8 Adelie  Torgersen           39.2          19.6               195        4675
+##  9 Adelie  Torgersen           34.1          18.1               193        3475
+## 10 Adelie  Torgersen           42            20.2               190        4250
+## # … with 334 more rows, and 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="nonparametric-classification.html#cb209-1"></a><span class="co"># visualize data</span></span>
+<span id="cb209-2"><a href="nonparametric-classification.html#cb209-2"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb209-3"><a href="nonparametric-classification.html#cb209-3"></a><span class="kw">plot</span>(body_mass_g <span class="op">~</span><span class="st"> </span>flipper_length_mm, <span class="dt">data =</span> penguins,</span>
+<span id="cb209-4"><a href="nonparametric-classification.html#cb209-4"></a>     <span class="dt">col =</span> species, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)</span>
+<span id="cb209-5"><a href="nonparametric-classification.html#cb209-5"></a><span class="kw">grid</span>()</span>
+<span id="cb209-6"><a href="nonparametric-classification.html#cb209-6"></a><span class="kw">plot</span>(bill_length_mm <span class="op">~</span><span class="st"> </span>flipper_length_mm, <span class="dt">data =</span> penguins,</span>
+<span id="cb209-7"><a href="nonparametric-classification.html#cb209-7"></a>     <span class="dt">col =</span> species, <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">cex =</span> <span class="fl">1.5</span>)</span>
+<span id="cb209-8"><a href="nonparametric-classification.html#cb209-8"></a><span class="kw">grid</span>()</span></code></pre></div>
+<p><img src="nonparametric-classification_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="nonparametric-classification.html#cb210-1"></a><span class="co"># fit tree and visualize</span></span>
+<span id="cb210-2"><a href="nonparametric-classification.html#cb210-2"></a>peng_mod =<span class="st"> </span><span class="kw">rpart</span>(species <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>year, <span class="dt">data =</span> penguins)</span>
+<span id="cb210-3"><a href="nonparametric-classification.html#cb210-3"></a><span class="kw">rpart.plot</span>(peng_mod, <span class="dt">type =</span> <span class="dv">2</span>, <span class="dt">box.palette =</span> <span class="kw">list</span>(<span class="st">&quot;Grays&quot;</span>, <span class="st">&quot;Reds&quot;</span>, <span class="st">&quot;Greens&quot;</span>))</span></code></pre></div>
+<p><img src="nonparametric-classification_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="nonparametric-classification.html#cb211-1"></a><span class="co"># fit bigger tree and visualize</span></span>
+<span id="cb211-2"><a href="nonparametric-classification.html#cb211-2"></a>peng_mod_big =<span class="st"> </span><span class="kw">rpart</span>(species <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>year, <span class="dt">data =</span> penguins, <span class="dt">minsplit =</span> <span class="dv">2</span>, <span class="dt">cp =</span> <span class="dv">0</span>)</span>
+<span id="cb211-3"><a href="nonparametric-classification.html#cb211-3"></a><span class="kw">rpart.plot</span>(peng_mod_big, <span class="dt">type =</span> <span class="dv">2</span>, <span class="dt">box.palette =</span> <span class="kw">list</span>(<span class="st">&quot;Grays&quot;</span>, <span class="st">&quot;Reds&quot;</span>, <span class="st">&quot;Greens&quot;</span>))</span></code></pre></div>
+<p><img src="nonparametric-classification_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<ul>
+<li>TODO: tune</li>
+</ul>
+<!-- ####################################################################### -->
 <!-- ```{r setup, include = FALSE} -->
 <!-- knitr::opts_chunk$set(echo = TRUE, fig.align = "center", cache = TRUE, autodep = TRUE) -->
 <!-- ``` -->
@@ -553,6 +635,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- ``` -->
 
 </div>
+</div>
             </section>
 
           </div>
@@ -582,6 +665,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": false
 },
 "fontsettings": {

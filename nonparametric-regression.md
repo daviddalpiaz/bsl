@@ -497,18 +497,18 @@ head(crdt_trn, n = 10)
 
 ```
 ## # A tibble: 10 x 11
-##    Income Limit Cards   Age Education Gender Student Married Ethnicity Balance
-##     <dbl> <int> <int> <int>     <int> <fct>  <fct>   <fct>   <fct>       <int>
-##  1  183.  13913     4    98        17 " Mal… No      Yes     Caucasian    1999
-##  2   35.7  2880     2    35        15 " Mal… No      No      African …       0
-##  3  123.   8376     2    89        17 " Mal… Yes     No      African …    1259
-##  4   20.8  2672     1    70        18 "Fema… No      No      African …       0
-##  5   39.1  5565     4    48        18 "Fema… No      Yes     Caucasian     772
-##  6   36.5  3806     2    52        13 " Mal… No      No      African …     188
-##  7   45.1  3762     3    80         8 " Mal… No      Yes     Caucasian      70
-##  8   43.5  2906     4    69        11 " Mal… No      No      Caucasian       0
-##  9   23.1  3476     2    50        15 "Fema… No      No      Caucasian     209
-## 10   53.2  4943     2    46        16 "Fema… No      Yes     Asian         382
+##    Income Limit Cards   Age Education Gender  Student Married Ethnicity  Balance
+##     <dbl> <int> <int> <int>     <int> <fct>   <fct>   <fct>   <fct>        <int>
+##  1  183.  13913     4    98        17 " Male" No      Yes     Caucasian     1999
+##  2   35.7  2880     2    35        15 " Male" No      No      African A…       0
+##  3  123.   8376     2    89        17 " Male" Yes     No      African A…    1259
+##  4   20.8  2672     1    70        18 "Femal… No      No      African A…       0
+##  5   39.1  5565     4    48        18 "Femal… No      Yes     Caucasian      772
+##  6   36.5  3806     2    52        13 " Male" No      No      African A…     188
+##  7   45.1  3762     3    80         8 " Male" No      Yes     Caucasian       70
+##  8   43.5  2906     4    69        11 " Male" No      No      Caucasian        0
+##  9   23.1  3476     2    50        15 "Femal… No      No      Caucasian      209
+## 10   53.2  4943     2    46        16 "Femal… No      Yes     Asian          382
 ## # … with 1 more variable: Rating <int>
 ```
 

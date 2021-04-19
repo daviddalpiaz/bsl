@@ -83,14 +83,14 @@ head(bc_trn)
 
 ```
 ## # A tibble: 6 x 10
-##   clump_thickness uniformity_of_c… uniformity_of_c… marginal_adhesi…
-##             <int>            <int>            <int>            <int>
-## 1               5                1                2                1
-## 2               8                6                7                3
-## 3               1                2                2                1
-## 4               1                1                2                1
-## 5              10                4                5                5
-## 6               8                8                7                4
+##   clump_thickness uniformity_of_cell_si… uniformity_of_cell_sh… marginal_adhesi…
+##             <int>                  <int>                  <int>            <int>
+## 1               5                      1                      2                1
+## 2               8                      6                      7                3
+## 3               1                      2                      2                1
+## 4               1                      1                      2                1
+## 5              10                      4                      5                5
+## 6               8                      8                      7                4
 ## # … with 6 more variables: single_epithelial_cell_size <int>,
 ## #   bare_nuclei <int>, bland_chromatin <int>, normal_nucleoli <int>,
 ## #   mitoses <int>, class <fct>

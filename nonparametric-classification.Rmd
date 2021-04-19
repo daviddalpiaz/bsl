@@ -4,7 +4,7 @@ Full book chapter still delayed! Keeping up with writing every week is getting t
 
 - [**Notes:** Nonparametric Classification](files/nonparametric-classification.pdf)
 
-```{r, eval = FALSE}
+```{r}
 # load packages
 library(tibble)
 library(ggplot2)
@@ -13,7 +13,9 @@ library(rpart.plot)
 library(caret)
 library(palmerpenguins)
 library(mlbench)
+```
 
+```{r}
 # set seed
 set.seed(42)
 
@@ -32,7 +34,9 @@ val = trn[-est_idx, ]
 
 # check data
 trn
+```
 
+```{r}
 # visualize data
 
 p1 = ggplot(data = trn, aes(x = x.1)) +
@@ -52,10 +56,14 @@ p4 = ggplot(data = trn, aes(x = x.2)) +
   scale_fill_manual(values=c("grey", 2, 3))
 
 gridExtra::grid.arrange(p1, p2, p3, p4)
+```
 
+```{r}
 plot(x.2 ~ x.1, data = trn, col = classes, pch = 20, cex = 1.5)
 grid()
+```
 
+```{r}
 # fit knn model
 mod_knn = knn3(classes ~ ., data = trn, k = 10)
 
@@ -63,7 +71,9 @@ mod_knn = knn3(classes ~ ., data = trn, k = 10)
 new_obs = data.frame(x.1 = 2, x.2 = -2)
 predict(mod_knn, new_obs, type = "prob")
 predict(mod_knn, new_obs, type = "class")
+```
 
+```{r}
 # fit tree model
 mod_tree = rpart(classes ~ ., data = trn, minsplit = 5)
 
@@ -71,16 +81,18 @@ mod_tree = rpart(classes ~ ., data = trn, minsplit = 5)
 new_obs = data.frame(x.1 = 3, x.2 = 3)
 predict(mod_tree, new_obs, type = "prob")
 predict(mod_tree, new_obs, type = "class")
+```
 
+```{r}
 # visualize tree results
 par(mfrow = c(1, 2))
 plot(x.2 ~ x.1, data = trn, col = classes, pch = 20, cex = 1.5)
 grid()
 rpart.plot(mod_tree, type = 2, box.palette = list("Grays", "Reds", "Greens"))
+```
 
-# reset plotting
-dev.off()
 
+```{r}
 # helper function to calculate misclassification
 calc_misclass = function(actual, predicted) {
   mean(actual != predicted)
@@ -94,7 +106,12 @@ calc_misclass(
 )
 
 mean(tst$classes != predict(mod_knn, tst, type = "class"))
+```
 
+
+## Example: KNN on Simulated Data
+
+```{r}
 # tune knn model ###############################################################
 
 # set seed
@@ -114,7 +131,7 @@ knn_mods = lapply(k_val, fit_knn_to_est)
 # make predictions
 knn_preds = lapply(knn_mods, predict, val, type = "class")
 
-# calculate misclass
+# calculate validation misclass
 knn_misclass = sapply(knn_preds, calc_misclass, actual = val$classes)
 
 # plot results
@@ -122,12 +139,24 @@ plot(k_val, knn_misclass, pch = 20, type = "b")
 grid()
 
 k_val[which.min(knn_misclass)]
+```
 
+- TODO: add training misclass
+- TODO: expand possible k value
+- TODO: re-fit to training data, report test misclass
+
+## Example: Decision Tree on Penguin Data
+
+```{r}
 # trees and penguins ###########################################################
+```
 
+```{r}
 # check data
 penguins
+```
 
+```{r}
 # visualize data
 par(mfrow = c(1, 2))
 plot(body_mass_g ~ flipper_length_mm, data = penguins,
@@ -136,20 +165,24 @@ grid()
 plot(bill_length_mm ~ flipper_length_mm, data = penguins,
      col = species, pch = 20, cex = 1.5)
 grid()
+```
 
-# reset plotting
-dev.off()
-
+```{r}
 # fit tree and visualize
 peng_mod = rpart(species ~ . - year, data = penguins)
 rpart.plot(peng_mod, type = 2, box.palette = list("Grays", "Reds", "Greens"))
+```
 
+```{r}
 # fit bigger tree and visualize
 peng_mod_big = rpart(species ~ . - year, data = penguins, minsplit = 2, cp = 0)
 rpart.plot(peng_mod_big, type = 2, box.palette = list("Grays", "Reds", "Greens"))
 ```
 
+- TODO: tune
 
+
+<!-- ####################################################################### -->
 
 <!-- ```{r setup, include = FALSE} -->
 <!-- knitr::opts_chunk$set(echo = TRUE, fig.align = "center", cache = TRUE, autodep = TRUE) -->

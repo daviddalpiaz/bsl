@@ -319,12 +319,12 @@ head(sim_mlr_data)
 ## # A tibble: 6 x 7
 ##       y    x1    x2    x3 x4       x5    x6
 ##   <dbl> <dbl> <dbl> <dbl> <fct> <dbl> <dbl>
-## 1  2.85 0.91   0.33  0.14 A      0.53  0.24
-## 2  6.22 0.94   0.19  0.18 B      0.7   0.51
-## 3  6.71 0.290  0.27  0.52 B      0.05  0.51
-## 4  7.84 0.83   0.53  0.81 B      0.92  0.76
-## 5  2.75 0.64   0.02  0.12 A      0.03  0.27
-## 6  4.60 0.52   0.8   0.89 A      0.78  0.69
+## 1  2.85  0.91  0.33  0.14 A      0.53  0.24
+## 2  6.22  0.94  0.19  0.18 B      0.7   0.51
+## 3  6.71  0.29  0.27  0.52 B      0.05  0.51
+## 4  7.84  0.83  0.53  0.81 B      0.92  0.76
+## 5  2.75  0.64  0.02  0.12 A      0.03  0.27
+## 6  4.60  0.52  0.8   0.89 A      0.78  0.69
 ```
 
 Note that we see only numeric (`dbl` or `int`) and factor (`fctr`) variables. For now, we will require that data contains only these types, and in particular, we will coerce any categorical variables to be factors.
@@ -1139,16 +1139,16 @@ head(dmnd_trn, n = 10)
 ## # A tibble: 10 x 10
 ##    carat cut       color clarity depth table     x     y     z price
 ##    <dbl> <fct>     <fct> <fct>   <dbl> <dbl> <dbl> <dbl> <dbl> <int>
-##  1 0.5   Premium   H     SI1      59    59    5.22  5.18  3.07  1156
-##  2 1.01  Ideal     G     SI2      63.2  57    6.33  6.28  3.99  4038
-##  3 0.62  Very Good D     SI1      61.3  58    5.47  5.49  3.36  1949
-##  4 0.41  Ideal     D     VS2      62.4  54    4.78  4.74  2.97  1076
-##  5 0.31  Ideal     G     IF       61.6  54    4.36  4.4   2.7    853
-##  6 1.08  Ideal     I     SI1      62.6  53.9  6.51  6.56  4.09  5049
-##  7 0.52  Very Good G     VS2      62.4  60    5.14  5.18  3.22  1423
-##  8 1.01  Premium   F     SI2      60.9  60    6.45  6.42  3.91  3297
-##  9 0.570 Ideal     H     VS1      61.7  54    5.33  5.36  3.3   1554
-## 10 0.34  Ideal     H     VS2      62.5  54    4.54  4.49  2.82   689
+##  1  0.5  Premium   H     SI1      59    59    5.22  5.18  3.07  1156
+##  2  1.01 Ideal     G     SI2      63.2  57    6.33  6.28  3.99  4038
+##  3  0.62 Very Good D     SI1      61.3  58    5.47  5.49  3.36  1949
+##  4  0.41 Ideal     D     VS2      62.4  54    4.78  4.74  2.97  1076
+##  5  0.31 Ideal     G     IF       61.6  54    4.36  4.4   2.7    853
+##  6  1.08 Ideal     I     SI1      62.6  53.9  6.51  6.56  4.09  5049
+##  7  0.52 Very Good G     VS2      62.4  60    5.14  5.18  3.22  1423
+##  8  1.01 Premium   F     SI2      60.9  60    6.45  6.42  3.91  3297
+##  9  0.57 Ideal     H     VS1      61.7  54    5.33  5.36  3.3   1554
+## 10  0.34 Ideal     H     VS2      62.5  54    4.54  4.49  2.82   689
 ```
 
 Our goal here will be to build a model to predict the `price` of a diamond given it's characteristics. Let's create a few EDA plots.
@@ -1276,18 +1276,18 @@ head(crdt_trn, n = 10)
 
 ```
 ## # A tibble: 10 x 11
-##    Income Limit Cards   Age Education Gender Student Married Ethnicity Balance
-##     <dbl> <int> <int> <int>     <int> <fct>  <fct>   <fct>   <fct>       <int>
-##  1  183.  13913     4    98        17 " Mal… No      Yes     Caucasian    1999
-##  2   35.7  2880     2    35        15 " Mal… No      No      African …       0
-##  3  123.   8376     2    89        17 " Mal… Yes     No      African …    1259
-##  4   20.8  2672     1    70        18 "Fema… No      No      African …       0
-##  5   39.1  5565     4    48        18 "Fema… No      Yes     Caucasian     772
-##  6   36.5  3806     2    52        13 " Mal… No      No      African …     188
-##  7   45.1  3762     3    80         8 " Mal… No      Yes     Caucasian      70
-##  8   43.5  2906     4    69        11 " Mal… No      No      Caucasian       0
-##  9   23.1  3476     2    50        15 "Fema… No      No      Caucasian     209
-## 10   53.2  4943     2    46        16 "Fema… No      Yes     Asian         382
+##    Income Limit Cards   Age Education Gender  Student Married Ethnicity  Balance
+##     <dbl> <int> <int> <int>     <int> <fct>   <fct>   <fct>   <fct>        <int>
+##  1  183.  13913     4    98        17 " Male" No      Yes     Caucasian     1999
+##  2   35.7  2880     2    35        15 " Male" No      No      African A…       0
+##  3  123.   8376     2    89        17 " Male" Yes     No      African A…    1259
+##  4   20.8  2672     1    70        18 "Femal… No      No      African A…       0
+##  5   39.1  5565     4    48        18 "Femal… No      Yes     Caucasian      772
+##  6   36.5  3806     2    52        13 " Male" No      No      African A…     188
+##  7   45.1  3762     3    80         8 " Male" No      Yes     Caucasian       70
+##  8   43.5  2906     4    69        11 " Male" No      No      Caucasian        0
+##  9   23.1  3476     2    50        15 "Femal… No      No      Caucasian      209
+## 10   53.2  4943     2    46        16 "Femal… No      Yes     Asian          382
 ## # … with 1 more variable: Rating <int>
 ```
 

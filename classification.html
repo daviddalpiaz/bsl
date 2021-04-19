@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 Classification | Basics of Statistical Learning</title>
   <meta name="description" content="Chapter 6 Classification | Basics of Statistical Learning" />
-  <meta name="generator" content="bookdown 0.21.4 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21.11 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 Classification | Basics of Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -32,7 +32,7 @@
   
 <link rel="prev" href="regression-overview.html"/>
 <link rel="next" href="nonparametric-classification.html"/>
-<script src="libs/header-attrs-2.5.3/header-attrs.js"></script>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -120,6 +120,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -219,12 +220,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.7" data-path="regression-overview.html"><a href="regression-overview.html#no-free-lunch"><i class="fa fa-check"></i><b>5.7</b> No Free Lunch</a></li>
 <li class="chapter" data-level="5.8" data-path="regression-overview.html"><a href="regression-overview.html#curse-of-dimensionality"><i class="fa fa-check"></i><b>5.8</b> Curse of Dimensionality</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>6</b> Classification</a></li>
-<li class="chapter" data-level="7" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html"><i class="fa fa-check"></i><b>7</b> Nonparametric Classification</a></li>
+<li class="chapter" data-level="6" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>6</b> Classification</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="classification.html"><a href="classification.html#r-setup-and-source-3"><i class="fa fa-check"></i><b>6.1</b> R Setup and Source</a></li>
+<li class="chapter" data-level="6.2" data-path="classification.html"><a href="classification.html#data-setup"><i class="fa fa-check"></i><b>6.2</b> Data Setup</a></li>
+<li class="chapter" data-level="6.3" data-path="classification.html"><a href="classification.html#mathematical-setup-2"><i class="fa fa-check"></i><b>6.3</b> Mathematical Setup</a></li>
+<li class="chapter" data-level="6.4" data-path="classification.html"><a href="classification.html#example"><i class="fa fa-check"></i><b>6.4</b> Example</a></li>
+<li class="chapter" data-level="6.5" data-path="classification.html"><a href="classification.html#bayes-classifier"><i class="fa fa-check"></i><b>6.5</b> Bayes Classifier</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="classification.html"><a href="classification.html#bayes-error-rate"><i class="fa fa-check"></i><b>6.5.1</b> Bayes Error Rate</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="classification.html"><a href="classification.html#building-a-classifier"><i class="fa fa-check"></i><b>6.6</b> Building a Classifier</a></li>
+<li class="chapter" data-level="6.7" data-path="classification.html"><a href="classification.html#modeling"><i class="fa fa-check"></i><b>6.7</b> Modeling</a>
+<ul>
+<li class="chapter" data-level="6.7.1" data-path="classification.html"><a href="classification.html#linear-models-3"><i class="fa fa-check"></i><b>6.7.1</b> Linear Models</a></li>
+<li class="chapter" data-level="6.7.2" data-path="classification.html"><a href="classification.html#k-nearest-neighbors-4"><i class="fa fa-check"></i><b>6.7.2</b> k-Nearest Neighbors</a></li>
+<li class="chapter" data-level="6.7.3" data-path="classification.html"><a href="classification.html#decision-trees-3"><i class="fa fa-check"></i><b>6.7.3</b> Decision Trees</a></li>
+</ul></li>
+<li class="chapter" data-level="6.8" data-path="classification.html"><a href="classification.html#classification-metrics"><i class="fa fa-check"></i><b>6.8</b> Classification Metrics</a>
+<ul>
+<li class="chapter" data-level="6.8.1" data-path="classification.html"><a href="classification.html#misclassification"><i class="fa fa-check"></i><b>6.8.1</b> Misclassification</a></li>
+<li class="chapter" data-level="6.8.2" data-path="classification.html"><a href="classification.html#accuracy"><i class="fa fa-check"></i><b>6.8.2</b> Accuracy</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html"><i class="fa fa-check"></i><b>7</b> Nonparametric Classification</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html#example-knn-on-simulated-data"><i class="fa fa-check"></i><b>7.1</b> Example: KNN on Simulated Data</a></li>
+<li class="chapter" data-level="7.2" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html#example-decision-tree-on-penguin-data"><i class="fa fa-check"></i><b>7.2</b> Example: Decision Tree on Penguin Data</a></li>
+</ul></li>
 <li class="chapter" data-level="8" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>8</b> Logistic Regression</a></li>
 <li class="chapter" data-level="9" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>9</b> Binary Classification</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="binary-classification.html"><a href="binary-classification.html#r-setup-and-source-3"><i class="fa fa-check"></i><b>9.1</b> R Setup and Source</a></li>
+<li class="chapter" data-level="9.1" data-path="binary-classification.html"><a href="binary-classification.html#r-setup-and-source-4"><i class="fa fa-check"></i><b>9.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="9.2" data-path="binary-classification.html"><a href="binary-classification.html#breast-cancer-data"><i class="fa fa-check"></i><b>9.2</b> Breast Cancer Data</a></li>
 <li class="chapter" data-level="9.3" data-path="binary-classification.html"><a href="binary-classification.html#confusion-matrix"><i class="fa fa-check"></i><b>9.3</b> Confusion Matrix</a></li>
 <li class="chapter" data-level="9.4" data-path="binary-classification.html"><a href="binary-classification.html#binary-classification-metrics"><i class="fa fa-check"></i><b>9.4</b> Binary Classification Metrics</a></li>
@@ -233,7 +260,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10" data-path="generative.html"><a href="generative.html"><i class="fa fa-check"></i><b>10</b> Generative Models</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="generative.html"><a href="generative.html#r-setup-and-source-4"><i class="fa fa-check"></i><b>10.1</b> R Setup and Source</a></li>
+<li class="chapter" data-level="10.1" data-path="generative.html"><a href="generative.html#r-setup-and-source-5"><i class="fa fa-check"></i><b>10.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="10.2" data-path="generative.html"><a href="generative.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>10.2</b> Linear Discriminant Analysis</a></li>
 <li class="chapter" data-level="10.3" data-path="generative.html"><a href="generative.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>10.3</b> Quadratic Discriminant Analysis</a></li>
 <li class="chapter" data-level="10.4" data-path="generative.html"><a href="generative.html#naive-bayes"><i class="fa fa-check"></i><b>10.4</b> Naive Bayes</a></li>
@@ -263,6 +290,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.3.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#reading-2"><i class="fa fa-check"></i><b>13.3.1</b> Reading</a></li>
 <li class="chapter" data-level="13.3.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#video-1"><i class="fa fa-check"></i><b>13.3.2</b> Video</a></li>
 </ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="supervised-overview.html"><a href="supervised-overview.html"><i class="fa fa-check"></i><b>14</b> Supervised Learning Overview II</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="supervised-overview.html"><a href="supervised-overview.html#classification-2"><i class="fa fa-check"></i><b>14.1</b> Classification</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="supervised-overview.html"><a href="supervised-overview.html#tuning"><i class="fa fa-check"></i><b>14.1.1</b> Tuning</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="supervised-overview.html"><a href="supervised-overview.html#regression-1"><i class="fa fa-check"></i><b>14.2</b> Regression</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="supervised-overview.html"><a href="supervised-overview.html#methods"><i class="fa fa-check"></i><b>14.2.1</b> Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="supervised-overview.html"><a href="supervised-overview.html#external-links"><i class="fa fa-check"></i><b>14.3</b> External Links</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="additional-reading.html"><a href="additional-reading.html"><i class="fa fa-check"></i><b>A</b> Additional Reading</a>
@@ -355,131 +394,263 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="classification-1" class="section level1" number="6">
 <h1><span class="header-section-number">Chapter 6</span> Classification</h1>
-<p>Full book chapter still delayed! Keeping up with writing every week is getting tough. Below are the notes from the video.</p>
+<p>This chapter continues our discussion of <strong>supervised learning</strong> by introducing the <strong>classification</strong> tasks. Like regression, we will focus on the conditional distribution of the response.</p>
+<p>Specifically, we will discuss:</p>
+<ul>
+<li>The setup for the <strong>classification</strong> task.</li>
+<li>The <strong>Bayes classifier</strong> and <strong>Bayes error</strong>.</li>
+<li>Estimating <strong>conditional probabilities</strong>.</li>
+<li>Two simple <strong>metrics</strong> for the classification task.</li>
+</ul>
+<p>This chapter is currently under construction. While it is being developed, the following links to the STAT 432 course notes.</p>
 <ul>
 <li><a href="files/classification.pdf"><strong>Notes:</strong> Classification</a></li>
 </ul>
-<!-- TODO: add confusion matrix, and plot? -->
-<!-- This chapter continues our discussion of **supervised learning** by introducing the **classification** tasks. Like regression, we will focus on the conditional distribution of the response. -->
-<!-- Specifically, we will discuss: -->
-<!-- - The setup for the **classification** task.  -->
-<!-- - The **Bayes classifier** and **Bayes error**. -->
-<!-- - Estimating **conditional probabilities**. -->
-<!-- - Two simple **metrics** for the classification task. -->
-<!-- ## R Setup and Source -->
-<!-- ```{r packages, warning = FALSE, message = FALSE} -->
-<!-- library(tibble)     # data frame printing -->
-<!-- library(dplyr)      # data manipulation -->
-<!-- library(knitr)      # creating tables -->
-<!-- library(kableExtra) # styling tables -->
-<!-- ``` -->
-<!-- Additionally, objects from `ggplot2`, `GGally`, and `ISLR` are accessed. Recall that the [Welcome](index.html) chapter contains directions for installing all necessary packages for following along with the text. The R Markdown source is provided as some code, mostly for creating plots, has been suppressed from the rendered document that you are currently reading. -->
-<!-- - **R Markdown Source:** [`classification.Rmd`](classification.Rmd) -->
-<!-- ## Data Setup -->
-<!-- ## Mathematical Setup -->
-<!-- ## Example -->
-<!-- ```{r, echo = FALSE} -->
-<!-- set.seed(1) -->
-<!-- joint_probs = round(1:12 / sum(1:12), 2) -->
-<!-- joint_probs = sample(joint_probs) -->
-<!-- joint_dist = matrix(data  = joint_probs, nrow = 3, ncol = 4) -->
-<!-- colnames(joint_dist) = c("$X = 1$", "$X = 2$", "$X = 3$", "$X = 4$") -->
-<!-- rownames(joint_dist) = c("$Y = A$", "$Y = B$", "$Y = C$") -->
-<!-- joint_dist %>% -->
-<!--   kable() %>% -->
-<!--   kable_styling("striped", full_width = FALSE) %>% -->
-<!--   column_spec(column = 1, bold = TRUE, background = "white", border_right = TRUE) -->
-<!-- ``` -->
-<!-- ```{r, echo = FALSE} -->
-<!-- # marginal distribution of Y -->
-<!-- t(colSums(joint_dist)) %>% kable() %>% kable_styling(full_width = FALSE) -->
-<!-- ``` -->
-<!-- ```{r, echo = FALSE} -->
-<!-- # marginal distribution of X -->
-<!-- t(rowSums(joint_dist)) %>% kable() %>% kable_styling(full_width = FALSE) -->
-<!-- ``` -->
-<!-- ## Bayes Classifier -->
-<!-- - TODO: Not the same as naïve Bayes classifier -->
-<!-- $$ -->
-<!-- p_k(x) = P\left[ Y = k \mid X = x \right] -->
-<!-- $$ -->
-<!-- $$ -->
-<!-- C^B(x) = \underset{k \in \{1, 2, \ldots K\}}{\text{argmax}} P\left[ Y = k \mid X = x \right] -->
-<!-- $$ -->
-<!-- *** -->
-<!-- ### Bayes Error Rate -->
-<!-- $$ -->
-<!-- 1 - \mathbb{E}_X\left[ \underset{k}{\text{max}} \ P[Y = k \mid X = x] \right] -->
-<!-- $$ -->
-<!-- ## Classification Metrics -->
-<!-- ### Misclassification -->
-<!-- ```{r} -->
-<!-- calc_misclass = function(actual, predicted) { -->
-<!--   mean(actual != predicted) -->
-<!-- } -->
-<!-- ``` -->
-<!-- ### Accuracy -->
-<!-- ```{r} -->
-<!-- calc_accuracy = function(actual, predicted) { -->
-<!--   mean(actual == predicted) -->
-<!-- } -->
-<!-- ``` -->
-<!-- - TODO: math notation -->
-<!-- - TODO: trn, tst, etc -->
-<!-- *** -->
-<!-- ## STAT 432 Materials -->
-<!-- - [**Slides** | Classification: Introduction](https://fall-2019.stat432.org/slides/classification.pdf) -->
-<!-- - [**Code** | Some Classification Code](https://fall-2019.stat432.org/misc/some-class-code-for-class.R) -->
-<!-- - [**Slides** | Classification: Binary Classification](https://fall-2019.stat432.org/slides/binary-classification.pdf) -->
-<!-- - [**Code** | Some Binary Classification Code](https://fall-2019.stat432.org/misc/some-binary-class-code-for-class.R) -->
-<!-- - [**Slides** | Classification: Nonparametric Classification](https://fall-2019.stat432.org/slides/nonparametric-classification.pdf) -->
-<!-- - [**Reading** | STAT 420: Logistic Regression](https://daviddalpiaz.github.io/appliedstats/logistic-regression.html) -->
-<!-- - [**Slides** | Classification: Logistic Regression](https://fall-2019.stat432.org/slides/logistic-regression.pdf) -->
-<!-- *** -->
-<!-- ```{r, include = FALSE}  -->
-<!-- knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, fig.align = "center") -->
-<!-- ``` -->
-<!-- ```{r, message = FALSE, warning = FALSE} -->
-<!-- library("dplyr") -->
-<!-- library("knitr") -->
-<!-- library("kableExtra") -->
-<!-- library("tibble") -->
-<!-- library("caret") -->
-<!-- library("rpart") -->
-<!-- library("nnet") -->
-<!-- ``` -->
-<!-- ## Building a Classifier -->
-<!-- $$ -->
-<!-- \hat{p}_k(x) = \hat{P}\left[ Y = k \mid X = x \right] -->
-<!-- $$ -->
-<!-- $$ -->
-<!-- \hat{C}(x) = \underset{k \in \{1, 2, \ldots K\}}{\text{argmax}} \hat{p}_k(x) -->
-<!-- $$ -->
-<!-- - TODO: first estimation conditional distribution, then classify to label with highest probability -->
-<!-- ```{r} -->
-<!-- gen_data = function(n = 100) { -->
-<!--   x = sample(c(0, 1), prob = c(0.4, 0.6), size = n, replace = TRUE) -->
-<!--   y = ifelse(test = {x == 0}, -->
-<!--              yes = sample(c("A", "B", "C"), size = n, prob = c(0.25, 0.50, 0.25), replace = TRUE), -->
-<!--              no = sample(c("A", "B", "C"), size = n, prob = c(0.1, 0.1, 0.4) / 0.6, replace = TRUE)) -->
-<!--   tibble(x = x, y = factor(y)) -->
-<!-- } -->
-<!-- test_cases = tibble(x = c(0, 1)) -->
-<!-- set.seed(42) -->
-<!-- some_data = gen_data() -->
-<!-- predict(knn3(y ~ x, data = some_data), test_cases) -->
-<!-- predict(rpart(y ~ x, data = some_data), test_cases) -->
-<!-- predict(multinom(y ~ x, data = some_data, trace = FALSE), test_cases, type = "prob") -->
-<!-- ``` -->
-<!-- ## Modeling -->
-<!-- ### Linear Models -->
-<!-- - TODO: use `nnet::multinom` -->
-<!--     - in place of `glm()`? always? -->
-<!-- ### k-Nearest Neighbors -->
-<!-- - TODO: use `caret::knn3()` -->
-<!-- ### Decision Trees -->
-<!-- - TODO: use `rpart::rpart()` -->
+<div id="r-setup-and-source-3" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> R Setup and Source</h2>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="classification.html#cb179-1"></a><span class="kw">library</span>(tibble)     <span class="co"># data frame printing</span></span>
+<span id="cb179-2"><a href="classification.html#cb179-2"></a><span class="kw">library</span>(dplyr)      <span class="co"># data manipulation</span></span>
+<span id="cb179-3"><a href="classification.html#cb179-3"></a></span>
+<span id="cb179-4"><a href="classification.html#cb179-4"></a><span class="kw">library</span>(knitr)      <span class="co"># creating tables</span></span>
+<span id="cb179-5"><a href="classification.html#cb179-5"></a><span class="kw">library</span>(kableExtra) <span class="co"># styling tables</span></span></code></pre></div>
+<p>Additionally, objects from <code>ggplot2</code>, <code>GGally</code>, and <code>ISLR</code> are accessed. Recall that the <a href="index.html">Welcome</a> chapter contains directions for installing all necessary packages for following along with the text. The R Markdown source is provided as some code, mostly for creating plots, has been suppressed from the rendered document that you are currently reading.</p>
+<ul>
+<li><strong>R Markdown Source:</strong> <a href="classification.Rmd"><code>classification.Rmd</code></a></li>
+</ul>
+</div>
+<div id="data-setup" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> Data Setup</h2>
+<ul>
+<li>TODO: Add data setup example.</li>
+</ul>
+</div>
+<div id="mathematical-setup-2" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> Mathematical Setup</h2>
+</div>
+<div id="example" class="section level2" number="6.4">
+<h2><span class="header-section-number">6.4</span> Example</h2>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(X = 1\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(X = 2\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(X = 3\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(X = 4\)</span>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;background-color: white !important;border-right:1px solid;">
+<span class="math inline">\(Y = A\)</span>
+</td>
+<td style="text-align:right;">
+0.12
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+<td style="text-align:right;">
+0.04
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;background-color: white !important;border-right:1px solid;">
+<span class="math inline">\(Y = B\)</span>
+</td>
+<td style="text-align:right;">
+0.05
+</td>
+<td style="text-align:right;">
+0.03
+</td>
+<td style="text-align:right;">
+0.10
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;background-color: white !important;border-right:1px solid;">
+<span class="math inline">\(Y = C\)</span>
+</td>
+<td style="text-align:right;">
+0.09
+</td>
+<td style="text-align:right;">
+0.06
+</td>
+<td style="text-align:right;">
+0.08
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+</tr>
+</tbody>
+</table>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+<span class="math inline">\(X = 1\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(X = 2\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(X = 3\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(X = 4\)</span>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+0.22
+</td>
+<td style="text-align:right;">
+0.42
+</td>
+</tr>
+</tbody>
+</table>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+<span class="math inline">\(Y = A\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(Y = B\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(Y = C\)</span>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+0.31
+</td>
+<td style="text-align:right;">
+0.33
+</td>
+<td style="text-align:right;">
+0.36
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="bayes-classifier" class="section level2" number="6.5">
+<h2><span class="header-section-number">6.5</span> Bayes Classifier</h2>
+<p><span class="math display">\[
+p_k(x) = P\left[ Y = k \mid X = x \right]
+\]</span></p>
+<p><span class="math display">\[
+C^B(x) = \underset{k \in \{1, 2, \ldots K\}}{\text{argmax}} P\left[ Y = k \mid X = x \right]
+\]</span></p>
+<p><strong>Warning:</strong> The Bayes classifier should not be confused with a naive Bayes classifier. The Bayes classifier assumes that we know <span class="math inline">\(P\left[ Y = k \mid X = x \right]\)</span> which is almost never known in practice. A naive Bayes classifier is a method we will see later that learns a classifier from data.<a href="#fn77" class="footnote-ref" id="fnref77"><sup>77</sup></a></p>
+<hr />
+<div id="bayes-error-rate" class="section level3" number="6.5.1">
+<h3><span class="header-section-number">6.5.1</span> Bayes Error Rate</h3>
+<p><span class="math display">\[
+1 - \mathbb{E}_X\left[ \underset{k}{\text{max}} \ P[Y = k \mid X = x] \right]
+\]</span></p>
+</div>
+</div>
+<div id="building-a-classifier" class="section level2" number="6.6">
+<h2><span class="header-section-number">6.6</span> Building a Classifier</h2>
+<p><span class="math display">\[
+\hat{p}_k(x) = \hat{P}\left[ Y = k \mid X = x \right]
+\]</span></p>
+<p><span class="math display">\[
+\hat{C}(x) = \underset{k \in \{1, 2, \ldots K\}}{\text{argmax}} \hat{p}_k(x)
+\]</span></p>
+<ul>
+<li>TODO: first estimation conditional distribution, then classify to label with highest probability</li>
+<li>TODO: do it in r with knn, tree, or glm / nnet</li>
+<li>TODO: note about estimating probabilities vs training a classifier</li>
+</ul>
+</div>
+<div id="modeling" class="section level2" number="6.7">
+<h2><span class="header-section-number">6.7</span> Modeling</h2>
+<div id="linear-models-3" class="section level3" number="6.7.1">
+<h3><span class="header-section-number">6.7.1</span> Linear Models</h3>
+<ul>
+<li>TODO: use <code>nnet::multinom</code>
+<ul>
+<li>in place of <code>glm()</code>? always?</li>
+</ul></li>
+</ul>
+</div>
+<div id="k-nearest-neighbors-4" class="section level3" number="6.7.2">
+<h3><span class="header-section-number">6.7.2</span> k-Nearest Neighbors</h3>
+<ul>
+<li>TODO: use <code>caret::knn3()</code></li>
+</ul>
+</div>
+<div id="decision-trees-3" class="section level3" number="6.7.3">
+<h3><span class="header-section-number">6.7.3</span> Decision Trees</h3>
+<ul>
+<li>TODO: use <code>rpart::rpart()</code></li>
+</ul>
+</div>
+</div>
+<div id="classification-metrics" class="section level2" number="6.8">
+<h2><span class="header-section-number">6.8</span> Classification Metrics</h2>
+<p>Like regression, classification metrics will depend on the learned function (in this case, the learned classifier <span class="math inline">\(\hat{C}\)</span>) as well as an additional dataset that is being used to make classifications with the learned function.<a href="#fn78" class="footnote-ref" id="fnref78"><sup>78</sup></a> Like regression, this will make the notation for a “simple” metric like accuracy look significantly more complicated than it truly is, but it will be helpful to make the dependency on the datasets explicit.</p>
+<div id="misclassification" class="section level3" number="6.8.1">
+<h3><span class="header-section-number">6.8.1</span> Misclassification</h3>
+<p><span class="math display">\[
+\text{miclass}\left(\hat{C}_{\texttt{set_f}}, \mathcal{D}_{\texttt{set_D}} \right) = \frac{1}{n_{\texttt{set_D}}}\displaystyle\sum_{i \in {\texttt{set_D}}}^{} I\left(y_i \neq \hat{C}_{\texttt{set_f}}({x}_i)\right)
+\]</span></p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="classification.html#cb180-1"></a>calc_misclass =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</span>
+<span id="cb180-2"><a href="classification.html#cb180-2"></a>  <span class="kw">mean</span>(actual <span class="op">!=</span><span class="st"> </span>predicted)</span>
+<span id="cb180-3"><a href="classification.html#cb180-3"></a>}</span></code></pre></div>
+</div>
+<div id="accuracy" class="section level3" number="6.8.2">
+<h3><span class="header-section-number">6.8.2</span> Accuracy</h3>
+<p><span class="math display">\[
+\text{accuracy}\left(\hat{C}_{\texttt{set_f}}, \mathcal{D}_{\texttt{set_D}} \right) = \frac{1}{n_{\texttt{set_D}}}\displaystyle\sum_{i \in {\texttt{set_D}}}^{} I\left(y_i = \hat{C}_{\texttt{set_f}}({x}_i)\right)
+\]</span></p>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="classification.html#cb181-1"></a>calc_accuracy =<span class="st"> </span><span class="cf">function</span>(actual, predicted) {</span>
+<span id="cb181-2"><a href="classification.html#cb181-2"></a>  <span class="kw">mean</span>(actual <span class="op">==</span><span class="st"> </span>predicted)</span>
+<span id="cb181-3"><a href="classification.html#cb181-3"></a>}</span></code></pre></div>
+<p>Plugging in the appropriate dataset will allow for calculation of train, test, and validation metrics.</p>
 
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="77">
+<li id="fn77"><p>This author feels that the use of “Bayes” in “Bayes classifier” is actually confusing because you don’t actually need to apply Bayes’ theorem to state or understand the result. Meanwhile, Bayes’ theorem is needed to understand the naive Bayes classifier. Oh well. Naming things is hard.<a href="classification.html#fnref77" class="footnote-back">↩︎</a></p></li>
+<li id="fn78"><p>The metrics also implicitly depend on the dataset used to learn the classifier.<a href="classification.html#fnref78" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
             </section>
 
@@ -510,6 +681,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": false
 },
 "fontsettings": {

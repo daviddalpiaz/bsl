@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 Nonparametric Regression | Basics of Statistical Learning</title>
   <meta name="description" content="Chapter 3 Nonparametric Regression | Basics of Statistical Learning" />
-  <meta name="generator" content="bookdown 0.21.4 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21.11 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Nonparametric Regression | Basics of Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -32,7 +32,7 @@
   
 <link rel="prev" href="linear-regression.html"/>
 <link rel="next" href="bias-variance-tradeoff.html"/>
-<script src="libs/header-attrs-2.5.3/header-attrs.js"></script>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -120,6 +120,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -219,12 +220,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.7" data-path="regression-overview.html"><a href="regression-overview.html#no-free-lunch"><i class="fa fa-check"></i><b>5.7</b> No Free Lunch</a></li>
 <li class="chapter" data-level="5.8" data-path="regression-overview.html"><a href="regression-overview.html#curse-of-dimensionality"><i class="fa fa-check"></i><b>5.8</b> Curse of Dimensionality</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>6</b> Classification</a></li>
-<li class="chapter" data-level="7" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html"><i class="fa fa-check"></i><b>7</b> Nonparametric Classification</a></li>
+<li class="chapter" data-level="6" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>6</b> Classification</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="classification.html"><a href="classification.html#r-setup-and-source-3"><i class="fa fa-check"></i><b>6.1</b> R Setup and Source</a></li>
+<li class="chapter" data-level="6.2" data-path="classification.html"><a href="classification.html#data-setup"><i class="fa fa-check"></i><b>6.2</b> Data Setup</a></li>
+<li class="chapter" data-level="6.3" data-path="classification.html"><a href="classification.html#mathematical-setup-2"><i class="fa fa-check"></i><b>6.3</b> Mathematical Setup</a></li>
+<li class="chapter" data-level="6.4" data-path="classification.html"><a href="classification.html#example"><i class="fa fa-check"></i><b>6.4</b> Example</a></li>
+<li class="chapter" data-level="6.5" data-path="classification.html"><a href="classification.html#bayes-classifier"><i class="fa fa-check"></i><b>6.5</b> Bayes Classifier</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="classification.html"><a href="classification.html#bayes-error-rate"><i class="fa fa-check"></i><b>6.5.1</b> Bayes Error Rate</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="classification.html"><a href="classification.html#building-a-classifier"><i class="fa fa-check"></i><b>6.6</b> Building a Classifier</a></li>
+<li class="chapter" data-level="6.7" data-path="classification.html"><a href="classification.html#modeling"><i class="fa fa-check"></i><b>6.7</b> Modeling</a>
+<ul>
+<li class="chapter" data-level="6.7.1" data-path="classification.html"><a href="classification.html#linear-models-3"><i class="fa fa-check"></i><b>6.7.1</b> Linear Models</a></li>
+<li class="chapter" data-level="6.7.2" data-path="classification.html"><a href="classification.html#k-nearest-neighbors-4"><i class="fa fa-check"></i><b>6.7.2</b> k-Nearest Neighbors</a></li>
+<li class="chapter" data-level="6.7.3" data-path="classification.html"><a href="classification.html#decision-trees-3"><i class="fa fa-check"></i><b>6.7.3</b> Decision Trees</a></li>
+</ul></li>
+<li class="chapter" data-level="6.8" data-path="classification.html"><a href="classification.html#classification-metrics"><i class="fa fa-check"></i><b>6.8</b> Classification Metrics</a>
+<ul>
+<li class="chapter" data-level="6.8.1" data-path="classification.html"><a href="classification.html#misclassification"><i class="fa fa-check"></i><b>6.8.1</b> Misclassification</a></li>
+<li class="chapter" data-level="6.8.2" data-path="classification.html"><a href="classification.html#accuracy"><i class="fa fa-check"></i><b>6.8.2</b> Accuracy</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html"><i class="fa fa-check"></i><b>7</b> Nonparametric Classification</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html#example-knn-on-simulated-data"><i class="fa fa-check"></i><b>7.1</b> Example: KNN on Simulated Data</a></li>
+<li class="chapter" data-level="7.2" data-path="nonparametric-classification.html"><a href="nonparametric-classification.html#example-decision-tree-on-penguin-data"><i class="fa fa-check"></i><b>7.2</b> Example: Decision Tree on Penguin Data</a></li>
+</ul></li>
 <li class="chapter" data-level="8" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>8</b> Logistic Regression</a></li>
 <li class="chapter" data-level="9" data-path="binary-classification.html"><a href="binary-classification.html"><i class="fa fa-check"></i><b>9</b> Binary Classification</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="binary-classification.html"><a href="binary-classification.html#r-setup-and-source-3"><i class="fa fa-check"></i><b>9.1</b> R Setup and Source</a></li>
+<li class="chapter" data-level="9.1" data-path="binary-classification.html"><a href="binary-classification.html#r-setup-and-source-4"><i class="fa fa-check"></i><b>9.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="9.2" data-path="binary-classification.html"><a href="binary-classification.html#breast-cancer-data"><i class="fa fa-check"></i><b>9.2</b> Breast Cancer Data</a></li>
 <li class="chapter" data-level="9.3" data-path="binary-classification.html"><a href="binary-classification.html#confusion-matrix"><i class="fa fa-check"></i><b>9.3</b> Confusion Matrix</a></li>
 <li class="chapter" data-level="9.4" data-path="binary-classification.html"><a href="binary-classification.html#binary-classification-metrics"><i class="fa fa-check"></i><b>9.4</b> Binary Classification Metrics</a></li>
@@ -233,7 +260,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10" data-path="generative.html"><a href="generative.html"><i class="fa fa-check"></i><b>10</b> Generative Models</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="generative.html"><a href="generative.html#r-setup-and-source-4"><i class="fa fa-check"></i><b>10.1</b> R Setup and Source</a></li>
+<li class="chapter" data-level="10.1" data-path="generative.html"><a href="generative.html#r-setup-and-source-5"><i class="fa fa-check"></i><b>10.1</b> R Setup and Source</a></li>
 <li class="chapter" data-level="10.2" data-path="generative.html"><a href="generative.html#linear-discriminant-analysis"><i class="fa fa-check"></i><b>10.2</b> Linear Discriminant Analysis</a></li>
 <li class="chapter" data-level="10.3" data-path="generative.html"><a href="generative.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i><b>10.3</b> Quadratic Discriminant Analysis</a></li>
 <li class="chapter" data-level="10.4" data-path="generative.html"><a href="generative.html#naive-bayes"><i class="fa fa-check"></i><b>10.4</b> Naive Bayes</a></li>
@@ -263,6 +290,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.3.1" data-path="ensemble-methods.html"><a href="ensemble-methods.html#reading-2"><i class="fa fa-check"></i><b>13.3.1</b> Reading</a></li>
 <li class="chapter" data-level="13.3.2" data-path="ensemble-methods.html"><a href="ensemble-methods.html#video-1"><i class="fa fa-check"></i><b>13.3.2</b> Video</a></li>
 </ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="supervised-overview.html"><a href="supervised-overview.html"><i class="fa fa-check"></i><b>14</b> Supervised Learning Overview II</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="supervised-overview.html"><a href="supervised-overview.html#classification-2"><i class="fa fa-check"></i><b>14.1</b> Classification</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="supervised-overview.html"><a href="supervised-overview.html#tuning"><i class="fa fa-check"></i><b>14.1.1</b> Tuning</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="supervised-overview.html"><a href="supervised-overview.html#regression-1"><i class="fa fa-check"></i><b>14.2</b> Regression</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="supervised-overview.html"><a href="supervised-overview.html#methods"><i class="fa fa-check"></i><b>14.2.1</b> Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="supervised-overview.html"><a href="supervised-overview.html#external-links"><i class="fa fa-check"></i><b>14.3</b> External Links</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="additional-reading.html"><a href="additional-reading.html"><i class="fa fa-check"></i><b>A</b> Additional Reading</a>
@@ -876,18 +915,18 @@ Right SSE
 <div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="nonparametric-regression.html#cb107-1"></a><span class="co"># check data</span></span>
 <span id="cb107-2"><a href="nonparametric-regression.html#cb107-2"></a><span class="kw">head</span>(crdt_trn, <span class="dt">n =</span> <span class="dv">10</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 10 x 11
-##    Income Limit Cards   Age Education Gender Student Married Ethnicity Balance
-##     &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;     &lt;int&gt; &lt;fct&gt;  &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;       &lt;int&gt;
-##  1  183.  13913     4    98        17 &quot; Mal… No      Yes     Caucasian    1999
-##  2   35.7  2880     2    35        15 &quot; Mal… No      No      African …       0
-##  3  123.   8376     2    89        17 &quot; Mal… Yes     No      African …    1259
-##  4   20.8  2672     1    70        18 &quot;Fema… No      No      African …       0
-##  5   39.1  5565     4    48        18 &quot;Fema… No      Yes     Caucasian     772
-##  6   36.5  3806     2    52        13 &quot; Mal… No      No      African …     188
-##  7   45.1  3762     3    80         8 &quot; Mal… No      Yes     Caucasian      70
-##  8   43.5  2906     4    69        11 &quot; Mal… No      No      Caucasian       0
-##  9   23.1  3476     2    50        15 &quot;Fema… No      No      Caucasian     209
-## 10   53.2  4943     2    46        16 &quot;Fema… No      Yes     Asian         382
+##    Income Limit Cards   Age Education Gender  Student Married Ethnicity  Balance
+##     &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;     &lt;int&gt; &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;        &lt;int&gt;
+##  1  183.  13913     4    98        17 &quot; Male&quot; No      Yes     Caucasian     1999
+##  2   35.7  2880     2    35        15 &quot; Male&quot; No      No      African A…       0
+##  3  123.   8376     2    89        17 &quot; Male&quot; Yes     No      African A…    1259
+##  4   20.8  2672     1    70        18 &quot;Femal… No      No      African A…       0
+##  5   39.1  5565     4    48        18 &quot;Femal… No      Yes     Caucasian      772
+##  6   36.5  3806     2    52        13 &quot; Male&quot; No      No      African A…     188
+##  7   45.1  3762     3    80         8 &quot; Male&quot; No      Yes     Caucasian       70
+##  8   43.5  2906     4    69        11 &quot; Male&quot; No      No      Caucasian        0
+##  9   23.1  3476     2    50        15 &quot;Femal… No      No      Caucasian      209
+## 10   53.2  4943     2    46        16 &quot;Femal… No      Yes     Asian          382
 ## # … with 1 more variable: Rating &lt;int&gt;</code></pre>
 <p>Recall that we would like to predict the <code>Rating</code> variable. This time, let’s try to use only demographic information as predictors.<a href="#fn59" class="footnote-ref" id="fnref59"><sup>59</sup></a> In particular, let’s focus on <code>Age</code> (numeric), <code>Gender</code> (categorical), and <code>Student</code> (categorical).</p>
 <p>Let’s fit KNN models with these features, and various values of <span class="math inline">\(k\)</span>. To do so, we use the <code>knnreg()</code> function from the <code>caret</code> package.<a href="#fn60" class="footnote-ref" id="fnref60"><sup>60</sup></a> Use <code>?knnreg</code> for documentation and details.</p>
@@ -1061,6 +1100,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": false
 },
 "fontsettings": {
