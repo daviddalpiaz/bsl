@@ -1,4 +1,4 @@
-# Supervised Learning Overview II
+# Supervised Learning Overview
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE, fig.align = "center", cache = TRUE, autodep = TRUE)
