@@ -55,7 +55,7 @@ How do we find and train models that generalize well to unseen data? We generall
 
 Note that we are using the **validation data** to *select* a model, while the **test data** is used to *estimate model performance*.
 
-## Aglorithms
+## Algorithms
 
 While there are many, many models that can be used for regression, we have focused on three **"families"** of models. We saw how each can be used to estimate the regression function. Importantly, each model family can be made more or less flexible to accommodate different datasets in order to find a model that predicts well.
 
